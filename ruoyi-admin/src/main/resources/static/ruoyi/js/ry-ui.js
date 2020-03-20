@@ -814,7 +814,7 @@
             remove: function (id) {
                 $.modal.confirm("确定删除该条" + $.table._option.modalName + "信息吗？", function () {
                     var url = $.common.isEmpty(id) ? $.table._option.removeUrl : $.table._option.removeUrl.replace("{id}", id);
-                    if ($.table._option.type == table_type.bootstrapTreeTable) {
+                    if ($.table._option.type === table_type.bootstrapTreeTable) {
                         $.operate.get(url);
                     } else {
                         var data = {"ids": id};

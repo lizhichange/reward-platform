@@ -9,9 +9,11 @@ import com.ruoyi.sms.facade.dto.ShipinDTO;
 import com.ruoyi.system.service.ISysOperLogService;
 import com.ruoyi.system.service.ISysPostService;
 import com.ruoyi.system.service.ISysUserService;
+import lombok.Data;
 import org.near.toolkit.common.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -63,11 +65,20 @@ public class PronController extends BaseController {
 
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(ShipinDTO shipinDTO) {
+    public TableDataInfoExt list(ShipinDTO shipinDTO) {
         startPage();
         List<ShipinDTO> list = shipinService.selectShipinDTOList(shipinDTO);
-        return getDataTable(list);
+        TableDataInfo dataTable = getDataTable(list);
+        TableDataInfoExt ext = new TableDataInfoExt();
+        BeanUtils.copyProperties(dataTable, ext);
+        ext.setLength(dataTable.getRows().size());
+        return ext;
     }
 
+
+}
+@Data
+class TableDataInfoExt extends TableDataInfo {
+    private long length;
 
 }

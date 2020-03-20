@@ -15,6 +15,7 @@ import org.near.toolkit.common.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -140,6 +141,14 @@ public class ShipinController extends BaseController {
     @PostMapping("/remove")
     @ResponseBody
     public AjaxResult remove(String ids) {
+
+        ShipinDTO item = new ShipinDTO();
+        item.setId(Integer.parseInt(ids));
+        item.setUserid(ShiroUtils.getLoginName());
+        List<ShipinDTO> dtoList = shipinService.selectShipinDTOList(item);
+        if (CollectionUtils.isEmpty(dtoList)) {
+            return error("只能删除自己发布的视频");
+        }
         return toAjax(shipinService.deleteShipinDTOByIds(ids));
     }
 }
