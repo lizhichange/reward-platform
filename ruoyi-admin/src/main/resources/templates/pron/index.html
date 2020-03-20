@@ -838,6 +838,10 @@
             <ul>
             </ul>
         </div>
+        <div class="box tags-cloud">
+            <a  th:each="item:${categoryList}" href="" style="font-weight: bold; font-size: 13px;"> [[${item.categoryName}]]</a>
+            &nbsp;&nbsp;
+        </div>
         <div class="member-links">
             <ul>
                 <li><a href="http://www.xiaobi017.com/signup2/" target="_blank">注册</a></li>
@@ -933,10 +937,7 @@
                     </div>
                 </div>
             </div>
-            <div class="box tags-cloud">
-                <a  th:each="item:${categoryList}" href="" style="font-weight: bold; font-size: 13px;"> [[${item.categoryName}]]</a>
-                &nbsp;&nbsp;
-            </div>
+
 
             <div id="list_videos_most_recent_videos">
                 <div class="headline">
