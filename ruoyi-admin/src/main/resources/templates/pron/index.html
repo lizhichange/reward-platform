@@ -919,8 +919,7 @@
                                     [[${role.name}]]
                                 </strong>
                                 <div class="wrap">
-                                    <div class="duration">2:42:22</div>
-
+                                    <div class="duration">[[${role.shijianStr}]]</div>
                                     <div class="rating positive">
                                         73%
                                     </div>
@@ -1066,9 +1065,9 @@
                             html += '<div class="item  "> '
                                 + '<a href="http://www.xiaobi017.com/videos/72086/yq-k/" title="'+row.name+'"> <div class="img"> <img class="thumb lazy-load" src="' + row.url + '"'
                                 + 'data-original="'+row.url+'" alt="'+row.name+'" data-cnt="5" width="180"'
-                                + 'height="135">  </div>  <strong class="'+row.name+'"> '+row.name+'  </strong>  <div class="wrap">  <div class="duration">6:45</div>'
+                                + 'height="135">  </div>  <strong class="'+row.name+'"> '+row.name+'  </strong>  <div class="wrap">  <div class="duration">'+row.shijianStr+'</div>'
                                 + '<div class="rating positive">  76%  </div> </div>  <div class="wrap">'
-                                + ' <div class="added"><em>3天前</em></div>'
+                                + ' <div class="added"><em>'+row.diffDays+'</em></div>'
                                 + '   <div class="views">39 379</div>'
                                 + '  </div>'
                                 + ' </a>'

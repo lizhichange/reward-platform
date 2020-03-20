@@ -39,6 +39,7 @@
 
             <input name="shiFileName" type="hidden" id="shiFileName" value="">
             <input name="shiUrl" type="hidden" id="shiUrl" value="">
+            <input name="shijian" type="hidden" id="shijian" value="">
 
             <div class="col-sm-6">
                 <div class="form-group">
@@ -146,6 +147,7 @@
             } else if (response.code === 0) {
                 $('#shiFileName').val(response.fileName);
                 $('#shiUrl').val(response.url);
+                $('#shijian').val(response.duration);
             }
         }
     });

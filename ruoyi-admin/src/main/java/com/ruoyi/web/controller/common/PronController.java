@@ -8,9 +8,7 @@ import com.ruoyi.sms.facade.api.IYqmService;
 import com.ruoyi.sms.facade.dto.ShipinDTO;
 import com.ruoyi.system.domain.SysCategory;
 import com.ruoyi.system.service.ISysCategoryService;
-import com.ruoyi.system.service.ISysOperLogService;
 import com.ruoyi.system.service.ISysPostService;
-import com.ruoyi.system.service.ISysUserService;
 import lombok.Data;
 import org.near.toolkit.common.DateUtils;
 import org.near.toolkit.common.StringUtil;
@@ -57,9 +55,19 @@ public class PronController extends BaseController {
         PageHelper.startPage(1, 12, StringUtil.EMPTY_STRING);
         List<ShipinDTO> list = shipinService.selectShipinDTOList(shipinDTO);
 
-        Date now = new Date();
+        convert(list);
 
-        if (CollectionUtils.isEmpty(list)) {
+        modelmap.addAttribute("list", list);
+        SysCategory sysCategory = new SysCategory();
+        sysCategory.setParentId(100L);
+        List<SysCategory> categoryList = categoryService.selectDeptList(sysCategory);
+        modelmap.addAttribute("categoryList", categoryList);
+        return prefix + "/index.html";
+    }
+
+    private void convert(List<ShipinDTO> list) {
+        if (!CollectionUtils.isEmpty(list)) {
+            Date now = new Date();
             for (ShipinDTO dto : list) {
                 Date createTime = dto.getCreateTime();
                 if (createTime != null) {
@@ -70,14 +78,12 @@ public class PronController extends BaseController {
                         dto.setDiffDays(diffDays + "天前");
                     }
                 }
+
+                if (StringUtil.isNotBlank(dto.getShijian())) {
+                    dto.setShijianStr(DateUtils.getTimeString(Integer.parseInt(dto.getShijian())));
+                }
             }
         }
-        modelmap.addAttribute("list", list);
-        SysCategory sysCategory = new SysCategory();
-        sysCategory.setParentId(100L);
-        List<SysCategory> categoryList = categoryService.selectDeptList(sysCategory);
-        modelmap.addAttribute("categoryList", categoryList);
-        return prefix + "/index.html";
     }
 
     @GetMapping("/pagination")
@@ -90,6 +96,7 @@ public class PronController extends BaseController {
     public TableDataInfoExt list(ShipinDTO shipinDTO) {
         startPage();
         List<ShipinDTO> list = shipinService.selectShipinDTOList(shipinDTO);
+        convert(list);
         TableDataInfo dataTable = getDataTable(list);
         TableDataInfoExt ext = new TableDataInfoExt();
         BeanUtils.copyProperties(dataTable, ext);

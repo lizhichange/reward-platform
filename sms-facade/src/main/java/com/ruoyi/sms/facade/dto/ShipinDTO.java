@@ -76,6 +76,7 @@ public class ShipinDTO implements Serializable {
      */
     private String shijian;
 
+    private String shijianStr;
     /**
      * shipin.lx
      *
