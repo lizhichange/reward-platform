@@ -70,11 +70,12 @@ public class CommonController {
             // 上传文件路径
             String filePath = Global.getUploadPath();
             // 上传并返回新文件名称
-            String fileName = FileUploadUtils.upload(filePath, file);
-            String url = serverConfig.getUrl() + fileName;
+            FileUploadUtils.UploadFileNameResult upload = FileUploadUtils.upload(filePath, file);
+            String url = serverConfig.getUrl() + upload.getPathFileName();
             AjaxResult ajax = AjaxResult.success();
-            ajax.put("fileName", fileName);
+            ajax.put("fileName", upload.getPathFileName());
             ajax.put("url", url);
+            ajax.put("duration", upload.getDuration());
             return ajax;
         } catch (Exception e) {
             return AjaxResult.error(e.getMessage());
@@ -85,22 +86,22 @@ public class CommonController {
     @ResponseBody
     public AjaxResult uploadFileName(@RequestParam("file_data") MultipartFile file) throws Exception {
         try {
+
+
             // 上传文件路径
             String filePath = Global.getUploadPath();
             // 上传并返回新文件名称
-            String fileName = FileUploadUtils.upload(filePath, file);
-            String url = serverConfig.getUrl() + fileName;
+            FileUploadUtils.UploadFileNameResult upload = FileUploadUtils.upload(filePath, file);
+            String url = serverConfig.getUrl() + upload.getPathFileName();
             AjaxResult ajax = AjaxResult.success();
-            ajax.put("fileName", fileName);
+            ajax.put("fileName", upload.getPathFileName());
             ajax.put("url", url);
-
-
+            ajax.put("duration", upload.getDuration());
             return ajax;
         } catch (Exception e) {
             return AjaxResult.error(e.getMessage());
         }
     }
-
 
     /**
      * 本地资源通用下载

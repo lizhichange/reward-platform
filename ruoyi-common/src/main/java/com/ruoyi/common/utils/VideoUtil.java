@@ -32,16 +32,20 @@ public class VideoUtil {
     public static long getDuration(String filePath) throws IOException {
         String format = getVideoFormat(filePath);
         long result = 0;
-        if ("wav".equals(format)) {
-            result = AudioUtil.getDuration(filePath).intValue();
-        } else if ("mp3".equals(format)) {
-            result = AudioUtil.getMp3Duration(filePath).intValue();
-        } else if ("m4a".equals(format)) {
-            result = VideoUtil.getMp4Duration(filePath);
-        } else if ("mov".equals(format)) {
-            result = VideoUtil.getMp4Duration(filePath);
-        } else if ("mp4".equals(format)) {
-            result = VideoUtil.getMp4Duration(filePath);
+        switch (format) {
+            case "wav":
+                result = AudioUtil.getDuration(filePath).intValue();
+                break;
+            case "mp3":
+                result = AudioUtil.getMp3Duration(filePath).intValue();
+                break;
+            case "m4a":
+            case "mp4":
+            case "mov":
+                result = VideoUtil.getMp4Duration(filePath);
+                break;
+            default:
+                break;
         }
 
         return result;
