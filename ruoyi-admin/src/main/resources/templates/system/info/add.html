@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="include :: header('新增【请填写功能名称】')"/>
+    <th:block th:include="include :: datetimepicker-css"/>
+</head>
+<body class="white-bg">
+<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+    <form class="form-horizontal m" id="form-info-add">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">企业名称 ：</label>
+            <div class="col-sm-8">
+                <input class="form-control" name="enterpriseName" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">开户日期 ：</label>
+            <div class="col-sm-8">
+                <div class="input-group date">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <input class="form-control" name="accountOpeningDate" placeholder="yyyy-MM-dd" type="text">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">销售经理：</label>
+            <div class="col-sm-8">
+                <input class="form-control" name="salesManager" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">付费类型：</label>
+            <div class="col-sm-8">
+                <select class="form-control m-b" name="paymentType">
+                    <option value="">所有</option>
+                </select>
+                <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 代码生成请选择字典属性</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">企业状态：</label>
+            <div class="col-sm-8">
+                <div class="radio-box">
+                    <input name="status" type="radio" value="">
+                    <label th:for="status" th:text="未知"></label>
+                </div>
+                <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 代码生成请选择字典属性</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">备注：</label>
+            <div class="col-sm-8">
+                <input class="form-control" name="remarks" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">企业登录账号：</label>
+            <div class="col-sm-8">
+                <input class="form-control" name="enterpriseAccount" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">企业登录密码：</label>
+            <div class="col-sm-8">
+                <input class="form-control" name="enterprisePassword" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">是否模板发送：</label>
+            <div class="col-sm-8">
+                <input class="form-control" name="sendTheTemplate" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">是否敏感词审核：</label>
+            <div class="col-sm-8">
+                <input class="form-control" name="sensitiveWordReview" type="text">
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">联系人：</label>
+            <div class="col-sm-8">
+                <input class="form-control" name="contact" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">联系人号码：</label>
+            <div class="col-sm-8">
+                <input class="form-control" name="contactPhone" type="text">
+            </div>
+        </div>
+    </form>
+</div>
+<th:block th:include="include :: footer"/>
+<th:block th:include="include :: datetimepicker-js"/>
+<script type="text/javascript">
+    var prefix = ctx + "system/info"
+    $("#form-info-add").validate({
+        focusCleanup: true
+    });
+
+    function submitHandler() {
+        if ($.validate.form()) {
+            $.operate.save(prefix + "/add", $('#form-info-add').serialize());
+        }
+    }
+
+    $("input[name='accountOpeningDate']").datetimepicker({
+        format: "yyyy-mm-dd",
+        minView: "month",
+        autoclose: true
+    });
+</script>
+</body>
+</html>
