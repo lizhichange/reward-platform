@@ -10,6 +10,7 @@ import com.ruoyi.system.domain.SysCategory;
 import com.ruoyi.system.service.ISysCategoryService;
 import com.ruoyi.system.service.ISysPostService;
 import lombok.Data;
+import lombok.extern.java.Log;
 import org.near.toolkit.common.DateUtils;
 import org.near.toolkit.common.StringUtil;
 import org.slf4j.Logger;
@@ -19,10 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
@@ -32,6 +30,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/pron")
+@Log
 public class PronController extends BaseController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PronController.class);
@@ -41,10 +40,12 @@ public class PronController extends BaseController {
 
     @Autowired
     IShipinService shipinService;
+
     @Autowired
     IYqmService yqmService;
     @Autowired
     ISysCategoryService categoryService;
+
 
     @Autowired
     ISysPostService postService;
@@ -88,12 +89,17 @@ public class PronController extends BaseController {
 
     @GetMapping("/pagination")
     public String pagination() {
-        return prefix + "/pagination.html";
+        return prefix + "/pagination";
     }
 
-    @GetMapping("/detail")
-    public String detail() {
-        return prefix + "/detail.html";
+    @GetMapping("/detail/{id}/{userid}")
+    public String detail(@PathVariable("id") Long id, @PathVariable("userid") String userid, ModelMap mmap) {
+        logger.info("user:{},id:{}", userid, id);
+        ShipinDTO shipin = shipinService.selectShipinDTOById(id);
+        SysCategory category = categoryService.selectDeptById(shipin.getCategoryId().longValue());
+        mmap.put("shipin", shipin);
+        mmap.put("category", category);
+        return prefix + "/detail";
     }
 
     @PostMapping("/list")

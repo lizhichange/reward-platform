@@ -910,7 +910,7 @@
 
                     <div class="margin-fix" id="list_videos_videos_watched_right_now_items">
                         <div class="item  " th:each="role:${list}">
-                            <a href="http://www.xiaobi017.com/videos/72138/j8-2-2-40/"
+                            <a  th:href="@{'/pron/detail/'+${role.id}+'/'+${role.userid}}"
                                th:title="${role.name}">
                                 <div class="img">
                                     <img class="thumb lazy-load" th:src="${role.url}"
@@ -1064,7 +1064,7 @@
                         $.each(res.rows, function (i, row) {
                             var ctx = '';
                             html += '<div class="item  "> '
-                                + '<a href="http://www.xiaobi017.com/videos/72086/yq-k/" title="'+row.name+'"> <div class="img"> <img class="thumb lazy-load" src="' + row.url + '"'
+                                + '<a href="/pron/detail/'+row.id+'/'+row.userid+'" title="'+row.name+'"> <div class="img"> <img class="thumb lazy-load" src="' + row.url + '"'
                                 + 'data-original="'+row.url+'" alt="'+row.name+'" data-cnt="5" width="180"'
                                 + 'height="135">  </div>  <strong class="'+row.name+'"> '+row.name+'  </strong>  <div class="wrap">  <div class="duration">'+row.shijianStr+'</div>'
                                 + '<div class="rating positive">  76%  </div> </div>  <div class="wrap">'

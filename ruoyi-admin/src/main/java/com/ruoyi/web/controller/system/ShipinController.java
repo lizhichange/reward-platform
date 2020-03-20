@@ -88,7 +88,7 @@ public class ShipinController extends BaseController {
     @ResponseBody
     public AjaxResult addSave(ShipinDTO shipin) {
 
-        // TODO: 2020/3/18 推广链接 评价userId
+        // TODO: 2020/3/18 推广链接 userId
         String data = URL.encode("www.baidu.com");
         String str = "http://mrw.so/api.htm?format=json&url=" + data + "&key=5e6ef6a244bb353b0f889030@54f90da6926dac28c12d0e31fdf820fc";
         LinkedHashMap forObject = restTemplate.getForObject(str, LinkedHashMap.class);
