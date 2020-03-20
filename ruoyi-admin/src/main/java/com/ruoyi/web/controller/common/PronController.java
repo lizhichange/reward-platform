@@ -91,6 +91,11 @@ public class PronController extends BaseController {
         return prefix + "/pagination.html";
     }
 
+    @GetMapping("/detail")
+    public String detail() {
+        return prefix + "/detail.html";
+    }
+
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfoExt list(ShipinDTO shipinDTO) {
