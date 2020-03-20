@@ -822,9 +822,9 @@
 </style>
 <div class="fixed666 stuckMenu isStuck" id="class2" style="position: fixed; top: 0px;">
     <div class="s1">
-        请务必收藏本站最新地址发布页
+
         <span>
-                <a href="https://www.ebay.com/usr/ke-6383" target="_blank">去地址发布页&gt;&gt;&gt;</a>
+                <a href="https://www.ebay.com/usr/ke-6383" target="_blank">&gt;&gt;&gt;</a>
             </span>
     </div>
     <div class="s2" onclick="close1();">
@@ -926,7 +926,7 @@
                                     </div>
                                 </div>
                                 <div class="wrap">
-                                    <div class="added"><em>3天前</em></div>
+                                    <div class="added"><em>[[${role.diffDays}]]</em></div>
                                     <div class="views">198 398</div>
                                 </div>
                             </a>
@@ -935,8 +935,7 @@
                 </div>
             </div>
             <div class="box tags-cloud">
-                <a href="http://www.xiaobi017.com/tags/c73595d7f72c22c93a83ff4fdfb811ba/"
-                   style="font-weight: bold; font-size: 13px;">嫩模</a>
+                <a  th:each="item:${categoryList}" href="" style="font-weight: bold; font-size: 13px;"> [[${item.categoryName}]]</a>
                 &nbsp;&nbsp;
             </div>
 

@@ -9,6 +9,8 @@ import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.framework.util.ShiroUtils;
 
+import com.ruoyi.sms.facade.api.IShipinService;
+import com.ruoyi.sms.facade.dto.ShipinDTO;
 import com.ruoyi.system.domain.SysCategory;
 import com.ruoyi.system.domain.SysRole;
 
@@ -17,13 +19,14 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.CollectionUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 /**
- * 部门信息
+ * 栏目信息
  *
  * @author ruoyi
  */
@@ -49,7 +52,7 @@ public class SysCategoryController extends BaseController {
     }
 
     /**
-     * 新增部门
+     * 新增栏目
      */
     @GetMapping("/add/{parentId}")
     public String add(@PathVariable("parentId") Long parentId, ModelMap mmap) {
@@ -58,15 +61,15 @@ public class SysCategoryController extends BaseController {
     }
 
     /**
-     * 新增保存部门
+     * 新增保存栏目
      */
-    @Log(title = "部门管理", businessType = BusinessType.INSERT)
+    @Log(title = "栏目管理", businessType = BusinessType.INSERT)
     @RequiresPermissions("system:SysDeptController:add")
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult addSave(@Validated SysCategory dept) {
         if (UserConstants.DEPT_NAME_NOT_UNIQUE.equals(categoryService.checkDeptNameUnique(dept))) {
-            return error("新增部门'" + dept.getCategoryName() + "'失败，部门名称已存在");
+            return error("新增栏目'" + dept.getCategoryName() + "'失败，栏目名称已存在");
         }
         dept.setCreateBy(ShiroUtils.getLoginName());
         return toAjax(categoryService.insertDept(dept));
@@ -88,15 +91,15 @@ public class SysCategoryController extends BaseController {
     /**
      * 保存
      */
-    @Log(title = "部门管理", businessType = BusinessType.UPDATE)
+    @Log(title = "栏目管理", businessType = BusinessType.UPDATE)
     @RequiresPermissions("system:category:edit")
     @PostMapping("/edit")
     @ResponseBody
     public AjaxResult editSave(@Validated SysCategory dept) {
         if (UserConstants.DEPT_NAME_NOT_UNIQUE.equals(categoryService.checkDeptNameUnique(dept))) {
-            return error("修改部门'" + dept.getCategoryName() + "'失败，部门名称已存在");
+            return error("修改栏目'" + dept.getCategoryName() + "'失败，栏目名称已存在");
         } else if (dept.getParentId().equals(dept.getCategoryId())) {
-            return error("修改部门'" + dept.getCategoryName() + "'失败，上级部门不能是自己");
+            return error("修改栏目'" + dept.getCategoryName() + "'失败，上级栏目不能是自己");
         }
         dept.setUpdateBy(ShiroUtils.getLoginName());
         return toAjax(categoryService.updateDept(dept));
@@ -105,22 +108,28 @@ public class SysCategoryController extends BaseController {
     /**
      * 删除
      */
-    @Log(title = "部门管理", businessType = BusinessType.DELETE)
+    @Log(title = "栏目管理", businessType = BusinessType.DELETE)
     @RequiresPermissions("system:category:remove")
     @GetMapping("/remove/{deptId}")
     @ResponseBody
     public AjaxResult remove(@PathVariable("deptId") Long deptId) {
         if (categoryService.selectDeptCount(deptId) > 0) {
-            return AjaxResult.warn("存在下级部门,不允许删除");
+            return AjaxResult.warn("存在下级栏目,不允许删除");
         }
-        if (categoryService.checkDeptExistUser(deptId)) {
-            return AjaxResult.warn("部门存在用户,不允许删除");
+        ShipinDTO shipinDTO = new ShipinDTO();
+        shipinDTO.setCategoryId(Math.toIntExact(deptId));
+        List<ShipinDTO> list = shipinService.selectShipinDTOList(shipinDTO);
+        if (!CollectionUtils.isEmpty(list)) {
+            return AjaxResult.warn("该类目关联了视频,不允许删除");
         }
         return toAjax(categoryService.deleteDeptById(deptId));
     }
 
+    @Autowired
+    IShipinService shipinService;
+
     /**
-     * 校验部门名称
+     * 校验栏目名称
      */
     @PostMapping("/checkDeptNameUnique")
     @ResponseBody
@@ -129,7 +138,7 @@ public class SysCategoryController extends BaseController {
     }
 
     /**
-     * 选择部门树
+     * 选择栏目树
      */
     @GetMapping("/selectDeptTree/{deptId}")
     public String selectDeptTree(@PathVariable("deptId") Long deptId, ModelMap mmap) {
@@ -138,7 +147,7 @@ public class SysCategoryController extends BaseController {
     }
 
     /**
-     * 加载部门列表树
+     * 加载栏目列表树
      */
     @GetMapping("/treeData")
     @ResponseBody
@@ -148,7 +157,7 @@ public class SysCategoryController extends BaseController {
     }
 
     /**
-     * 加载角色部门（数据权限）列表树
+     * 加载角色栏目（数据权限）列表树
      */
     @GetMapping("/roleDeptTreeData")
     @ResponseBody

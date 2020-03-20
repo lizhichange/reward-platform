@@ -154,6 +154,7 @@ public class ShipinDTO implements Serializable {
 
     private String shiUrl;
 
+    private String diffDays;
     private static final long serialVersionUID = 1L;
 
     @Override

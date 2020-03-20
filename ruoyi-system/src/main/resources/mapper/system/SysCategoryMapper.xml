@@ -50,7 +50,7 @@
     </select>
 
     <select id="checkDeptExistUser" parameterType="Long" resultType="int">
-		select count(1) from sys_user where category_id = #{categoryId} and del_flag = '0'
+		select count(1) from sys_category where category_id = #{categoryId} and del_flag = '0'
 	</select>
 
     <select id="selectDeptCount" parameterType="SysCategory" resultType="int">
