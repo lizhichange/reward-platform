@@ -163,9 +163,6 @@ public class ShipinController extends BaseController {
         item.setId(Integer.parseInt(s));
         item.setUserid(ShiroUtils.getLoginName());
         int count = shipinService.count(item);
-        if (count == 0) {
-            return true;
-        }
-        return false;
+        return count == 0;
     }
 }

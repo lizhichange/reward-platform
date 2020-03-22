@@ -16,6 +16,10 @@
     <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
     <script th:src="@{/pron/flowplayer/flowplayer.min.js}"></script>
     <!--    <script th:src="@{/pron/detail/main.min.js}"></script>-->
+    <script  th:src="@{/ajax/libs/layer/layer.min.js}"></script>
+    <script th:src="@{/ajax/libs/blockUI/jquery.blockUI.js}"></script>
+    <script th:src="@{/ruoyi/js/ry-ui.js?v=4.0.0}"></script>
+
 
 </head>
 
@@ -26,10 +30,15 @@
             <ul>
             </ul>
         </div>
+        <div class="box tags-cloud">
+            <a th:each="item:${categoryList}" href="" style="font-weight: bold; font-size: 13px;">
+                [[${item.categoryName}]]</a>
+            &nbsp;&nbsp;
+        </div>
         <div class="member-links">
             <ul>
-                <li><a href="/signup2/" target="_blank">注册</a></li>
-                <li><a href="/login2/" target="_blank" id="login">登录</a></li>
+                <li><a href="http://www.xiaobi017.com/signup2/" target="_blank">注册</a></li>
+                <li><a href="http://www.xiaobi017.com/login2/" target="_blank" id="login">登录</a></li>
             </ul>
         </div>
     </div>
@@ -228,8 +237,32 @@
                     });
                     video.on('seeking seeked pause ready resume', function (e, api) {
                         let type = e.type;
-                        console.log(type, api);
+                        if (type === 'resume') {
+                            console.log(type, api);
+                            check();
+                        }
                     });
+
+                    function check() {
+                        $.modal.loading($("#btnSubmit").data("loading"));
+                        var username = '12';
+                        $.ajax({
+                            type: "post",
+                            url: "/login",
+                            data: {
+                                "username": username
+                            },
+                            success: function (r) {
+                                if (r.code === 0) {
+
+                                } else {
+                                    $.modal.closeLoading();
+                                    $.modal.msg(r.msg);
+                                }
+                            }
+                        });
+                    }
+
                 });
             </script>
 
@@ -267,10 +300,6 @@
                                     </div>
                                     <div class="item">
                                         类别:
-                                        <a href="http://www.xiaobi017.com/categories/sm/">SM</a>
-                                    </div>
-                                    <div class="item">
-                                        标签:
                                         <a href="">[[${category.categoryName}]]</a>
                                     </div>
 
@@ -297,8 +326,8 @@
                 <div class="list-videos">
                     <div class="margin-fix" id="list_videos_related_videos_items">
                         <div class="item  " th:each="role:${list}">
-                            <a  th:href="@{'/pron/detail/'+${role.id}+'/'+${role.userid}}"
-                                th:title="${role.name}">
+                            <a th:href="@{'/pron/detail/'+${role.id}+'/'+${role.userid}}"
+                               th:title="${role.name}">
                                 <div class="img">
                                     <img class="thumb lazy-load" th:src="${role.url}"
                                          th:data-original="${role.url}"
@@ -311,9 +340,6 @@
                                 </strong>
                                 <div class="wrap">
                                     <div class="duration">[[${role.shijianStr}]]</div>
-                                    <div class="rating positive">
-                                        73%
-                                    </div>
                                 </div>
                                 <div class="wrap">
                                     <div class="added"><em>[[${role.diffDays}]]</em></div>

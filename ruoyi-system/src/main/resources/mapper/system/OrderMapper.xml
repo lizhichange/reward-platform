@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.OrderMapper">
+    
+    <resultMap type="Order" id="OrderResult">
+        <result property="id"    column="id"    />
+        <result property="orderId"    column="order_id"    />
+        <result property="money"    column="money"    />
+        <result property="price"    column="price"    />
+        <result property="type"    column="type"    />
+        <result property="payNo"    column="pay_no"    />
+        <result property="param"    column="param"    />
+        <result property="payTime"    column="pay_time"    />
+        <result property="payTag"    column="pay_tag"    />
+        <result property="status"    column="status"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectOrderVo">
+        select id, order_id, money, price, `type`, pay_no, param, pay_time, pay_tag, status, create_time, update_time from `order`
+    </sql>
+
+    <select id="selectOrderList" parameterType="Order" resultMap="OrderResult">
+        <include refid="selectOrderVo"/>
+        <where>  
+            <if test="orderId != null  and orderId != ''"> and order_id = #{orderId}</if>
+            <if test="money != null "> and money = #{money}</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="type != null "> and `type` = #{type}</if>
+            <if test="payNo != null  and payNo != ''"> and pay_no = #{payNo}</if>
+            <if test="param != null  and param != ''"> and param = #{param}</if>
+            <if test="payTime != null "> and pay_time = #{payTime}</if>
+            <if test="payTag != null  and payTag != ''"> and pay_tag = #{payTag}</if>
+            <if test="status != null "> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectOrderById" parameterType="Long" resultMap="OrderResult">
+        <include refid="selectOrderVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertOrder" parameterType="Order" useGeneratedKeys="true" keyProperty="id">
+        insert into `order`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderId != null  and orderId != ''">order_id,</if>
+            <if test="money != null ">money,</if>
+            <if test="price != null ">price,</if>
+            <if test="type != null ">`type`,</if>
+            <if test="payNo != null  and payNo != ''">pay_no,</if>
+            <if test="param != null  and param != ''">param,</if>
+            <if test="payTime != null ">pay_time,</if>
+            <if test="payTag != null  and payTag != ''">pay_tag,</if>
+            <if test="status != null ">status,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateTime != null ">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderId != null  and orderId != ''">#{orderId},</if>
+            <if test="money != null ">#{money},</if>
+            <if test="price != null ">#{price},</if>
+            <if test="type != null ">#{type},</if>
+            <if test="payNo != null  and payNo != ''">#{payNo},</if>
+            <if test="param != null  and param != ''">#{param},</if>
+            <if test="payTime != null ">#{payTime},</if>
+            <if test="payTag != null  and payTag != ''">#{payTag},</if>
+            <if test="status != null ">#{status},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateOrder" parameterType="Order">
+        update `order`
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orderId != null  and orderId != ''">order_id = #{orderId},</if>
+            <if test="money != null ">money = #{money},</if>
+            <if test="price != null ">price = #{price},</if>
+            <if test="type != null ">`type` = #{type},</if>
+            <if test="payNo != null  and payNo != ''">pay_no = #{payNo},</if>
+            <if test="param != null  and param != ''">param = #{param},</if>
+            <if test="payTime != null ">pay_time = #{payTime},</if>
+            <if test="payTag != null  and payTag != ''">pay_tag = #{payTag},</if>
+            <if test="status != null ">status = #{status},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteOrderById" parameterType="Long">
+        delete from `order` where id = #{id}
+    </delete>
+
+    <delete id="deleteOrderByIds" parameterType="String">
+        delete from `order` where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

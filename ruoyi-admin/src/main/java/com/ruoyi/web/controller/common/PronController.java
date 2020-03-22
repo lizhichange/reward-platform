@@ -120,11 +120,14 @@ public class PronController extends BaseController {
         ShipinDTO shipinDTO = new ShipinDTO();
         PageHelper.startPage(1, 12, StringUtil.EMPTY_STRING);
         List<ShipinDTO> list = shipinService.selectShipinDTOList(shipinDTO);
-
         convert(list);
-
         modelmap.addAttribute("list", list);
 
+
+        SysCategory sysCategory = new SysCategory();
+        sysCategory.setParentId(100L);
+        List<SysCategory> categoryList = categoryService.selectDeptList(sysCategory);
+        modelmap.addAttribute("categoryList", categoryList);
 
         return prefix + "/detail";
     }
