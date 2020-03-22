@@ -2,11 +2,13 @@ package com.ruoyi.sms.service;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.ruoyi.common.core.text.Convert;
-import com.ruoyi.sms.mapper.ExtShipinMapper;
 import com.ruoyi.sms.domain.Shipin;
+import com.ruoyi.sms.domain.ShipinExample;
 import com.ruoyi.sms.facade.api.IShipinService;
 import com.ruoyi.sms.facade.dto.ShipinDTO;
+import com.ruoyi.sms.mapper.ExtShipinMapper;
 import com.ruoyi.sms.mapper.ShipinMapper;
+import org.near.toolkit.common.StringUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -68,6 +70,20 @@ public class ShipinServiceImpl implements IShipinService {
 
         return list.stream().map(this::convert).collect(Collectors.toList());
 
+    }
+
+    @Override
+    public int count(ShipinDTO item) {
+        ShipinExample example = new ShipinExample();
+        ShipinExample.Criteria criteria = example.createCriteria();
+        if (item.getId() != null) {
+            criteria.andIdEqualTo(item.getId());
+        }
+        if (StringUtil.isNotBlank(item.getUserid())) {
+            criteria.andUseridEqualTo(item.getUserid());
+        }
+        long l = shipinMapper.countByExample(example);
+        return (int) l;
     }
 
     /**

@@ -28,6 +28,8 @@ public interface IShipinService {
      */
     public List<ShipinDTO> selectShipinDTOList(ShipinDTO item);
 
+    public int count(ShipinDTO item);
+
     /**
      * 新增公共片库
      *

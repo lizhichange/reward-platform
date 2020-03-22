@@ -17,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.CollectionUtils;
@@ -50,6 +51,9 @@ public class PronController extends BaseController {
     @Autowired
     ISysPostService postService;
 
+    @Autowired
+    ThreadPoolTaskExecutor threadPoolTaskExecutor;
+
     @GetMapping()
     public String index(ModelMap modelmap) {
         ShipinDTO shipinDTO = new ShipinDTO();
@@ -70,20 +74,24 @@ public class PronController extends BaseController {
         if (!CollectionUtils.isEmpty(list)) {
             Date now = new Date();
             for (ShipinDTO dto : list) {
-                Date createTime = dto.getCreateTime();
-                if (createTime != null) {
-                    long diffDays = DateUtils.getDiffDays(createTime, now);
-                    if (diffDays < 1) {
-                        dto.setDiffDays("刚刚");
-                    } else {
-                        dto.setDiffDays(diffDays + "天前");
-                    }
-                }
-
-                if (StringUtil.isNotBlank(dto.getShijian())) {
-                    dto.setShijianStr(DateUtils.getTimeString(Integer.parseInt(dto.getShijian())));
-                }
+                convert(now, dto);
             }
+        }
+    }
+
+    private void convert(Date now, ShipinDTO dto) {
+        Date createTime = dto.getCreateTime();
+        if (createTime != null) {
+            long diffDays = DateUtils.getDiffDays(createTime, now);
+            if (diffDays < 1) {
+                dto.setDiffDays("刚刚");
+            } else {
+                dto.setDiffDays(diffDays + "天前");
+            }
+        }
+
+        if (StringUtil.isNotBlank(dto.getShijian())) {
+            dto.setShijianStr(DateUtils.getTimeString(Integer.parseInt(dto.getShijian())));
         }
     }
 
@@ -96,11 +104,28 @@ public class PronController extends BaseController {
     public String detail(@PathVariable("id") Long id, @PathVariable("userid") String userid, ModelMap mmap) {
         logger.info("user:{},id:{}", userid, id);
         ShipinDTO shipin = shipinService.selectShipinDTOById(id);
-        SysCategory category = categoryService.selectDeptById(shipin.getCategoryId().longValue());
-        mmap.put("shipin", shipin);
-        mmap.put("category", category);
+        if (shipin!=null){
+            convert(new Date(), shipin);
+            mmap.put("shipin", shipin);
+            SysCategory category = categoryService.selectDeptById(shipin.getCategoryId().longValue());
+            if (category!=null){
+                mmap.put("category", category);
+            }
+        }
+        threadPoolTaskExecutor.execute(() -> {
+
+
+        });
+
         return prefix + "/detail";
     }
+
+
+    @GetMapping("/flowplayer")
+    public String flowplayer(ModelMap mmap) {
+        return prefix + "/flowplayer";
+    }
+
 
     @PostMapping("/list")
     @ResponseBody
