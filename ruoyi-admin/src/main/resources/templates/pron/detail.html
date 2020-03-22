@@ -206,12 +206,15 @@
                     <source type="video/mp4" th:src="${shipin.zykey}">
                 </video>
             </div>
-
+            <input type="hidden" th:value="${shipin.zykey}" id="src"/>
+            <input type="hidden" th:value="${shipin.url}" id="poster"/>
             <script>
                 $(function () {
+                    let src = $('#src').val();
+                    let poster = $('#poster').val();
                     let video = $("#area1").flowplayer({
-                        description: "This is a video about videos, showing how to view videos",
-                        src: "https://edge.flowplayer.org/bauhaus.mp4",
+                        description: "",
+                        src: src,
                         swf: "/pron/flowplayer/flowplayer.swf",
                         title: "my video",
                         autoplay: false,
@@ -219,7 +222,7 @@
                         title: "Video about videos",
                         rewind: true,
                         loop: false,//播放器是否应循环播放当前视频。默认：false
-                        poster: 'http://cdn-img.tadpoles.xyz/contents/videos_screenshots/72000/72281/preview.mp4.jpg',
+                        poster: poster,
                         autopause: true,
                         plugins: []
                     });
@@ -293,33 +296,28 @@
             <div class="box">
                 <div class="list-videos">
                     <div class="margin-fix" id="list_videos_related_videos_items">
-                        <div class="item  ">
-                            <a href="http://www.xiaobi017.com/videos/63640/720p357/"
-                               title="爱剪辑-极品美乳女神护士剧情演绎制服诱惑大屌病人做爱 无套抽插 女上疯狂骑乘 淫叫高潮 淫语露脸 高清720P">
+                        <div class="item  " th:each="role:${list}">
+                            <a  th:href="@{'/pron/detail/'+${role.id}+'/'+${role.userid}}"
+                                th:title="${role.name}">
                                 <div class="img">
-                                    <img class="thumb lazy-load"
-                                         src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                                         data-original="http://cdn-img.tadpoles.xyz/contents/videos_screenshots/63000/63640/180x135/1.jpg"
-                                         alt="爱剪辑-极品美乳女神护士剧情演绎制服诱惑大屌病人做爱 无套抽插 女上疯狂骑乘 淫叫高潮 淫语露脸 高清720P" data-cnt="5"
-                                         width="180" height="135"/>
-                                    <span class="ico-fav-0 " title="加入标签" data-fav-video-id="63640"
-                                          data-fav-type="0"></span>
-                                    <span class="ico-fav-1 " title="稍后观看" data-fav-video-id="63640"
-                                          data-fav-type="1"></span>
+                                    <img class="thumb lazy-load" th:src="${role.url}"
+                                         th:data-original="${role.url}"
+                                         th:alt="${role.name}" data-cnt="5"
+                                         width="180" height="135">
+
                                 </div>
                                 <strong class="title">
-                                    爱剪辑-极品美乳女神护士剧情演绎制服诱惑大屌病人做爱 无套抽插 女上疯狂骑乘 淫叫高潮 淫语露脸 高清720P
+                                    [[${role.name}]]
                                 </strong>
                                 <div class="wrap">
-                                    <div class="duration">17:31</div>
-
+                                    <div class="duration">[[${role.shijianStr}]]</div>
                                     <div class="rating positive">
-                                        72%
+                                        73%
                                     </div>
                                 </div>
                                 <div class="wrap">
-                                    <div class="added"><em>8月前</em></div>
-                                    <div class="views">202 927</div>
+                                    <div class="added"><em>[[${role.diffDays}]]</em></div>
+                                    <div class="views">[[${role.click}]]</div>
                                 </div>
                             </a>
                         </div>

@@ -101,21 +101,30 @@ public class PronController extends BaseController {
     }
 
     @GetMapping("/detail/{id}/{userid}")
-    public String detail(@PathVariable("id") Long id, @PathVariable("userid") String userid, ModelMap mmap) {
+    public String detail(@PathVariable("id") Long id, @PathVariable("userid") String userid, ModelMap modelmap) {
         logger.info("user:{},id:{}", userid, id);
         ShipinDTO shipin = shipinService.selectShipinDTOById(id);
         if (shipin!=null){
             convert(new Date(), shipin);
-            mmap.put("shipin", shipin);
+            modelmap.put("shipin", shipin);
             SysCategory category = categoryService.selectDeptById(shipin.getCategoryId().longValue());
             if (category!=null){
-                mmap.put("category", category);
+                modelmap.put("category", category);
             }
         }
         threadPoolTaskExecutor.execute(() -> {
 
 
         });
+
+        ShipinDTO shipinDTO = new ShipinDTO();
+        PageHelper.startPage(1, 12, StringUtil.EMPTY_STRING);
+        List<ShipinDTO> list = shipinService.selectShipinDTOList(shipinDTO);
+
+        convert(list);
+
+        modelmap.addAttribute("list", list);
+
 
         return prefix + "/detail";
     }

@@ -443,7 +443,6 @@
         }
 
 
-
         .addthis_20x20_style .at15t,
         .addthis_20x20_style .at300bs {
             overflow: hidden;
@@ -839,7 +838,8 @@
             </ul>
         </div>
         <div class="box tags-cloud">
-            <a  th:each="item:${categoryList}" href="" style="font-weight: bold; font-size: 13px;"> [[${item.categoryName}]]</a>
+            <a th:each="item:${categoryList}" href="" style="font-weight: bold; font-size: 13px;">
+                [[${item.categoryName}]]</a>
             &nbsp;&nbsp;
         </div>
         <div class="member-links">
@@ -910,7 +910,7 @@
 
                     <div class="margin-fix" id="list_videos_videos_watched_right_now_items">
                         <div class="item  " th:each="role:${list}">
-                            <a  th:href="@{'/pron/detail/'+${role.id}+'/'+${role.userid}}"
+                            <a th:href="@{'/pron/detail/'+${role.id}+'/'+${role.userid}}"
                                th:title="${role.name}">
                                 <div class="img">
                                     <img class="thumb lazy-load" th:src="${role.url}"
@@ -1064,12 +1064,12 @@
                         $.each(res.rows, function (i, row) {
                             var ctx = '';
                             html += '<div class="item  "> '
-                                + '<a href="/pron/detail/'+row.id+'/'+row.userid+'" title="'+row.name+'"> <div class="img"> <img class="thumb lazy-load" src="' + row.url + '"'
-                                + 'data-original="'+row.url+'" alt="'+row.name+'" data-cnt="5" width="180"'
-                                + 'height="135">  </div>  <strong class="'+row.name+'"> '+row.name+'  </strong>  <div class="wrap">  <div class="duration">'+row.shijianStr+'</div>'
+                                + '<a href="/pron/detail/' + row.id + '/' + row.userid + '" title="' + row.name + '"> <div class="img"> <img class="thumb lazy-load" src="' + row.url + '"'
+                                + 'data-original="' + row.url + '" alt="' + row.name + '" data-cnt="5" width="180"'
+                                + 'height="135">  </div>  <strong class="' + row.name + '"> ' + row.name + '  </strong>  <div class="wrap">  <div class="duration">' + row.shijianStr + '</div>'
                                 + '<div class="rating positive">  76%  </div> </div>  <div class="wrap">'
-                                + ' <div class="added"><em>'+row.diffDays+'</em></div>'
-                                + '   <div class="views">'+row.click+'</div>'
+                                + ' <div class="added"><em>' + row.diffDays + '</em></div>'
+                                + '   <div class="views">' + row.click + '</div>'
                                 + '  </div>'
                                 + ' </a>'
                                 + ' </div>';
@@ -1095,14 +1095,6 @@
         document.getElementById("class2").style.display = "none";
     }
 </script>
-<div id="_atssh"
-     style="visibility: hidden; height: 1px; width: 1px; position: absolute; top: -9999px; z-index: 100000;">
-    <iframe
-            id="_atssh695" title="AddThis utility frame"
-            style="height: 1px; width: 1px; position: absolute; top: 0px; z-index: 100000; border: 0px; left: 0px;"
-            th:src="@{/pron/sh.f48a1a04fe8dbf021b4cda1d.html}"></iframe>
-</div>
-<style id="service-icons-0"></style>
 
 
 </body>
