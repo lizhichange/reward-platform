@@ -1,10 +1,13 @@
 package com.ruoyi.sms.service;
 
 import com.ruoyi.common.core.text.Convert;
-import com.ruoyi.sms.mapper.ExtYqmMapper;
 import com.ruoyi.sms.domain.Yqm;
+import com.ruoyi.sms.domain.YqmExample;
 import com.ruoyi.sms.facade.api.IYqmService;
 import com.ruoyi.sms.facade.dto.YqmDTO;
+import com.ruoyi.sms.mapper.ExtYqmMapper;
+import com.ruoyi.sms.mapper.YqmMapper;
+import org.near.toolkit.common.StringUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +26,22 @@ import java.util.stream.Collectors;
 public class YqmServiceImpl implements IYqmService {
     @Autowired
     private ExtYqmMapper extYqmMapper;
+    @Autowired
+    private YqmMapper yqmMapper;
+
+    @Override
+    public int count(YqmDTO item) {
+        YqmExample example = new YqmExample();
+        YqmExample.Criteria criteria = example.createCriteria();
+        if (item.getId() != null) {
+            criteria.andIdEqualTo(item.getId());
+        }
+        if (StringUtil.isNotBlank(item.getUserid())) {
+            criteria.andUseridEqualTo(item.getUserid());
+        }
+        long l = yqmMapper.countByExample(example);
+        return (int) l;
+    }
 
     /**
      * 查询邀请码管理

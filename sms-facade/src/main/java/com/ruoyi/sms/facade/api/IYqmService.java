@@ -1,7 +1,6 @@
 package com.ruoyi.sms.facade.api;
 
 
-
 import com.ruoyi.sms.facade.dto.YqmDTO;
 
 import java.util.List;
@@ -14,6 +13,10 @@ import java.util.List;
  * @date 2020-03-17
  */
 public interface IYqmService {
+
+    public int count(YqmDTO item);
+
+
     /**
      * 查询邀请码管理
      *

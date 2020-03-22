@@ -14,7 +14,7 @@
     <link th:href="@{/pron/detail/all-responsive-metal.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{/pron/detail/jquery.fancybox-metal.css}" rel="stylesheet" type="text/css"/>
     <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
-    <script th:src="@{/pron/flowplayer/flowplayer.min.js}"></script>
+    <script th:src="@{/pron/flowplayer/flowplayer.js}"></script>
     <!--    <script th:src="@{/pron/detail/main.min.js}"></script>-->
     <script  th:src="@{/ajax/libs/layer/layer.min.js}"></script>
     <script th:src="@{/ajax/libs/blockUI/jquery.blockUI.js}"></script>
@@ -235,11 +235,32 @@
                         autopause: true,
                         plugins: []
                     });
+
+
+
+                    var video1;
+                    var bVideo1 = false;
+
+                    $("#area1").bind("ready", function(e, api) {
+                        bVideo1 = true;
+                        video1 = api;
+                        setupContemporaryEvents();
+                    });
+
+                    var setupContemporaryEvents = function(){
+                        if(bVideo1){
+                            $("#area1").bind("resume", function(e, api) {
+                                video1.play();
+                            });
+                        }
+                    };
+
+
                     video.on('seeking seeked pause ready resume', function (e, api) {
                         let type = e.type;
                         if (type === 'resume') {
                             console.log(type, api);
-                            check();
+
                         }
                     });
 

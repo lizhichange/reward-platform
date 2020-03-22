@@ -1,5 +1,6 @@
 package com.ruoyi.web.controller.system;
 
+import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
@@ -155,6 +156,28 @@ public class YqmController extends BaseController {
     @PostMapping("/remove")
     @ResponseBody
     public AjaxResult remove(String ids) {
+        if (ids.contains(",")) {
+            Iterable<String> split = Splitter.on(',')
+                    .trimResults()
+                    .omitEmptyStrings().split(ids);
+            for (String s : split) {
+                if (xxx(s)) {
+                    return error("只能删除自己添加的邀请码");
+                }
+            }
+        } else {
+            if (xxx(ids)) {
+                return error("只能删除自己添加的邀请码");
+            }
+        }
         return toAjax(yqmService.deleteYqmByIds(ids));
+    }
+
+    private boolean xxx(String s) {
+        YqmDTO item = new YqmDTO();
+        item.setId(Integer.parseInt(s));
+        item.setUserid(ShiroUtils.getLoginName());
+        int count = yqmService.count(item);
+        return count == 0;
     }
 }
