@@ -161,23 +161,36 @@ public class YqmController extends BaseController {
                     .trimResults()
                     .omitEmptyStrings().split(ids);
             for (String s : split) {
-                if (xxx(s)) {
+                if (delete(s)) {
                     return error("只能删除自己添加的邀请码");
                 }
             }
         } else {
-            if (xxx(ids)) {
+            if (delete(ids)) {
                 return error("只能删除自己添加的邀请码");
             }
         }
         return toAjax(yqmService.deleteYqmByIds(ids));
     }
 
-    private boolean xxx(String s) {
+    private boolean delete(String ids) {
+        List<YqmDTO> xxx = xxx(ids);
+        if (xxx.size() == 0) {
+            return true;
+        } else {
+            for (YqmDTO dto : xxx) {
+                if (dto.getZt().equals(YqmStatusEnum.Y.getCode())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private List<YqmDTO> xxx(String s) {
         YqmDTO item = new YqmDTO();
         item.setId(Integer.parseInt(s));
         item.setUserid(ShiroUtils.getLoginName());
-        int count = yqmService.count(item);
-        return count == 0;
+        return yqmService.selectYqmList(item);
     }
 }
