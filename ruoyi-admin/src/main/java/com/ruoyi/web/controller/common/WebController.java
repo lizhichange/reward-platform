@@ -110,9 +110,10 @@ public class WebController extends BaseController {
         SysUser user = new SysUser();
         user.setLoginName(loginName);
         user.setPostIds(new Long[]{sysPost.get().getPostId()});
+        user.setRoleId(sysRole.getRoleId());
+        user.setRoleIds(new Long[]{sysRole.getRoleId()});
         user.setUserName(userName);
         user.setDeptId(105L);
-        user.setRoleId(sysRole.getRoleId());
         user.setEmail("system@163.com");
         user.setPhonenumber(getPhoneNum());
         user.setSex("1");
