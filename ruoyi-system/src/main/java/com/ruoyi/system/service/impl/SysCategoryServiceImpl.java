@@ -1,6 +1,5 @@
 package com.ruoyi.system.service.impl;
 
-import com.ruoyi.common.annotation.DataScope;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.core.domain.Ztree;
 import com.ruoyi.common.exception.BusinessException;
@@ -35,7 +34,6 @@ public class SysCategoryServiceImpl implements ISysCategoryService {
      * @return 部门信息集合
      */
     @Override
-    @DataScope(deptAlias = "d")
     public List<SysCategory> selectDeptList(SysCategory dept) {
         return sysCategoryMapper.selectDeptList(dept);
     }
@@ -47,7 +45,6 @@ public class SysCategoryServiceImpl implements ISysCategoryService {
      * @return 所有部门信息
      */
     @Override
-    @DataScope(deptAlias = "d")
     public List<Ztree> selectDeptTree(SysCategory dept) {
         List<SysCategory> deptList = sysCategoryMapper.selectDeptList(dept);
         return initZtree(deptList);
@@ -237,7 +234,7 @@ public class SysCategoryServiceImpl implements ISysCategoryService {
     @Override
     public String checkDeptNameUnique(SysCategory dept) {
         Long deptId = StringUtils.isNull(dept.getCategoryId()) ? -1L : dept.getCategoryId();
-         SysCategory info = sysCategoryMapper.checkDeptNameUnique(dept.getCategoryName(), dept.getParentId());
+        SysCategory info = sysCategoryMapper.checkDeptNameUnique(dept.getCategoryName(), dept.getParentId());
         if (StringUtils.isNotNull(info) && info.getCategoryId().longValue() != deptId.longValue()) {
             return UserConstants.DEPT_NAME_NOT_UNIQUE;
         }

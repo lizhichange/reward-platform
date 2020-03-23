@@ -51,6 +51,8 @@ public interface ExtShipinMapper {
      */
     public int deleteShipinById(Long id);
 
+    int updateClickPlus(Long id);
+
     /**
      * 批量删除公共片库
      *

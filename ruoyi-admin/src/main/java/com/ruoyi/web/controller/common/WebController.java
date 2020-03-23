@@ -1,5 +1,6 @@
 package com.ruoyi.web.controller.common;
 
+import com.ruoyi.common.config.ServerConfig;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
@@ -10,10 +11,13 @@ import com.ruoyi.sms.facade.dto.YqmDTO;
 import com.ruoyi.sms.facade.enums.YqmStatusEnum;
 import com.ruoyi.system.domain.SysPost;
 import com.ruoyi.system.domain.SysRole;
+import com.ruoyi.system.domain.SysShort;
 import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.system.service.ISysPostService;
 import com.ruoyi.system.service.ISysRoleService;
+import com.ruoyi.system.service.ISysShortService;
 import com.ruoyi.system.service.ISysUserService;
+import lombok.extern.java.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +40,7 @@ import java.util.Optional;
  */
 @Controller
 @RequestMapping("/webLogin")
+@Log
 public class WebController extends BaseController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(WebController.class);
@@ -46,13 +51,16 @@ public class WebController extends BaseController {
     ISysUserService userService;
 
     @Autowired
-    private SysPasswordService passwordService;
+    SysPasswordService passwordService;
 
     @Autowired
     ISysRoleService roleService;
 
     @Autowired
     IYqmService yqmService;
+
+    @Autowired
+    ISysShortService sysShortService;
 
 
     @Autowired
@@ -68,6 +76,9 @@ public class WebController extends BaseController {
     public String reg() {
         return prefix + "/reg";
     }
+
+    @Autowired
+    private ServerConfig serverConfig;
 
     @PostMapping("/reg")
     @ResponseBody
@@ -132,8 +143,14 @@ public class WebController extends BaseController {
             dto.setZt(YqmStatusEnum.Y.getCode());
             dto.setName(loginName);
             yqmService.updateYqm(dto);
+            SysShort sysShort = new SysShort();
+            //我的推广链接
+            String shortUrl = serverConfig.getUrl() + "/pron/" + loginName;
+            sysShort.setShortUrl(shortUrl);
+            logger.info("shortUrl:{}", shortUrl);
+            sysShort.setShortKey(loginName);
+            sysShortService.insertSysShort(sysShort);
         }
-
         return toAjax(i);
     }
 

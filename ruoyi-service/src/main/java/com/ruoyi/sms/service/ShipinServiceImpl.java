@@ -45,6 +45,11 @@ public class ShipinServiceImpl implements IShipinService {
 
     }
 
+    @Override
+    public int updateClickPlus(Long id) {
+        return extShipinMapper.updateClickPlus(id);
+    }
+
     private ShipinDTO convert(Shipin shipin) {
         if (shipin == null) {
             return null;

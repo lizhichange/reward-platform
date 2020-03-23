@@ -131,7 +131,7 @@
 			var preViewUrl = prefix + "/preview/" + tableId;
 			$.modal.loading("正在加载数据，请稍后...");
 			$.get(preViewUrl, function(result) {
-				if (result.code == web_status.SUCCESS) {
+				if (result.code === web_status.SUCCESS) {
 					 var items = [];
 		                $.each(result.data, function(index, value) {
 		                	value = value.replace(/</g, "&lt;");
@@ -166,7 +166,7 @@
 		//批量生成代码
 		function batchGenCode() {
 		    var rows = $.table.selectColumns("tableName");
-		    if (rows.length == 0) {
+		    if (rows.length === 0) {
 		        $.modal.alertWarning("请选择要生成的数据");
 		        return;
 		    }

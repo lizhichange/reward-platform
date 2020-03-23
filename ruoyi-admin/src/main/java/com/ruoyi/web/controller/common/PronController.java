@@ -23,6 +23,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
 
@@ -55,7 +56,9 @@ public class PronController extends BaseController {
     ThreadPoolTaskExecutor threadPoolTaskExecutor;
 
     @GetMapping()
-    public String index(ModelMap modelmap) {
+    public String index(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
+
+        logger.info("userId:{}",userid);
         ShipinDTO shipinDTO = new ShipinDTO();
         PageHelper.startPage(1, 12, StringUtil.EMPTY_STRING);
         List<ShipinDTO> list = shipinService.selectShipinDTOList(shipinDTO);
@@ -104,22 +107,21 @@ public class PronController extends BaseController {
     public String detail(@PathVariable("id") Long id, @PathVariable("userid") String userid, ModelMap modelmap) {
         logger.info("user:{},id:{}", userid, id);
         ShipinDTO shipin = shipinService.selectShipinDTOById(id);
-        if (shipin!=null){
+        if (shipin != null) {
             convert(new Date(), shipin);
             modelmap.put("shipin", shipin);
             SysCategory category = categoryService.selectDeptById(shipin.getCategoryId().longValue());
-            if (category!=null){
+            if (category != null) {
                 modelmap.put("category", category);
             }
+            //异步执行浏览加1
+            threadPoolTaskExecutor.execute(() -> shipinService.updateClickPlus(shipin.getId().longValue()));
+
         }
-        threadPoolTaskExecutor.execute(() -> {
 
 
-        });
-
-        ShipinDTO shipinDTO = new ShipinDTO();
         PageHelper.startPage(1, 12, StringUtil.EMPTY_STRING);
-        List<ShipinDTO> list = shipinService.selectShipinDTOList(shipinDTO);
+        List<ShipinDTO> list = shipinService.selectShipinDTOList(new ShipinDTO());
         convert(list);
         modelmap.addAttribute("list", list);
 
@@ -152,6 +154,15 @@ public class PronController extends BaseController {
         return ext;
     }
 
+
+    /**
+     * 微信支付
+     */
+    @PostMapping(value = "/payment")
+    Object payment(HttpServletRequest request) {
+
+        return null;
+    }
 
 }
 

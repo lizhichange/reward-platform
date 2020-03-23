@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.SysShortMapper">
+    
+    <resultMap type="SysShort" id="SysShortResult">
+        <result property="id"    column="id"    />
+        <result property="shortKey"    column="short_key"    />
+        <result property="shortUrl"    column="short_url"    />
+        <result property="shortStatus"    column="short_status"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectSysShortVo">
+        select id, short_key, short_url, short_status, create_time, update_time from sys_short
+    </sql>
+
+    <select id="selectSysShortList" parameterType="SysShort" resultMap="SysShortResult">
+        <include refid="selectSysShortVo"/>
+        <where>  
+            <if test="shortKey != null  and shortKey != ''"> and short_key = #{shortKey}</if>
+            <if test="shortUrl != null  and shortUrl != ''"> and short_url = #{shortUrl}</if>
+            <if test="shortStatus != null  and shortStatus != ''"> and short_status = #{shortStatus}</if>
+        </where>
+    </select>
+    
+    <select id="selectSysShortById" parameterType="Long" resultMap="SysShortResult">
+        <include refid="selectSysShortVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertSysShort" parameterType="SysShort" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_short
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="shortKey != null  and shortKey != ''">short_key,</if>
+            <if test="shortUrl != null  and shortUrl != ''">short_url,</if>
+            <if test="shortStatus != null  and shortStatus != ''">short_status,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateTime != null ">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="shortKey != null  and shortKey != ''">#{shortKey},</if>
+            <if test="shortUrl != null  and shortUrl != ''">#{shortUrl},</if>
+            <if test="shortStatus != null  and shortStatus != ''">#{shortStatus},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysShort" parameterType="SysShort">
+        update sys_short
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="shortKey != null  and shortKey != ''">short_key = #{shortKey},</if>
+            <if test="shortUrl != null  and shortUrl != ''">short_url = #{shortUrl},</if>
+            <if test="shortStatus != null  and shortStatus != ''">short_status = #{shortStatus},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSysShortById" parameterType="Long">
+        delete from sys_short where id = #{id}
+    </delete>
+
+    <delete id="deleteSysShortByIds" parameterType="String">
+        delete from sys_short where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
