@@ -250,17 +250,16 @@
                     var setupContemporaryEvents = function(){
                         if(bVideo1){
                             $("#area1").bind("resume", function(e, api) {
-                                video1.play();
+
                             });
                         }
                     };
 
 
-                    video.on('seeking seeked pause ready resume', function (e, api) {
+                    video.on('seeking seeked pause ready', function (e, api) {
                         let type = e.type;
                         if (type === 'resume') {
-                            console.log(type, api);
-
+                            console.log(type);
                         }
                     });
 

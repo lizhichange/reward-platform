@@ -4188,7 +4188,10 @@
                     }
 
                     bean.on(root, 'click', '.fp-toggle, .fp-play, .fp-playbtn', function () {
-                        if (api.disabled) return;
+                        console.log(api,api.disabled)
+                        if (api.disabled) {
+                            return;
+                        }
                         api.toggle();
                     });
 
