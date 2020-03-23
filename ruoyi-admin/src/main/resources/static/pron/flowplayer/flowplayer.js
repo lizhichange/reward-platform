@@ -3763,7 +3763,6 @@
            {{ LOADING_ROUNDED_OUTLINE }}\
          </div>\
          <div class="fp-header">\
-           <a class="fp-share fp-icon"></a>\
            <a class="fp-fullscreen fp-icon"></a>\
            <a class="fp-unload fp-icon"></a>\
          </div>\
@@ -5292,9 +5291,9 @@
                         m.appendChild(y), (d || o).appendChild(m)
                     }
                 } else {
-                    var m = p("a", {href: "https://flowplayer.com/hello/?from=player"}), d = t.find(".fp-player", o)[0];
+                    var m = p("a", {href: "javascript:void(0);"}), d = t.find(".fp-player", o)[0];
                     (d || o).appendChild(m);
-                    var u = p("div", {className: "fp-context-menu fp-menu"}, '<strong>&copy; 2018 Flowplayer AB</strong><a href="https://flowplayer.com/hello/?from=player">About Flowplayer</a><a href="https://flowplayer.com/license">GPL based license</a>'),
+                    var u = p("div", {className: "fp-context-menu fp-menu"}, ''),
                         g = window.location.href.indexOf("localhost");
                     7 !== g && (d || o).appendChild(u), e.on("pause resume finish unload ready", function (e, a) {
                         var l = -1;
@@ -5307,8 +5306,8 @@
                                 bottom: "70px",
                                 zIndex: 99999,
                                 width: "100px",
-                                height: "20px",
-                                backgroundImage: "url(" + [".png", "logo", "/", ".net", ".cloudfront", "d32wqyuo10o653", "//", "https:"].reverse().join("") + ")"
+                                height: "20px"
+                                // backgroundImage: "url(" + [".png", "logo", "/", ".net", ".cloudfront", "d32wqyuo10o653", "//", "https:"].reverse().join("") + ")"
                             };
                             for (var i in p) p.hasOwnProperty(i) && (m.style[i] = p[i]);
                             a.load.ed = r(m) && (7 === g || u.parentNode == o || u.parentNode == d), a.load.ed || a.pause()

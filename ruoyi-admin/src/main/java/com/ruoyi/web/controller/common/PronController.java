@@ -1,5 +1,6 @@
 package com.ruoyi.web.controller.common;
 
+import cn.hutool.core.util.RandomUtil;
 import com.github.pagehelper.PageHelper;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.page.TableDataInfo;
@@ -73,6 +74,8 @@ public class PronController extends BaseController {
         SysWebMain webMain = new SysWebMain();
         List<SysWebMain> list = sysWebMainService.selectSysWebMainList(webMain);
         if (!CollectionUtils.isEmpty(list)) {
+            int size = list.size();
+            int i = RandomUtil.randomInt(0, size - 1);
             SysWebMain item = list.get(0);
             String url = item.getMainUrl() + "/pron/redirect?userid=" + user;
             logger.info("redirect.url:{}", url);
