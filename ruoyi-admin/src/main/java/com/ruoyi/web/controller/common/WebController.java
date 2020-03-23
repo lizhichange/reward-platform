@@ -5,6 +5,7 @@ import com.ruoyi.common.config.ServerConfig;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.enums.ShortStatus;
 import com.ruoyi.framework.shiro.service.SysPasswordService;
 import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.sms.facade.api.IYqmService;
@@ -167,12 +168,14 @@ public class WebController extends BaseController {
             threadPoolTaskExecutor.execute(() -> {
                 SysShort sysShort = new SysShort();
                 sysShort.setShortKey(loginName);
+                sysShort.setShortStatus(ShortStatus.OK.getCode());
                 //我的推广链接
                 String longUrl = string + "/pron?userid=" + loginName;
                 sysShort.setLongUrl(longUrl);
                 logger.info("longUrl:{}", longUrl);
                 String shortUrl = BaiduDwz.createShortUrl(longUrl, "long-term");
                 if (StringUtil.isNotBlank(shortUrl)) {
+                    sysShort.setShortUrl(shortUrl);
                     sysShortService.insertSysShort(sysShort);
                 }
             });
