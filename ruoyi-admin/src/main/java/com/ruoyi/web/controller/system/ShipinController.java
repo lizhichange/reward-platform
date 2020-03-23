@@ -1,6 +1,5 @@
 package com.ruoyi.web.controller.system;
 
-import com.alibaba.dubbo.common.URL;
 import com.google.common.base.Splitter;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
@@ -12,7 +11,6 @@ import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.sms.facade.api.IShipinService;
 import com.ruoyi.sms.facade.dto.ShipinDTO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.near.toolkit.common.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -20,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Date;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 
@@ -87,21 +84,6 @@ public class ShipinController extends BaseController {
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult addSave(ShipinDTO shipin) {
-
-        // TODO: 2020/3/18 推广链接 userId
-        String data = URL.encode("www.baidu.com");
-        String str = "http://mrw.so/api.htm?format=json&url=" + data + "&key=5e6ef6a244bb353b0f889030@54f90da6926dac28c12d0e31fdf820fc";
-        LinkedHashMap forObject = restTemplate.getForObject(str, LinkedHashMap.class);
-        if (forObject == null) {
-            return AjaxResult.error("短链接转换失败");
-        }
-        Object url = forObject.get("url");
-        if (url != null && StringUtil.isNotBlank(url.toString())) {
-            shipin.setShorturl(url.toString());
-        } else {
-            return AjaxResult.error("短链接转换失败");
-        }
-
         String loginName = ShiroUtils.getLoginName();
         shipin.setUserid(loginName);
         shipin.setMoney(shipin.getStartMoney() + "-" + shipin.getEndMoney());
