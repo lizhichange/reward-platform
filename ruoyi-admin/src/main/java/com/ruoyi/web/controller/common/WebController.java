@@ -110,7 +110,8 @@ public class WebController extends BaseController {
         ServletRequestAttributes my = (ServletRequestAttributes) requestAttributes;
         HttpServletRequest myRequest = my.getRequest();
         StringBuffer requestURL = myRequest.getRequestURL();
-        System.out.println(requestURL);
+        logger.info("requestURL:{}", requestURL);
+
         String contextPath = myRequest.getServletContext().getContextPath();
         final String string = requestURL.delete(requestURL.length() - request.getRequestURI().length(), requestURL.length()).append(contextPath).toString();
 
