@@ -46,13 +46,6 @@ public class SysIndexController extends BaseController {
         mmap.put("copyrightYear", Global.getCopyrightYear());
         mmap.put("demoEnabled", Global.isDemoEnabled());
 
-        SysShort sysShort = new SysShort();
-        sysShort.setShortKey(user.getLoginName());
-        List<SysShort> list = sysShortService.selectSysShortList(sysShort);
-        if (!CollectionUtils.isEmpty(list)) {
-            SysShort item = list.get(0);
-            mmap.addAttribute("sysShort", item);
-        }
         return "index";
     }
 
@@ -66,6 +59,14 @@ public class SysIndexController extends BaseController {
     @GetMapping("/system/main")
     public String main(ModelMap mmap) {
         mmap.put("version", Global.getVersion());
+        SysUser user = ShiroUtils.getSysUser();
+        SysShort sysShort = new SysShort();
+        sysShort.setShortKey(user.getLoginName());
+        List<SysShort> list = sysShortService.selectSysShortList(sysShort);
+        if (!CollectionUtils.isEmpty(list)) {
+            SysShort item = list.get(0);
+            mmap.put("sysShort", item);
+        }
         return "main";
     }
 }
