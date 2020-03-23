@@ -7,8 +7,10 @@ import com.ruoyi.sms.facade.api.IShipinService;
 import com.ruoyi.sms.facade.api.IYqmService;
 import com.ruoyi.sms.facade.dto.ShipinDTO;
 import com.ruoyi.system.domain.SysCategory;
+import com.ruoyi.system.domain.SysWebMain;
 import com.ruoyi.system.service.ISysCategoryService;
 import com.ruoyi.system.service.ISysPostService;
+import com.ruoyi.system.service.ISysWebMainService;
 import lombok.Data;
 import lombok.extern.java.Log;
 import org.near.toolkit.common.DateUtils;
@@ -44,6 +46,9 @@ public class PronController extends BaseController {
     IShipinService shipinService;
 
     @Autowired
+    ISysWebMainService sysWebMainService;
+
+    @Autowired
     IYqmService yqmService;
     @Autowired
     ISysCategoryService categoryService;
@@ -55,9 +60,28 @@ public class PronController extends BaseController {
     @Autowired
     ThreadPoolTaskExecutor threadPoolTaskExecutor;
 
+    @GetMapping("/redirect")
+    public String redirect(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
+        xxx(userid, modelmap);
+        return prefix + "/index.html";
+
+    }
+
     @GetMapping()
     public String index(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
+        String user = StringUtil.isBlank(userid) ? "" : userid;
+        SysWebMain webMain = new SysWebMain();
+        List<SysWebMain> list = sysWebMainService.selectSysWebMainList(webMain);
+        if (!CollectionUtils.isEmpty(list)) {
+            SysWebMain item = list.get(0);
+            String url = item.getMainUrl() + "/pron/redirect?userid=" + user;
+            logger.info("redirect.url:{}", url);
+            return "redirect:" + url;
+        }
+        return redirect(userid, modelmap);
+    }
 
+    private void xxx(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
         logger.info("userId:{}", userid);
         ShipinDTO shipinDTO = new ShipinDTO();
         PageHelper.startPage(1, 12, StringUtil.EMPTY_STRING);
@@ -70,7 +94,6 @@ public class PronController extends BaseController {
         sysCategory.setParentId(100L);
         List<SysCategory> categoryList = categoryService.selectDeptList(sysCategory);
         modelmap.addAttribute("categoryList", categoryList);
-        return prefix + "/index.html";
     }
 
     private void convert(List<ShipinDTO> list) {
