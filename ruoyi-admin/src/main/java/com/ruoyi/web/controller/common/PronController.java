@@ -58,7 +58,7 @@ public class PronController extends BaseController {
     @GetMapping()
     public String index(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
 
-        logger.info("userId:{}",userid);
+        logger.info("userId:{}", userid);
         ShipinDTO shipinDTO = new ShipinDTO();
         PageHelper.startPage(1, 12, StringUtil.EMPTY_STRING);
         List<ShipinDTO> list = shipinService.selectShipinDTOList(shipinDTO);
@@ -163,7 +163,6 @@ public class PronController extends BaseController {
 
         return null;
     }
-
 }
 
 @Data
@@ -171,3 +170,5 @@ class TableDataInfoExt extends TableDataInfo {
     private long length;
 
 }
+
+

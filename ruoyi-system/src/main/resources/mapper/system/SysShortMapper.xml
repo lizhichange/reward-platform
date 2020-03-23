@@ -8,13 +8,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="id"    column="id"    />
         <result property="shortKey"    column="short_key"    />
         <result property="shortUrl"    column="short_url"    />
+        <result property="longUrl"    column="long_url"    />
         <result property="shortStatus"    column="short_status"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
     </resultMap>
 
     <sql id="selectSysShortVo">
-        select id, short_key, short_url, short_status, create_time, update_time from sys_short
+        select id, short_key, short_url, long_url, short_status, create_time, update_time from sys_short
     </sql>
 
     <select id="selectSysShortList" parameterType="SysShort" resultMap="SysShortResult">
@@ -22,6 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <where>  
             <if test="shortKey != null  and shortKey != ''"> and short_key = #{shortKey}</if>
             <if test="shortUrl != null  and shortUrl != ''"> and short_url = #{shortUrl}</if>
+            <if test="longUrl != null  and longUrl != ''"> and long_url = #{longUrl}</if>
             <if test="shortStatus != null  and shortStatus != ''"> and short_status = #{shortStatus}</if>
         </where>
     </select>
@@ -36,6 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="shortKey != null  and shortKey != ''">short_key,</if>
             <if test="shortUrl != null  and shortUrl != ''">short_url,</if>
+            <if test="longUrl != null  and longUrl != ''">long_url,</if>
             <if test="shortStatus != null  and shortStatus != ''">short_status,</if>
             <if test="createTime != null ">create_time,</if>
             <if test="updateTime != null ">update_time,</if>
@@ -43,6 +46,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="shortKey != null  and shortKey != ''">#{shortKey},</if>
             <if test="shortUrl != null  and shortUrl != ''">#{shortUrl},</if>
+            <if test="longUrl != null  and longUrl != ''">#{longUrl},</if>
             <if test="shortStatus != null  and shortStatus != ''">#{shortStatus},</if>
             <if test="createTime != null ">#{createTime},</if>
             <if test="updateTime != null ">#{updateTime},</if>
@@ -54,6 +58,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="SET" suffixOverrides=",">
             <if test="shortKey != null  and shortKey != ''">short_key = #{shortKey},</if>
             <if test="shortUrl != null  and shortUrl != ''">short_url = #{shortUrl},</if>
+            <if test="longUrl != null  and longUrl != ''">long_url = #{longUrl},</if>
             <if test="shortStatus != null  and shortStatus != ''">short_status = #{shortStatus},</if>
             <if test="createTime != null ">create_time = #{createTime},</if>
             <if test="updateTime != null ">update_time = #{updateTime},</if>

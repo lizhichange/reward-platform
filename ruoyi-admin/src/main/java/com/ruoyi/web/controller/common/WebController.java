@@ -1,5 +1,6 @@
 package com.ruoyi.web.controller.common;
 
+import com.ruoyi.BaiduDwz;
 import com.ruoyi.common.config.ServerConfig;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.core.controller.BaseController;
@@ -18,16 +19,22 @@ import com.ruoyi.system.service.ISysRoleService;
 import com.ruoyi.system.service.ISysShortService;
 import com.ruoyi.system.service.ISysUserService;
 import lombok.extern.java.Log;
+import org.near.toolkit.common.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.net.URL;
@@ -80,6 +87,9 @@ public class WebController extends BaseController {
     @Autowired
     private ServerConfig serverConfig;
 
+    @Autowired
+    ThreadPoolTaskExecutor threadPoolTaskExecutor;
+
     @PostMapping("/reg")
     @ResponseBody
     public AjaxResult reg(String loginName, String userName, String password,
@@ -92,9 +102,19 @@ public class WebController extends BaseController {
                           /**
                            *
                            */
-                          String payeeAccount
+                          String payeeAccount, HttpServletRequest request
 
     ) {
+
+        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+        ServletRequestAttributes my = (ServletRequestAttributes) requestAttributes;
+        HttpServletRequest myRequest = my.getRequest();
+        StringBuffer requestURL = myRequest.getRequestURL();
+        System.out.println(requestURL);
+        String contextPath = myRequest.getServletContext().getContextPath();
+        final String string = requestURL.delete(requestURL.length() - request.getRequestURI().length(), requestURL.length()).append(contextPath).toString();
+
+
         YqmDTO yqmDTO = new YqmDTO();
         yqmDTO.setYqm(yqm);
         List<YqmDTO> list = yqmService.selectYqmList(yqmDTO);
@@ -143,13 +163,18 @@ public class WebController extends BaseController {
             dto.setZt(YqmStatusEnum.Y.getCode());
             dto.setName(loginName);
             yqmService.updateYqm(dto);
-            SysShort sysShort = new SysShort();
-            //我的推广链接
-            String shortUrl = serverConfig.getUrl() + "/pron/" + loginName;
-            sysShort.setShortUrl(shortUrl);
-            logger.info("shortUrl:{}", shortUrl);
-            sysShort.setShortKey(loginName);
-            sysShortService.insertSysShort(sysShort);
+            threadPoolTaskExecutor.execute(() -> {
+                SysShort sysShort = new SysShort();
+                sysShort.setShortKey(loginName);
+                //我的推广链接
+                String longUrl = string + "/pron?userid=" + loginName;
+                sysShort.setLongUrl(longUrl);
+                logger.info("longUrl:{}", longUrl);
+                String shortUrl = BaiduDwz.createShortUrl(longUrl, "long-term");
+                if (StringUtil.isNotBlank(shortUrl)) {
+                    sysShortService.insertSysShort(sysShort);
+                }
+            });
         }
         return toAjax(i);
     }
