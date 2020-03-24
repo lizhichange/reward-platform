@@ -1,16 +1,18 @@
 package com.ruoyi.framework.factory;
 
 
- import com.ruoyi.sms.domain.SysWechatConfig;
- import com.ruoyi.sms.repository.WeChatConfigRepository;
- import lombok.Getter;
- import lombok.extern.slf4j.Slf4j;
+import com.ruoyi.system.domain.SysWechatConfig;
+import com.ruoyi.system.mapper.SysWechatConfigMapper;
+import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 
 /**
  * @author wahaha
@@ -24,21 +26,24 @@ public class ConfigFactory {
     private ConfigurableEnvironment env;
 
     @Getter
-    private SysWechatConfig weChatConfig;
+    private SysWechatConfig sysWechatConfig;
     @Autowired
-    WeChatConfigRepository weChatConfigRepository;
+    SysWechatConfigMapper sysWechatConfigMapper;
 
 
     @PostConstruct
-    @Scheduled(cron="0 * * * * ? ")
-    void init(){
+    @Scheduled(cron = "0 * * * * ? ")
+    void init() {
         String profile = env.getActiveProfiles()[0];
-        weChatConfig = weChatConfigRepository.envType(profile);
-        log.info("weChatConfig:{}",  weChatConfig);
+        SysWechatConfig item = new SysWechatConfig();
+        item.setEnvType(profile);
+        List<SysWechatConfig> list = sysWechatConfigMapper.selectSysWechatConfigList(item);
+        if (!CollectionUtils.isEmpty(list)) {
+            sysWechatConfig = list.get(0);
+        }
+        log.info("weChatConfig:{}", sysWechatConfig);
 
     }
-
-
 
 
 }

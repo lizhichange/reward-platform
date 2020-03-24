@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.SysWechatConfigMapper">
+    
+    <resultMap type="SysWechatConfig" id="SysWechatConfigResult">
+        <result property="id"    column="id"    />
+        <result property="configCode"    column="config_code"    />
+        <result property="envType"    column="env_type"    />
+        <result property="appId"    column="app_id"    />
+        <result property="appsecret"    column="appsecret"    />
+        <result property="mchId"    column="mch_id"    />
+        <result property="signKey"    column="sign_key"    />
+        <result property="certFile"    column="cert_file"    />
+        <result property="token"    column="token"    />
+        <result property="encodingAesKey"    column="encoding_aes_key"    />
+        <result property="gmtCreate"    column="gmt_create"    />
+        <result property="gmtModified"    column="gmt_modified"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectSysWechatConfigVo">
+        select id, config_code, env_type, app_id, appsecret, mch_id, sign_key, cert_file, token, encoding_aes_key, gmt_create, gmt_modified, create_time, update_time from sys_wechat_config
+    </sql>
+
+    <select id="selectSysWechatConfigList" parameterType="SysWechatConfig" resultMap="SysWechatConfigResult">
+        <include refid="selectSysWechatConfigVo"/>
+        <where>  
+            <if test="configCode != null  and configCode != ''"> and config_code = #{configCode}</if>
+            <if test="envType != null  and envType != ''"> and env_type = #{envType}</if>
+            <if test="appId != null  and appId != ''"> and app_id = #{appId}</if>
+            <if test="appsecret != null  and appsecret != ''"> and appsecret = #{appsecret}</if>
+            <if test="mchId != null  and mchId != ''"> and mch_id = #{mchId}</if>
+            <if test="signKey != null  and signKey != ''"> and sign_key = #{signKey}</if>
+            <if test="certFile != null  and certFile != ''"> and cert_file = #{certFile}</if>
+            <if test="token != null  and token != ''"> and token = #{token}</if>
+            <if test="encodingAesKey != null  and encodingAesKey != ''"> and encoding_aes_key = #{encodingAesKey}</if>
+            <if test="gmtCreate != null "> and gmt_create = #{gmtCreate}</if>
+            <if test="gmtModified != null "> and gmt_modified = #{gmtModified}</if>
+        </where>
+    </select>
+    
+    <select id="selectSysWechatConfigById" parameterType="Long" resultMap="SysWechatConfigResult">
+        <include refid="selectSysWechatConfigVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertSysWechatConfig" parameterType="SysWechatConfig" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_wechat_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="configCode != null  and configCode != ''">config_code,</if>
+            <if test="envType != null  and envType != ''">env_type,</if>
+            <if test="appId != null  and appId != ''">app_id,</if>
+            <if test="appsecret != null  and appsecret != ''">appsecret,</if>
+            <if test="mchId != null  and mchId != ''">mch_id,</if>
+            <if test="signKey != null  and signKey != ''">sign_key,</if>
+            <if test="certFile != null  and certFile != ''">cert_file,</if>
+            <if test="token != null  and token != ''">token,</if>
+            <if test="encodingAesKey != null  and encodingAesKey != ''">encoding_aes_key,</if>
+            <if test="gmtCreate != null ">gmt_create,</if>
+            <if test="gmtModified != null ">gmt_modified,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateTime != null ">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="configCode != null  and configCode != ''">#{configCode},</if>
+            <if test="envType != null  and envType != ''">#{envType},</if>
+            <if test="appId != null  and appId != ''">#{appId},</if>
+            <if test="appsecret != null  and appsecret != ''">#{appsecret},</if>
+            <if test="mchId != null  and mchId != ''">#{mchId},</if>
+            <if test="signKey != null  and signKey != ''">#{signKey},</if>
+            <if test="certFile != null  and certFile != ''">#{certFile},</if>
+            <if test="token != null  and token != ''">#{token},</if>
+            <if test="encodingAesKey != null  and encodingAesKey != ''">#{encodingAesKey},</if>
+            <if test="gmtCreate != null ">#{gmtCreate},</if>
+            <if test="gmtModified != null ">#{gmtModified},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysWechatConfig" parameterType="SysWechatConfig">
+        update sys_wechat_config
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="configCode != null  and configCode != ''">config_code = #{configCode},</if>
+            <if test="envType != null  and envType != ''">env_type = #{envType},</if>
+            <if test="appId != null  and appId != ''">app_id = #{appId},</if>
+            <if test="appsecret != null  and appsecret != ''">appsecret = #{appsecret},</if>
+            <if test="mchId != null  and mchId != ''">mch_id = #{mchId},</if>
+            <if test="signKey != null  and signKey != ''">sign_key = #{signKey},</if>
+            <if test="certFile != null  and certFile != ''">cert_file = #{certFile},</if>
+            <if test="token != null  and token != ''">token = #{token},</if>
+            <if test="encodingAesKey != null  and encodingAesKey != ''">encoding_aes_key = #{encodingAesKey},</if>
+            <if test="gmtCreate != null ">gmt_create = #{gmtCreate},</if>
+            <if test="gmtModified != null ">gmt_modified = #{gmtModified},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSysWechatConfigById" parameterType="Long">
+        delete from sys_wechat_config where id = #{id}
+    </delete>
+
+    <delete id="deleteSysWechatConfigByIds" parameterType="String">
+        delete from sys_wechat_config where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

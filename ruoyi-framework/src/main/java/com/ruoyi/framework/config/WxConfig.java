@@ -5,7 +5,7 @@ import com.google.common.collect.Lists;
 
 import com.ruoyi.framework.factory.ConfigFactory;
 import com.ruoyi.framework.handler.*;
-import com.ruoyi.sms.domain.SysWechatConfig;
+import com.ruoyi.system.domain.SysWechatConfig;
 import lombok.AllArgsConstructor;
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.mp.api.WxMpMessageRouter;
@@ -15,10 +15,8 @@ import me.chanjar.weixin.mp.api.impl.WxMpQrcodeServiceImpl;
 import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
 import me.chanjar.weixin.mp.config.impl.WxMpDefaultConfigImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -99,7 +97,7 @@ public class WxConfig {
     @Bean
     public WxMpService wxMpService() {
 
-        SysWechatConfig weChatConfig = configFactory.getWeChatConfig();
+        SysWechatConfig weChatConfig = configFactory.getSysWechatConfig();
         WxMpProperties wxMpProperties = new WxMpProperties();
 
         WxMpProperties.MpConfig mpConfig = new WxMpProperties.MpConfig();
