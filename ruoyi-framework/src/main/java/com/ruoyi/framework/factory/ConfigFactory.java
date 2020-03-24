@@ -1,6 +1,9 @@
-package com.ruoyi.generator.factory;
+package com.ruoyi.framework.factory;
 
 
+ import com.ruoyi.sms.domain.SysWechatConfig;
+ import com.ruoyi.sms.repository.WeChatConfigRepository;
+ import lombok.Getter;
  import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.ConfigurableEnvironment;
@@ -20,8 +23,8 @@ public class ConfigFactory {
     @Autowired
     private ConfigurableEnvironment env;
 
-
-    private   WeChatConfig weChatConfig;
+    @Getter
+    private SysWechatConfig weChatConfig;
     @Autowired
     WeChatConfigRepository weChatConfigRepository;
 
@@ -36,8 +39,6 @@ public class ConfigFactory {
     }
 
 
-    public WeChatConfig getWeChatConfig() {
-        return weChatConfig;
-    }
+
 
 }

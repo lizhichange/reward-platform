@@ -1,4 +1,4 @@
-package com.ruoyi.generator.config;
+package com.ruoyi.framework.config;
 
 import lombok.Data;
 import lombok.ToString;

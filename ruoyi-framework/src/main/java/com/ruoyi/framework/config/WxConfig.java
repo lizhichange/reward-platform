@@ -1,10 +1,11 @@
-package com.ruoyi.generator.config;
+package com.ruoyi.framework.config;
 
 
 import com.google.common.collect.Lists;
-import com.wxmp.wxmp.dal.WeChatConfig;
-import com.wxmp.wxmp.factory.ConfigFactory;
-import com.wxmp.wxmp.handler.*;
+
+import com.ruoyi.framework.factory.ConfigFactory;
+import com.ruoyi.framework.handler.*;
+import com.ruoyi.sms.domain.SysWechatConfig;
 import lombok.AllArgsConstructor;
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.mp.api.WxMpMessageRouter;
@@ -98,12 +99,12 @@ public class WxConfig {
     @Bean
     public WxMpService wxMpService() {
 
-        WeChatConfig weChatConfig = configFactory.getWeChatConfig();
+        SysWechatConfig weChatConfig = configFactory.getWeChatConfig();
         WxMpProperties wxMpProperties = new WxMpProperties();
 
         WxMpProperties.MpConfig mpConfig = new WxMpProperties.MpConfig();
         mpConfig.setAppId(weChatConfig.getAppId());
-        mpConfig.setSecret(weChatConfig.getAppSecret());
+        mpConfig.setSecret(weChatConfig.getAppsecret());
         mpConfig.setToken(weChatConfig.getToken());
         mpConfig.setAesKey(weChatConfig.getEncodingAesKey());
         wxMpProperties.setConfigs(Lists.newArrayList(mpConfig));
@@ -131,10 +132,4 @@ public class WxConfig {
     public WxMpQrcodeService wxMpQrcodeService(WxMpService wxMpService) {
         return new WxMpQrcodeServiceImpl(wxMpService);
     }
-    @Bean
-    public RestTemplate restTemplate(RestTemplateBuilder builder){
-        return builder.build();
-    }
-
-
 }

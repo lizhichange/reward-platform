@@ -39,7 +39,7 @@
                         userId="root"
                         password="root"/>
 
-        <javaModelGenerator targetPackage="com.ruoyi.sms.service.dal.dataobj"
+        <javaModelGenerator targetPackage="com.ruoyi.sms.domain"
                             targetProject="src/main/java">
             <property name="trimStrings" value="true"/>
 
@@ -61,7 +61,7 @@
 
         <sqlMapGenerator targetPackage="mapper/sqlmap" targetProject="src/main/resources"/>
 
-        <javaClientGenerator targetPackage="com.ruoyi.sms.service.dal.dao"
+        <javaClientGenerator targetPackage="com.ruoyi.sms.mapper"
                              targetProject="src/main/java" type="XMLMAPPER">
 
             <property name="enableSubPackages" value=""/>
@@ -75,7 +75,7 @@
         </javaClientGenerator>
 
 
-        <table tableName="shipin" mapperName="">
+        <table tableName="sys_wechat_config" mapperName="">
             <generatedKey column="id" sqlStatement="JDBC"/>
         </table>
 

@@ -1,4 +1,4 @@
-package com.ruoyi.generator.handler;
+package com.ruoyi.framework.handler;
 
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.common.session.WxSessionManager;

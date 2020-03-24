@@ -1,4 +1,4 @@
-package com.ruoyi.generator.builder;
+package com.ruoyi.framework.builder;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

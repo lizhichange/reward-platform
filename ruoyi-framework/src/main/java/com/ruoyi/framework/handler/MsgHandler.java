@@ -1,7 +1,9 @@
-package com.ruoyi.generator.handler;
+package com.ruoyi.framework.handler;
 
-import com.wxmp.wxmp.builder.*;
-import com.wxmp.wxmp.builder.TextBuilder;
+
+
+import com.ruoyi.framework.builder.JsonUtils;
+import com.ruoyi.framework.builder.TextBuilder;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.mp.api.WxMpService;
