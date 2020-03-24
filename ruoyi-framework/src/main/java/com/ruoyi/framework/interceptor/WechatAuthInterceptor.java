@@ -77,7 +77,7 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
             String authorizationUrl = wxMpService.oauth2buildAuthorizationUrl(url, WxConsts.OAuth2Scope.SNSAPI_USERINFO, null);
             //跳转
             response.sendRedirect(authorizationUrl);
-            return true;
+            return false;
         } else {
             return super.preHandle(request, response, handler);
         }
