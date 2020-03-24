@@ -71,6 +71,8 @@ ruoyi:
 
   # 获取ip地址开关
   addressEnabled: true
+  # 是否mock
+  mock: true
 
   wxPnCallbackUrl: http://ds.wx40q.com/wechat/callback
 

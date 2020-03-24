@@ -9,6 +9,7 @@ import com.ruoyi.framework.interceptor.impl.WxPnUserAuth;
 import com.ruoyi.framework.interceptor.util.SessionContext;
 import com.ruoyi.framework.interceptor.util.SessionData;
 import com.sun.corba.se.spi.ior.IdentifiableFactory;
+import com.sun.org.apache.bcel.internal.generic.FLOAD;
 import lombok.extern.java.Log;
 
 import me.chanjar.weixin.common.api.WxConsts;
@@ -57,6 +58,13 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
         String referer = request.getHeader("referer");
         session.setAttribute("referer", referer);
         LOGGER.info("referer:{}", referer);
+
+        //是否mock
+        if (Global.isMock()) {
+            SessionContext.set(session, "x", "x");
+            return true;
+        }
+
         if (handler instanceof HandlerMethod) {
             HandlerMethod handlerMethod = (HandlerMethod) handler;
             Method method = handlerMethod.getMethod();

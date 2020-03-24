@@ -42,12 +42,23 @@ public class Global {
      */
     private static boolean addressEnabled;
 
+    private static boolean mock;
 
     private static String wxPnCallbackUrl;
+
+    public static boolean isMock() {
+        return mock;
+    }
+
+    public void setMock(boolean mock) {
+        Global.mock = mock;
+    }
 
     public static String getWxPnCallbackUrl() {
         return wxPnCallbackUrl;
     }
+
+
 
     public void setWxPnCallbackUrl(String wxPnCallbackUrl) {
         Global.wxPnCallbackUrl = wxPnCallbackUrl;

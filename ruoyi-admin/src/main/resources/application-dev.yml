@@ -70,25 +70,28 @@ ruoyi:
   profile: /Users/sunflower/Downloads/uploadPath
   # 获取ip地址开关
   addressEnabled: true
+  # 是否mock
+  mock: true
+
   # 微信预授权回调
   wxPnCallbackUrl: http://ds.wx40q.com/wechat/callback
 
 dubbo:
-    registry:
-        address: 127.0.0.1:2181
-        protocol: zookeeper
-        timeout: 15000
-    protocol:
-        port: 12345
-        name: dubbo
-        status: server
-        serialization: fastjson
-        threads: 2000
-    application:
-        qos:
-            port: 22222
-            enable: true
-        name: dubbo-sms-zk-service
-        id: dubbo-sms-zk-service
-    scan:
-        basePackages: com.ruoyi.sms.service
+  registry:
+    address: 127.0.0.1:2181
+    protocol: zookeeper
+    timeout: 15000
+  protocol:
+    port: 12345
+    name: dubbo
+    status: server
+    serialization: fastjson
+    threads: 2000
+  application:
+    qos:
+      port: 22222
+      enable: true
+    name: dubbo-sms-zk-service
+    id: dubbo-sms-zk-service
+  scan:
+    basePackages: com.ruoyi.sms.service
