@@ -1,41 +1,45 @@
 <!DOCTYPE html>
-<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <th:block th:include="include :: header('新增域名管理')" />
+    <th:block th:include="include :: header('新增域名管理')"/>
 </head>
 <body class="white-bg">
-    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
-        <form class="form-horizontal m" id="form-webmain-add">
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">链接地址：</label>
-                <div class="col-sm-8">
-                    <input name="mainUrl" class="form-control" type="text">
-                </div>
+<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+    <form class="form-horizontal m" id="form-webmain-add">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">链接地址：</label>
+            <div class="col-sm-8">
+                <input name="mainUrl" class="form-control" type="text">
             </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">状态：</label>
-                <div class="col-sm-8">
-                    <div class="radio-box">
-                        <input type="radio" name="mainStatus" value="">
-                        <label th:for="mainStatus" th:text="未知"></label>
-                    </div>
-                    <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 代码生成请选择字典属性</span>
-                </div>
-            </div>
-        </form>
-    </div>
-    <th:block th:include="include :: footer" />
-    <script type="text/javascript">
-        var prefix = ctx + "system/webmain"
-        $("#form-webmain-add").validate({
-            focusCleanup: true
-        });
+        </div>
 
-        function submitHandler() {
-            if ($.validate.form()) {
-                $.operate.save(prefix + "/add", $('#form-webmain-add').serialize());
-            }
+        <div class="form-group">
+            <label class="col-sm-4 control-label">链接状态：</label>
+            <div class="col-sm-8">
+                <label class="toggle-switch switch-solid">
+                    <input checked id="mainStatus" type="checkbox">
+                    <span></span>
+                </label>
+            </div>
+        </div>
+
+    </form>
+</div>
+<th:block th:include="include :: footer"/>
+<script type="text/javascript">
+    var prefix = ctx + "system/webmain";
+    $("#form-webmain-add").validate({
+        focusCleanup: true
+    });
+
+    function submitHandler() {
+        if ($.validate.form()) {
+            var data = $('#form-webmain-add').serialize();
+            var status = $("input[id='mainStatus']").is(':checked') === true ? 0 : 1;
+            data.push({"name": "status", "value": status});
+            $.operate.save(prefix + "/add",data);
         }
-    </script>
+    }
+</script>
 </body>
 </html>

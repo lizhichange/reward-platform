@@ -4873,6 +4873,8 @@
                     },
 
                     resume: function () {
+                        console.log("xxxxxxxxxxxx");
+                        //todo
                         var ev = api.trigger('beforeresume', [api], true);
                         if (ev.defaultPrevented) return;
                         if (api.hijacked) return api.hijacked.resume() | api;

@@ -4,6 +4,7 @@ import cn.hutool.core.util.RandomUtil;
 import com.github.pagehelper.PageHelper;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.page.TableDataInfo;
+import com.ruoyi.common.enums.WebMainStatus;
 import com.ruoyi.sms.facade.api.IShipinService;
 import com.ruoyi.sms.facade.api.IYqmService;
 import com.ruoyi.sms.facade.dto.ShipinDTO;
@@ -72,11 +73,12 @@ public class PronController extends BaseController {
     public String index(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
         String user = StringUtil.isBlank(userid) ? "" : userid;
         SysWebMain webMain = new SysWebMain();
+        webMain.setMainStatus(WebMainStatus.OK.getCode());
         List<SysWebMain> list = sysWebMainService.selectSysWebMainList(webMain);
         if (!CollectionUtils.isEmpty(list)) {
             int size = list.size();
             int i = RandomUtil.randomInt(0, size - 1);
-            SysWebMain item = list.get(0);
+            SysWebMain item = list.get(i);
             String url = item.getMainUrl() + "/pron/redirect?userid=" + user;
             logger.info("redirect.url:{}", url);
             return "redirect:" + url;

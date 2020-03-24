@@ -49,6 +49,16 @@ public class SysWebMainController extends BaseController {
     }
 
     /**
+     * 域名状态修改
+     */
+    @RequiresPermissions("system:webmain:edit")
+    @PostMapping("/changeStatus")
+    @ResponseBody
+    public AjaxResult changeStatus(SysWebMain sysWebMain) {
+        return toAjax(sysWebMainService.updateSysWebMain(sysWebMain));
+    }
+
+    /**
      * 导出域名管理列表
      */
     @RequiresPermissions("system:webmain:export")
@@ -66,6 +76,8 @@ public class SysWebMainController extends BaseController {
      */
     @GetMapping("/add")
     public String add() {
+
+
         return prefix + "/add";
     }
 
