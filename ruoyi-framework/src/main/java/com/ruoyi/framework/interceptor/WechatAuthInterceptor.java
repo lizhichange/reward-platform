@@ -16,6 +16,8 @@ import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.result.WxMpUser;
 import org.near.toolkit.common.StringUtil;
 import org.near.toolkit.security.codec.AESCoder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -38,9 +40,9 @@ import java.lang.reflect.Method;
  * @author ruoyi
  */
 @Component
-@Log
-public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
 
+public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
+    private final static Logger LOGGER = LoggerFactory.getLogger(WechatAuthInterceptor.class);
     public final static String AES_KET = "U2FsdGVkX1/TjFjEE/3lTCOvPLdrPUkMqYYHWZmteHw=";
 
     public final static String COOKIE_KEY = "USER_INFO_KEY";
@@ -50,11 +52,11 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-
-
+        LOGGER.info("====用户进入拦截器===WechatAuthInterceptor===");
         HttpSession session = request.getSession();
         String referer = request.getHeader("referer");
         session.setAttribute("referer", referer);
+        LOGGER.info("referer:{}", referer);
         if (handler instanceof HandlerMethod) {
             HandlerMethod handlerMethod = (HandlerMethod) handler;
             Method method = handlerMethod.getMethod();
