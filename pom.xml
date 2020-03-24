@@ -295,6 +295,20 @@
             </dependency>
 
 
+            <!--        公众号（包括订阅号和服务号）-->
+            <dependency>
+                <groupId>com.github.binarywang</groupId>
+                <artifactId>wx-java-mp-spring-boot-starter</artifactId>
+                <version>3.7.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.binarywang</groupId>
+                <artifactId>wx-java-pay-spring-boot-starter</artifactId>
+                <version>3.7.0</version>
+            </dependency>
+
+
+
 
         </dependencies>
     </dependencyManagement>
@@ -332,6 +346,8 @@
             <artifactId>fastjson</artifactId>
             <version>${fastjson.version}</version>
         </dependency>
+
+
 
     </dependencies>
 
