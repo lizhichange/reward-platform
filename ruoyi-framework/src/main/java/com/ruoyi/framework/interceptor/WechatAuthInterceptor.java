@@ -27,10 +27,10 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.io.PrintWriter;
+
+
 import java.lang.reflect.Method;
-import java.util.Map;
+
 
 /**
  * 微信预授权拦截器
@@ -39,7 +39,7 @@ import java.util.Map;
  */
 @Component
 @Log
-public abstract class WechatAuthInterceptor extends HandlerInterceptorAdapter {
+public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
 
     public final static String AES_KET = "U2FsdGVkX1/TjFjEE/3lTCOvPLdrPUkMqYYHWZmteHw=";
 
