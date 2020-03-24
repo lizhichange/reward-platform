@@ -2,6 +2,7 @@ package com.ruoyi.web.controller.wechat;
 
 
 import com.alibaba.fastjson.JSON;
+import com.ruoyi.framework.interceptor.WechatAuthInterceptor;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.result.WxMpOAuth2AccessToken;
@@ -23,6 +24,8 @@ import javax.servlet.http.HttpSession;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.ruoyi.framework.interceptor.WechatAuthInterceptor.COOKIE_KEY;
+
 /**
  * @author sunflower
  */
@@ -35,11 +38,9 @@ public class WechatController {
     @Autowired
     WxMpService wxMpService;
 
-    private final String key = "U2FsdGVkX1/TjFjEE/3lTCOvPLdrPUkMqYYHWZmteHw=";
-
-    public static void write(WxMpUser wxMpUser, String cookieName, String key, String domain,
+    public static void write(WxMpUser wxMpUser, String cookieName, String aesKey, String domain,
                              HttpServletResponse response) {
-        String encryptJson = AESCoder.encrypt(JSON.toJSONString(wxMpUser), key, null);
+        String encryptJson = AESCoder.encrypt(JSON.toJSONString(wxMpUser), aesKey, "utf-8");
         Cookie cookie = new Cookie(cookieName, encryptJson);
         cookie.setMaxAge(-1);
         cookie.setDomain(domain);
@@ -52,8 +53,6 @@ public class WechatController {
     @GetMapping("/callback")
     public String callback(@RequestParam("code") String code, HttpServletRequest request,
                            HttpServletResponse response) throws WxErrorException {
-
-
         HttpSession session = request.getSession();
         Object referer = session.getAttribute("referer");
         LOGGER.info("code:{}", code);
@@ -63,8 +62,7 @@ public class WechatController {
             WxMpUser wxMpUser = wxMpService.oauth2getUserInfo(accessToken, null);
             if (referer != null) {
                 String doMain = DoMainUtil.getDoMain(referer.toString());
-                String userInfoKey = "USER_INFO_KEY";
-                write(wxMpUser, userInfoKey, key, doMain, response);
+                write(wxMpUser, COOKIE_KEY, WechatAuthInterceptor.AES_KET, doMain, response);
             }
         }
         assert referer != null;
@@ -73,7 +71,9 @@ public class WechatController {
 
     public static void main(String[] args) {
         WxMpUser wxMpUser = new WxMpUser();
-        String str = AESCoder.encrypt(JSON.toJSONString(wxMpUser), "U2FsdGVkX1/TjFjEE/3lTCOvPLdrPUkMqYYHWZmteHw=", "utf-8");
-        System.out.println(str);
+        String str1 = AESCoder.encrypt(JSON.toJSONString(wxMpUser), WechatAuthInterceptor.AES_KET, "utf-8");
+        System.out.println(str1);
+        String str2 = AESCoder.decrypt(str1, WechatAuthInterceptor.AES_KET, "utf-8");
+        System.out.println(str2);
     }
 }
