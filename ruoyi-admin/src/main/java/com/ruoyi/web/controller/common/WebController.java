@@ -173,7 +173,7 @@ public class WebController extends BaseController {
                 String longUrl = string + "/pron?userid=" + loginName;
                 sysShort.setLongUrl(longUrl);
                 logger.info("longUrl:{}", longUrl);
-                String shortUrl = BaiduDwz.createShortUrl(longUrl, "long-term");
+                String shortUrl = BaiduDwz.createShortUrl(longUrl, "1-year");
                 if (StringUtil.isNotBlank(shortUrl)) {
                     sysShort.setShortUrl(shortUrl);
                     sysShortService.insertSysShort(sysShort);
