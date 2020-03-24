@@ -240,6 +240,8 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/login", "anon,captchaValidate");
         filterChainDefinitionMap.put("/pron/**", "anon");
         filterChainDefinitionMap.put("/webLogin/**", "anon");
+        //微信预授权回调不拦截
+        filterChainDefinitionMap.put("/wechat/callback", "anon");
 
         // 系统权限列表
         // filterChainDefinitionMap.putAll(SpringUtils.getBean(IMenuService.class).selectPermsAll());

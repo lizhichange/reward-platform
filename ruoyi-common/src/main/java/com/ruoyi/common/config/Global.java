@@ -36,14 +36,27 @@ public class Global {
      */
     private static String profile;
 
+
     /**
      * 获取地址开关
      */
     private static boolean addressEnabled;
 
+
+    private static String wxPnCallbackUrl;
+
+    public static String getWxPnCallbackUrl() {
+        return wxPnCallbackUrl;
+    }
+
+    public void setWxPnCallbackUrl(String wxPnCallbackUrl) {
+        Global.wxPnCallbackUrl = wxPnCallbackUrl;
+    }
+
     public static String getName() {
         return name;
     }
+
 
     public void setName(String name) {
         Global.name = name;

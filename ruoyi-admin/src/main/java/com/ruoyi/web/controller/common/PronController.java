@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.WebMainStatus;
+import com.ruoyi.framework.interceptor.impl.WxPnUserAuth;
 import com.ruoyi.sms.facade.api.IShipinService;
 import com.ruoyi.sms.facade.api.IYqmService;
 import com.ruoyi.sms.facade.dto.ShipinDTO;
@@ -63,13 +64,15 @@ public class PronController extends BaseController {
     ThreadPoolTaskExecutor threadPoolTaskExecutor;
 
     @GetMapping("/redirect")
+    @WxPnUserAuth
     public String redirect(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
         xxx(userid, modelmap);
-        return prefix + "/index.html";
+        return prefix + "/index";
 
     }
 
     @GetMapping()
+    @WxPnUserAuth
     public String index(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
         String user = StringUtil.isBlank(userid) ? "" : userid;
         SysWebMain webMain = new SysWebMain();
@@ -91,9 +94,7 @@ public class PronController extends BaseController {
         ShipinDTO shipinDTO = new ShipinDTO();
         PageHelper.startPage(1, 12, StringUtil.EMPTY_STRING);
         List<ShipinDTO> list = shipinService.selectShipinDTOList(shipinDTO);
-
         convert(list);
-
         modelmap.addAttribute("list", list);
         SysCategory sysCategory = new SysCategory();
         sysCategory.setParentId(100L);
@@ -101,37 +102,9 @@ public class PronController extends BaseController {
         modelmap.addAttribute("categoryList", categoryList);
     }
 
-    private void convert(List<ShipinDTO> list) {
-        if (!CollectionUtils.isEmpty(list)) {
-            Date now = new Date();
-            for (ShipinDTO dto : list) {
-                convert(now, dto);
-            }
-        }
-    }
-
-    private void convert(Date now, ShipinDTO dto) {
-        Date createTime = dto.getCreateTime();
-        if (createTime != null) {
-            long diffDays = DateUtils.getDiffDays(createTime, now);
-            if (diffDays < 1) {
-                dto.setDiffDays("刚刚");
-            } else {
-                dto.setDiffDays(diffDays + "天前");
-            }
-        }
-
-        if (StringUtil.isNotBlank(dto.getShijian())) {
-            dto.setShijianStr(DateUtils.getTimeString(Integer.parseInt(dto.getShijian())));
-        }
-    }
-
-    @GetMapping("/pagination")
-    public String pagination() {
-        return prefix + "/pagination";
-    }
 
     @GetMapping("/detail/{id}/{userid}")
+    @WxPnUserAuth
     public String detail(@PathVariable("id") Long id, @PathVariable("userid") String userid, ModelMap modelmap) {
         logger.info("user:{},id:{}", userid, id);
         ShipinDTO shipin = shipinService.selectShipinDTOById(id);
@@ -163,12 +136,6 @@ public class PronController extends BaseController {
     }
 
 
-    @GetMapping("/flowplayer")
-    public String flowplayer(ModelMap mmap) {
-        return prefix + "/flowplayer";
-    }
-
-
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfoExt list(ShipinDTO shipinDTO) {
@@ -190,6 +157,43 @@ public class PronController extends BaseController {
     Object payment(HttpServletRequest request) {
 
         return null;
+    }
+
+    private void convert(List<ShipinDTO> list) {
+        if (!CollectionUtils.isEmpty(list)) {
+            Date now = new Date();
+            for (ShipinDTO dto : list) {
+                convert(now, dto);
+            }
+        }
+    }
+
+    private void convert(Date now, ShipinDTO dto) {
+        Date createTime = dto.getCreateTime();
+        if (createTime != null) {
+            long diffDays = DateUtils.getDiffDays(createTime, now);
+            if (diffDays < 1) {
+                dto.setDiffDays("刚刚");
+            } else {
+                dto.setDiffDays(diffDays + "天前");
+            }
+        }
+
+        if (StringUtil.isNotBlank(dto.getShijian())) {
+            dto.setShijianStr(DateUtils.getTimeString(Integer.parseInt(dto.getShijian())));
+        }
+    }
+
+
+    @GetMapping("/flowplayer")
+    public String flowplayer(ModelMap mmap) {
+        return prefix + "/flowplayer";
+    }
+
+
+    @GetMapping("/pagination")
+    public String pagination() {
+        return prefix + "/pagination";
     }
 }
 
