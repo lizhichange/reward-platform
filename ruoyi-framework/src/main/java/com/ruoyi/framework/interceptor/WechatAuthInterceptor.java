@@ -12,6 +12,7 @@ import com.sun.corba.se.spi.ior.IdentifiableFactory;
 import com.sun.org.apache.bcel.internal.generic.FLOAD;
 import lombok.extern.java.Log;
 
+import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.result.WxMpUser;
@@ -22,6 +23,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -41,7 +45,7 @@ import java.lang.reflect.Method;
  * @author ruoyi
  */
 @Component
-
+@Slf4j
 public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
     private final static Logger LOGGER = LoggerFactory.getLogger(WechatAuthInterceptor.class);
     public final static String AES_KET = "U2FsdGVkX1/TjFjEE/3lTCOvPLdrPUkMqYYHWZmteHw=";
@@ -52,6 +56,14 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         LOGGER.info("====用户进入拦截器===WechatAuthInterceptor===");
+
+        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+        ServletRequestAttributes my = (ServletRequestAttributes) requestAttributes;
+        HttpServletRequest myRequest = my.getRequest();
+        StringBuffer requestURL = myRequest.getRequestURL();
+        log.info("requestURL:{}", requestURL);
+
+
         HttpSession session = request.getSession();
         String referer = request.getHeader("referer");
         session.setAttribute("referer", referer);
