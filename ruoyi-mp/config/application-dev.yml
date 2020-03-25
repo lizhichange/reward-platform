@@ -65,3 +65,8 @@ dubbo:
   application:
     name: ruoyi-mp
     id: ruoyi-mp
+    qos:
+      enable: true
+      port: 33333
+      foreign:
+        ip: false
