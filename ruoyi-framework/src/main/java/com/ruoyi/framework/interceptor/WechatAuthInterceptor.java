@@ -48,8 +48,6 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
 
     public final static String COOKIE_KEY = "USER_INFO_KEY";
 
-    @Autowired
-    WxMpService wxMpService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -73,7 +71,6 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
             if (annotation == null) {
                 return true;
             }
-
             String read = read(request, COOKIE_KEY);
             if (StringUtil.isNotBlank(read)) {
                 WxMpUser wxMpUser = JSONObject.parseObject(read, WxMpUser.class);
@@ -82,11 +79,14 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
                     return true;
                 }
             }
-            //执行预授权
-            String url = Global.getWxPnCallbackUrl();
-            String authorizationUrl = wxMpService.oauth2buildAuthorizationUrl(url, WxConsts.OAuth2Scope.SNSAPI_USERINFO, null);
-            //跳转
-            response.sendRedirect(authorizationUrl);
+
+            String wxAuthUrl = Global.getWxAuthUrl();
+            if (wxAuthUrl.contains("?")) {
+                wxAuthUrl += "&callback=" + referer;
+            } else {
+                wxAuthUrl += "?callback=" + referer;
+            }
+            response.sendRedirect(wxAuthUrl);
             return false;
         } else {
             return super.preHandle(request, response, handler);

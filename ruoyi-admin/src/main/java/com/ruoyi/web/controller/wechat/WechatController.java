@@ -29,14 +29,12 @@ import static com.ruoyi.framework.interceptor.WechatAuthInterceptor.COOKIE_KEY;
 /**
  * @author sunflower
  */
-@Controller
-@RequestMapping("/wechat")
+
 
 public class WechatController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(WechatController.class);
-    @Autowired
-    WxMpService wxMpService;
+
 
     public static void write(WxMpUser wxMpUser, String cookieName, String aesKey, String domain,
                              HttpServletResponse response) {
@@ -49,25 +47,6 @@ public class WechatController {
         response.addCookie(cookie);
     }
 
-
-    @GetMapping("/callback")
-    public String callback(@RequestParam("code") String code, HttpServletRequest request,
-                           HttpServletResponse response) throws WxErrorException {
-        HttpSession session = request.getSession();
-        Object referer = session.getAttribute("referer");
-        LOGGER.info("code:{}", code);
-        WxMpOAuth2AccessToken accessToken = wxMpService.oauth2getAccessToken(code);
-        if (accessToken != null) {
-            //用户信息
-            WxMpUser wxMpUser = wxMpService.oauth2getUserInfo(accessToken, null);
-            if (referer != null) {
-                String doMain = DoMainUtil.getDoMain(referer.toString());
-                write(wxMpUser, COOKIE_KEY, WechatAuthInterceptor.AES_KET, doMain, response);
-            }
-        }
-        assert referer != null;
-        return "redirect:" + referer.toString();
-    }
 
     public static void main(String[] args) {
         WxMpUser wxMpUser = new WxMpUser();

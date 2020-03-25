@@ -1,0 +1,67 @@
+# 开发环境配置
+server:
+  # 应用的访问路径
+  context-path: /
+
+  port: 8082
+  tomcat:
+    # tomcat的URI编码
+    uri-encoding: UTF-8
+    # tomcat最大线程数，默认为200
+    max-threads: 800
+    # Tomcat启动初始化的线程数，默认值25
+    min-spare-threads: 30
+
+  resources:
+    # 静态资源路径
+    static-locations: classpath:static/
+
+mp:
+  # 微信预授权回调
+  wxPnCallbackUrl: http://ds.wx40q.com/wechat/callback
+
+
+
+
+spring:
+  application:
+    name: ruoyi-mp
+
+
+
+endpoints:
+  dubbo:
+    enabled: true
+
+
+management:
+  server:
+    port: 8082
+  endpoint:
+    dubbo-configs:
+      enabled: true
+    dubbo:
+      enabled: true
+    dubbo-services:
+      enabled: true
+    dubbo-properties:
+      enabled: true
+    dubbo-shutdown:
+      enabled: true
+    dubbo-references:
+      enabled: true
+  health:
+    dubbo:
+      status:
+        defaults: memory
+dubbo:
+  registry:
+    address: 127.0.0.1:2181
+    protocol: zookeeper
+    timeout: 15000
+  protocol:
+    port: 12345
+    name: dubbo
+  application:
+    name: ruoyi-mp
+    id: ruoyi-mp

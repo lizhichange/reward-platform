@@ -9,11 +9,15 @@ import org.apache.commons.codec.binary.Hex;
  */
 public class SHACoder {
 
-    /** 加密算法 */
+    /**
+     * 加密算法
+     */
     private static final String ALGORITHM = "SHA";
 
-    /** 字符编码 */
-    private static final String CHARSET   = "UTF-8";
+    /**
+     * 字符编码
+     */
+    private static final String CHARSET = "UTF-8";
 
     /**
      * 将原文加密生成摘要字符串，默认编码utf-8

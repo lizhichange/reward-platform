@@ -40,7 +40,7 @@ public interface IYqmService {
      * @return 结果
      */
 
-     int insertYqm(YqmDTO yqm);
+    int insertYqm(YqmDTO yqm);
 
     /**
      * 修改邀请码管理
@@ -65,4 +65,4 @@ public interface IYqmService {
      * @return 结果
      */
     public int deleteYqmById(Long id);
-    }
+}

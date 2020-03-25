@@ -35,7 +35,7 @@ public class TsController extends BaseController {
     @GetMapping()
     public String ts(ModelMap modelMap) {
         int count = tsService.count();
-        modelMap.addAttribute("count",count);
+        modelMap.addAttribute("count", count);
         return prefix + "/ts";
     }
 

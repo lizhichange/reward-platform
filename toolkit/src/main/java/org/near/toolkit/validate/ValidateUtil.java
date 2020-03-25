@@ -19,58 +19,94 @@ import java.util.regex.Pattern;
  */
 public class ValidateUtil {
 
-    /**手机格式的正则表达式*/
-    public final static String REGEX_MOBILE            = "^1\\d{10}$";
+    /**
+     * 手机格式的正则表达式
+     */
+    public final static String REGEX_MOBILE = "^1\\d{10}$";
 
-    /**国外手机格式的正则表达式*/
-    public final static String REGEX_FOREIGN_MOBILE    = CommonValidateUtil.REGEX_FOREIGN_MOBILE;
+    /**
+     * 国外手机格式的正则表达式
+     */
+    public final static String REGEX_FOREIGN_MOBILE = CommonValidateUtil.REGEX_FOREIGN_MOBILE;
 
-    /**支付宝登录号的正则表达式*/
-    public final static String REGEX_LOGON_ID          = CommonValidateUtil.REGEX_LOGON_ID;
+    /**
+     * 支付宝登录号的正则表达式
+     */
+    public final static String REGEX_LOGON_ID = CommonValidateUtil.REGEX_LOGON_ID;
 
-    /**手机6位数字校验码*/
-    public final static String REGUX_VALIDATE_CODE     = "^\\d{6}$";
+    /**
+     * 手机6位数字校验码
+     */
+    public final static String REGUX_VALIDATE_CODE = "^\\d{6}$";
 
-    /**16位纯数字流水号*/
-    public final static String REGEX_VALIDATE_BIZ_NO   = "^\\d{16}$";
+    /**
+     * 16位纯数字流水号
+     */
+    public final static String REGEX_VALIDATE_BIZ_NO = "^\\d{16}$";
 
-    /**4位图片校验码*/
-    public final static String REGEX_PIC_CODE          = "^\\d{4}$";
+    /**
+     * 4位图片校验码
+     */
+    public final static String REGEX_PIC_CODE = "^\\d{4}$";
 
-    /**电话号码，只能由数字和"-"组成,6到25位。*/
-    public final static String REGEX_PHONE             = "^[0-9,-]{6,25}$";
+    /**
+     * 电话号码，只能由数字和"-"组成,6到25位。
+     */
+    public final static String REGEX_PHONE = "^[0-9,-]{6,25}$";
 
-    /**电话号码，只能由数字和"-"组成,6到20位，或者为空。*/
-    public final static String REGEX_PHONE_NULL        = "^[0-9,-]{6,20}$|^$";
+    /**
+     * 电话号码，只能由数字和"-"组成,6到20位，或者为空。
+     */
+    public final static String REGEX_PHONE_NULL = "^[0-9,-]{6,20}$|^$";
 
-    /**邮政编码,只能6位数字*/
-    public final static String POST                    = "^\\d{1,6}$";
+    /**
+     * 邮政编码,只能6位数字
+     */
+    public final static String POST = "^\\d{1,6}$";
 
-    /**用户姓名,只能由中文汉字、大写英文字母或.构成*/
-    public final static String REGEX_USER_NAME         = "^[\u4e00-\u9fa5,0-9,a-z,A-Z,.]+$";
+    /**
+     * 用户姓名,只能由中文汉字、大写英文字母或.构成
+     */
+    public final static String REGEX_USER_NAME = "^[\u4e00-\u9fa5,0-9,a-z,A-Z,.]+$";
 
-    /** 业务编码，只能由字母和数字组成 */
-    public final static String REGEX_BIZ_CODE          = "^[0-9,a-z,A-Z]+$";
+    /**
+     * 业务编码，只能由字母和数字组成
+     */
+    public final static String REGEX_BIZ_CODE = "^[0-9,a-z,A-Z]+$";
 
-    /**资金账户备注名 只能由中文汉字，大小写英文字母，数字和指定特殊字符*/
-    public final static String REGEX_ACCOUNT_MEMO      = "^(\\d)?[\u4e00-\u9fa5,0-9,a-z,A-Z]+$";
+    /**
+     * 资金账户备注名 只能由中文汉字，大小写英文字母，数字和指定特殊字符
+     */
+    public final static String REGEX_ACCOUNT_MEMO = "^(\\d)?[\u4e00-\u9fa5,0-9,a-z,A-Z]+$";
 
-    /**纯数字*/
-    public final static String NUM                     = "^(\\d)*$";
+    /**
+     * 纯数字
+     */
+    public final static String NUM = "^(\\d)*$";
 
-    /**金额，类似于-135,342,12.954*/
-    public final static String REGEX_VALIDATE_MONEY    = "^[+-]?\\d+(,\\d{3})*(\\.\\d+)?$";
+    /**
+     * 金额，类似于-135,342,12.954
+     */
+    public final static String REGEX_VALIDATE_MONEY = "^[+-]?\\d+(,\\d{3})*(\\.\\d+)?$";
 
-    /**手机动态口令，可以不输入，输入长度只能数字长度6位*/
+    /**
+     * 手机动态口令，可以不输入，输入长度只能数字长度6位
+     */
     public final static String MOBILE_PROTECT_ACK_CODE = "^\\d{0}|\\d{6}$";
 
-    /** URL地址校验*/
-    public final static String URL_VALIDATE_CODE       = "^([a-zA-z]+://)?(\\w+(-\\w+)*)(\\.(\\w+(-\\w+)*))*(\\?\\S*)?$";
+    /**
+     * URL地址校验
+     */
+    public final static String URL_VALIDATE_CODE = "^([a-zA-z]+://)?(\\w+(-\\w+)*)(\\.(\\w+(-\\w+)*))*(\\?\\S*)?$";
 
-    /** 日期格式校验。格式为yyyy-MM-dd */
-    public final static String WEB_DATE_VALIDATE       = "^[0-9]{4}(\\-)(((0[13578]|(10|12))(\\-)(0[1-9]|[1-2][0-9]|3[0-1]))|(02(\\-)(0[1-9]|[1-2][0-9]))|((0[469]|11)(\\-)(0[1-9]|[1-2][0-9]|3[0])))";
+    /**
+     * 日期格式校验。格式为yyyy-MM-dd
+     */
+    public final static String WEB_DATE_VALIDATE = "^[0-9]{4}(\\-)(((0[13578]|(10|12))(\\-)(0[1-9]|[1-2][0-9]|3[0-1]))|(02(\\-)(0[1-9]|[1-2][0-9]))|((0[469]|11)(\\-)(0[1-9]|[1-2][0-9]|3[0])))";
 
-    /** 日期格式校验。格式为yyyy.MM.dd */
+    /**
+     * 日期格式校验。格式为yyyy.MM.dd
+     */
     public final static String SHORT_WEB_DATE_VALIDATE = "^[0-9]{4}(\\.)(((0[13578]|(10|12))(\\.)(0[1-9]|[1-2][0-9]|3[0-1]))|(02(\\.)(0[1-9]|[1-2][0-9]))|((0[469]|11)(\\.)(0[1-9]|[1-2][0-9]|3[0])))";
 
     /**
@@ -81,7 +117,7 @@ public class ValidateUtil {
      * @param src 待判断的输入字符串
      * @param reg 正则表达式
      * @return True:输入的字符串是否和传入的正则匹配
-     *         False:输入的字符串是否和传入的正则不匹配
+     * False:输入的字符串是否和传入的正则不匹配
      */
     public static boolean isValidReg(String src, String reg) {
         // 无效的输入，直接返回false
@@ -166,6 +202,7 @@ public class ValidateUtil {
      * 判断输入的字符串是否是手机号码格式
      * </pre>
      * 国内手机号验证规则
+     *
      * @param src 待判断的输入字符串
      * @return True:是合法的手机号码;False:不是合法的手机号码
      */
@@ -184,6 +221,7 @@ public class ValidateUtil {
      * 判断输入的字符串是否是手机号码格式
      * </pre>
      * 国外手机号验证规则
+     *
      * @param src 待判断的输入字符串
      * @return True:是合法的手机号码;False:不是合法的手机号码
      */
@@ -251,8 +289,9 @@ public class ValidateUtil {
      * <pre>
      * 判断输入的字符串是否是合法的支付宝登录号
      * </pre>
-     *
+     * <p>
      * 支付宝登录号有两种格式。其一是手机号码；其二是Email（长度未限制）
+     *
      * @param src 待判断的输入字符串
      * @return True:是合法的登录号;False:不是合法的登录号
      */
@@ -297,6 +336,7 @@ public class ValidateUtil {
      * <li>小数位允许超过多为的数字(多余2位将四舍五入)</li>
      * <li>允许正负金额</li>
      * </ul>
+     *
      * @param src 待判断的输入字符串
      * @return true表示是合法的金额;false表示不是合法的金额
      */
@@ -312,7 +352,7 @@ public class ValidateUtil {
     }
 
     /**
-     *  <pre>
+     * <pre>
      * 第二种判断是否是合法的金额的方法，利用转化为Money对象的正确与否。注意:<br/>
      * 这样不能判别,分隔的多个数字情形，只是全部忽略掉。<li>
      *  </pre>
@@ -370,8 +410,6 @@ public class ValidateUtil {
     }
 
     /**
-     *
-     *
      * @param str
      * @return
      */

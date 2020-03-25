@@ -8,7 +8,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * 模型对象帮助类。实现toString重载
- *
+ * <p>
  * Created by Willard on 2015/7/25.
  */
 public class ToString implements java.io.Serializable {

@@ -41,28 +41,33 @@ public class Global {
      * 获取地址开关
      */
     private static boolean addressEnabled;
-
+    /**
+     * 是否mock用户信息
+     */
     private static boolean mock;
 
-    private static String wxPnCallbackUrl;
+    /**
+     * 微信预授权地址
+     */
+    private static String wxAuthUrl;
+
+    public static String getWxAuthUrl() {
+        return wxAuthUrl;
+    }
+
+    public void setWxAuthUrl(String wxAuthUrl) {
+        Global.wxAuthUrl = wxAuthUrl;
+    }
 
     public static boolean isMock() {
         return mock;
     }
 
+
     public void setMock(boolean mock) {
         Global.mock = mock;
     }
 
-    public static String getWxPnCallbackUrl() {
-        return wxPnCallbackUrl;
-    }
-
-
-
-    public void setWxPnCallbackUrl(String wxPnCallbackUrl) {
-        Global.wxPnCallbackUrl = wxPnCallbackUrl;
-    }
 
     public static String getName() {
         return name;

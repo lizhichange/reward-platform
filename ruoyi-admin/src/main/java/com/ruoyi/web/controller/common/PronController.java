@@ -4,7 +4,7 @@ import cn.hutool.core.util.RandomUtil;
 import com.github.pagehelper.PageHelper;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.page.TableDataInfo;
-import com.ruoyi.common.enums.WebMainStatus;
+import com.ruoyi.sms.facade.enums.WebMainStatus;
 import com.ruoyi.framework.interceptor.impl.WxPnUserAuth;
 import com.ruoyi.sms.facade.api.IShipinService;
 import com.ruoyi.sms.facade.api.IYqmService;

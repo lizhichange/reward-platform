@@ -74,8 +74,8 @@ ruoyi:
   # 是否mock
   mock: true
 
-  wxPnCallbackUrl: http://ds.wx40q.com/wechat/callback
-
+  # 微信预授权地址
+  wxAuthUrl: http://ds.wx40q.com/wechat/auth
 
 dubbo:
   registry:
@@ -89,10 +89,7 @@ dubbo:
     serialization: fastjson
     threads: 2000
   application:
-    qos:
-      port: 22222
-      enable: true
     name: dubbo-sms-zk-service
     id: dubbo-sms-zk-service
   scan:
-    basePackages: com.ruoyi.sms.service
+    basePackages: com.ruoyi.sms.service,com.ruoyi.system.facade

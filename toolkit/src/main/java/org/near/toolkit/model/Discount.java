@@ -9,10 +9,10 @@ import java.util.regex.Pattern;
  * Created by willa on 2015/12/24.
  */
 public class Discount implements Serializable {
-    private static final long    serialVersionUID = 7139811876159243916L;
-    private static final Pattern checker          = Pattern.compile("^\\d|\\d\\.\\d$");
+    private static final long serialVersionUID = 7139811876159243916L;
+    private static final Pattern checker = Pattern.compile("^\\d|\\d\\.\\d$");
 
-    private int                  value;
+    private int value;
 
     public Discount() {
     }

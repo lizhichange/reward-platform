@@ -13,17 +13,29 @@ import java.util.regex.Pattern;
  */
 public class SensitiveStringHiddenUtil {
 
-    /** 大陆身份证号正则表达式 */
-    private static final String  ID_CARD_REGEXP    = "[0-9]{15}|[0-9]{18}|[0-9]{14}X|[0-9]{17}X";
-    /** 银行卡号正则表达式 */
-    private static final String  BANK_CARD_REGEXP  = "[0-9]{13,19}";
-    /** 手机正则表达式 */
-    private static final String  PHONE_TEL_REGEXP  = "[0-9]{11}";
-    /** 大陆身份证号匹配模式 */
-    private static final Pattern ID_CARD_PATTERN   = Pattern.compile(ID_CARD_REGEXP);
-    /** 银行卡号匹配模式 */
+    /**
+     * 大陆身份证号正则表达式
+     */
+    private static final String ID_CARD_REGEXP = "[0-9]{15}|[0-9]{18}|[0-9]{14}X|[0-9]{17}X";
+    /**
+     * 银行卡号正则表达式
+     */
+    private static final String BANK_CARD_REGEXP = "[0-9]{13,19}";
+    /**
+     * 手机正则表达式
+     */
+    private static final String PHONE_TEL_REGEXP = "[0-9]{11}";
+    /**
+     * 大陆身份证号匹配模式
+     */
+    private static final Pattern ID_CARD_PATTERN = Pattern.compile(ID_CARD_REGEXP);
+    /**
+     * 银行卡号匹配模式
+     */
     private static final Pattern BANK_CARD_PATTERN = Pattern.compile(BANK_CARD_REGEXP);
-    /** 手机正则表达式 */
+    /**
+     * 手机正则表达式
+     */
     private static final Pattern PHONE_TEL_PATTERN = Pattern.compile(PHONE_TEL_REGEXP);
 
     /**
@@ -112,10 +124,9 @@ public class SensitiveStringHiddenUtil {
      * 对大陆身份证号进行部分隐藏处理，只显示前6位和后4位，其他用*代替。<br/>
      * 如果入参不是合法的大陆身份证号，将按敏感信息缺省隐藏方式处理，显示前1/3和后1/3，其他用*代替。<br/>
      *
-     * @param idCardNo 待部分隐藏处理的身份证号。
+     * @param idCardNo   待部分隐藏处理的身份证号。
      * @param doValidate 是否做身份证号合法性校验。警告：做校验会进行正则匹配，性能上比不做校验的方法略有损耗。
      * @return 如果hideFlag为true，返回符合《支付宝敏感信息日志打印规范》的身份证号部分展示字符串；否则返回原数据。
-     *
      */
     public static String idCardNoHide(String idCardNo, boolean doValidate) {
 
@@ -191,7 +202,7 @@ public class SensitiveStringHiddenUtil {
      * 对手机号进行部分隐藏处理，手机号只显示前3位和后4位，其他用*代替。<br/>
      * 不支持带分机的电话号码，将按敏感信息缺省隐藏方式处理，显示前1/3和后1/3，其他用*代替。
      *
-     * @param phoneNo 待处理的电话号码
+     * @param phoneNo    待处理的电话号码
      * @param doValidate 是否做电话号码合法性校验。警告：做校验会进行正则匹配，性能上比不做校验的方法略有损耗。
      * @return 如果hideFlag为true，返回《支付宝敏感信息日志打印规范》中推荐的电话号码部分展示字符串；否则返回原数据。
      */
@@ -221,7 +232,7 @@ public class SensitiveStringHiddenUtil {
     /**
      * 对Email进行部分隐藏处理，只显示用户名的前3位+**+@域名。如用户名不足3位，将显示用户名全部+**+@域名。如果不是email（不含‘@’）,将按敏感信息缺省隐藏方式处理，显示前1/3和后1/3。
      *
-     * @param email 待处理的Email
+     * @param email      待处理的Email
      * @param doValidate 是否做Email合法性校验。警告：做校验会进行正则匹配，性能上比不做校验的方法略有损耗。
      * @return 如果hideFlag为true，返回《支付宝敏感信息日志打印规范》中推荐的Email部分展示字符串；否则返回原数据。
      */
@@ -273,8 +284,7 @@ public class SensitiveStringHiddenUtil {
      * SensitiveDataUtil.defaultHide("tttttttt") = "ttt***tt"
      * </pre>
      *
-     * @param sensitiveData
-     *            待部分隐藏处理的敏感信息。
+     * @param sensitiveData 待部分隐藏处理的敏感信息。
      * @returns 屏蔽后的数据; 如果hideFlag为flase，返回原数据。
      */
     public static String defaultHide(String sensitiveData) {
@@ -298,14 +308,10 @@ public class SensitiveStringHiddenUtil {
      * SensitiveDataUtil.customizeHide("13568794561",3,0,8) = "135********"
      * </pre>
      *
-     * @param sensitiveData
-     *            原数据
-     * @param frontCharNum
-     *            展示前几位
-     * @param tailCharNum
-     *            展示后几位
-     * @param hiddenCharNum
-     *            展示星号*的个数
+     * @param sensitiveData 原数据
+     * @param frontCharNum  展示前几位
+     * @param tailCharNum   展示后几位
+     * @param hiddenCharNum 展示星号*的个数
      * @return 部分隐藏的敏感数据字符串
      */
     public static String customizeHide(final String sensitiveData, final int frontCharNum,
@@ -345,6 +351,7 @@ public class SensitiveStringHiddenUtil {
 
     /**
      * 返回隐藏的手机号码
+     *
      * @param mobileNum 手机号码
      * @return 返回隐藏的手机号码
      */
@@ -366,6 +373,7 @@ public class SensitiveStringHiddenUtil {
 
     /**
      * 返回隐藏的手机号码，支持国际号码
+     *
      * @param mobileNum 手机号码
      * @return 返回隐藏的手机号码
      */

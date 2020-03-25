@@ -1,12 +1,10 @@
 package com.ruoyi.sms.facade.enums;
 
 
-
 import lombok.Getter;
 import org.near.toolkit.model.BaseEnum;
 
 /**
- *
  * @author lizhi
  * @date 2018-7-12
  */
@@ -19,7 +17,8 @@ public enum AccountOptType implements BaseEnum {
     /**
      * 支出
      */
-    OUTLAY("1", "支出"),;
+    OUTLAY("1", "支出"),
+    ;
 
     String code;
     String desc;

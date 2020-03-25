@@ -21,17 +21,25 @@ import org.apache.commons.codec.binary.Base64;
  */
 public class DESCoder {
 
-    /** 字符编码 */
-    private static final String CHARSET          = "UTF-8";
+    /**
+     * 字符编码
+     */
+    private static final String CHARSET = "UTF-8";
 
-    /** 密钥算法 */
-    private static final String KEY_ALGORITHM    = "DES";
+    /**
+     * 密钥算法
+     */
+    private static final String KEY_ALGORITHM = "DES";
 
-    /** 加密、解密算法 */
+    /**
+     * 加密、解密算法
+     */
     private static final String CIPHER_ALGORITHM = "DES/ECB/PKCS5Padding";
 
-    /** 密钥长度 */
-    private static final int    KEY_SIZE         = 56;
+    /**
+     * 密钥长度
+     */
+    private static final int KEY_SIZE = 56;
 
     /**
      * 加密，默认编码utf-8

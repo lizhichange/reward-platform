@@ -18,14 +18,13 @@ import java.util.List;
 
 /**
  * 链接管理Controller
- * 
+ *
  * @author ruoyi
  * @date 2020-03-23
  */
 @Controller
 @RequestMapping("/system/short")
-public class SysShortController extends BaseController
-{
+public class SysShortController extends BaseController {
     private String prefix = "system/short";
 
     @Autowired
@@ -33,8 +32,7 @@ public class SysShortController extends BaseController
 
     @RequiresPermissions("system:short:view")
     @GetMapping()
-    public String index()
-    {
+    public String index() {
         return prefix + "/short";
     }
 
@@ -44,8 +42,7 @@ public class SysShortController extends BaseController
     @RequiresPermissions("system:short:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(SysShort sysShort)
-    {
+    public TableDataInfo list(SysShort sysShort) {
         startPage();
         List<SysShort> list = sysShortService.selectSysShortList(sysShort);
         return getDataTable(list);
@@ -58,8 +55,7 @@ public class SysShortController extends BaseController
     @Log(title = "链接管理", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(SysShort sysShort)
-    {
+    public AjaxResult export(SysShort sysShort) {
         List<SysShort> list = sysShortService.selectSysShortList(sysShort);
         ExcelUtil<SysShort> util = new ExcelUtil<SysShort>(SysShort.class);
         return util.exportExcel(list, "short");
@@ -69,8 +65,7 @@ public class SysShortController extends BaseController
      * 新增链接管理
      */
     @GetMapping("/add")
-    public String add()
-    {
+    public String add() {
         return prefix + "/add";
     }
 
@@ -81,8 +76,7 @@ public class SysShortController extends BaseController
     @Log(title = "链接管理", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(SysShort sysShort)
-    {
+    public AjaxResult addSave(SysShort sysShort) {
         return toAjax(sysShortService.insertSysShort(sysShort));
     }
 
@@ -90,8 +84,7 @@ public class SysShortController extends BaseController
      * 修改链接管理
      */
     @GetMapping("/edit/{id}")
-    public String edit(@PathVariable("id") Long id, ModelMap mmap)
-    {
+    public String edit(@PathVariable("id") Long id, ModelMap mmap) {
         SysShort sysShort = sysShortService.selectSysShortById(id);
         mmap.put("sysShort", sysShort);
         return prefix + "/edit";
@@ -104,8 +97,7 @@ public class SysShortController extends BaseController
     @Log(title = "链接管理", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(SysShort sysShort)
-    {
+    public AjaxResult editSave(SysShort sysShort) {
         return toAjax(sysShortService.updateSysShort(sysShort));
     }
 
@@ -114,10 +106,9 @@ public class SysShortController extends BaseController
      */
     @RequiresPermissions("system:short:remove")
     @Log(title = "链接管理", businessType = BusinessType.DELETE)
-    @PostMapping( "/remove")
+    @PostMapping("/remove")
     @ResponseBody
-    public AjaxResult remove(String ids)
-    {
+    public AjaxResult remove(String ids) {
         return toAjax(sysShortService.deleteSysShortByIds(ids));
     }
 }

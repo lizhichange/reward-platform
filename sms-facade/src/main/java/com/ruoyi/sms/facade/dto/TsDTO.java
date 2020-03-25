@@ -7,80 +7,56 @@ import java.io.Serializable;
 @Data
 public class TsDTO implements Serializable {
     /**
-    *
-    *
-    * ts.id
-    
+     * ts.id
      *
      * @mbg.generated 2020-03-16 22:14:08
      */
     private Integer id;
 
     /**
-    *
-    *
-    * ts.ip
-    
+     * ts.ip
      *
      * @mbg.generated 2020-03-16 22:14:08
      */
     private String ip;
 
     /**
-    *
-    *
-    * ts.zt
-    
+     * ts.zt
      *
      * @mbg.generated 2020-03-16 22:14:08
      */
     private String zt;
 
     /**
-    *
-    *
-    * ts.neirong
-    
+     * ts.neirong
      *
      * @mbg.generated 2020-03-16 22:14:08
      */
     private String neirong;
 
     /**
-    *
-    *
-    * ts.shijian
-    
+     * ts.shijian
      *
      * @mbg.generated 2020-03-16 22:14:08
      */
     private String shijian;
 
     /**
-    *
-    *
-    * ts.typeto
-    
+     * ts.typeto
      *
      * @mbg.generated 2020-03-16 22:14:08
      */
     private String typeto;
 
     /**
-    *
-    *
-    * ts.sid
-    
+     * ts.sid
      *
      * @mbg.generated 2020-03-16 22:14:08
      */
     private Integer sid;
 
     /**
-    *
-    *
-    * ts.userid
-    
+     * ts.userid
      *
      * @mbg.generated 2020-03-16 22:14:08
      */
