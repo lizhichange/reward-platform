@@ -1,5 +1,6 @@
 package com.ruoyi.sms.service;
 
+import com.alibaba.dubbo.config.annotation.Service;
 import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.sms.domain.Yqm;
 import com.ruoyi.sms.domain.YqmExample;
@@ -10,7 +11,6 @@ import com.ruoyi.sms.mapper.YqmMapper;
 import org.near.toolkit.common.StringUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,7 +22,10 @@ import java.util.stream.Collectors;
  * @author ruoyi
  * @date 2020-03-17
  */
-@Service
+@Service(
+        version = "1.0.0",
+        timeout = 15000
+)
 public class YqmServiceImpl implements IYqmService {
     @Autowired
     private ExtYqmMapper extYqmMapper;
