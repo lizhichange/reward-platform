@@ -56,7 +56,6 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
         String referer = request.getHeader("referer");
         session.setAttribute("referer", referer);
         LOGGER.info("referer:{}", referer);
-
         //是否mock
         if (Global.isMock()) {
             SessionContext.set(session, "x", "x");

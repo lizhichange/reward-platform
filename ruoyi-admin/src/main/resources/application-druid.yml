@@ -72,7 +72,7 @@ ruoyi:
   # 获取ip地址开关
   addressEnabled: true
   # 是否mock
-  mock: true
+  mock: false
 
   # 微信预授权地址
   wxAuthUrl: http://auth.grkfcs.cn/wechat/auth
