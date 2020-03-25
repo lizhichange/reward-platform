@@ -61,7 +61,8 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
         ServletRequestAttributes my = (ServletRequestAttributes) requestAttributes;
         HttpServletRequest myRequest = my.getRequest();
         StringBuffer requestURL = myRequest.getRequestURL();
-        log.info("requestURL:{}", requestURL);
+        String requestURI = myRequest.getRequestURI();
+        log.info("requestURL:{},requestURI:{}", requestURL,requestURI);
 
 
         HttpSession session = request.getSession();
