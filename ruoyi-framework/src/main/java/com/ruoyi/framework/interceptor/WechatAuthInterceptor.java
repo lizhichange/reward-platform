@@ -82,6 +82,7 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
             String op = myRequest.getParameter("op");
             if (StringUtil.isNotBlank(op)) {
                 WxMpUser wxMpUser = new WxMpUser();
+                wxMpUser.setOpenId(op);
                 String doMain = DoMainUtil.getDoMain(requestUrl.toString());
                 write(wxMpUser, COOKIE_KEY, doMain, response);
                 SessionContext.set(session, wxMpUser.getOpenId(), wxMpUser.getOpenId());
@@ -126,7 +127,7 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
         RC4 rc4 = new RC4(RC_KET);
         byte[] crypt = rc4.encrypt(JSON.toJSONString(wxMpUser));
         String encryptJson = new String(crypt);
-        log.info("encryptJson:{}",encryptJson);
+        log.info("encryptJson:{}", encryptJson);
         Cookie cookie = new Cookie(cookieName, encryptJson);
         cookie.setMaxAge(-1);
         cookie.setDomain(domain);
