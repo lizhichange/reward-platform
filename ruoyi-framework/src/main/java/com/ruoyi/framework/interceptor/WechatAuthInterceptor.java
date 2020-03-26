@@ -1,12 +1,9 @@
 package com.ruoyi.framework.interceptor;
 
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.ruoyi.common.config.Global;
 import com.ruoyi.framework.interceptor.impl.WxPnUserAuth;
 import com.ruoyi.framework.interceptor.util.SessionContext;
-import com.ruoyi.framework.interceptor.util.SessionData;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.util.http.URIUtil;
 import org.near.toolkit.common.DoMainUtil;
@@ -39,7 +36,9 @@ import java.util.Map;
 @Slf4j
 public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
     private final static Logger LOGGER = LoggerFactory.getLogger(WechatAuthInterceptor.class);
-    public final static String COOKIE_KEY = "USER_INFO_KEY";
+    public final static String COOKIE_OP_KEY = "OPEN_INFO_KEY";
+    public final static String COOKIE_USER_KEY = "USER_INFO_KEY";
+
     public final static String RC_KET = "U2FsdGVkX1/TjFjEE/3lTCOvPLdrPUkMqYYHWZmteHw=";
 
 
@@ -77,27 +76,26 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
             if (annotation == null) {
                 return true;
             }
+            String doMain = DoMainUtil.getDoMain(requestUrl.toString());
+
             //授权回来之后中定向会带有openId参数
             String op = myRequest.getParameter("op");
             //推广人的userid
             String userid = myRequest.getParameter("userid");
-            SessionData sessionData = new SessionData();
             if (StringUtil.isNotBlank(userid)) {
-                sessionData.setUserId(userid);
+                write(userid, COOKIE_USER_KEY, doMain, response);
             }
             if (StringUtil.isNotBlank(op)) {
-                sessionData.setOpenId(op);
-                String doMain = DoMainUtil.getDoMain(requestUrl.toString());
-                write(sessionData, COOKIE_KEY, doMain, response);
-                SessionContext.set(session, sessionData.getOpenId(), sessionData.getUserId());
+                write(op, COOKIE_OP_KEY, doMain, response);
+                SessionContext.set(session, op, userid);
                 return true;
             }
 
-            String read = read(request, COOKIE_KEY);
-            log.info("read:{}", read);
-            if (StringUtil.isNotBlank(read)) {
-                SessionData data = JSONObject.parseObject(read, SessionData.class);
-                SessionContext.set(session, data.getOpenId(), data.getUserId());
+            String userId = read(request, COOKIE_USER_KEY);
+            String openId = read(request, COOKIE_OP_KEY);
+            log.info("openId:{}", openId);
+            if (StringUtil.isNotBlank(openId)) {
+                SessionContext.set(session, openId, userId);
                 return true;
             }
 
@@ -124,10 +122,9 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
     }
 
 
-    public static void write(SessionData sessionData, String cookieName, String domain,
+    public static void write(String str, String cookieName, String domain,
                              HttpServletResponse response) {
-        String string = JSON.toJSONString(sessionData);
-        Cookie cookie = new Cookie(cookieName, string);
+        Cookie cookie = new Cookie(cookieName, str);
         cookie.setMaxAge(-1);
         cookie.setDomain(domain);
         cookie.setPath("/");
