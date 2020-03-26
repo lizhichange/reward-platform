@@ -40,8 +40,6 @@ import java.util.Map;
 @Slf4j
 public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
     private final static Logger LOGGER = LoggerFactory.getLogger(WechatAuthInterceptor.class);
-    public final static String AES_KET = "U2FsdGVkX1/TjFjEE/3lTCOvPLdrPUkMqYYHWZmteHw=";
-
     public final static String COOKIE_KEY = "USER_INFO_KEY";
 
 
