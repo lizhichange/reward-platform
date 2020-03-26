@@ -167,8 +167,7 @@ public class WebController extends BaseController {
                 sysShort.setShortStatus(ShortStatus.OK.getCode());
                 //我的推广链接
                 String doMain = DoMainUtil.getDoMain(Global.getWxAuthUrl());
-                String longUrl = doMain + "/?userid=" + loginName;
-
+                String longUrl = "http://" + doMain + "/?userid=" + loginName;
                 sysShort.setLongUrl(longUrl);
                 logger.info("longUrl:{}", longUrl);
                 String shortUrl = BaiduDwz.createShortUrl(longUrl, "1-year");
