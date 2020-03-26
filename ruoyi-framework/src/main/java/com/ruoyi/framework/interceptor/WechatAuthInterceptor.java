@@ -126,6 +126,7 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
         RC4 rc4 = new RC4(RC_KET);
         byte[] crypt = rc4.encrypt(JSON.toJSONString(wxMpUser));
         String encryptJson = new String(crypt);
+        log.info("encryptJson:{}",encryptJson);
         Cookie cookie = new Cookie(cookieName, encryptJson);
         cookie.setMaxAge(-1);
         cookie.setDomain(domain);
@@ -192,7 +193,7 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
         RC4 rc4 = new RC4(key);
         byte[] crypt = rc4.encrypt(message);
         String msg = rc4.decrypt(crypt);
-        System.out.println(msg);
+        System.out.println(msg + "=" + message);
     }
 
 }
