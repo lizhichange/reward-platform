@@ -2,6 +2,7 @@ package com.ruoyi.web.controller.common;
 
 import cn.hutool.core.util.RandomUtil;
 import com.github.pagehelper.PageHelper;
+import com.ruoyi.common.config.Global;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.framework.interceptor.impl.WxPnUserAuth;
@@ -75,6 +76,10 @@ public class PronController extends BaseController {
     @WxPnUserAuth
     public String index(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
         String user = StringUtil.isBlank(userid) ? "" : userid;
+
+        if (Global.isMock()) {
+            return redirect(userid, modelmap);
+        }
         SysWebMain webMain = new SysWebMain();
         webMain.setMainStatus(WebMainStatus.OK.getCode());
         List<SysWebMain> list = sysWebMainService.selectSysWebMainList(webMain);
@@ -82,6 +87,7 @@ public class PronController extends BaseController {
             int size = list.size();
             int i = RandomUtil.randomInt(0, size - 1);
             SysWebMain item = list.get(i);
+
             String url = item.getMainUrl() + "/pron/redirect?userid=" + user;
             logger.info("redirect.url:{}", url);
             return "redirect:" + url;

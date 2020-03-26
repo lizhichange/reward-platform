@@ -16,7 +16,7 @@
     <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
     <script th:src="@{/proncss/flowplayer/flowplayer.js}"></script>
     <!--    <script th:src="@{/pron/detail/main.min.js}"></script>-->
-    <script  th:src="@{/ajax/libs/layer/layer.min.js}"></script>
+    <script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
     <script th:src="@{/ajax/libs/blockUI/jquery.blockUI.js}"></script>
     <script th:src="@{/ruoyi/js/ry-ui.js?v=4.0.0}"></script>
 
@@ -224,65 +224,31 @@
                     let video = $("#area1").flowplayer({
                         description: "",
                         src: src,
-                        swf: "/pron/flowplayer/flowplayer.swf",
+                        swf: "/proncss/flowplayer/flowplayer.swf",
                         title: "my video",
                         autoplay: false,
                         preload: "none",
-                        title: "Video about videos",
+                        title: "videos",
                         rewind: true,
-                        loop: false,//播放器是否应循环播放当前视频。默认：false
                         poster: poster,
                         autopause: true,
                         plugins: []
                     });
 
-
-
-                    var video1;
-                    var bVideo1 = false;
-
-                    $("#area1").bind("ready", function(e, api) {
-                        bVideo1 = true;
-                        video1 = api;
-                        setupContemporaryEvents();
-                    });
-
-                    var setupContemporaryEvents = function(){
-                        if(bVideo1){
-                            $("#area1").bind("resume", function(e, api) {
-
-                            });
-                        }
-                    };
-
-
                     video.on('seeking seeked pause ready', function (e, api) {
                         let type = e.type;
+
+                        if (type === 'ready') {
+                            console.log(api);
+                        }
+
                         if (type === 'resume') {
                             console.log(type);
                         }
+                        if (type === 'pause') {
+                            console.log(type, api);
+                        }
                     });
-
-                    function check() {
-                        $.modal.loading($("#btnSubmit").data("loading"));
-                        var username = '12';
-                        $.ajax({
-                            type: "post",
-                            url: "/login",
-                            data: {
-                                "username": username
-                            },
-                            success: function (r) {
-                                if (r.code === 0) {
-
-                                } else {
-                                    $.modal.closeLoading();
-                                    $.modal.msg(r.msg);
-                                }
-                            }
-                        });
-                    }
-
                 });
             </script>
 

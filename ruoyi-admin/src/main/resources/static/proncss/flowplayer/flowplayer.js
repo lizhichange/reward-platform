@@ -4873,6 +4873,7 @@
                     },
 
                     resume: function () {
+
                         console.log("xxxxxxxxxxxx");
                         //todo
                         var ev = api.trigger('beforeresume', [api], true);
