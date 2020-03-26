@@ -46,6 +46,7 @@ public class WechatController {
         //预授权回调地址
         String url = MpAuthConfig.getWxPnCallbackUrl();
 
+        LOGGER.info("auth.callback:{}", callback);
 
         if (url.contains("?")) {
             url += "&callback=" + callback;
@@ -62,7 +63,7 @@ public class WechatController {
 
     @GetMapping("/callback")
     public String callback(@RequestParam("code") String code, @RequestParam("callback") String callback, @RequestParam("state") String state) throws WxErrorException {
-        LOGGER.info("code:{},state:{}", code, state);
+        LOGGER.info("callback.code:{},state:{},callback:{}", code, state, callback);
         WxMpOAuth2AccessToken accessToken = wxMpService.oauth2getAccessToken(code);
         if (accessToken != null) {
             //用户信息
