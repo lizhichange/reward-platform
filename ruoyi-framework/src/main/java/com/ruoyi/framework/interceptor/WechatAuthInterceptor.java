@@ -28,6 +28,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.lang.reflect.Method;
+import java.nio.charset.Charset;
 import java.util.Map;
 
 
@@ -125,8 +126,7 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
                              HttpServletResponse response) {
         //加密
         RC4 rc4 = new RC4(RC_KET);
-        byte[] crypt = rc4.encrypt(JSON.toJSONString(wxMpUser));
-        String encryptJson = new String(crypt);
+        String encryptJson = rc4.encryptHex(JSON.toJSONString(wxMpUser), Charset.defaultCharset());
         log.info("encryptJson:{}", encryptJson);
         Cookie cookie = new Cookie(cookieName, encryptJson);
         cookie.setMaxAge(-1);
