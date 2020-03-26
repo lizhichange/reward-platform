@@ -1,9 +1,6 @@
 package com.ruoyi.framework.interceptor;
 
 
-import cn.hutool.crypto.symmetric.RC4;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.ruoyi.common.config.Global;
 import com.ruoyi.framework.interceptor.impl.WxPnUserAuth;
 import com.ruoyi.framework.interceptor.util.SessionContext;
@@ -28,7 +25,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.lang.reflect.Method;
-import java.nio.charset.Charset;
 import java.util.Map;
 
 
@@ -89,16 +85,13 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
                 SessionContext.set(session, wxMpUser.getOpenId(), wxMpUser.getOpenId());
                 return true;
             }
-
             String read = read(request, COOKIE_KEY);
-            log.info("read:{}",read);
+            log.info("read:{}", read);
             if (StringUtil.isNotBlank(read)) {
-                WxMpUser wxMpUser = JSONObject.parseObject(read, WxMpUser.class);
-                if (wxMpUser != null) {
-                    SessionContext.set(session, wxMpUser.getOpenId(), wxMpUser.getOpenId());
-                    return true;
-                }
+                SessionContext.set(session, op, op);
+                return true;
             }
+
             String wxAuthUrl = Global.getWxAuthUrl();
             String encode = URIUtil.encodeURIComponent(referer);
             //pRTa/LHAlQIxYq2mYSAJWN7BoLXN2B2waTHJaSBHGP1gN0fdvEWVP9h8ZCxB/O9l
@@ -113,6 +106,7 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
         } else {
             return super.preHandle(request, response, handler);
         }
+
     }
 
     private HttpServletRequest getHttpServletRequest() {
@@ -125,11 +119,7 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
 
     public static void write(WxMpUser wxMpUser, String cookieName, String domain,
                              HttpServletResponse response) {
-        //加密
-        RC4 rc4 = new RC4(RC_KET);
-        String encryptJson = rc4.encryptHex(JSON.toJSONString(wxMpUser), Charset.defaultCharset());
-        log.info("encryptJson:{}", encryptJson);
-        Cookie cookie = new Cookie(cookieName, encryptJson);
+        Cookie cookie = new Cookie(cookieName, wxMpUser.getOpenId());
         cookie.setMaxAge(-1);
         cookie.setDomain(domain);
         cookie.setPath("/");
@@ -180,22 +170,11 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
         }
         for (Cookie c : cookies) {
             if (cookieKey.equals(c.getName())) {
-                //解密
-                RC4 rc4 = new RC4(RC_KET);
-                return rc4.decrypt(c.getValue().getBytes());
+
+                return c.getValue();
             }
         }
         return null;
-    }
-
-
-    public static void main(String[] args) {
-        String message = "这是一个中文消息！";
-        String key = RC_KET;
-        RC4 rc4 = new RC4(key);
-        byte[] crypt = rc4.encrypt(message);
-        String msg = rc4.decrypt(crypt);
-        System.out.println(msg + "=" + message);
     }
 
 }
