@@ -68,8 +68,13 @@ public class WechatController {
         if (accessToken != null) {
             //用户信息
             WxMpUser wxMpUser = wxMpService.oauth2getUserInfo(accessToken, null);
+            if (callback.contains("?")) {
+                callback += "&op=" + wxMpUser.getOpenId();
+            } else {
+                callback += "?op=" + wxMpUser.getOpenId();
+            }
+            return "redirect:" + callback;
         }
-
         return "redirect:";
     }
 }
