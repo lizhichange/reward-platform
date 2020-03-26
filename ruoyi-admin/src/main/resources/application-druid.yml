@@ -93,3 +93,8 @@ dubbo:
     id: dubbo-sms-zk-service
   scan:
     basePackages: com.ruoyi.sms.service,com.ruoyi.system.facade
+    qos:
+      enable: true
+      port: 44444
+      foreign:
+        ip: false
