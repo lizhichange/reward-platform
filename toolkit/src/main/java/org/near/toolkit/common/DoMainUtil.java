@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
  */
 public class DoMainUtil {
 
-    private final static String REGEX_DOMAIN = "(?<=http://|\\.)[^.]*?\\.(com|cn|net|org|biz|info|cc|tv)";
+    private final static String REGEX_DOMAIN = "(?<=http://|\\.)[^.]*?\\.(com|cn|net|org|biz|info|cc|tv|top)";
 
     private static Pattern p = Pattern.compile(REGEX_DOMAIN,
             Pattern.CASE_INSENSITIVE);

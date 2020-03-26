@@ -1,6 +1,7 @@
 package com.ruoyi.web.controller.common;
 
 import com.ruoyi.BaiduDwz;
+import com.ruoyi.common.config.Global;
 import com.ruoyi.common.config.ServerConfig;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.core.controller.BaseController;
@@ -20,6 +21,7 @@ import com.ruoyi.system.service.ISysRoleService;
 import com.ruoyi.system.service.ISysShortService;
 import com.ruoyi.system.service.ISysUserService;
 import lombok.extern.java.Log;
+import org.near.toolkit.common.DoMainUtil;
 import org.near.toolkit.common.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -158,6 +160,8 @@ public class WebController extends BaseController {
         user.setUpdateTime(new Date());
         user.setSalt(ShiroUtils.randomSalt());
         user.setRemark("代理用户");
+        user.setPayee(payee);
+        user.setPayeeAccount(payeeAccount);
         user.setPassword(passwordService.encryptPassword(loginName, password, user.getSalt()));
         user.setCreateBy("admin");
         int i = userService.insertUser(user);
@@ -170,7 +174,9 @@ public class WebController extends BaseController {
                 sysShort.setShortKey(loginName);
                 sysShort.setShortStatus(ShortStatus.OK.getCode());
                 //我的推广链接
-                String longUrl = string + "/pron?userid=" + loginName;
+                String doMain = DoMainUtil.getDoMain(Global.getWxAuthUrl());
+                String longUrl = doMain + "/?userid=" + loginName;
+
                 sysShort.setLongUrl(longUrl);
                 logger.info("longUrl:{}", longUrl);
                 String shortUrl = BaiduDwz.createShortUrl(longUrl, "1-year");
