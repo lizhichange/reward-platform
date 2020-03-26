@@ -65,7 +65,6 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
         HttpServletRequest myRequest = getHttpServletRequest();
         StringBuffer requestUrl = myRequest.getRequestURL();
         log.info("requestURL:{}", requestUrl);
-
         Map<String, String[]> parameterMap = myRequest.getParameterMap();
         StringBuilder str = new StringBuilder();
         if (!CollectionUtils.isEmpty(parameterMap)) {
@@ -93,6 +92,15 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
             if (annotation == null) {
                 return true;
             }
+            //授权回来之后中定向会带有openId参数
+            String op = myRequest.getParameter("op");
+            if (StringUtil.isNotBlank(op)) {
+                WxMpUser wxMpUser = new WxMpUser();
+                write(wxMpUser, COOKIE_KEY, AES_KET, requestUrl.toString(), response);
+                SessionContext.set(session, wxMpUser.getOpenId(), wxMpUser.getOpenId());
+                return true;
+            }
+
             String read = read(request, COOKIE_KEY);
             if (StringUtil.isNotBlank(read)) {
                 WxMpUser wxMpUser = JSONObject.parseObject(read, WxMpUser.class);
@@ -122,6 +130,17 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
         ServletRequestAttributes my = (ServletRequestAttributes) requestAttributes;
         assert my != null;
         return my.getRequest();
+    }
+
+    public static void write(WxMpUser wxMpUser, String cookieName, String aesKey, String domain,
+                             HttpServletResponse response) {
+        String encryptJson = AESCoder.encrypt(JSON.toJSONString(wxMpUser), aesKey, "utf-8");
+        Cookie cookie = new Cookie(cookieName, encryptJson);
+        cookie.setMaxAge(-1);
+        cookie.setDomain(domain);
+        cookie.setPath("/");
+        cookie.setHttpOnly(true);
+        response.addCookie(cookie);
     }
 
     /**

@@ -36,16 +36,7 @@ public class WechatController {
     private static final Logger LOGGER = LoggerFactory.getLogger(WechatController.class);
 
 
-    public static void write(WxMpUser wxMpUser, String cookieName, String aesKey, String domain,
-                             HttpServletResponse response) {
-        String encryptJson = AESCoder.encrypt(JSON.toJSONString(wxMpUser), aesKey, "utf-8");
-        Cookie cookie = new Cookie(cookieName, encryptJson);
-        cookie.setMaxAge(-1);
-        cookie.setDomain(domain);
-        cookie.setPath("/");
-        cookie.setHttpOnly(true);
-        response.addCookie(cookie);
-    }
+
 
 
     public static void main(String[] args) {
