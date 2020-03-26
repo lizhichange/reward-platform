@@ -40,14 +40,11 @@ public class WechatController {
 
 
     @GetMapping("/auth")
-    public String auth(HttpServletRequest request, HttpServletResponse response) throws WxErrorException {
-
+    public String auth(HttpServletRequest request) {
         String callback = request.getParameter("callback");
         //预授权回调地址
         String url = MpAuthConfig.getWxPnCallbackUrl();
-
         LOGGER.info("auth.callback:{}", callback);
-
         if (url.contains("?")) {
             url += "&callback=" + callback;
         } else {
@@ -55,8 +52,6 @@ public class WechatController {
         }
         //执行预授权
         String authorizationUrl = wxMpService.oauth2buildAuthorizationUrl(url, WxConsts.OAuth2Scope.SNSAPI_USERINFO, callback);
-
-
         //重定向跳转
         return "redirect:" + authorizationUrl;
     }
@@ -73,6 +68,7 @@ public class WechatController {
             } else {
                 callback += "?op=" + wxMpUser.getOpenId();
             }
+            LOGGER.info("callback.redirect:{}", callback);
             return "redirect:" + callback;
         }
         return "redirect:";

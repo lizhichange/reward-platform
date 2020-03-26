@@ -1,6 +1,8 @@
 package com.ruoyi.framework.interceptor;
 
 
+import cn.hutool.crypto.SecureUtil;
+import cn.hutool.crypto.symmetric.DES;
 import com.alibaba.dubbo.common.URL;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -96,7 +98,7 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
             String op = myRequest.getParameter("op");
             if (StringUtil.isNotBlank(op)) {
                 WxMpUser wxMpUser = new WxMpUser();
-                write(wxMpUser, COOKIE_KEY, AES_KET, requestUrl.toString(), response);
+                write(wxMpUser, COOKIE_KEY, requestUrl.toString(), response);
                 SessionContext.set(session, wxMpUser.getOpenId(), wxMpUser.getOpenId());
                 return true;
             }
@@ -132,15 +134,27 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
         return my.getRequest();
     }
 
-    public static void write(WxMpUser wxMpUser, String cookieName, String aesKey, String domain,
+    public static void write(WxMpUser wxMpUser, String cookieName, String domain,
                              HttpServletResponse response) {
-        String encryptJson = AESCoder.encrypt(JSON.toJSONString(wxMpUser), aesKey, "utf-8");
+        //加密
+        final DES des = SecureUtil.des();
+        String encryptJson = des.encryptHex(JSON.toJSONString(wxMpUser));
         Cookie cookie = new Cookie(cookieName, encryptJson);
         cookie.setMaxAge(-1);
         cookie.setDomain(domain);
         cookie.setPath("/");
         cookie.setHttpOnly(true);
         response.addCookie(cookie);
+    }
+
+
+    public void encryptDecryptTest() {
+        String content = "我是一个测试的test字符串123";
+        final DES des = SecureUtil.des();
+        final String encryptHex = des.encryptHex(content);
+        final String result = des.decryptStr(encryptHex);
+
+
     }
 
     /**
@@ -186,10 +200,10 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
         for (Cookie c : cookies) {
             if (cookieKey.equals(c.getName())) {
                 //解密
-                return AESCoder.decrypt(c.getValue(), AES_KET, "utf-8");
+                final DES des = SecureUtil.des();
+                return des.decryptStr(c.getValue());
             }
         }
-
         return null;
     }
 
