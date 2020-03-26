@@ -18,7 +18,7 @@ server:
 
 mp:
   # 微信预授权回调
-  wxPnCallbackUrl: http://auth.grkfcs.cn/wechat/callback
+  wxPnCallbackUrl: http://yuluncc.top/wechat/callback
 
 
 
