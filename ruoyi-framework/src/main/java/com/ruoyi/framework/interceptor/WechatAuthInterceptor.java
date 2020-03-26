@@ -11,6 +11,7 @@ import com.ruoyi.framework.interceptor.util.SessionContext;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.util.http.URIUtil;
 import me.chanjar.weixin.mp.bean.result.WxMpUser;
+import org.near.toolkit.common.DoMainUtil;
 import org.near.toolkit.common.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -81,7 +82,8 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
             String op = myRequest.getParameter("op");
             if (StringUtil.isNotBlank(op)) {
                 WxMpUser wxMpUser = new WxMpUser();
-                write(wxMpUser, COOKIE_KEY, requestUrl.toString(), response);
+                String doMain = DoMainUtil.getDoMain(requestUrl.toString());
+                write(wxMpUser, COOKIE_KEY, doMain, response);
                 SessionContext.set(session, wxMpUser.getOpenId(), wxMpUser.getOpenId());
                 return true;
             }
@@ -115,6 +117,12 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
         ServletRequestAttributes my = (ServletRequestAttributes) requestAttributes;
         assert my != null;
         return my.getRequest();
+    }
+
+    public static void main(String[] args) {
+        String s = "http://vzfwly.cn/pron/redirect";
+        String doMain = DoMainUtil.getDoMain(s);
+        System.out.println(doMain);
     }
 
     public static void write(WxMpUser wxMpUser, String cookieName, String domain,
