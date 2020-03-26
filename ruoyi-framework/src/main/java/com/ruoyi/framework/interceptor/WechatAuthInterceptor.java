@@ -15,6 +15,7 @@ import lombok.extern.java.Log;
 
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.api.WxConsts;
+import me.chanjar.weixin.common.util.http.URIUtil;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.result.WxMpUser;
 import org.near.toolkit.common.StringUtil;
@@ -101,7 +102,7 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
                 }
             }
             String wxAuthUrl = Global.getWxAuthUrl();
-            String encode = URL.encode(referer);
+            String encode = URIUtil.encodeURIComponent(referer);
             String callback = AESCoder.encrypt(JSON.toJSONString(referer), AES_KET, "UTF-8");
             LOGGER.info("callback:{}", callback);
             //pRTa/LHAlQIxYq2mYSAJWN7BoLXN2B2waTHJaSBHGP1gN0fdvEWVP9h8ZCxB/O9l
