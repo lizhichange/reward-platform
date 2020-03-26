@@ -10,10 +10,10 @@
     <meta name="keywords" content="撸一撸,久久热,超碰视频,成人电影,蝌蚪窝">
     <meta name="generator" content="蝌蚪窝 CMS">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" th:href="@{/web/pagination.min.css}">
-    <link th:href="@{/web/detail/all-responsive-metal.css}" rel="stylesheet" type="text/css">
-    <link th:href="@{/web/jquery.fancybox-metal.css}" rel="stylesheet" type="text/css">
-    <script async="" th:src="@{/web/analytics.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/proncss/pagination.min.css}">
+    <link th:href="@{/proncss/detail/all-responsive-metal.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/proncss/jquery.fancybox-metal.css}" rel="stylesheet" type="text/css">
+    <script async="" th:src="@{/proncss/analytics.js}"></script>
 
 
     <style type="text/css">
@@ -591,9 +591,9 @@
 
     </div>
 
-    <script th:src="@{/web/jquery-3.2.1.min.js}"></script>
-    <script type="text/javascript" th:src="@{/web/pagination.min.js}"></script>
-    <script th:src="@{/web/layer.js}"></script>
+    <script th:src="@{/proncss/jquery-3.2.1.min.js}"></script>
+    <script type="text/javascript" th:src="@{/proncss/pagination.min.js}"></script>
+    <script th:src="@{/proncss/layer.js}"></script>
 
     <div class="content">
         <div class="main-content">
@@ -682,7 +682,7 @@
 </div>
 
 
-<script th:src="@{/web/stickUp.min.js}"></script>
+<script th:src="@{/proncss/stickUp.min.js}"></script>
 <script type="text/javascript">
     //initiating jQuery
     jQuery(function ($) {
@@ -729,7 +729,7 @@
                         $.each(res.rows, function (i, row) {
                             var ctx = '';
                             html += '<div class="item  "> '
-                                + '' + row.id + '<a href="/web/detail//" title="' + row.userid + '' + row.name + '"> <div class="img"> <img class="thumb lazy-load" src="' + row.url + '"'
+                                + '' + row.id + '<a href="/proncss/detail//" title="' + row.userid + '' + row.name + '"> <div class="img"> <img class="thumb lazy-load" src="' + row.url + '"'
                                 + 'data-original="' + row.url + '" alt="' + row.name + '" data-cnt="5" width="180"'
                                 + 'height="135">  </div>  <strong class="' + row.name + '"> ' + row.name + '  </strong>  <div class="wrap">  <div class="duration">' + row.shijianStr + '</div>'
                                 + '</div>  <div class="wrap">'
