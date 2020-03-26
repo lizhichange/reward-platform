@@ -1,7 +1,6 @@
 package com.ruoyi.web.controller.system;
 
 import com.google.common.base.Splitter;
-import com.google.common.collect.Lists;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
@@ -9,17 +8,15 @@ import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.util.ShiroUtils;
-import com.ruoyi.sms.facade.api.IYqmService;
-import com.ruoyi.sms.facade.dto.YqmDTO;
 import com.ruoyi.sms.facade.enums.YqmStatusEnum;
 import com.ruoyi.system.domain.SysUser;
+import com.ruoyi.system.domain.Yqm;
 import com.ruoyi.system.service.ISysUserService;
-import com.ruoyi.web.vo.YqmVO;
+import com.ruoyi.system.service.IYqmService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.near.toolkit.common.DateUtils;
 import org.near.toolkit.common.EnumUtil;
 import org.near.toolkit.common.StringUtil;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -28,7 +25,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 /**
@@ -61,22 +57,14 @@ public class YqmController extends BaseController {
     @RequiresPermissions("system:yqm:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(YqmDTO yqm) {
+    public TableDataInfo list(Yqm yqm) {
         startPage();
         yqm.setUserid(ShiroUtils.getLoginName());
-        List<YqmDTO> list = yqmService.selectYqmList(yqm);
-        List<YqmVO> collect = Lists.newArrayList();
-        if (!CollectionUtils.isEmpty(list)) {
-            collect = list.stream().map(ie -> {
-                YqmVO vo = new YqmVO();
-                BeanUtils.copyProperties(ie, vo);
-                if (StringUtil.isNotBlank(vo.getZt())) {
-                    vo.setZtDesc(EnumUtil.queryByCode(vo.getZt(), YqmStatusEnum.class).getDesc());
-                }
-                return vo;
-            }).collect(Collectors.toList());
+        List<Yqm> list = yqmService.selectYqmList(yqm);
+        for (Yqm item : list) {
+            item.setZtDesc(EnumUtil.queryByCode(item.getZt(), YqmStatusEnum.class).getDesc());
         }
-        return getDataTable(collect);
+        return getDataTable(list);
     }
 
     /**
@@ -85,9 +73,9 @@ public class YqmController extends BaseController {
     @RequiresPermissions("system:yqm:export")
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(YqmDTO yqm) {
-        List<YqmDTO> list = yqmService.selectYqmList(yqm);
-        ExcelUtil<YqmDTO> util = new ExcelUtil<YqmDTO>(YqmDTO.class);
+    public AjaxResult export(Yqm yqm) {
+        List<Yqm> list = yqmService.selectYqmList(yqm);
+        ExcelUtil<Yqm> util = new ExcelUtil<Yqm>(Yqm.class);
         return util.exportExcel(list, "yqm");
     }
 
@@ -106,14 +94,13 @@ public class YqmController extends BaseController {
     @Log(title = "邀请码管理", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(YqmDTO yqm) {
+    public AjaxResult addSave(Yqm yqm) {
         //未使用默认
         if (StringUtil.isBlank(yqm.getYqm())) {
             return AjaxResult.error("邀请码不能为空");
         }
-        YqmDTO tar = new YqmDTO();
-        tar.setYqm(yqm.getYqm());
-        List<YqmDTO> list = yqmService.selectYqmList(tar);
+
+        List<Yqm> list = yqmService.selectYqmList(yqm);
         if (!CollectionUtils.isEmpty(list)) {
             return AjaxResult.error("邀请码邀请码已存在");
         }
@@ -132,7 +119,7 @@ public class YqmController extends BaseController {
      */
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") Long id, ModelMap mmap) {
-        YqmDTO yqm = yqmService.selectYqmById(id);
+        Yqm yqm = yqmService.selectYqmById(id);
         mmap.put("yqm", yqm);
         return prefix + "/edit";
     }
@@ -144,7 +131,7 @@ public class YqmController extends BaseController {
     @Log(title = "邀请码管理", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(YqmDTO yqm) {
+    public AjaxResult editSave(Yqm yqm) {
         return toAjax(yqmService.updateYqm(yqm));
     }
 
@@ -160,37 +147,38 @@ public class YqmController extends BaseController {
             Iterable<String> split = Splitter.on(',')
                     .trimResults()
                     .omitEmptyStrings().split(ids);
-            for (String s : split) {
-                if (delete(s)) {
+            for (String str : split) {
+                Yqm item = new Yqm();
+                item.setId(Long.parseLong(str));
+                item.setUserid(ShiroUtils.getLoginName());
+                List<Yqm> xxx = yqmService.selectYqmList(item);
+                if (xxx.size() == 0) {
                     return error("只能删除自己添加的邀请码");
+                } else {
+                    for (Yqm dto : xxx) {
+                        if (dto.getZt().equals(YqmStatusEnum.Y.getCode())) {
+                            return error("邀请码已经被其他用户使用不能删除");
+                        }
+                    }
                 }
             }
         } else {
-            if (delete(ids)) {
+            Yqm item = new Yqm();
+            item.setId(Long.parseLong(ids));
+            item.setUserid(ShiroUtils.getLoginName());
+            List<Yqm> xxx = yqmService.selectYqmList(item);
+            if (xxx.size() == 0) {
                 return error("只能删除自己添加的邀请码");
+            } else {
+                for (Yqm dto : xxx) {
+                    if (dto.getZt().equals(YqmStatusEnum.Y.getCode())) {
+                        return error("邀请码已经被其他用户使用不能删除");
+                    }
+                }
             }
         }
         return toAjax(yqmService.deleteYqmByIds(ids));
     }
 
-    private boolean delete(String ids) {
-        List<YqmDTO> xxx = xxx(ids);
-        if (xxx.size() == 0) {
-            return true;
-        } else {
-            for (YqmDTO dto : xxx) {
-                if (dto.getZt().equals(YqmStatusEnum.Y.getCode())) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
 
-    private List<YqmDTO> xxx(String s) {
-        YqmDTO item = new YqmDTO();
-        item.setId(Integer.parseInt(s));
-        item.setUserid(ShiroUtils.getLoginName());
-        return yqmService.selectYqmList(item);
-    }
 }

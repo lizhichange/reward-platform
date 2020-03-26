@@ -9,17 +9,9 @@ import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.enums.ShortStatus;
 import com.ruoyi.framework.shiro.service.SysPasswordService;
 import com.ruoyi.framework.util.ShiroUtils;
-import com.ruoyi.sms.facade.api.IYqmService;
-import com.ruoyi.sms.facade.dto.YqmDTO;
 import com.ruoyi.sms.facade.enums.YqmStatusEnum;
-import com.ruoyi.system.domain.SysPost;
-import com.ruoyi.system.domain.SysRole;
-import com.ruoyi.system.domain.SysShort;
-import com.ruoyi.system.domain.SysUser;
-import com.ruoyi.system.service.ISysPostService;
-import com.ruoyi.system.service.ISysRoleService;
-import com.ruoyi.system.service.ISysShortService;
-import com.ruoyi.system.service.ISysUserService;
+import com.ruoyi.system.domain.*;
+import com.ruoyi.system.service.*;
 import lombok.extern.java.Log;
 import org.near.toolkit.common.DoMainUtil;
 import org.near.toolkit.common.StringUtil;
@@ -119,13 +111,13 @@ public class WebController extends BaseController {
         final String string = requestURL.delete(requestURL.length() - request.getRequestURI().length(), requestURL.length()).append(contextPath).toString();
 
 
-        YqmDTO yqmDTO = new YqmDTO();
+        Yqm yqmDTO = new Yqm();
         yqmDTO.setYqm(yqm);
-        List<YqmDTO> list = yqmService.selectYqmList(yqmDTO);
+        List<Yqm> list = yqmService.selectYqmList(yqmDTO);
         if (CollectionUtils.isEmpty(list)) {
             return error("'" + yqm + "'邀请码不存在，注册账号失败");
         }
-        YqmDTO dto = list.get(0);
+        Yqm dto = list.get(0);
         if (dto.getZt().equals(YqmStatusEnum.Y.getCode())) {
             return error("'" + yqm + "'邀请码已使用，注册账号失败");
         }

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.YqmMapper">
+    
+    <resultMap type="Yqm" id="YqmResult">
+        <result property="id"    column="id"    />
+        <result property="userid"    column="userid"    />
+        <result property="yqm"    column="yqm"    />
+        <result property="shijian"    column="shijian"    />
+        <result property="name"    column="name"    />
+        <result property="zt"    column="zt"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectYqmVo">
+        select id, userid, yqm, shijian, name, zt, create_time, update_time from yqm
+    </sql>
+
+    <select id="selectYqmList" parameterType="Yqm" resultMap="YqmResult">
+        <include refid="selectYqmVo"/>
+        <where>  
+            <if test="userid != null  and userid != ''"> and userid = #{userid}</if>
+            <if test="id != null  and id != ''"> and id = #{id}</if>
+            <if test="yqm != null  and yqm != ''"> and yqm = #{yqm}</if>
+            <if test="shijian != null  and shijian != ''"> and shijian = #{shijian}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="zt != null  and zt != ''"> and zt = #{zt}</if>
+        </where>
+    </select>
+    
+    <select id="selectYqmById" parameterType="Long" resultMap="YqmResult">
+        <include refid="selectYqmVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertYqm" parameterType="Yqm" useGeneratedKeys="true" keyProperty="id">
+        insert into yqm
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userid != null  and userid != ''">userid,</if>
+            <if test="yqm != null  and yqm != ''">yqm,</if>
+            <if test="shijian != null  and shijian != ''">shijian,</if>
+            <if test="name != null  and name != ''">name,</if>
+            <if test="zt != null  and zt != ''">zt,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateTime != null ">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userid != null  and userid != ''">#{userid},</if>
+            <if test="yqm != null  and yqm != ''">#{yqm},</if>
+            <if test="shijian != null  and shijian != ''">#{shijian},</if>
+            <if test="name != null  and name != ''">#{name},</if>
+            <if test="zt != null  and zt != ''">#{zt},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateYqm" parameterType="Yqm">
+        update yqm
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userid != null  and userid != ''">userid = #{userid},</if>
+            <if test="yqm != null  and yqm != ''">yqm = #{yqm},</if>
+            <if test="shijian != null  and shijian != ''">shijian = #{shijian},</if>
+            <if test="name != null  and name != ''">name = #{name},</if>
+            <if test="zt != null  and zt != ''">zt = #{zt},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteYqmById" parameterType="Long">
+        delete from yqm where id = #{id}
+    </delete>
+
+    <delete id="deleteYqmByIds" parameterType="String">
+        delete from yqm where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
