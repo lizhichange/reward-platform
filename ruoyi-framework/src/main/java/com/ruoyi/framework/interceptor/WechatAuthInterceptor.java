@@ -91,6 +91,7 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
             }
 
             String read = read(request, COOKIE_KEY);
+            log.info("read:{}",read);
             if (StringUtil.isNotBlank(read)) {
                 WxMpUser wxMpUser = JSONObject.parseObject(read, WxMpUser.class);
                 if (wxMpUser != null) {
