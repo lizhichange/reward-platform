@@ -1,12 +1,14 @@
 package com.ruoyi.framework.interceptor;
 
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.ruoyi.common.config.Global;
 import com.ruoyi.framework.interceptor.impl.WxPnUserAuth;
 import com.ruoyi.framework.interceptor.util.SessionContext;
+import com.ruoyi.framework.interceptor.util.SessionData;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.util.http.URIUtil;
-import me.chanjar.weixin.mp.bean.result.WxMpUser;
 import org.near.toolkit.common.DoMainUtil;
 import org.near.toolkit.common.StringUtil;
 import org.slf4j.Logger;
@@ -77,25 +79,30 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
             }
             //授权回来之后中定向会带有openId参数
             String op = myRequest.getParameter("op");
+            //推广人的userid
+            String userid = myRequest.getParameter("userid");
+            SessionData sessionData = new SessionData();
+            if (StringUtil.isNotBlank(userid)) {
+                sessionData.setUserId(userid);
+            }
             if (StringUtil.isNotBlank(op)) {
-                WxMpUser wxMpUser = new WxMpUser();
-                wxMpUser.setOpenId(op);
+                sessionData.setOpenId(op);
                 String doMain = DoMainUtil.getDoMain(requestUrl.toString());
-                write(wxMpUser, COOKIE_KEY, doMain, response);
-                SessionContext.set(session, wxMpUser.getOpenId(), wxMpUser.getOpenId());
+                write(sessionData, COOKIE_KEY, doMain, response);
+                SessionContext.set(session, sessionData.getOpenId(), sessionData.getUserId());
                 return true;
             }
+
             String read = read(request, COOKIE_KEY);
             log.info("read:{}", read);
             if (StringUtil.isNotBlank(read)) {
-                SessionContext.set(session, op, op);
+                SessionData data = JSONObject.parseObject(read, SessionData.class);
+                SessionContext.set(session, data.getOpenId(), data.getUserId());
                 return true;
             }
 
             String wxAuthUrl = Global.getWxAuthUrl();
             String encode = URIUtil.encodeURIComponent(referer);
-            //pRTa/LHAlQIxYq2mYSAJWN7BoLXN2B2waTHJaSBHGP1gN0fdvEWVP9h8ZCxB/O9l
-            //pRTa/LHAlQIxYq2mYSAJWN7BoLXN2B2waTHJaSBHGP1gN0fdvEWVP9h8ZCxB/O9l
             if (wxAuthUrl.contains("?")) {
                 wxAuthUrl += "&callback=" + encode;
             } else {
@@ -117,9 +124,10 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
     }
 
 
-    public static void write(WxMpUser wxMpUser, String cookieName, String domain,
+    public static void write(SessionData sessionData, String cookieName, String domain,
                              HttpServletResponse response) {
-        Cookie cookie = new Cookie(cookieName, wxMpUser.getOpenId());
+        String string = JSON.toJSONString(sessionData);
+        Cookie cookie = new Cookie(cookieName, string);
         cookie.setMaxAge(-1);
         cookie.setDomain(domain);
         cookie.setPath("/");
@@ -170,7 +178,6 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
         }
         for (Cookie c : cookies) {
             if (cookieKey.equals(c.getName())) {
-
                 return c.getValue();
             }
         }
