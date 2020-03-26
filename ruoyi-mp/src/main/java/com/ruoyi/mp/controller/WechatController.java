@@ -45,6 +45,13 @@ public class WechatController {
         String callback = request.getParameter("callback");
         //预授权回调地址
         String url = MpAuthConfig.getWxPnCallbackUrl();
+
+
+        if (url.contains("?")) {
+            url += "&callback=" + callback;
+        } else {
+            url += "?callback=" + callback;
+        }
         //执行预授权
         String authorizationUrl = wxMpService.oauth2buildAuthorizationUrl(url, WxConsts.OAuth2Scope.SNSAPI_BASE, callback);
 
@@ -54,7 +61,7 @@ public class WechatController {
     }
 
     @GetMapping("/callback")
-    public String callback(@RequestParam("code") String code, @RequestParam("state") String state) throws WxErrorException {
+    public String callback(@RequestParam("code") String code, @RequestParam("callback") String callback, @RequestParam("state") String state) throws WxErrorException {
         LOGGER.info("code:{},state:{}", code, state);
         WxMpOAuth2AccessToken accessToken = wxMpService.oauth2getAccessToken(code);
         if (accessToken != null) {

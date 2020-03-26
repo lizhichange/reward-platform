@@ -1,6 +1,7 @@
 package com.ruoyi.framework.interceptor;
 
 
+import com.alibaba.dubbo.common.URL;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.ruoyi.common.config.Global;
@@ -23,6 +24,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -37,6 +39,8 @@ import javax.servlet.http.HttpSession;
 
 
 import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.Map;
 
 
 /**
@@ -57,18 +61,23 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         LOGGER.info("====用户进入拦截器===WechatAuthInterceptor===");
 
-        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
-        ServletRequestAttributes my = (ServletRequestAttributes) requestAttributes;
-        HttpServletRequest myRequest = my.getRequest();
-        StringBuffer requestURL = myRequest.getRequestURL();
-        String requestURI = myRequest.getRequestURI();
-        log.info("requestURL:{},requestURI:{}", requestURL,requestURI);
+        HttpServletRequest myRequest = getHttpServletRequest();
+        StringBuffer requestUrl = myRequest.getRequestURL();
+        log.info("requestURL:{}", requestUrl);
 
+        Map<String, String[]> parameterMap = myRequest.getParameterMap();
+        StringBuilder str = new StringBuilder();
+        if (!CollectionUtils.isEmpty(parameterMap)) {
+            for (Map.Entry<String, String[]> entry : parameterMap.entrySet()) {
+                String k = entry.getKey();
+                String[] v = entry.getValue();
+                String param = k + "=" + v[0];
+                str.append(param).append("&");
+            }
+        }
 
+        String referer = requestUrl.toString() + "?" + str;
         HttpSession session = request.getSession();
-        String referer = request.getHeader("referer");
-        session.setAttribute("referer", referer);
-        LOGGER.info("referer:{}", referer);
         //是否mock
         if (Global.isMock()) {
             SessionContext.set(session, "x", "x");
@@ -91,18 +100,29 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
                     return true;
                 }
             }
-
             String wxAuthUrl = Global.getWxAuthUrl();
+            String encode = URL.encode(referer);
+            String callback = AESCoder.encrypt(JSON.toJSONString(referer), AES_KET, "UTF-8");
+            LOGGER.info("callback:{}", callback);
+            //pRTa/LHAlQIxYq2mYSAJWN7BoLXN2B2waTHJaSBHGP1gN0fdvEWVP9h8ZCxB/O9l
+            //pRTa/LHAlQIxYq2mYSAJWN7BoLXN2B2waTHJaSBHGP1gN0fdvEWVP9h8ZCxB/O9l
             if (wxAuthUrl.contains("?")) {
-                wxAuthUrl += "&callback=" + referer;
+                wxAuthUrl += "&callback=" + encode;
             } else {
-                wxAuthUrl += "?callback=" + referer;
+                wxAuthUrl += "?callback=" + encode;
             }
             response.sendRedirect(wxAuthUrl);
             return false;
         } else {
             return super.preHandle(request, response, handler);
         }
+    }
+
+    private HttpServletRequest getHttpServletRequest() {
+        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+        ServletRequestAttributes my = (ServletRequestAttributes) requestAttributes;
+        assert my != null;
+        return my.getRequest();
     }
 
     /**
