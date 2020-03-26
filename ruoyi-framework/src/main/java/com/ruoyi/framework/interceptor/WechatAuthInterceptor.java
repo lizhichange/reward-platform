@@ -103,8 +103,6 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
             }
             String wxAuthUrl = Global.getWxAuthUrl();
             String encode = URIUtil.encodeURIComponent(referer);
-            String callback = AESCoder.encrypt(JSON.toJSONString(referer), AES_KET, "UTF-8");
-            LOGGER.info("callback:{}", callback);
             //pRTa/LHAlQIxYq2mYSAJWN7BoLXN2B2waTHJaSBHGP1gN0fdvEWVP9h8ZCxB/O9l
             //pRTa/LHAlQIxYq2mYSAJWN7BoLXN2B2waTHJaSBHGP1gN0fdvEWVP9h8ZCxB/O9l
             if (wxAuthUrl.contains("?")) {
