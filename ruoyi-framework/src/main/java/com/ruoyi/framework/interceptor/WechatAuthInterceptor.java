@@ -1,8 +1,7 @@
 package com.ruoyi.framework.interceptor;
 
 
-import cn.hutool.crypto.SecureUtil;
-import cn.hutool.crypto.symmetric.DES;
+import cn.hutool.crypto.symmetric.RC4;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.ruoyi.common.config.Global;
@@ -42,6 +41,7 @@ import java.util.Map;
 public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
     private final static Logger LOGGER = LoggerFactory.getLogger(WechatAuthInterceptor.class);
     public final static String COOKIE_KEY = "USER_INFO_KEY";
+    public final static String RC_KET = "U2FsdGVkX1/TjFjEE/3lTCOvPLdrPUkMqYYHWZmteHw=";
 
 
     @Override
@@ -119,17 +119,13 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
         return my.getRequest();
     }
 
-    public static void main(String[] args) {
-        String s = "http://vzfwly.cn/pron/redirect";
-        String doMain = DoMainUtil.getDoMain(s);
-        System.out.println(doMain);
-    }
 
     public static void write(WxMpUser wxMpUser, String cookieName, String domain,
                              HttpServletResponse response) {
         //加密
-        final DES des = SecureUtil.des();
-        String encryptJson = des.encryptHex(JSON.toJSONString(wxMpUser));
+        RC4 rc4 = new RC4(RC_KET);
+        byte[] crypt = rc4.encrypt(JSON.toJSONString(wxMpUser));
+        String encryptJson = new String(crypt);
         Cookie cookie = new Cookie(cookieName, encryptJson);
         cookie.setMaxAge(-1);
         cookie.setDomain(domain);
@@ -138,15 +134,6 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
         response.addCookie(cookie);
     }
 
-
-    public void encryptDecryptTest() {
-        String content = "我是一个测试的test字符串123";
-        final DES des = SecureUtil.des();
-        final String encryptHex = des.encryptHex(content);
-        final String result = des.decryptStr(encryptHex);
-
-
-    }
 
     /**
      * // 执行目标方法之后执行
@@ -191,11 +178,21 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
         for (Cookie c : cookies) {
             if (cookieKey.equals(c.getName())) {
                 //解密
-                final DES des = SecureUtil.des();
-                return des.decryptStr(c.getValue());
+                RC4 rc4 = new RC4(RC_KET);
+                return rc4.decrypt(c.getValue().getBytes());
             }
         }
         return null;
+    }
+
+
+    public static void main(String[] args) {
+        String message = "这是一个中文消息！";
+        String key = RC_KET;
+        RC4 rc4 = new RC4(key);
+        byte[] crypt = rc4.encrypt(message);
+        String msg = rc4.decrypt(crypt);
+        System.out.println(msg);
     }
 
 }
