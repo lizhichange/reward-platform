@@ -1,6 +1,5 @@
 package com.ruoyi.web.controller.common;
 
-import cn.hutool.core.lang.UUID;
 import cn.hutool.core.util.RandomUtil;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
@@ -8,6 +7,7 @@ import com.ruoyi.common.config.Global;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.page.TableDataInfo;
+import com.ruoyi.common.sequence.ConcurrentSequence;
 import com.ruoyi.framework.interceptor.impl.WxPnUserAuth;
 import com.ruoyi.framework.interceptor.util.SessionContext;
 import com.ruoyi.sms.facade.api.IShipinService;
@@ -81,6 +81,9 @@ public class PronController extends BaseController {
 
     }
 
+    @Autowired
+    ConcurrentSequence concurrentSequence;
+
     @PostMapping("/queryOrder")
     @WxPnUserAuth
     @ResponseBody
@@ -95,7 +98,7 @@ public class PronController extends BaseController {
             ShipinDTO dto = shipinService.selectShipinDTOById(shipinDTO.getId().longValue());
             order.setCreateTime(new Date());
             order.setUpdateTime(new Date());
-            order.setOrderId(UUID.randomUUID().toString());
+            order.setOrderId(concurrentSequence.nextId().toString());
             //商品快照信息
             order.setGoodsSnapshot(JSON.toJSONString(dto));
             order.setExtensionUserId(SessionContext.getUserId());

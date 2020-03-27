@@ -135,3 +135,6 @@ management:
       status:
         defaults: memory
         extras: load,threadpool
+
+sequence:
+  workerId: 1
