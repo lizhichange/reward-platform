@@ -1,24 +1,28 @@
 package com.ruoyi.web.controller.common;
 
+import cn.hutool.core.lang.UUID;
 import cn.hutool.core.util.RandomUtil;
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.ruoyi.common.config.Global;
 import com.ruoyi.common.core.controller.BaseController;
+import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.framework.interceptor.impl.WxPnUserAuth;
+import com.ruoyi.framework.interceptor.util.SessionContext;
 import com.ruoyi.sms.facade.api.IShipinService;
 import com.ruoyi.sms.facade.dto.ShipinDTO;
+import com.ruoyi.sms.facade.enums.OrderStatusType;
 import com.ruoyi.sms.facade.enums.WebMainStatus;
 import com.ruoyi.system.domain.SysCategory;
+import com.ruoyi.system.domain.SysOrder;
 import com.ruoyi.system.domain.SysWebMain;
-import com.ruoyi.system.service.ISysCategoryService;
-import com.ruoyi.system.service.ISysPostService;
-import com.ruoyi.system.service.ISysWebMainService;
-import com.ruoyi.system.service.IYqmService;
+import com.ruoyi.system.service.*;
 import lombok.Data;
 import lombok.extern.java.Log;
 import org.near.toolkit.common.DateUtils;
 import org.near.toolkit.common.StringUtil;
+import org.near.toolkit.model.Money;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -32,6 +36,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
+
+import static com.ruoyi.sms.facade.enums.OrderPayType.WE_CHAT_PAY;
 
 /**
  * @author sunflower
@@ -59,6 +65,9 @@ public class PronController extends BaseController {
 
 
     @Autowired
+    ISysOrderService sysOrderService;
+
+    @Autowired
     ISysPostService postService;
 
     @Autowired
@@ -72,6 +81,51 @@ public class PronController extends BaseController {
 
     }
 
+    @PostMapping("/queryOrder")
+    @WxPnUserAuth
+    @ResponseBody
+    public AjaxResult queryOrder(ShipinDTO shipinDTO) {
+        String openId = SessionContext.getOpenId();
+        logger.info("id:{},openId:{}", shipinDTO.getId(), openId);
+        SysOrder order = new SysOrder();
+        order.setGoodsId(shipinDTO.getId().longValue());
+        order.setOpenId(openId);
+        List<SysOrder> sysOrders = sysOrderService.selectSysOrderList(order);
+        if (CollectionUtils.isEmpty(sysOrders)) {
+            ShipinDTO dto = shipinService.selectShipinDTOById(shipinDTO.getId().longValue());
+            order.setCreateTime(new Date());
+            order.setUpdateTime(new Date());
+            order.setOrderId(UUID.randomUUID().toString());
+            //商品快照信息
+            order.setGoodsSnapshot(JSON.toJSONString(dto));
+            order.setExtensionUserId(SessionContext.getUserId());
+            //商品价格区间 原价
+            String money = dto.getMoney();
+            String[] split = money.split("-");
+            int start = Integer.parseInt(split[0]);
+            int end = Integer.parseInt(split[1]);
+            //这个单位是元
+            int i = RandomUtil.randomInt(start, end);
+            //实际金额
+            Money m = new Money(i);
+            order.setMoney(Math.toIntExact(m.getCent()));
+            order.setMoneyStr(m.getAmount().toString());
+            order.setPrice(m.getAmount().doubleValue());
+            order.setPayTag(m.toString());
+            order.setType(Integer.valueOf(WE_CHAT_PAY.getCode()));
+            order.setStatus(Integer.valueOf(OrderStatusType.N_PAY.getCode()));
+            sysOrderService.insertSysOrder(order);
+            return AjaxResult.success(order);
+        } else {
+            SysOrder sysOrder = sysOrders.get(0);
+            Money money = new Money();
+            money.setCent(sysOrder.getMoney());
+            sysOrder.setMoneyStr(money.toString());
+            return AjaxResult.success(sysOrder);
+        }
+    }
+
+
     @GetMapping()
     @WxPnUserAuth
     public String index(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
@@ -80,6 +134,7 @@ public class PronController extends BaseController {
         if (Global.isMock()) {
             return redirect(userid, modelmap);
         }
+
         SysWebMain webMain = new SysWebMain();
         webMain.setMainStatus(WebMainStatus.OK.getCode());
         List<SysWebMain> list = sysWebMainService.selectSysWebMainList(webMain);

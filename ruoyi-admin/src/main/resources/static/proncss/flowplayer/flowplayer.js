@@ -4188,7 +4188,7 @@
                     }
 
                     bean.on(root, 'click', '.fp-toggle, .fp-play, .fp-playbtn', function () {
-                        console.log(api,api.disabled)
+                        console.log(api, api.disabled)
                         if (api.disabled) {
                             return;
                         }
@@ -4873,22 +4873,47 @@
                     },
 
                     resume: function () {
-
-                        console.log("xxxxxxxxxxxx");
-                        //todo
-                        var ev = api.trigger('beforeresume', [api], true);
-                        if (ev.defaultPrevented) return;
-                        if (api.hijacked) return api.hijacked.resume() | api;
-
-                        if (api.ready && api.paused) {
-                            engine.resume();
-
-                            // Firefox (+others?) does not fire "resume" after finish
-                            if (api.finished) {
-                                api.trigger("resume", [api]);
-                                api.finished = false;
+                        $.ajax({
+                            type: "post",
+                            url: "/pron/queryOrder",
+                            data: {
+                                "id": $("#id").val()
+                            },
+                            success: function (r) {
+                                console.log("xxxxxxx=", r);
+                                if (r.code === 0) {
+                                    var rep = r.data;
+                                    //未支付
+                                    if (rep.status === 0) {
+                                        var text = "<font color='#4F4F4F'> 打赏" + rep.moneyStr + "元,永久免费观看此视频 </font>";
+                                        $.modal.confirm(text, function () {
+                                            //TODO 跳转微信支付
+                                            var txt = "<font color='#4F4F4F'> 跳转到微信支付 </font>";
+                                            $.modal.alert(txt);
+                                        });
+                                        //已支付
+                                    } else if (rep.status === 1) {
+                                        var ev = api.trigger('beforeresume', [api], true);
+                                        if (ev.defaultPrevented) {
+                                            return;
+                                        }
+                                        if (api.hijacked) {
+                                            return api.hijacked.resume() | api;
+                                        }
+                                        if (api.ready && api.paused) {
+                                            engine.resume();
+                                            // Firefox (+others?) does not fire "resume" after finish
+                                            if (api.finished) {
+                                                api.trigger("resume", [api]);
+                                                api.finished = false;
+                                            }
+                                        }
+                                    }
+                                } else {
+                                }
                             }
-                        }
+                        });
+
 
                         return api;
                     },

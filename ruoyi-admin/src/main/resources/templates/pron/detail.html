@@ -217,6 +217,8 @@
             </div>
             <input type="hidden" th:value="${shipin.zykey}" id="src"/>
             <input type="hidden" th:value="${shipin.url}" id="poster"/>
+            <input type="hidden" th:value="${shipin.id}" id="id"/>
+
             <script>
                 $(function () {
                     let src = $('#src').val();
@@ -239,7 +241,7 @@
                         let type = e.type;
 
                         if (type === 'ready') {
-                            console.log(api);
+
                         }
 
                         if (type === 'resume') {
