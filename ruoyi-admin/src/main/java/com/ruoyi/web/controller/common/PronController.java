@@ -2,8 +2,6 @@ package com.ruoyi.web.controller.common;
 
 import cn.hutool.core.util.RandomUtil;
 import com.alibaba.fastjson.JSON;
-import com.github.binarywang.wxpay.bean.request.WxPayUnifiedOrderRequest;
-import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.pagehelper.PageHelper;
 import com.ruoyi.common.config.Global;
 import com.ruoyi.common.core.controller.BaseController;
@@ -20,7 +18,6 @@ import com.ruoyi.system.domain.SysCategory;
 import com.ruoyi.system.domain.SysOrder;
 import com.ruoyi.system.domain.SysWebMain;
 import com.ruoyi.system.service.*;
-import io.swagger.annotations.ApiOperation;
 import lombok.Data;
 import lombok.extern.java.Log;
 import org.near.toolkit.common.DateUtils;
@@ -171,9 +168,9 @@ public class PronController extends BaseController {
     }
 
 
-    @GetMapping("/detail/{id}/{userid}")
+    @GetMapping("/detail")
     @WxPnUserAuth
-    public String detail(@PathVariable("id") Long id, @PathVariable("userid") String userid, ModelMap modelmap) {
+    public String detail(@RequestParam(value = "id", required = true) Long id, @RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
         logger.info("user:{},id:{}", userid, id);
         ShipinDTO shipin = shipinService.selectShipinDTOById(id);
         if (shipin != null) {
@@ -185,9 +182,7 @@ public class PronController extends BaseController {
             }
             //异步执行浏览加1
             threadPoolTaskExecutor.execute(() -> shipinService.updateClickPlus(shipin.getId().longValue()));
-
         }
-
 
         PageHelper.startPage(1, 12, StringUtil.EMPTY_STRING);
         List<ShipinDTO> list = shipinService.selectShipinDTOList(new ShipinDTO());
