@@ -14,7 +14,11 @@
     <link th:href="@{/proncss/detail/all-responsive-metal.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/proncss/jquery.fancybox-metal.css}" rel="stylesheet" type="text/css">
     <script async="" th:src="@{/proncss/analytics.js}"></script>
-
+    <script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script th:src="@{/ajax/libs/blockUI/jquery.blockUI.js}"></script>
+    <script th:src="@{/ajax/libs/validate/jquery.validate.min.js}"></script>
+    <script th:src="@{/ruoyi/js/ry-ui.js?v=4.0.0}"></script>
 
     <style type="text/css">
 
@@ -506,6 +510,21 @@
         @media screen and (max-height: 700px) and (max-width: 400px) {
 
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </style>
     <style type="text/css">
 
@@ -523,6 +542,21 @@
             position: absolute;
             width: 1px
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     </style>
 </head>
@@ -548,6 +582,21 @@
         bottom: 0;
         font-size: 15px;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </style>
 
 <div class="top-links">
@@ -582,16 +631,14 @@
         </div>
 
         <div class="search">
-            <form id="search_form" action="http://www.xiaobi017.com/search/" method="get"
-                  data-url="http://www.xiaobi017.com/search/%QUERY%/">
-                <span class="search-button">搜索</span>
-                <div class="search-text"><input type="text" name="q" placeholder="请输入搜索关键词,至少两个字符" value=""></div>
+            <form id="user-form">
+                <span id="search" class="search-button">搜索</span>
+                <div class="search-text"><input type="text" name="name" placeholder="请输入搜索关键词,至少两个字符" value=""></div>
             </form>
         </div>
 
     </div>
 
-    <script th:src="@{/proncss/jquery-3.2.1.min.js}"></script>
     <script type="text/javascript" th:src="@{/proncss/pagination.min.js}"></script>
     <script th:src="@{/proncss/layer.js}"></script>
 
@@ -684,8 +731,9 @@
 
 <script th:src="@{/proncss/stickUp.min.js}"></script>
 <script type="text/javascript">
-    //initiating jQuery
-    jQuery(function ($) {
+
+
+
         $(document).ready(function () {
             //enabling stickUp on the '.fixed666' class
             $('.fixed666').stickUp();
@@ -752,7 +800,48 @@
             }
         });
 
+$("#search").click(function(){
+  $.modal.loading("");
+    var name = $("input[name='name']").val();
+        $.ajax({
+        dataType: 'json',
+        type: 'post',
+        url: '/pron/list',
+        data: {
+            "name": name,
+             "pageNum": 1 ,
+             "pageSize":  100
+        },
+        success: function (res) {
+          $.modal.closeLoading();
+             if (res && res.code === 0) {
+
+
+
+            } else {
+                $.modal.closeLoading();
+
+                $.modal.msg(r.msg);
+            }
+        }
     });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </script>
 </body>
