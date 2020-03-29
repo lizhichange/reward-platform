@@ -24,25 +24,29 @@ public class WxPayConfiguration {
 
     @Bean
     public WxPayService wxPayService() {
-        WxPayProperties properties = new WxPayProperties();
-        SysWechatConfigDTO weChatConfig = configFactory.getSysWechatConfig();
-        properties.setAppId(weChatConfig.getAppId());
-        properties.setMchId(weChatConfig.getMchId());
-        properties.setMchKey("");
-        properties.setKeyPath(weChatConfig.getCertFile());
-
-
-        WxPayConfig payConfig = new WxPayConfig();
-        payConfig.setAppId(StringUtils.trimToNull(properties.getAppId()));
-        payConfig.setMchId(StringUtils.trimToNull(properties.getMchId()));
-        payConfig.setMchKey(StringUtils.trimToNull(properties.getMchKey()));
-        payConfig.setKeyPath(StringUtils.trimToNull(properties.getKeyPath()));
-
-        // 可以指定是否使用沙箱环境
-        payConfig.setUseSandboxEnv(false);
-
         WxPayService wxPayService = new WxPayServiceImpl();
-        wxPayService.setConfig(payConfig);
+        try {
+
+            WxPayProperties properties = new WxPayProperties();
+            SysWechatConfigDTO weChatConfig = configFactory.getSysWechatConfig();
+            properties.setAppId(weChatConfig.getAppId());
+            properties.setMchId(weChatConfig.getMchId());
+            properties.setMchKey("");
+            properties.setKeyPath(weChatConfig.getCertFile());
+
+
+            WxPayConfig payConfig = new WxPayConfig();
+            payConfig.setAppId(StringUtils.trimToNull(properties.getAppId()));
+            payConfig.setMchId(StringUtils.trimToNull(properties.getMchId()));
+            payConfig.setMchKey(StringUtils.trimToNull(properties.getMchKey()));
+            payConfig.setKeyPath(StringUtils.trimToNull(properties.getKeyPath()));
+            // 可以指定是否使用沙箱环境
+            payConfig.setUseSandboxEnv(false);
+            wxPayService.setConfig(payConfig);
+        } catch (Exception e) {
+
+        }
+
         return wxPayService;
     }
 
