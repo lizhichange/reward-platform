@@ -4809,8 +4809,9 @@
                         console.log.apply(console, ['DEBUG'].concat([].slice.call(arguments)));
                     },
                     load: function (video, callback) {
+                        console.log("load-xxxxxxxxxxxxxx");
+                        if (api.error || api.loading) {return;}
 
-                        if (api.error || api.loading) return;
                         api.video = {};
 
                         api.finished = false;
