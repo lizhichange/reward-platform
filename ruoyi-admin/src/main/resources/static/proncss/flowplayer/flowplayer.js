@@ -4891,6 +4891,7 @@
                                             var txt = "<font color='#4F4F4F'> 跳转到微信支付 </font>";
                                             $.modal.alert(txt);
                                         });
+                                           return null;
                                         //已支付
                                     } else if (rep.status === 1) {
                                         var ev = api.trigger('beforeresume', [api], true);
@@ -4908,6 +4909,7 @@
                                                 api.finished = false;
                                             }
                                         }
+                                        return api;
                                     }
                                 } else {
                                 }
@@ -4915,7 +4917,7 @@
                         });
 
 
-                        return api;
+                        return null;
                     },
 
                     toggle: function () {
