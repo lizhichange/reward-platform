@@ -198,6 +198,7 @@
 
 
 
+
                 </style>
             </div>
 
@@ -209,9 +210,6 @@
                 window.addEventListener('resize', function () {
                     document.getElementById('mse').style.height = window.innerHeight + 'px';
                 });
-
-
-
             </script>
             <div id="mse"></div>
             <!--            <script th:src="@{/proncss/xgplayer/browser/index.js}" charset="utf-8"></script>-->
@@ -225,7 +223,7 @@
                     "url": document.getElementById('src').value,
                     "volume": 0.3,
                     "fluid": true,
-                    "poster": "//s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/poster.jpg",
+                    "poster":document.getElementById('poster').value, ,
                     "playsinline": true,
                     "closeVideoTouch": true,
                     "closeVideoDblclick": true,
@@ -233,6 +231,7 @@
                     "whitelist": [''],
                     "videoInit": true,
                 });
+
 
             </script>
 
