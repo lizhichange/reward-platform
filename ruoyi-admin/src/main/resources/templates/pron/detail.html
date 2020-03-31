@@ -13,13 +13,11 @@
     <meta name="keywords" content=""/>
     <meta name="generator" content=""/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- player skin -->
+
     <link rel="stylesheet" th:href="@{/proncss/skin/skin.css}">
     <link th:href="@{/proncss/detail/all-responsive-metal.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{/proncss/detail/jquery.fancybox-metal.css}" rel="stylesheet" type="text/css"/>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
-    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
-    <script th:src="@{/ruoyi/js/ry-ui.js?v=4.0.0}"></script>
 
 
 </head>
@@ -199,6 +197,7 @@
                     }
 
 
+
                 </style>
             </div>
 
@@ -212,6 +211,7 @@
                 });
 
 
+
             </script>
             <div id="mse"></div>
             <!--            <script th:src="@{/proncss/xgplayer/browser/index.js}" charset="utf-8"></script>-->
@@ -222,7 +222,7 @@
                 let player = new Player({
                     "id": 'mse',
                     "autoplay": false,
-                    "url": $("#src").val(),
+                    "url": document.getElementById('src').value,
                     "volume": 0.3,
                     "fluid": true,
                     "poster": "//s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/poster.jpg",
@@ -233,6 +233,7 @@
                     "whitelist": [''],
                     "videoInit": true,
                 });
+
             </script>
 
 
