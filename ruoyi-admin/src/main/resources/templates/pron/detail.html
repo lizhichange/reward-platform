@@ -198,7 +198,6 @@
 
 
 
-
                 </style>
             </div>
 
@@ -210,6 +209,8 @@
                 window.addEventListener('resize', function () {
                     document.getElementById('mse').style.height = window.innerHeight + 'px';
                 });
+
+
             </script>
             <div id="mse"></div>
             <!--            <script th:src="@{/proncss/xgplayer/browser/index.js}" charset="utf-8"></script>-->
@@ -219,18 +220,25 @@
             <script type="text/javascript">
                 let player = new Player({
                     "id": 'mse',
-                    "autoplay": false,
+                     autoplay: false,
                     "url": document.getElementById('src').value,
                     "volume": 0.3,
                     "fluid": true,
-                    "poster":document.getElementById('poster').value,
+                    "preloadTime": 15, // 默认预加载 15 秒
+                    "poster": document.getElementById('poster').value,
                     "playsinline": true,
                     "closeVideoTouch": true,
                     "closeVideoDblclick": true,
                     "closeVideoClick": true,
                     "whitelist": [''],
                     "videoInit": true,
+                    keyShortcut: 'on',
+                    execBeforePluginsCall: [() => {
+                        console.log('Execute before plugins call')
+                    }]
+
                 });
+
 
 
             </script>
