@@ -14,7 +14,6 @@ public enum OrderPayType implements BaseEnum {
      * 支付方式
      */
     WE_CHAT_PAY("1", "微信支付"),
-    N("0", "未使用"),
     ;
 
     String code;

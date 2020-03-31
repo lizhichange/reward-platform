@@ -17,9 +17,9 @@
 
                             <li>
                                 <label>支付方式：</label>
-                                <select name="type" th:with="type=${@dict.getType('')}">
+                                <select name="type">
                                     <option value="">所有</option>
-                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                    <option th:each="dict : ${types}" th:text="${dict.code}" th:value="${dict.desc}"></option>
                                 </select>
                             </li>
                             <li>
@@ -31,6 +31,7 @@
                                 <label>订单状态：</label>
                                 <select name="status">
                                     <option value="">所有</option>
+                                    <option th:each="dict : ${status}" th:text="${dict.code}" th:value="${dict.desc}"></option>
                                 </select>
                             </li>
                             <li>

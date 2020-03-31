@@ -1,14 +1,19 @@
 package com.ruoyi.web.controller.system;
 
+import com.google.common.collect.Lists;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
+import com.ruoyi.sms.facade.enums.OrderPayType;
+import com.ruoyi.sms.facade.enums.OrderStatusType;
 import com.ruoyi.system.domain.SysOrder;
 import com.ruoyi.system.service.ISysOrderService;
+import lombok.Data;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.near.toolkit.model.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -32,8 +37,36 @@ public class SysOrderController extends BaseController {
 
     @RequiresPermissions("system:sysOrder:view")
     @GetMapping()
-    public String sysOrder() {
+    public String sysOrder(ModelMap modelMap) {
+
+
+        OrderPayType[] values = OrderPayType.values();
+        List<SelectOption> types = Lists.newArrayList();
+        for (OrderPayType value : values) {
+            SelectOption option = new SelectOption();
+            option.setCode(value.getCode());
+            option.setDesc(value.getDesc());
+            types.add(option);
+        }
+        modelMap.addAttribute("types", types);
+
+        OrderStatusType[] status = OrderStatusType.values();
+        List<SelectOption> statusList = Lists.newArrayList();
+        for (OrderStatusType value : status) {
+            SelectOption option = new SelectOption();
+            option.setCode(value.getCode());
+            option.setDesc(value.getDesc());
+            statusList.add(option);
+        }
+        modelMap.addAttribute("status", statusList);
         return prefix + "/sysOrder";
+    }
+
+
+    @Data
+    static class SelectOption extends ToString {
+        private String code;
+        private String desc;
     }
 
     /**
