@@ -1,9 +1,13 @@
 package com.ruoyi.system.domain;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
+import com.ruoyi.sms.facade.enums.OrderPayType;
+import com.ruoyi.sms.facade.enums.OrderStatusType;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+import org.near.toolkit.common.EnumUtil;
+import org.near.toolkit.model.Money;
 
 import java.util.Date;
 
@@ -240,7 +244,11 @@ public class SysOrder extends BaseEntity {
     }
 
     public String getMoneyStr() {
-        return moneyStr;
+
+        Money m = new Money();
+        m.setCent(this.money);
+        return moneyStr = m.toString();
+
     }
 
     public void setMoneyStr(String moneyStr) {
@@ -248,7 +256,7 @@ public class SysOrder extends BaseEntity {
     }
 
     public String getTypeStr() {
-        return typeStr;
+        return typeStr = EnumUtil.queryByCode(this.type.toString(), OrderPayType.class).getDesc();
     }
 
     public void setTypeStr(String typeStr) {
@@ -256,6 +264,7 @@ public class SysOrder extends BaseEntity {
     }
 
     public String getStatusStr() {
+        statusStr = EnumUtil.queryByCode(this.status.toString(), OrderStatusType.class).getDesc();
         return statusStr;
     }
 
