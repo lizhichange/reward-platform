@@ -198,6 +198,7 @@
                     @media screen and (max-width: 860px) {
                     }
 
+
                 </style>
             </div>
 
@@ -209,28 +210,28 @@
                 window.addEventListener('resize', function () {
                     document.getElementById('mse').style.height = window.innerHeight + 'px';
                 });
+
+
             </script>
             <div id="mse"></div>
+            <!--            <script th:src="@{/proncss/xgplayer/browser/index.js}" charset="utf-8"></script>-->
+            <!--            <script th:src="@{/proncss/xgplayer-mp4/browser/index.js}" charset="utf-8"></script>-->
             <script src="//cdn.jsdelivr.net/npm/xgplayer/browser/index.js" charset="utf-8"></script>
             <script src="//cdn.jsdelivr.net/npm/xgplayer-mp4/browser/index.js" charset="utf-8"></script>
             <script type="text/javascript">
                 let player = new Player({
-                    id: 'mse',
-                    autoplay: false,
-                    "closeVideoClick": true,
+                    "id": 'mse',
+                    "autoplay": false,
+                    "url": $("#src").val(),
+                    "volume": 0.3,
                     "fluid": true,
-                    volume: 0.3,
-                    url: $("#src").val(),
-                    poster: "//s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/poster.jpg",
-                    playsinline: true,
+                    "poster": "//s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/poster.jpg",
+                    "playsinline": true,
                     "closeVideoTouch": true,
                     "closeVideoDblclick": true,
-                    whitelist: [''],
+                    "closeVideoClick": true,
+                    "whitelist": [''],
                     "videoInit": true,
-                });
-
-                player.emit('play', function () {
-                    console.log(11);
                 });
             </script>
 
