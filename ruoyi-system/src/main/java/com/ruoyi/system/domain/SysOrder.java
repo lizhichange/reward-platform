@@ -37,12 +37,15 @@ public class SysOrder extends BaseEntity {
     @Excel(name = "实际金额")
     private Integer money;
 
+
     private String moneyStr;
     /**
      * 原价
      */
     @Excel(name = "原价")
     private Integer price;
+
+    private String priceStr;
 
     /**
      * 支付方式
@@ -275,5 +278,15 @@ public class SysOrder extends BaseEntity {
 
     public void setStatusStr(String statusStr) {
         this.statusStr = statusStr;
+    }
+
+    public String getPriceStr() {
+        Money m = new Money();
+        m.setCent(this.price == null ? 0 : this.price);
+        return priceStr = m.toString();
+    }
+
+    public void setPriceStr(String priceStr) {
+        this.priceStr = priceStr;
     }
 }
