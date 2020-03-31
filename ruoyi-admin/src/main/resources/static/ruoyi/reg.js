@@ -31,7 +31,7 @@ function reg() {
         success: function (r) {
             if (r.code === 0) {
                 $.modal.msg('注册成功');
-                location.href = ctx + 'index';
+                location.href = ctx + 'webLogin';
             } else {
                 $.modal.closeLoading();
                 $.modal.msg(r.msg);
