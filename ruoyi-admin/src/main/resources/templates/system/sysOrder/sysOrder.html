@@ -14,14 +14,7 @@
                                 <label>订单ID：</label>
                                 <input type="text" name="orderId"/>
                             </li>
-                            <li>
-                                <label>实际金额：</label>
-                                <input type="text" name="money"/>
-                            </li>
-                            <li>
-                                <label>原价：</label>
-                                <input type="text" name="price"/>
-                            </li>
+
                             <li>
                                 <label>支付方式：</label>
                                 <select name="type" th:with="type=${@dict.getType('')}">
@@ -33,18 +26,7 @@
                                 <label>流水号：</label>
                                 <input type="text" name="payNo"/>
                             </li>
-                            <li>
-                                <label>自定义参数：</label>
-                                <input type="text" name="param"/>
-                            </li>
-                            <li>
-                                <label>付款时间：</label>
-                                <input type="text" name="payTime"/>
-                            </li>
-                            <li>
-                                <label>金额的备注：</label>
-                                <input type="text" name="payTag"/>
-                            </li>
+
                             <li>
                                 <label>订单状态：</label>
                                 <select name="status">
@@ -54,14 +36,6 @@
                             <li>
                                 <label>商品信息：</label>
                                 <input type="text" name="goodsId"/>
-                            </li>
-                            <li>
-                                <label>商品快照：</label>
-                                <input type="text" name="goodsSnapshot"/>
-                            </li>
-                            <li>
-                                <label>用户的openId：</label>
-                                <input type="text" name="openId"/>
                             </li>
                             <li>
                                 <label>推广人的id：</label>
