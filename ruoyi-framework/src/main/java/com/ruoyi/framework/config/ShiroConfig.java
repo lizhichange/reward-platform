@@ -13,6 +13,7 @@ import com.ruoyi.framework.shiro.web.filter.online.OnlineSessionFilter;
 import com.ruoyi.framework.shiro.web.filter.sync.SyncOnlineSessionFilter;
 import com.ruoyi.framework.shiro.web.session.OnlineWebSessionManager;
 import com.ruoyi.framework.shiro.web.session.SpringSessionValidationScheduler;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.codec.Base64;
@@ -42,6 +43,7 @@ import java.util.Map;
  * @author ruoyi
  */
 @Configuration
+@Slf4j
 public class ShiroConfig {
     public static final String PREMISSION_STRING = "perms[\"{0}\"]";
 
@@ -205,6 +207,7 @@ public class ShiroConfig {
         LogoutFilter logoutFilter = new LogoutFilter();
         logoutFilter.setCacheManager(getEhCacheManager());
         logoutFilter.setLoginUrl(loginUrl);
+        log.info("logoutFilter.loginUrl:{}", loginUrl);
         return logoutFilter;
     }
 
@@ -218,6 +221,7 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         // 身份认证失败，则跳转到登录页面的配置
         shiroFilterFactoryBean.setLoginUrl(loginUrl);
+        log.info("shiroFilterFactoryBean.loginUrl:{}", loginUrl);
         // 权限认证失败，则跳转到指定页面
         shiroFilterFactoryBean.setUnauthorizedUrl(unauthorizedUrl);
         // Shiro连接约束配置，即过滤链的定义
@@ -270,6 +274,7 @@ public class ShiroConfig {
     public OnlineSessionFilter onlineSessionFilter() {
         OnlineSessionFilter onlineSessionFilter = new OnlineSessionFilter();
         onlineSessionFilter.setLoginUrl(loginUrl);
+        log.info("onlineSessionFilter.loginUrl:{}", loginUrl);
         return onlineSessionFilter;
     }
 

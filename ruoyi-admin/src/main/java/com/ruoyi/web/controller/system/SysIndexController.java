@@ -32,7 +32,10 @@ public class SysIndexController extends BaseController {
     @Autowired
     ISysShortService sysShortService;
 
-    // 系统首页
+    /**
+     * 系统首页
+     */
+
     @GetMapping("/index")
     public String index(ModelMap mmap) {
         // 取身份信息
@@ -45,7 +48,6 @@ public class SysIndexController extends BaseController {
         mmap.put("skinName", configService.selectConfigByKey("sys.index.skinName"));
         mmap.put("copyrightYear", Global.getCopyrightYear());
         mmap.put("demoEnabled", Global.isDemoEnabled());
-
         return "index";
     }
 

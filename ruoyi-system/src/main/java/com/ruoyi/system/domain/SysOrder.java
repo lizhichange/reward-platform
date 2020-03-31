@@ -5,218 +5,238 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
 
+import java.util.Date;
+
 /**
  * 订单列表对象 sys_order
- * 
+ *
  * @author ruoyi
  * @date 2020-03-26
  */
-public class SysOrder extends BaseEntity
-{
+public class SysOrder extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
-    /** null */
+    /**
+     * null
+     */
     private Long id;
 
-    /** 订单ID */
+    /**
+     * 订单ID
+     */
     @Excel(name = "订单ID")
     private String orderId;
 
-    /** 实际金额 */
+    /**
+     * 实际金额
+     */
     @Excel(name = "实际金额")
     private Integer money;
-     private String moneyStr;
-    /** 原价 */
-    @Excel(name = "原价")
-    private Double price;
 
-    /** 支付方式 */
+    private String moneyStr;
+    /**
+     * 原价
+     */
+    @Excel(name = "原价")
+    private Integer price;
+
+    /**
+     * 支付方式
+     */
     @Excel(name = "支付方式")
     private Integer type;
 
-    /** 流水号 */
+    @Excel(name = "支付方式描述")
+    private String typeStr;
+
+    /**
+     * 流水号
+     */
     @Excel(name = "流水号")
     private String payNo;
 
-    /** 自定义参数 */
+    /**
+     * 自定义参数
+     */
     @Excel(name = "自定义参数")
     private String param;
 
-    /** 付款时间 */
+    /**
+     * 付款时间
+     */
     @Excel(name = "付款时间")
-    private Long payTime;
+    private Date payTime;
 
-    /** 金额的备注 */
+    /**
+     * 金额的备注
+     */
     @Excel(name = "金额的备注")
     private String payTag;
 
-    /** 订单状态 */
+    /**
+     * 订单状态
+     */
     @Excel(name = "订单状态")
     private Integer status;
 
-    /** 商品信息 */
+
+    private String statusStr;
+    /**
+     * 商品信息
+     */
     @Excel(name = "商品信息")
     private Long goodsId;
 
-    /** 商品快照 */
+    /**
+     * 商品快照
+     */
     @Excel(name = "商品快照")
     private String goodsSnapshot;
 
-    /** 用户的openId */
+    /**
+     * 用户的openId
+     */
     @Excel(name = "用户的openId")
     private String openId;
 
-    /** 推广人的id */
+    /**
+     * 推广人的id
+     */
     @Excel(name = "推广人的id")
     private String extensionUserId;
 
-    public void setId(Long id) 
-    {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Long getId() 
-    {
+    public Long getId() {
         return id;
     }
-    public void setOrderId(String orderId) 
-    {
+
+    public void setOrderId(String orderId) {
         this.orderId = orderId;
     }
 
-    public String getOrderId() 
-    {
+    public String getOrderId() {
         return orderId;
     }
-    public void setMoney(Integer money) 
-    {
+
+    public void setMoney(Integer money) {
         this.money = money;
     }
 
-    public Integer getMoney() 
-    {
+    public Integer getMoney() {
         return money;
     }
-    public void setPrice(Double price) 
-    {
+
+    public void setPrice(Integer price) {
         this.price = price;
     }
 
-    public Double getPrice() 
-    {
+    public Integer getPrice() {
         return price;
     }
-    public void setType(Integer type) 
-    {
+
+    public void setType(Integer type) {
         this.type = type;
     }
 
-    public Integer getType() 
-    {
+    public Integer getType() {
         return type;
     }
-    public void setPayNo(String payNo) 
-    {
+
+    public void setPayNo(String payNo) {
         this.payNo = payNo;
     }
 
-    public String getPayNo() 
-    {
+    public String getPayNo() {
         return payNo;
     }
-    public void setParam(String param) 
-    {
+
+    public void setParam(String param) {
         this.param = param;
     }
 
-    public String getParam() 
-    {
+    public String getParam() {
         return param;
     }
-    public void setPayTime(Long payTime) 
-    {
+
+    public void setPayTime(Date payTime) {
         this.payTime = payTime;
     }
 
-    public Long getPayTime() 
-    {
+    public Date getPayTime() {
         return payTime;
     }
-    public void setPayTag(String payTag) 
-    {
+
+    public void setPayTag(String payTag) {
         this.payTag = payTag;
     }
 
-    public String getPayTag() 
-    {
+    public String getPayTag() {
         return payTag;
     }
-    public void setStatus(Integer status) 
-    {
+
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
-    public Integer getStatus() 
-    {
+    public Integer getStatus() {
         return status;
     }
-    public void setGoodsId(Long goodsId) 
-    {
+
+    public void setGoodsId(Long goodsId) {
         this.goodsId = goodsId;
     }
 
-    public Long getGoodsId() 
-    {
+    public Long getGoodsId() {
         return goodsId;
     }
-    public void setGoodsSnapshot(String goodsSnapshot) 
-    {
+
+    public void setGoodsSnapshot(String goodsSnapshot) {
         this.goodsSnapshot = goodsSnapshot;
     }
 
-    public String getGoodsSnapshot() 
-    {
+    public String getGoodsSnapshot() {
         return goodsSnapshot;
     }
-    public void setOpenId(String openId) 
-    {
+
+    public void setOpenId(String openId) {
         this.openId = openId;
     }
 
-    public String getOpenId() 
-    {
+    public String getOpenId() {
         return openId;
     }
-    public void setExtensionUserId(String extensionUserId) 
-    {
+
+    public void setExtensionUserId(String extensionUserId) {
         this.extensionUserId = extensionUserId;
     }
 
-    public String getExtensionUserId() 
-    {
+    public String getExtensionUserId() {
         return extensionUserId;
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("id", getId())
-            .append("orderId", getOrderId())
-            .append("money", getMoney())
-            .append("price", getPrice())
-            .append("type", getType())
-            .append("payNo", getPayNo())
-            .append("param", getParam())
-            .append("payTime", getPayTime())
-            .append("payTag", getPayTag())
-            .append("status", getStatus())
-            .append("createTime", getCreateTime())
-            .append("updateTime", getUpdateTime())
-            .append("goodsId", getGoodsId())
-            .append("goodsSnapshot", getGoodsSnapshot())
-            .append("openId", getOpenId())
-            .append("extensionUserId", getExtensionUserId())
-            .toString();
+        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
+                .append("id", getId())
+                .append("orderId", getOrderId())
+                .append("money", getMoney())
+                .append("price", getPrice())
+                .append("type", getType())
+                .append("payNo", getPayNo())
+                .append("param", getParam())
+                .append("payTime", getPayTime())
+                .append("payTag", getPayTag())
+                .append("status", getStatus())
+                .append("createTime", getCreateTime())
+                .append("updateTime", getUpdateTime())
+                .append("goodsId", getGoodsId())
+                .append("goodsSnapshot", getGoodsSnapshot())
+                .append("openId", getOpenId())
+                .append("extensionUserId", getExtensionUserId())
+                .toString();
     }
 
     public String getMoneyStr() {
@@ -225,5 +245,21 @@ public class SysOrder extends BaseEntity
 
     public void setMoneyStr(String moneyStr) {
         this.moneyStr = moneyStr;
+    }
+
+    public String getTypeStr() {
+        return typeStr;
+    }
+
+    public void setTypeStr(String typeStr) {
+        this.typeStr = typeStr;
+    }
+
+    public String getStatusStr() {
+        return statusStr;
+    }
+
+    public void setStatusStr(String statusStr) {
+        this.statusStr = statusStr;
     }
 }

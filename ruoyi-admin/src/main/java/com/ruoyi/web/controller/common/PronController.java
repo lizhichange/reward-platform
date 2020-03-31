@@ -12,6 +12,7 @@ import com.ruoyi.framework.interceptor.impl.WxPnUserAuth;
 import com.ruoyi.framework.interceptor.util.SessionContext;
 import com.ruoyi.sms.facade.api.IShipinService;
 import com.ruoyi.sms.facade.dto.ShipinDTO;
+import com.ruoyi.sms.facade.enums.OrderPayType;
 import com.ruoyi.sms.facade.enums.OrderStatusType;
 import com.ruoyi.sms.facade.enums.WebMainStatus;
 import com.ruoyi.system.domain.SysCategory;
@@ -21,6 +22,7 @@ import com.ruoyi.system.service.*;
 import lombok.Data;
 import lombok.extern.java.Log;
 import org.near.toolkit.common.DateUtils;
+import org.near.toolkit.common.EnumUtil;
 import org.near.toolkit.common.StringUtil;
 import org.near.toolkit.model.Money;
 import org.slf4j.Logger;
@@ -110,14 +112,20 @@ public class PronController extends BaseController {
             int end = Integer.parseInt(split[1]);
             //这个单位是元
             int i = RandomUtil.randomInt(start, end);
-            //实际金额
+            //实际金额 转换单位分
+
             Money m = new Money(i);
             order.setMoney(Math.toIntExact(m.getCent()));
             order.setMoneyStr(m.getAmount().toString());
-            order.setPrice(m.getAmount().doubleValue());
+            //原价 转换单位分
+            order.setPrice(Math.toIntExact(m.getCent()));
+            //备注
             order.setPayTag(m.toString());
+
             order.setType(Integer.valueOf(WE_CHAT_PAY.getCode()));
+            order.setTypeStr(WE_CHAT_PAY.getDesc());
             order.setStatus(Integer.valueOf(OrderStatusType.N_PAY.getCode()));
+            order.setStatusStr(OrderStatusType.N_PAY.getDesc());
             sysOrderService.insertSysOrder(order);
             return AjaxResult.success(order);
         } else {
@@ -125,6 +133,8 @@ public class PronController extends BaseController {
             Money money = new Money();
             money.setCent(sysOrder.getMoney());
             sysOrder.setMoneyStr(money.toString());
+            sysOrder.setTypeStr(EnumUtil.queryByCode(sysOrder.getType().toString(), OrderPayType.class).getDesc());
+            sysOrder.setStatusStr(EnumUtil.queryByCode(sysOrder.getStatus().toString(), OrderStatusType.class).getDesc());
             return AjaxResult.success(sysOrder);
         }
     }
@@ -234,7 +244,7 @@ public class PronController extends BaseController {
     private void convert(Date now, ShipinDTO dto) {
         Date createTime = dto.getCreateTime();
         if (createTime != null) {
-            long diffDays = DateUtils.getDiffDays(createTime, now);
+            long diffDays = DateUtils.getDiffDays(now, createTime);
             if (diffDays < 1) {
                 dto.setDiffDays("刚刚");
             } else {

@@ -1,56 +1,58 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.system.mapper.SysOrderMapper">
-    
+
     <resultMap type="SysOrder" id="SysOrderResult">
-        <result property="id"    column="id"    />
-        <result property="orderId"    column="order_id"    />
-        <result property="money"    column="money"    />
-        <result property="price"    column="price"    />
-        <result property="type"    column="type"    />
-        <result property="payNo"    column="pay_no"    />
-        <result property="param"    column="param"    />
-        <result property="payTime"    column="pay_time"    />
-        <result property="payTag"    column="pay_tag"    />
-        <result property="status"    column="status"    />
-        <result property="createTime"    column="create_time"    />
-        <result property="updateTime"    column="update_time"    />
-        <result property="goodsId"    column="goods_id"    />
-        <result property="goodsSnapshot"    column="goods_snapshot"    />
-        <result property="openId"    column="open_id"    />
-        <result property="extensionUserId"    column="extension_user_id"    />
+        <result property="id" column="id"/>
+        <result property="orderId" column="order_id"/>
+        <result property="money" column="money"/>
+        <result property="price" column="price"/>
+        <result property="type" column="type"/>
+        <result property="payNo" column="pay_no"/>
+        <result property="param" column="param"/>
+        <result property="payTime" column="pay_time"/>
+        <result property="payTag" column="pay_tag"/>
+        <result property="status" column="status"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="goodsId" column="goods_id"/>
+        <result property="goodsSnapshot" column="goods_snapshot"/>
+        <result property="openId" column="open_id"/>
+        <result property="extensionUserId" column="extension_user_id"/>
     </resultMap>
 
     <sql id="selectSysOrderVo">
-        select id, order_id, money, price, type, pay_no, param, pay_time, pay_tag, status, create_time, update_time, goods_id, goods_snapshot, open_id, extension_user_id from sys_order
+        select id, order_id, money, price, type, pay_no, param, pay_time, pay_tag, status, create_time, update_time,
+        goods_id, goods_snapshot, open_id, extension_user_id from sys_order
     </sql>
 
     <select id="selectSysOrderList" parameterType="SysOrder" resultMap="SysOrderResult">
         <include refid="selectSysOrderVo"/>
-        <where>  
-            <if test="orderId != null  and orderId != ''"> and order_id = #{orderId}</if>
-            <if test="money != null "> and money = #{money}</if>
-            <if test="price != null "> and price = #{price}</if>
-            <if test="type != null "> and type = #{type}</if>
-            <if test="payNo != null  and payNo != ''"> and pay_no = #{payNo}</if>
-            <if test="param != null  and param != ''"> and param = #{param}</if>
-            <if test="payTime != null "> and pay_time = #{payTime}</if>
-            <if test="payTag != null  and payTag != ''"> and pay_tag = #{payTag}</if>
-            <if test="status != null "> and status = #{status}</if>
-            <if test="goodsId != null "> and goods_id = #{goodsId}</if>
-            <if test="goodsSnapshot != null  and goodsSnapshot != ''"> and goods_snapshot = #{goodsSnapshot}</if>
-            <if test="openId != null  and openId != ''"> and open_id = #{openId}</if>
-            <if test="extensionUserId != null  and extensionUserId != ''"> and extension_user_id = #{extensionUserId}</if>
+        <where>
+            <if test="orderId != null  and orderId != ''">and order_id = #{orderId}</if>
+            <if test="money != null ">and money = #{money}</if>
+            <if test="price != null ">and price = #{price}</if>
+            <if test="type != null ">and type = #{type}</if>
+            <if test="payNo != null  and payNo != ''">and pay_no = #{payNo}</if>
+            <if test="param != null  and param != ''">and param = #{param}</if>
+            <if test="payTime != null ">and pay_time = #{payTime}</if>
+            <if test="payTag != null  and payTag != ''">and pay_tag = #{payTag}</if>
+            <if test="status != null ">and status = #{status}</if>
+            <if test="goodsId != null ">and goods_id = #{goodsId}</if>
+            <if test="goodsSnapshot != null  and goodsSnapshot != ''">and goods_snapshot = #{goodsSnapshot}</if>
+            <if test="openId != null  and openId != ''">and open_id = #{openId}</if>
+            <if test="extensionUserId != null  and extensionUserId != ''">and extension_user_id = #{extensionUserId}
+            </if>
         </where>
     </select>
-    
+
     <select id="selectSysOrderById" parameterType="Long" resultMap="SysOrderResult">
         <include refid="selectSysOrderVo"/>
         where id = #{id}
     </select>
-        
+
     <insert id="insertSysOrder" parameterType="SysOrder" useGeneratedKeys="true" keyProperty="id">
         insert into sys_order
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -69,7 +71,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="goodsSnapshot != null  and goodsSnapshot != ''">goods_snapshot,</if>
             <if test="openId != null  and openId != ''">open_id,</if>
             <if test="extensionUserId != null  and extensionUserId != ''">extension_user_id,</if>
-         </trim>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="orderId != null  and orderId != ''">#{orderId},</if>
             <if test="money != null ">#{money},</if>
@@ -86,7 +88,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="goodsSnapshot != null  and goodsSnapshot != ''">#{goodsSnapshot},</if>
             <if test="openId != null  and openId != ''">#{openId},</if>
             <if test="extensionUserId != null  and extensionUserId != ''">#{extensionUserId},</if>
-         </trim>
+        </trim>
     </insert>
 
     <update id="updateSysOrder" parameterType="SysOrder">
@@ -116,10 +118,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteSysOrderByIds" parameterType="String">
-        delete from sys_order where id in 
+        delete from sys_order where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
     </delete>
-    
+
 </mapper>

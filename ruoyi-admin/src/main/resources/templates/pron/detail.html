@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <title></title>
-    <meta name="viewport"
-          content="target-densitydpi=device-dpi, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+
+    <meta name=viewport
+          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui">
+    <meta name="referrer" content="no-referrer">
+
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="description" content="【！"/>
+    <meta name="description" content=""/>
     <meta name="keywords" content=""/>
-    <meta name="generator" content="蝌蚪窝 CMS"/>
+    <meta name="generator" content=""/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- player skin -->
     <link rel="stylesheet" th:href="@{/proncss/skin/skin.css}">
@@ -15,8 +19,7 @@
     <link th:href="@{/proncss/detail/jquery.fancybox-metal.css}" rel="stylesheet" type="text/css"/>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
-    <script th:src="@{/proncss/flowplayer/flowplayer.js}"></script>
-    <!--    <script th:src="@{/pron/detail/main.min.js}"></script>-->
+    <!-- <script th:src="@{/proncss/flowplayer/flowplayer.js}"></script> -->
     <script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
     <script th:src="@{/ajax/libs/blockUI/jquery.blockUI.js}"></script>
     <script th:src="@{/ruoyi/js/ry-ui.js?v=4.0.0}"></script>
@@ -38,8 +41,8 @@
         </div>
         <div class="member-links">
             <ul>
-                <li><a href="http://www.xiaobi017.com/signup2/" target="_blank">注册</a></li>
-                <li><a href="http://www.xiaobi017.com/login2/" target="_blank" id="login">登录</a></li>
+                <li><a href="" target="_blank">注册</a></li>
+                <li><a href="" target="_blank" id="login">登录</a></li>
             </ul>
         </div>
     </div>
@@ -62,11 +65,11 @@
     <nav>
         <div class="navigation">
             <button class="button">
-				<span class="icon">
-					<span class="ico-bar"></span>
-					<span class="ico-bar"></span>
-					<span class="ico-bar"></span>
-				</span>
+                <span class="icon">
+                    <span class="ico-bar"></span>
+                    <span class="ico-bar"></span>
+                    <span class="ico-bar"></span>
+                </span>
             </button>
             <ul class="primary">
                 <li>
@@ -103,15 +106,11 @@
             <div class="table">
 
                 <style>
-
-                    ul, li {
+                    ul,
+                    li {
                         list-style: none;
                     }
 
-                    * {
-                        padding: 0;
-                        margin: 0;
-                    }
 
                     i {
                         font-style: normal;
@@ -128,7 +127,6 @@
 
                     .right-vip .right-vip-left-top .arrow i {
                         border: 6px solid #424242;
-                        display: block;
                         display: block;
                         position: absolute;
                         top: 8px;
@@ -162,7 +160,6 @@
                         text-align: center;
                         display: block;
                         color: #fff;
-                        text-align: center;
                     }
 
                     .right-vip .right-vip-text p {
@@ -199,69 +196,51 @@
                     }
 
                     @media screen and (min-width: 860px) {
-
                     }
 
                     @media screen and (max-width: 860px) {
-
                     }
+
                 </style>
             </div>
 
-            <!-- the player -->
-
-
-            <div id="area1" data-ratio="0.4167">
-                <video id="vid1" preload="none">
-                    <source type="video/mp4" th:src="${shipin.zykey}">
-                </video>
-            </div>
             <input type="hidden" th:value="${shipin.zykey}" id="src"/>
             <input type="hidden" th:value="${shipin.url}" id="poster"/>
             <input type="hidden" th:value="${shipin.id}" id="id"/>
 
-            <script>
-                $(function () {
-                    let src = $('#src').val();
-                    let poster = $('#poster').val();
-                    let video = $("#area1").flowplayer({
-                        description: "",
-                        src: src,
-                        swf: "/proncss/flowplayer/flowplayer.swf",
-                        title: "my video",
-                        autoplay: false,
-                        preload: "none",
-                        title: "videos",
-                        rewind: true,
-                        poster: poster,
-                        autopause: true,
-                        plugins: []
-                    });
+            <script type="text/javascript">
+                window.addEventListener('resize', function () {
+                    document.getElementById('mse').style.height = window.innerHeight + 'px';
+                });
+            </script>
+            <div id="mse"></div>
+            <script src="//cdn.jsdelivr.net/npm/xgplayer/browser/index.js" charset="utf-8"></script>
+            <script src="//cdn.jsdelivr.net/npm/xgplayer-mp4/browser/index.js" charset="utf-8"></script>
+            <script type="text/javascript">
+                let player = new Player({
+                    id: 'mse',
+                    autoplay: false,
+                    "closeVideoClick": true,
+                    "fluid": true,
+                    volume: 0.3,
+                    url: $("#src").val(),
+                    poster: "//s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/poster.jpg",
+                    playsinline: true,
+                    "closeVideoTouch": true,
+                    "closeVideoDblclick": true,
+                    whitelist: [''],
+                    "videoInit": true,
+                });
 
-                    video.on('seeking seeked pause ready', function (e, api) {
-                        let type = e.type;
-
-                        if (type === 'ready') {
-
-                        }
-
-                        if (type === 'resume') {
-                            console.log(type);
-                        }
-                        if (type === 'pause') {
-                            console.log(type, api);
-                        }
-                    });
+                player.emit('play', function () {
+                    console.log(11);
                 });
             </script>
 
 
             <div class="video-holder">
                 <div class="player">
-
                 </div>
-
-
                 <div class="video-info">
                     <div class="info-holder">
                         <div class="info-buttons">
@@ -318,10 +297,8 @@
                             <a th:href="@{'/pron/detail?id='+${role.id}+'&userid='+${role.userid}}"
                                th:title="${role.name}">
                                 <div class="img">
-                                    <img class="thumb lazy-load" th:src="${role.url}"
-                                         th:data-original="${role.url}"
-                                         th:alt="${role.name}" data-cnt="5"
-                                         width="180" height="135">
+                                    <img class="thumb lazy-load" th:src="${role.url}" th:data-original="${role.url}"
+                                         th:alt="${role.name}" data-cnt="5" width="180" height="135">
 
                                 </div>
                                 <strong class="title">
@@ -368,4 +345,5 @@
     </div>
 </div>
 </body>
+
 </html>
