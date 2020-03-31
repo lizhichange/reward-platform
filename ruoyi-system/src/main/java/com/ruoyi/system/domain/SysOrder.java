@@ -246,7 +246,7 @@ public class SysOrder extends BaseEntity {
     public String getMoneyStr() {
 
         Money m = new Money();
-        m.setCent(this.money);
+        m.setCent(this.money == null ? 0 : this.money);
         return moneyStr = m.toString();
 
     }
@@ -256,7 +256,10 @@ public class SysOrder extends BaseEntity {
     }
 
     public String getTypeStr() {
-        return typeStr = EnumUtil.queryByCode(this.type.toString(), OrderPayType.class).getDesc();
+        if (this.type != null) {
+            typeStr = EnumUtil.queryByCode(this.type.toString(), OrderPayType.class).getDesc();
+        }
+        return typeStr;
     }
 
     public void setTypeStr(String typeStr) {
@@ -264,7 +267,9 @@ public class SysOrder extends BaseEntity {
     }
 
     public String getStatusStr() {
-        statusStr = EnumUtil.queryByCode(this.status.toString(), OrderStatusType.class).getDesc();
+        if (this.status != null) {
+            statusStr = EnumUtil.queryByCode(this.status.toString(), OrderStatusType.class).getDesc();
+        }
         return statusStr;
     }
 
