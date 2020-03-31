@@ -18,6 +18,10 @@
     <link th:href="@{/proncss/detail/all-responsive-metal.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{/proncss/detail/jquery.fancybox-metal.css}" rel="stylesheet" type="text/css"/>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
+
+    <script th:src="@{/ruoyi/js/ry-ui.js?v=4.0.0}"></script>
 
 
 </head>
@@ -197,9 +201,6 @@
                     }
 
 
-
-
-
                 </style>
             </div>
 
@@ -213,8 +214,6 @@
                 });
 
 
-
-
             </script>
             <div id="mse"></div>
             <!--            <script th:src="@{/proncss/xgplayer/browser/index.js}" charset="utf-8"></script>-->
@@ -224,7 +223,7 @@
             <script type="text/javascript">
                 let player = new Player({
                     "id": 'mse',
-                     autoplay: false,
+                    autoplay: false,
                     "url": document.getElementById('src').value,
                     "volume": 0.3,
                     "fluid": true,
@@ -238,14 +237,44 @@
                     lang: 'zh-cn',
                     "videoInit": true,
                     keyShortcut: 'on',
+                    customConfig: {
+                        //
+                    },
                     execBeforePluginsCall: [() => {
                         console.log('Execute before plugins call')
                     }]
 
                 });
 
+                player.on('play', function () {
+                    $.ajax({
+                        type: "post",
+                        url: "/pron/queryOrder",
+                        data: {
+                            "id": $("#id").val()
+                        },
+                        success: function (r) {
+                            console.log(r);
+                            if (r.code === 0) {
+                                var rep = r.data;
+                                if (rep.status === 0) {
+                                    player.pause();
+                                    var text = "<font color='#4F4F4F'> 打赏" + rep.moneyStr + "元,永久免费观看此视频 </font>";
+                                    $.modal.confirm(text, function () {
+                                        var txt = "<font color='#4F4F4F'> 跳转到微信支付 </font>";
+                                        $.modal.alert(txt);
+                                    });
+                                } else if (rep.status === 1) {
+                                    player.play();
+                                }
+                            } else {
+
+                            }
+                        }
+                    });
 
 
+                });
 
 
             </script>
