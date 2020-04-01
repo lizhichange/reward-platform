@@ -31,9 +31,7 @@ public class WxPayConfiguration {
             SysWechatConfigDTO weChatConfig = configFactory.getSysWechatConfig();
             properties.setAppId(weChatConfig.getAppId());
             properties.setMchId(weChatConfig.getMchId());
-            properties.setMchKey("");
             properties.setKeyPath(weChatConfig.getCertFile());
-
 
             WxPayConfig payConfig = new WxPayConfig();
             payConfig.setAppId(StringUtils.trimToNull(properties.getAppId()));
