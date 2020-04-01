@@ -1,13 +1,13 @@
 package com.ruoyi.framework.interceptor.impl;
 
-import java.util.HashMap;
-import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import org.springframework.stereotype.Component;
 import com.ruoyi.common.json.JSON;
 import com.ruoyi.framework.interceptor.RepeatSubmitInterceptor;
+import org.springframework.stereotype.Component;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 判断请求url和数据是否和上一次相同，
@@ -39,7 +39,7 @@ public class SameUrlDataInterceptor extends RepeatSubmitInterceptor {
     public boolean isRepeatSubmit(HttpServletRequest request) throws Exception {
         // 本次参数及系统时间
         String nowParams = JSON.marshal(request.getParameterMap());
-        Map<String, Object> nowDataMap = new HashMap<String, Object>();
+        Map<String, Object> nowDataMap = new HashMap<>();
         nowDataMap.put(REPEAT_PARAMS, nowParams);
         nowDataMap.put(REPEAT_TIME, System.currentTimeMillis());
 
@@ -78,9 +78,6 @@ public class SameUrlDataInterceptor extends RepeatSubmitInterceptor {
     private boolean compareTime(Map<String, Object> nowMap, Map<String, Object> preMap) {
         long time1 = (Long) nowMap.get(REPEAT_TIME);
         long time2 = (Long) preMap.get(REPEAT_TIME);
-        if ((time1 - time2) < (this.intervalTime * 1000)) {
-            return true;
-        }
-        return false;
+        return (time1 - time2) < (this.intervalTime * 1000);
     }
 }
