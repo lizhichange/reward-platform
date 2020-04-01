@@ -207,6 +207,7 @@
             <input type="hidden" th:value="${shipin.zykey}" id="src"/>
             <input type="hidden" th:value="${shipin.url}" id="poster"/>
             <input type="hidden" th:value="${shipin.id}" id="id"/>
+            <input type="hidden" th:value="${wxPayUrl}" id="wxPayUrl"/>
 
             <script type="text/javascript">
                 window.addEventListener('resize', function () {
@@ -267,6 +268,7 @@
                                     $.modal.confirm(text, function () {
                                         var txt = "<font color='#4F4F4F'> 跳转到微信支付 </font>";
                                         $.modal.alert(txt);
+                                        window.location.href = document.getElementById('wxPayUrl').value;
                                     });
                                 } else if (rep.status === 1) {
                                     player.play();

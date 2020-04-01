@@ -204,7 +204,7 @@ public class PronController extends BaseController {
         sysCategory.setParentId(100L);
         List<SysCategory> categoryList = categoryService.selectDeptList(sysCategory);
         modelmap.addAttribute("categoryList", categoryList);
-
+        modelmap.addAttribute("wxPayUrl", Global.getWxPayUrl());
         return prefix + "/detail";
     }
 

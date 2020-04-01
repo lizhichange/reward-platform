@@ -51,12 +51,23 @@ public class Global {
      */
     private static String wxAuthUrl;
 
+
+    private static String wxPayUrl;
+
     public static String getWxAuthUrl() {
         return wxAuthUrl;
     }
 
+    public static String getWxPayUrl() {
+        return wxPayUrl;
+    }
+
     public void setWxAuthUrl(String wxAuthUrl) {
         Global.wxAuthUrl = wxAuthUrl;
+    }
+
+    public void setWxPayUrl(String wxPayUrl) {
+        Global.wxPayUrl = wxPayUrl;
     }
 
     public static boolean isMock() {
