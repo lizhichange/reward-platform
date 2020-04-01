@@ -107,7 +107,7 @@ public class PayController {
         request.setOpenid(item.getOpenId());
         String getRequestUrl = servletRequest.getRequestURL().toString();
         String doMain = DoMainUtil.getDoMain(getRequestUrl);
-        request.setNotifyUrl(doMain + "/pay/notify/order");
+        request.setNotifyUrl("http://" + doMain + "/pay/notify/order");
         WxPayUnifiedOrderResult createOrder = this.wxPayService.createOrder(request);
         LOGGER.info("createOrder:{}", createOrder);
         if (createOrder != null) {
