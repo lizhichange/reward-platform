@@ -109,10 +109,11 @@ public class PayController {
         String doMain = DoMainUtil.getDoMain(getRequestUrl);
         request.setNotifyUrl(doMain + "/pay/notify/order");
         WxPayUnifiedOrderResult createOrder = this.wxPayService.createOrder(request);
+        LOGGER.info("createOrder:{}", createOrder);
         if (createOrder != null) {
 
         }
-        LOGGER.info("createOrder:{}", createOrder);
+
 
         return this.wxPayService.createOrder(request);
     }
