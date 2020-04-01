@@ -13,7 +13,9 @@ import com.ruoyi.mp.factory.ConfigFactory;
 import com.ruoyi.sms.facade.ISysOrderFacade;
 import com.ruoyi.sms.facade.ISysWebMainFacade;
 import com.ruoyi.sms.facade.dto.SysOrderDTO;
+import com.ruoyi.sms.facade.enums.OrderStatusType;
 import lombok.extern.slf4j.Slf4j;
+import org.near.toolkit.common.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,6 +81,10 @@ public class PayController {
     public <T> T createOrder(SysOrderDTO dto,
                              HttpServletRequest servletRequest) throws Exception {
         SysOrderDTO item = getSysOrderDTO(dto.getOrderId());
+        if (StringUtil.equals(OrderStatusType.Y_PAY.getCode(), item.getStatus().toString())) {
+            throw new Exception("已经支付过,请不要重复支付");
+        }
+
         WxPayUnifiedOrderRequest request = new WxPayUnifiedOrderRequest();
         request.setOutTradeNo(item.getOrderId());
         if (mpAuthConfig.isMockMoney()) {
