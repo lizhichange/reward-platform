@@ -20,6 +20,7 @@ import org.near.toolkit.common.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.Assert;
@@ -82,8 +83,8 @@ public class PayController {
      */
     @PostMapping("/createOrder")
     @ResponseBody
-    public WxPayMpOrderResult createOrder(SysOrderDTO dto,
-                                          HttpServletRequest servletRequest) throws Exception {
+    public ResponseEntity<WxPayMpOrderResult> createOrder(SysOrderDTO dto,
+                                                          HttpServletRequest servletRequest) throws Exception {
         SysOrderDTO item = getSysOrderDTO(dto.getOrderId());
         if (StringUtil.equals(OrderStatusType.Y_PAY.getCode(), item.getStatus().toString())) {
             throw new Exception("已经支付过,请不要重复支付");
@@ -113,12 +114,8 @@ public class PayController {
         request.setNotifyUrl("http://" + doMain + "/pay/notify/order");
         WxPayMpOrderResult createOrder = this.wxPayService.createOrder(request);
         LOGGER.info("createOrder:{}", createOrder);
-        if (createOrder != null) {
+        return ResponseEntity.badRequest().body(createOrder);
 
-        }
-
-
-        return createOrder;
     }
 
 
