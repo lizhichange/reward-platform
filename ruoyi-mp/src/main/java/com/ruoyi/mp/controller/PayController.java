@@ -15,6 +15,7 @@ import com.ruoyi.sms.facade.ISysWebMainFacade;
 import com.ruoyi.sms.facade.dto.SysOrderDTO;
 import com.ruoyi.sms.facade.enums.OrderStatusType;
 import lombok.extern.slf4j.Slf4j;
+import org.near.toolkit.common.DoMainUtil;
 import org.near.toolkit.common.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -104,8 +105,9 @@ public class PayController {
         }
         request.setTradeType(WxPayConstants.TradeType.JSAPI);
         request.setOpenid(item.getOpenId());
-        String getRequestUrl = servletRequest.getRequestURI();
-        request.setNotifyUrl(getRequestUrl + "/notify/order");
+        String getRequestUrl = servletRequest.getRequestURL().toString();
+        String doMain = DoMainUtil.getDoMain(getRequestUrl);
+        request.setNotifyUrl(doMain + "/pay/notify/order");
         WxPayUnifiedOrderResult createOrder = this.wxPayService.createOrder(request);
         if (createOrder != null) {
 
