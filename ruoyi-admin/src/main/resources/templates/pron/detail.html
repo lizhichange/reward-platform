@@ -17,10 +17,8 @@
     <link rel="stylesheet" th:href="@{/proncss/skin/skin.css}">
     <link th:href="@{/proncss/detail/all-responsive-metal.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{/proncss/detail/jquery.fancybox-metal.css}" rel="stylesheet" type="text/css"/>
-    <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
     <script th:src="@{/js/jquery.min.js}"></script>
     <script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
-
     <script th:src="@{/ruoyi/js/ry-ui.js?v=4.0.0}"></script>
 
 
@@ -268,7 +266,9 @@
                                     $.modal.confirm(text, function () {
                                         var txt = "<font color='#4F4F4F'> 跳转到微信支付 </font>";
                                         $.modal.alert(txt);
-                                        window.location.href = document.getElementById('wxPayUrl').value;
+                                        let value = document.getElementById('wxPayUrl').value;
+                                        console.log(value);
+                                        window.location.href = value + "?orderId=" + rep.orderId;
                                     });
                                 } else if (rep.status === 1) {
                                     player.play();

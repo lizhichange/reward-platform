@@ -26,8 +26,7 @@ mp:
   # 微信预授权回调
   wxPnCallbackUrl: http://yuluncc.top/wechat/callback
   configCode: FULIHUI_YOUFULI
-  mockMoney: true
-
+  mockMoney: false
 
 
 spring:

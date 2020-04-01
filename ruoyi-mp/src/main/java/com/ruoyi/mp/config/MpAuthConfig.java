@@ -20,6 +20,8 @@ public class MpAuthConfig {
     private String wxPnCallbackUrl;
     @Value("${mp.configCode}")
     private String configCode;
+    @Value("${mp.mockMoney}")
+    private boolean mockMoney;
 
 
 }
