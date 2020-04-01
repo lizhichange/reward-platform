@@ -32,11 +32,14 @@ public class WechatController {
     @Autowired
     WxPayService wxPayService;
 
+    @Autowired
+    MpAuthConfig mpAuthConfig;
+
     @GetMapping("/auth")
     public String auth(HttpServletRequest request) {
         String callback = request.getParameter("callback");
         //预授权回调地址
-        String url = MpAuthConfig.getWxPnCallbackUrl();
+        String url = mpAuthConfig.getWxPnCallbackUrl();
         LOGGER.info("auth.callback:{}", callback);
         if (url.contains("?")) {
             url += "&callback=" + callback;

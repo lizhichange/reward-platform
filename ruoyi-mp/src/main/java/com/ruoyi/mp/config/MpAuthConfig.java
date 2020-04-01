@@ -1,6 +1,7 @@
 package com.ruoyi.mp.config;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import lombok.Data;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
@@ -9,30 +10,16 @@ import org.springframework.stereotype.Component;
  * @author ruoyi
  */
 @Component
-@ConfigurationProperties(prefix = "mp")
+@Data
 public class MpAuthConfig {
 
     /**
      * 微信授权回调地址
      */
-    private static String wxPnCallbackUrl;
-
-    private static String configCode;
-
-    public static String getWxPnCallbackUrl() {
-        return wxPnCallbackUrl;
-    }
+    @Value("${mp.wxPnCallbackUrl}")
+    private String wxPnCallbackUrl;
+    @Value("${mp.configCode}")
+    private String configCode;
 
 
-    public void setWxPnCallbackUrl(String wxPnCallbackUrl) {
-        MpAuthConfig.wxPnCallbackUrl = wxPnCallbackUrl;
-    }
-
-    public static String getConfigCode() {
-        return configCode;
-    }
-
-    public static void setConfigCode(String configCode) {
-        MpAuthConfig.configCode = configCode;
-    }
 }

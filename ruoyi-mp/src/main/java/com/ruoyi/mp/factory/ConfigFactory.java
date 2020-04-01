@@ -36,6 +36,9 @@ public class ConfigFactory {
     SysWechatConfigFacade sysWechatConfigFacade;
 
 
+    @Autowired
+    MpAuthConfig mpAuthConfig;
+
     @PostConstruct
     @Scheduled(cron = "0 * * * * ? ")
     void init() {
@@ -43,7 +46,7 @@ public class ConfigFactory {
             String profile = env.getActiveProfiles()[0];
             SysWechatConfigDTO item = new SysWechatConfigDTO();
             item.setEnvType(profile);
-            item.setConfigCode(MpAuthConfig.getConfigCode());
+            item.setConfigCode(mpAuthConfig.getConfigCode());
             List<SysWechatConfigDTO> list = sysWechatConfigFacade.selectSysWechatConfigList(item);
             if (!CollectionUtils.isEmpty(list)) {
                 sysWechatConfig = list.get(0);
