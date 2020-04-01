@@ -3,8 +3,8 @@ package com.ruoyi.mp.controller;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.github.binarywang.wxpay.bean.notify.WxPayNotifyResponse;
 import com.github.binarywang.wxpay.bean.notify.WxPayOrderNotifyResult;
+import com.github.binarywang.wxpay.bean.order.WxPayMpOrderResult;
 import com.github.binarywang.wxpay.bean.request.WxPayUnifiedOrderRequest;
-import com.github.binarywang.wxpay.bean.result.WxPayUnifiedOrderResult;
 import com.github.binarywang.wxpay.constant.WxPayConstants;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.WxPayService;
@@ -71,16 +71,19 @@ public class PayController {
         return list.get(0);
     }
 
+
     /**
-     * 调用统一下单接口，并组装生成支付所需参数对象.
+     * 调用统一下单接口，并组装生成支付所需参数对象.*
      *
-     * @param <T> 请使用{@link com.github.binarywang.wxpay.bean.order}包下的类
+     * @param dto
+     * @param servletRequest
      * @return 返回 {@link com.github.binarywang.wxpay.bean.order}包下的类对象
+     * @throws Exception
      */
     @PostMapping("/createOrder")
     @ResponseBody
-    public <T> T createOrder(SysOrderDTO dto,
-                             HttpServletRequest servletRequest) throws Exception {
+    public WxPayMpOrderResult createOrder(SysOrderDTO dto,
+                                          HttpServletRequest servletRequest) throws Exception {
         SysOrderDTO item = getSysOrderDTO(dto.getOrderId());
         if (StringUtil.equals(OrderStatusType.Y_PAY.getCode(), item.getStatus().toString())) {
             throw new Exception("已经支付过,请不要重复支付");
@@ -108,14 +111,14 @@ public class PayController {
         String getRequestUrl = servletRequest.getRequestURL().toString();
         String doMain = DoMainUtil.getDoMain(getRequestUrl);
         request.setNotifyUrl("http://" + doMain + "/pay/notify/order");
-        WxPayUnifiedOrderResult createOrder = this.wxPayService.createOrder(request);
+        WxPayMpOrderResult createOrder = this.wxPayService.createOrder(request);
         LOGGER.info("createOrder:{}", createOrder);
         if (createOrder != null) {
 
         }
 
 
-        return this.wxPayService.createOrder(request);
+        return createOrder;
     }
 
 
