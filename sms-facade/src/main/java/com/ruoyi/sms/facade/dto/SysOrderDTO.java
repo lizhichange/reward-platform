@@ -39,6 +39,8 @@ public class SysOrderDTO extends ToString {
      */
     private Integer price;
 
+    private Date updateTime;
+
     private String priceStr;
 
     /**
@@ -250,5 +252,13 @@ public class SysOrderDTO extends ToString {
 
     public void setPriceStr(String priceStr) {
         this.priceStr = priceStr;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 }

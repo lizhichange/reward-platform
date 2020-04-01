@@ -55,7 +55,9 @@ public class ISysOrderFacadeImpl implements ISysOrderFacade {
 
     @Override
     public int updateSysOrder(SysOrderDTO sysOrder) {
-        return 0;
+        SysOrder item = new SysOrder();
+        BeanUtils.copyProperties(sysOrder, item);
+        return sysOrderService.updateSysOrder(item);
     }
 
     @Override

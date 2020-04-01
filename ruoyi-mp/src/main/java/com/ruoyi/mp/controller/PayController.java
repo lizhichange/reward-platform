@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -115,6 +116,15 @@ public class PayController {
         WxPayMpOrderResult createOrder = this.wxPayService.createOrder(request);
         LOGGER.info("createOrder:{}", createOrder);
         if (createOrder != null) {
+            SysOrderDTO newOrder = new SysOrderDTO();
+            newOrder.setId(item.getId());
+            String packageValue = createOrder.getPackageValue();
+            if (StringUtil.isNotBlank(packageValue)) {
+                String[] split = packageValue.split("=");
+                newOrder.setPayNo(split[1]);
+                newOrder.setUpdateTime(new Date());
+                sysOrderFacade.updateSysOrder(newOrder);
+            }
             return AjaxResult.success(createOrder);
         }
         return AjaxResult.error();
