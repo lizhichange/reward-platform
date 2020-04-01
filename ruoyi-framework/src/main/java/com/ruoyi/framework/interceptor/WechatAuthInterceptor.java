@@ -79,23 +79,22 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
             String doMain = DoMainUtil.getDoMain(requestUrl.toString());
 
             //授权回来之后中定向会带有openId参数
-            String op = myRequest.getParameter("op");
+            String openId = myRequest.getParameter("op");
             //推广人的userid
-            String userid = myRequest.getParameter("userid");
-            if (StringUtil.isNotBlank(userid)) {
-                write(userid, COOKIE_USER_KEY, doMain, response);
+            String userId = myRequest.getParameter("userid");
+            if (StringUtil.isNotBlank(userId)) {
+                write(userId, COOKIE_USER_KEY, doMain, response);
             }
-            if (StringUtil.isNotBlank(op)) {
-                write(op, COOKIE_OP_KEY, doMain, response);
-                SessionContext.set(session, op, userid);
+            if (StringUtil.isNotBlank(openId)) {
+                write(openId, COOKIE_OP_KEY, doMain, response);
+                SessionContext.set(session, userId, openId);
                 return true;
             }
-
-            String userId = read(request, COOKIE_USER_KEY);
-            String openId = read(request, COOKIE_OP_KEY);
+            userId = read(request, COOKIE_USER_KEY);
+            openId = read(request, COOKIE_OP_KEY);
             log.info("openId:{}", openId);
             if (StringUtil.isNotBlank(openId)) {
-                SessionContext.set(session, openId, userId);
+                SessionContext.set(session, userId, openId);
                 return true;
             }
 
