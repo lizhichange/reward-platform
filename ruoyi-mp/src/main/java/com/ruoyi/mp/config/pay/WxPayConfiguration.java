@@ -32,12 +32,12 @@ public class WxPayConfiguration {
             properties.setAppId(weChatConfig.getAppId());
             properties.setMchId(weChatConfig.getMchId());
             properties.setKeyPath(weChatConfig.getCertFile());
-
+            properties.setMchKey(weChatConfig.getSignKey());
             WxPayConfig payConfig = new WxPayConfig();
             payConfig.setAppId(StringUtils.trimToNull(properties.getAppId()));
             payConfig.setMchId(StringUtils.trimToNull(properties.getMchId()));
-            payConfig.setMchKey(StringUtils.trimToNull(properties.getMchKey()));
             payConfig.setKeyPath(StringUtils.trimToNull(properties.getKeyPath()));
+            payConfig.setMchKey(StringUtils.trimToNull(properties.getMchKey()));
             // 可以指定是否使用沙箱环境
             payConfig.setUseSandboxEnv(false);
             wxPayService.setConfig(payConfig);
