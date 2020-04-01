@@ -123,7 +123,7 @@ public class PayController {
                 String[] split = packageValue.split("=");
                 newOrder.setPayNo(split[1]);
                 newOrder.setUpdateTime(new Date());
-                sysOrderFacade.updateSysOrder(newOrder);
+                LOGGER.info("newOrder:{}", newOrder);
             }
             return AjaxResult.success(createOrder);
         }
