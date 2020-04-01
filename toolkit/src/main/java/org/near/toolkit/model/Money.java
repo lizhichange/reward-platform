@@ -360,6 +360,7 @@ public class Money implements Serializable, Comparable {
      * @return <code>true</code>表示相等，<code>false</code>表示不相等。
      * @see Object#equals(Object)
      */
+    @Override
     public boolean equals(Object other) {
         return (other instanceof Money) && equals((Money) other);
     }
@@ -387,6 +388,7 @@ public class Money implements Serializable, Comparable {
      * @return 本货币对象的杂凑值。
      * @see Object#hashCode()
      */
+    @Override
     public int hashCode() {
         return (int) (cent ^ (cent >>> 32));
     }
@@ -410,6 +412,7 @@ public class Money implements Serializable, Comparable {
      *                            IllegalArgumentException 待比较货币对象与本货币对象的币种不同。
      * @see Comparable#compareTo(Object)
      */
+    @Override
     public int compareTo(Object other) {
         return compareTo((Money) other);
     }
@@ -826,6 +829,7 @@ public class Money implements Serializable, Comparable {
     /**
      * 生成本对象的缺省字符串表示
      */
+    @Override
     public String toString() {
         return getAmount().toString();
     }

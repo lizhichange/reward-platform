@@ -29,11 +29,14 @@ public class ThreadContext {
      */
     public static ThreadContext getInstance() {
         if (instance == null) {
-            lock.lock();
-            if (instance == null) {
-                instance = new ThreadContext();
+            try {
+                lock.lock();
+                if (instance == null) {
+                    instance = new ThreadContext();
+                }
+            } finally {
+                lock.unlock();
             }
-            lock.unlock();
         }
         return instance;
     }
@@ -47,11 +50,14 @@ public class ThreadContext {
      */
     public static ThreadContext getInstance(ThreadLocal<ConcurrentMap<String, Object>> threadCache) {
         if (instance == null) {
-            lock.lock();
-            if (instance == null) {
-                instance = new ThreadContext(threadCache);
+            try {
+                lock.lock();
+                if (instance == null) {
+                    instance = new ThreadContext(threadCache);
+                }
+            } finally {
+                lock.unlock();
             }
-            lock.unlock();
         }
         return instance;
     }
