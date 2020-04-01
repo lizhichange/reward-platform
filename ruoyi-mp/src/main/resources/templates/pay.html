@@ -194,7 +194,7 @@
             let orderId = $("#orderId").val();
             $.ajax({
                 type: "post",
-                url: "/login",
+                url: "/pay/createOrder",
                 data: {
                     "orderId": orderId
                 },
