@@ -9,6 +9,7 @@ import com.github.binarywang.wxpay.constant.WxPayConstants;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.WxPayService;
 import com.ruoyi.mp.config.MpAuthConfig;
+import com.ruoyi.mp.factory.ConfigFactory;
 import com.ruoyi.sms.facade.ISysOrderFacade;
 import com.ruoyi.sms.facade.ISysWebMainFacade;
 import com.ruoyi.sms.facade.dto.SysOrderDTO;
@@ -43,12 +44,20 @@ public class PayController {
     MpAuthConfig mpAuthConfig;
     @Reference(version = "1.0.0", check = false)
     ISysOrderFacade sysOrderFacade;
+    @Autowired
+    ConfigFactory configFactory;
 
     @GetMapping
-    public String pay(@RequestParam(value = "orderId") String orderId, ModelMap modelmap,
-
-                      HttpServletRequest servletRequest) throws Exception {
+    public String pay(@RequestParam(value = "orderId") String orderId, ModelMap modelmap) throws Exception {
         LOGGER.info("orderId:{}", orderId);
+        SysOrderDTO item = getSysOrderDTO(orderId);
+        modelmap.addAttribute("order", item);
+        return "pay";
+
+
+    }
+
+    private SysOrderDTO getSysOrderDTO(String orderId) throws Exception {
         Assert.notNull(orderId, "orderId is not null");
         SysOrderDTO sysOrderDTO = new SysOrderDTO();
         sysOrderDTO.setOrderId(orderId);
@@ -56,8 +65,20 @@ public class PayController {
         if (CollectionUtils.isEmpty(list)) {
             throw new Exception("系统异常");
         }
-        SysOrderDTO item = list.get(0);
-        modelmap.addAttribute("order", item);
+        return list.get(0);
+    }
+
+    /**
+     * 调用统一下单接口，并组装生成支付所需参数对象.
+     *
+     * @param <T> 请使用{@link com.github.binarywang.wxpay.bean.order}包下的类
+     * @return 返回 {@link com.github.binarywang.wxpay.bean.order}包下的类对象
+     */
+    @PostMapping("/createOrder")
+    @ResponseBody
+    public <T> T createOrder(SysOrderDTO dto,
+                             HttpServletRequest servletRequest) throws Exception {
+        SysOrderDTO item = getSysOrderDTO(dto.getOrderId());
         WxPayUnifiedOrderRequest request = new WxPayUnifiedOrderRequest();
         request.setOutTradeNo(item.getOrderId());
         if (mpAuthConfig.isMockMoney()) {
@@ -66,7 +87,7 @@ public class PayController {
             request.setTotalFee(item.getMoney());
         }
         request.setBody("会员充值");
-
+        request.setMchId(configFactory.getSysWechatConfig().getMchId());
         try {
             InetAddress netAddress = InetAddress.getLocalHost();
             if (netAddress != null) {
@@ -84,7 +105,8 @@ public class PayController {
 
         }
         LOGGER.info("createOrder:{}", createOrder);
-        return "pay";
+
+        return this.wxPayService.createOrder(request);
     }
 
 
