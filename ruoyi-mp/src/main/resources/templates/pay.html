@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta http-equiv="content-type" content="text/html;charset=utf8"/>
     <meta id="viewport" name="viewport"
@@ -172,14 +173,14 @@
 <article class="charge">
     <h1>微信支付购买</h1>
     <section class="content">
-        <h2>商品：测试商品。</h2>
+        <h2>商品：会员服务。</h2>
         <ul class="select cf">
             <li><img src="/img/weixin.jpg" style="width:150px;height:150px"></li>
         </ul>
         <p class="copy-right">亲，此商品不提供退款和发货服务哦</p>
-        <div class="price">微信价：<strong>￥0.01元</strong></div>
+        <div class="price">微信价：<strong>￥[[${order.moneyStr}]]元</strong></div>
         <div class="operation"><a class="btn-green" id="getBrandWCPayRequest" href="#">立即购买</a></div>
-        <input type="hidden" value="" id="orderId"/>
+        <input type="hidden" th:value="${order.orderId}" id="orderId"/>
         <p class="copy-right">微信支付购买</p>
     </section>
 </article>
