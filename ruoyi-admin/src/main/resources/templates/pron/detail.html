@@ -340,7 +340,7 @@
                 <div class="list-videos">
                     <div class="margin-fix" id="list_videos_related_videos_items">
                         <div class="item  " th:each="role:${list}">
-                            <a th:href="@{'/pron/detail?id='+${role.id}+'&userid='+${role.userid}}"
+                            <a th:href="@{'/pron/detail?id='+${role.id}}"
                                th:title="${role.name}">
                                 <div class="img">
                                     <img class="thumb lazy-load" th:src="${role.url}" th:data-original="${role.url}"
