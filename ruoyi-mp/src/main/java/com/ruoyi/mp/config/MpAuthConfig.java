@@ -17,12 +17,22 @@ public class MpAuthConfig {
      */
     private static String wxPnCallbackUrl;
 
+    private static String configCode;
 
     public static String getWxPnCallbackUrl() {
         return wxPnCallbackUrl;
     }
 
+
     public void setWxPnCallbackUrl(String wxPnCallbackUrl) {
         MpAuthConfig.wxPnCallbackUrl = wxPnCallbackUrl;
+    }
+
+    public static String getConfigCode() {
+        return configCode;
+    }
+
+    public static void setConfigCode(String configCode) {
+        MpAuthConfig.configCode = configCode;
     }
 }

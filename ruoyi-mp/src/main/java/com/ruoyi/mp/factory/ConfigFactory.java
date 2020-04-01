@@ -2,6 +2,7 @@ package com.ruoyi.mp.factory;
 
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.ruoyi.mp.config.MpAuthConfig;
 import com.ruoyi.sms.facade.SysWechatConfigFacade;
 import com.ruoyi.sms.facade.dto.SysWechatConfigDTO;
 
@@ -42,6 +43,7 @@ public class ConfigFactory {
             String profile = env.getActiveProfiles()[0];
             SysWechatConfigDTO item = new SysWechatConfigDTO();
             item.setEnvType(profile);
+            item.setConfigCode(MpAuthConfig.getConfigCode());
             List<SysWechatConfigDTO> list = sysWechatConfigFacade.selectSysWechatConfigList(item);
             if (!CollectionUtils.isEmpty(list)) {
                 sysWechatConfig = list.get(0);
