@@ -261,4 +261,26 @@ public class SysOrderDTO extends ToString {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
+
+    private Integer limit;
+
+    private Integer offset;
+
+
+    public Integer getLimit() {
+        return limit;
+    }
+
+    public void setLimit(Integer limit) {
+        this.limit = limit;
+    }
+
+    public Integer getOffset() {
+        return offset;
+    }
+
+    public void setOffset(Integer offset) {
+        this.offset = offset;
+    }
 }

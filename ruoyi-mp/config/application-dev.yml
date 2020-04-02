@@ -28,6 +28,7 @@ mp:
   configCode: FULIHUI_YOUFULI
   mockMoney: true
 
+  mockWeChatOrderQuery: true
 
 
 spring:

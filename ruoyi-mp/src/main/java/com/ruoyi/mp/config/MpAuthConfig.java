@@ -22,6 +22,7 @@ public class MpAuthConfig {
     private String configCode;
     @Value("${mp.mockMoney}")
     private boolean mockMoney;
-
+    @Value("${mp.mockWeChatOrderQuery}")
+    private boolean mockWeChatOrderQuery;
 
 }
