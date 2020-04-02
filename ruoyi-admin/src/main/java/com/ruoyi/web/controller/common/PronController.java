@@ -92,6 +92,7 @@ public class PronController extends BaseController {
     @ResponseBody
     public AjaxResult queryOrder(ShipinDTO shipinDTO) {
         String openId = SessionContext.getOpenId();
+        String userId = SessionContext.getUserId();
         logger.info("id:{},openId:{}", shipinDTO.getId(), openId);
         SysOrder order = new SysOrder();
         order.setGoodsId(shipinDTO.getId().longValue());
@@ -100,6 +101,7 @@ public class PronController extends BaseController {
         if (CollectionUtils.isEmpty(sysOrders)) {
             ShipinDTO dto = shipinService.selectShipinDTOById(shipinDTO.getId().longValue());
             order.setCreateTime(new Date());
+            order.setExtensionUserId(userId);
             order.setUpdateTime(new Date());
             order.setOrderId(concurrentSequence.nextId().toString());
             //商品快照信息
