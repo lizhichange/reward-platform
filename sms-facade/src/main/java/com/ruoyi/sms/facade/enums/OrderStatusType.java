@@ -21,6 +21,12 @@ public enum OrderStatusType implements BaseEnum {
      */
     Y_PAY("1", "已支付"),
 
+    /**
+     * 支付中 ,待确认
+     */
+
+    PAY_ING("2", "支付中"),
+
 
     ;
 

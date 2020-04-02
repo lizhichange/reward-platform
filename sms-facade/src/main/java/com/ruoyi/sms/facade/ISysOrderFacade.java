@@ -43,6 +43,7 @@ public interface ISysOrderFacade {
      * @return 结果
      */
     public int updateSysOrder(SysOrderDTO sysOrder);
+    int updateSysOrderByOrderId(SysOrderDTO sysOrder);
 
     /**
      * 批量删除订单列表

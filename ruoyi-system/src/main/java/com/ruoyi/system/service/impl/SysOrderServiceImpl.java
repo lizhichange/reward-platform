@@ -66,6 +66,12 @@ public class SysOrderServiceImpl implements ISysOrderService {
         sysOrder.setUpdateTime(DateUtils.getNowDate());
         return sysOrderMapper.updateSysOrder(sysOrder);
     }
+    @Override
+    public int updateSysOrderByOrderId(SysOrder sysOrder) {
+        sysOrder.setUpdateTime(DateUtils.getNowDate());
+        return sysOrderMapper.updateSysOrderByOrderId(sysOrder);
+    }
+
 
     /**
      * 删除订单列表对象

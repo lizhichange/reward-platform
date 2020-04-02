@@ -19,7 +19,7 @@ public interface ISysOrderService
      * @return 订单列表
      */
     public SysOrder selectSysOrderById(Long id);
-
+    int updateSysOrderByOrderId(SysOrder sysOrder);
     /**
      * 查询订单列表列表
      * 

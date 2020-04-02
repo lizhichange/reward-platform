@@ -16,6 +16,7 @@ import com.ruoyi.sms.facade.ISysWebMainFacade;
 import com.ruoyi.sms.facade.dto.SysOrderDTO;
 import com.ruoyi.sms.facade.enums.OrderStatusType;
 import lombok.extern.slf4j.Slf4j;
+import org.near.toolkit.common.DateUtils;
 import org.near.toolkit.common.DoMainUtil;
 import org.near.toolkit.common.StringUtil;
 import org.slf4j.Logger;
@@ -30,6 +31,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
@@ -122,8 +124,10 @@ public class PayController {
             if (StringUtil.isNotBlank(packageValue)) {
                 String[] split = packageValue.split("=");
                 newOrder.setPayNo(split[1]);
-                newOrder.setUpdateTime(new Date());
+                //支付中
+                newOrder.setStatus(Integer.valueOf(OrderStatusType.PAY_ING.getCode()));
                 LOGGER.info("newOrder:{}", newOrder);
+                sysOrderFacade.updateSysOrder(newOrder);
             }
             return AjaxResult.success(createOrder);
         }
@@ -141,9 +145,24 @@ public class PayController {
      */
     @PostMapping("/notify/order")
     public String parseOrderNotifyResult(@RequestBody String xmlData) throws WxPayException {
+        Assert.notNull(xmlData, "xmlData is not null");
         final WxPayOrderNotifyResult notifyResult = this.wxPayService.parseOrderNotifyResult(xmlData);
-        // TODO 根据自己业务场景需要构造返回对象
-        return WxPayNotifyResponse.success("成功");
+        if (notifyResult != null && notifyResult.getReturnCode().equals(WxPayConstants.ResultCode.SUCCESS)) {
+            SysOrderDTO newOrder = new SysOrderDTO();
+            String orderId = notifyResult.getOutTradeNo();
+            newOrder.setOrderId(orderId);
+            try {
+                newOrder.setPayTime(DateUtils.parseLongFormat(notifyResult.getTimeEnd()));
+            } catch (ParseException ignored) {
+            }
+            Date now = new Date();
+            newOrder.setPayTime(now);
+            newOrder.setStatus(Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
+            LOGGER.info("newOrder:{}", newOrder);
+            sysOrderFacade.updateSysOrderByOrderId(newOrder);
+            return WxPayNotifyResponse.success("SUCCESS");
+        }
+        return WxPayNotifyResponse.fail("FAIL");
     }
 
 }

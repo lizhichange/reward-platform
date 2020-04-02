@@ -44,6 +44,8 @@ public interface SysOrderMapper
      */
     public int updateSysOrder(SysOrder sysOrder);
 
+    public int updateSysOrderByOrderId(SysOrder sysOrder);
+
     /**
      * 删除订单列表
      * 
