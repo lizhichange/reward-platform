@@ -47,7 +47,7 @@
 <div class="container">
     <div class="header">
         <div class="logo">
-            <a href="http://www.xiaobi017.com/"></a>
+            <a href="/pron"></a>
         </div>
         <div class="social-bookmarks">
         </div>
@@ -211,6 +211,9 @@
                 window.addEventListener('resize', function () {
                     document.getElementById('mse').style.height = window.innerHeight + 'px';
                 });
+                $('#toggle-button').click(function (e) {
+                    window.location.href = "/pron/tswq";
+                });
 
 
             </script>
@@ -220,6 +223,8 @@
             <script src="//cdn.jsdelivr.net/npm/xgplayer/browser/index.js" charset="utf-8"></script>
             <script src="//cdn.jsdelivr.net/npm/xgplayer-mp4/browser/index.js" charset="utf-8"></script>
             <script type="text/javascript">
+
+
                 let player = new Player({
                     "id": 'mse',
                     autoplay: false,
@@ -298,7 +303,9 @@
                             </div>
                             <div class="tabs-menu">
                                 <ul>
-                                    <li><a href="#tab_report_rrror" class="toggle-button">投诉</a></li>
+                                    <li>
+                                        <a href="javascript:void(0)" id="toggle-button" class="toggle-button">投诉</a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -377,8 +384,8 @@
 <div class="footer">
     <div class="footer-wrap">
         <ul class="nav">
-            <li><a href="http://www.xiaobi017.com/">主页</a></li>
-            <li><a href="/signup2/" target="_blank">注册</a></li>
+            <li><a href="/pron">主页</a></li>
+            <li><a href="/" target="_blank">注册</a></li>
 
         </ul>
         <div class="copyright">

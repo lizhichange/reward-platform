@@ -57,6 +57,10 @@ public class PronController extends BaseController {
     @Autowired
     IShipinService shipinService;
 
+
+    @Autowired
+    ConcurrentSequence concurrentSequence;
+
     @Autowired
     ISysWebMainService sysWebMainService;
 
@@ -84,8 +88,6 @@ public class PronController extends BaseController {
 
     }
 
-    @Autowired
-    ConcurrentSequence concurrentSequence;
 
     @PostMapping("/queryOrder")
     @WxPnUserAuth
@@ -271,7 +273,10 @@ public class PronController extends BaseController {
         return prefix + "/pagination";
     }
 
-
+    @GetMapping("/tswq")
+    public String renderTs(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
+        return prefix + "/tswq";
+    }
 }
 
 
