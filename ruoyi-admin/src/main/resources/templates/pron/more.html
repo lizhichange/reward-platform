@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset=UTF-8>
+    <meta id=viewport name=viewport
+          content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover"/>
+    <title>更多信息</title>
+    <link rel=stylesheet type=text/css href=//res.wx.qq.com/open/libs/weui/1.1.1/weui.min.css/>
+    <!--style-->
+    <link rel="stylesheet" href="//res.wx.qq.com/a/wx_fed/wx110/res/static/css/525f8f695949e3fcab6adef8bb5f32fc.css"/>
+</head>
+
+<body ontouchstart>
+<div id=reason style=opacity:0></div>
+<script type=text/html id=template>
+    <div class="weui-msg">
+        <div class="weui-msg__text-area">
+            <h2 class="weui-msg__title">[!=title!]</h2>
+            <p class="weui-msg__desc">[!=desc!]</p>
+            <div id="url" class="weui-msg__desc reason__url">
+                [!for (var i = 0, len = urls.length; i < len; ++i) {!]
+                <p>[!=encode(urls[i])!]</p>
+                [!}!]
+                <a id="fold" href="javascript:" style="display: none" class="reason__fold"> <i></i> </a>
+            </div>
+        </div>
+        <div class="weui-msg__opr-area">
+            <div class="weui-btn-area">
+                [!for (var i = 0, len = btns.length; i < len; ++i) {!]
+                <a href="[!=btns[i].url!]"
+                   class="weui-btn [!if(btns[i].type){!]weui-btn_[!=btns[i].type!][!}else{!]weui-btn_plain-primary[!}!]">[!=btns[i].name!]</a>
+                [!}!]
+                [!if (imgurls.length > 0){!]
+                <a href="javascript:;" id="viewImage" class="weui-btn weui-btn_plain-primary">查看违规截图</a>
+                [!}!]
+            </div>
+        </div>
+    </div>
+</script>
+<div class="weui-toptips weui-toptips_warn"></div>
+<script>
+    !function (e, t) {
+        e.WX110 = {
+            BASE_PATH: "/security/newreadtemplate?t=webpage_intercept",
+            CGI_URL: "/cgi-bin/mmspamsupport-bin/urlblockappeal",
+            TEXT_NETWORKERR: "网络错误，请稍后再试",
+            FUNC_GOTO: function (e) {
+                location.href = this.BASE_PATH + e
+            }
+        }
+    }(window, document.body)
+
+</script>
+<script src=//res.wx.qq.com/open/libs/zepto/1.1.6/zepto.js></script>
+<!--script-->
+<script src="//res.wx.qq.com/a/wx_fed/wx110/res/static/js/w_more-info_f87f126.js"></script>
+</body>
+
+</html>

@@ -277,6 +277,12 @@ public class PronController extends BaseController {
     public String renderTs(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
         return prefix + "/tswq";
     }
+
+    @GetMapping("/tips")
+    public String tips(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
+        return prefix + "/tips";
+    }
+
 }
 
 
