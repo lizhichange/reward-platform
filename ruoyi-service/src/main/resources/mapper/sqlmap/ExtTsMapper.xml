@@ -5,110 +5,115 @@
 <mapper namespace="com.ruoyi.sms.mapper.ExtTsMapper">
 
 
-
     <resultMap type="Ts" id="TsResult">
-                    <result property="id" column="id"/>
-                    <result property="ip" column="ip"/>
-                    <result property="zt" column="zt"/>
-                    <result property="neirong" column="neirong"/>
-                    <result property="shijian" column="shijian"/>
-                    <result property="typeto" column="typeto"/>
-                    <result property="sid" column="sid"/>
-                    <result property="userid" column="userid"/>
-                    </resultMap>
+        <result property="id" column="id"/>
+        <result property="ip" column="ip"/>
+        <result property="zt" column="zt"/>
+        <result property="neirong" column="neirong"/>
+        <result property="shijian" column="shijian"/>
+        <result property="typeto" column="typeto"/>
+        <result property="sid" column="sid"/>
+        <result property="userid" column="userid"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="open_id" property="openId"/>
+
+    </resultMap>
 
 
     <sql id="selectTsVo">
-        select id, ip, zt, neirong, shijian, typeto, sid, userid from ts
+        select
+        id, ip, zt, neirong, shijian, typeto, sid, userid, create_time, update_time, open_id
+        from ts
     </sql>
 
     <select id="selectTsList" parameterType="Ts" resultMap="TsResult">
         <include refid="selectTsVo"/>
         <where>
-                                                                                                    <if test="ip != null  and ip != ''">
-                            and ip = #{ip}
-                        </if>
-                                                                                                            <if test="zt != null  and zt != ''">
-                            and zt = #{zt}
-                        </if>
-                                                                                                            <if test="neirong != null  and neirong != ''">
-                            and neirong = #{neirong}
-                        </if>
-                                                                                                            <if test="shijian != null  and shijian != ''">
-                            and shijian = #{shijian}
-                        </if>
-                                                                                                            <if test="typeto != null  and typeto != ''">
-                            and typeto = #{typeto}
-                        </if>
-                                                                                                            <if test="sid != null ">
-                            and sid = #{sid}
-                        </if>
-                                                                                                            <if test="userid != null  and userid != ''">
-                            and userid = #{userid}
-                        </if>
-                                                        </where>
-            </select>
+            <if test="ip != null  and ip != ''">
+                and ip = #{ip}
+            </if>
+            <if test="zt != null  and zt != ''">
+                and zt = #{zt}
+            </if>
+            <if test="neirong != null  and neirong != ''">
+                and neirong = #{neirong}
+            </if>
+            <if test="shijian != null  and shijian != ''">
+                and shijian = #{shijian}
+            </if>
+            <if test="typeto != null  and typeto != ''">
+                and typeto = #{typeto}
+            </if>
+            <if test="sid != null ">
+                and sid = #{sid}
+            </if>
+            <if test="userid != null  and userid != ''">
+                and userid = #{userid}
+            </if>
+        </where>
+    </select>
 
     <select id="selectTsById" parameterType="Long" resultMap="TsResult">
-                    <include refid="selectTsVo"/>
-            where id = #{id}
-            </select>
+        <include refid="selectTsVo"/>
+        where id = #{id}
+    </select>
 
     <insert id="insertTs" parameterType="Ts" useGeneratedKeys="true"
             keyProperty="id">
         insert into ts
         <trim prefix="(" suffix=")" suffixOverrides=",">
-                                                                            <if test="ip != null  and ip != ''">ip,
-                    </if>
-                                                                <if test="zt != null  and zt != ''">zt,
-                    </if>
-                                                                <if test="neirong != null  and neirong != ''">neirong,
-                    </if>
-                                                                <if test="shijian != null  and shijian != ''">shijian,
-                    </if>
-                                                                <if test="typeto != null  and typeto != ''">typeto,
-                    </if>
-                                                                <if test="sid != null ">sid,
-                    </if>
-                                                                <if test="userid != null  and userid != ''">userid,
-                    </if>
-                                    </trim>
+            <if test="ip != null  and ip != ''">ip,
+            </if>
+            <if test="zt != null  and zt != ''">zt,
+            </if>
+            <if test="neirong != null  and neirong != ''">neirong,
+            </if>
+            <if test="shijian != null  and shijian != ''">shijian,
+            </if>
+            <if test="typeto != null  and typeto != ''">typeto,
+            </if>
+            <if test="sid != null ">sid,
+            </if>
+            <if test="userid != null  and userid != ''">userid,
+            </if>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-                                                                            <if test="ip != null  and ip != ''">#{ip},
-                    </if>
-                                                                <if test="zt != null  and zt != ''">#{zt},
-                    </if>
-                                                                <if test="neirong != null  and neirong != ''">#{neirong},
-                    </if>
-                                                                <if test="shijian != null  and shijian != ''">#{shijian},
-                    </if>
-                                                                <if test="typeto != null  and typeto != ''">#{typeto},
-                    </if>
-                                                                <if test="sid != null ">#{sid},
-                    </if>
-                                                                <if test="userid != null  and userid != ''">#{userid},
-                    </if>
-                                    </trim>
+            <if test="ip != null  and ip != ''">#{ip},
+            </if>
+            <if test="zt != null  and zt != ''">#{zt},
+            </if>
+            <if test="neirong != null  and neirong != ''">#{neirong},
+            </if>
+            <if test="shijian != null  and shijian != ''">#{shijian},
+            </if>
+            <if test="typeto != null  and typeto != ''">#{typeto},
+            </if>
+            <if test="sid != null ">#{sid},
+            </if>
+            <if test="userid != null  and userid != ''">#{userid},
+            </if>
+        </trim>
     </insert>
 
     <update id="updateTs" parameterType="Ts">
         update ts
         <trim prefix="SET" suffixOverrides=",">
-                                                                            <if test="ip != null  and ip != ''">ip = #{ip},
-                    </if>
-                                                                <if test="zt != null  and zt != ''">zt = #{zt},
-                    </if>
-                                                                <if test="neirong != null  and neirong != ''">neirong = #{neirong},
-                    </if>
-                                                                <if test="shijian != null  and shijian != ''">shijian = #{shijian},
-                    </if>
-                                                                <if test="typeto != null  and typeto != ''">typeto = #{typeto},
-                    </if>
-                                                                <if test="sid != null ">sid = #{sid},
-                    </if>
-                                                                <if test="userid != null  and userid != ''">userid = #{userid},
-                    </if>
-                                    </trim>
+            <if test="ip != null  and ip != ''">ip = #{ip},
+            </if>
+            <if test="zt != null  and zt != ''">zt = #{zt},
+            </if>
+            <if test="neirong != null  and neirong != ''">neirong = #{neirong},
+            </if>
+            <if test="shijian != null  and shijian != ''">shijian = #{shijian},
+            </if>
+            <if test="typeto != null  and typeto != ''">typeto = #{typeto},
+            </if>
+            <if test="sid != null ">sid = #{sid},
+            </if>
+            <if test="userid != null  and userid != ''">userid = #{userid},
+            </if>
+        </trim>
         where id = #{id}
     </update>
 

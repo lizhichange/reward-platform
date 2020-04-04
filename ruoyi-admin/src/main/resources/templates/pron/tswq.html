@@ -6,11 +6,16 @@
     <title>投诉</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/weui.min.css}">
     <link rel="stylesheet" th:href="@{/css/0361fffae382d0e25a2429290f7be5cf.css}">
+    <script th:src="@{/js/jquery.min.js}"></script>
 
     <style type="text/css">
         body {
             background-color: var(--weui-BG-0);
             color: var(--weui-FG-0)
+        }
+
+        .wx-sh {
+            display: none;
         }
     </style>
 </head>
@@ -18,25 +23,80 @@
 <body ontouchstart="">
 <div class="body">
     <div class="weui-cells__title">请选择投诉该网页的原因:</div>
+
     <div class="weui-cells">
-        <a class="weui-cell weui-cell_access" href="https://mp.weixin.qq.com/s/DY20sK5wqMgfqDSa2VndSQ">
+        <a class="weui-cell weui-cell_access js_item" data-id="button" href="javascript:">
             <div class="weui-cell__bd">网页包含欺诈信息（如：假红包）</div>
             <div class="weui-cell__ft"></div>
         </a>
-        <a class="weui-cell weui-cell_access" href="https://mp.weixin.qq.com/s/VDVkmf9VPyZp5fxbVgCB2g">
+
+        <a class="weui-cell weui-cell_access wx-sh" href="https://mp.weixin.qq.com/s/DY20sK5wqMgfqDSa2VndSQ">
+            <div class="weui-cell__bd wx-submit">提交给微信团队审核</div>
+            <div class="weui-cell__ft"></div>
+        </a>
+
+
+        <a class="weui-cell weui-cell_access js_item" data-id="dialog" href="javascript:">
             <div class="weui-cell__bd">网页包含违法信息</div>
             <div class="weui-cell__ft"></div>
         </a>
-        <a class="weui-cell weui-cell_access"
-           href="http://mp.weixin.qq.com/s?__biz=MzA5MzEzNDg3MQ==&amp;mid=505283684&amp;idx=1&amp;sn=6cebeb26176bae15d7aca5f290f1bf93">
+
+
+        <a class="weui-cell weui-cell_access wx-sh" href="https://mp.weixin.qq.com/s/VDVkmf9VPyZp5fxbVgCB2g">
+            <div class="weui-cell__bd">色情</div>
+            <div class="weui-cell__ft"></div>
+        </a>
+        <a class="weui-cell weui-cell_access wx-sh" href="https://mp.weixin.qq.com/s/VDVkmf9VPyZp5fxbVgCB2g">
+            <div class="weui-cell__bd">暴恐血腥</div>
+            <div class="weui-cell__ft"></div>
+        </a>
+        <a class="weui-cell weui-cell_access wx-sh" href="https://mp.weixin.qq.com/s/VDVkmf9VPyZp5fxbVgCB2g">
+            <div class="weui-cell__bd">政治敏感</div>
+            <div class="weui-cell__ft"></div>
+        </a>
+        <a class="weui-cell weui-cell_access wx-sh" href="https://mp.weixin.qq.com/s/VDVkmf9VPyZp5fxbVgCB2g">
+            <div class="weui-cell__bd">赌博</div>
+            <div class="weui-cell__ft"></div>
+        </a>
+
+
+        <a class="weui-cell weui-cell_access js_item" data-id="msg" href="javascript:">
+
             <div class="weui-cell__bd">网页可能包含谣言信息</div>
             <div class="weui-cell__ft"></div>
         </a>
-        <a class="weui-cell weui-cell_access" href="http://mp.weixin.qq.com/s/LUWjczvw0ixVpHk3XkwMgA">
+
+
+        <a class="weui-cell weui-cell_access wx-sh" href="https://mp.weixin.qq.com/s/DY20sK5wqMgfqDSa2VndSQ">
+            <div class="weui-cell__bd">提交给微信团队审核</div>
+            <div class="weui-cell__ft"></div>
+        </a>
+
+
+        <a class="weui-cell weui-cell_access js_item" data-id="picker" href="javascript:">
             <div class="weui-cell__bd">网页包含诱导分享/关注性质的内容</div>
             <div class="weui-cell__ft"></div>
         </a>
-        <a class="weui-cell weui-cell_access" href="http://mp.weixin.qq.com/s/LUWjczvw0ixVpHk3XkwMgA">
+
+        <a class="weui-cell weui-cell_access wx-sh" href="http://mp.weixin.qq.com/s/LUWjczvw0ixVpHk3XkwMgA">
+            <div class="weui-cell__bd">好友助力加速</div>
+            <div class="weui-cell__ft"></div>
+        </a>
+        <a class="weui-cell weui-cell_access wx-sh" href="http://mp.weixin.qq.com/s/LUWjczvw0ixVpHk3XkwMgA">
+            <div class="weui-cell__bd">砍价</div>
+            <div class="weui-cell__ft"></div>
+        </a>
+        <a class="weui-cell weui-cell_access wx-sh" href="http://mp.weixin.qq.com/s/LUWjczvw0ixVpHk3XkwMgA">
+            <div class="weui-cell__bd">任务收集</div>
+            <div class="weui-cell__ft"></div>
+        </a>
+        <a class="weui-cell weui-cell_access wx-sh" href="http://mp.weixin.qq.com/s/LUWjczvw0ixVpHk3XkwMgA">
+            <div class="weui-cell__bd">诱导下载</div>
+            <div class="weui-cell__ft"></div>
+        </a>
+
+
+        <a class="weui-cell weui-cell_access js_item" data-id="toast" href="javascript:">
             <div class="weui-cell__bd">网页包含（虚假/抽奖性质/欺诈）拼
                 <br/>
                 团信息
@@ -44,26 +104,65 @@
             <div class="weui-cell__ft"></div>
         </a>
 
-        <a class="weui-cell weui-cell_access" href="http://mp.weixin.qq.com/s/LUWjczvw0ixVpHk3XkwMgA">
+        <a class="weui-cell weui-cell_access wx-sh" href="https://mp.weixin.qq.com/s/DY20sK5wqMgfqDSa2VndSQ">
+            <div class="weui-cell__bd">提交给微信团队审核</div>
+            <div class="weui-cell__ft"></div>
+        </a>
+
+
+        <a class="weui-cell weui-cell_access js_item" data-id="top" href="javascript:">
             <div class="weui-cell__bd">网页包含不适当的内容对我造成骚扰</div>
             <div class="weui-cell__ft"></div>
         </a>
 
-        <a class="weui-cell weui-cell_access" href="http://mp.weixin.qq.com/s/LUWjczvw0ixVpHk3XkwMgA">
+        <a class="weui-cell weui-cell_access wx-sh" href="https://mp.weixin.qq.com/s/DY20sK5wqMgfqDSa2VndSQ">
+            <div class="weui-cell__bd">内容低俗/题文不符</div>
+            <div class="weui-cell__ft"></div>
+        </a>
+
+        <a class="weui-cell weui-cell_access wx-sh" href="https://mp.weixin.qq.com/s/DY20sK5wqMgfqDSa2VndSQ">
+            <div class="weui-cell__bd">骚扰/广告/垃圾信息</div>
+            <div class="weui-cell__ft"></div>
+        </a>
+
+
+        <a class="weui-cell weui-cell_access js_item" data-id="tips" href="javascript:">
             <div class="weui-cell__bd">网页包含有偿投票信息</div>
             <div class="weui-cell__ft"></div>
         </a>
 
-        <a class="weui-cell weui-cell_access" href="http://mp.weixin.qq.com/s/LUWjczvw0ixVpHk3XkwMgA">
+        <a class="weui-cell weui-cell_access wx-sh" href="https://mp.weixin.qq.com/s/DY20sK5wqMgfqDSa2VndSQ">
+            <div class="weui-cell__bd">提交给微信团队审核</div>
+            <div class="weui-cell__ft"></div>
+        </a>
+
+
+        <a class="weui-cell weui-cell_access js_item" data-id="navbar" href="javascript:">
             <div class="weui-cell__bd">网页包含隐私泄露风险</div>
             <div class="weui-cell__ft"></div>
         </a>
 
+        <a class="weui-cell weui-cell_access wx-sh" href="http://mp.weixin.qq.com/s/LUWjczvw0ixVpHk3XkwMgA">
+            <div class="weui-cell__bd">收集个人隐私信息（如：钓鱼链接）</div>
+            <div class="weui-cell__ft"></div>
+        </a>
+        <a class="weui-cell weui-cell_access wx-sh" href="http://mp.weixin.qq.com/s/LUWjczvw0ixVpHk3XkwMgA">
+            <div class="weui-cell__bd">违规使用用户头像</div>
+            <div class="weui-cell__ft"></div>
+        </a>
+        <a class="weui-cell weui-cell_access wx-sh" href="http://mp.weixin.qq.com/s/LUWjczvw0ixVpHk3XkwMgA">
+            <div class="weui-cell__bd">仿冒微信功能</div>
+            <div class="weui-cell__ft"></div>
+        </a>
+
     </div>
+
+
     <p class="link">
         <a href="https://kf.qq.com/touch/scene_product.html?scene_id=kf186">投诉须知</a>
     </p>
 </div>
+
 <script>
     !function (e) {
         function i(s) {
@@ -81,6 +180,16 @@
 
 </script>
 
+<script type="text/javascript" class="home js_show">
+    $(function () {
+        $('.js_item').on('click', function () {
+            let id = $(this).data('id');
+            let obj = $(this);
+            obj.siblings().addClass('wx-sh');
+            obj.prop('href', '/pron/audit');
+        });
+    });
 
+</script>
 </body>
 </html>

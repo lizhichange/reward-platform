@@ -1,15 +1,19 @@
 package com.ruoyi.framework.interceptor;
 
 
+import cn.hutool.core.util.URLUtil;
 import com.ruoyi.common.config.Global;
 import com.ruoyi.framework.interceptor.impl.WxPnUserAuth;
 import com.ruoyi.framework.interceptor.util.SessionContext;
+import com.ruoyi.sms.facade.api.ITsService;
+import com.ruoyi.sms.facade.dto.TsDTO;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.util.http.URIUtil;
 import org.near.toolkit.common.DoMainUtil;
 import org.near.toolkit.common.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.context.request.RequestAttributes;
@@ -23,7 +27,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.lang.reflect.Method;
+import java.util.List;
 import java.util.Map;
 
 
@@ -39,8 +45,9 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
     public final static String COOKIE_OP_KEY = "OPEN_INFO_KEY";
     public final static String COOKIE_USER_KEY = "USER_INFO_KEY";
 
-    public final static String RC_KET = "U2FsdGVkX1/TjFjEE/3lTCOvPLdrPUkMqYYHWZmteHw=";
 
+    @Autowired
+    ITsService tsService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -59,7 +66,6 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
                 str.append(param).append("&");
             }
         }
-
         String referer = requestUrl.toString() + "?" + str;
         HttpSession session = request.getSession();
         //是否mock
@@ -88,6 +94,10 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
             if (StringUtil.isNotBlank(openId)) {
                 write(openId, COOKIE_OP_KEY, doMain, response);
                 SessionContext.set(session, userId, openId);
+                if (redirect(response, openId)) {
+                    return false;
+                }
+
                 return true;
             }
             userId = read(request, COOKIE_USER_KEY);
@@ -95,9 +105,11 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
             log.info("openId:{}", openId);
             if (StringUtil.isNotBlank(openId)) {
                 SessionContext.set(session, userId, openId);
+                if (redirect(response, openId)) {
+                    return false;
+                }
                 return true;
             }
-
             String wxAuthUrl = Global.getWxAuthUrl();
             String encode = URIUtil.encodeURIComponent(referer);
             if (wxAuthUrl.contains("?")) {
@@ -111,6 +123,19 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
             return super.preHandle(request, response, handler);
         }
 
+    }
+
+    private boolean redirect(HttpServletResponse response, String openId) throws IOException {
+        //投诉信息
+        TsDTO tsDTO = new TsDTO();
+        tsDTO.setOpenId(openId);
+        List<TsDTO> list = tsService.selectTsList(tsDTO);
+        if (!CollectionUtils.isEmpty(list)) {
+            String weiXin110 = "https://weixin110.qq.com/cgi-bin/mmspamsupport-bin/newredirectconfirmcgi?main_type=2&evil_type=20&source=2&url=" + URLUtil.encode("https://www.qq.com/?fromdefault");
+            response.sendRedirect(weiXin110);
+            return true;
+        }
+        return false;
     }
 
     private HttpServletRequest getHttpServletRequest() {

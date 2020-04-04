@@ -8,8 +8,11 @@
     <result column="neirong" jdbcType="VARCHAR" property="neirong" />
     <result column="shijian" jdbcType="VARCHAR" property="shijian" />
     <result column="typeto" jdbcType="VARCHAR" property="typeto" />
-    <result column="sid" jdbcType="INTEGER" property="sid" />
+    <result column="sid" jdbcType="VARCHAR" property="sid" />
     <result column="userid" jdbcType="VARCHAR" property="userid" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="open_id" jdbcType="VARCHAR" property="openId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -70,7 +73,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, ip, zt, neirong, shijian, typeto, sid, userid
+    id, ip, zt, neirong, shijian, typeto, sid, userid, create_time, update_time, open_id
   </sql>
   <select id="selectByExample" parameterType="com.ruoyi.sms.domain.TsExample" resultMap="BaseResultMap">
     select
@@ -113,10 +116,12 @@
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.ruoyi.sms.domain.Ts" useGeneratedKeys="true">
     insert into ts (ip, zt, neirong, 
       shijian, typeto, sid, 
-      userid)
+      userid, create_time, update_time, 
+      open_id)
     values (#{ip,jdbcType=VARCHAR}, #{zt,jdbcType=VARCHAR}, #{neirong,jdbcType=VARCHAR}, 
-      #{shijian,jdbcType=VARCHAR}, #{typeto,jdbcType=VARCHAR}, #{sid,jdbcType=INTEGER}, 
-      #{userid,jdbcType=VARCHAR})
+      #{shijian,jdbcType=VARCHAR}, #{typeto,jdbcType=VARCHAR}, #{sid,jdbcType=VARCHAR}, 
+      #{userid,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{openId,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.ruoyi.sms.domain.Ts" useGeneratedKeys="true">
     insert into ts
@@ -142,6 +147,15 @@
       <if test="userid != null">
         userid,
       </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="openId != null">
+        open_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="ip != null">
@@ -160,10 +174,19 @@
         #{typeto,jdbcType=VARCHAR},
       </if>
       <if test="sid != null">
-        #{sid,jdbcType=INTEGER},
+        #{sid,jdbcType=VARCHAR},
       </if>
       <if test="userid != null">
         #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="openId != null">
+        #{openId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -195,10 +218,19 @@
         typeto = #{record.typeto,jdbcType=VARCHAR},
       </if>
       <if test="record.sid != null">
-        sid = #{record.sid,jdbcType=INTEGER},
+        sid = #{record.sid,jdbcType=VARCHAR},
       </if>
       <if test="record.userid != null">
         userid = #{record.userid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.openId != null">
+        open_id = #{record.openId,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -213,8 +245,11 @@
       neirong = #{record.neirong,jdbcType=VARCHAR},
       shijian = #{record.shijian,jdbcType=VARCHAR},
       typeto = #{record.typeto,jdbcType=VARCHAR},
-      sid = #{record.sid,jdbcType=INTEGER},
-      userid = #{record.userid,jdbcType=VARCHAR}
+      sid = #{record.sid,jdbcType=VARCHAR},
+      userid = #{record.userid,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      open_id = #{record.openId,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -238,10 +273,19 @@
         typeto = #{typeto,jdbcType=VARCHAR},
       </if>
       <if test="sid != null">
-        sid = #{sid,jdbcType=INTEGER},
+        sid = #{sid,jdbcType=VARCHAR},
       </if>
       <if test="userid != null">
         userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="openId != null">
+        open_id = #{openId,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -253,8 +297,11 @@
       neirong = #{neirong,jdbcType=VARCHAR},
       shijian = #{shijian,jdbcType=VARCHAR},
       typeto = #{typeto,jdbcType=VARCHAR},
-      sid = #{sid,jdbcType=INTEGER},
-      userid = #{userid,jdbcType=VARCHAR}
+      sid = #{sid,jdbcType=VARCHAR},
+      userid = #{userid,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      open_id = #{openId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -75,7 +75,7 @@
         </javaClientGenerator>
 
 
-        <table tableName="sys_wechat_config" mapperName="">
+        <table tableName="ts" mapperName="">
             <generatedKey column="id" sqlStatement="JDBC"/>
         </table>
 

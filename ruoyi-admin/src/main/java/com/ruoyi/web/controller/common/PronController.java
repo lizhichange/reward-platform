@@ -283,6 +283,10 @@ public class PronController extends BaseController {
         return prefix + "/tips";
     }
 
+    @GetMapping("/audit")
+    public String audit(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
+        return prefix + "/audit";
+    }
 }
 
 
