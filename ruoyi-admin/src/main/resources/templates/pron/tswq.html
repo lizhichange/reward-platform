@@ -30,7 +30,7 @@
             <div class="weui-cell__ft"></div>
         </a>
 
-        <a class="weui-cell weui-cell_access wx-sh" href="https://mp.weixin.qq.com/s/DY20sK5wqMgfqDSa2VndSQ">
+        <a class="weui-cell weui-cell_access wx-sh" href="">
             <div class="weui-cell__bd wx-submit">提交给微信团队审核</div>
             <div class="weui-cell__ft"></div>
         </a>
@@ -61,12 +61,9 @@
 
 
         <a class="weui-cell weui-cell_access js_item" data-id="msg" href="javascript:">
-
             <div class="weui-cell__bd">网页可能包含谣言信息</div>
             <div class="weui-cell__ft"></div>
         </a>
-
-
         <a class="weui-cell weui-cell_access wx-sh" href="https://mp.weixin.qq.com/s/DY20sK5wqMgfqDSa2VndSQ">
             <div class="weui-cell__bd">提交给微信团队审核</div>
             <div class="weui-cell__ft"></div>
@@ -119,7 +116,6 @@
             <div class="weui-cell__bd">内容低俗/题文不符</div>
             <div class="weui-cell__ft"></div>
         </a>
-
         <a class="weui-cell weui-cell_access wx-sh" href="https://mp.weixin.qq.com/s/DY20sK5wqMgfqDSa2VndSQ">
             <div class="weui-cell__bd">骚扰/广告/垃圾信息</div>
             <div class="weui-cell__ft"></div>
@@ -130,7 +126,6 @@
             <div class="weui-cell__bd">网页包含有偿投票信息</div>
             <div class="weui-cell__ft"></div>
         </a>
-
         <a class="weui-cell weui-cell_access wx-sh" href="https://mp.weixin.qq.com/s/DY20sK5wqMgfqDSa2VndSQ">
             <div class="weui-cell__bd">提交给微信团队审核</div>
             <div class="weui-cell__ft"></div>
@@ -155,6 +150,7 @@
             <div class="weui-cell__ft"></div>
         </a>
 
+
     </div>
 
 
@@ -177,16 +173,27 @@
         e.exports = ""
     }]);/* vhtml-webpack-plugin version: 0.2.2 */
 
-
 </script>
 
 <script type="text/javascript" class="home js_show">
     $(function () {
         $('.js_item').on('click', function () {
-            let id = $(this).data('id');
             let obj = $(this);
-            obj.siblings().addClass('wx-sh');
-            obj.prop('href', '/pron/audit');
+            // obj.siblings().addClass('wx-sh');
+            let id = $(this).data('id');
+            let weui = $(".weui-cells");
+            if (id === 'button' || id === 'msg' || id === 'toast' || id === 'tips') {
+                var html = '<a class="weui-cell weui-cell_access" href="">'
+                    + ' <div class="weui-cell__bd wx-submit">提交给微信团队审核</div>'
+                    + '<div class="weui-cell__ft"></div>'
+                    + '</a>';
+                weui.html(html);
+            } else if (id === 'dialog' || id === 'picker' || id === 'top' || id === 'navbar') {
+
+            }
+
+
+            // obj.prop('href', '/pron/audit');
         });
     });
 
