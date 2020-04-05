@@ -9,6 +9,7 @@
           crossorigin="anonymous">
     <link href="//res.wx.qq.com/a/wx110/webpage-intercept/res/js/reason.18a216b4.js" rel="preload" as="script"
           crossorigin="anonymous">
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
     <script th:src="@{/js/jquery.min.js}"></script>
 
     <style type="text/css">
@@ -56,6 +57,7 @@
         .ui-ellpisis-action a:active {
             opacity: .8
         }
+
 
 
     </style>
@@ -161,6 +163,7 @@
         }
 
 
+
     </style>
 </head>
 <body>
@@ -195,6 +198,7 @@
 <script>
     $(function () {
         $("#close").on('click', function () {
+        WeixinJSBridge.call('closeWindow');
             var userAgent = navigator.userAgent;
             if (userAgent.indexOf("Firefox") !== -1 || userAgent.indexOf("Chrome") !== -1) {
                 location.href = "about:blank";
@@ -206,6 +210,7 @@
         });
 
     });
+
 </script>
 </body>
 </html>
