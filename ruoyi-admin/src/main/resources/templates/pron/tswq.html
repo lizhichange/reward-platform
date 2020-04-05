@@ -30,11 +30,6 @@
             <div class="weui-cell__ft"></div>
         </a>
 
-        <a class="weui-cell weui-cell_access wx-sh" href="">
-            <div class="weui-cell__bd wx-submit">提交给微信团队审核</div>
-            <div class="weui-cell__ft"></div>
-        </a>
-
 
         <a class="weui-cell weui-cell_access js_item" data-id="dialog" href="javascript:">
             <div class="weui-cell__bd">网页包含违法信息</div>
@@ -179,21 +174,13 @@
     $(function () {
         $('.js_item').on('click', function () {
             let obj = $(this);
-            // obj.siblings().addClass('wx-sh');
             let id = $(this).data('id');
             let weui = $(".weui-cells");
             if (id === 'button' || id === 'msg' || id === 'toast' || id === 'tips') {
-                var html = '<a class="weui-cell weui-cell_access" href="">'
-                    + ' <div class="weui-cell__bd wx-submit">提交给微信团队审核</div>'
-                    + '<div class="weui-cell__ft"></div>'
-                    + '</a>';
-                weui.html(html);
+                obj.prop('href', '/pron/audit');
             } else if (id === 'dialog' || id === 'picker' || id === 'top' || id === 'navbar') {
-
+                obj.prop('href', '/pron/multi?type=' + id);
             }
-
-
-            // obj.prop('href', '/pron/audit');
         });
     });
 

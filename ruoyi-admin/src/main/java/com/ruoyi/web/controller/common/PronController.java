@@ -2,6 +2,8 @@ package com.ruoyi.web.controller.common;
 
 import cn.hutool.core.util.RandomUtil;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.parser.Feature;
 import com.github.pagehelper.PageHelper;
 import com.ruoyi.common.config.Global;
 import com.ruoyi.common.core.controller.BaseController;
@@ -19,6 +21,8 @@ import com.ruoyi.system.domain.SysCategory;
 import com.ruoyi.system.domain.SysOrder;
 import com.ruoyi.system.domain.SysWebMain;
 import com.ruoyi.system.service.*;
+import com.ruoyi.web.Multi;
+import com.ruoyi.web.controller.enums.MultiTypeEnum;
 import lombok.Data;
 import lombok.extern.java.Log;
 import org.near.toolkit.common.DateUtils;
@@ -275,6 +279,254 @@ public class PronController extends BaseController {
 
     @GetMapping("/tswq")
     public String renderTs(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
+
+        String json = "{\n" +
+                "  \"list\": [\n" +
+                "    \"请选择投诉该网页的原因：\",\n" +
+                "    {\n" +
+                "      \"id\": 32,\n" +
+                "      \"name\": \"网页包含欺诈信息（如：假红包）\",\n" +
+                "      \"list\": [\n" +
+                "        \"你可以：\",\n" +
+                "        {\n" +
+                "          \"id\": 108,\n" +
+                "          \"name\": \"提交给微信团队审核\",\n" +
+                "          \"proof\": 0\n" +
+                "        }\n" +
+                "      ]\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"id\": 58,\n" +
+                "      \"name\": \"网页包含违法信息\",\n" +
+                "      \"list\": [\n" +
+                "        \"请选择哪一类违法内容：\",\n" +
+                "        {\n" +
+                "          \"id\": 1,\n" +
+                "          \"name\": \"色情\",\n" +
+                "          \"list\": [\n" +
+                "            \"你可以：\",\n" +
+                "            {\n" +
+                "              \"id\": 108,\n" +
+                "              \"name\": \"提交给微信团队审核\",\n" +
+                "              \"proof\": 0\n" +
+                "            }\n" +
+                "          ]\n" +
+                "        },\n" +
+                "        {\n" +
+                "          \"id\": 15,\n" +
+                "          \"name\": \"暴恐血腥\",\n" +
+                "          \"list\": [\n" +
+                "            \"你可以：\",\n" +
+                "            {\n" +
+                "              \"id\": 108,\n" +
+                "              \"name\": \"提交给微信团队审核\",\n" +
+                "              \"proof\": 0\n" +
+                "            }\n" +
+                "          ]\n" +
+                "        },\n" +
+                "        {\n" +
+                "          \"id\": 5,\n" +
+                "          \"name\": \"政治敏感\",\n" +
+                "          \"list\": [\n" +
+                "            \"你可以：\",\n" +
+                "            {\n" +
+                "              \"id\": 108,\n" +
+                "              \"name\": \"提交给微信团队审核\",\n" +
+                "              \"proof\": 0\n" +
+                "            }\n" +
+                "          ]\n" +
+                "        },\n" +
+                "        {\n" +
+                "          \"id\": 16,\n" +
+                "          \"name\": \"赌博\",\n" +
+                "          \"list\": [\n" +
+                "            \"你可以：\",\n" +
+                "            {\n" +
+                "              \"id\": 108,\n" +
+                "              \"name\": \"提交给微信团队审核\",\n" +
+                "              \"proof\": 0\n" +
+                "            }\n" +
+                "          ]\n" +
+                "        }\n" +
+                "      ]\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"id\": 14,\n" +
+                "      \"name\": \"网页可能包含谣言信息\",\n" +
+                "      \"list\": [\n" +
+                "        \"你可以：\",\n" +
+                "        {\n" +
+                "          \"id\": 108,\n" +
+                "          \"name\": \"提交给微信团队审核\",\n" +
+                "          \"proof\": 0\n" +
+                "        }\n" +
+                "      ]\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"id\": 13,\n" +
+                "      \"name\": \"网页包含诱导分享/关注性质的内容\",\n" +
+                "      \"list\": [\n" +
+                "        \"请选择哪一类违法内容：\",\n" +
+                "        {\n" +
+                "          \"id\": 56,\n" +
+                "          \"name\": \"好友助力加速\",\n" +
+                "          \"list\": [\n" +
+                "            \"你可以：\",\n" +
+                "            {\n" +
+                "              \"id\": 108,\n" +
+                "              \"name\": \"提交给微信团队审核\",\n" +
+                "              \"proof\": 0\n" +
+                "            }\n" +
+                "          ]\n" +
+                "        },\n" +
+                "        {\n" +
+                "          \"id\": 57,\n" +
+                "          \"name\": \"砍价\",\n" +
+                "          \"list\": [\n" +
+                "            \"你可以：\",\n" +
+                "            {\n" +
+                "              \"id\": 108,\n" +
+                "              \"name\": \"提交给微信团队审核\",\n" +
+                "              \"proof\": 0\n" +
+                "            }\n" +
+                "          ]\n" +
+                "        },\n" +
+                "        {\n" +
+                "          \"id\": 58,\n" +
+                "          \"name\": \"任务收集\",\n" +
+                "          \"list\": [\n" +
+                "            \"你可以：\",\n" +
+                "            {\n" +
+                "              \"id\": 108,\n" +
+                "              \"name\": \"提交给微信团队审核\",\n" +
+                "              \"proof\": 0\n" +
+                "            }\n" +
+                "          ]\n" +
+                "        },\n" +
+                "        {\n" +
+                "          \"id\": 59,\n" +
+                "          \"name\": \"诱导下载\",\n" +
+                "          \"list\": [\n" +
+                "            \"你可以：\",\n" +
+                "            {\n" +
+                "              \"id\": 108,\n" +
+                "              \"name\": \"提交给微信团队审核\",\n" +
+                "              \"proof\": 0\n" +
+                "            }\n" +
+                "          ]\n" +
+                "        }\n" +
+                "      ]\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"id\": 56,\n" +
+                "      \"name\": \"网页包含（虚假/抽奖性质/欺诈）拼团信息\",\n" +
+                "      \"list\": [\n" +
+                "        \"你可以：\",\n" +
+                "        {\n" +
+                "          \"id\": 108,\n" +
+                "          \"name\": \"提交给微信团队审核\",\n" +
+                "          \"proof\": 0\n" +
+                "        }\n" +
+                "      ]\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"id\": 23,\n" +
+                "      \"name\": \"网页包含不适当的内容对我造成骚扰\",\n" +
+                "      \"list\": [\n" +
+                "        \"请选择哪一类违法内容：\",\n" +
+                "        {\n" +
+                "          \"id\": 60,\n" +
+                "          \"name\": \"内容低俗/题文不符\",\n" +
+                "          \"list\": [\n" +
+                "            \"你可以：\",\n" +
+                "            {\n" +
+                "              \"id\": 108,\n" +
+                "              \"name\": \"提交给微信团队审核\",\n" +
+                "              \"proof\": 0\n" +
+                "            }\n" +
+                "          ]\n" +
+                "        },\n" +
+                "        {\n" +
+                "          \"id\": 61,\n" +
+                "          \"name\": \"骚扰/广告/垃圾信息\",\n" +
+                "          \"list\": [\n" +
+                "            \"你可以：\",\n" +
+                "            {\n" +
+                "              \"id\": 108,\n" +
+                "              \"name\": \"提交给微信团队审核\",\n" +
+                "              \"proof\": 0\n" +
+                "            }\n" +
+                "          ]\n" +
+                "        }\n" +
+                "      ]\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"id\": 59,\n" +
+                "      \"name\": \"网页包含有偿投票信息\",\n" +
+                "      \"list\": [\n" +
+                "        \"你可以：\",\n" +
+                "        {\n" +
+                "          \"id\": 108,\n" +
+                "          \"name\": \"提交给微信团队审核\",\n" +
+                "          \"proof\": 0\n" +
+                "        }\n" +
+                "      ]\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"id\": 60,\n" +
+                "      \"name\": \"网页包含隐私泄露风险\",\n" +
+                "      \"list\": [\n" +
+                "        \"请选择哪一类违法内容：\",\n" +
+                "        {\n" +
+                "          \"id\": 62,\n" +
+                "          \"name\": \"收集个人隐私信息（如：钓鱼链接）\",\n" +
+                "          \"list\": [\n" +
+                "            \"你可以：\",\n" +
+                "            {\n" +
+                "              \"id\": 108,\n" +
+                "              \"name\": \"提交给微信团队审核\",\n" +
+                "              \"proof\": 0\n" +
+                "            }\n" +
+                "          ]\n" +
+                "        },\n" +
+                "        {\n" +
+                "          \"id\": 63,\n" +
+                "          \"name\": \"违规使用用户头像\",\n" +
+                "          \"list\": [\n" +
+                "            \"你可以：\",\n" +
+                "            {\n" +
+                "              \"id\": 108,\n" +
+                "              \"name\": \"提交给微信团队审核\",\n" +
+                "              \"proof\": 0\n" +
+                "            }\n" +
+                "          ]\n" +
+                "        },\n" +
+                "        {\n" +
+                "          \"id\": 64,\n" +
+                "          \"name\": \"仿冒微信功能\",\n" +
+                "          \"list\": [\n" +
+                "            \"你可以：\",\n" +
+                "            {\n" +
+                "              \"id\": 108,\n" +
+                "              \"name\": \"提交给微信团队审核\",\n" +
+                "              \"proof\": 0\n" +
+                "            }\n" +
+                "          ]\n" +
+                "        }\n" +
+                "      ]\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"id\": 24,\n" +
+                "      \"name\": \"遇到网页流量被劫持怎么办\",\n" +
+                "      \"type\": \"article\",\n" +
+                "      \"href\": \"http://mp.weixin.qq.com/s?__biz=MzIzNzAzODg4OA==&mid=401352390&idx=1&sn=49d7f7d99a4944b065ba5cc54b060130#wechat_redirect\"\n" +
+                "    }\n" +
+                "  ],\n" +
+                "  \"ret\": 0\n" +
+                "}";
+
+        Multi parse = JSONObject.parseObject(json, Multi.class, new Feature[0]);
+        modelmap.addAttribute("parse", parse);
         return prefix + "/tswq";
     }
 
@@ -286,6 +538,16 @@ public class PronController extends BaseController {
     @GetMapping("/audit")
     public String audit(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
         return prefix + "/audit";
+    }
+
+    @GetMapping("/multi")
+    public String multi(@RequestParam(value = "userid", required = false) String userid,
+                        @RequestParam(value = "type") String type,
+                        ModelMap modelmap) {
+        MultiTypeEnum multiTypeEnum = EnumUtil.queryByCode(type, MultiTypeEnum.class);
+        List<MultiTypeEnum.ItemContent> list = multiTypeEnum.getList();
+        modelmap.addAttribute("list", list);
+        return prefix + "/multi";
     }
 }
 
