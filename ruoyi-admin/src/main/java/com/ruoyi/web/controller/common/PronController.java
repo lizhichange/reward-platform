@@ -542,7 +542,6 @@ public class PronController extends BaseController {
 
     @GetMapping("/success")
     public String success(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
-
         return prefix + "/success";
     }
 
