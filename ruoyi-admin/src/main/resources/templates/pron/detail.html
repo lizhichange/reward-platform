@@ -203,6 +203,7 @@
 
 
 
+
                 </style>
             </div>
 
@@ -215,11 +216,15 @@
                 window.addEventListener('resize', function () {
                     document.getElementById('mse').style.height = window.innerHeight + 'px';
                 });
-                $('#toggle-button').click(function (e) {
+                $(function(){
+                   $('#toggle-button').click(function (e) {
                    let obj = $(this);
                    obj.prop('href', '/pron/tswq?type=');
 
                 });
+                });
+
+
 
 
 
@@ -294,6 +299,7 @@
 
 
                 });
+
 
 
 
