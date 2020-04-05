@@ -10,10 +10,13 @@ import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.sequence.ConcurrentSequence;
+import com.ruoyi.common.utils.IpUtils;
 import com.ruoyi.framework.interceptor.impl.WxPnUserAuth;
 import com.ruoyi.framework.interceptor.util.SessionContext;
 import com.ruoyi.sms.facade.api.IShipinService;
+import com.ruoyi.sms.facade.api.ITsService;
 import com.ruoyi.sms.facade.dto.ShipinDTO;
+import com.ruoyi.sms.facade.dto.TsDTO;
 import com.ruoyi.sms.facade.enums.OrderPayType;
 import com.ruoyi.sms.facade.enums.OrderStatusType;
 import com.ruoyi.sms.facade.enums.WebMainStatus;
@@ -60,6 +63,8 @@ public class PronController extends BaseController {
 
     @Autowired
     IShipinService shipinService;
+    @Autowired
+    ITsService tsService;
 
 
     @Autowired
@@ -541,7 +546,17 @@ public class PronController extends BaseController {
     }
 
     @GetMapping("/sub")
-    public String success(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
+    public String success(@RequestParam(value = "userid", required = false) String userid,
+                          HttpServletRequest request,
+                          ModelMap modelmap) {
+
+        threadPoolTaskExecutor.execute(() -> {
+            TsDTO tsDTO = new TsDTO();
+            tsDTO.setOpenId(SessionContext.getOpenId());
+            tsDTO.setUserid(SessionContext.getUserId());
+            tsDTO.setIp(IpUtils.getIpAddr(request));
+            tsService.insertTs(tsDTO);
+        });
         return prefix + "/sub";
     }
 
