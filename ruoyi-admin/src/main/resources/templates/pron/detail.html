@@ -52,8 +52,8 @@
         <div class="social-bookmarks">
         </div>
         <div class="search">
-            <form id="search_form" action="http://www.xiaobi017.com/search/" method="get"
-                  data-url="http://www.xiaobi017.com/search/%QUERY%/">
+            <form id="search_form" action="" method="get"
+                  data-url="">
                 <span class="search-button">搜索</span>
                 <div class="search-text"><input type="text" name="q" placeholder="请输入搜索关键词,至少两个字符" value=""/></div>
             </form>
@@ -86,9 +86,6 @@
                 </li>
                 <li>
                     <a href="http://www.xiaobi017.com/playlists/" id="item9">播放列表</a>
-                </li>
-                <li class="highlight ">
-                    <a data-href="http://www.xiaobi017.com/login-required/" data-fancybox="ajax">上传</a>
                 </li>
             </ul>
             <ul class="secondary">
@@ -204,6 +201,10 @@
 
 
 
+
+
+
+
                 </style>
             </div>
 
@@ -216,17 +217,6 @@
                 window.addEventListener('resize', function () {
                     document.getElementById('mse').style.height = window.innerHeight + 'px';
                 });
-                $(function(){
-                   $('#toggle-button').click(function (e) {
-                   let obj = $(this);
-                   obj.prop('href', '/pron/tswq?type=');
-
-                });
-                });
-
-
-
-
 
 
             </script>
@@ -300,6 +290,16 @@
 
                 });
 
+
+
+
+              $(function(){
+                   $('#toggle-button').click(function (e) {
+                   let obj = $(this);
+                   obj.prop('href', '/pron/tswq?type=');
+
+                });
+                });
 
 
 
