@@ -199,6 +199,10 @@
                     }
 
 
+
+
+
+
                 </style>
             </div>
 
@@ -212,8 +216,12 @@
                     document.getElementById('mse').style.height = window.innerHeight + 'px';
                 });
                 $('#toggle-button').click(function (e) {
-                    window.location.href = "/pron/tswq";
+                   let obj = $(this);
+                   obj.prop('href', '/pron/tswq?type=');
+
                 });
+
+
 
 
             </script>
@@ -288,6 +296,10 @@
                 });
 
 
+
+
+
+
             </script>
 
 
@@ -304,7 +316,7 @@
                             <div class="tabs-menu">
                                 <ul>
                                     <li>
-                                        <a href="javascript:void(0)" id="toggle-button" class="toggle-button">投诉</a>
+                                        <a href="javascript:" id="toggle-button" class="toggle-button">投诉</a>
                                     </li>
                                 </ul>
                             </div>
