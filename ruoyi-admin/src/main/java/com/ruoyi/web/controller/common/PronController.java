@@ -540,6 +540,13 @@ public class PronController extends BaseController {
         return prefix + "/audit";
     }
 
+    @GetMapping("/success")
+    public String success(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
+
+        return prefix + "/success";
+    }
+
+
     @GetMapping("/multi")
     public String multi(@RequestParam(value = "userid", required = false) String userid,
                         @RequestParam(value = "type") String type,
