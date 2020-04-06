@@ -12,7 +12,6 @@ import com.ruoyi.sms.facade.enums.AccountType;
 import com.ruoyi.sms.facade.enums.SwitchEnum;
 import com.ruoyi.system.domain.Account;
 import com.ruoyi.system.service.IAccountService;
-import com.ruoyi.system.service.ISysUserService;
 import com.ruoyi.web.controller.vo.SelectOption;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -140,7 +139,7 @@ public class AccountController extends BaseController {
         return toAjax(accountService.deleteAccountByIds(ids));
     }
 
-    ISysUserService sysUserService;
+
 
     /**
      * 账户状态修改
