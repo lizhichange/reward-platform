@@ -65,19 +65,18 @@ ruoyi:
   # 版权年份
   copyrightYear: 2019
   # 实例演示开关
-  demoEnabled: false
+  demoEnabled: true
   # 文件路径 示例（ Windows配置D:/ruoyi/uploadPath，Linux配置 /home/ruoyi/uploadPath）
-  profile: /home/fulihui/uploadPath
-
+  profile: /Users/sunflower/Downloads/uploadPath
   # 获取ip地址开关
   addressEnabled: true
   # 是否mock
-  mock: false
-
+  mock: true
   # 微信预授权地址
   wxAuthUrl: http://yuluncc.top/wechat/auth
   # 微信支付地址
   wxPayUrl: http://yuluncc.top/pay
+
 
 dubbo:
   registry:
@@ -100,3 +99,8 @@ dubbo:
       port: 44444
       foreign:
         ip: false
+
+nacos:
+  config:
+    server-addr: 127.0.0.1:8848
+    file-extension: yml

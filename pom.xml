@@ -37,6 +37,7 @@
         <zkclient.version>0.2</zkclient.version>
         <zookeeper.version>[3.4.14,)</zookeeper.version>
         <curator-framework.version>2.12.0</curator-framework.version>
+        <nacos-config-spring-boot.version>0.2.1</nacos-config-spring-boot.version>
 
 
     </properties>
@@ -230,8 +231,6 @@
             </dependency>
 
 
-
-
             <dependency>
                 <groupId>com.ruoyi</groupId>
                 <artifactId>ruoyi-mp</artifactId>
@@ -314,6 +313,13 @@
                 <artifactId>weixin-java-pay</artifactId>
                 <version>3.7.0</version>
             </dependency>
+            <!-- nacos 依赖 -->
+            <dependency>
+                <groupId>com.alibaba.boot</groupId>
+                <artifactId>nacos-config-spring-boot-starter</artifactId>
+                <version>${nacos-config-spring-boot.version}</version>
+            </dependency>
+
 
         </dependencies>
     </dependencyManagement>
