@@ -1,9 +1,10 @@
 package com.ruoyi.system.biz.impl;
 
 import com.ruoyi.sms.facade.dto.SysOrderDTO;
+import com.ruoyi.sms.facade.enums.AccountOptType;
+import com.ruoyi.sms.facade.enums.AccountType;
 import com.ruoyi.sms.facade.enums.OrderStatusType;
-import com.ruoyi.sms.facade.enums.UserAccountOptTypeEnum;
-import com.ruoyi.sms.facade.enums.UserAccountType;
+
 import com.ruoyi.sms.facade.request.UserAccountOperatorRequest;
 import com.ruoyi.system.biz.AbstractOrderStatusProcessor;
 import com.ruoyi.system.biz.TakeAccountAmountManager;
@@ -21,7 +22,7 @@ import org.springframework.util.CollectionUtils;
 import java.math.BigDecimal;
 import java.util.List;
 
-import static com.ruoyi.sms.facade.enums.UserAccountBizCode.ORDER_REBATE;
+import static com.ruoyi.sms.facade.enums.AccountBizCode.ORDER_REBATE;
 
 /**
  * 订单已到账处理
@@ -81,7 +82,7 @@ public class OrderAlreadyToAccountProcessor extends AbstractOrderStatusProcessor
         accOptReq.setSourceCode(orderSn);
         //订单返利
         accOptReq.setRemark(remark);
-        accOptReq.setOptType(UserAccountOptTypeEnum.INCOME.getCode());
+        accOptReq.setOptType(AccountOptType.INCOME.getCode());
         accOptReq.setBizCode(bizCode);
         accOptReq.setUserAccountType(userAccountType);
         if (xxx(orderSn, userId, bizCode)) {
@@ -99,7 +100,7 @@ public class OrderAlreadyToAccountProcessor extends AbstractOrderStatusProcessor
         criteria.andAccountIdEqualTo(userId);
         criteria.andBizCodeEqualTo(bizCode);
         criteria.andSourceCodeEqualTo(orderSn);
-        criteria.andOptTypeEqualTo(UserAccountOptTypeEnum.INCOME.getCode());
+        criteria.andOptTypeEqualTo(AccountOptType.INCOME.getCode());
         List<AccountDetail> list = accountDetailMapper.selectByExample(example);
         return !CollectionUtils.isEmpty(list);
     }
@@ -110,7 +111,7 @@ public class OrderAlreadyToAccountProcessor extends AbstractOrderStatusProcessor
         String extensionUserId = orderInfo.getExtensionUserId();
         if (StringUtil.isNotBlank(extensionUserId)) {
             addMoneyToBalance(orderInfo.getOrderId(), rebateAmount, extensionUserId, "返利", ORDER_REBATE.getCode(),
-                    UserAccountType.PROMOTION_MERCHANT.getCode());
+                    AccountType.PROMOTION_MERCHANT.getCode());
         }
         return rebateAmount;
     }

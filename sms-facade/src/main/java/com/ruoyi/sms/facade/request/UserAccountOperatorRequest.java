@@ -5,7 +5,6 @@
 package com.ruoyi.sms.facade.request;
 
 
-import com.ruoyi.sms.facade.enums.UserAccountOptTypeEnum;
 import lombok.Getter;
 import lombok.Setter;
 import org.near.toolkit.model.ToString;
@@ -40,8 +39,6 @@ public class UserAccountOperatorRequest extends ToString {
     private String sourceCode;
     /**
      * 操作类型 [0:收入][1:支出]',
-     *
-     * @see UserAccountOptTypeEnum
      */
 
     private String optType;

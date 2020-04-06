@@ -11,9 +11,8 @@ import com.ruoyi.sms.facade.enums.OrderPayType;
 import com.ruoyi.sms.facade.enums.OrderStatusType;
 import com.ruoyi.system.domain.SysOrder;
 import com.ruoyi.system.service.ISysOrderService;
-import lombok.Data;
+import com.ruoyi.web.controller.vo.SelectOption;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.near.toolkit.model.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -62,12 +61,6 @@ public class SysOrderController extends BaseController {
         return prefix + "/sysOrder";
     }
 
-
-    @Data
-    static class SelectOption extends ToString {
-        private String code;
-        private String desc;
-    }
 
     /**
      * 查询订单列表列表

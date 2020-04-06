@@ -12,9 +12,9 @@ import org.near.toolkit.model.BaseEnum;
 public enum AccountType implements BaseEnum {
 
     /**
-     * 推广商户
+     * 推广代理商户
      */
-    PROMOTION_MERCHANT("PROMOTION_MERCHANT", "推广商户"),
+    PROMOTION_MERCHANT("PROMOTION_MERCHANT", "推广代理商户"),
     ;
 
     String code;

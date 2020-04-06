@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.IAccountMapper">
+
+    <resultMap type="Account" id="AccountResult">
+        <result property="id" column="id"/>
+        <result property="accountId" column="account_id"/>
+        <result property="balance" column="balance"/>
+        <result property="state" column="state"/>
+        <result property="gmtCreate" column="gmt_create"/>
+        <result property="createBy" column="create_by"/>
+        <result property="gmtModified" column="gmt_modified"/>
+        <result property="modifiedBy" column="modified_by"/>
+        <result property="accountType" column="account_type"/>
+    </resultMap>
+
+    <sql id="selectAccountVo">
+        select id, account_id, balance, state, gmt_create, create_by, gmt_modified, modified_by, account_type from
+        account
+    </sql>
+
+    <select id="selectAccountList" parameterType="Account" resultMap="AccountResult">
+        <include refid="selectAccountVo"/>
+        <where>
+            <if test="accountId != null  and accountId != ''">and account_id = #{accountId}</if>
+            <if test="balance != null ">and balance = #{balance}</if>
+            <if test="state != null  and state != ''">and state = #{state}</if>
+            <if test="gmtCreate != null ">and gmt_create = #{gmtCreate}</if>
+            <if test="gmtModified != null ">and gmt_modified = #{gmtModified}</if>
+            <if test="modifiedBy != null  and modifiedBy != ''">and modified_by = #{modifiedBy}</if>
+            <if test="accountType != null  and accountType != ''">and account_type = #{accountType}</if>
+        </where>
+    </select>
+
+    <select id="selectAccountById" parameterType="Long" resultMap="AccountResult">
+        <include refid="selectAccountVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertAccount" parameterType="Account" useGeneratedKeys="true" keyProperty="id">
+        insert into account
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="accountId != null  and accountId != ''">account_id,</if>
+            <if test="balance != null ">balance,</if>
+            <if test="state != null  and state != ''">state,</if>
+            <if test="gmtCreate != null ">gmt_create,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="gmtModified != null ">gmt_modified,</if>
+            <if test="modifiedBy != null  and modifiedBy != ''">modified_by,</if>
+            <if test="accountType != null  and accountType != ''">account_type,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="accountId != null  and accountId != ''">#{accountId},</if>
+            <if test="balance != null ">#{balance},</if>
+            <if test="state != null  and state != ''">#{state},</if>
+            <if test="gmtCreate != null ">#{gmtCreate},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="gmtModified != null ">#{gmtModified},</if>
+            <if test="modifiedBy != null  and modifiedBy != ''">#{modifiedBy},</if>
+            <if test="accountType != null  and accountType != ''">#{accountType},</if>
+        </trim>
+    </insert>
+
+    <update id="updateAccount" parameterType="Account">
+        update account
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="accountId != null  and accountId != ''">account_id = #{accountId},</if>
+            <if test="balance != null ">balance = #{balance},</if>
+            <if test="state != null  and state != ''">state = #{state},</if>
+            <if test="gmtCreate != null ">gmt_create = #{gmtCreate},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="gmtModified != null ">gmt_modified = #{gmtModified},</if>
+            <if test="modifiedBy != null  and modifiedBy != ''">modified_by = #{modifiedBy},</if>
+            <if test="accountType != null  and accountType != ''">account_type = #{accountType},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteAccountById" parameterType="Long">
+        delete from account where id = #{id}
+    </delete>
+
+    <delete id="deleteAccountByIds" parameterType="String">
+        delete from account where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>
