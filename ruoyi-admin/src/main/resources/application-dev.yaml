@@ -103,4 +103,4 @@ dubbo:
 nacos:
   config:
     server-addr: 127.0.0.1:8848
-    file-extension: yml
+    file-extension: yaml
