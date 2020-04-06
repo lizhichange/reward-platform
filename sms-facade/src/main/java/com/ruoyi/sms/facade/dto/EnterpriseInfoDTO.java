@@ -1,6 +1,9 @@
 package com.ruoyi.sms.facade.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -9,6 +12,9 @@ import java.util.Date;
  * @author wahaha
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class EnterpriseInfoDTO implements Serializable {
     /**
      * enterprise_info.id

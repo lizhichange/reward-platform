@@ -1,9 +1,10 @@
 package com.ruoyi.sms.facade.dto;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import lombok.NoArgsConstructor;
 import org.near.toolkit.model.ToString;
 
 /**
@@ -13,6 +14,9 @@ import org.near.toolkit.model.ToString;
  * @date 2020-03-23
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class SysWebMainDTO extends ToString {
     private static final long serialVersionUID = 1L;
 

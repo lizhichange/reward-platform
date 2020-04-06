@@ -11,6 +11,7 @@ import com.github.binarywang.wxpay.service.WxPayService;
 import com.ruoyi.mp.config.MpAuthConfig;
 import com.ruoyi.mp.factory.ConfigFactory;
 import com.ruoyi.mp.util.AjaxResult;
+import com.ruoyi.sms.facade.IAccountFacade;
 import com.ruoyi.sms.facade.ISysOrderFacade;
 import com.ruoyi.sms.facade.ISysWebMainFacade;
 import com.ruoyi.sms.facade.dto.SysOrderDTO;
@@ -51,6 +52,8 @@ public class PayController {
     MpAuthConfig mpAuthConfig;
     @Reference(version = "1.0.0", check = false)
     ISysOrderFacade sysOrderFacade;
+    @Reference(version = "1.0.0", check = false)
+    IAccountFacade accountFacade;
     @Autowired
     ConfigFactory configFactory;
 
@@ -151,6 +154,12 @@ public class PayController {
             SysOrderDTO newOrder = new SysOrderDTO();
             String orderId = notifyResult.getOutTradeNo();
             newOrder.setOrderId(orderId);
+            //支付中
+            newOrder.setStatus(Integer.valueOf(OrderStatusType.PAY_ING.getCode()));
+            List<SysOrderDTO> dtoList = sysOrderFacade.selectSysOrderListExt(newOrder);
+            if (CollectionUtils.isEmpty(dtoList)) {
+                return WxPayNotifyResponse.fail("FAIL");
+            }
             try {
                 newOrder.setPayTime(DateUtils.parseLongFormat(notifyResult.getTimeEnd()));
             } catch (ParseException ignored) {
@@ -159,7 +168,7 @@ public class PayController {
             newOrder.setPayTime(now);
             newOrder.setStatus(Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
             LOGGER.info("newOrder:{}", newOrder);
-            sysOrderFacade.updateSysOrderByOrderId(newOrder);
+            accountFacade.take(newOrder);
             return WxPayNotifyResponse.success("SUCCESS");
         }
         return WxPayNotifyResponse.fail("FAIL");

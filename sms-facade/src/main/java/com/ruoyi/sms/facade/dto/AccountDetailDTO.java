@@ -1,4 +1,4 @@
-package com.ruoyi.sms.domain;
+package com.ruoyi.sms.facade.dto;
 
 import lombok.Data;
 
@@ -9,7 +9,7 @@ import java.util.Date;
  * @author sunflower
  */
 @Data
-public class AccountDetail implements Serializable {
+public class AccountDetailDTO implements Serializable {
     /**
      * account_detail.id
      * 主键

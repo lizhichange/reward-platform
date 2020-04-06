@@ -2,6 +2,9 @@ package com.ruoyi.sms.facade.dto;
 
 import com.ruoyi.sms.facade.enums.OrderPayType;
 import com.ruoyi.sms.facade.enums.OrderStatusType;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.near.toolkit.common.EnumUtil;
 import org.near.toolkit.model.Money;
 import org.near.toolkit.model.ToString;
@@ -14,6 +17,9 @@ import java.util.Date;
  * @author ruoyi
  * @date 2020-03-26
  */
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class SysOrderDTO extends ToString {
     private static final long serialVersionUID = 1L;
 

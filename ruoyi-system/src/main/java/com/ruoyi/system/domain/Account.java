@@ -1,25 +1,24 @@
-package com.ruoyi.sms.domain;
+package com.ruoyi.system.domain;
+
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
-import lombok.Data;
 
+/**
+ * @author sunflower
+ */
 @Data
 public class Account implements Serializable {
     /**
-    *
-    *
-    * account.id
-    
+     * account.id
      *
      * @mbg.generated 2019-09-09 15:04:41
      */
     private Integer id;
 
     /**
-    *
-    *
-    * account.account_id
+     * account.account_id
      * 账户唯一标识
      *
      * @mbg.generated 2019-09-09 15:04:41
@@ -27,9 +26,7 @@ public class Account implements Serializable {
     private String accountId;
 
     /**
-    *
-    *
-    * account.balance
+     * account.balance
      * 余额
      *
      * @mbg.generated 2019-09-09 15:04:41
@@ -37,9 +34,7 @@ public class Account implements Serializable {
     private Long balance;
 
     /**
-    *
-    *
-    * account.state
+     * account.state
      * 状态[1:启用,0:禁用]
      *
      * @mbg.generated 2019-09-09 15:04:41
@@ -47,9 +42,7 @@ public class Account implements Serializable {
     private String state;
 
     /**
-    *
-    *
-    * account.gmt_create
+     * account.gmt_create
      * 创建时间
      *
      * @mbg.generated 2019-09-09 15:04:41
@@ -57,19 +50,14 @@ public class Account implements Serializable {
     private Date gmtCreate;
 
     /**
-    *
-    *
-    * account.create_by
-    
+     * account.create_by
      *
      * @mbg.generated 2019-09-09 15:04:41
      */
     private String createBy;
 
     /**
-    *
-    *
-    * account.gmt_modified
+     * account.gmt_modified
      * 修改时间
      *
      * @mbg.generated 2019-09-09 15:04:41
@@ -77,19 +65,14 @@ public class Account implements Serializable {
     private Date gmtModified;
 
     /**
-    *
-    *
-    * account.modified_by
-    
+     * account.modified_by
      *
      * @mbg.generated 2019-09-09 15:04:41
      */
     private String modifiedBy;
 
     /**
-    *
-    *
-    * account.account_type
+     * account.account_type
      * 账户类型
      *
      * @mbg.generated 2019-09-09 15:04:41

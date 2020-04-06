@@ -1,4 +1,4 @@
-package com.ruoyi.sms.domain;
+package com.ruoyi.system.domain;
 
 import java.util.ArrayList;
 import java.util.Date;

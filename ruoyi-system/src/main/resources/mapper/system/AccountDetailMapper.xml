@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.sms.mapper.AccountDetailMapper">
-  <resultMap id="BaseResultMap" type="com.ruoyi.sms.domain.AccountDetail">
+<mapper namespace="com.ruoyi.system.mapper.AccountDetailMapper">
+  <resultMap id="BaseResultMap" type="com.ruoyi.system.domain.AccountDetail">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="account_id" jdbcType="VARCHAR" property="accountId" />
     <result column="amount" jdbcType="BIGINT" property="amount" />
@@ -76,7 +76,7 @@
     id, account_id, amount, opt_type, remark, out_trade_no, biz_code, source_code, gmt_create, 
     gmt_modified, operator
   </sql>
-  <select id="selectByExample" parameterType="com.ruoyi.sms.domain.AccountDetailExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.ruoyi.system.domain.AccountDetailExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -108,13 +108,13 @@
     delete from account_detail
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ruoyi.sms.domain.AccountDetailExample">
+  <delete id="deleteByExample" parameterType="com.ruoyi.system.domain.AccountDetailExample">
     delete from account_detail
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.ruoyi.sms.domain.AccountDetail" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.ruoyi.system.domain.AccountDetail" useGeneratedKeys="true">
     insert into account_detail (account_id, amount, opt_type, 
       remark, out_trade_no, biz_code, 
       source_code, gmt_create, gmt_modified, 
@@ -124,7 +124,7 @@
       #{sourceCode,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
       #{operator,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.ruoyi.sms.domain.AccountDetail" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.ruoyi.system.domain.AccountDetail" useGeneratedKeys="true">
     insert into account_detail
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="accountId != null">
@@ -191,7 +191,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ruoyi.sms.domain.AccountDetailExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.ruoyi.system.domain.AccountDetailExample" resultType="java.lang.Long">
     select count(*) from account_detail
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -255,7 +255,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ruoyi.sms.domain.AccountDetail">
+  <update id="updateByPrimaryKeySelective" parameterType="com.ruoyi.system.domain.AccountDetail">
     update account_detail
     <set>
       <if test="accountId != null">
@@ -291,7 +291,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ruoyi.sms.domain.AccountDetail">
+  <update id="updateByPrimaryKey" parameterType="com.ruoyi.system.domain.AccountDetail">
     update account_detail
     set account_id = #{accountId,jdbcType=VARCHAR},
       amount = #{amount,jdbcType=BIGINT},

@@ -44,6 +44,7 @@ public class WeChatOrderStatusCheckScheduled {
             SysOrderDTO item = new SysOrderDTO();
             item.setOffset(PAGE);
             item.setLimit(ROWS);
+            item.setStatus(Integer.valueOf(OrderStatusType.PAY_ING.getCode()));
             List<SysOrderDTO> list = sysOrderFacade.selectSysOrderListExt(item);
             if (!CollectionUtils.isEmpty(list)) {
                 for (SysOrderDTO dto : list) {
@@ -52,7 +53,6 @@ public class WeChatOrderStatusCheckScheduled {
                     } catch (Exception e) {
                         log.error(e.getMessage(), e);
                     }
-
                 }
             }
         }

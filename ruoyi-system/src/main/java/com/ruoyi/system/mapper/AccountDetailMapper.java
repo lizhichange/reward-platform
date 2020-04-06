@@ -1,10 +1,11 @@
-package com.ruoyi.sms.mapper;
+package com.ruoyi.system.mapper;
 
-import com.ruoyi.sms.domain.AccountDetail;
-import com.ruoyi.sms.domain.AccountDetailExample;
+
+import com.ruoyi.system.domain.AccountDetail;
+import com.ruoyi.system.domain.AccountDetailExample;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 public interface AccountDetailMapper {
     long countByExample(AccountDetailExample example);
