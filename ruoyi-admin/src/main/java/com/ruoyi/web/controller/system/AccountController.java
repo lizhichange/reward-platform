@@ -11,7 +11,6 @@ import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.sms.facade.enums.AccountType;
 import com.ruoyi.sms.facade.enums.SwitchEnum;
 import com.ruoyi.system.domain.Account;
-import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.system.service.IAccountService;
 import com.ruoyi.system.service.ISysUserService;
 import com.ruoyi.web.controller.vo.SelectOption;
@@ -150,8 +149,7 @@ public class AccountController extends BaseController {
     @RequiresPermissions("system:account:edit")
     @PostMapping("/changeStatus")
     @ResponseBody
-    public AjaxResult changeStatus(Account account, SysUser user) {
-        sysUserService.checkUserAllowed(user);
+    public AjaxResult changeStatus(Account account) {
         return toAjax(accountService.changeStatus(account));
     }
 
