@@ -1,118 +1,132 @@
 package com.ruoyi.sms.facade.dto;
 
 import lombok.Data;
-
-import java.io.Serializable;
-import java.util.Date;
+import org.near.toolkit.model.ToString;
 
 /**
  * @author sunflower
  */
 @Data
-public class TsDTO implements Serializable {
-    /**
-     * ts.id
-     * 主键
-     *
-     * @mbg.generated 2020-04-03 19:08:11
-     */
-    private Integer id;
+public class TsDTO extends ToString {
+
+    private static final long serialVersionUID = 1L;
 
     /**
-     * ts.ip
+     * 主键
+     */
+    private Long id;
+
+    /**
      * ip地址
-     *
-     * @mbg.generated 2020-04-03 19:08:11
      */
     private String ip;
 
     /**
-     * ts.zt
      * 状态
-     *
-     * @mbg.generated 2020-04-03 19:08:11
      */
     private String zt;
 
     /**
-     * ts.neirong
      * 内容
-     *
-     * @mbg.generated 2020-04-03 19:08:11
      */
     private String neirong;
 
     /**
-     * ts.shijian
      * 时间
-     *
-     * @mbg.generated 2020-04-03 19:08:11
      */
     private String shijian;
 
     /**
-     * ts.typeto
-     *
-     * @mbg.generated 2020-04-03 19:08:11
+     * $column.columnComment
      */
     private String typeto;
 
     /**
-     * ts.sid
-     *
-     * @mbg.generated 2020-04-03 19:08:11
+     * $column.columnComment
      */
     private String sid;
 
     /**
-     * ts.userid
-     *
-     * @mbg.generated 2020-04-03 19:08:11
+     * $column.columnComment
      */
     private String userid;
 
     /**
-     * ts.create_time
-     * 创建时间
-     *
-     * @mbg.generated 2020-04-03 19:08:11
-     */
-    private Date createTime;
-
-    /**
-     * ts.update_time
-     * 修改时间
-     *
-     * @mbg.generated 2020-04-03 19:08:11
-     */
-    private Date updateTime;
-
-    /**
-     * ts.open_id
-     *
-     * @mbg.generated 2020-04-03 19:08:11
+     * $column.columnComment
      */
     private String openId;
 
-    private static final long serialVersionUID = 1L;
-
-    @Override
-    public String toString() {
-        return getClass().getSimpleName() +
-                " [" +
-                "Hash = " + hashCode() +
-                ", id=" + id +
-                ", ip=" + ip +
-                ", zt=" + zt +
-                ", neirong=" + neirong +
-                ", shijian=" + shijian +
-                ", typeto=" + typeto +
-                ", sid=" + sid +
-                ", userid=" + userid +
-                ", createTime=" + createTime +
-                ", updateTime=" + updateTime +
-                ", openId=" + openId +
-                ", serialVersionUID=" + serialVersionUID +
-                "]";
+    public void setId(Long id) {
+        this.id = id;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setZt(String zt) {
+        this.zt = zt;
+    }
+
+    public String getZt() {
+        return zt;
+    }
+
+    public void setNeirong(String neirong) {
+        this.neirong = neirong;
+    }
+
+    public String getNeirong() {
+        return neirong;
+    }
+
+    public void setShijian(String shijian) {
+        this.shijian = shijian;
+    }
+
+    public String getShijian() {
+        return shijian;
+    }
+
+    public void setTypeto(String typeto) {
+        this.typeto = typeto;
+    }
+
+    public String getTypeto() {
+        return typeto;
+    }
+
+    public void setSid(String sid) {
+        this.sid = sid;
+    }
+
+    public String getSid() {
+        return sid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
+
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
+    }
+
+    public String getOpenId() {
+        return openId;
+    }
+
+
 }

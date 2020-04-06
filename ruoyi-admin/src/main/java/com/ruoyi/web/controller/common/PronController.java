@@ -236,15 +236,6 @@ public class PronController extends BaseController {
     }
 
 
-    /**
-     * 微信支付
-     */
-    @PostMapping(value = "/payment")
-    Object payment(HttpServletRequest request) {
-
-        return null;
-    }
-
     private void convert(List<ShipinDTO> list) {
         if (!CollectionUtils.isEmpty(list)) {
             Date now = new Date();

@@ -59,7 +59,7 @@ public class TsController extends BaseController {
     @ResponseBody
     public AjaxResult export(TsDTO ts) {
         List<TsDTO> list = tsService.selectTsList(ts);
-        ExcelUtil<TsDTO> util = new ExcelUtil<TsDTO>(TsDTO.class);
+        ExcelUtil<TsDTO> util = new ExcelUtil<>(TsDTO.class);
         return util.exportExcel(list, "ts");
     }
 

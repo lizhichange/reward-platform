@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <th:block th:include="include :: header('投诉列表')"/>
-
+    <th:block th:include="include :: header('投诉列表列表')"/>
 </head>
 <body class="gray-bg">
 <div class="container-div">
@@ -11,20 +10,25 @@
             <form id="formId">
                 <div class="select-list">
                     <ul>
+
                         <label class="col-sm-3 control-label"> 共有投诉 [[${count}]] 条</label>
+
+                        <li>
+                            <label>代理用户id：</label>
+                            <input type="text" name="userid"/>
+                        </li>
+                        <li>
+                            <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i
+                                    class="fa fa-search"></i>&nbsp;搜索</a>
+                            <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i
+                                    class="fa fa-refresh"></i>&nbsp;重置</a>
+                        </li>
                     </ul>
                 </div>
             </form>
         </div>
 
         <div class="btn-group-sm" id="toolbar" role="group">
-            <a class="btn btn-success" onclick="$.operate.addFull()" shiro:hasPermission="system:ts:add">
-                <i class="fa fa-plus"></i> 添加
-            </a>
-            <a class="btn btn-primary single disabled" onclick="$.operate.edit()"
-               shiro:hasPermission="system:ts:edit">
-                <i class="fa fa-edit"></i> 修改
-            </a>
             <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()"
                shiro:hasPermission="system:ts:remove">
                 <i class="fa fa-remove"></i> 删除
@@ -34,61 +38,70 @@
             </a>
         </div>
         <div class="col-sm-12 select-table table-striped">
-            <table id="bootstrap-table" data-mobile-responsive="true"></table>
+            <table id="bootstrap-table"></table>
         </div>
     </div>
 </div>
 <th:block th:include="include :: footer"/>
 <script th:inline="javascript">
-    var editFlag = [[${@permission.hasPermi('system:ts:edit')}]];
-    var removeFlag = [[${@permission.hasPermi('system:ts:remove')}]];
-    var prefix = ctx + "system/ts";
+        var editFlag = [[${@permission.hasPermi('system:ts:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('system:ts:remove')}]];
+        var prefix = ctx + "system/ts";
 
-    $(function () {
-        var options = {
-            url: prefix + "/list",
-            createUrl: prefix + "/add",
-            updateUrl: prefix + "/edit/{id}",
-            removeUrl: prefix + "/remove",
-            exportUrl: prefix + "/export",
-            modalName: "投诉列表",
-            columns: [{
-                checkbox: true
-            },
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+                exportUrl: prefix + "/export",
+                modalName: "投诉列表",
+                columns: [{
+                    checkbox: true
+                },
                 {
-                    field: 'id',
-                    title: '投诉id',
+                    field : 'id', 
+                    title : '主键',
                     visible: false
                 },
                 {
-                    field: 'ip',
-                    title: 'ip地址'
+                    field : 'ip', 
+                    title : 'ip地址'
                 },
+
                 {
-                    field: 'zt',
-                    title: '投诉状态'
+                    field : 'neirong', 
+                    title : '内容'
                 },
+
+
                 {
-                    field: 'neirong',
-                    title: '投诉内容'
+                    field : 'userid', 
+                    title : '代理id'
                 },
+
                 {
-                    field: 'shijian',
-                    title: '投诉时间'
+                    field : 'openId',
+                    title : 'openId'
                 },
                 {
                     title: '操作',
                     align: 'center',
-                    formatter: function (value, row, index) {
+                    formatter: function(value, row, index) {
                         var actions = [];
-                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.editFull(\'' + row.id + '\')"><i class="fa fa-edit"></i>编辑</a> ');
                         actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.id + '\')"><i class="fa fa-remove"></i>删除</a>');
                         return actions.join('');
                     }
                 }]
-        };
-        $.table.init(options);
-    });
+            };
+            $.table.init(options);
+        });
+
+
+
+
+
+
 </script>
 </body>
 </html>
