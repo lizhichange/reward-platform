@@ -164,6 +164,8 @@ public class PayController {
                 newOrder.setPayTime(DateUtils.parseLongFormat(notifyResult.getTimeEnd()));
             } catch (ParseException ignored) {
             }
+            String transactionId = notifyResult.getTransactionId();
+            log.info("transactionId:{},outTradeNo:{}", transactionId, notifyResult.getOutTradeNo());
             Date now = new Date();
             newOrder.setPayTime(now);
             newOrder.setStatus(Integer.valueOf(OrderStatusType.Y_PAY.getCode()));

@@ -6,6 +6,7 @@ import com.github.binarywang.wxpay.bean.result.WxPayOrderQueryResult;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.WxPayService;
 import com.ruoyi.mp.config.MpAuthConfig;
+import com.ruoyi.sms.facade.IAccountFacade;
 import com.ruoyi.sms.facade.ISysOrderFacade;
 import com.ruoyi.sms.facade.dto.SysOrderDTO;
 import com.ruoyi.sms.facade.enums.OrderStatusType;
@@ -37,6 +38,8 @@ public class WeChatOrderStatusCheckScheduled {
     MpAuthConfig mpAuthConfig;
     @Reference(version = "1.0.0", check = false)
     ISysOrderFacade sysOrderFacade;
+    @Reference(version = "1.0.0", check = false)
+    IAccountFacade accountFacade;
 
     @Scheduled(cron = "0/60 * * * * ?")
     public void execute() {
@@ -73,7 +76,7 @@ public class WeChatOrderStatusCheckScheduled {
                     //微信支付订单号
                     newOrder.setPayNo(result.getTransactionId());
                     newOrder.setStatus(Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
-                    sysOrderFacade.updateSysOrderByOrderId(newOrder);
+                    accountFacade.take(newOrder);
                 }
             }
         }

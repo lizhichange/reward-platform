@@ -106,7 +106,6 @@ public class OrderAlreadyToAccountProcessor extends AbstractOrderStatusProcessor
 
     @Override
     public Long execute(SysOrderDTO orderInfo) {
-        //拼多多订单返利金额 自购金额
         Long rebateAmount = get(orderInfo);
         String extensionUserId = orderInfo.getExtensionUserId();
         if (StringUtil.isNotBlank(extensionUserId)) {
