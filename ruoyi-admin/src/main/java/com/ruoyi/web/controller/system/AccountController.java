@@ -143,7 +143,7 @@ public class AccountController extends BaseController {
     ISysUserService sysUserService;
 
     /**
-     * 用户状态修改
+     * 账户状态修改
      */
     @Log(title = "账户管理", businessType = BusinessType.UPDATE)
     @RequiresPermissions("system:account:edit")
