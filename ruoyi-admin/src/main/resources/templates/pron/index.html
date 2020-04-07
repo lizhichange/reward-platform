@@ -709,6 +709,7 @@
          * @return {[type]}         [description]
          */
         ajax: function (options, refresh, $target) {
+            $.modal.loading("");
             $.ajax({
                 type: 'post',
                 url: '/pron/list',
@@ -718,6 +719,7 @@
                 },
                 dataType: 'json'
             }).done(function (res) {
+                $.modal.closeLoading();
                 console.log(res);
                 // do something
                 //todo 数据
