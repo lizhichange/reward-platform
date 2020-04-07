@@ -17,7 +17,7 @@ public interface ExtTsMapper {
      * @param id 投诉列表ID
      * @return 投诉列表
      */
-    public Ts selectTsById(Long id);
+    Ts selectTsById(Long id);
 
     /**
      * 查询投诉列表列表

@@ -8,7 +8,9 @@ import com.github.pagehelper.PageHelper;
 import com.ruoyi.common.config.Global;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.core.page.PageDomain;
 import com.ruoyi.common.core.page.TableDataInfo;
+import com.ruoyi.common.core.page.TableSupport;
 import com.ruoyi.common.sequence.ConcurrentSequence;
 import com.ruoyi.common.utils.IpUtils;
 import com.ruoyi.framework.interceptor.impl.WxPnUserAuth;
@@ -28,13 +30,13 @@ import com.ruoyi.web.Multi;
 import com.ruoyi.web.controller.enums.MultiTypeEnum;
 import lombok.Data;
 import lombok.extern.java.Log;
+import org.near.servicesupport.result.TPageResult;
 import org.near.toolkit.common.DateUtils;
 import org.near.toolkit.common.EnumUtil;
 import org.near.toolkit.common.StringUtil;
 import org.near.toolkit.model.Money;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Controller;
@@ -224,15 +226,17 @@ public class PronController extends BaseController {
 
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfoExt list(ShipinDTO shipinDTO) {
-        startPage();
-        List<ShipinDTO> list = shipinService.selectShipinDTOList(shipinDTO);
+    public TableDataInfo list(ShipinDTO shipinDTO) {
+
+        PageDomain pageDomain = TableSupport.buildPageRequest();
+        Integer pageNum = pageDomain.getPageNum();
+        Integer pageSize = pageDomain.getPageSize();
+        TPageResult<ShipinDTO> result = shipinService.queryPage(pageNum, pageSize, shipinDTO);
+        List<ShipinDTO> list = result.getValues();
         convert(list);
         TableDataInfo dataTable = getDataTable(list);
-        TableDataInfoExt ext = new TableDataInfoExt();
-        BeanUtils.copyProperties(dataTable, ext);
-        ext.setLength(dataTable.getRows().size());
-        return ext;
+        dataTable.setTotal(result.getTotalRows());
+        return dataTable;
     }
 
 

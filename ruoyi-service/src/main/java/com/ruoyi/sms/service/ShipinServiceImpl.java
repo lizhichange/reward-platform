@@ -1,16 +1,22 @@
 package com.ruoyi.sms.service;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.google.common.collect.Lists;
 import com.ruoyi.common.core.text.Convert;
+import com.ruoyi.sms.convert.ShipinConvert;
 import com.ruoyi.sms.domain.Shipin;
 import com.ruoyi.sms.domain.ShipinExample;
 import com.ruoyi.sms.facade.api.IShipinService;
 import com.ruoyi.sms.facade.dto.ShipinDTO;
 import com.ruoyi.sms.mapper.ExtShipinMapper;
 import com.ruoyi.sms.mapper.ShipinMapper;
+import com.ruoyi.sms.repository.ShipinRepository;
+import org.near.servicesupport.result.ResultBuilder;
+import org.near.servicesupport.result.TPageResult;
 import org.near.toolkit.common.StringUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,6 +36,8 @@ public class ShipinServiceImpl implements IShipinService {
     @Autowired
     private ShipinMapper shipinMapper;
     @Autowired
+    ShipinRepository shipinRepository;
+    @Autowired
     private ExtShipinMapper extShipinMapper;
 
     /**
@@ -41,7 +49,7 @@ public class ShipinServiceImpl implements IShipinService {
     @Override
     public ShipinDTO selectShipinDTOById(Long id) {
         Shipin shipin = extShipinMapper.selectShipinById(id);
-        return convert(shipin);
+        return ShipinConvert.convert(shipin);
 
     }
 
@@ -50,14 +58,6 @@ public class ShipinServiceImpl implements IShipinService {
         return extShipinMapper.updateClickPlus(id);
     }
 
-    private ShipinDTO convert(Shipin shipin) {
-        if (shipin == null) {
-            return null;
-        }
-        ShipinDTO dto = new ShipinDTO();
-        BeanUtils.copyProperties(shipin, dto);
-        return dto;
-    }
 
     /**
      * 查询公共片库列表
@@ -69,11 +69,8 @@ public class ShipinServiceImpl implements IShipinService {
     public List<ShipinDTO> selectShipinDTOList(ShipinDTO item) {
         Shipin it = new Shipin();
         BeanUtils.copyProperties(item, it);
-
-
         List<Shipin> list = extShipinMapper.selectShipinList(it);
-
-        return list.stream().map(this::convert).collect(Collectors.toList());
+        return list.stream().map(ShipinConvert::convert).collect(Collectors.toList());
 
     }
 
@@ -116,6 +113,18 @@ public class ShipinServiceImpl implements IShipinService {
         Shipin it = new Shipin();
         BeanUtils.copyProperties(item, it);
         return extShipinMapper.updateShipin(it);
+    }
+
+    @Override
+    public TPageResult
+            <ShipinDTO> queryPage(int start, int rows, ShipinDTO shipinDTO) {
+        int i = start > 1 ? (start - 1) * rows : 0;
+        List<ShipinDTO> list = shipinRepository.queryPage(i, rows, shipinDTO.getName());
+        if (CollectionUtils.isEmpty(list)) {
+            return ResultBuilder.succTPage(Lists.newArrayList(), start, rows, 0);
+        }
+        long count = shipinRepository.count(shipinDTO.getName());
+        return ResultBuilder.succTPage(list, start, rows, (int) count);
     }
 
     /**

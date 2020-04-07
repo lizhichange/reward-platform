@@ -2,6 +2,7 @@ package com.ruoyi.sms.facade.api;
 
 
 import com.ruoyi.sms.facade.dto.ShipinDTO;
+import org.near.servicesupport.result.TPageResult;
 
 import java.util.List;
 
@@ -47,7 +48,8 @@ public interface IShipinService {
      * @return 结果
      */
     int updateShipinDTO(ShipinDTO item);
-
+    TPageResult
+            <ShipinDTO> queryPage(int start, int rows ,ShipinDTO shipinDTO);
     /**
      * 批量删除公共片库
      *
