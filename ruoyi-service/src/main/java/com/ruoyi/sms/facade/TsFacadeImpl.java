@@ -1,4 +1,4 @@
-package com.ruoyi.sms.service;
+package com.ruoyi.sms.facade;
 
 
 import com.alibaba.dubbo.config.annotation.Service;
@@ -7,7 +7,6 @@ import com.ruoyi.sms.mapper.ExtTsMapper;
 import com.ruoyi.sms.mapper.TsMapper;
 import com.ruoyi.sms.domain.Ts;
 import com.ruoyi.sms.domain.TsExample;
-import com.ruoyi.sms.facade.api.ITsService;
 import com.ruoyi.sms.facade.dto.TsDTO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,13 +25,14 @@ import java.util.stream.Collectors;
         version = "1.0.0",
         timeout = 15000
 )
-public class TsServiceImpl implements ITsService {
+public class TsFacadeImpl implements ITsFacade {
     @Autowired
     private ExtTsMapper extTsMapper;
 
 
     @Autowired
     private TsMapper tsMapper;
+
     /**
      * 查询投诉列表
      *

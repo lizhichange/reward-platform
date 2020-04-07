@@ -5,7 +5,7 @@ import cn.hutool.core.util.URLUtil;
 import com.ruoyi.common.config.Global;
 import com.ruoyi.framework.interceptor.impl.WxPnUserAuth;
 import com.ruoyi.framework.interceptor.util.SessionContext;
-import com.ruoyi.sms.facade.api.ITsService;
+import com.ruoyi.sms.facade.ITsFacade;
 import com.ruoyi.sms.facade.dto.TsDTO;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.util.http.URIUtil;
@@ -47,7 +47,7 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
 
 
     @Autowired
-    ITsService tsService;
+    ITsFacade tsService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

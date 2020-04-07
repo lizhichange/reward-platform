@@ -1,4 +1,4 @@
-package com.ruoyi.sms.facade.api;/*
+package com.ruoyi.sms.facade;/*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -23,7 +23,7 @@ import java.util.List;
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
  * @since 1.0.0
  */
-public interface DemoService {
+public interface DemoFacade {
 
     String sayHello(String name);
 

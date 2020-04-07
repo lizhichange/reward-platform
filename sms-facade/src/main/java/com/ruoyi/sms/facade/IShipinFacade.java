@@ -1,4 +1,4 @@
-package com.ruoyi.sms.facade.api;
+package com.ruoyi.sms.facade;
 
 
 import com.ruoyi.sms.facade.dto.ShipinDTO;
@@ -12,7 +12,7 @@ import java.util.List;
  * @author ruoyi
  * @date 2020-03-17
  */
-public interface IShipinService {
+public interface IShipinFacade {
     /**
      * 查询公共片库
      *
@@ -48,8 +48,10 @@ public interface IShipinService {
      * @return 结果
      */
     int updateShipinDTO(ShipinDTO item);
+
     TPageResult
-            <ShipinDTO> queryPage(int start, int rows ,ShipinDTO shipinDTO);
+            <ShipinDTO> queryPage(int start, int rows, ShipinDTO shipinDTO);
+
     /**
      * 批量删除公共片库
      *

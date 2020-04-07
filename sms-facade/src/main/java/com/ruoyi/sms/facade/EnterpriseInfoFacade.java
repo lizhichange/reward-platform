@@ -1,4 +1,4 @@
-package com.ruoyi.sms.facade.api;
+package com.ruoyi.sms.facade;
 
 import com.ruoyi.sms.facade.dto.EnterpriseInfoDTO;
 
@@ -10,7 +10,7 @@ import java.util.List;
  * @author ruoyi
  * @date 2019-09-06
  */
-public interface EnterpriseInfoService {
+public interface EnterpriseInfoFacade {
 
     /**
      * 查询【请填写功能名称】

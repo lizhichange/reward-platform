@@ -9,7 +9,7 @@ import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.framework.util.ShiroUtils;
 
-import com.ruoyi.sms.facade.api.IShipinService;
+import com.ruoyi.sms.facade.IShipinFacade;
 import com.ruoyi.sms.facade.dto.ShipinDTO;
 import com.ruoyi.system.domain.SysCategory;
 import com.ruoyi.system.domain.SysRole;
@@ -118,7 +118,7 @@ public class SysCategoryController extends BaseController {
         }
         ShipinDTO shipinDTO = new ShipinDTO();
         shipinDTO.setCategoryId(Math.toIntExact(deptId));
-        List<ShipinDTO> list = shipinService.selectShipinDTOList(shipinDTO);
+        List<ShipinDTO> list = shipinFacade.selectShipinDTOList(shipinDTO);
         if (!CollectionUtils.isEmpty(list)) {
             return AjaxResult.warn("该类目关联了视频,不允许删除");
         }
@@ -126,7 +126,7 @@ public class SysCategoryController extends BaseController {
     }
 
     @Autowired
-    IShipinService shipinService;
+    IShipinFacade shipinFacade;
 
     /**
      * 校验栏目名称

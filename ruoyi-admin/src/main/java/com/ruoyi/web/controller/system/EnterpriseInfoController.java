@@ -7,7 +7,7 @@ import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
-import com.ruoyi.sms.facade.api.EnterpriseInfoService;
+import com.ruoyi.sms.facade.EnterpriseInfoFacade;
 import com.ruoyi.sms.facade.dto.EnterpriseInfoDTO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class EnterpriseInfoController extends BaseController {
     private String prefix = "system/info";
 
     @Autowired
-    private EnterpriseInfoService enterpriseInfoService;
+    private EnterpriseInfoFacade enterpriseInfoService;
 
     @RequiresPermissions("system:info:view")
     @GetMapping()

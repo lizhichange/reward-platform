@@ -14,30 +14,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ruoyi.sms.service;
+package com.ruoyi.sms.facade;
 
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
-import com.ruoyi.sms.facade.api.DemoService;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.List;
 
 
 /**
- * Default {@link DemoService}
+ * Default {@link DemoFacade}
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
- * @see DemoService
+ * @see DemoFacade
  * @since 1.0.0
  */
 @Service(
         version = "1.0.0",
         timeout = 15000
 )
-public class DefaultDemoServiceImpl implements DemoService {
+public class DefaultDemoFacadeImpl implements DemoFacade {
 
     @Override
     public String sayHello(String name) {

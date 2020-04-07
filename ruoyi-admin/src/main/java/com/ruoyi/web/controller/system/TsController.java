@@ -7,8 +7,9 @@ import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
-import com.ruoyi.sms.facade.api.ITsService;
-import com.ruoyi.sms.facade.dto.TsDTO;
+import com.ruoyi.sms.domain.Ts;
+import com.ruoyi.sms.facade.ITsFacade;
+import com.ruoyi.sms.service.ITsService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,12 +30,14 @@ public class TsController extends BaseController {
     private String prefix = "system/ts";
 
     @Autowired
-    private ITsService tsService;
+    ITsFacade tsFacade;
+    @Autowired
+    ITsService tsService;
 
     @RequiresPermissions("system:ts:view")
     @GetMapping()
     public String ts(ModelMap modelMap) {
-        int count = tsService.count();
+        int count = tsFacade.count();
         modelMap.addAttribute("count", count);
         return prefix + "/ts";
     }
@@ -45,9 +48,9 @@ public class TsController extends BaseController {
     @RequiresPermissions("system:ts:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(TsDTO ts) {
+    public TableDataInfo list(Ts ts) {
         startPage();
-        List<TsDTO> list = tsService.selectTsList(ts);
+        List<Ts> list = tsService.selectTsList(ts);
         return getDataTable(list);
     }
 
@@ -57,9 +60,9 @@ public class TsController extends BaseController {
     @RequiresPermissions("system:ts:export")
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(TsDTO ts) {
-        List<TsDTO> list = tsService.selectTsList(ts);
-        ExcelUtil<TsDTO> util = new ExcelUtil<>(TsDTO.class);
+    public AjaxResult export(Ts ts) {
+        List<Ts> list = tsService.selectTsList(ts);
+        ExcelUtil<Ts> util = new ExcelUtil<>(Ts.class);
         return util.exportExcel(list, "ts");
     }
 
@@ -78,7 +81,7 @@ public class TsController extends BaseController {
     @Log(title = "投诉列表", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(TsDTO ts) {
+    public AjaxResult addSave(Ts ts) {
         return toAjax(tsService.insertTs(ts));
     }
 
@@ -87,7 +90,7 @@ public class TsController extends BaseController {
      */
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") Long id, ModelMap mmap) {
-        TsDTO ts = tsService.selectTsById(id);
+        Ts ts = tsService.selectTsById(id);
         mmap.put("ts", ts);
         return prefix + "/edit";
     }
@@ -99,7 +102,7 @@ public class TsController extends BaseController {
     @Log(title = "投诉列表", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(TsDTO ts) {
+    public AjaxResult editSave(Ts ts) {
         return toAjax(tsService.updateTs(ts));
     }
 

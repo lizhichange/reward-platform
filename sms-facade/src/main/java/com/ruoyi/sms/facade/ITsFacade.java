@@ -1,4 +1,4 @@
-package com.ruoyi.sms.facade.api;
+package com.ruoyi.sms.facade;
 
 
 import com.ruoyi.sms.facade.dto.TsDTO;
@@ -11,7 +11,7 @@ import java.util.List;
  * @author ruoyi
  * @date 2020-03-16
  */
-public interface ITsService {
+public interface ITsFacade {
     /**
      * 查询投诉列表
      *

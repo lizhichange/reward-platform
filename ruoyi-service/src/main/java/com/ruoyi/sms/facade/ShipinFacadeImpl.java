@@ -1,4 +1,4 @@
-package com.ruoyi.sms.service;
+package com.ruoyi.sms.facade;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.google.common.collect.Lists;
@@ -6,7 +6,6 @@ import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.sms.convert.ShipinConvert;
 import com.ruoyi.sms.domain.Shipin;
 import com.ruoyi.sms.domain.ShipinExample;
-import com.ruoyi.sms.facade.api.IShipinService;
 import com.ruoyi.sms.facade.dto.ShipinDTO;
 import com.ruoyi.sms.mapper.ExtShipinMapper;
 import com.ruoyi.sms.mapper.ShipinMapper;
@@ -32,7 +31,7 @@ import java.util.stream.Collectors;
         version = "1.0.0",
         timeout = 15000
 )
-public class ShipinServiceImpl implements IShipinService {
+public class ShipinFacadeImpl implements IShipinFacade {
     @Autowired
     private ShipinMapper shipinMapper;
     @Autowired

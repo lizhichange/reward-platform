@@ -15,8 +15,8 @@ import com.ruoyi.common.sequence.ConcurrentSequence;
 import com.ruoyi.common.utils.IpUtils;
 import com.ruoyi.framework.interceptor.impl.WxPnUserAuth;
 import com.ruoyi.framework.interceptor.util.SessionContext;
-import com.ruoyi.sms.facade.api.IShipinService;
-import com.ruoyi.sms.facade.api.ITsService;
+import com.ruoyi.sms.facade.IShipinFacade;
+import com.ruoyi.sms.facade.ITsFacade;
 import com.ruoyi.sms.facade.dto.ShipinDTO;
 import com.ruoyi.sms.facade.dto.TsDTO;
 import com.ruoyi.sms.facade.enums.OrderPayType;
@@ -64,9 +64,9 @@ public class PronController extends BaseController {
 
 
     @Autowired
-    IShipinService shipinService;
+    IShipinFacade shipinFacade;
     @Autowired
-    ITsService tsService;
+    ITsFacade tsService;
 
 
     @Autowired
@@ -77,16 +77,11 @@ public class PronController extends BaseController {
 
 
     @Autowired
-    IYqmService yqmService;
-    @Autowired
     ISysCategoryService categoryService;
 
 
     @Autowired
     ISysOrderService sysOrderService;
-
-    @Autowired
-    ISysPostService postService;
 
     @Autowired
     ThreadPoolTaskExecutor threadPoolTaskExecutor;
@@ -112,7 +107,7 @@ public class PronController extends BaseController {
         order.setOpenId(openId);
         List<SysOrder> sysOrders = sysOrderService.selectSysOrderList(order);
         if (CollectionUtils.isEmpty(sysOrders)) {
-            ShipinDTO dto = shipinService.selectShipinDTOById(shipinDTO.getId().longValue());
+            ShipinDTO dto = shipinFacade.selectShipinDTOById(shipinDTO.getId().longValue());
             order.setCreateTime(new Date());
             order.setExtensionUserId(userId);
             order.setUpdateTime(new Date());
@@ -183,7 +178,7 @@ public class PronController extends BaseController {
         logger.info("userId:{}", userid);
         ShipinDTO shipinDTO = new ShipinDTO();
         PageHelper.startPage(1, 12, StringUtil.EMPTY_STRING);
-        List<ShipinDTO> list = shipinService.selectShipinDTOList(shipinDTO);
+        List<ShipinDTO> list = shipinFacade.selectShipinDTOList(shipinDTO);
         convert(list);
         modelmap.addAttribute("list", list);
         SysCategory sysCategory = new SysCategory();
@@ -197,7 +192,7 @@ public class PronController extends BaseController {
     @WxPnUserAuth
     public String detail(@RequestParam(value = "id", required = true) Long id, @RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
         logger.info("user:{},id:{}", userid, id);
-        ShipinDTO shipin = shipinService.selectShipinDTOById(id);
+        ShipinDTO shipin = shipinFacade.selectShipinDTOById(id);
         if (shipin != null) {
             convert(new Date(), shipin);
             modelmap.put("shipin", shipin);
@@ -206,11 +201,11 @@ public class PronController extends BaseController {
                 modelmap.put("category", category);
             }
             //异步执行浏览加1
-            threadPoolTaskExecutor.execute(() -> shipinService.updateClickPlus(shipin.getId().longValue()));
+            threadPoolTaskExecutor.execute(() -> shipinFacade.updateClickPlus(shipin.getId().longValue()));
         }
 
         PageHelper.startPage(1, 12, StringUtil.EMPTY_STRING);
-        List<ShipinDTO> list = shipinService.selectShipinDTOList(new ShipinDTO());
+        List<ShipinDTO> list = shipinFacade.selectShipinDTOList(new ShipinDTO());
         convert(list);
         modelmap.addAttribute("list", list);
 
@@ -231,7 +226,7 @@ public class PronController extends BaseController {
         PageDomain pageDomain = TableSupport.buildPageRequest();
         Integer pageNum = pageDomain.getPageNum();
         Integer pageSize = pageDomain.getPageSize();
-        TPageResult<ShipinDTO> result = shipinService.queryPage(pageNum, pageSize, shipinDTO);
+        TPageResult<ShipinDTO> result = shipinFacade.queryPage(pageNum, pageSize, shipinDTO);
         List<ShipinDTO> list = result.getValues();
         convert(list);
         TableDataInfo dataTable = getDataTable(list);

@@ -8,8 +8,10 @@ import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.util.ShiroUtils;
-import com.ruoyi.sms.facade.api.IShipinService;
+import com.ruoyi.sms.domain.Shipin;
+import com.ruoyi.sms.facade.IShipinFacade;
 import com.ruoyi.sms.facade.dto.ShipinDTO;
+import com.ruoyi.sms.service.IShipinService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,7 +35,10 @@ public class ShipinController extends BaseController {
     private String prefix = "system/shipin";
 
     @Autowired
-    private IShipinService shipinService;
+    private IShipinFacade shipinFacade;
+    @Autowired
+
+    IShipinService shipinService;
 
     @RequiresPermissions("system:shipin:view")
     @GetMapping()
@@ -47,9 +52,9 @@ public class ShipinController extends BaseController {
     @RequiresPermissions("system:shipin:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(ShipinDTO shipin) {
+    public TableDataInfo list(Shipin shipin) {
         startPage();
-        List<ShipinDTO> list = shipinService.selectShipinDTOList(shipin);
+        List<Shipin> list = shipinService.selectShipinList(shipin);
         return getDataTable(list);
     }
 
@@ -59,9 +64,9 @@ public class ShipinController extends BaseController {
     @RequiresPermissions("system:shipin:export")
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(ShipinDTO shipin) {
-        List<ShipinDTO> list = shipinService.selectShipinDTOList(shipin);
-        ExcelUtil<ShipinDTO> util = new ExcelUtil<>(ShipinDTO.class);
+    public AjaxResult export(Shipin shipin) {
+        List<Shipin> list = shipinService.selectShipinList(shipin);
+        ExcelUtil<Shipin> util = new ExcelUtil<>(Shipin.class);
         return util.exportExcel(list, "shipin");
     }
 
@@ -90,7 +95,7 @@ public class ShipinController extends BaseController {
         shipin.setClick(0);
         shipin.setZykey(shipin.getShiUrl());
         shipin.setCreateTime(new Date());
-        return toAjax(shipinService.insertShipinDTO(shipin));
+        return toAjax(shipinFacade.insertShipinDTO(shipin));
     }
 
 
@@ -99,7 +104,7 @@ public class ShipinController extends BaseController {
      */
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") Long id, ModelMap mmap) {
-        ShipinDTO shipin = shipinService.selectShipinDTOById(id);
+        ShipinDTO shipin = shipinFacade.selectShipinDTOById(id);
         mmap.put("shipin", shipin);
         return prefix + "/edit";
     }
@@ -112,7 +117,7 @@ public class ShipinController extends BaseController {
     @PostMapping("/edit")
     @ResponseBody
     public AjaxResult editSave(ShipinDTO shipin) {
-        return toAjax(shipinService.updateShipinDTO(shipin));
+        return toAjax(shipinFacade.updateShipinDTO(shipin));
     }
 
     /**
@@ -137,14 +142,14 @@ public class ShipinController extends BaseController {
                 return error("只能删除自己发布的视频");
             }
         }
-        return toAjax(shipinService.deleteShipinDTOByIds(ids));
+        return toAjax(shipinFacade.deleteShipinDTOByIds(ids));
     }
 
     private boolean xxx(String s) {
         ShipinDTO item = new ShipinDTO();
         item.setId(Integer.parseInt(s));
         item.setUserid(ShiroUtils.getLoginName());
-        int count = shipinService.count(item);
+        int count = shipinFacade.count(item);
         return count == 0;
     }
 }

@@ -1,10 +1,9 @@
-package com.ruoyi.sms.service;
+package com.ruoyi.sms.facade;
 
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.sms.domain.EnterpriseInfo;
-import com.ruoyi.sms.facade.api.EnterpriseInfoService;
 import com.ruoyi.sms.facade.dto.EnterpriseInfoDTO;
 import com.ruoyi.sms.mapper.EnterpriseInfoMapper;
 import com.ruoyi.sms.mapper.ExtEnterpriseInfoMapper;
@@ -25,7 +24,7 @@ import java.util.stream.Collectors;
         version = "1.0.0",
         timeout = 15000
 )
-public class EnterpriseInfoServiceImpl implements EnterpriseInfoService {
+public class EnterpriseInfoFacadeImpl implements EnterpriseInfoFacade {
     @Autowired
     private EnterpriseInfoMapper enterpriseInfoMapper;
 
