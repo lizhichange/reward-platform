@@ -117,11 +117,11 @@ public class ShipinFacadeImpl implements IShipinFacade {
     public TPageResult
             <ShipinDTO> queryPage(int start, int rows, ShipinDTO shipinDTO, String orderByClause) {
         int i = start > 1 ? (start - 1) * rows : 0;
-        List<ShipinDTO> list = shipinRepository.queryPage(i, rows, shipinDTO.getName(), orderByClause);
+        List<ShipinDTO> list = shipinRepository.queryPage(i, rows, shipinDTO, orderByClause);
         if (CollectionUtils.isEmpty(list)) {
             return ResultBuilder.succTPage(Lists.newArrayList(), start, rows, 0);
         }
-        long count = shipinRepository.count(shipinDTO.getName());
+        long count = shipinRepository.count(shipinDTO);
         return ResultBuilder.succTPage(list, start, rows, (int) count);
     }
 

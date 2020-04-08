@@ -9,9 +9,9 @@ import java.util.List;
  */
 public interface ShipinRepository {
 
-    List<ShipinDTO> queryPage(int start, int rows, String name, String orderByClause);
+    List<ShipinDTO> queryPage(int start, int rows, ShipinDTO shipinDTO , String orderByClause);
 
-    long count(String name);
+    long count(ShipinDTO shipinDTO);
 
 
 }

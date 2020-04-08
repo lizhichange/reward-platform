@@ -182,6 +182,10 @@ public class PronController extends BaseController {
         List<ShipinDTO> list = shipinFacade.selectShipinDTOList(shipinDTO);
         convert(list);
         modelmap.addAttribute("list", list);
+        getCategory(modelmap);
+    }
+
+    private void getCategory(ModelMap modelmap) {
         SysCategory sysCategory = new SysCategory();
         sysCategory.setParentId(100L);
         List<SysCategory> categoryList = categoryService.selectDeptList(sysCategory);
@@ -193,6 +197,7 @@ public class PronController extends BaseController {
     @WxPnUserAuth
     public String category(@RequestParam(value = "categoryId", required = false) Long categoryId, @RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
         logger.info("user:{},categoryId:{}", userid, categoryId);
+        getCategory(modelmap);
         return prefix + "/category";
     }
 
@@ -217,12 +222,7 @@ public class PronController extends BaseController {
         List<ShipinDTO> list = shipinFacade.selectShipinDTOList(new ShipinDTO());
         convert(list);
         modelmap.addAttribute("list", list);
-
-
-        SysCategory sysCategory = new SysCategory();
-        sysCategory.setParentId(100L);
-        List<SysCategory> categoryList = categoryService.selectDeptList(sysCategory);
-        modelmap.addAttribute("categoryList", categoryList);
+        getCategory(modelmap);
         modelmap.addAttribute("wxPayUrl", Global.getWxPayUrl());
         return prefix + "/detail";
     }
@@ -231,7 +231,6 @@ public class PronController extends BaseController {
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(ShipinDTO shipinDTO) {
-
         PageDomain pageDomain = TableSupport.buildPageRequest();
         Integer pageNum = pageDomain.getPageNum();
         Integer pageSize = pageDomain.getPageSize();
@@ -268,12 +267,6 @@ public class PronController extends BaseController {
         if (StringUtil.isNotBlank(dto.getShijian())) {
             dto.setShijianStr(DateUtils.getTimeString(Integer.parseInt(dto.getShijian())));
         }
-    }
-
-
-    @GetMapping("/flowplayer")
-    public String flowplayer(ModelMap mmap) {
-        return prefix + "/flowplayer";
     }
 
 

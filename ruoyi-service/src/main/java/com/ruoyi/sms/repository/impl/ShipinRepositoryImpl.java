@@ -30,8 +30,8 @@ public class ShipinRepositoryImpl implements ShipinRepository {
      */
 
     @Override
-    public List<ShipinDTO> queryPage(int start, int rows, String name, String orderByClause) {
-        ShipinExample example = getShipinExample(name);
+    public List<ShipinDTO> queryPage(int start, int rows, ShipinDTO shipinDTO, String orderByClause) {
+        ShipinExample example = getShipinExample(shipinDTO);
         example.setOffset(start);
         example.setLimit(rows);
         if (StringUtil.isNotBlank(orderByClause)) {
@@ -43,17 +43,21 @@ public class ShipinRepositoryImpl implements ShipinRepository {
     }
 
     @Override
-    public long count(String name) {
-        ShipinExample example = getShipinExample(name);
+    public long count(ShipinDTO shipinDTO) {
+        ShipinExample example = getShipinExample(shipinDTO);
         return shipinMapper.countByExample(example);
     }
 
-    private ShipinExample getShipinExample(String name) {
+    private ShipinExample getShipinExample(ShipinDTO shipinDTO) {
         ShipinExample example = new ShipinExample();
         ShipinExample.Criteria criteria = example.createCriteria();
-        if (StringUtil.isNotBlank(name)) {
-            criteria.andNameLike(name);
+        if (StringUtil.isNotBlank(shipinDTO.getName())) {
+            criteria.andNameLike(shipinDTO.getName());
         }
+        if (shipinDTO.getCategoryId() != null) {
+            criteria.andCategoryIdEqualTo(shipinDTO.getCategoryId());
+        }
+
         return example;
     }
 }
