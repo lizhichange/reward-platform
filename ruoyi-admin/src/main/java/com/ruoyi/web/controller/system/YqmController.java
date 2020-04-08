@@ -59,6 +59,7 @@ public class YqmController extends BaseController {
     @ResponseBody
     public TableDataInfo list(Yqm yqm) {
         startPage();
+        startOrderBy();
         yqm.setUserid(ShiroUtils.getLoginName());
         List<Yqm> list = yqmService.selectYqmList(yqm);
         for (Yqm item : list) {
