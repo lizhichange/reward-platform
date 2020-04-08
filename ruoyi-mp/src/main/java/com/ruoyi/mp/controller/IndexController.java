@@ -5,7 +5,6 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.ruoyi.sms.facade.ISysWebMainFacade;
 import com.ruoyi.sms.facade.dto.SysWebMainDTO;
 import com.ruoyi.sms.facade.enums.WebMainStatus;
-import lombok.extern.java.Log;
 import org.near.toolkit.common.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,9 +32,14 @@ public class IndexController {
         webMain.setMainStatus(WebMainStatus.OK.getCode());
         List<SysWebMainDTO> list = sysWebMainFacade.selectSysWebMainList(webMain);
         if (!CollectionUtils.isEmpty(list)) {
+            SysWebMainDTO item;
             int size = list.size();
-            int i = RandomUtil.randomInt(0, size - 1);
-            SysWebMainDTO item = list.get(i);
+            if (size == 1) {
+                item = list.get(0);
+            } else {
+                int i = RandomUtil.randomInt(0, size - 1);
+                item = list.get(i);
+            }
             String url = item.getMainUrl() + "/pron/redirect?userid=" + user;
             LOGGER.info("redirect.url:{}", url);
             return "redirect:" + url;
