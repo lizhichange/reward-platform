@@ -1,5 +1,7 @@
 package com.ruoyi.mp.controller;
 
+import cn.hutool.http.useragent.UserAgent;
+import cn.hutool.http.useragent.UserAgentUtil;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.github.binarywang.wxpay.bean.notify.WxPayNotifyResponse;
 import com.github.binarywang.wxpay.bean.notify.WxPayOrderNotifyResult;
@@ -58,13 +60,18 @@ public class PayController {
     ConfigFactory configFactory;
 
     @GetMapping
-    public String pay(@RequestParam(value = "orderId") String orderId, ModelMap modelmap) throws Exception {
+    public String pay(@RequestParam(value = "orderId") String orderId, ModelMap modelmap,
+                      HttpServletRequest request) throws Exception {
+
+        String ua = request.getHeader("User-Agent").toLowerCase();
+        UserAgent parse = UserAgentUtil.parse(ua);
+        if (!parse.isMobile()) {
+            throw new Exception("系统异常");
+        }
         LOGGER.info("orderId:{}", orderId);
         SysOrderDTO item = getSysOrderDTO(orderId);
         modelmap.addAttribute("order", item);
         return "pay";
-
-
     }
 
     private SysOrderDTO getSysOrderDTO(String orderId) throws Exception {
