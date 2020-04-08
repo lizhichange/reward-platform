@@ -104,7 +104,10 @@
                 {
                     field: 'url',
                     title: '图片链接',
-                    sortable: true
+                    sortable: true,
+                    formatter: function (value, row, index) {
+                           return $.table.imageView(row.logo);
+                    }
                 },
 
 
@@ -155,6 +158,8 @@
         $(this).hide();
         $('#btnExpand').show();
     });
+
+
 
 
 </script>
