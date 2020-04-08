@@ -25,10 +25,11 @@ import com.ruoyi.sms.facade.enums.WebMainStatus;
 import com.ruoyi.system.domain.SysCategory;
 import com.ruoyi.system.domain.SysOrder;
 import com.ruoyi.system.domain.SysWebMain;
-import com.ruoyi.system.service.*;
+import com.ruoyi.system.service.ISysCategoryService;
+import com.ruoyi.system.service.ISysOrderService;
+import com.ruoyi.system.service.ISysWebMainService;
 import com.ruoyi.web.Multi;
 import com.ruoyi.web.controller.enums.MultiTypeEnum;
-import lombok.Data;
 import lombok.extern.java.Log;
 import org.near.servicesupport.result.TPageResult;
 import org.near.toolkit.common.DateUtils;
@@ -188,9 +189,17 @@ public class PronController extends BaseController {
     }
 
 
+    @GetMapping("/category")
+    @WxPnUserAuth
+    public String category(@RequestParam(value = "categoryId", required = false) Long categoryId, @RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
+        logger.info("user:{},categoryId:{}", userid, categoryId);
+        return prefix + "/category";
+    }
+
+
     @GetMapping("/detail")
     @WxPnUserAuth
-    public String detail(@RequestParam(value = "id", required = true) Long id, @RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
+    public String detail(@RequestParam(value = "id") Long id, @RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
         logger.info("user:{},id:{}", userid, id);
         ShipinDTO shipin = shipinFacade.selectShipinDTOById(id);
         if (shipin != null) {
@@ -561,13 +570,11 @@ public class PronController extends BaseController {
         modelmap.addAttribute("list", list);
         return prefix + "/multi";
     }
+
+
 }
 
 
-@Data
-class TableDataInfoExt extends TableDataInfo {
-    private long length;
 
-}
 
 
