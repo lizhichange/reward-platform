@@ -1,15 +1,5 @@
 package com.ruoyi.quartz.service.impl;
 
-import java.util.List;
-import javax.annotation.PostConstruct;
-
-import org.quartz.JobDataMap;
-import org.quartz.JobKey;
-import org.quartz.Scheduler;
-import org.quartz.SchedulerException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import com.ruoyi.common.constant.ScheduleConstants;
 import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.common.exception.job.TaskException;
@@ -18,6 +8,18 @@ import com.ruoyi.quartz.mapper.SysJobMapper;
 import com.ruoyi.quartz.service.ISysJobService;
 import com.ruoyi.quartz.util.CronUtils;
 import com.ruoyi.quartz.util.ScheduleUtils;
+import lombok.SneakyThrows;
+import org.quartz.JobDataMap;
+import org.quartz.JobKey;
+import org.quartz.Scheduler;
+import org.quartz.SchedulerException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.PostConstruct;
+import java.util.List;
 
 /**
  * 定时任务调度信息 服务层
@@ -32,16 +34,26 @@ public class SysJobServiceImpl implements ISysJobService {
     @Autowired
     private SysJobMapper jobMapper;
 
+    @Autowired
+    ThreadPoolTaskExecutor threadPoolTaskExecutor;
+
     /**
      * 项目启动时，初始化定时器
      * 主要是防止手动修改数据库导致未同步到定时任务处理（注：不能手动修改数据库ID和任务组名，否则会导致脏数据）
      */
     @PostConstruct
     public void init() throws SchedulerException, TaskException {
-        List<SysJob> jobList = jobMapper.selectJobAll();
-        for (SysJob job : jobList) {
-            updateSchedulerJob(job, job.getJobGroup());
-        }
+        threadPoolTaskExecutor.execute(new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                List<SysJob> jobList = jobMapper.selectJobAll();
+                for (SysJob job : jobList) {
+                    updateSchedulerJob(job, job.getJobGroup());
+                }
+            }
+        });
+
     }
 
     /**
