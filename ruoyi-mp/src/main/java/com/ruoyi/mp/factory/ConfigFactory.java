@@ -44,20 +44,19 @@ public class ConfigFactory {
     @PostConstruct
     @Scheduled(cron = "0 * * * * ? ")
     void init() {
-        threadPoolTaskExecutor.execute(() -> {
-            try {
-                String profile = env.getActiveProfiles()[0];
-                SysWechatConfigDTO item = new SysWechatConfigDTO();
-                item.setEnvType(profile);
-                item.setConfigCode(mpAuthConfig.getConfigCode());
-                List<SysWechatConfigDTO> list = sysWechatConfigFacade.selectSysWechatConfigList(item);
-                if (!CollectionUtils.isEmpty(list)) {
-                    sysWechatConfig = list.get(0);
-                }
-                log.info("weChatConfig:{}", sysWechatConfig);
-            } catch (Exception e) {
-                log.info(e.getMessage(), e);
+
+        try {
+            String profile = env.getActiveProfiles()[0];
+            SysWechatConfigDTO item = new SysWechatConfigDTO();
+            item.setEnvType(profile);
+            item.setConfigCode(mpAuthConfig.getConfigCode());
+            List<SysWechatConfigDTO> list = sysWechatConfigFacade.selectSysWechatConfigList(item);
+            if (!CollectionUtils.isEmpty(list)) {
+                sysWechatConfig = list.get(0);
             }
-        });
+            log.info("weChatConfig:{}", sysWechatConfig);
+        } catch (Exception e) {
+            log.info(e.getMessage(), e);
+        }
     }
 }
