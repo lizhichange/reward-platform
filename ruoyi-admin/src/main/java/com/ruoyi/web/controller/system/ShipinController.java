@@ -14,6 +14,8 @@ import com.ruoyi.sms.facade.dto.ShipinDTO;
 import com.ruoyi.sms.facade.dto.SysCategoryDTO;
 import com.ruoyi.sms.service.IShipinService;
 import com.ruoyi.system.domain.SysCategory;
+import com.ruoyi.system.domain.SysRole;
+import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.system.service.ISysCategoryService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.BeanUtils;
@@ -145,6 +147,15 @@ public class ShipinController extends BaseController {
     @PostMapping("/remove")
     @ResponseBody
     public AjaxResult remove(String ids) {
+        SysUser sysUser = ShiroUtils.getSysUser();
+        List<SysRole> roles = sysUser.getRoles();
+        SysRole sysRole = roles.get(0);
+        //如果是管理员。直接删除
+        if (sysRole.getRoleKey().equals("admin")) {
+            return toAjax(shipinFacade.deleteShipinDTOByIds(ids));
+        }
+
+
         if (ids.contains(",")) {
             Iterable<String> split = Splitter.on(',')
                     .trimResults()
