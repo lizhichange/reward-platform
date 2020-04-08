@@ -42,7 +42,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public AjaxResult handleException(Exception e) {
         log.error(e.getMessage(), e);
-        return AjaxResult.error("服务器错误，请联系管理员");
+        return AjaxResult.error(e.getMessage());
     }
 
 

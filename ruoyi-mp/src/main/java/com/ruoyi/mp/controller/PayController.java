@@ -66,7 +66,7 @@ public class PayController {
         String ua = request.getHeader("User-Agent").toLowerCase();
         UserAgent parse = UserAgentUtil.parse(ua);
         if (!parse.isMobile()) {
-            throw new Exception("系统异常");
+            throw new Exception("系统异常,请使用移动端打开");
         }
         LOGGER.info("orderId:{}", orderId);
         SysOrderDTO item = getSysOrderDTO(orderId);
