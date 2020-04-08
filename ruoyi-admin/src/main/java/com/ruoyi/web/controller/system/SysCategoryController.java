@@ -142,7 +142,8 @@ public class SysCategoryController extends BaseController {
      */
     @GetMapping("/selectDeptTree/{deptId}")
     public String selectDeptTree(@PathVariable("deptId") Long deptId, ModelMap mmap) {
-        mmap.put("dept", categoryService.selectDeptById(deptId));
+        SysCategory sysCategory = categoryService.selectDeptById(deptId);
+        mmap.put("dept",sysCategory );
         return prefix + "/tree";
     }
 

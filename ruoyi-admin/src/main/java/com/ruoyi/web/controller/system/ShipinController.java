@@ -11,8 +11,12 @@ import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.sms.domain.Shipin;
 import com.ruoyi.sms.facade.IShipinFacade;
 import com.ruoyi.sms.facade.dto.ShipinDTO;
+import com.ruoyi.sms.facade.dto.SysCategoryDTO;
 import com.ruoyi.sms.service.IShipinService;
+import com.ruoyi.system.domain.SysCategory;
+import com.ruoyi.system.service.ISysCategoryService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -39,6 +43,10 @@ public class ShipinController extends BaseController {
     @Autowired
 
     IShipinService shipinService;
+
+
+    @Autowired
+    ISysCategoryService sysCategoryService;
 
     @RequiresPermissions("system:shipin:view")
     @GetMapping()
@@ -91,9 +99,7 @@ public class ShipinController extends BaseController {
     public AjaxResult addSave(ShipinDTO shipin) {
         String loginName = ShiroUtils.getLoginName();
         shipin.setUserid(loginName);
-        shipin.setMoney(shipin.getStartMoney() + "-" + shipin.getEndMoney());
         shipin.setClick(0);
-        shipin.setZykey(shipin.getShiUrl());
         shipin.setCreateTime(new Date());
         return toAjax(shipinFacade.insertShipinDTO(shipin));
     }
@@ -105,7 +111,17 @@ public class ShipinController extends BaseController {
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") Long id, ModelMap mmap) {
         ShipinDTO shipin = shipinFacade.selectShipinDTOById(id);
+        String money = shipin.getMoney();
+        String[] split = money.split("-");
+        shipin.setStartMoney(split[0]);
+        shipin.setEndMoney(split[1]);
         mmap.put("shipin", shipin);
+        Integer categoryId = shipin.getCategoryId();
+        SysCategory sysCategory = sysCategoryService.selectDeptById(categoryId.longValue());
+        SysCategoryDTO categoryDTO = new SysCategoryDTO();
+        BeanUtils.copyProperties(sysCategory, categoryDTO);
+        shipin.setCategory(categoryDTO);
+
         return prefix + "/edit";
     }
 
@@ -117,6 +133,7 @@ public class ShipinController extends BaseController {
     @PostMapping("/edit")
     @ResponseBody
     public AjaxResult editSave(ShipinDTO shipin) {
+        shipin.setMoney(shipin.getStartMoney() + "-" + shipin.getEndMoney());
         return toAjax(shipinFacade.updateShipinDTO(shipin));
     }
 

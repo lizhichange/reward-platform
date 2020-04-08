@@ -97,7 +97,6 @@ public class ShipinFacadeImpl implements IShipinFacade {
     public int insertShipinDTO(ShipinDTO item) {
         Shipin it = new Shipin();
         BeanUtils.copyProperties(item, it);
-
         return extShipinMapper.insertShipin(it);
     }
 

@@ -152,6 +152,7 @@ public class ShipinDTO implements Serializable {
      */
     private Integer categoryId;
 
+    private SysCategoryDTO category;
     /**
      * shipin.create_time
      *

@@ -38,7 +38,7 @@
             <input name="url" type="hidden" id="url" value="">
 
             <input name="shiFileName" type="hidden" id="shiFileName" value="">
-            <input name="shiUrl" type="hidden" id="shiUrl" value="">
+            <input name="zykey" type="hidden" id="zykey" value="">
             <input name="shijian" type="hidden" id="shijian" value="">
 
             <div class="col-sm-6">
@@ -48,12 +48,12 @@
                         <input class="form-control" name="startMoney" value="2" placeholder="2" required
                                type="text">
                     </div>
-                    <label class="col-sm-1 control-label"><span style="color: red; ">元</label>
+                    <label class="col-sm-1 control-label"><span style="color: red; ">元</span></label>
                     <div class="col-sm-3">
                         <input class="form-control" name="endMoney" value="5" placeholder="5" required
                                type="text">
                     </div>
-                    <label class="col-sm-1 control-label"><span style="color: red; ">到</label>
+                    <label class="col-sm-1 control-label"><span style="color: red; ">到</span></label>
 
                 </div>
             </div>
@@ -146,7 +146,7 @@
                 $.modal.msg(response.msg);
             } else if (response.code === 0) {
                 $('#shiFileName').val(response.fileName);
-                $('#shiUrl').val(response.url);
+                $('#zykey').val(response.url);
                 $('#shijian').val(response.duration);
             }
         }
@@ -161,12 +161,12 @@
     function submitHandler() {
         if ($.validate.form()) {
             let url = $('#url').val();
-            let shiUrl = $('#shiUrl').val();
+            let zykey = $('#zykey').val();
             if (url == null || url === '') {
                 $.modal.msg('请先上传视频logo图片');
                 return;
             }
-            if (shiUrl == null || shiUrl === '') {
+            if (zykey == null || zykey === '') {
                 $.modal.msg('请先上传视频');
                 return;
             }
@@ -198,6 +198,7 @@
             layer.close(index);
         }
     }
+
 
 
 </script>

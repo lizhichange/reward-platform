@@ -1,18 +1,5 @@
 package com.ruoyi.web.controller.system;
 
-import java.util.List;
-
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.core.controller.BaseController;
@@ -22,10 +9,21 @@ import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.shiro.service.SysPasswordService;
 import com.ruoyi.framework.util.ShiroUtils;
+import com.ruoyi.system.domain.SysPost;
+import com.ruoyi.system.domain.SysRole;
 import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.system.service.ISysPostService;
 import com.ruoyi.system.service.ISysRoleService;
 import com.ruoyi.system.service.ISysUserService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 /**
  * 用户信息
@@ -99,8 +97,10 @@ public class SysUserController extends BaseController {
      */
     @GetMapping("/add")
     public String add(ModelMap mmap) {
-        mmap.put("roles", roleService.selectRoleAll());
-        mmap.put("posts", postService.selectPostAll());
+        List<SysRole> sysRoles = roleService.selectRoleAll();
+        mmap.put("roles",sysRoles);
+        List<SysPost> sysPosts = postService.selectPostAll();
+        mmap.put("posts",sysPosts );
         return prefix + "/add";
     }
 
@@ -130,7 +130,8 @@ public class SysUserController extends BaseController {
      */
     @GetMapping("/edit/{userId}")
     public String edit(@PathVariable("userId") Long userId, ModelMap mmap) {
-        mmap.put("user", userService.selectUserById(userId));
+        SysUser sysUser = userService.selectUserById(userId);
+        mmap.put("user",sysUser );
         mmap.put("roles", roleService.selectRolesByUserId(userId));
         mmap.put("posts", postService.selectPostsByUserId(userId));
         return prefix + "/edit";
