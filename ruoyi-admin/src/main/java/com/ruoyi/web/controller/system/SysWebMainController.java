@@ -9,6 +9,7 @@ import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.system.domain.SysWebMain;
 import com.ruoyi.system.service.ISysWebMainService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.near.toolkit.common.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -89,6 +90,10 @@ public class SysWebMainController extends BaseController {
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult addSave(SysWebMain sysWebMain) {
+        if (StringUtil.isNotBlank(sysWebMain.getMainStatus())
+                && sysWebMain.getMainStatus().equals("on")) {
+            sysWebMain.setMainStatus("0");
+        }
         return toAjax(sysWebMainService.insertSysWebMain(sysWebMain));
     }
 

@@ -39,7 +39,7 @@
         if ($.validate.form()) {
             var data = $('#form-webmain-add').serialize();
             var mainStatus = $("input[id='mainStatus']").is(':checked') === true ? 0 : 1;
-            data.push({"name": "mainStatus", "value": mainStatus});
+            console.log(data);
             $.operate.save(prefix + "/add",data);
         }
     }
