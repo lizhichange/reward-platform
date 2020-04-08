@@ -14,7 +14,7 @@
     <meta name="generator" content=""/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" th:href="@{/proncss/skin/skin.css}">
+    <link th:href="@{/proncss/skin/skin.css}" rel="stylesheet"/>
     <link th:href="@{/proncss/detail/all-responsive-metal.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{/proncss/detail/jquery.fancybox-metal.css}" rel="stylesheet" type="text/css"/>
     <script th:src="@{/js/jquery.min.js}"></script>
@@ -32,9 +32,10 @@
             </ul>
         </div>
         <div class="box tags-cloud">
-            <a th:each="item:${categoryList}" href="" style="font-weight: bold; font-size: 13px;">
-                [[${item.categoryName}]]</a>
+            <a th:each="item:${categoryList}" style="font-weight: bold; font-size: 13px;"
+               th:href="@{'/pron/category?categoryId='+${item.categoryId}}">[[${item.categoryName}]]</a>
             &nbsp;&nbsp;
+
         </div>
         <div class="member-links">
             <ul>
@@ -70,7 +71,7 @@
             </button>
             <ul class="primary">
                 <li>
-                    <a href="http://www.xiaobi017.com/" id="item1">首页</a>
+                    <a href="/pron" id="item1">首页</a>
                 </li>
             </ul>
             <ul class="secondary">
@@ -182,14 +183,6 @@
 
 
 
-
-
-
-
-
-
-
-
                 </style>
             </div>
 
@@ -211,8 +204,6 @@
             <script src="//cdn.jsdelivr.net/npm/xgplayer/browser/index.js" charset="utf-8"></script>
             <script src="//cdn.jsdelivr.net/npm/xgplayer-mp4/browser/index.js" charset="utf-8"></script>
             <script type="text/javascript">
-
-
                 let player = new Player({
                     "id": 'mse',
                     autoplay: false,
@@ -271,13 +262,7 @@
                             }
                         }
                     });
-
-
                 });
-
-
-
-
               $(function(){
                    $('#toggle-button').click(function (e) {
                    let obj = $(this);
@@ -285,11 +270,6 @@
 
                 });
                 });
-
-
-
-
-
 
             </script>
 
@@ -344,8 +324,6 @@
         <div class="related-videos" id="list_videos_related_videos">
             <ul class="list-sort" id="list_videos_related_videos_filter_list">
                 <li><span>相关视频</span></li>
-
-
             </ul>
 
             <div class="box">

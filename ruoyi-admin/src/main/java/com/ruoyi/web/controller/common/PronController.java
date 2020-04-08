@@ -190,14 +190,17 @@ public class PronController extends BaseController {
         sysCategory.setParentId(100L);
         List<SysCategory> categoryList = categoryService.selectDeptList(sysCategory);
         modelmap.addAttribute("categoryList", categoryList);
+
     }
 
 
     @GetMapping("/category")
     @WxPnUserAuth
-    public String category(@RequestParam(value = "categoryId", required = false) Long categoryId, @RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
+    public String category(@RequestParam(value = "categoryId") Long categoryId, @RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
         logger.info("user:{},categoryId:{}", userid, categoryId);
         getCategory(modelmap);
+        SysCategory sysCategory = categoryService.selectDeptById(categoryId);
+        modelmap.addAttribute("category", sysCategory);
         return prefix + "/category";
     }
 

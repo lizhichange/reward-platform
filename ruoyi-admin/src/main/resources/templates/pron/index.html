@@ -512,6 +512,13 @@
 
 
 
+
+
+
+
+
+
+
     </style>
     <style type="text/css">
 
@@ -529,6 +536,13 @@
             position: absolute;
             width: 1px
         }
+
+
+
+
+
+
+
 
 
 
@@ -559,6 +573,13 @@
 
 
 
+
+
+
+
+
+
+
 </style>
 
 <div class="top-links">
@@ -569,8 +590,8 @@
             </ul>
         </div>
         <div class="box tags-cloud">
-            <a th:each="item:${categoryList}" href="" style="font-weight: bold; font-size: 13px;">
-                [[${item.categoryName}]]</a>
+            <a th:each="item:${categoryList}" style="font-weight: bold; font-size: 13px;"
+               th:href="@{'/pron/category?categoryId='+${item.categoryId}}">[[${item.categoryName}]]</a>
             &nbsp;&nbsp;
         </div>
         <div class="member-links">
@@ -673,8 +694,8 @@
 <div class="footer">
     <div class="footer-wrap">
         <ul class="nav">
-            <li><a href="http://www.xiaobi017.com/">主页</a></li>
-            <li><a href="http://www.xiaobi017.com/signup2/" target="_blank">注册</a></li>
+            <li><a href="/pron">主页</a></li>
+            <li><a href="" target="_blank">注册</a></li>
 
         </ul>
         <div class="copyright">
@@ -798,6 +819,13 @@
             }
         });
     });
+
+
+
+
+
+
+
 
 
 
