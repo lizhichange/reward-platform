@@ -2,6 +2,8 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:include="include :: header('新增域名管理')"/>
+    <th:block th:include="include :: select2-css"/>
+
 </head>
 <body class="white-bg">
 <div class="wrapper wrapper-content animated fadeInRight ibox-content">
@@ -26,6 +28,7 @@
     </form>
 </div>
 <th:block th:include="include :: footer"/>
+<th:block th:include="include :: select2-js"/>
 <script type="text/javascript">
     var prefix = ctx + "system/webmain";
     $("#form-webmain-add").validate({
