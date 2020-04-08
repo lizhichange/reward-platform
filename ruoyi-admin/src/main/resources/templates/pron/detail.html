@@ -5,20 +5,20 @@
     <title></title>
 
     <meta name=viewport
-          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui">
+        content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui">
     <meta name="referrer" content="no-referrer">
 
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     <meta name="description" content="高速在线观看，无需下载播放器。">
     <meta name="keywords" content="电影">
     <meta name="generator" content="CMS">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link th:href="@{/proncss/skin/skin.css}" rel="stylesheet"/>
-    <link th:href="@{/proncss/detail/all-responsive-metal.css}" rel="stylesheet" type="text/css"/>
-    <link th:href="@{/proncss/detail/jquery.fancybox-metal.css}" rel="stylesheet" type="text/css"/>
-    <script th:src="@{/js/jquery.min.js}"></script>
+    <link th:href="@{/proncss/skin/skin.css}" rel="stylesheet" />
+    <link th:href="@{/proncss/detail/all-responsive-metal.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/proncss/detail/jquery.fancybox-metal.css}" rel="stylesheet" type="text/css" />
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
     <script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
     <script th:src="@{/ruoyi/js/ry-ui.js?v=4.0.0}"></script>
 
@@ -34,7 +34,7 @@
         </div>
         <div class="box tags-cloud">
             <a class="highlight" th:each="item:${categoryList}" style="font-weight: bold; font-size: 13px;"
-               th:href="@{'/pron/category?categoryId='+${item.categoryId}}">[[${item.categoryName}]] &nbsp;&nbsp;
+                th:href="@{'/pron/category?categoryId='+${item.categoryId}}">[[${item.categoryName}]] &nbsp;&nbsp;
             </a>
         </div>
         <div class="member-links">
@@ -146,30 +146,16 @@
                         background: none !important;
                     }
 
-                    @media screen and (min-width: 860px) {
-                    }
+                    @media screen and (min-width: 860px) {}
 
-                    @media screen and (max-width: 860px) {
-                    }
-
-
-
-
-
-
-
-
-
-
-
-
+                    @media screen and (max-width: 860px) {}
                 </style>
             </div>
 
-            <input type="hidden" th:value="${shipin.zykey}" id="src"/>
-            <input type="hidden" th:value="${shipin.url}" id="poster"/>
-            <input type="hidden" th:value="${shipin.id}" id="id"/>
-            <input type="hidden" th:value="${wxPayUrl}" id="wxPayUrl"/>
+            <input type="hidden" th:value="${shipin.zykey}" id="src" />
+            <input type="hidden" th:value="${shipin.url}" id="poster" />
+            <input type="hidden" th:value="${shipin.id}" id="id" />
+            <input type="hidden" th:value="${wxPayUrl}" id="wxPayUrl" />
 
             <script type="text/javascript">
                 window.addEventListener('resize', function () {
@@ -252,12 +238,13 @@
                         }
                     });
                 });
-              $(function(){
-                   $('#toggle-button').click(function (e) {
-                   let obj = $(this);
-                   obj.prop('href', '/pron/tswq?type=');
+                
+                $(function () {
+                    $('#toggle-button').click(function (e) {
+                        let obj = $(this);
+                        obj.prop('href', '/pron/tswq?type=');
 
-                });
+                    });
                 });
 
 
@@ -328,11 +315,10 @@
                 <div class="list-videos">
                     <div class="margin-fix" id="list_videos_related_videos_items">
                         <div class="item  " th:each="role:${list}">
-                            <a th:href="@{'/pron/detail?id='+${role.id}}"
-                               th:title="${role.name}">
+                            <a th:href="@{'/pron/detail?id='+${role.id}}" th:title="${role.name}">
                                 <div class="img">
                                     <img class="thumb lazy-load" th:src="${role.url}" th:data-original="${role.url}"
-                                         th:alt="${role.name}" data-cnt="5" width="180" height="135">
+                                        th:alt="${role.name}" data-cnt="5" width="180" height="135">
 
                                 </div>
                                 <strong class="title">
@@ -366,7 +352,7 @@
             <li><a href="/pron">主页</a></li>
         </ul>
         <div class="copyright">
-            2012-2020 <a href="http://www.xiaobi017.com">蝌蚪窝_一个释放蝌蚪的网站</a><br/>
+            2012-2020 <a href="/pron">一个释放蝌蚪的网站</a><br />
             保留所有权利。
         </div>
         <div class="txt">
