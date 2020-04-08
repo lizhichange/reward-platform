@@ -30,10 +30,13 @@ public class ShipinRepositoryImpl implements ShipinRepository {
      */
 
     @Override
-    public List<ShipinDTO> queryPage(int start, int rows, String name) {
+    public List<ShipinDTO> queryPage(int start, int rows, String name, String orderByClause) {
         ShipinExample example = getShipinExample(name);
         example.setOffset(start);
         example.setLimit(rows);
+        if (StringUtil.isNotBlank(orderByClause)) {
+            example.setOrderByClause(orderByClause);
+        }
         List<Shipin> list = shipinMapper.selectByExample(example);
         return list.stream().map(ShipinConvert::convert).collect(Collectors.toList());
 

@@ -49,8 +49,7 @@ public interface IShipinFacade {
      */
     int updateShipinDTO(ShipinDTO item);
 
-    TPageResult
-            <ShipinDTO> queryPage(int start, int rows, ShipinDTO shipinDTO);
+    TPageResult<ShipinDTO> queryPage(int start, int rows, ShipinDTO shipinDTO, String orderByClause);
 
     /**
      * 批量删除公共片库

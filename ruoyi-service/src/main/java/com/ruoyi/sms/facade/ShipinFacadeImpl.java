@@ -115,9 +115,9 @@ public class ShipinFacadeImpl implements IShipinFacade {
 
     @Override
     public TPageResult
-            <ShipinDTO> queryPage(int start, int rows, ShipinDTO shipinDTO) {
+            <ShipinDTO> queryPage(int start, int rows, ShipinDTO shipinDTO, String orderByClause) {
         int i = start > 1 ? (start - 1) * rows : 0;
-        List<ShipinDTO> list = shipinRepository.queryPage(i, rows, shipinDTO.getName());
+        List<ShipinDTO> list = shipinRepository.queryPage(i, rows, shipinDTO.getName(), orderByClause);
         if (CollectionUtils.isEmpty(list)) {
             return ResultBuilder.succTPage(Lists.newArrayList(), start, rows, 0);
         }

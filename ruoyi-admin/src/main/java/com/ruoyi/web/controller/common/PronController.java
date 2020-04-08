@@ -226,7 +226,8 @@ public class PronController extends BaseController {
         PageDomain pageDomain = TableSupport.buildPageRequest();
         Integer pageNum = pageDomain.getPageNum();
         Integer pageSize = pageDomain.getPageSize();
-        TPageResult<ShipinDTO> result = shipinFacade.queryPage(pageNum, pageSize, shipinDTO);
+        String orderByClause = " create_time desc ";
+        TPageResult<ShipinDTO> result = shipinFacade.queryPage(pageNum, pageSize, shipinDTO, orderByClause);
         List<ShipinDTO> list = result.getValues();
         convert(list);
         TableDataInfo dataTable = getDataTable(list);
