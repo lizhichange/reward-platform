@@ -219,7 +219,7 @@
                             console.log(r);
                             if (r.code === 0) {
                                 var rep = r.data;
-                                if (rep.status === 0) {
+                                if (rep.status === 0||rep.status === 2) {
                                     player.pause();
                                     var text = "<font color='#4F4F4F'> 打赏" + rep.moneyStr + "元,永久免费观看此视频 </font>";
                                     $.modal.confirm(text, function () {
@@ -233,7 +233,7 @@
                                     player.play();
                                 }
                             } else {
-
+                                    player.pause();
                             }
                         }
                     });
