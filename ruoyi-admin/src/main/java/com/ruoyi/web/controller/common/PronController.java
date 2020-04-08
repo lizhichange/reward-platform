@@ -199,7 +199,11 @@ public class PronController extends BaseController {
         logger.info("user:{},categoryId:{}", userid, categoryId);
         getCategory(modelmap);
         SysCategory sysCategory = categoryService.selectDeptById(categoryId);
-        modelmap.addAttribute("category", sysCategory);
+        if (sysCategory == null) {
+            modelmap.addAttribute("category", new SysCategory());
+        } else {
+            modelmap.addAttribute("category", sysCategory);
+        }
         return prefix + "/category";
     }
 

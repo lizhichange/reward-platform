@@ -4,7 +4,7 @@
 <head>
     <script type="text/javascript" src="https://z.moatads.com/addthismoatframe568911941483/moatframe.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>类别欧美中的视频</title>
+    <title>类别[[${category.categoryName}]]中的视频</title>
     <meta name="viewport"
           content="target-densitydpi=device-dpi, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta name="description" content="高速在线观看，无需下载播放器。">
@@ -754,6 +754,16 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
     </style>
     <style type="text/css">
 		.at-branding-logo {
@@ -851,11 +861,31 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
     </style>
     <style type="text/css">
 		.fancybox-margin {
 			margin-right: 0px;
 		}
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1604,6 +1634,16 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
     </style>
     <style type="text/css">
 		.at-branding-logo {
@@ -1701,6 +1741,16 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
     </style>
     <style type="text/css">
 		.fancybox-margin {
@@ -1718,17 +1768,21 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
     </style>
     <style type="text/css">
 		.fancybox-margin {
 			margin-right: 0px;
 		}
-
-
-
-
-
-
 
 
 
@@ -1786,6 +1840,16 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
 </style>
 
 <div class="top-links">
@@ -1795,17 +1859,27 @@
             <ul>
             </ul>
         </div>
+        <style>
+            .highlight{
+              font-weight: bold;
+              font-size: 13px;
+            }
 
+
+
+        </style>
+        <!--//${item.categoryId ==category.categoryId }  ? color: #bfd128;:;-->
         <div class="box tags-cloud">
-            <a class="highlight" th:each="item:${categoryList}" style="font-weight: bold; font-size: 13px;"
+            <a class="highlight" th:each="item:${categoryList}"
+               th:style="${item.categoryId ==category.categoryId} ?'color: #bfd128':''"
                th:href="@{'/pron/category?categoryId='+${item.categoryId}}">[[${item.categoryName}]] &nbsp;&nbsp;
             </a>
         </div>
 
         <div class="member-links">
             <ul>
-                <li><a href="/pron" target="_blank">首页</a></li>
-                <li><a href="" target="_blank" id="login">登录</a></li>
+                <li><a href="/pron">首页</a></li>
+                <li><a href="">登录</a></li>
             </ul>
         </div>
     </div>
@@ -1836,7 +1910,7 @@
                 <div id="list_videos_common_videos_list">
 
                     <div class="headline">
-                        <h1> 类别欧美中的新视频 </h1>
+                        <h1> 类别[[${category.categoryName}]]中的新视频 </h1>
 
                         <div class="sort">
                             <span class="icon type-sort"></span>
@@ -2009,6 +2083,16 @@
             }
         });
     });
+
+
+
+
+
+
+
+
+
+
 
 
 
