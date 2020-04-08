@@ -103,6 +103,7 @@ public class ShipinController extends BaseController {
         shipin.setUserid(loginName);
         shipin.setClick(0);
         shipin.setCreateTime(new Date());
+        shipin.setMoney(shipin.getStartMoney() + "-" + shipin.getEndMoney());
         return toAjax(shipinFacade.insertShipinDTO(shipin));
     }
 
