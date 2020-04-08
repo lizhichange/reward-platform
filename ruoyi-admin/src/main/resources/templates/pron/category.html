@@ -750,6 +750,7 @@
 
 
 
+
     </style>
     <style type="text/css">
 		.at-branding-logo {
@@ -843,11 +844,13 @@
 
 
 
+
     </style>
     <style type="text/css">
 		.fancybox-margin {
 			margin-right: 0px;
 		}
+
 
 
 
@@ -1588,6 +1591,7 @@
 
 
 
+
     </style>
     <style type="text/css">
 		.at-branding-logo {
@@ -1681,24 +1685,27 @@
 
 
 
-    </style>
-    <style type="text/css">
-		.fancybox-margin {
-			margin-right: 0px;
-		}
-
-
-
-
-
-
-
 
     </style>
     <style type="text/css">
 		.fancybox-margin {
 			margin-right: 0px;
 		}
+
+
+
+
+
+
+
+
+
+    </style>
+    <style type="text/css">
+		.fancybox-margin {
+			margin-right: 0px;
+		}
+
 
 
 
@@ -1754,6 +1761,7 @@
 
 
 
+
 </style>
 
 <div class="top-links">
@@ -1765,9 +1773,9 @@
         </div>
 
         <div class="box tags-cloud">
-            <a class="highlight" th:each="item:${categoryList}" href="" style="font-weight: bold; font-size: 13px;"
-                th:href="@{'/pron/category?categoryId='+${item.categoryId}}">[[${item.categoryName}]]</a>
-            &nbsp;&nbsp;
+            <a class="highlight" th:each="item:${categoryList}" style="font-weight: bold; font-size: 13px;"
+               th:href="@{'/pron/category?categoryId='+${item.categoryId}}">[[${item.categoryName}]] &nbsp;&nbsp;
+            </a>
         </div>
 
         <div class="member-links">
@@ -1893,7 +1901,7 @@
     $('#example-3').pagination({
         total: 10, // 总数据条数
         current: 1, // 当前页码
-        length: 24, // 每页数据量
+        length: 12, // 每页数据量
         size: 2, // 显示按钮个数
         categoryId:$('#categoryId').val(),// 类目id
         /**
@@ -1996,6 +2004,7 @@
             }
         });
     });
+
 
 
 

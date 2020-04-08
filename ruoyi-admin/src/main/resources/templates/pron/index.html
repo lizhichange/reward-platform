@@ -519,6 +519,7 @@
 
 
 
+
     </style>
     <style type="text/css">
 
@@ -536,6 +537,7 @@
             position: absolute;
             width: 1px
         }
+
 
 
 
@@ -580,6 +582,7 @@
 
 
 
+
 </style>
 
 <div class="top-links">
@@ -590,9 +593,9 @@
             </ul>
         </div>
         <div class="box tags-cloud">
-            <a th:each="item:${categoryList}" style="font-weight: bold; font-size: 13px;"
-               th:href="@{'/pron/category?categoryId='+${item.categoryId}}">[[${item.categoryName}]]</a>
-            &nbsp;&nbsp;
+            <a class="highlight" th:each="item:${categoryList}" style="font-weight: bold; font-size: 13px;"
+               th:href="@{'/pron/category?categoryId='+${item.categoryId}}">[[${item.categoryName}]] &nbsp;&nbsp;
+            </a>
         </div>
         <div class="member-links">
             <ul>
@@ -819,6 +822,7 @@
             }
         });
     });
+
 
 
 
