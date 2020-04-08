@@ -17,7 +17,7 @@
             <label class="col-sm-4 control-label">链接状态：</label>
             <div class="col-sm-8">
                 <label class="toggle-switch switch-solid">
-                    <input checked id="mainStatus" type="checkbox">
+                    <input checked id="mainStatus" name="mainStatus" type="checkbox">
                     <span></span>
                 </label>
             </div>
@@ -35,8 +35,8 @@
     function submitHandler() {
         if ($.validate.form()) {
             var data = $('#form-webmain-add').serialize();
-            var status = $("input[id='mainStatus']").is(':checked') === true ? 0 : 1;
-            data.push({"name": "status", "value": status});
+            var mainStatus = $("input[id='mainStatus']").is(':checked') === true ? 0 : 1;
+            data.push({"name": "mainStatus", "value": mainStatus});
             $.operate.save(prefix + "/add",data);
         }
     }
