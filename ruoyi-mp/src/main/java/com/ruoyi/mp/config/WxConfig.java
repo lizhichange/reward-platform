@@ -124,7 +124,7 @@ public class WxConfig {
             }).collect(Collectors.toMap(WxMpDefaultConfigImpl::getAppId, a -> a, (o, n) -> o)));
             return service;
         }
-        return  new WxMpServiceImpl();
+        return new WxMpServiceImpl();
     }
 
     @Bean
