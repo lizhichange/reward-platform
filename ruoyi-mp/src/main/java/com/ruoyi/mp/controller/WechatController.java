@@ -44,7 +44,7 @@ public class WechatController {
             url += "?callback=" + callback;
         }
         //执行预授权
-        String authorizationUrl = wxMpService.oauth2buildAuthorizationUrl(url, WxConsts.OAuth2Scope.SNSAPI_USERINFO, callback);
+        String authorizationUrl = wxMpService.oauth2buildAuthorizationUrl(url, WxConsts.OAuth2Scope.SNSAPI_BASE, callback);
         //重定向跳转
         return "redirect:" + authorizationUrl;
     }
