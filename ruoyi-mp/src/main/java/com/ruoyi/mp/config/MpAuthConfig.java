@@ -24,5 +24,8 @@ public class MpAuthConfig {
     private boolean mockMoney;
     @Value("${mp.mockWeChatOrderQuery}")
     private boolean mockWeChatOrderQuery;
+    @Value("${mp.mockWeChatOrderSuccess}")
+    private boolean mockWeChatOrderSuccess;
+
 
 }

@@ -61,7 +61,17 @@ public class WeChatOrderStatusCheckScheduled {
         }
     }
 
+
     private void syncPayState(SysOrderDTO order) throws WxPayException {
+        if (!mpAuthConfig.isMockWeChatOrderSuccess()) {
+            SysOrderDTO newOrder = new SysOrderDTO();
+            newOrder.setPayTime(new Date());
+            newOrder.setOrderId(order.getOrderId());
+            newOrder.setStatus(Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
+            accountFacade.take(newOrder);
+            return;
+        }
+
         WxPayOrderQueryRequest request = new WxPayOrderQueryRequest();
         request.setOutTradeNo(order.getOrderId());
         WxPayOrderQueryResult result = wxPayService.queryOrder(request);

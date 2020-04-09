@@ -29,6 +29,8 @@ mp:
 
   mockMoney: false
   mockWeChatOrderQuery: false
+  mockWeChatOrderSuccess: false
+
 
 
 spring:
