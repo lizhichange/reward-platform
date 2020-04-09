@@ -43,6 +43,7 @@ public interface IAccountMapper {
      * @return 结果
      */
     public int updateAccount(Account account);
+    public int updateAccountByAccountId(Account account);
 
     /**
      * 删除【请填写功能名称】

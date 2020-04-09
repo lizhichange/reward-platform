@@ -78,6 +78,21 @@
         where id = #{id}
     </update>
 
+    <update id="updateAccountByAccountId" parameterType="Account">
+        update account
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="balance != null ">balance = #{balance},</if>
+            <if test="state != null  and state != ''">state = #{state},</if>
+            <if test="gmtCreate != null ">gmt_create = #{gmtCreate},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="gmtModified != null ">gmt_modified = #{gmtModified},</if>
+            <if test="modifiedBy != null  and modifiedBy != ''">modified_by = #{modifiedBy},</if>
+            <if test="accountType != null  and accountType != ''">account_type = #{accountType},</if>
+        </trim>
+        where account_id = #{accountId}
+    </update>
+
+
     <delete id="deleteAccountById" parameterType="Long">
         delete from account where id = #{id}
     </delete>
