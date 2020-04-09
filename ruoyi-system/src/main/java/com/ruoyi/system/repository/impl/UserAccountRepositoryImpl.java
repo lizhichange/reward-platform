@@ -56,8 +56,8 @@ public class UserAccountRepositoryImpl implements UserAccountRepository {
     }
 
     @Override
-    public boolean modifyBalance(String userId, long balance, String operator) {
-        return extUserAccountMapper.updateBalance(userId, balance, operator);
+    public boolean modifyBalance(String accountId, long balance, String operator) {
+        return extUserAccountMapper.updateBalance(accountId, balance, operator);
     }
 
 

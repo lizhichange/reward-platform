@@ -17,10 +17,10 @@ public interface UserAccountRepository {
 
     void insert(Account record, String operator);
 
-    AccountDTO queryByUserId(String userId);
+    AccountDTO queryByUserId(String accountId);
 
     List<AccountDTO> queryAll();
 
-    boolean modifyBalance(String userId, long balance, String operator);
+    boolean modifyBalance(String accountId, long balance, String operator);
 
 }

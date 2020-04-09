@@ -15,12 +15,12 @@ import java.util.List;
  */
 public interface ExtUserAccountMapper {
 
-    boolean updateBalance(@Param("userId") String userId,
+    boolean updateBalance(@Param("accountId") String accountId,
                           @Param("balance") long balance,
                           @Param("operator") String operator);
 
 
-    long querySum(@Param("userId") String userId,
+    long querySum(@Param("accountId") String accountId,
                   @Param("bizCodes") List<String> bizCodes,
                   @Param("optType") String optType);
 
