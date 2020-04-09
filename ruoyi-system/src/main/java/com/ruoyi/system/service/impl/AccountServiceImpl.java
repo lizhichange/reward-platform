@@ -89,6 +89,6 @@ public class AccountServiceImpl implements IAccountService {
 
     @Override
     public int changeStatus(Account account) {
-        return accountMapper.updateAccount(account);
+        return accountMapper.updateAccountByAccountId(account);
     }
 }

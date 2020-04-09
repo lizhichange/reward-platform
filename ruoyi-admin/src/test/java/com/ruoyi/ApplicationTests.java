@@ -3,6 +3,8 @@ package com.ruoyi;
 import com.ruoyi.sms.domain.Shipin;
 import com.ruoyi.sms.domain.ShipinExample;
 import com.ruoyi.sms.mapper.ShipinMapper;
+import com.ruoyi.system.domain.Account;
+import com.ruoyi.system.mapper.AccountMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +19,17 @@ import java.util.List;
 public class ApplicationTests {
     @Autowired
     ShipinMapper shipinMapper;
+    @Autowired
+    AccountMapper accountMapper;
+    @Test
+    public void test01() {
+        Account account=new Account();
+        account.setAccountId("admin");
+        account.setState("0");
+        account.setBalance(110L);
+        accountMapper.insertSelective(account);
 
+    }
     @Test
     public void testOne() {
         List<Shipin> list = shipinMapper.selectByExample(new ShipinExample());
