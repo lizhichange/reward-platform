@@ -30,7 +30,7 @@ import java.util.List;
 @Slf4j
 public class WeChatOrderStatusCheckScheduled {
 
-    private static final int PAGE = 1;
+
     private static final int ROWS = 100;
     @Autowired
     WxPayService wxPayService;
@@ -45,7 +45,6 @@ public class WeChatOrderStatusCheckScheduled {
     public void execute() {
         if (!mpAuthConfig.isMockWeChatOrderQuery()) {
             SysOrderDTO item = new SysOrderDTO();
-            item.setOffset(PAGE);
             item.setLimit(ROWS);
             item.setStatus(Integer.valueOf(OrderStatusType.PAY_ING.getCode()));
             List<SysOrderDTO> list = sysOrderFacade.selectSysOrderListExt(item);

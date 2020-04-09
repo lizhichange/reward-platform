@@ -61,8 +61,12 @@ public class ISysOrderFacadeImpl implements ISysOrderFacade {
     public List<SysOrderDTO> selectSysOrderListExt(SysOrderDTO sysOrder) {
 
         SysOrderExample example = new SysOrderExample();
-        example.setOffset(sysOrder.getOffset());
-        example.setLimit(sysOrder.getLimit());
+        if (sysOrder.getOffset() != null) {
+            example.setOffset(sysOrder.getOffset());
+        }
+        if (sysOrder.getLimit() != null) {
+            example.setLimit(sysOrder.getLimit());
+        }
         SysOrderExample.Criteria criteria = example.createCriteria();
         if (null != sysOrder.getStatus()) {
             criteria.andStatusEqualTo(sysOrder.getStatus());
