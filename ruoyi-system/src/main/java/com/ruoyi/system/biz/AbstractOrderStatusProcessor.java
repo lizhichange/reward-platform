@@ -24,7 +24,7 @@ public abstract class AbstractOrderStatusProcessor implements UserOrderStatusPro
      * @return 获取返利金额 long
      */
     public Long get(SysOrderDTO orderInfo) {
-        //佣金配置
+        //佣金配置 百分比20
         Integer snapshot = 20;
         //支付金额
         Integer promotionAmount = orderInfo.getMoney();

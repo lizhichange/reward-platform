@@ -1,6 +1,6 @@
 package com.ruoyi.system.domain;
 
-import lombok.Data;
+import org.near.toolkit.model.Money;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -8,7 +8,6 @@ import java.util.Date;
 /**
  * @author sunflower
  */
-@Data
 public class Account implements Serializable {
     /**
      * account.id
@@ -33,6 +32,8 @@ public class Account implements Serializable {
      */
     private Long balance;
 
+
+    private String balanceStr;
     /**
      * account.state
      * 状态[1:启用,0:禁用]
@@ -79,7 +80,90 @@ public class Account implements Serializable {
      */
     private String accountType;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
+    }
+
+    public Long getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Long balance) {
+        this.balance = balance;
+    }
+
+    public String getBalanceStr() {
+        if (this.balance != null) {
+            Money money = new Money();
+            money.setCent(this.balance);
+            balanceStr = money.getAmount().toString();
+        }
+        return balanceStr;
+    }
+
+    public void setBalanceStr(String balanceStr) {
+        this.balanceStr = balanceStr;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public Date getGmtCreate() {
+        return gmtCreate;
+    }
+
+    public void setGmtCreate(Date gmtCreate) {
+        this.gmtCreate = gmtCreate;
+    }
+
+    public String getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
+    }
+
+    public Date getGmtModified() {
+        return gmtModified;
+    }
+
+    public void setGmtModified(Date gmtModified) {
+        this.gmtModified = gmtModified;
+    }
+
+    public String getModifiedBy() {
+        return modifiedBy;
+    }
+
+    public void setModifiedBy(String modifiedBy) {
+        this.modifiedBy = modifiedBy;
+    }
+
+    public String getAccountType() {
+        return accountType;
+    }
+
+
     private static final long serialVersionUID = 1L;
+
 
     @Override
     public String toString() {
@@ -99,5 +183,9 @@ public class Account implements Serializable {
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
+    }
+
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
     }
 }
