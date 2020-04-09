@@ -147,7 +147,7 @@ public class PronController extends BaseController {
                 threadPoolTaskExecutor.execute(() -> {
                     SysOrder upOrder = new SysOrder();
                     upOrder.setOrderId(sysOrder.getOrderId());
-                    upOrder.setExtensionUserId(sysOrder.getExtensionUserId());
+                    upOrder.setExtensionUserId(userId);
                     sysOrderService.updateSysOrderByOrderId(upOrder);
                 });
             }
