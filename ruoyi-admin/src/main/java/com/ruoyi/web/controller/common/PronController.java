@@ -110,12 +110,12 @@ public class PronController extends BaseController {
         if (CollectionUtils.isEmpty(sysOrders)) {
             ShipinDTO dto = shipinFacade.selectShipinDTOById(shipinDTO.getId().longValue());
             order.setCreateTime(new Date());
+            //代理推广的id
             order.setExtensionUserId(userId);
             order.setUpdateTime(new Date());
             order.setOrderId(concurrentSequence.nextId().toString());
             //商品快照信息
             order.setGoodsSnapshot(JSON.toJSONString(dto));
-            order.setExtensionUserId(SessionContext.getUserId());
             //商品价格区间 原价
             String money = dto.getMoney();
             String[] split = money.split("-");
@@ -141,6 +141,16 @@ public class PronController extends BaseController {
             return AjaxResult.success(order);
         } else {
             SysOrder sysOrder = sysOrders.get(0);
+            //如果为空
+            if (StringUtil.isBlank(sysOrder.getExtensionUserId())) {
+                //异步执行
+                threadPoolTaskExecutor.execute(() -> {
+                    SysOrder upOrder = new SysOrder();
+                    upOrder.setOrderId(sysOrder.getOrderId());
+                    upOrder.setExtensionUserId(sysOrder.getExtensionUserId());
+                    sysOrderService.updateSysOrderByOrderId(upOrder);
+                });
+            }
             Money money = new Money();
             money.setCent(sysOrder.getMoney());
             sysOrder.setMoneyStr(money.toString());
