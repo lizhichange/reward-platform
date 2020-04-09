@@ -6,12 +6,12 @@
     <meta id="viewport" name="viewport"
           content="width=device-width; initial-scale=1.0; maximum-scale=1; user-scalable=no;"/>
     <title></title>
-    <!--
-    /****************************************
-    本文件是【微信支付V2.0】JSAPI支付实例
-    需要用授权接口进入页面
-    ****************************************/
-    -->
+
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+
+
     <style type="text/css">
 
         body, p, ul, li, h1, h2, form, input {
@@ -167,9 +167,13 @@
         }
 
 
+
+
     </style>
 </head>
 <body>
+
+
 <article class="charge">
     <h1>微信支付购买</h1>
     <section class="content">
@@ -182,16 +186,22 @@
         <div class="operation"><a class="btn-green" id="getBrandWCPayRequest">立即购买</a></div>
         <input type="hidden" th:value="${order.orderId}" id="orderId"/>
         <p class="copy-right">微信支付购买</p>
+
     </section>
 </article>
+
+
 </body>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
 <script type="text/javascript" src="/js/zepto.min.js"></script>
-<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+
 <script type="text/javascript">
     $(function () {
         $('#getBrandWCPayRequest').click(function () {
             let orderId = $("#orderId").val();
+            $.showLoading("数据加载中");
             $.ajax({
                 type: "post",
                 url: "/pay/createOrder",
@@ -199,6 +209,7 @@
                     "orderId": orderId
                 },
                 success: function (r) {
+                $.hideLoading();
                     if (r.code === 0) {
                         let rep = r.data;
                         WeixinJSBridge.invoke(
@@ -225,6 +236,30 @@
             });
         });
     });
+
+    // loading
+    $(function(){
+        var $loadingToast = $('#loadingToast');
+        $('#showLoadingToast').on('click', function(){
+            if ($loadingToast.css('display') != 'none') return;
+
+            $loadingToast.fadeIn(100);
+            setTimeout(function () {
+                $loadingToast.fadeOut(100);
+            }, 2000);
+        });
+    });
+
+
+
+
+
+
+
+
+
+
+
 
 
 </script>
