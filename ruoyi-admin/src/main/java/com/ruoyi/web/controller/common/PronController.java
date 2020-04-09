@@ -165,9 +165,13 @@ public class PronController extends BaseController {
         List<SysWebMain> list = sysWebMainService.selectSysWebMainList(webMain);
         if (!CollectionUtils.isEmpty(list)) {
             int size = list.size();
-            int i = RandomUtil.randomInt(0, size - 1);
-            SysWebMain item = list.get(i);
-
+            SysWebMain item;
+            if (size == 1) {
+                item = list.get(0);
+            } else {
+                int i = RandomUtil.randomInt(0, size - 1);
+                item = list.get(i);
+            }
             String url = item.getMainUrl() + "/pron/redirect?userid=" + user;
             logger.info("redirect.url:{}", url);
             return "redirect:" + url;
