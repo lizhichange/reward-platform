@@ -148,7 +148,6 @@
         current: 1, // 当前页码
         length: 12, // 每页数据量
         size: 2, // 显示按钮个数
-        categoryId:$('#categoryId').val(), //类目id
         /**
          * ajax请求远程数据
          * 此方法阻止按钮渲染
@@ -169,7 +168,8 @@
                 url: '/pron/list',
                 data: {
                     pageNum: options.current,
-                    pageSize: options.length
+                    pageSize: options.length,
+                    categoryId:$('#categoryId').val(), //类目id
                 },
                 dataType: 'json'
             }).done(function (res) {
@@ -249,6 +249,7 @@
             }
         });
     });
+
 
 
 </script>
