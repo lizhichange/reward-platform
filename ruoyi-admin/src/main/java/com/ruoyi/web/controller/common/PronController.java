@@ -46,6 +46,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -195,6 +196,7 @@ public class PronController extends BaseController {
         PageHelper.startPage(1, 12, StringUtil.EMPTY_STRING);
         List<ShipinDTO> list = shipinFacade.selectShipinDTOList(shipinDTO);
         convert(list);
+        list.stream().sorted(Comparator.comparing(ShipinDTO::getCreateTime));
         modelmap.addAttribute("list", list);
         getCategory(modelmap);
     }

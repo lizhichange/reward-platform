@@ -9,8 +9,7 @@
     <version>4.1.0</version>
 
     <name>ruoyi</name>
-    <url>http://www.ruoyi.vip</url>
-    <description>若依管理系统</description>
+    <description>管理系统</description>
 
     <properties>
         <ruoyi.version>4.1.0</ruoyi.version>
@@ -319,7 +318,6 @@
                 <artifactId>nacos-config-spring-boot-starter</artifactId>
                 <version>${nacos-config-spring-boot.version}</version>
             </dependency>
-
 
 
         </dependencies>
