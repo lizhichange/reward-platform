@@ -46,8 +46,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import static com.ruoyi.sms.facade.enums.OrderPayType.WE_CHAT_PAY;
 
@@ -195,7 +194,7 @@ public class PronController extends BaseController {
         PageHelper.startPage(1, 12, StringUtil.EMPTY_STRING);
         List<ShipinDTO> list = shipinFacade.selectShipinDTOList(shipinDTO);
         convert(list);
-        list.stream().sorted((o1, o2) -> o2.getCreateTime().compareTo(o1.getCreateTime()));
+        Collections.sort(list, (o1, o2) -> o2.getCreateTime().compareTo(o1.getCreateTime()));
         modelmap.addAttribute("list", list);
         getCategory(modelmap);
     }
