@@ -5,8 +5,8 @@
 package com.ruoyi.sms.facade;
 
 
+import com.ruoyi.sms.facade.dto.TWechatAuthDTO;
 import com.ruoyi.sms.facade.dto.UserDto;
-import com.ruoyi.sms.facade.dto.WechatAuthDto;
 import com.ruoyi.sms.facade.request.UserWechatLoginRequest;
 
 
@@ -38,7 +38,7 @@ public interface UserDetailFacade {
      * @param openId 用户openId
      * @return {@link UserDto}
      */
-    WechatAuthDto queryByOpenId(String openId);
+    TWechatAuthDTO queryByOpenId(String openId);
 
 
     /**
@@ -47,5 +47,5 @@ public interface UserDetailFacade {
      * @param userId 用户openId
      * @return {@link UserDto}
      */
-    WechatAuthDto queryWechatByUserId(String userId);
+    TWechatAuthDTO queryWechatByUserId(String userId);
 }

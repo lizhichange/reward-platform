@@ -1,10 +1,10 @@
 package com.ruoyi.sms.repository.impl;
 
-import com.ruoyi.sms.domain.WechatAuthDO;
-import com.ruoyi.sms.domain.WechatAuthDOExample;
-import com.ruoyi.sms.facade.dto.WechatAuthDto;
+import com.ruoyi.sms.domain.TWechatAuth;
+import com.ruoyi.sms.domain.TWechatAuthExample;
+import com.ruoyi.sms.facade.dto.TWechatAuthDTO;
 import com.ruoyi.sms.facade.enums.PrincipalTypeEnum;
-import com.ruoyi.sms.mapper.WechatAuthDOMapper;
+import com.ruoyi.sms.mapper.TWechatAuthMapper;
 import com.ruoyi.sms.repository.WechatAuthRepository;
 import org.near.toolkit.common.EnumUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,64 +21,64 @@ import java.util.List;
 @Repository
 public class WechatAuthRepositoryImpl implements WechatAuthRepository {
     @Autowired
-    private WechatAuthDOMapper wechatAuthDOMapper;
+    private TWechatAuthMapper wechatAuthMapper;
 
     @Override
-    public void insert(WechatAuthDO record, String operator) {
+    public void insert(TWechatAuth record, String operator) {
         Date now = new Date();
         record.setGmtCreate(now);
         record.setCreateBy(operator);
         record.setGmtModified(now);
         record.setModifiedBy(operator);
-        wechatAuthDOMapper.insertSelective(record);
+        wechatAuthMapper.insertSelective(record);
     }
 
     @Override
-    public boolean update(WechatAuthDO record, String operator) {
+    public boolean update(TWechatAuth record, String operator) {
         record.setGmtModified(new Date());
         record.setModifiedBy(operator);
-        return wechatAuthDOMapper.updateByPrimaryKeySelective(record) > 0;
+        return wechatAuthMapper.updateByPrimaryKeySelective(record) > 0;
     }
 
     @Override
     public boolean delete(String principalId, PrincipalTypeEnum principalType) {
-        WechatAuthDOExample example = new WechatAuthDOExample();
-        example.createCriteria().andPrincipalIdEqualTo(principalId)
-                .andPrincipalTypeEqualTo(principalType.getCode());
-        return wechatAuthDOMapper.deleteByExample(example) > 0;
+        TWechatAuthExample example = new TWechatAuthExample();
+        example.createCriteria().andUserIdEqualTo(principalId)
+                .andUserTypeEqualTo(principalType.getCode());
+        return wechatAuthMapper.deleteByExample(example) > 0;
     }
 
     @Override
-    public WechatAuthDto queryByOpenId(String openId, PrincipalTypeEnum principalType) {
-        WechatAuthDOExample example = new WechatAuthDOExample();
+    public TWechatAuthDTO queryByOpenId(String openId, PrincipalTypeEnum principalType) {
+        TWechatAuthExample example = new TWechatAuthExample();
         example.createCriteria().andOpenIdEqualTo(openId)
-                .andPrincipalTypeEqualTo(principalType.getCode());
-        List<WechatAuthDO> list = wechatAuthDOMapper.selectByExample(example);
+                .andUserTypeEqualTo(principalType.getCode());
+        List<TWechatAuth> list = wechatAuthMapper.selectByExample(example);
         return CollectionUtils.isEmpty(list) ? null : conv(list.get(0));
     }
 
     @Override
-    public WechatAuthDto queryByPrincipalId(String principalId, PrincipalTypeEnum principalType) {
-        WechatAuthDOExample example = new WechatAuthDOExample();
-        example.createCriteria().andPrincipalIdEqualTo(principalId)
-                .andPrincipalTypeEqualTo(principalType.getCode());
-        List<WechatAuthDO> list = wechatAuthDOMapper.selectByExample(example);
+    public TWechatAuthDTO queryByPrincipalId(String principalId, PrincipalTypeEnum principalType) {
+        TWechatAuthExample example = new TWechatAuthExample();
+        example.createCriteria().andUserIdEqualTo(principalId)
+                .andUserTypeEqualTo(principalType.getCode());
+        List<TWechatAuth> list = wechatAuthMapper.selectByExample(example);
         return CollectionUtils.isEmpty(list) ? null : conv(list.get(0));
     }
 
-    public static WechatAuthDto conv(WechatAuthDO record) {
+    public static TWechatAuthDTO conv(TWechatAuth record) {
         if (record == null) {
             return null;
         }
-        WechatAuthDto dto = new WechatAuthDto();
+        TWechatAuthDTO dto = new TWechatAuthDTO();
         dto.setId(record.getId());
         dto.setOpenId(record.getOpenId());
-        dto.setPrincipalId(record.getPrincipalId());
-        PrincipalTypeEnum principalType = EnumUtil.queryByCode(record.getPrincipalType(),
+        dto.setUserId(record.getUserId());
+        PrincipalTypeEnum principalType = EnumUtil.queryByCode(record.getUserType(),
                 PrincipalTypeEnum.class);
         assert principalType != null;
-        dto.setPrincipalType(principalType);
-        dto.setAppId(record.getAppid());
+        dto.setUserType(principalType);
+        dto.setAppid(record.getAppid());
         dto.setUnionid(record.getUnionid());
         dto.setSubscribe(record.getSubscribe());
         dto.setCreateBy(record.getCreateBy());

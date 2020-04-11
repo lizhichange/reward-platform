@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class WechatAuthDOExample {
+public class TWechatAuthExample {
     protected String orderByClause;
 
     protected boolean distinct;
@@ -15,7 +15,7 @@ public class WechatAuthDOExample {
 
     private Integer offset;
 
-    public WechatAuthDOExample() {
+    public TWechatAuthExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -255,143 +255,143 @@ public class WechatAuthDOExample {
             return (Criteria) this;
         }
 
-        public Criteria andPrincipalIdIsNull() {
-            addCriterion("principal_id is null");
+        public Criteria andUserIdIsNull() {
+            addCriterion("user_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andPrincipalIdIsNotNull() {
-            addCriterion("principal_id is not null");
+        public Criteria andUserIdIsNotNull() {
+            addCriterion("user_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPrincipalIdEqualTo(String value) {
-            addCriterion("principal_id =", value, "principalId");
+        public Criteria andUserIdEqualTo(String value) {
+            addCriterion("user_id =", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andPrincipalIdNotEqualTo(String value) {
-            addCriterion("principal_id <>", value, "principalId");
+        public Criteria andUserIdNotEqualTo(String value) {
+            addCriterion("user_id <>", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andPrincipalIdGreaterThan(String value) {
-            addCriterion("principal_id >", value, "principalId");
+        public Criteria andUserIdGreaterThan(String value) {
+            addCriterion("user_id >", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andPrincipalIdGreaterThanOrEqualTo(String value) {
-            addCriterion("principal_id >=", value, "principalId");
+        public Criteria andUserIdGreaterThanOrEqualTo(String value) {
+            addCriterion("user_id >=", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andPrincipalIdLessThan(String value) {
-            addCriterion("principal_id <", value, "principalId");
+        public Criteria andUserIdLessThan(String value) {
+            addCriterion("user_id <", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andPrincipalIdLessThanOrEqualTo(String value) {
-            addCriterion("principal_id <=", value, "principalId");
+        public Criteria andUserIdLessThanOrEqualTo(String value) {
+            addCriterion("user_id <=", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andPrincipalIdLike(String value) {
-            addCriterion("principal_id like", value, "principalId");
+        public Criteria andUserIdLike(String value) {
+            addCriterion("user_id like", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andPrincipalIdNotLike(String value) {
-            addCriterion("principal_id not like", value, "principalId");
+        public Criteria andUserIdNotLike(String value) {
+            addCriterion("user_id not like", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andPrincipalIdIn(List<String> values) {
-            addCriterion("principal_id in", values, "principalId");
+        public Criteria andUserIdIn(List<String> values) {
+            addCriterion("user_id in", values, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andPrincipalIdNotIn(List<String> values) {
-            addCriterion("principal_id not in", values, "principalId");
+        public Criteria andUserIdNotIn(List<String> values) {
+            addCriterion("user_id not in", values, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andPrincipalIdBetween(String value1, String value2) {
-            addCriterion("principal_id between", value1, value2, "principalId");
+        public Criteria andUserIdBetween(String value1, String value2) {
+            addCriterion("user_id between", value1, value2, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andPrincipalIdNotBetween(String value1, String value2) {
-            addCriterion("principal_id not between", value1, value2, "principalId");
+        public Criteria andUserIdNotBetween(String value1, String value2) {
+            addCriterion("user_id not between", value1, value2, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andPrincipalTypeIsNull() {
-            addCriterion("principal_type is null");
+        public Criteria andUserTypeIsNull() {
+            addCriterion("user_type is null");
             return (Criteria) this;
         }
 
-        public Criteria andPrincipalTypeIsNotNull() {
-            addCriterion("principal_type is not null");
+        public Criteria andUserTypeIsNotNull() {
+            addCriterion("user_type is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPrincipalTypeEqualTo(String value) {
-            addCriterion("principal_type =", value, "principalType");
+        public Criteria andUserTypeEqualTo(String value) {
+            addCriterion("user_type =", value, "userType");
             return (Criteria) this;
         }
 
-        public Criteria andPrincipalTypeNotEqualTo(String value) {
-            addCriterion("principal_type <>", value, "principalType");
+        public Criteria andUserTypeNotEqualTo(String value) {
+            addCriterion("user_type <>", value, "userType");
             return (Criteria) this;
         }
 
-        public Criteria andPrincipalTypeGreaterThan(String value) {
-            addCriterion("principal_type >", value, "principalType");
+        public Criteria andUserTypeGreaterThan(String value) {
+            addCriterion("user_type >", value, "userType");
             return (Criteria) this;
         }
 
-        public Criteria andPrincipalTypeGreaterThanOrEqualTo(String value) {
-            addCriterion("principal_type >=", value, "principalType");
+        public Criteria andUserTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("user_type >=", value, "userType");
             return (Criteria) this;
         }
 
-        public Criteria andPrincipalTypeLessThan(String value) {
-            addCriterion("principal_type <", value, "principalType");
+        public Criteria andUserTypeLessThan(String value) {
+            addCriterion("user_type <", value, "userType");
             return (Criteria) this;
         }
 
-        public Criteria andPrincipalTypeLessThanOrEqualTo(String value) {
-            addCriterion("principal_type <=", value, "principalType");
+        public Criteria andUserTypeLessThanOrEqualTo(String value) {
+            addCriterion("user_type <=", value, "userType");
             return (Criteria) this;
         }
 
-        public Criteria andPrincipalTypeLike(String value) {
-            addCriterion("principal_type like", value, "principalType");
+        public Criteria andUserTypeLike(String value) {
+            addCriterion("user_type like", value, "userType");
             return (Criteria) this;
         }
 
-        public Criteria andPrincipalTypeNotLike(String value) {
-            addCriterion("principal_type not like", value, "principalType");
+        public Criteria andUserTypeNotLike(String value) {
+            addCriterion("user_type not like", value, "userType");
             return (Criteria) this;
         }
 
-        public Criteria andPrincipalTypeIn(List<String> values) {
-            addCriterion("principal_type in", values, "principalType");
+        public Criteria andUserTypeIn(List<String> values) {
+            addCriterion("user_type in", values, "userType");
             return (Criteria) this;
         }
 
-        public Criteria andPrincipalTypeNotIn(List<String> values) {
-            addCriterion("principal_type not in", values, "principalType");
+        public Criteria andUserTypeNotIn(List<String> values) {
+            addCriterion("user_type not in", values, "userType");
             return (Criteria) this;
         }
 
-        public Criteria andPrincipalTypeBetween(String value1, String value2) {
-            addCriterion("principal_type between", value1, value2, "principalType");
+        public Criteria andUserTypeBetween(String value1, String value2) {
+            addCriterion("user_type between", value1, value2, "userType");
             return (Criteria) this;
         }
 
-        public Criteria andPrincipalTypeNotBetween(String value1, String value2) {
-            addCriterion("principal_type not between", value1, value2, "principalType");
+        public Criteria andUserTypeNotBetween(String value1, String value2) {
+            addCriterion("user_type not between", value1, value2, "userType");
             return (Criteria) this;
         }
 
@@ -545,52 +545,62 @@ public class WechatAuthDOExample {
             return (Criteria) this;
         }
 
-        public Criteria andSubscribeEqualTo(Boolean value) {
+        public Criteria andSubscribeEqualTo(String value) {
             addCriterion("subscribe =", value, "subscribe");
             return (Criteria) this;
         }
 
-        public Criteria andSubscribeNotEqualTo(Boolean value) {
+        public Criteria andSubscribeNotEqualTo(String value) {
             addCriterion("subscribe <>", value, "subscribe");
             return (Criteria) this;
         }
 
-        public Criteria andSubscribeGreaterThan(Boolean value) {
+        public Criteria andSubscribeGreaterThan(String value) {
             addCriterion("subscribe >", value, "subscribe");
             return (Criteria) this;
         }
 
-        public Criteria andSubscribeGreaterThanOrEqualTo(Boolean value) {
+        public Criteria andSubscribeGreaterThanOrEqualTo(String value) {
             addCriterion("subscribe >=", value, "subscribe");
             return (Criteria) this;
         }
 
-        public Criteria andSubscribeLessThan(Boolean value) {
+        public Criteria andSubscribeLessThan(String value) {
             addCriterion("subscribe <", value, "subscribe");
             return (Criteria) this;
         }
 
-        public Criteria andSubscribeLessThanOrEqualTo(Boolean value) {
+        public Criteria andSubscribeLessThanOrEqualTo(String value) {
             addCriterion("subscribe <=", value, "subscribe");
             return (Criteria) this;
         }
 
-        public Criteria andSubscribeIn(List<Boolean> values) {
+        public Criteria andSubscribeLike(String value) {
+            addCriterion("subscribe like", value, "subscribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubscribeNotLike(String value) {
+            addCriterion("subscribe not like", value, "subscribe");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubscribeIn(List<String> values) {
             addCriterion("subscribe in", values, "subscribe");
             return (Criteria) this;
         }
 
-        public Criteria andSubscribeNotIn(List<Boolean> values) {
+        public Criteria andSubscribeNotIn(List<String> values) {
             addCriterion("subscribe not in", values, "subscribe");
             return (Criteria) this;
         }
 
-        public Criteria andSubscribeBetween(Boolean value1, Boolean value2) {
+        public Criteria andSubscribeBetween(String value1, String value2) {
             addCriterion("subscribe between", value1, value2, "subscribe");
             return (Criteria) this;
         }
 
-        public Criteria andSubscribeNotBetween(Boolean value1, Boolean value2) {
+        public Criteria andSubscribeNotBetween(String value1, String value2) {
             addCriterion("subscribe not between", value1, value2, "subscribe");
             return (Criteria) this;
         }

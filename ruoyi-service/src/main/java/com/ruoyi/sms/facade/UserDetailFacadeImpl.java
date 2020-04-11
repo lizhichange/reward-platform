@@ -7,9 +7,9 @@ package com.ruoyi.sms.facade;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.ruoyi.sms.domain.TUserDetail;
-import com.ruoyi.sms.domain.WechatAuthDO;
+import com.ruoyi.sms.domain.TWechatAuth;
+import com.ruoyi.sms.facade.dto.TWechatAuthDTO;
 import com.ruoyi.sms.facade.dto.UserDto;
-import com.ruoyi.sms.facade.dto.WechatAuthDto;
 import com.ruoyi.sms.facade.enums.PrincipalTypeEnum;
 import com.ruoyi.sms.facade.request.UserWechatLoginRequest;
 import com.ruoyi.sms.repository.UserDetailRepository;
@@ -35,26 +35,27 @@ public class UserDetailFacadeImpl implements UserDetailFacade {
     @Override
     public UserDto wechatLogin(UserWechatLoginRequest request) {
         PrincipalTypeEnum principalType = PrincipalTypeEnum.USER;
-        WechatAuthDto wechat = wechatRepository.queryByOpenId(request.getOpenId(), principalType);
+        TWechatAuthDTO wechat = wechatRepository.queryByOpenId(request.getOpenId(), principalType);
         UserDto res;
         // 已注册
         if (wechat != null) {
-            res = userDetailRepository.queryByPK(wechat.getPrincipalId());
+            res = userDetailRepository.queryByPK(wechat.getUserId());
         } else { // 未注册
             String userId = UUID.randomUUID().toString();
             TUserDetail uRecord = new TUserDetail();
             uRecord.setUserId(userId);
             uRecord.setNickname(request.getNickName());
             uRecord.setGender(request.getGender());
-            uRecord.setHeadImg(request.getHeadImg());
+            uRecord.setAvatarUrl(request.getHeadImg());
             userDetailRepository.insert(uRecord, null);
 
-            WechatAuthDO wRecord = new WechatAuthDO();
+            TWechatAuth wRecord = new TWechatAuth();
             wRecord.setOpenId(request.getOpenId());
             wRecord.setAppid(request.getAppid());
             wRecord.setUnionid(request.getUnionid());
-            wRecord.setPrincipalId(userId);
-            wRecord.setPrincipalType(principalType.getCode());
+            wRecord.setUserId(userId);
+
+            wRecord.setUserType(principalType.getCode());
             wechatRepository.insert(wRecord, null);
 
             res = userDetailRepository.queryByPK(userId);
@@ -68,13 +69,13 @@ public class UserDetailFacadeImpl implements UserDetailFacade {
     }
 
     @Override
-    public WechatAuthDto queryByOpenId(String openId) {
+    public TWechatAuthDTO queryByOpenId(String openId) {
         PrincipalTypeEnum principalType = PrincipalTypeEnum.USER;
         return wechatRepository.queryByOpenId(openId, principalType);
     }
 
     @Override
-    public WechatAuthDto queryWechatByUserId(String userId) {
+    public TWechatAuthDTO queryWechatByUserId(String userId) {
         PrincipalTypeEnum principalType = PrincipalTypeEnum.USER;
         return wechatRepository.queryByPrincipalId(userId, principalType);
     }

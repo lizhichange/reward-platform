@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.sms.mapper.TUserDetailMapper">
   <resultMap id="BaseResultMap" type="com.ruoyi.sms.domain.TUserDetail">
-    <id column="user_id" jdbcType="VARCHAR" property="userId" />
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
     <result column="nickname" jdbcType="VARCHAR" property="nickname" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="gender" jdbcType="CHAR" property="gender" />
@@ -13,7 +14,14 @@
     <result column="create_by" jdbcType="VARCHAR" property="createBy" />
     <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
     <result column="modified_by" jdbcType="VARCHAR" property="modifiedBy" />
-    <result column="head_img" jdbcType="VARCHAR" property="headImg" />
+    <result column="user_source" jdbcType="VARCHAR" property="userSource" />
+    <result column="user_referee" jdbcType="VARCHAR" property="userReferee" />
+    <result column="user_referee_ids" jdbcType="VARCHAR" property="userRefereeIds" />
+    <result column="marker" jdbcType="VARCHAR" property="marker" />
+    <result column="reg_date" jdbcType="DATE" property="regDate" />
+    <result column="level" jdbcType="INTEGER" property="level" />
+    <result column="avatar_url" jdbcType="VARCHAR" property="avatarUrl" />
+    <result column="reg_url" jdbcType="VARCHAR" property="regUrl" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -74,8 +82,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    user_id, nickname, name, gender, id_card, mobile_no, birthday, gmt_create, create_by, 
-    gmt_modified, modified_by, head_img
+    id, user_id, nickname, name, gender, id_card, mobile_no, birthday, gmt_create, create_by, 
+    gmt_modified, modified_by, user_source, user_referee, user_referee_ids, marker, reg_date, 
+    level, avatar_url, reg_url
   </sql>
   <select id="selectByExample" parameterType="com.ruoyi.sms.domain.TUserDetailExample" resultMap="BaseResultMap">
     select
@@ -99,15 +108,15 @@
       </if>
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from t_user_detail
-    where user_id = #{userId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from t_user_detail
-    where user_id = #{userId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.ruoyi.sms.domain.TUserDetailExample">
     delete from t_user_detail
@@ -115,19 +124,23 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ruoyi.sms.domain.TUserDetail">
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.ruoyi.sms.domain.TUserDetail" useGeneratedKeys="true">
     insert into t_user_detail (user_id, nickname, name, 
       gender, id_card, mobile_no, 
       birthday, gmt_create, create_by, 
-      gmt_modified, modified_by, head_img
-      )
+      gmt_modified, modified_by, user_source, 
+      user_referee, user_referee_ids, marker, 
+      reg_date, level, avatar_url, 
+      reg_url)
     values (#{userId,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
       #{gender,jdbcType=CHAR}, #{idCard,jdbcType=VARCHAR}, #{mobileNo,jdbcType=VARCHAR}, 
       #{birthday,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, 
-      #{gmtModified,jdbcType=TIMESTAMP}, #{modifiedBy,jdbcType=VARCHAR}, #{headImg,jdbcType=VARCHAR}
-      )
+      #{gmtModified,jdbcType=TIMESTAMP}, #{modifiedBy,jdbcType=VARCHAR}, #{userSource,jdbcType=VARCHAR}, 
+      #{userReferee,jdbcType=VARCHAR}, #{userRefereeIds,jdbcType=VARCHAR}, #{marker,jdbcType=VARCHAR}, 
+      #{regDate,jdbcType=DATE}, #{level,jdbcType=INTEGER}, #{avatarUrl,jdbcType=VARCHAR}, 
+      #{regUrl,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.ruoyi.sms.domain.TUserDetail">
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.ruoyi.sms.domain.TUserDetail" useGeneratedKeys="true">
     insert into t_user_detail
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -163,8 +176,29 @@
       <if test="modifiedBy != null">
         modified_by,
       </if>
-      <if test="headImg != null">
-        head_img,
+      <if test="userSource != null">
+        user_source,
+      </if>
+      <if test="userReferee != null">
+        user_referee,
+      </if>
+      <if test="userRefereeIds != null">
+        user_referee_ids,
+      </if>
+      <if test="marker != null">
+        marker,
+      </if>
+      <if test="regDate != null">
+        reg_date,
+      </if>
+      <if test="level != null">
+        level,
+      </if>
+      <if test="avatarUrl != null">
+        avatar_url,
+      </if>
+      <if test="regUrl != null">
+        reg_url,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -201,8 +235,29 @@
       <if test="modifiedBy != null">
         #{modifiedBy,jdbcType=VARCHAR},
       </if>
-      <if test="headImg != null">
-        #{headImg,jdbcType=VARCHAR},
+      <if test="userSource != null">
+        #{userSource,jdbcType=VARCHAR},
+      </if>
+      <if test="userReferee != null">
+        #{userReferee,jdbcType=VARCHAR},
+      </if>
+      <if test="userRefereeIds != null">
+        #{userRefereeIds,jdbcType=VARCHAR},
+      </if>
+      <if test="marker != null">
+        #{marker,jdbcType=VARCHAR},
+      </if>
+      <if test="regDate != null">
+        #{regDate,jdbcType=DATE},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="avatarUrl != null">
+        #{avatarUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="regUrl != null">
+        #{regUrl,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -215,6 +270,9 @@
   <update id="updateByExampleSelective" parameterType="map">
     update t_user_detail
     <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
       <if test="record.userId != null">
         user_id = #{record.userId,jdbcType=VARCHAR},
       </if>
@@ -248,8 +306,29 @@
       <if test="record.modifiedBy != null">
         modified_by = #{record.modifiedBy,jdbcType=VARCHAR},
       </if>
-      <if test="record.headImg != null">
-        head_img = #{record.headImg,jdbcType=VARCHAR},
+      <if test="record.userSource != null">
+        user_source = #{record.userSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userReferee != null">
+        user_referee = #{record.userReferee,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userRefereeIds != null">
+        user_referee_ids = #{record.userRefereeIds,jdbcType=VARCHAR},
+      </if>
+      <if test="record.marker != null">
+        marker = #{record.marker,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regDate != null">
+        reg_date = #{record.regDate,jdbcType=DATE},
+      </if>
+      <if test="record.level != null">
+        level = #{record.level,jdbcType=INTEGER},
+      </if>
+      <if test="record.avatarUrl != null">
+        avatar_url = #{record.avatarUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regUrl != null">
+        reg_url = #{record.regUrl,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -258,7 +337,8 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update t_user_detail
-    set user_id = #{record.userId,jdbcType=VARCHAR},
+    set id = #{record.id,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=VARCHAR},
       nickname = #{record.nickname,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
       gender = #{record.gender,jdbcType=CHAR},
@@ -269,7 +349,14 @@
       create_by = #{record.createBy,jdbcType=VARCHAR},
       gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
       modified_by = #{record.modifiedBy,jdbcType=VARCHAR},
-      head_img = #{record.headImg,jdbcType=VARCHAR}
+      user_source = #{record.userSource,jdbcType=VARCHAR},
+      user_referee = #{record.userReferee,jdbcType=VARCHAR},
+      user_referee_ids = #{record.userRefereeIds,jdbcType=VARCHAR},
+      marker = #{record.marker,jdbcType=VARCHAR},
+      reg_date = #{record.regDate,jdbcType=DATE},
+      level = #{record.level,jdbcType=INTEGER},
+      avatar_url = #{record.avatarUrl,jdbcType=VARCHAR},
+      reg_url = #{record.regUrl,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -277,6 +364,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.ruoyi.sms.domain.TUserDetail">
     update t_user_detail
     <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
       <if test="nickname != null">
         nickname = #{nickname,jdbcType=VARCHAR},
       </if>
@@ -307,15 +397,37 @@
       <if test="modifiedBy != null">
         modified_by = #{modifiedBy,jdbcType=VARCHAR},
       </if>
-      <if test="headImg != null">
-        head_img = #{headImg,jdbcType=VARCHAR},
+      <if test="userSource != null">
+        user_source = #{userSource,jdbcType=VARCHAR},
+      </if>
+      <if test="userReferee != null">
+        user_referee = #{userReferee,jdbcType=VARCHAR},
+      </if>
+      <if test="userRefereeIds != null">
+        user_referee_ids = #{userRefereeIds,jdbcType=VARCHAR},
+      </if>
+      <if test="marker != null">
+        marker = #{marker,jdbcType=VARCHAR},
+      </if>
+      <if test="regDate != null">
+        reg_date = #{regDate,jdbcType=DATE},
+      </if>
+      <if test="level != null">
+        level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="avatarUrl != null">
+        avatar_url = #{avatarUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="regUrl != null">
+        reg_url = #{regUrl,jdbcType=VARCHAR},
       </if>
     </set>
-    where user_id = #{userId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ruoyi.sms.domain.TUserDetail">
     update t_user_detail
-    set nickname = #{nickname,jdbcType=VARCHAR},
+    set user_id = #{userId,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
       gender = #{gender,jdbcType=CHAR},
       id_card = #{idCard,jdbcType=VARCHAR},
@@ -325,7 +437,14 @@
       create_by = #{createBy,jdbcType=VARCHAR},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
       modified_by = #{modifiedBy,jdbcType=VARCHAR},
-      head_img = #{headImg,jdbcType=VARCHAR}
-    where user_id = #{userId,jdbcType=VARCHAR}
+      user_source = #{userSource,jdbcType=VARCHAR},
+      user_referee = #{userReferee,jdbcType=VARCHAR},
+      user_referee_ids = #{userRefereeIds,jdbcType=VARCHAR},
+      marker = #{marker,jdbcType=VARCHAR},
+      reg_date = #{regDate,jdbcType=DATE},
+      level = #{level,jdbcType=INTEGER},
+      avatar_url = #{avatarUrl,jdbcType=VARCHAR},
+      reg_url = #{regUrl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

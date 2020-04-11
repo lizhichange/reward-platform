@@ -1,18 +1,16 @@
 package com.ruoyi.sms.mapper;
 
-
 import com.ruoyi.sms.domain.TUserDetail;
 import com.ruoyi.sms.domain.TUserDetailExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface TUserDetailMapper {
     long countByExample(TUserDetailExample example);
 
     int deleteByExample(TUserDetailExample example);
 
-    int deleteByPrimaryKey(String userId);
+    int deleteByPrimaryKey(Integer id);
 
     int insert(TUserDetail record);
 
@@ -20,7 +18,7 @@ public interface TUserDetailMapper {
 
     List<TUserDetail> selectByExample(TUserDetailExample example);
 
-    TUserDetail selectByPrimaryKey(String userId);
+    TUserDetail selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") TUserDetail record, @Param("example") TUserDetailExample example);
 
