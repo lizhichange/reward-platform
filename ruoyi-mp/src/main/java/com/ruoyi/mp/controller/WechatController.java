@@ -1,12 +1,17 @@
 package com.ruoyi.mp.controller;
 
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.ruoyi.mp.config.MpAuthConfig;
+import com.ruoyi.sms.facade.UserDetailFacade;
+import com.ruoyi.sms.facade.dto.UserDto;
+import com.ruoyi.sms.facade.request.UserWechatLoginRequest;
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.result.WxMpOAuth2AccessToken;
 import me.chanjar.weixin.mp.bean.result.WxMpUser;
+import me.chanjar.weixin.mp.config.WxMpConfigStorage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +34,12 @@ public class WechatController {
     @Autowired
     WxMpService wxMpService;
 
+    @Reference(version = "1.0.0", check = false)
+    UserDetailFacade userDetailFacade;
+
     @Autowired
     MpAuthConfig mpAuthConfig;
+
 
     @GetMapping("/auth")
     public String auth(HttpServletRequest request) {
@@ -56,6 +65,17 @@ public class WechatController {
         if (accessToken != null) {
             //用户信息
             WxMpUser wxMpUser = wxMpService.oauth2getUserInfo(accessToken, null);
+            WxMpConfigStorage wxMpConfigStorage = wxMpService.getWxMpConfigStorage();
+            String appId = wxMpConfigStorage.getAppId();
+            UserWechatLoginRequest userWechatLoginRequest = new UserWechatLoginRequest();
+            userWechatLoginRequest.setOpenId(wxMpUser.getOpenId());
+            userWechatLoginRequest.setAppid(appId);
+            userWechatLoginRequest.setNickName(wxMpUser.getNickname());
+            userWechatLoginRequest.setGender(wxMpUser.getSexDesc());
+            userWechatLoginRequest.setUnionid(wxMpUser.getUnionId());
+            userWechatLoginRequest.setHeadImg(wxMpUser.getHeadImgUrl());
+            UserDto dto = userDetailFacade.wechatLogin(userWechatLoginRequest);
+
             if (callback.contains("?")) {
                 callback += "&op=" + wxMpUser.getOpenId();
             } else {
@@ -66,8 +86,6 @@ public class WechatController {
         }
         return "redirect:";
     }
-
-
 
 
 }
