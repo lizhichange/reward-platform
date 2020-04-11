@@ -51,7 +51,9 @@ public class UserDetailRepositoryImpl implements UserDetailRepository {
 
     @Override
     public UserDto queryByPK(String userId) {
-        return conv(tUserDetailMapper.selectByPrimaryKey(userId));
+        TUserDetailExample example = new TUserDetailExample();
+        example.createCriteria().andUserIdEqualTo(userId);
+        return conv(tUserDetailMapper.selectByExample(example).get(0));
     }
 
     @Override
@@ -68,7 +70,7 @@ public class UserDetailRepositoryImpl implements UserDetailRepository {
         // emoji 处理
         UserDto target = new UserDto();
         target.setUserId(src.getUserId());
-        target.setNickName(new String(Base64.decodeBase64(src.getNickname())));
+        target.setNickname(new String(Base64.decodeBase64(src.getNickname())));
         target.setName(src.getName());
         target.setGender(src.getGender());
         target.setIdCard(src.getIdCard());
@@ -77,7 +79,7 @@ public class UserDetailRepositoryImpl implements UserDetailRepository {
         target.setCreateBy(src.getCreateBy());
         target.setGmtCreate(src.getGmtCreate());
         target.setModifiedBy(src.getModifiedBy());
-        target.setHeadImg(src.getHeadImg());
+        target.setAvatarUrl(src.getAvatarUrl());
         target.setGmtModified(src.getGmtModified());
         return target;
     }
