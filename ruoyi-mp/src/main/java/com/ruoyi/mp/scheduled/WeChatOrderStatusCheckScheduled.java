@@ -1,4 +1,4 @@
-package com.ruoyi.mp;
+package com.ruoyi.mp.scheduled;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.github.binarywang.wxpay.bean.request.WxPayOrderQueryRequest;
