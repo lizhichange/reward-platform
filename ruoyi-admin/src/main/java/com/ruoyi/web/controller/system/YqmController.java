@@ -1,6 +1,7 @@
 package com.ruoyi.web.controller.system;
 
 import com.google.common.base.Splitter;
+import com.google.common.collect.Lists;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
@@ -60,7 +61,10 @@ public class YqmController extends BaseController {
     public TableDataInfo list(Yqm yqm) {
         startPage();
         startOrderBy();
-        yqm.setUserid(ShiroUtils.getLoginName());
+        //如果是不管理员
+        if (!ShiroUtils.getLoginName().equals("admin")) {
+            yqm.setUseridList(Lists.newArrayList(ShiroUtils.getLoginName()));
+        }
         List<Yqm> list = yqmService.selectYqmList(yqm);
         for (Yqm item : list) {
             item.setZtDesc(EnumUtil.queryByCode(item.getZt(), YqmStatusEnum.class).getDesc());

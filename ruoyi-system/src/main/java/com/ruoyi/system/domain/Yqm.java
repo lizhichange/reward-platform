@@ -1,9 +1,11 @@
 package com.ruoyi.system.domain;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
+import java.util.List;
 
 /**
  * 邀请码管理对象 yqm
@@ -24,6 +26,8 @@ public class Yqm extends BaseEntity {
      */
     @Excel(name = "代理id")
     private String userid;
+
+    private List<String> useridList;
 
     /**
      * 邀请码
@@ -119,5 +123,13 @@ public class Yqm extends BaseEntity {
 
     public void setZtDesc(String ztDesc) {
         this.ztDesc = ztDesc;
+    }
+
+    public List<String> getUseridList() {
+        return useridList;
+    }
+
+    public void setUseridList(List<String> useridList) {
+        this.useridList = useridList;
     }
 }

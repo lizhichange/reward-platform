@@ -28,6 +28,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="shijian != null  and shijian != ''"> and shijian = #{shijian}</if>
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
             <if test="zt != null  and zt != ''"> and zt = #{zt}</if>
+
+            <if test="useridList!= null  and useridList.size() > 0">
+                and userid in
+                <foreach item="item" collection="useridList" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
         </where>
     </select>
     
