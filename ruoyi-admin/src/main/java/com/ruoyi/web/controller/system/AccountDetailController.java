@@ -56,7 +56,7 @@ public class AccountDetailController extends BaseController {
             SelectOption option = new SelectOption();
             option.setCode(value.getCode());
             option.setDesc(value.getDesc());
-            types.add(option);
+            biz.add(option);
         }
         modelMap.addAttribute("biz", biz);
 
