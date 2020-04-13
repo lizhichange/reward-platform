@@ -224,8 +224,11 @@ public class PronController extends BaseController {
 
     @GetMapping("/detail")
     @WxPnUserAuth
-    public String detail(@RequestParam(value = "id") Long id, @RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
-        logger.info("user:{},id:{}", userid, id);
+    public String detail(@RequestParam(value = "id") Long id,
+                         @RequestParam(value = "userid", required = false) String userid,
+                         @RequestParam(value = "author", required = false) String author,
+                         ModelMap modelmap) {
+        logger.info("user:{},id:{},author:{}", userid, id, author);
         ShipinDTO shipin = shipinFacade.selectShipinDTOById(id);
         if (shipin != null) {
             convert(new Date(), shipin);

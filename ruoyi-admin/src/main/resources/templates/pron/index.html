@@ -512,19 +512,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-    </style>
-    <style type="text/css">
-
         .at-branding-logo span {
             text-decoration: none
         }
@@ -544,22 +531,7 @@
 
 
 
-
-
-
-
-
-
-
-
-    </style>
-</head>
-
-<body>
-
-<style type="text/css">
-
-    .s1 span {
+ .s1 span {
         text-align: center;
         font-size: 15px;
         font-weight: bold;
@@ -579,17 +551,11 @@
 
 
 
+    </style>
+</head>
 
+<body>
 
-
-
-
-
-
-
-
-
-</style>
 
 <div class="top-links">
     <div class="center-hold">
@@ -643,7 +609,7 @@
                 <div class="list-videos">
                     <div class="margin-fix" id="list_videos_videos_watched_right_now_items">
                         <div class="item  " th:each="role:${list}">
-                            <a th:href="@{'/pron/detail?id='+${role.id}}"
+                            <a th:href="@{'/pron/detail?id='+${role.id}+'&author='+${role.userid}}"
                                th:title="${role.name}">
                                 <div class="img">
                                     <img class="thumb lazy-load" th:src="${role.url}"
@@ -762,7 +728,7 @@
                     $.each(res.rows, function (i, row) {
                         var ctx = '';
                         html += '<div class="item  "> '
-                            + '<a href="/pron/detail?id=' + row.id + '" title="' + row.name + '"> <div class="img"> <img class="thumb lazy-load" src="' + row.url + '"'
+                            + '<a href="/pron/detail?id=' + row.id + '&author=' + row.userid + '" title="' + row.name + '"> <div class="img"> <img class="thumb lazy-load" src="' + row.url + '"'
                             + 'data-original="' + row.url + '" alt="' + row.name + '" data-cnt="5" width="180"'
                             + 'height="135">  </div>  <strong class="' + row.name + '"> ' + row.name + '  </strong>  <div class="wrap">  <div class="duration">' + row.shijianStr + '</div>'
                             + '</div>  <div class="wrap">'
@@ -804,7 +770,7 @@
                     let html = "";
                     $.each(res.rows, function (i, row) {
                         html += ' <div class="item  ">'
-                            + '<a href="/pron/detail?id=' + row.id + '&userid=' + row.userid + '" title="' + row.name + '"> '
+                            + '<a href="/pron/detail?id=' + row.id + '&author=' + row.userid + '" title="' + row.name + '"> '
                             + '    <div class="img">'
                             + '        <img class="thumb lazy-load" src="' + row.url + '"  data-original="' + row.url + '" alt="' + row.name + '" data-cnt="5" width="180" height="135">'
                             + '    </div>'
@@ -827,6 +793,9 @@
             }
         });
     });
+
+
+
 
 </script>
 </body>

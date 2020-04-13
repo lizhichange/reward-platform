@@ -161,21 +161,8 @@
                 window.addEventListener('resize', function () {
                     document.getElementById('mse').style.height = window.innerHeight + 'px';
                 });
-
-
-
-
-
-
-
-
-
-
-
             </script>
             <div id="mse"></div>
-            <!--            <script th:src="@{/proncss/xgplayer/browser/index.js}" charset="utf-8"></script>-->
-            <!--            <script th:src="@{/proncss/xgplayer-mp4/browser/index.js}" charset="utf-8"></script>-->
             <script src="//cdn.jsdelivr.net/npm/xgplayer/browser/index.js" charset="utf-8"></script>
             <script src="//cdn.jsdelivr.net/npm/xgplayer-mp4/browser/index.js" charset="utf-8"></script>
             <script type="text/javascript">
@@ -315,7 +302,7 @@
                 <div class="list-videos">
                     <div class="margin-fix" id="list_videos_related_videos_items">
                         <div class="item  " th:each="role:${list}">
-                            <a th:href="@{'/pron/detail?id='+${role.id}}" th:title="${role.name}">
+                            <a th:href="@{'/pron/detail?id='+${role.id}+'&author='+${role.userid}}"  th:title="${role.name}">
                                 <div class="img">
                                     <img class="thumb lazy-load" th:src="${role.url}" th:data-original="${role.url}"
                                         th:alt="${role.name}" data-cnt="5" width="180" height="135">
