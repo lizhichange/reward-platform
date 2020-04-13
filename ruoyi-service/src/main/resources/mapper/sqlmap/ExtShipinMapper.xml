@@ -27,7 +27,8 @@
     </resultMap>
 
     <sql id="selectShipinVo">
-        select id, money, sj, cs, url, userid, name, zykey, shijian, lx, zt, logo, is_lei, is_allow, click, is_preview, shorturl, category_id, create_time from shipin
+        select id, money, sj, cs, url, userid, name, zykey, shijian, lx, zt, logo, is_lei, is_allow, click, is_preview,
+        shorturl, category_id, create_time from shipin
     </sql>
 
     <select id="selectShipinList" parameterType="Shipin" resultMap="ShipinResult">
@@ -83,6 +84,9 @@
             </if>
             <if test="categoryId != null ">
                 and category_id = #{categoryId}
+            </if>
+            <if test="id != null ">
+                and id = #{id}
             </if>
         </where>
     </select>
@@ -229,6 +233,6 @@
 
 
     <update id="updateClickPlus" parameterType="Long">
-    update shipin set click=click+1  where id = #{id}
+        update shipin set click=click+1 where id = #{id}
     </update>
 </mapper>
