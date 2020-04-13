@@ -68,6 +68,7 @@ public class AccountDetail implements Serializable {
      */
     private String bizCode;
 
+    private String  bizCodeStr;
     /**
      * account_detail.source_code
      * 来源业务编码

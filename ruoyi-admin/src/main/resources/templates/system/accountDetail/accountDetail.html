@@ -14,10 +14,7 @@
                             <label>账户唯一id：</label>
                             <input type="text" name="accountId"/>
                         </li>
-                        <li>
-                            <label>金额 分为单位：</label>
-                            <input type="text" name="amount"/>
-                        </li>
+
                         <li>
                             <label>操作类型：</label>
                             <select name="optType">
@@ -33,7 +30,12 @@
                         </li>
                         <li>
                             <label>业务代码：</label>
-                            <input type="text" name="bizCode"/>
+                            <select name="bizCode">
+                                <option value="">所有</option>
+                                <option th:each="dict : ${biz}" th:text="${dict.desc}"
+                                        th:value="${dict.code}">
+                                </option>
+                            </select>
                         </li>
                         <li>
                             <label>来源业务编码：</label>
@@ -123,7 +125,7 @@
                     title : '外部交易号'
                 },
                 {
-                    field : 'bizCode', 
+                    field : 'bizCodeStr',
                     title : '业务代码'
                 },
                 {

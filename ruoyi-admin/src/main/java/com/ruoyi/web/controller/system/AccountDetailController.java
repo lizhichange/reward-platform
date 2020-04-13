@@ -7,6 +7,7 @@ import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
+import com.ruoyi.sms.facade.enums.AccountBizCode;
 import com.ruoyi.sms.facade.enums.AccountOptType;
 import com.ruoyi.system.domain.AccountDetail;
 import com.ruoyi.system.service.IAccountDetailService;
@@ -49,6 +50,17 @@ public class AccountDetailController extends BaseController {
         }
         modelMap.addAttribute("types", types);
 
+
+        List<SelectOption> biz = Lists.newArrayList();
+        for (AccountBizCode value : AccountBizCode.values()) {
+            SelectOption option = new SelectOption();
+            option.setCode(value.getCode());
+            option.setDesc(value.getDesc());
+            types.add(option);
+        }
+        modelMap.addAttribute("biz", biz);
+
+
         return prefix + "/accountDetail";
     }
 
@@ -70,6 +82,13 @@ public class AccountDetailController extends BaseController {
             Money money = new Money();
             money.setCent(amount);
             detail.setAmountStr(money.toString());
+
+
+            AccountBizCode bizCode = EnumUtil.queryByCode(detail.getBizCode(), AccountBizCode.class);
+
+            detail.setBizCodeStr(bizCode.getDesc());
+
+
 
         }
         return getDataTable(list);
