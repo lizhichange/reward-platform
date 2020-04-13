@@ -40,26 +40,41 @@ public class UserDetailFacadeImpl implements UserDetailFacade {
         // 已注册
         if (wechat != null) {
             res = userDetailRepository.queryByPK(wechat.getUserId());
+            if (res == null) {
+                TUserDetail uRecord = new TUserDetail();
+                uRecord.setUserId(wechat.getUserId());
+                uRecord.setNickname(request.getNickName());
+                uRecord.setGender(request.getGender());
+                uRecord.setAvatarUrl(request.getHeadImg());
+                userDetailRepository.insert(uRecord, null);
+                res = userDetailRepository.queryByPK(wechat.getUserId());
+            }
         } else { // 未注册
-            String userId = UUID.randomUUID().toString();
-            TUserDetail uRecord = new TUserDetail();
-            uRecord.setUserId(userId);
-            uRecord.setNickname(request.getNickName());
-            uRecord.setGender(request.getGender());
-            uRecord.setAvatarUrl(request.getHeadImg());
-            userDetailRepository.insert(uRecord, null);
-
-            TWechatAuth wRecord = new TWechatAuth();
-            wRecord.setOpenId(request.getOpenId());
-            wRecord.setAppid(request.getAppid());
-            wRecord.setUnionid(request.getUnionid());
-            wRecord.setUserId(userId);
-
-            wRecord.setUserType(principalType.getCode());
-            wechatRepository.insert(wRecord, null);
-
-            res = userDetailRepository.queryByPK(userId);
+            res = take(request, principalType);
         }
+        return res;
+    }
+
+    private UserDto take(UserWechatLoginRequest request, PrincipalTypeEnum principalType) {
+        UserDto res;
+        String userId = UUID.randomUUID().toString();
+        TUserDetail uRecord = new TUserDetail();
+        uRecord.setUserId(userId);
+        uRecord.setNickname(request.getNickName());
+        uRecord.setGender(request.getGender());
+        uRecord.setAvatarUrl(request.getHeadImg());
+        userDetailRepository.insert(uRecord, null);
+
+        TWechatAuth wRecord = new TWechatAuth();
+        wRecord.setOpenId(request.getOpenId());
+        wRecord.setAppid(request.getAppid());
+        wRecord.setUnionid(request.getUnionid());
+        wRecord.setUserId(userId);
+
+        wRecord.setUserType(principalType.getCode());
+        wechatRepository.insert(wRecord, null);
+
+        res = userDetailRepository.queryByPK(userId);
         return res;
     }
 
