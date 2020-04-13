@@ -12,6 +12,7 @@ import com.ruoyi.system.client.ShipinFacadeClient;
 import com.ruoyi.system.domain.AccountDetail;
 import com.ruoyi.system.domain.AccountDetailExample;
 import com.ruoyi.system.mapper.AccountDetailMapper;
+import com.ruoyi.system.service.ISysConfigService;
 import lombok.extern.slf4j.Slf4j;
 import org.near.toolkit.common.StringUtil;
 import org.near.toolkit.model.Money;
@@ -112,6 +113,9 @@ public class OrderAlreadyToAccountProcessor extends AbstractOrderStatusProcessor
         return !CollectionUtils.isEmpty(list);
     }
 
+    @Autowired
+    ISysConfigService configService;
+
     @Override
     public Long execute(SysOrderDTO orderInfo) {
         Long rebateAmount = get(orderInfo);
@@ -131,6 +135,11 @@ public class OrderAlreadyToAccountProcessor extends AbstractOrderStatusProcessor
                 ShipinDTO shipinDTO = first.get();
                 //佣金配置 百分比10
                 Integer snapshot = 10;
+                //sys.author.rebate
+                String configByKey = configService.selectConfigByKey("sys.author.rebate");
+                if (StringUtil.isNotBlank(configByKey)) {
+                    snapshot = Integer.parseInt(configByKey);
+                }
                 //支付金额
                 Integer promotionAmount = orderInfo.getMoney();
                 log.info("配置用户百分比:{},订单金额:{}", snapshot, promotionAmount);

@@ -5,7 +5,10 @@
 package com.ruoyi.system.biz;
 
 import com.ruoyi.sms.facade.dto.SysOrderDTO;
+import com.ruoyi.system.service.ISysConfigService;
 import lombok.extern.slf4j.Slf4j;
+import org.near.toolkit.common.StringUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 
 
 /**
@@ -17,6 +20,9 @@ import lombok.extern.slf4j.Slf4j;
 public abstract class AbstractOrderStatusProcessor implements UserOrderStatusProcessor {
 
 
+    @Autowired
+    ISysConfigService configService;
+
     /**
      * Get long.
      *
@@ -26,6 +32,10 @@ public abstract class AbstractOrderStatusProcessor implements UserOrderStatusPro
     public Long get(SysOrderDTO orderInfo) {
         //佣金配置 百分比20
         Integer snapshot = 20;
+        String configByKey = configService.selectConfigByKey("sys.order.rebate");
+        if (StringUtil.isNotBlank(configByKey)) {
+            snapshot = Integer.parseInt(configByKey);
+        }
         //支付金额
         Integer promotionAmount = orderInfo.getMoney();
         log.info("配置用户百分比:{},订单金额:{}", snapshot, promotionAmount);
