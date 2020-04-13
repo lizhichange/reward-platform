@@ -92,7 +92,7 @@
 
             <if test="useridList!= null  and useridList.size() > 0">
                 and userid in
-                <foreach item="item" collection="list" open="(" separator="," close=")">
+                <foreach item="item" collection="useridList" open="(" separator="," close=")">
                     #{item}
                 </foreach>
             </if>
