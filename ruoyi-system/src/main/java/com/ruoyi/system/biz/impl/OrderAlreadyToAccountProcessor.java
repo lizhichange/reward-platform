@@ -1,16 +1,18 @@
 package com.ruoyi.system.biz.impl;
 
+import com.ruoyi.sms.facade.dto.ShipinDTO;
 import com.ruoyi.sms.facade.dto.SysOrderDTO;
 import com.ruoyi.sms.facade.enums.AccountOptType;
 import com.ruoyi.sms.facade.enums.AccountType;
 import com.ruoyi.sms.facade.enums.OrderStatusType;
-
 import com.ruoyi.sms.facade.request.UserAccountOperatorRequest;
 import com.ruoyi.system.biz.AbstractOrderStatusProcessor;
 import com.ruoyi.system.biz.TakeAccountAmountManager;
+import com.ruoyi.system.client.ShipinFacadeClient;
 import com.ruoyi.system.domain.AccountDetail;
 import com.ruoyi.system.domain.AccountDetailExample;
 import com.ruoyi.system.mapper.AccountDetailMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.near.toolkit.common.StringUtil;
 import org.near.toolkit.model.Money;
 import org.slf4j.Logger;
@@ -21,7 +23,9 @@ import org.springframework.util.CollectionUtils;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
+import static com.ruoyi.sms.facade.enums.AccountBizCode.ORDER_AUTHOR_REBATE;
 import static com.ruoyi.sms.facade.enums.AccountBizCode.ORDER_REBATE;
 
 /**
@@ -31,11 +35,14 @@ import static com.ruoyi.sms.facade.enums.AccountBizCode.ORDER_REBATE;
  * @date 2018 -7-12
  */
 @Component
+@Slf4j
 public class OrderAlreadyToAccountProcessor extends AbstractOrderStatusProcessor {
 
     private static final Logger LOGGER = LoggerFactory
             .getLogger(OrderAlreadyToAccountProcessor.class);
 
+    @Autowired
+    ShipinFacadeClient shipinFacadeClient;
 
     /**
      * The Take account amount manager.
@@ -112,6 +119,27 @@ public class OrderAlreadyToAccountProcessor extends AbstractOrderStatusProcessor
         if (StringUtil.isNotBlank(extensionUserId)) {
             addMoneyToBalance(orderInfo.getOrderId(), rebateAmount, extensionUserId, "返利", ORDER_REBATE.getCode(),
                     AccountType.PROMOTION_MERCHANT.getCode());
+        }
+
+        Long goodsId = orderInfo.getGoodsId();
+        if (goodsId != null) {
+            ShipinDTO dto = new ShipinDTO();
+            dto.setId(goodsId.intValue());
+            List<ShipinDTO> dtoList = shipinFacadeClient.selectShipinDTOList(dto);
+            if (!CollectionUtils.isEmpty(dtoList)) {
+                Optional<ShipinDTO> first = dtoList.stream().findFirst();
+                ShipinDTO shipinDTO = first.get();
+                String userid = shipinDTO.getUserid();
+                //佣金配置 百分比10
+                Integer snapshot = 10;
+                //支付金额
+                Integer promotionAmount = orderInfo.getMoney();
+                log.info("配置用户百分比:{},订单金额:{}", snapshot, promotionAmount);
+                Long amount = (long) ((promotionAmount * snapshot) / 100);
+                log.info("预计返利视频作者金额:{}", amount);
+                addMoneyToBalance(orderInfo.getOrderId(), amount, userid, "返利", ORDER_AUTHOR_REBATE.getCode(),
+                        AccountType.PROMOTION_MERCHANT.getCode());
+            }
         }
         return rebateAmount;
     }

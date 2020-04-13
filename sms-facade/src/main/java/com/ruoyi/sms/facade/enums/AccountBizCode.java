@@ -13,9 +13,14 @@ public enum AccountBizCode implements BaseEnum {
 
 
     /**
-     * 订单返利
+     * 订单推广商户返利
      */
-    ORDER_REBATE("ORDER_REBATE", "订单返利"),
+    ORDER_REBATE("ORDER_REBATE", "订单推广商户返利"),
+    /**
+     * 订单视频作者返利
+     */
+    ORDER_AUTHOR_REBATE("ORDER_AUTHOR_REBATE", "订单视频作者返利"),
+
 
     /**
      * 用户提现
