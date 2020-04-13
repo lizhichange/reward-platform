@@ -120,7 +120,7 @@ public class OrderAlreadyToAccountProcessor extends AbstractOrderStatusProcessor
             addMoneyToBalance(orderInfo.getOrderId(), rebateAmount, extensionUserId, "返利", ORDER_REBATE.getCode(),
                     AccountType.PROMOTION_MERCHANT.getCode());
         }
-
+        log.info("execute.orderInfo:{}", orderInfo);
         Long goodsId = orderInfo.getGoodsId();
         if (goodsId != null) {
             ShipinDTO dto = new ShipinDTO();
@@ -129,7 +129,6 @@ public class OrderAlreadyToAccountProcessor extends AbstractOrderStatusProcessor
             if (!CollectionUtils.isEmpty(dtoList)) {
                 Optional<ShipinDTO> first = dtoList.stream().findFirst();
                 ShipinDTO shipinDTO = first.get();
-                String userid = shipinDTO.getUserid();
                 //佣金配置 百分比10
                 Integer snapshot = 10;
                 //支付金额
@@ -137,7 +136,7 @@ public class OrderAlreadyToAccountProcessor extends AbstractOrderStatusProcessor
                 log.info("配置用户百分比:{},订单金额:{}", snapshot, promotionAmount);
                 Long amount = (long) ((promotionAmount * snapshot) / 100);
                 log.info("预计返利视频作者金额:{}", amount);
-                addMoneyToBalance(orderInfo.getOrderId(), amount, userid, "返利", ORDER_AUTHOR_REBATE.getCode(),
+                addMoneyToBalance(orderInfo.getOrderId(), amount, shipinDTO.getUserid(), "返利", ORDER_AUTHOR_REBATE.getCode(),
                         AccountType.PROMOTION_MERCHANT.getCode());
             }
         }
