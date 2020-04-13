@@ -23,7 +23,7 @@ public class SysOrder extends BaseEntity {
     /**
      * null
      */
-    private Long id;
+    private Integer id;
 
     /**
      * 订单ID
@@ -92,7 +92,7 @@ public class SysOrder extends BaseEntity {
      * 商品信息
      */
     @Excel(name = "商品信息")
-    private Long goodsId;
+    private Integer goodsId;
 
     /**
      * 商品快照
@@ -112,11 +112,11 @@ public class SysOrder extends BaseEntity {
     @Excel(name = "推广人的id")
     private String extensionUserId;
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -192,11 +192,11 @@ public class SysOrder extends BaseEntity {
         return status;
     }
 
-    public void setGoodsId(Long goodsId) {
+    public void setGoodsId(Integer goodsId) {
         this.goodsId = goodsId;
     }
 
-    public Long getGoodsId() {
+    public Integer getGoodsId() {
         return goodsId;
     }
 

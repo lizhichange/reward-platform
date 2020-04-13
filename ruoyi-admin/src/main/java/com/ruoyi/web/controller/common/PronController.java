@@ -103,7 +103,7 @@ public class PronController extends BaseController {
         String userId = SessionContext.getUserId();
         logger.info("id:{},openId:{}", shipinDTO.getId(), openId);
         SysOrder order = new SysOrder();
-        order.setGoodsId(shipinDTO.getId().longValue());
+        order.setGoodsId(shipinDTO.getId());
         order.setOpenId(openId);
         List<SysOrder> sysOrders = sysOrderService.selectSysOrderList(order);
         if (CollectionUtils.isEmpty(sysOrders)) {

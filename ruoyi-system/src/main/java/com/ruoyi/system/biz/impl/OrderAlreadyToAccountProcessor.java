@@ -121,10 +121,10 @@ public class OrderAlreadyToAccountProcessor extends AbstractOrderStatusProcessor
                     AccountType.PROMOTION_MERCHANT.getCode());
         }
         log.info("execute.orderInfo:{}", orderInfo);
-        Long goodsId = orderInfo.getGoodsId();
+        Integer goodsId = orderInfo.getGoodsId();
         if (goodsId != null) {
             ShipinDTO dto = new ShipinDTO();
-            dto.setId(goodsId.intValue());
+            dto.setId(goodsId);
             List<ShipinDTO> dtoList = shipinFacadeClient.selectShipinDTOList(dto);
             if (!CollectionUtils.isEmpty(dtoList)) {
                 Optional<ShipinDTO> first = dtoList.stream().findFirst();
