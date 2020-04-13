@@ -13,6 +13,7 @@ import com.ruoyi.system.service.IAccountDetailService;
 import com.ruoyi.web.controller.vo.SelectOption;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.near.toolkit.common.EnumUtil;
+import org.near.toolkit.model.Money;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -65,6 +66,11 @@ public class AccountDetailController extends BaseController {
             String optType = detail.getOptType();
             AccountOptType accountOptType = EnumUtil.queryByCode(optType, AccountOptType.class);
             detail.setOptTypeStr(accountOptType.getDesc());
+            Long amount = detail.getAmount();
+            Money money = new Money();
+            money.setCent(amount);
+            detail.setAmountStr(money.toString());
+
         }
         return getDataTable(list);
     }

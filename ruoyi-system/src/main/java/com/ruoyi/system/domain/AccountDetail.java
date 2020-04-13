@@ -34,6 +34,7 @@ public class AccountDetail implements Serializable {
      */
     private Long amount;
 
+    private String amountStr;
     /**
      * account_detail.opt_type
      * 操作类型 [0:收入][1:支出]
