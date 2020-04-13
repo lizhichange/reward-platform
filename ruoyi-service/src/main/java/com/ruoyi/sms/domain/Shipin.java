@@ -4,23 +4,19 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class Shipin implements Serializable {
     /**
-    *
-    *
-    * shipin.id
-    
+     * shipin.id
      *
      * @mbg.generated 2020-03-19 21:47:04
      */
     private Integer id;
 
     /**
-    *
-    *
-    * shipin.money
+     * shipin.money
      * 资源设置的打赏金额
      *
      * @mbg.generated 2020-03-19 21:47:04
@@ -28,9 +24,7 @@ public class Shipin implements Serializable {
     private String money;
 
     /**
-    *
-    *
-    * shipin.sj
+     * shipin.sj
      * 选择模式 1为 开启随机金额分配
      *
      * @mbg.generated 2020-03-19 21:47:04
@@ -38,9 +32,7 @@ public class Shipin implements Serializable {
     private String sj;
 
     /**
-    *
-    *
-    * shipin.cs
+     * shipin.cs
      * 打赏人数
      *
      * @mbg.generated 2020-03-19 21:47:04
@@ -48,9 +40,7 @@ public class Shipin implements Serializable {
     private String cs;
 
     /**
-    *
-    *
-    * shipin.url
+     * shipin.url
      * 打赏图片
      *
      * @mbg.generated 2020-03-19 21:47:04
@@ -58,9 +48,7 @@ public class Shipin implements Serializable {
     private String url;
 
     /**
-    *
-    *
-    * shipin.userid
+     * shipin.userid
      * 用户ID
      *
      * @mbg.generated 2020-03-19 21:47:04
@@ -68,9 +56,7 @@ public class Shipin implements Serializable {
     private String userid;
 
     /**
-    *
-    *
-    * shipin.name
+     * shipin.name
      * 资源名称
      *
      * @mbg.generated 2020-03-19 21:47:04
@@ -78,99 +64,71 @@ public class Shipin implements Serializable {
     private String name;
 
     /**
-    *
-    *
-    * shipin.zykey
-    
+     * shipin.zykey
      *
      * @mbg.generated 2020-03-19 21:47:04
      */
     private String zykey;
 
     /**
-    *
-    *
-    * shipin.shijian
-    
+     * shipin.shijian
      *
      * @mbg.generated 2020-03-19 21:47:04
      */
     private String shijian;
 
     /**
-    *
-    *
-    * shipin.lx
-    
+     * shipin.lx
      *
      * @mbg.generated 2020-03-19 21:47:04
      */
     private String lx;
 
     /**
-    *
-    *
-    * shipin.zt
-    
+     * shipin.zt
      *
      * @mbg.generated 2020-03-19 21:47:04
      */
     private String zt;
 
     /**
-    *
-    *
-    * shipin.logo
-    
+     * shipin.logo
      *
      * @mbg.generated 2020-03-19 21:47:04
      */
     private String logo;
 
     /**
-    *
-    *
-    * shipin.is_lei
-    
+     * shipin.is_lei
      *
      * @mbg.generated 2020-03-19 21:47:04
      */
     private Boolean isLei;
 
     /**
-    *
-    *
-    * shipin.is_allow
-    
+     * shipin.is_allow
      *
      * @mbg.generated 2020-03-19 21:47:04
      */
     private Boolean isAllow;
 
+    private List<String> useridList;
     /**
-    *
-    *
-    * shipin.click
-    
+     * shipin.click
      *
      * @mbg.generated 2020-03-19 21:47:04
      */
     private Integer click;
 
     /**
-    *
-    *
-    * shipin.is_preview
-    
+     * shipin.is_preview
      *
      * @mbg.generated 2020-03-19 21:47:04
      */
     private Boolean isPreview;
 
     /**
-    *
-    *
-    * shipin.shorturl
+     * shipin.shorturl
      * 短链
      *
      * @mbg.generated 2020-03-19 21:47:04
@@ -178,9 +136,7 @@ public class Shipin implements Serializable {
     private String shorturl;
 
     /**
-    *
-    *
-    * shipin.category_id
+     * shipin.category_id
      * 类目id
      *
      * @mbg.generated 2020-03-19 21:47:04
@@ -188,10 +144,7 @@ public class Shipin implements Serializable {
     private Integer categoryId;
 
     /**
-    *
-    *
-    * shipin.create_time
-    
+     * shipin.create_time
      *
      * @mbg.generated 2020-03-19 21:47:04
      */

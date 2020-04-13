@@ -1,6 +1,7 @@
 package com.ruoyi.web.controller.system;
 
 import com.google.common.base.Splitter;
+import com.google.common.collect.Lists;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
@@ -66,6 +67,7 @@ public class ShipinController extends BaseController {
     @ResponseBody
     public TableDataInfo list(Shipin shipin) {
         startPage();
+        shipin.setUseridList(Lists.newArrayList("admin", ShiroUtils.getLoginName()));
         List<Shipin> list = shipinService.selectShipinList(shipin);
         return getDataTable(list);
     }

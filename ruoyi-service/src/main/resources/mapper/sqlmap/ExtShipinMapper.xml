@@ -88,6 +88,14 @@
             <if test="id != null ">
                 and id = #{id}
             </if>
+
+
+            <if test="useridList!= null  and useridList.size() > 0">
+                and userid in
+                <foreach item="item" collection="list" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
         </where>
     </select>
 
