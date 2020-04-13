@@ -1,88 +1,87 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <th:block th:include="include :: header('账户明细列表')" />
+    <th:block th:include="include :: header('账户明细列表')"/>
 </head>
 <body class="gray-bg">
-     <div class="container-div">
-        <div class="row">
-            <div class="col-sm-12 search-collapse">
-                <form id="formId">
-                    <div class="select-list">
-                        <ul>
-                            <li>
-                                <label>账户唯一id：</label>
-                                <input type="text" name="accountId"/>
-                            </li>
-                            <li>
-                                <label>金额 分为单位：</label>
-                                <input type="text" name="amount"/>
-                            </li>
-                            <li>
-                                <label>操作类型 [0:收入][1:支出]：</label>
-                                <select name="optType" th:with="type=${@dict.getType('')}">
-                                    <option value="">所有</option>
-                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
-                                </select>
-                            </li>
-                            <li>
-                                <label>订单id：</label>
-                                <input type="text" name="outTradeNo"/>
-                            </li>
-                            <li>
-                                <label>业务代码：</label>
-                                <input type="text" name="bizCode"/>
-                            </li>
-                            <li>
-                                <label>来源业务编码：</label>
-                                <input type="text" name="sourceCode"/>
-                            </li>
-                            <li class="select-time">
-                                <label>创建时间：</label>
-                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginGmtCreate]"/>
-                                <span>-</span>
-                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endGmtCreate]"/>
-                            </li>
-                            <li class="select-time">
-                                <label>修改时间：</label>
-                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginGmtModified]"/>
-                                <span>-</span>
-                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endGmtModified]"/>
-                            </li>
-                            <li>
-                                <label>null：</label>
-                                <input type="text" name="operator"/>
-                            </li>
-                            <li>
-                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
-                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
-                            </li>
-                        </ul>
-                    </div>
-                </form>
-            </div>
+<div class="container-div">
+    <div class="row">
+        <div class="col-sm-12 search-collapse">
+            <form id="formId">
+                <div class="select-list">
+                    <ul>
+                        <li>
+                            <label>账户唯一id：</label>
+                            <input type="text" name="accountId"/>
+                        </li>
+                        <li>
+                            <label>金额 分为单位：</label>
+                            <input type="text" name="amount"/>
+                        </li>
+                        <li>
+                            <label>操作类型：</label>
+                            <select name="optType">
+                                <option value="">所有</option>
+                                <option th:each="dict : ${types}" th:text="${dict.desc}"
+                                        th:value="${dict.code}">
+                                </option>
+                            </select>
+                        </li>
+                        <li>
+                            <label>订单id：</label>
+                            <input type="text" name="outTradeNo"/>
+                        </li>
+                        <li>
+                            <label>业务代码：</label>
+                            <input type="text" name="bizCode"/>
+                        </li>
+                        <li>
+                            <label>来源业务编码：</label>
+                            <input type="text" name="sourceCode"/>
+                        </li>
+                        <li class="select-time">
+                            <label>创建时间：</label>
+                            <input type="text" class="time-input" id="startTime" placeholder="开始时间"
+                                   name="params[beginGmtCreate]"/>
+                            <span>-</span>
+                            <input type="text" class="time-input" id="endTime" placeholder="结束时间"
+                                   name="params[endGmtCreate]"/>
+                        </li>
+                        <li>
+                            <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i
+                                    class="fa fa-search"></i>&nbsp;搜索</a>
+                            <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i
+                                    class="fa fa-refresh"></i>&nbsp;重置</a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
 
-            <div class="btn-group-sm" id="toolbar" role="group">
-                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:accountDetail:add">
-                    <i class="fa fa-plus"></i> 添加
-                </a>
-                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="system:accountDetail:edit">
-                    <i class="fa fa-edit"></i> 修改
-                </a>
-                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:accountDetail:remove">
-                    <i class="fa fa-remove"></i> 删除
-                </a>
-                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:accountDetail:export">
-                    <i class="fa fa-download"></i> 导出
-                </a>
-            </div>
-            <div class="col-sm-12 select-table table-striped">
-                <table id="bootstrap-table"></table>
-            </div>
+        <div class="btn-group-sm" id="toolbar" role="group">
+            <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:accountDetail:add">
+                <i class="fa fa-plus"></i> 添加
+            </a>
+            <a class="btn btn-primary single disabled" onclick="$.operate.edit()"
+               shiro:hasPermission="system:accountDetail:edit">
+                <i class="fa fa-edit"></i> 修改
+            </a>
+            <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()"
+               shiro:hasPermission="system:accountDetail:remove">
+                <i class="fa fa-remove"></i> 删除
+            </a>
+            <a class="btn btn-warning" onclick="$.table.exportExcel()"
+               shiro:hasPermission="system:accountDetail:export">
+                <i class="fa fa-download"></i> 导出
+            </a>
+        </div>
+        <div class="col-sm-12 select-table table-striped">
+            <table id="bootstrap-table"></table>
         </div>
     </div>
-    <th:block th:include="include :: footer" />
-    <script th:inline="javascript">
+</div>
+<th:block th:include="include :: footer"/>
+<script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('system:accountDetail:edit')}]];
         var removeFlag = [[${@permission.hasPermi('system:accountDetail:remove')}]];
         var prefix = ctx + "system/accountDetail";
@@ -112,8 +111,8 @@
                     title : '金额 分为单位'
                 },
                 {
-                    field : 'optType', 
-                    title : '操作类型 [0:收入][1:支出]'
+                    field : 'optTypeStr',
+                    title : '操作类型'
                 },
                 {
                     field : 'remark', 
@@ -131,18 +130,7 @@
                     field : 'sourceCode', 
                     title : '来源业务编码'
                 },
-                {
-                    field : 'gmtCreate', 
-                    title : '创建时间'
-                },
-                {
-                    field : 'gmtModified', 
-                    title : '修改时间'
-                },
-                {
-                    field : 'operator', 
-                    title : 'null'
-                },
+
                 {
                     title: '操作',
                     align: 'center',
@@ -156,6 +144,9 @@
             };
             $.table.init(options);
         });
-    </script>
+
+
+
+</script>
 </body>
 </html>

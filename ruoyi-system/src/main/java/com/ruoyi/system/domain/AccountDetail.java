@@ -42,6 +42,7 @@ public class AccountDetail implements Serializable {
      */
     private String optType;
 
+    private String optTypeStr;
     /**
      * account_detail.remark
      * 描述
