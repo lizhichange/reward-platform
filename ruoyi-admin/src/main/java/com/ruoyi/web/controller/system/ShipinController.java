@@ -67,7 +67,9 @@ public class ShipinController extends BaseController {
     @ResponseBody
     public TableDataInfo list(Shipin shipin) {
         startPage();
-        shipin.setUseridList(Lists.newArrayList("admin", ShiroUtils.getLoginName()));
+        if (!ShiroUtils.getLoginName().equals("admin")){
+            shipin.setUseridList(Lists.newArrayList("admin", ShiroUtils.getLoginName()));
+        }
         List<Shipin> list = shipinService.selectShipinList(shipin);
         return getDataTable(list);
     }
