@@ -1,5 +1,6 @@
 package com.ruoyi.system.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -68,7 +69,7 @@ public class AccountDetail implements Serializable {
      */
     private String bizCode;
 
-    private String  bizCodeStr;
+    private String bizCodeStr;
     /**
      * account_detail.source_code
      * 来源业务编码
@@ -83,6 +84,7 @@ public class AccountDetail implements Serializable {
      *
      * @mbg.generated 2020-03-16 21:49:40
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date gmtCreate;
 
     /**
@@ -91,6 +93,7 @@ public class AccountDetail implements Serializable {
      *
      * @mbg.generated 2020-03-16 21:49:40
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date gmtModified;
 
     /**
