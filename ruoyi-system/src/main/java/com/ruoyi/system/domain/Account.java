@@ -79,6 +79,7 @@ public class Account implements Serializable {
      * @mbg.generated 2019-09-09 15:04:41
      */
     private String accountType;
+    private String accountTypeStr;
 
     public Integer getId() {
         return id;
@@ -187,5 +188,13 @@ public class Account implements Serializable {
 
     public void setAccountType(String accountType) {
         this.accountType = accountType;
+    }
+
+    public String getAccountTypeStr() {
+        return accountTypeStr;
+    }
+
+    public void setAccountTypeStr(String accountTypeStr) {
+        this.accountTypeStr = accountTypeStr;
     }
 }

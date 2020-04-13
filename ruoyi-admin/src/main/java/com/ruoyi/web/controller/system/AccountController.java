@@ -14,6 +14,7 @@ import com.ruoyi.system.domain.Account;
 import com.ruoyi.system.service.IAccountService;
 import com.ruoyi.web.controller.vo.SelectOption;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.near.toolkit.common.EnumUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -72,6 +73,11 @@ public class AccountController extends BaseController {
     public TableDataInfo list(Account account) {
         startPage();
         List<Account> list = accountService.selectAccountList(account);
+        for (Account item : list) {
+            AccountType accountType = EnumUtil.queryByCode(item
+                    .getAccountType(), AccountType.class);
+            item.setAccountTypeStr(accountType.getDesc());
+        }
         return getDataTable(list);
     }
 
@@ -138,7 +144,6 @@ public class AccountController extends BaseController {
     public AjaxResult remove(String ids) {
         return toAjax(accountService.deleteAccountByIds(ids));
     }
-
 
 
     /**
