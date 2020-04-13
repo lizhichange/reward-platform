@@ -1,6 +1,7 @@
 package com.ruoyi.system.service;
 
 import com.ruoyi.system.domain.SysOrder;
+import com.ruoyi.system.domain.ext.ExtSysOrder;
 
 import java.util.List;
 
@@ -18,6 +19,8 @@ public interface ISysOrderService {
      * @return 订单列表
      */
     public SysOrder selectSysOrderById(Long id);
+
+    long countByExample(ExtSysOrder extSysOrder);
 
     int updateSysOrderByOrderId(SysOrder sysOrder);
 

@@ -3,6 +3,9 @@ package com.ruoyi.system.service.impl;
 import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.system.domain.SysOrder;
+import com.ruoyi.system.domain.ext.ExtSysOrder;
+import com.ruoyi.system.domain.ext.SysOrderExample;
+import com.ruoyi.system.mapper.ExtSysOrderMapper;
 import com.ruoyi.system.mapper.SysOrderMapper;
 import com.ruoyi.system.service.ISysOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +24,9 @@ public class SysOrderServiceImpl implements ISysOrderService {
     @Autowired
     private SysOrderMapper sysOrderMapper;
 
+    @Autowired
+    private ExtSysOrderMapper extSysOrderMapper;
+
     /**
      * 查询订单列表
      *
@@ -30,6 +36,17 @@ public class SysOrderServiceImpl implements ISysOrderService {
     @Override
     public SysOrder selectSysOrderById(Long id) {
         return sysOrderMapper.selectSysOrderById(id);
+    }
+
+    @Override
+    public long countByExample(ExtSysOrder extSysOrder) {
+        SysOrderExample example = new SysOrderExample();
+        SysOrderExample.Criteria criteria = example.createCriteria();
+        if (extSysOrder.getGoodsId() != null) {
+            criteria.andGoodsIdEqualTo(extSysOrder.getGoodsId());
+        }
+        return extSysOrderMapper.countByExample(example);
+
     }
 
     /**
@@ -66,6 +83,7 @@ public class SysOrderServiceImpl implements ISysOrderService {
         sysOrder.setUpdateTime(DateUtils.getNowDate());
         return sysOrderMapper.updateSysOrder(sysOrder);
     }
+
     @Override
     public int updateSysOrderByOrderId(SysOrder sysOrder) {
         sysOrder.setUpdateTime(DateUtils.getNowDate());

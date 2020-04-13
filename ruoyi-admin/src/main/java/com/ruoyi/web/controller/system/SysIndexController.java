@@ -3,9 +3,11 @@ package com.ruoyi.web.controller.system;
 import com.ruoyi.common.config.Global;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.framework.util.ShiroUtils;
+import com.ruoyi.system.domain.Account;
 import com.ruoyi.system.domain.SysMenu;
 import com.ruoyi.system.domain.SysShort;
 import com.ruoyi.system.domain.SysUser;
+import com.ruoyi.system.service.IAccountService;
 import com.ruoyi.system.service.ISysConfigService;
 import com.ruoyi.system.service.ISysMenuService;
 import com.ruoyi.system.service.ISysShortService;
@@ -25,12 +27,13 @@ import java.util.List;
 @Controller
 public class SysIndexController extends BaseController {
     @Autowired
-    private ISysMenuService menuService;
-
+    ISysMenuService menuService;
     @Autowired
-    private ISysConfigService configService;
+    ISysConfigService configService;
     @Autowired
     ISysShortService sysShortService;
+    @Autowired
+    IAccountService accountService;
 
     /**
      * 系统首页
@@ -68,6 +71,14 @@ public class SysIndexController extends BaseController {
         if (!CollectionUtils.isEmpty(list)) {
             SysShort item = list.get(0);
             mmap.put("sysShort", item);
+        }
+        Account account = new Account();
+        String loginName = ShiroUtils.getLoginName();
+        account.setAccountId(loginName);
+        List<Account> accounts = accountService.selectAccountList(account);
+        if (!CollectionUtils.isEmpty(accounts)) {
+            Account item = accounts.get(0);
+            mmap.put("account", item);
         }
         return "main";
     }

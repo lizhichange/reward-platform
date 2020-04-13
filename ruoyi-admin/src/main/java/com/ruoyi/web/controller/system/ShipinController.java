@@ -16,7 +16,9 @@ import com.ruoyi.sms.service.IShipinService;
 import com.ruoyi.system.domain.SysCategory;
 import com.ruoyi.system.domain.SysRole;
 import com.ruoyi.system.domain.SysUser;
+import com.ruoyi.system.domain.ext.ExtSysOrder;
 import com.ruoyi.system.service.ISysCategoryService;
+import com.ruoyi.system.service.ISysOrderService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -140,6 +142,9 @@ public class ShipinController extends BaseController {
         return toAjax(shipinFacade.updateShipinDTO(shipin));
     }
 
+    @Autowired
+    ISysOrderService sysOrderService;
+
     /**
      * 删除公共片库
      */
@@ -148,6 +153,8 @@ public class ShipinController extends BaseController {
     @PostMapping("/remove")
     @ResponseBody
     public AjaxResult remove(String ids) {
+
+
         SysUser sysUser = ShiroUtils.getSysUser();
         List<SysRole> roles = sysUser.getRoles();
         SysRole sysRole = roles.get(0);
@@ -156,19 +163,24 @@ public class ShipinController extends BaseController {
             return toAjax(shipinFacade.deleteShipinDTOByIds(ids));
         }
 
-
         if (ids.contains(",")) {
             Iterable<String> split = Splitter.on(',')
                     .trimResults()
                     .omitEmptyStrings().split(ids);
             for (String s : split) {
-                if (xxx(s)) {
+                if (!xxx(s)) {
                     return error("只能删除自己发布的视频");
+                }
+                if (!checkOrder(s)) {
+                    return error("发布的视频已关联订单");
                 }
             }
         } else {
-            if (xxx(ids)) {
+            if (!xxx(ids)) {
                 return error("只能删除自己发布的视频");
+            }
+            if (!checkOrder(ids)) {
+                return error("发布的视频已关联订单");
             }
         }
         return toAjax(shipinFacade.deleteShipinDTOByIds(ids));
@@ -176,9 +188,19 @@ public class ShipinController extends BaseController {
 
     private boolean xxx(String s) {
         ShipinDTO item = new ShipinDTO();
-        item.setId(Integer.parseInt(s));
+        int id = Integer.parseInt(s);
+        item.setId(id);
         item.setUserid(ShiroUtils.getLoginName());
         int count = shipinFacade.count(item);
         return count == 0;
     }
+
+    private boolean checkOrder(String s) {
+        int id = Integer.parseInt(s);
+        ExtSysOrder sysOrder = new ExtSysOrder();
+        sysOrder.setGoodsId(id);
+        long count = sysOrderService.countByExample(sysOrder);
+        return count == 0;
+    }
+
 }

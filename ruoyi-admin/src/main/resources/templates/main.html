@@ -26,11 +26,22 @@
                     <h5>我的推广链接</h5>
                 </div>
                 <div class="ibox-content">
-                    <p><i class="fa fa-send-o"></i> 短链接：<a th:href="${sysShort?.getShortUrl()}" target="_blank">[[${sysShort?.getShortUrl()}]]</a></p>
+                    <p><i class="fa fa-send-o"></i> 短链接：<a th:href="${sysShort?.getShortUrl()}" target="_blank">[[${sysShort?.getShortUrl()}]]</a>
+                    </p>
                 </div>
             </div>
         </div>
-
+        <div class="col-sm-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>我的推广收益</h5>
+                </div>
+                <div class="ibox-content">
+                    <p><i class="fa fa-send-o"></i> 我的余额：<a th:href="${account?.getBalanceStr()}" target="_blank">[[${sysShort?.getShortUrl()}]]</a>
+                    </p>
+                </div>
+            </div>
+        </div>
         <!--        <div class="col-sm-4">-->
         <!--            <div class="ibox float-e-margins">-->
         <!--                <div class="ibox-title">-->
@@ -65,6 +76,9 @@
             content: html
         });
     });
+
+
+
 </script>
 </body>
 </html>
