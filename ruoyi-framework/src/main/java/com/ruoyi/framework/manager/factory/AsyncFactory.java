@@ -27,12 +27,15 @@ import java.util.TimerTask;
 public class AsyncFactory {
     private static final Logger sys_user_logger = LoggerFactory.getLogger("sys-user");
 
+
     /**
      * 同步session到数据库
      *
      * @param session 在线用户会话
      * @return 任务task
      */
+
+
     public static TimerTask syncSessionToDb(final OnlineSession session) {
         return new TimerTask() {
             @Override
@@ -45,15 +48,16 @@ public class AsyncFactory {
                 online.setLastAccessTime(session.getLastAccessTime());
                 online.setExpireTime(session.getTimeout());
                 online.setIpaddr(session.getHost());
-                online.setLoginLocation(AddressUtils.getRealAddressByIP(session.getHost()));
+                String realAddressByIP = AddressUtils.getRealAddressByIP(session.getHost());
+                online.setLoginLocation(realAddressByIP);
                 online.setBrowser(session.getBrowser());
                 online.setOs(session.getOs());
                 online.setStatus(session.getStatus());
                 SpringUtils.getBean(ISysUserOnlineService.class).saveOnline(online);
-
             }
         };
     }
+
 
     /**
      * 操作日志记录

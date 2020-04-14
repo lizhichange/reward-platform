@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 
 /**
@@ -34,6 +35,7 @@ public class TakeAccountAmountManagerImpl implements TakeAccountAmountManager {
     UserAccountDetailRepository userAccountDetailRepository;
 
     @Override
+    @Transactional
     public AccountDTO addBalance(UserAccountOperatorRequest request) {
         AccountDTO acc = userAccountRepository.queryByUserId(request.getUserId());
         if (acc == null) {

@@ -1,11 +1,18 @@
 package com.ruoyi.common.utils;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.github.rholder.retry.*;
+import com.google.common.base.Predicates;
 import com.ruoyi.common.config.Global;
 import com.ruoyi.common.json.JSON;
 import com.ruoyi.common.json.JSONObject;
 import com.ruoyi.common.utils.http.HttpUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.rmi.RemoteException;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 获取地址类
@@ -15,9 +22,31 @@ import com.ruoyi.common.utils.http.HttpUtils;
 public class AddressUtils {
     private static final Logger log = LoggerFactory.getLogger(AddressUtils.class);
 
+    private static final Retryer<String> retryer = RetryerBuilder.<String>newBuilder()
+            .retryIfResult(Predicates.isNull())
+            .retryIfExceptionOfType(IOException.class)
+            .retryIfRuntimeException()
+            .withWaitStrategy(WaitStrategies.fixedWait(3, TimeUnit.SECONDS))
+            .withStopStrategy(StopStrategies.stopAfterAttempt(3))
+            .build();
+
+    public static void main(String[] args) throws ExecutionException, RetryException {
+        String call = retryer.call(() -> {
+            String rspStr = "111";
+            log.info("1111");
+            if (StringUtils.isEmpty(rspStr)) {
+                throw new RemoteException("获取地理位置异常");
+            }
+            return rspStr;
+        });
+        System.out.println(call);
+    }
+
     public static final String IP_URL = "http://ip.taobao.com/service/getIpInfo.php";
 
     public static String getRealAddressByIP(String ip) {
+
+
         String address = "XX XX";
 
         // 内网不查询
@@ -25,7 +54,19 @@ public class AddressUtils {
             return "内网IP";
         }
         if (Global.isAddressEnabled()) {
-            String rspStr = HttpUtils.sendPost(IP_URL, "ip=" + ip);
+            String call = null;
+            try {
+                call = retryer.call(() -> {
+                    String rspStr = HttpUtils.sendPost(IP_URL, "ip=" + ip);
+                    if (StringUtils.isEmpty(rspStr)) {
+                        throw new RemoteException("获取地理位置异常");
+                    }
+                    return rspStr;
+                });
+            } catch (ExecutionException | RetryException e) {
+                e.printStackTrace();
+            }
+            String rspStr = call;
             if (StringUtils.isEmpty(rspStr)) {
                 log.error("获取地理位置异常 {}", ip);
                 return address;
