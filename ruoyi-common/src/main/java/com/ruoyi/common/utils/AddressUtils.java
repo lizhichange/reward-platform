@@ -22,7 +22,8 @@ import java.util.concurrent.TimeUnit;
 public class AddressUtils {
     private static final Logger log = LoggerFactory.getLogger(AddressUtils.class);
 
-    private static final Retryer<String> retryer = RetryerBuilder.<String>newBuilder()
+
+    private static final Retryer<String> ret = RetryerBuilder.<String>newBuilder()
             .retryIfResult(Predicates.isNull())
             .retryIfExceptionOfType(IOException.class)
             .retryIfRuntimeException()
@@ -30,25 +31,11 @@ public class AddressUtils {
             .withStopStrategy(StopStrategies.stopAfterAttempt(3))
             .build();
 
-    public static void main(String[] args) throws ExecutionException, RetryException {
-        String call = retryer.call(() -> {
-            String rspStr = "111";
-            log.info("1111");
-            if (StringUtils.isEmpty(rspStr)) {
-                throw new RemoteException("获取地理位置异常");
-            }
-            return rspStr;
-        });
-        System.out.println(call);
-    }
 
     public static final String IP_URL = "http://ip.taobao.com/service/getIpInfo.php";
 
     public static String getRealAddressByIP(String ip) {
-
-
         String address = "XX XX";
-
         // 内网不查询
         if (IpUtils.internalIp(ip)) {
             return "内网IP";
@@ -56,7 +43,7 @@ public class AddressUtils {
         if (Global.isAddressEnabled()) {
             String call = null;
             try {
-                call = retryer.call(() -> {
+                call = ret.call(() -> {
                     String rspStr = HttpUtils.sendPost(IP_URL, "ip=" + ip);
                     if (StringUtils.isEmpty(rspStr)) {
                         throw new RemoteException("获取地理位置异常");
