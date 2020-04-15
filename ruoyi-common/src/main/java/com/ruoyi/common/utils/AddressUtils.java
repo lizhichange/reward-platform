@@ -19,6 +19,7 @@ import java.util.concurrent.TimeUnit;
  *
  * @author ruoyi
  */
+
 public class AddressUtils {
     private static final Logger log = LoggerFactory.getLogger(AddressUtils.class);
 
@@ -45,13 +46,14 @@ public class AddressUtils {
             try {
                 call = ret.call(() -> {
                     String rspStr = HttpUtils.sendPost(IP_URL, "ip=" + ip);
+                    log.info("rspStr:{}", rspStr);
                     if (StringUtils.isEmpty(rspStr)) {
                         throw new RemoteException("获取地理位置异常");
                     }
                     return rspStr;
                 });
             } catch (ExecutionException | RetryException e) {
-                e.printStackTrace();
+                log.error(e.getMessage(), e);
             }
             String rspStr = call;
             if (StringUtils.isEmpty(rspStr)) {
@@ -70,5 +72,10 @@ public class AddressUtils {
             }
         }
         return address;
+    }
+
+    public static void main(String[] args) {
+        String url = "https://cleanuri.com/api/v1/shorten";
+
     }
 }

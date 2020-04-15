@@ -85,6 +85,7 @@ public class HttpUtils {
             conn.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
             conn.setRequestProperty("Accept-Charset", "utf-8");
             conn.setRequestProperty("contentType", "utf-8");
+            conn.setConnectTimeout(2000);
             conn.setDoOutput(true);
             conn.setDoInput(true);
             out = new PrintWriter(conn.getOutputStream());
@@ -143,7 +144,7 @@ public class HttpUtils {
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
             String ret = "";
             while ((ret = br.readLine()) != null) {
-                if (ret != null && !ret.trim().equals("")) {
+                if (!ret.trim().equals("")) {
                     result.append(new String(ret.getBytes("ISO-8859-1"), "utf-8"));
                 }
             }
