@@ -292,7 +292,7 @@ public class PronController extends BaseController {
             return dataTable;
         }
         //如果查询出来的数据小于
-        if (list.size() < pageSize && list.size() <= 12) {
+        if (list.size() < pageSize && list.size() <= 20) {
             // shuffle 打乱顺序
             Collections.shuffle(list);
             TableDataInfo dataTable = getDataTable(list);
@@ -300,7 +300,7 @@ public class PronController extends BaseController {
             return dataTable;
         }
         Collections.shuffle(list);
-        List<ShipinDTO> collect = list.stream().limit(12).collect(Collectors.toList());
+        List<ShipinDTO> collect = list.stream().limit(20).collect(Collectors.toList());
         TableDataInfo dataTable = getDataTable(collect);
         dataTable.setTotal(result.getTotalRows());
         return dataTable;
