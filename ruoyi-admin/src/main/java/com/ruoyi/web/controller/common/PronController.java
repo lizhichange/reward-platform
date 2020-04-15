@@ -91,7 +91,7 @@ public class PronController extends BaseController {
 
     @GetMapping("/redirect")
     @WxPnUserAuth
-    @com.ruoyi.common.annotation.Log(title = "视频重定向", businessType = BusinessType.OTHER)
+    @com.ruoyi.common.annotation.Log(title = "视频重定向", businessType = BusinessType.QUERY)
     public String redirect(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
         xxx(userid, modelmap);
         return prefix + "/index";
@@ -102,7 +102,7 @@ public class PronController extends BaseController {
     @PostMapping("/queryOrder")
     @WxPnUserAuth
     @ResponseBody
-    @com.ruoyi.common.annotation.Log(title = "前台查询订单", businessType = BusinessType.OTHER)
+    @com.ruoyi.common.annotation.Log(title = "前台查询订单", businessType = BusinessType.QUERY)
     public AjaxResult queryOrder(ShipinDTO shipinDTO) {
         String openId = SessionContext.getOpenId();
         String userId = SessionContext.getUserId();
@@ -167,7 +167,7 @@ public class PronController extends BaseController {
 
     @GetMapping()
     @WxPnUserAuth
-    @com.ruoyi.common.annotation.Log(title = "视频首页", businessType = BusinessType.OTHER)
+    @com.ruoyi.common.annotation.Log(title = "视频首页", isSaveRequestData = true, businessType = BusinessType.QUERY)
     public String index(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
         String user = StringUtil.isBlank(userid) ? "" : userid;
 
@@ -215,7 +215,7 @@ public class PronController extends BaseController {
 
     @GetMapping("/category")
     @WxPnUserAuth
-    @com.ruoyi.common.annotation.Log(title = "前台类目首页", businessType = BusinessType.OTHER)
+    @com.ruoyi.common.annotation.Log(title = "前台类目首页", businessType = BusinessType.QUERY)
     public String category(@RequestParam(value = "categoryId") Long categoryId, @RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
         logger.info("user:{},categoryId:{}", userid, categoryId);
         getCategory(modelmap);
@@ -231,7 +231,7 @@ public class PronController extends BaseController {
 
     @GetMapping("/detail")
     @WxPnUserAuth
-    @com.ruoyi.common.annotation.Log(title = "视频详情页面", businessType = BusinessType.OTHER)
+    @com.ruoyi.common.annotation.Log(title = "视频详情页面", businessType = BusinessType.QUERY)
     public String detail(@RequestParam(value = "id") Long id,
                          @RequestParam(value = "userid", required = false) String userid,
                          @RequestParam(value = "author", required = false) String author,
@@ -560,16 +560,20 @@ public class PronController extends BaseController {
     }
 
     @GetMapping("/tips")
+    @com.ruoyi.common.annotation.Log(title = "投诉页面", businessType = BusinessType.QUERY)
+
     public String tips(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
         return prefix + "/tips";
     }
 
     @GetMapping("/audit")
+    @com.ruoyi.common.annotation.Log(title = "举报页面", businessType = BusinessType.QUERY)
     public String audit(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
         return prefix + "/audit";
     }
 
     @GetMapping("/sub")
+    @com.ruoyi.common.annotation.Log(title = "提交请求", businessType = BusinessType.QUERY)
     public String success(@RequestParam(value = "userid", required = false) String userid,
                           HttpServletRequest request,
                           ModelMap modelmap) {

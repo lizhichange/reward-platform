@@ -5,6 +5,7 @@ import com.ruoyi.common.enums.BusinessStatus;
 import com.ruoyi.common.json.JSON;
 import com.ruoyi.common.utils.ServletUtils;
 import com.ruoyi.common.utils.StringUtils;
+import com.ruoyi.framework.interceptor.util.SessionContext;
 import com.ruoyi.framework.manager.AsyncManager;
 import com.ruoyi.framework.manager.factory.AsyncFactory;
 import com.ruoyi.framework.util.ShiroUtils;
@@ -70,7 +71,8 @@ public class LogAspect {
 
             // 获取当前的用户
             SysUser currentUser = ShiroUtils.getSysUser();
-
+            //前台端
+            String openId = SessionContext.getOpenId();
             // *========数据库日志=========*//
             SysOperLog operLog = new SysOperLog();
             operLog.setStatus(BusinessStatus.SUCCESS.ordinal());
