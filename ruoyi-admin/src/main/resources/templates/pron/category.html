@@ -65,7 +65,8 @@
             <form id="user-form">
                 <input type="hidden" th:value="${category.categoryId}" name="categoryId" id="categoryId"/>
                 <span id="search" class="search-button">搜索</span>
-                <div class="search-text"><input type="text" name="name" placeholder="请输入搜索关键词,至少两个字符" value=""></div>
+                <div class="search-text"><input type="text" name="name" required placeholder="请输入搜索关键词,至少两个字符" value="">
+                </div>
             </form>
         </div>
     </div>
@@ -217,12 +218,15 @@
             data: {
                 "name": name,
                 "pageNum": 1,
-                "pageSize": 50
+                "pageSize": 50,
+                "categoryId":$('#categoryId').val(), //类目id
+
             },
             success: function (res) {
                 $.modal.closeLoading();
                 if (res && res.code === 0) {
                     $("#list_videos_common_videos_list_items").empty();
+                    $("#list_videos_most_recent_videos_pagination").css('display','none');
                     let html = "";
                     $.each(res.rows, function (i, row) {
                           html += '<div class="item  "> '
@@ -244,6 +248,7 @@
             }
         });
     });
+
 
 
 
