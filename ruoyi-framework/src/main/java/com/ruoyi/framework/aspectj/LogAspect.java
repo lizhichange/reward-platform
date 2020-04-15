@@ -18,6 +18,7 @@ import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.near.toolkit.common.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -73,6 +74,8 @@ public class LogAspect {
             SysUser currentUser = ShiroUtils.getSysUser();
             //前台端
             String openId = SessionContext.getOpenId();
+            //推广商
+            String userId = SessionContext.getUserId();
             // *========数据库日志=========*//
             SysOperLog operLog = new SysOperLog();
             operLog.setStatus(BusinessStatus.SUCCESS.ordinal());
@@ -88,6 +91,15 @@ public class LogAspect {
                 if (StringUtils.isNotNull(currentUser.getDept())
                         && StringUtils.isNotEmpty(currentUser.getDept().getDeptName())) {
                     operLog.setDeptName(currentUser.getDept().getDeptName());
+                }
+            } else {
+                //openId
+                if (StringUtil.isNotBlank(openId)) {
+                    operLog.setOperName(openId);
+                }
+                //userId
+                if (StringUtil.isNotBlank(userId)) {
+
                 }
             }
 
