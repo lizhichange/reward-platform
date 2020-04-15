@@ -8,10 +8,12 @@ import com.ruoyi.common.json.JSONObject;
 import com.ruoyi.common.utils.http.HttpUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -23,7 +25,8 @@ import java.util.concurrent.TimeUnit;
 public class AddressUtils {
     private static final Logger log = LoggerFactory.getLogger(AddressUtils.class);
 
-
+    @Autowired
+    static ThreadPoolExecutor threadPoolExecutor;
     private static final Retryer<String> ret = RetryerBuilder.<String>newBuilder()
             .retryIfResult(Predicates.isNull())
             .retryIfExceptionOfType(IOException.class)
@@ -45,6 +48,7 @@ public class AddressUtils {
             String call = null;
             try {
                 call = ret.call(() -> {
+                    threadPoolExecutor.submit(() -> null);
                     String rspStr = HttpUtils.sendPost(IP_URL, "ip=" + ip);
                     log.info("rspStr:{}", rspStr);
                     if (StringUtils.isEmpty(rspStr)) {

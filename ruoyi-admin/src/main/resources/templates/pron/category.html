@@ -213,35 +213,30 @@
         $.ajax({
             dataType: 'json',
             type: 'post',
-            url: '/pron/list',
+            url: '/pron/byCategoryList',
             data: {
                 "name": name,
                 "pageNum": 1,
-                "pageSize": 100
+                "pageSize": 50
             },
             success: function (res) {
                 $.modal.closeLoading();
                 if (res && res.code === 0) {
-                    $("#list_videos_videos_watched_right_now_items").empty();
+                    $("#list_videos_common_videos_list_items").empty();
                     let html = "";
                     $.each(res.rows, function (i, row) {
-                        html += ' <div class="item  ">'
-                            + '<a href="/pron/detail?id=' + row.id + '&author=' + row.userid + '" title="' + row.name + '"> '
-                            + '    <div class="img">'
-                            + '        <img class="thumb lazy-load" src="' + row.url + '"  data-original="' + row.url + '" alt="' + row.name + '" data-cnt="5" width="180" height="135">'
-                            + '    </div>'
-                            + '    <strong class="title">' + row.name + '</strong>'
-                            + '    <div class="wrap">'
-                            + '        <div class="duration">' + row.shijianStr + '</div>'
-                            + '    </div>'
-                            + '    <div class="wrap">'
-                            + '        <div class="added"><em>' + row.diffDays + '</em></div>'
-                            + '       <div class="views">' + row.click + '</div>'
-                            + '   </div>'
-                            + '   </a>'
-                            + '   </div>';
+                          html += '<div class="item  "> '
+                                + '<a href="/pron/detail?id=' + row.id +  '&author=' + row.userid + '" title="' + row.name + '"> <div class="img"> <img class="thumb lazy-load" src="' + row.url + '"'
+                                + 'data-original="' + row.url + '" alt="' + row.name + '" data-cnt="5" width="180"'
+                                + 'height="135">  </div>  <strong class="' + row.name + '"> ' + row.name + '  </strong>  <div class="wrap">  <div class="duration">' + row.shijianStr + '</div>'
+                                + '</div>  <div class="wrap">'
+                                + ' <div class="added"><em>' + row.diffDays + '</em></div>'
+                                + '   <div class="views">' + row.click + '</div>'
+                                + '  </div>'
+                                + ' </a>'
+                                + ' </div>';
                     });
-                    $("#list_videos_videos_watched_right_now_items").html(html);
+                    $("#list_videos_common_videos_list_items").html(html);
                 } else {
                     $.modal.closeLoading();
                     $.modal.msg(r.msg);
@@ -249,6 +244,7 @@
             }
         });
     });
+
 
 
 

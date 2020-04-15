@@ -275,6 +275,34 @@ public class PronController extends BaseController {
     }
 
 
+    @PostMapping("/byCategoryList")
+    @ResponseBody
+    public TableDataInfo byCategoryList(ShipinDTO shipinDTO) {
+        PageDomain pageDomain = TableSupport.buildPageRequest();
+        Integer pageNum = pageDomain.getPageNum();
+        Integer pageSize = pageDomain.getPageSize();
+        String orderByClause = " create_time desc ";
+        TPageResult<ShipinDTO> result = shipinFacade.queryPage(pageNum, pageSize, shipinDTO, orderByClause);
+        List<ShipinDTO> list = result.getValues();
+        convert(list);
+        if (!CollectionUtils.isEmpty(list)) {
+            //如果查询出来的数据大于
+            if (list.size() <= pageSize) {
+
+            } else {
+
+            }
+        }
+
+        // shuffle 打乱顺序
+        Collections.shuffle(list);
+
+        TableDataInfo dataTable = getDataTable(list);
+        dataTable.setTotal(result.getTotalRows());
+        return dataTable;
+    }
+
+
     private void convert(List<ShipinDTO> list) {
         if (!CollectionUtils.isEmpty(list)) {
             Date now = new Date();
