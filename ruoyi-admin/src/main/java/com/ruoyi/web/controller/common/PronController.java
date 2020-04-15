@@ -50,6 +50,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.ruoyi.sms.facade.enums.OrderPayType.WE_CHAT_PAY;
 
@@ -285,19 +286,22 @@ public class PronController extends BaseController {
         TPageResult<ShipinDTO> result = shipinFacade.queryPage(pageNum, pageSize, shipinDTO, orderByClause);
         List<ShipinDTO> list = result.getValues();
         convert(list);
-        if (!CollectionUtils.isEmpty(list)) {
-            //如果查询出来的数据大于
-            if (list.size() <= pageSize) {
-
-            } else {
-
-            }
+        if (CollectionUtils.isEmpty(list)) {
+            TableDataInfo dataTable = getDataTable(list);
+            dataTable.setTotal(result.getTotalRows());
+            return dataTable;
         }
-
-        // shuffle 打乱顺序
+        //如果查询出来的数据小于
+        if (list.size() < pageSize && list.size() <= 24) {
+            // shuffle 打乱顺序
+            Collections.shuffle(list);
+            TableDataInfo dataTable = getDataTable(list);
+            dataTable.setTotal(result.getTotalRows());
+            return dataTable;
+        }
         Collections.shuffle(list);
-
-        TableDataInfo dataTable = getDataTable(list);
+        List<ShipinDTO> collect = list.stream().limit(24).collect(Collectors.toList());
+        TableDataInfo dataTable = getDataTable(collect);
         dataTable.setTotal(result.getTotalRows());
         return dataTable;
     }
