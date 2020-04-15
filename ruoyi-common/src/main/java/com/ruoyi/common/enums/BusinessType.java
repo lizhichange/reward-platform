@@ -11,10 +11,7 @@ public enum BusinessType {
      */
     OTHER,
 
-    /**
-     * QUERY
-     */
-    QUERY,
+
 
     /**
      * 新增
@@ -60,4 +57,9 @@ public enum BusinessType {
      * 清空
      */
     CLEAN,
+
+    /**
+     * QUERY
+     */
+    QUERY,
 }
