@@ -85,7 +85,7 @@ public class AccountController extends BaseController {
      * 导出【请填写功能名称】列表
      */
     @RequiresPermissions("system:account:export")
-    @Log(title = "【请填写功能名称】", businessType = BusinessType.EXPORT)
+    @Log(title = "账户导出", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(Account account) {
@@ -106,7 +106,7 @@ public class AccountController extends BaseController {
      * 新增保存【请填写功能名称】
      */
     @RequiresPermissions("system:account:add")
-    @Log(title = "【请填写功能名称】", businessType = BusinessType.INSERT)
+    @Log(title = "【账户保存】", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult addSave(Account account) {
@@ -114,7 +114,7 @@ public class AccountController extends BaseController {
     }
 
     /**
-     * 修改【请填写功能名称】
+     * 修改【账户修改】
      */
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") Long id, ModelMap mmap) {
@@ -124,10 +124,10 @@ public class AccountController extends BaseController {
     }
 
     /**
-     * 修改保存【请填写功能名称】
+     * 修改保存【账户修改】
      */
     @RequiresPermissions("system:account:edit")
-    @Log(title = "【请填写功能名称】", businessType = BusinessType.UPDATE)
+    @Log(title = "【账户修改】", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
     public AjaxResult editSave(Account account) {
@@ -138,7 +138,7 @@ public class AccountController extends BaseController {
      * 删除【请填写功能名称】
      */
     @RequiresPermissions("system:account:remove")
-    @Log(title = "【请填写功能名称】", businessType = BusinessType.DELETE)
+    @Log(title = "【账户删除】", businessType = BusinessType.DELETE)
     @PostMapping("/remove")
     @ResponseBody
     public AjaxResult remove(String ids) {

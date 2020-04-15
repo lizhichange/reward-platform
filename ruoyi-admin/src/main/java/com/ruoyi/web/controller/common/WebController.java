@@ -6,6 +6,7 @@ import com.ruoyi.common.config.ServerConfig;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.enums.ShortStatus;
 import com.ruoyi.framework.shiro.service.SysPasswordService;
 import com.ruoyi.framework.util.ShiroUtils;
@@ -87,6 +88,7 @@ public class WebController extends BaseController {
 
     @PostMapping("/reg")
     @ResponseBody
+    @com.ruoyi.common.annotation.Log(title = "代理商户注册", businessType = BusinessType.OTHER)
     public AjaxResult reg(String loginName, String userName, String password,
 
                           String yqm,
