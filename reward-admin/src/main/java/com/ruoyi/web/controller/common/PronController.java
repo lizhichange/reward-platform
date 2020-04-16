@@ -256,7 +256,7 @@ public class PronController extends BaseController {
         convert(list);
         modelmap.addAttribute("list", list);
         getCategory(modelmap);
-        modelmap.addAttribute("wxPayUrl", Global.getWxPayUrl() + "?payType=" + WxPayConstants.TradeType.JSAPI);
+        modelmap.addAttribute("wxPayUrl", Global.getWxPayUrl() + "?tradeType=" + WxPayConstants.TradeType.JSAPI);
         return prefix + "/detail";
     }
 
