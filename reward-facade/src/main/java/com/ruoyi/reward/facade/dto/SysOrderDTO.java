@@ -2,9 +2,7 @@ package com.ruoyi.reward.facade.dto;
 
 import com.ruoyi.reward.facade.enums.OrderStatusType;
 import com.ruoyi.reward.facade.enums.OrderPayType;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.near.toolkit.common.EnumUtil;
 import org.near.toolkit.model.Money;
 import org.near.toolkit.model.ToString;
@@ -20,6 +18,8 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Setter
+@Getter
 public class SysOrderDTO extends ToString {
     private static final long serialVersionUID = 1L;
 
@@ -102,6 +102,8 @@ public class SysOrderDTO extends ToString {
      * 推广人的id
      */
     private String extensionUserId;
+
+    private String tradeType;
 
     public void setId(Integer id) {
         this.id = id;
@@ -289,4 +291,5 @@ public class SysOrderDTO extends ToString {
     public void setOffset(Integer offset) {
         this.offset = offset;
     }
+
 }

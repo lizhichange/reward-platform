@@ -77,7 +77,7 @@ public class PayController {
 
     @GetMapping
     public String pay(@RequestParam(value = "orderId") String orderId,
-                      @RequestParam(value = "payType") String payType,
+                      @RequestParam(value = "tradeType") String tradeType,
                       ModelMap modelmap,
                       HttpServletRequest request) throws Exception {
         String ua = request.getHeader("User-Agent").toLowerCase();
@@ -85,9 +85,10 @@ public class PayController {
         if (!parse.isMobile()) {
             throw new Exception("系统异常,请使用移动端打开");
         }
-        LOGGER.info("orderId:{},payType:{}", orderId, payType);
+        LOGGER.info("orderId:{},payType:{}", orderId, tradeType);
         SysOrderDTO item = getSysOrderDTO(orderId);
-        if (StringUtil.equals(WxPayConstants.TradeType.JSAPI, payType)) {
+        item.setTradeType(tradeType);
+        if (StringUtil.equals(WxPayConstants.TradeType.JSAPI, tradeType)) {
             modelmap.addAttribute("order", item);
             return "jsApiPay";
         }
@@ -129,10 +130,7 @@ public class PayController {
     @ResponseBody
     public AjaxResult createOrder(SysOrderDTO dto,
                                   HttpServletRequest servletRequest) throws Exception {
-
-
         return create(dto, servletRequest);
-
     }
 
     private AjaxResult create(SysOrderDTO dto, HttpServletRequest servletRequest) throws Exception {
@@ -140,6 +138,7 @@ public class PayController {
         if (StringUtil.equals(OrderStatusType.Y_PAY.getCode(), item.getStatus().toString())) {
             throw new Exception("已经支付过,请不要重复支付");
         }
+
 
         WxPayUnifiedOrderRequest request = new WxPayUnifiedOrderRequest();
         request.setOutTradeNo(item.getOrderId());
@@ -158,8 +157,10 @@ public class PayController {
         } catch (UnknownHostException e) {
             LOGGER.error(e.getMessage(), e);
         }
-//        tradeTypeJsApi(servletRequest, item, request);
 
+        if (StringUtil.equals(dto.getTradeType(), WxPayConstants.TradeType.JSAPI)) {
+            return tradeTypeJsApi(servletRequest, item, request);
+        }
         return tradeTypeNative(servletRequest, item, request);
     }
 

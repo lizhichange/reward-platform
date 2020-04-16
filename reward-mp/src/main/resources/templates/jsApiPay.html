@@ -2,9 +2,9 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta http-equiv="content-type" content="text/html;charset=utf8" />
+    <meta http-equiv="content-type" content="text/html;charset=utf8"/>
     <meta id="viewport" name="viewport"
-        content="width=device-width; initial-scale=1.0; maximum-scale=1; user-scalable=no;" />
+          content="width=device-width; initial-scale=1.0; maximum-scale=1; user-scalable=no;"/>
     <title></title>
 
 
@@ -196,25 +196,29 @@
             box-sizing: border-box;
             overflow: hidden;
         }
+
     </style>
 </head>
 
 <body>
-    <article class="charge">
-        <h1>微信支付购买</h1>
-        <section class="content">
-            <h2>商品：会员服务。</h2>
-            <ul class="select cf">
-                <li><img src="/img/weixin.jpg" style="width:150px;height:150px"></li>
-            </ul>
-            <p class="copy-right">亲，此商品不提供退款和发货服务哦</p>
-            <div class="price">微信价：<strong>￥[[${order.moneyStr}]]元</strong></div>
-            <div class="operation"><a class="btn-green" id="getBrandWCPayRequest">立即购买</a></div>
-            <input type="hidden" th:value="${order.orderId}" id="orderId" />
-            <p class="copy-right">微信支付购买</p>
-        </section>
+<article class="charge">
+    <h1>微信支付购买</h1>
+    <section class="content">
+        <h2>商品：会员服务。</h2>
+        <ul class="select cf">
+            <li><img src="/img/weixin.jpg" style="width:150px;height:150px"></li>
+        </ul>
+        <p class="copy-right">亲，此商品不提供退款和发货服务哦</p>
+        <div class="price">微信价：<strong>￥[[${order.moneyStr}]]元</strong></div>
+        <div class="operation"><a class="btn-green" id="getBrandWCPayRequest">立即购买</a></div>
+        <input type="hidden" th:value="${order.orderId}" id="orderId"/>
+        <input type="hidden" th:value="${order.tradeType}" id="tradeType"/>
 
-    </article>
+
+        <p class="copy-right">微信支付购买</p>
+    </section>
+
+</article>
 
 
 </body>
@@ -227,12 +231,14 @@
     $(function () {
         $('#getBrandWCPayRequest').click(function () {
             let orderId = $("#orderId").val();
+            let tradeType = $("#tradeType").val();
             $.showLoading("数据加载中");
             $.ajax({
                 type: "post",
                 url: "/pay/createOrder",
                 data: {
-                    "orderId": orderId
+                    "orderId": orderId,
+                    "tradeType":tradeType
                 },
                 success: function (r) {
                     $.hideLoading();
@@ -275,6 +281,7 @@
             }, 2000);
         });
     });
+
 </script>
 
 </html>
