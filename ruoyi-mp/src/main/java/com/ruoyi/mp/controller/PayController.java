@@ -204,7 +204,7 @@ public class PayController {
      */
     @PostMapping("/entPay")
     @ApiOperation("企业付款")
-    @ApiImplicitParam(name = "request", value = "新增用户信息", dataType = "EntPayRequest")
+    @ApiImplicitParam(name = "request", value = "企业付款", dataType = "EntPayRequest")
     public EntPayResult entPay(@RequestBody EntPayRequest request) throws WxPayException {
         EntPayService entPayService = wxPayService.getEntPayService();
         return entPayService.entPay(request);
