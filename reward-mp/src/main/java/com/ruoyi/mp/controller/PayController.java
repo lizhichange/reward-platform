@@ -88,8 +88,9 @@ public class PayController {
         LOGGER.info("orderId:{},payType:{}", orderId, tradeType);
         SysOrderDTO item = getSysOrderDTO(orderId);
         item.setTradeType(tradeType);
+        modelmap.addAttribute("order", item);
         if (StringUtil.equals(WxPayConstants.TradeType.JSAPI, tradeType)) {
-            modelmap.addAttribute("order", item);
+
             return "jsApiPay";
         }
 
