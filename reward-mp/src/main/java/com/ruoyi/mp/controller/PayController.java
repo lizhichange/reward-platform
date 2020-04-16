@@ -170,7 +170,7 @@ public class PayController {
         request.setProductId(item.getGoodsId().toString());
         String getRequestUrl = servletRequest.getRequestURL().toString();
         String doMain = DoMainUtil.getDoMain(getRequestUrl);
-        Date date = DateUtils.addSeconds(new Date(), 61);
+        Date date = DateUtils.addSeconds(new Date(), 60 * 2);
         //10秒时效
         request.setTimeExpire(DateUtils.formatLongFormat(date));
         request.setNotifyUrl("http://" + doMain + "/pay/notify/order");
