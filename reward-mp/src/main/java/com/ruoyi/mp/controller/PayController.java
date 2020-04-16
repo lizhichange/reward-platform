@@ -76,18 +76,22 @@ public class PayController {
     ConfigFactory configFactory;
 
     @GetMapping
-    public String pay(@RequestParam(value = "orderId") String orderId, ModelMap modelmap,
+    public String pay(@RequestParam(value = "orderId") String orderId,
+                      @RequestParam(value = "payType") String payType,
+                      ModelMap modelmap,
                       HttpServletRequest request) throws Exception {
-
-
         String ua = request.getHeader("User-Agent").toLowerCase();
         UserAgent parse = UserAgentUtil.parse(ua);
         if (!parse.isMobile()) {
             throw new Exception("系统异常,请使用移动端打开");
         }
-        LOGGER.info("orderId:{}", orderId);
+        LOGGER.info("orderId:{},payType:{}", orderId, payType);
         SysOrderDTO item = getSysOrderDTO(orderId);
-        modelmap.addAttribute("order", item);
+        if (StringUtil.equals(WxPayConstants.TradeType.JSAPI, payType)) {
+            modelmap.addAttribute("order", item);
+            return "jsApiPay";
+        }
+
         AjaxResult ajaxResult = create(item, request);
         log.info("ajax:{}", ajaxResult);
         if (ajaxResult != null) {
@@ -98,7 +102,7 @@ public class PayController {
                 modelmap.addAttribute("result", result);
             }
         }
-        return "jsApiPay";
+        return "nativePay";
     }
 
     private SysOrderDTO getSysOrderDTO(String orderId) throws Exception {

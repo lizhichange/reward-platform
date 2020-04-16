@@ -4,6 +4,7 @@ import cn.hutool.core.util.RandomUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.parser.Feature;
+import com.github.binarywang.wxpay.constant.WxPayConstants;
 import com.github.pagehelper.PageHelper;
 import com.ruoyi.common.config.Global;
 import com.ruoyi.common.core.controller.BaseController;
@@ -255,7 +256,7 @@ public class PronController extends BaseController {
         convert(list);
         modelmap.addAttribute("list", list);
         getCategory(modelmap);
-        modelmap.addAttribute("wxPayUrl", Global.getWxPayUrl());
+        modelmap.addAttribute("wxPayUrl", Global.getWxPayUrl() + "?payType=" + WxPayConstants.TradeType.JSAPI);
         return prefix + "/detail";
     }
 
