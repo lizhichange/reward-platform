@@ -98,7 +98,7 @@ public class PayController {
                 modelmap.addAttribute("result", result);
             }
         }
-        return "pay";
+        return "jsApiPay";
     }
 
     private SysOrderDTO getSysOrderDTO(String orderId) throws Exception {
@@ -224,8 +224,6 @@ public class PayController {
     @ResponseBody
     public String parseOrderNotifyResult(@RequestBody String xmlData) throws WxPayException {
         Assert.notNull(xmlData, "xmlData is not null");
-
-
         final WxPayOrderNotifyResult notifyResult = this.wxPayService.parseOrderNotifyResult(xmlData);
         if (notifyResult != null && notifyResult.getReturnCode().equals(WxPayConstants.ResultCode.SUCCESS)) {
             SysOrderDTO newOrder = new SysOrderDTO();
