@@ -27,9 +27,9 @@ mp:
   wxPnCallbackUrl: http://yuluncc.top/wechat/callback
   configCode: FULIHUI_YOUFULI
 
-  mockMoney: false
+  mockMoney: true
   mockWeChatOrderQuery: false
-  mockWeChatOrderSuccess: false
+  mockWeChatOrderSuccess: true
 
 
 
