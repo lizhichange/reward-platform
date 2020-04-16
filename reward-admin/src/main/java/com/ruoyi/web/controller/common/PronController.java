@@ -28,6 +28,7 @@ import com.ruoyi.system.domain.SysCategory;
 import com.ruoyi.system.domain.SysOrder;
 import com.ruoyi.system.domain.SysWebMain;
 import com.ruoyi.system.service.ISysCategoryService;
+import com.ruoyi.system.service.ISysConfigService;
 import com.ruoyi.system.service.ISysOrderService;
 import com.ruoyi.system.service.ISysWebMainService;
 import com.ruoyi.web.Multi;
@@ -83,7 +84,6 @@ public class PronController extends BaseController {
 
     @Autowired
     ISysCategoryService categoryService;
-
 
     @Autowired
     ISysOrderService sysOrderService;
@@ -230,6 +230,8 @@ public class PronController extends BaseController {
         return prefix + "/category";
     }
 
+    @Autowired
+    ISysConfigService configService;
 
     @GetMapping("/detail")
     @WxPnUserAuth
@@ -256,7 +258,9 @@ public class PronController extends BaseController {
         convert(list);
         modelmap.addAttribute("list", list);
         getCategory(modelmap);
-        modelmap.addAttribute("wxPayUrl", Global.getWxPayUrl() + "?tradeType=" + WxPayConstants.TradeType.JSAPI);
+        //sys.tradeType
+        String tradeType = configService.selectConfigByKey("sys.tradeType");
+        modelmap.addAttribute("wxPayUrl", Global.getWxPayUrl() + "?tradeType=" + tradeType);
         return prefix + "/detail";
     }
 
