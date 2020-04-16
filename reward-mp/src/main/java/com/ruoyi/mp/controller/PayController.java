@@ -7,6 +7,7 @@ import com.github.binarywang.wxpay.bean.entpay.EntPayRequest;
 import com.github.binarywang.wxpay.bean.entpay.EntPayResult;
 import com.github.binarywang.wxpay.bean.notify.WxPayNotifyResponse;
 import com.github.binarywang.wxpay.bean.notify.WxPayOrderNotifyResult;
+import com.github.binarywang.wxpay.bean.notify.WxScanPayNotifyResult;
 import com.github.binarywang.wxpay.bean.order.WxPayMpOrderResult;
 import com.github.binarywang.wxpay.bean.request.WxPayUnifiedOrderRequest;
 import com.github.binarywang.wxpay.constant.WxPayConstants;
@@ -38,6 +39,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.text.ParseException;
@@ -127,11 +129,11 @@ public class PayController {
         } catch (UnknownHostException e) {
             LOGGER.error(e.getMessage(), e);
         }
-        request.setTradeType(WxPayConstants.TradeType.JSAPI);
-        request.setOpenid(item.getOpenId());
-        String getRequestUrl = servletRequest.getRequestURL().toString();
-        String doMain = DoMainUtil.getDoMain(getRequestUrl);
-        request.setNotifyUrl("http://" + doMain + "/pay/notify/order");
+
+       // tradeTypeJsApi(servletRequest, item, request);
+
+        tradeTypeNative(servletRequest, item, request);
+
         WxPayMpOrderResult createOrder = this.wxPayService.createOrder(request);
         LOGGER.info("createOrder:{}", createOrder);
         if (createOrder != null) {
@@ -150,6 +152,20 @@ public class PayController {
         }
         return AjaxResult.error();
 
+    }
+
+    private void tradeTypeJsApi(HttpServletRequest servletRequest, SysOrderDTO item, WxPayUnifiedOrderRequest request) {
+        request.setTradeType(WxPayConstants.TradeType.JSAPI);
+        request.setOpenid(item.getOpenId());
+        String getRequestUrl = servletRequest.getRequestURL().toString();
+        String doMain = DoMainUtil.getDoMain(getRequestUrl);
+        request.setNotifyUrl("http://" + doMain + "/pay/notify/order");
+    }
+
+
+    private void tradeTypeNative(HttpServletRequest servletRequest, SysOrderDTO item, WxPayUnifiedOrderRequest request) {
+        request.setTradeType(WxPayConstants.TradeType.NATIVE);
+        request.setProductId(item.getGoodsId().toString());
     }
 
 
@@ -210,4 +226,62 @@ public class PayController {
         return entPayService.entPay(request);
     }
 
+    @ApiOperation(value = "扫码支付回调通知处理")
+    @PostMapping("/notify/scanpay")
+    public String parseScanPayNotifyResult(String xmlData) throws WxPayException {
+        final WxScanPayNotifyResult result = this.wxPayService.parseScanPayNotifyResult(xmlData);
+        // TODO 根据自己业务场景需要构造返回对象
+        return WxPayNotifyResponse.success("成功");
+    }
+
+    /**
+     * <pre>
+     * 扫码支付模式一生成二维码的方法
+     * 二维码中的内容为链接，形式为：
+     * weixin://wxpay/bizpayurl?sign=XXXXX&appid=XXXXX&mch_id=XXXXX&product_id=XXXXXX&time_stamp=XXXXXX&nonce_str=XXXXX
+     * 其中XXXXX为商户需要填写的内容，商户将该链接生成二维码，如需要打印发布二维码，需要采用此格式。商户可调用第三方库生成二维码图片。
+     * 文档详见: https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=6_4
+     * </pre>
+     *
+     * @param productId  产品Id
+     * @param logoFile   商户logo图片的文件对象，可以为空
+     * @param sideLength 要生成的二维码的边长，如果为空，则取默认值400
+     * @return 生成的二维码的字节数组
+     */
+    public byte[] createScanPayQrcodeMode1(String productId, File logoFile, Integer sideLength) {
+        return this.wxPayService.createScanPayQrcodeMode1(productId, logoFile, sideLength);
+    }
+
+    /**
+     * <pre>
+     * 扫码支付模式一生成二维码的方法
+     * 二维码中的内容为链接，形式为：
+     * weixin://wxpay/bizpayurl?sign=XXXXX&appid=XXXXX&mch_id=XXXXX&product_id=XXXXXX&time_stamp=XXXXXX&nonce_str=XXXXX
+     * 其中XXXXX为商户需要填写的内容，商户将该链接生成二维码，如需要打印发布二维码，需要采用此格式。商户可调用第三方库生成二维码图片。
+     * 文档详见: https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=6_4
+     * </pre>
+     *
+     * @param productId 产品Id
+     * @return 生成的二维码URL连接
+     */
+    public String createScanPayQrcodeMode1(String productId) {
+        return this.wxPayService.createScanPayQrcodeMode1(productId);
+    }
+
+    /**
+     * <pre>
+     * 扫码支付模式二生成二维码的方法
+     * 对应链接格式：weixin：//wxpay/bizpayurl?sr=XXXXX。请商户调用第三方库将code_url生成二维码图片。
+     * 该模式链接较短，生成的二维码打印到结账小票上的识别率较高。
+     * 文档详见: https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=6_5
+     * </pre>
+     *
+     * @param codeUrl    微信返回的交易会话的二维码链接
+     * @param logoFile   商户logo图片的文件对象，可以为空
+     * @param sideLength 要生成的二维码的边长，如果为空，则取默认值400
+     * @return 生成的二维码的字节数组
+     */
+    public byte[] createScanPayQrcodeMode2(String codeUrl, File logoFile, Integer sideLength) {
+        return this.wxPayService.createScanPayQrcodeMode2(codeUrl, logoFile, sideLength);
+    }
 }
