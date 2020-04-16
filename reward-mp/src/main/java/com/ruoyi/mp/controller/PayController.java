@@ -170,14 +170,16 @@ public class PayController {
         String getRequestUrl = servletRequest.getRequestURL().toString();
         String doMain = DoMainUtil.getDoMain(getRequestUrl);
         request.setNotifyUrl("http://" + doMain + "/pay/notify/order");
-        WxPayNativeOrderResult createOrder = this.wxPayService.createOrder(request);
+        WxPayNativeOrderResult createOrder = wxPayService.createOrder(request);
         LOGGER.info("createOrder:{}", createOrder);
-        if (createOrder != null) {
+        if (createOrder != null && StringUtil.isNotBlank(createOrder.getCodeUrl())) {
             SysOrderDTO newOrder = new SysOrderDTO();
             newOrder.setId(item.getId());
             newOrder.setStatus(Integer.valueOf(OrderStatusType.PAY_ING.getCode()));
             LOGGER.info("newOrder:{}", newOrder);
             sysOrderFacade.updateSysOrder(newOrder);
+            byte[] scanPayQrcodeMode2 = createScanPayQrcodeMode2(createOrder.getCodeUrl(), null, null);
+
             return AjaxResult.success(createOrder);
         }
         return AjaxResult.error();
