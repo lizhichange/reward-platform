@@ -194,7 +194,7 @@
             <div class="operation"><a class="btn-green" id="getBrandWCPayRequest">立即购买</a></div>
             <input type="hidden" th:value="${order.orderId}" id="orderId" />
             <p class="copy-right">微信支付购买</p>
-
+            <img id="img" style="display: none;"/>
         </section>
     </article>
 
@@ -240,8 +240,9 @@
                             //
                         } else if (rep.type === 'NATIVE') {
                             if (rep.data.codeUrl && rep.data.codeUrl != '') {
-
-                                //todo 
+                              $('#img').css("display",'block');
+                              var src="http://qr.liantu.com/api.php?text="+rep.data.codeUrl;
+                              $('#img').arrt("src",src);
                             }
                         }
                     } else {
