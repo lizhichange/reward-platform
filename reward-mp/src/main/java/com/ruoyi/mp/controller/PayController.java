@@ -15,6 +15,7 @@ import com.github.binarywang.wxpay.constant.WxPayConstants;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.EntPayService;
 import com.github.binarywang.wxpay.service.WxPayService;
+import com.google.common.collect.Maps;
 import com.ruoyi.mp.config.MpAuthConfig;
 import com.ruoyi.mp.factory.ConfigFactory;
 import com.ruoyi.mp.util.AjaxResult;
@@ -46,6 +47,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -159,6 +161,9 @@ public class PayController {
                 LOGGER.info("newOrder:{}", newOrder);
                 sysOrderFacade.updateSysOrder(newOrder);
             }
+            HashMap<String, Object> map = Maps.newHashMap();
+            map.put("type", WxPayConstants.TradeType.JSAPI);
+            map.put("data", createOrder);
             return AjaxResult.success(createOrder);
         }
         return AjaxResult.error();
@@ -171,7 +176,6 @@ public class PayController {
         String getRequestUrl = servletRequest.getRequestURL().toString();
         String doMain = DoMainUtil.getDoMain(getRequestUrl);
         Date date = DateUtils.addSeconds(new Date(), 60 * 2);
-        //10秒时效
         request.setTimeExpire(DateUtils.formatLongFormat(date));
         request.setNotifyUrl("http://" + doMain + "/pay/notify/order");
         WxPayNativeOrderResult createOrder = wxPayService.createOrder(request);
@@ -182,9 +186,10 @@ public class PayController {
             newOrder.setStatus(Integer.valueOf(OrderStatusType.PAY_ING.getCode()));
             LOGGER.info("newOrder:{}", newOrder);
             sysOrderFacade.updateSysOrder(newOrder);
-            byte[] scanPayQrcodeMode2 = createScanPayQrcodeMode2(createOrder.getCodeUrl(), null, null);
-            LOGGER.info("scanPayQrcodeMode2:{}", scanPayQrcodeMode2);
-            return AjaxResult.success(createOrder);
+            HashMap<String, Object> map = Maps.newHashMap();
+            map.put("type", WxPayConstants.TradeType.NATIVE);
+            map.put("data", createOrder);
+            return AjaxResult.success(map);
         }
         return AjaxResult.error();
     }
