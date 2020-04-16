@@ -166,6 +166,9 @@ public class PayController {
     private void tradeTypeNative(HttpServletRequest servletRequest, SysOrderDTO item, WxPayUnifiedOrderRequest request) {
         request.setTradeType(WxPayConstants.TradeType.NATIVE);
         request.setProductId(item.getGoodsId().toString());
+        String getRequestUrl = servletRequest.getRequestURL().toString();
+        String doMain = DoMainUtil.getDoMain(getRequestUrl);
+        request.setNotifyUrl("http://" + doMain + "/pay/notify/order");
     }
 
 
