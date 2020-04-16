@@ -183,7 +183,7 @@ public class PayController {
             LOGGER.info("newOrder:{}", newOrder);
             sysOrderFacade.updateSysOrder(newOrder);
             byte[] scanPayQrcodeMode2 = createScanPayQrcodeMode2(createOrder.getCodeUrl(), null, null);
-
+            LOGGER.info("scanPayQrcodeMode2:{}", scanPayQrcodeMode2);
             return AjaxResult.success(createOrder);
         }
         return AjaxResult.error();
