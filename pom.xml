@@ -4,15 +4,30 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.ruoyi</groupId>
-    <artifactId>ruoyi</artifactId>
+    <groupId>com.reward</groupId>
+    <artifactId>reward</artifactId>
     <version>4.1.0</version>
 
-    <name>ruoyi</name>
-    <description>管理系统</description>
+    <name>reward-platform</name>
+    <description>管理平台</description>
+
+    <modules>
+        <module>reward-admin</module>
+        <module>reward-framework</module>
+        <module>reward-system</module>
+        <module>reward-quartz</module>
+        <module>reward-generator</module>
+        <module>reward-common</module>
+        <module>reward-service</module>
+        <module>reward-facade</module>
+        <module>reward-mp</module>
+        <module>toolkit</module>
+    </modules>
+    <packaging>pom</packaging>
+
 
     <properties>
-        <ruoyi.version>4.1.0</ruoyi.version>
+        <reward.version>4.1.0</reward.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
@@ -44,7 +59,6 @@
     <!-- 依赖声明 -->
     <dependencyManagement>
         <dependencies>
-
             <!-- SpringBoot的依赖配置-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -178,62 +192,62 @@
 
             <!-- 定时任务-->
             <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-quartz</artifactId>
-                <version>${ruoyi.version}</version>
+                <groupId>com.reward</groupId>
+                <artifactId>reward-quartz</artifactId>
+                <version>${reward.version}</version>
             </dependency>
 
             <!-- 代码生成-->
             <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-generator</artifactId>
-                <version>${ruoyi.version}</version>
+                <groupId>com.reward</groupId>
+                <artifactId>reward-generator</artifactId>
+                <version>${reward.version}</version>
             </dependency>
 
             <!-- 核心模块-->
             <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-framework</artifactId>
-                <version>${ruoyi.version}</version>
+                <groupId>com.reward</groupId>
+                <artifactId>reward-framework</artifactId>
+                <version>${reward.version}</version>
             </dependency>
 
             <!-- 系统模块-->
             <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-system</artifactId>
-                <version>${ruoyi.version}</version>
+                <groupId>com.reward</groupId>
+                <artifactId>reward-system</artifactId>
+                <version>${reward.version}</version>
             </dependency>
 
             <!-- 通用工具-->
             <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-common</artifactId>
-                <version>${ruoyi.version}</version>
+                <groupId>com.reward</groupId>
+                <artifactId>reward-common</artifactId>
+                <version>${reward.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-service</artifactId>
-                <version>${ruoyi.version}</version>
+                <groupId>com.reward</groupId>
+                <artifactId>reward-service</artifactId>
+                <version>${reward.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ruoyi</groupId>
+                <groupId>com.reward</groupId>
                 <artifactId>toolkit</artifactId>
-                <version>${ruoyi.version}</version>
+                <version>${reward.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>sms-facade</artifactId>
+                <groupId>com.reward</groupId>
+                <artifactId>reward-facade</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
             </dependency>
 
 
             <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-mp</artifactId>
-                <version>${ruoyi.version</version>
+                <groupId>com.reward</groupId>
+                <artifactId>reward-mp</artifactId>
+                <version>${reward.version</version>
             </dependency>
             <dependency>
                 <groupId>com.alibaba.boot</groupId>
@@ -323,19 +337,6 @@
         </dependencies>
     </dependencyManagement>
 
-    <modules>
-        <module>ruoyi-admin</module>
-        <module>ruoyi-framework</module>
-        <module>ruoyi-system</module>
-        <module>ruoyi-quartz</module>
-        <module>ruoyi-generator</module>
-        <module>ruoyi-common</module>
-        <module>ruoyi-service</module>
-        <module>sms-facade</module>
-        <module>ruoyi-mp</module>
-        <module>toolkit</module>
-    </modules>
-    <packaging>pom</packaging>
 
 
     <dependencies>

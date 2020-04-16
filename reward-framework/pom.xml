@@ -3,13 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>ruoyi</artifactId>
-        <groupId>com.ruoyi</groupId>
+        <artifactId>reward</artifactId>
+        <groupId>com.reward</groupId>
         <version>4.1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 	
-    <artifactId>ruoyi-framework</artifactId>
+    <artifactId>reward-framework</artifactId>
 	
 	<description>
 	    framework框架核心
@@ -73,13 +73,13 @@
 
         <!-- 系统模块-->
         <dependency>
-            <groupId>com.ruoyi</groupId>
-            <artifactId>ruoyi-system</artifactId>
+            <groupId>com.reward</groupId>
+            <artifactId>reward-system</artifactId>
         </dependency>
 
 		<dependency>
-			<groupId>com.ruoyi</groupId>
-			<artifactId>ruoyi-service</artifactId>
+			<groupId>com.reward</groupId>
+			<artifactId>reward-service</artifactId>
 		</dependency>
 
 		<!-- 获取系统信息 -->
