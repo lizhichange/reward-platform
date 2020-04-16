@@ -2,7 +2,6 @@ package com.ruoyi.web.controller.common;
 
 import com.ruoyi.BaiduDwz;
 import com.ruoyi.common.config.Global;
-import com.ruoyi.common.config.ServerConfig;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
@@ -80,8 +79,7 @@ public class WebController extends BaseController {
         return prefix + "/reg";
     }
 
-    @Autowired
-    private ServerConfig serverConfig;
+
 
     @Autowired
     ThreadPoolTaskExecutor threadPoolTaskExecutor;

@@ -152,6 +152,12 @@ public class Shipin implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+
+    // 视图1
+    public interface OneView{};
+    // 视图2 继承视图1
+    public interface TwoView extends OneView{};
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

@@ -21,6 +21,9 @@ import com.ruoyi.sms.facade.ISysOrderFacade;
 import com.ruoyi.sms.facade.ISysWebMainFacade;
 import com.ruoyi.sms.facade.dto.SysOrderDTO;
 import com.ruoyi.sms.facade.enums.OrderStatusType;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.near.toolkit.common.DateUtils;
 import org.near.toolkit.common.DoMainUtil;
@@ -47,6 +50,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/pay")
 @Slf4j
+@Api("支付")
 public class PayController {
     private final static Logger LOGGER = LoggerFactory.getLogger(PayController.class);
     @Reference(version = "1.0.0", check = false)
@@ -199,6 +203,8 @@ public class PayController {
      * @param request 请求对象
      */
     @PostMapping("/entPay")
+    @ApiOperation("企业付款")
+    @ApiImplicitParam(name = "request", value = "新增用户信息", dataType = "EntPayRequest")
     public EntPayResult entPay(@RequestBody EntPayRequest request) throws WxPayException {
         EntPayService entPayService = wxPayService.getEntPayService();
         return entPayService.entPay(request);

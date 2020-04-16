@@ -201,7 +201,7 @@ public class PronController extends BaseController {
         PageHelper.startPage(1, 12, StringUtil.EMPTY_STRING);
         List<ShipinDTO> list = shipinFacade.selectShipinDTOList(shipinDTO);
         convert(list);
-        Collections.sort(list, (o1, o2) -> o2.getCreateTime().compareTo(o1.getCreateTime()));
+        list.sort((o1, o2) -> o2.getCreateTime().compareTo(o1.getCreateTime()));
         modelmap.addAttribute("list", list);
         getCategory(modelmap);
     }
