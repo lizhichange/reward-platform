@@ -15,11 +15,8 @@ import java.util.Date;
  * @author ruoyi
  * @date 2020-03-26
  */
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
-@Getter
 public class SysOrderDTO extends ToString {
     private static final long serialVersionUID = 1L;
 
@@ -292,4 +289,11 @@ public class SysOrderDTO extends ToString {
         this.offset = offset;
     }
 
+    public String getTradeType() {
+        return tradeType;
+    }
+
+    public void setTradeType(String tradeType) {
+        this.tradeType = tradeType;
+    }
 }
