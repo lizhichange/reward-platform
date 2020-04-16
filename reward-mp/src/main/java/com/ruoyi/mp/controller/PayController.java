@@ -26,6 +26,7 @@ import com.ruoyi.reward.facade.enums.OrderStatusType;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.near.toolkit.common.DateUtils;
 import org.near.toolkit.common.DoMainUtil;
@@ -169,6 +170,9 @@ public class PayController {
         request.setProductId(item.getGoodsId().toString());
         String getRequestUrl = servletRequest.getRequestURL().toString();
         String doMain = DoMainUtil.getDoMain(getRequestUrl);
+        Date date = DateUtils.addSeconds(new Date(), 10);
+        //10秒时效
+        request.setTimeExpire(DateUtils.formatLongFormat(date));
         request.setNotifyUrl("http://" + doMain + "/pay/notify/order");
         WxPayNativeOrderResult createOrder = wxPayService.createOrder(request);
         LOGGER.info("createOrder:{}", createOrder);
