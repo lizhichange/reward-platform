@@ -168,7 +168,7 @@ public class PronController extends BaseController {
 
     @GetMapping()
     @WxPnUserAuth
-    @com.ruoyi.common.annotation.Log(title = "视频首页", isSaveRequestData = true, businessType = BusinessType.QUERY)
+    @com.ruoyi.common.annotation.Log(title = "视频首页", businessType = BusinessType.QUERY)
     public String index(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
         String user = StringUtil.isBlank(userid) ? "" : userid;
 

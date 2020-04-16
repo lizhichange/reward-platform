@@ -76,6 +76,7 @@ public class PayController {
     public String pay(@RequestParam(value = "orderId") String orderId, ModelMap modelmap,
                       HttpServletRequest request) throws Exception {
 
+
         String ua = request.getHeader("User-Agent").toLowerCase();
         UserAgent parse = UserAgentUtil.parse(ua);
         if (!parse.isMobile()) {
@@ -84,6 +85,16 @@ public class PayController {
         LOGGER.info("orderId:{}", orderId);
         SysOrderDTO item = getSysOrderDTO(orderId);
         modelmap.addAttribute("order", item);
+        AjaxResult ajaxResult = create(item, request);
+        log.info("ajax:{}", ajaxResult);
+        if (ajaxResult != null) {
+            Integer code = (Integer) ajaxResult.get("code");
+            if (code == 0) {
+                HashMap data = (HashMap) ajaxResult.get("data");
+                WxPayNativeOrderResult result = (WxPayNativeOrderResult) data.get("data");
+                modelmap.addAttribute("result", result);
+            }
+        }
         return "pay";
     }
 
@@ -111,6 +122,13 @@ public class PayController {
     @ResponseBody
     public AjaxResult createOrder(SysOrderDTO dto,
                                   HttpServletRequest servletRequest) throws Exception {
+
+
+        return create(dto, servletRequest);
+
+    }
+
+    private AjaxResult create(SysOrderDTO dto, HttpServletRequest servletRequest) throws Exception {
         SysOrderDTO item = getSysOrderDTO(dto.getOrderId());
         if (StringUtil.equals(OrderStatusType.Y_PAY.getCode(), item.getStatus().toString())) {
             throw new Exception("已经支付过,请不要重复支付");
@@ -133,12 +151,9 @@ public class PayController {
         } catch (UnknownHostException e) {
             LOGGER.error(e.getMessage(), e);
         }
-
-        //tradeTypeJsApi(servletRequest, item, request);
+//        tradeTypeJsApi(servletRequest, item, request);
 
         return tradeTypeNative(servletRequest, item, request);
-
-
     }
 
     private AjaxResult tradeTypeJsApi(HttpServletRequest servletRequest, SysOrderDTO item, WxPayUnifiedOrderRequest request) throws WxPayException {
