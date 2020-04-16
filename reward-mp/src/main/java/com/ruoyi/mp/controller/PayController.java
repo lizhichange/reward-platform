@@ -9,6 +9,7 @@ import com.github.binarywang.wxpay.bean.notify.WxPayNotifyResponse;
 import com.github.binarywang.wxpay.bean.notify.WxPayOrderNotifyResult;
 import com.github.binarywang.wxpay.bean.notify.WxScanPayNotifyResult;
 import com.github.binarywang.wxpay.bean.order.WxPayMpOrderResult;
+import com.github.binarywang.wxpay.bean.order.WxPayNativeOrderResult;
 import com.github.binarywang.wxpay.bean.request.WxPayUnifiedOrderRequest;
 import com.github.binarywang.wxpay.constant.WxPayConstants;
 import com.github.binarywang.wxpay.exception.WxPayException;
@@ -130,10 +131,19 @@ public class PayController {
             LOGGER.error(e.getMessage(), e);
         }
 
-       // tradeTypeJsApi(servletRequest, item, request);
+        //tradeTypeJsApi(servletRequest, item, request);
 
-        tradeTypeNative(servletRequest, item, request);
+        return tradeTypeNative(servletRequest, item, request);
 
+
+    }
+
+    private AjaxResult tradeTypeJsApi(HttpServletRequest servletRequest, SysOrderDTO item, WxPayUnifiedOrderRequest request) throws WxPayException {
+        request.setTradeType(WxPayConstants.TradeType.JSAPI);
+        request.setOpenid(item.getOpenId());
+        String getRequestUrl = servletRequest.getRequestURL().toString();
+        String doMain = DoMainUtil.getDoMain(getRequestUrl);
+        request.setNotifyUrl("http://" + doMain + "/pay/notify/order");
         WxPayMpOrderResult createOrder = this.wxPayService.createOrder(request);
         LOGGER.info("createOrder:{}", createOrder);
         if (createOrder != null) {
@@ -151,24 +161,26 @@ public class PayController {
             return AjaxResult.success(createOrder);
         }
         return AjaxResult.error();
-
-    }
-
-    private void tradeTypeJsApi(HttpServletRequest servletRequest, SysOrderDTO item, WxPayUnifiedOrderRequest request) {
-        request.setTradeType(WxPayConstants.TradeType.JSAPI);
-        request.setOpenid(item.getOpenId());
-        String getRequestUrl = servletRequest.getRequestURL().toString();
-        String doMain = DoMainUtil.getDoMain(getRequestUrl);
-        request.setNotifyUrl("http://" + doMain + "/pay/notify/order");
     }
 
 
-    private void tradeTypeNative(HttpServletRequest servletRequest, SysOrderDTO item, WxPayUnifiedOrderRequest request) {
+    private AjaxResult tradeTypeNative(HttpServletRequest servletRequest, SysOrderDTO item, WxPayUnifiedOrderRequest request) throws WxPayException {
         request.setTradeType(WxPayConstants.TradeType.NATIVE);
         request.setProductId(item.getGoodsId().toString());
         String getRequestUrl = servletRequest.getRequestURL().toString();
         String doMain = DoMainUtil.getDoMain(getRequestUrl);
         request.setNotifyUrl("http://" + doMain + "/pay/notify/order");
+        WxPayNativeOrderResult createOrder = this.wxPayService.createOrder(request);
+        LOGGER.info("createOrder:{}", createOrder);
+        if (createOrder != null) {
+            SysOrderDTO newOrder = new SysOrderDTO();
+            newOrder.setId(item.getId());
+            newOrder.setStatus(Integer.valueOf(OrderStatusType.PAY_ING.getCode()));
+            LOGGER.info("newOrder:{}", newOrder);
+            sysOrderFacade.updateSysOrder(newOrder);
+            return AjaxResult.success(createOrder);
+        }
+        return AjaxResult.error();
     }
 
 
