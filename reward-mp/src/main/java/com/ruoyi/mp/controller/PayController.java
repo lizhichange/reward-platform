@@ -1,5 +1,6 @@
 package com.ruoyi.mp.controller;
 
+import cn.hutool.core.util.RandomUtil;
 import cn.hutool.http.useragent.UserAgent;
 import cn.hutool.http.useragent.UserAgentUtil;
 import com.alibaba.dubbo.config.annotation.Reference;
@@ -23,7 +24,9 @@ import com.ruoyi.reward.facade.api.IAccountFacade;
 import com.ruoyi.reward.facade.api.ISysOrderFacade;
 import com.ruoyi.reward.facade.api.ISysWebMainFacade;
 import com.ruoyi.reward.facade.dto.SysOrderDTO;
+import com.ruoyi.reward.facade.dto.SysWebMainDTO;
 import com.ruoyi.reward.facade.enums.OrderStatusType;
+import com.ruoyi.reward.facade.enums.WebMainStatus;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -220,9 +223,11 @@ public class PayController {
     @PostMapping("/notify/order")
     public String parseOrderNotifyResult(@RequestBody String xmlData) throws WxPayException {
         Assert.notNull(xmlData, "xmlData is not null");
+        SysOrderDTO newOrder = new SysOrderDTO();
+
         final WxPayOrderNotifyResult notifyResult = this.wxPayService.parseOrderNotifyResult(xmlData);
         if (notifyResult != null && notifyResult.getReturnCode().equals(WxPayConstants.ResultCode.SUCCESS)) {
-            SysOrderDTO newOrder = new SysOrderDTO();
+
             String orderId = notifyResult.getOutTradeNo();
             newOrder.setOrderId(orderId);
             //支付中
@@ -235,6 +240,7 @@ public class PayController {
                 newOrder.setPayTime(DateUtils.parseLongFormat(notifyResult.getTimeEnd()));
             } catch (ParseException ignored) {
             }
+            newOrder.setGoodsId(dtoList.get(0).getGoodsId());
             String transactionId = notifyResult.getTransactionId();
             log.info("transactionId:{},outTradeNo:{}", transactionId, notifyResult.getOutTradeNo());
             Date now = new Date();
@@ -242,9 +248,26 @@ public class PayController {
             newOrder.setStatus(Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
             LOGGER.info("newOrder:{}", newOrder);
             accountFacade.take(newOrder);
-            return WxPayNotifyResponse.success("SUCCESS");
         }
-        return WxPayNotifyResponse.fail("FAIL");
+
+        SysWebMainDTO webMain = new SysWebMainDTO();
+        webMain.setMainStatus(WebMainStatus.OK.getCode());
+        List<SysWebMainDTO> list = sysWebMainFacade.selectSysWebMainList(webMain);
+        String url = null;
+        if (!CollectionUtils.isEmpty(list)) {
+            SysWebMainDTO item;
+            int size = list.size();
+            if (size == 1) {
+                item = list.get(0);
+            } else {
+                int i = RandomUtil.randomInt(0, size - 1);
+                item = list.get(i);
+            }
+            //http://ds.wx40q.com/pron/detail?id=24&author=admin
+            url = item.getMainUrl() + "/pron/detail?id=" + newOrder.getGoodsId();
+            LOGGER.info("redirect.url:{}", url);
+        }
+        return "redirect:" + url;
     }
 
     /**

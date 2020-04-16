@@ -209,20 +209,21 @@
     <h1>微信支付购买</h1>
     <section class="content">
         <h2>商品：会员服务。</h2>
-        <ul class="select cf">
-            <li><img src="/img/weixin.jpg" style="width:150px;height:150px"></li>
-        </ul>
-        <p class="copy-right">亲，此商品不提供退款和发货服务哦</p>
-        <div class="price">微信价：<strong>￥[[${order.moneyStr}]]元</strong></div>
-        <div class="operation"><a class="btn-green" id="getBrandWCPayRequest">立即购买</a></div>
-        <input type="hidden" th:value="${order.orderId}" id="orderId"/>
-        <p class="copy-right">微信支付购买</p>
-
+<!--        <ul class="select cf">-->
+<!--            <li><img src="/img/weixin.jpg" style="width:150px;height:150px"></li>-->
+<!--        </ul>-->
         <ul class="selectImg cf">
             <li><img
                     th:src="@{'http://qr.liantu.com/api.php?text='+${result.codeUrl} }"
                     alt=""/></li>
         </ul>
+        <p class="copy-right">亲，此商品不提供退款和发货服务哦</p>
+        <div class="price">微信价：<strong>￥[[${order.moneyStr}]]元</strong></div>
+        <div class="operation"><a class="btn-green" id="getBrandWCPayRequest">立即购买</a></div>
+        <input type="hidden" th:value="${order.orderId}" id="orderId"/>
+<!--        <p class="copy-right">微信支付购买</p>-->
+
+
     </section>
 
 </article>
