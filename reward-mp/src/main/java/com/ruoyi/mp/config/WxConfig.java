@@ -5,7 +5,7 @@ import com.google.common.collect.Lists;
 
 import com.ruoyi.mp.factory.ConfigFactory;
 import com.ruoyi.mp.handler.*;
-import com.ruoyi.sms.facade.dto.SysWechatConfigDTO;
+import com.ruoyi.reward.facade.dto.SysWechatConfigDTO;
 
 import lombok.AllArgsConstructor;
 import me.chanjar.weixin.common.api.WxConsts;

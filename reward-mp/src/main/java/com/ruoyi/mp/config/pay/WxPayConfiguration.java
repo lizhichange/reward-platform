@@ -4,7 +4,7 @@ import com.github.binarywang.wxpay.config.WxPayConfig;
 import com.github.binarywang.wxpay.service.WxPayService;
 import com.github.binarywang.wxpay.service.impl.WxPayServiceImpl;
 import com.ruoyi.mp.factory.ConfigFactory;
-import com.ruoyi.sms.facade.dto.SysWechatConfigDTO;
+import com.ruoyi.reward.facade.dto.SysWechatConfigDTO;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

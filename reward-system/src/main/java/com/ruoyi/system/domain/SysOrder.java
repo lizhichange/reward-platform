@@ -2,8 +2,8 @@ package com.ruoyi.system.domain;
 
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
-import com.ruoyi.sms.facade.enums.OrderPayType;
-import com.ruoyi.sms.facade.enums.OrderStatusType;
+import com.ruoyi.reward.facade.enums.OrderPayType;
+import com.ruoyi.reward.facade.enums.OrderStatusType;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.near.toolkit.common.EnumUtil;

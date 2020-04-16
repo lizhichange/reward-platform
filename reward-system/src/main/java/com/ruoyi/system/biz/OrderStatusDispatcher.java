@@ -1,7 +1,7 @@
 package com.ruoyi.system.biz;
 
 import com.google.common.collect.Maps;
-import com.ruoyi.sms.facade.enums.OrderStatusType;
+import com.ruoyi.reward.facade.enums.OrderStatusType;
 import org.springframework.context.support.ApplicationObjectSupport;
 import org.springframework.stereotype.Component;
 

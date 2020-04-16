@@ -4,7 +4,7 @@
 
 package com.ruoyi.system.repository;
 
-import com.ruoyi.sms.facade.dto.AccountDTO;
+import com.ruoyi.reward.facade.dto.AccountDTO;
 import com.ruoyi.system.domain.Account;
 
 import java.util.List;

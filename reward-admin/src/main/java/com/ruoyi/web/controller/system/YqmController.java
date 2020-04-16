@@ -9,7 +9,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.util.ShiroUtils;
-import com.ruoyi.sms.facade.enums.YqmStatusEnum;
+import com.ruoyi.reward.facade.enums.YqmStatusEnum;
 import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.system.domain.Yqm;
 import com.ruoyi.system.service.ISysUserService;

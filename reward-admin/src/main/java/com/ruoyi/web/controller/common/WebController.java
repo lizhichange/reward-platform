@@ -9,7 +9,7 @@ import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.enums.ShortStatus;
 import com.ruoyi.framework.shiro.service.SysPasswordService;
 import com.ruoyi.framework.util.ShiroUtils;
-import com.ruoyi.sms.facade.enums.YqmStatusEnum;
+import com.ruoyi.reward.facade.enums.YqmStatusEnum;
 import com.ruoyi.system.domain.*;
 import com.ruoyi.system.service.*;
 import lombok.extern.java.Log;

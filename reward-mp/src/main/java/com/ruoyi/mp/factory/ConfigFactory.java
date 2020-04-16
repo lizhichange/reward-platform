@@ -3,8 +3,8 @@ package com.ruoyi.mp.factory;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.ruoyi.mp.config.MpAuthConfig;
-import com.ruoyi.sms.facade.SysWechatConfigFacade;
-import com.ruoyi.sms.facade.dto.SysWechatConfigDTO;
+import com.ruoyi.reward.facade.api.SysWechatConfigFacade;
+import com.ruoyi.reward.facade.dto.SysWechatConfigDTO;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

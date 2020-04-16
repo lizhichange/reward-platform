@@ -1,10 +1,10 @@
 package com.ruoyi.system.biz.impl;
 
 
-import com.ruoyi.sms.facade.dto.AccountDTO;
-import com.ruoyi.sms.facade.enums.SwitchEnum;
-import com.ruoyi.sms.facade.request.UserAccountCreateRequest;
-import com.ruoyi.sms.facade.request.UserAccountOperatorRequest;
+import com.ruoyi.reward.facade.dto.AccountDTO;
+import com.ruoyi.reward.facade.enums.SwitchEnum;
+import com.ruoyi.reward.facade.request.UserAccountCreateRequest;
+import com.ruoyi.reward.facade.request.UserAccountOperatorRequest;
 import com.ruoyi.system.biz.TakeAccountAmountManager;
 import com.ruoyi.system.domain.Account;
 import com.ruoyi.system.domain.AccountDetail;

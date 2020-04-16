@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.sms.mapper.EnterpriseInfoMapper">
-    <resultMap id="BaseResultMap" type="com.ruoyi.sms.domain.EnterpriseInfo">
+<mapper namespace="com.ruoyi.reward.mapper.EnterpriseInfoMapper">
+    <resultMap id="BaseResultMap" type="com.ruoyi.reward.domain.EnterpriseInfo">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="enterprise_name" jdbcType="VARCHAR" property="enterpriseName"/>
         <result column="account_opening_date" jdbcType="TIMESTAMP" property="accountOpeningDate"/>
@@ -83,7 +83,7 @@
     enterprise_account, enterprise_password, send_the_template, sensitive_word_review, 
     gmt_create, gmt_modified, contact, contact_phone
   </sql>
-    <select id="selectByExample" parameterType="com.ruoyi.sms.domain.EnterpriseInfoExample"
+    <select id="selectByExample" parameterType="com.ruoyi.reward.domain.EnterpriseInfoExample"
             resultMap="BaseResultMap">
         select
         <if test="distinct">
@@ -116,13 +116,13 @@
     delete from enterprise_info
     where id = #{id,jdbcType=INTEGER}
   </delete>
-    <delete id="deleteByExample" parameterType="com.ruoyi.sms.domain.EnterpriseInfoExample">
+    <delete id="deleteByExample" parameterType="com.ruoyi.reward.domain.EnterpriseInfoExample">
         delete from enterprise_info
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </delete>
-    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.ruoyi.sms.domain.EnterpriseInfo"
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.ruoyi.reward.domain.EnterpriseInfo"
             useGeneratedKeys="true">
     insert into enterprise_info (enterprise_name, account_opening_date, 
       sales_manager, payment_type, status, 
@@ -138,7 +138,7 @@
       )
   </insert>
     <insert id="insertSelective" keyColumn="id" keyProperty="id"
-            parameterType="com.ruoyi.sms.domain.EnterpriseInfo" useGeneratedKeys="true">
+            parameterType="com.ruoyi.reward.domain.EnterpriseInfo" useGeneratedKeys="true">
         insert into enterprise_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="enterpriseName != null">
@@ -229,7 +229,7 @@
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.ruoyi.sms.domain.EnterpriseInfoExample"
+    <select id="countByExample" parameterType="com.ruoyi.reward.domain.EnterpriseInfoExample"
             resultType="java.lang.Long">
         select count(*) from enterprise_info
         <if test="_parameter != null">
@@ -310,7 +310,7 @@
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
-    <update id="updateByPrimaryKeySelective" parameterType="com.ruoyi.sms.domain.EnterpriseInfo">
+    <update id="updateByPrimaryKeySelective" parameterType="com.ruoyi.reward.domain.EnterpriseInfo">
         update enterprise_info
         <set>
             <if test="enterpriseName != null">
@@ -358,7 +358,7 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.ruoyi.sms.domain.EnterpriseInfo">
+    <update id="updateByPrimaryKey" parameterType="com.ruoyi.reward.domain.EnterpriseInfo">
     update enterprise_info
     set enterprise_name = #{enterpriseName,jdbcType=VARCHAR},
       account_opening_date = #{accountOpeningDate,jdbcType=TIMESTAMP},

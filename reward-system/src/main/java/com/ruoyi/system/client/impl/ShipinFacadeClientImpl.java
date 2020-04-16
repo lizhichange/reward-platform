@@ -1,8 +1,8 @@
 package com.ruoyi.system.client.impl;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.ruoyi.sms.facade.IShipinFacade;
-import com.ruoyi.sms.facade.dto.ShipinDTO;
+import com.ruoyi.reward.facade.api.IShipinFacade;
+import com.ruoyi.reward.facade.dto.ShipinDTO;
 import com.ruoyi.system.client.ShipinFacadeClient;
 import org.springframework.stereotype.Component;
 

@@ -3,9 +3,9 @@ package com.ruoyi.mp.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.ruoyi.mp.config.MpAuthConfig;
-import com.ruoyi.sms.facade.UserDetailFacade;
-import com.ruoyi.sms.facade.dto.UserDto;
-import com.ruoyi.sms.facade.request.UserWechatLoginRequest;
+import com.ruoyi.reward.facade.api.UserDetailFacade;
+import com.ruoyi.reward.facade.dto.UserDto;
+import com.ruoyi.reward.facade.request.UserWechatLoginRequest;
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;

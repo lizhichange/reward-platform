@@ -4,7 +4,7 @@
  */
 package com.ruoyi.system.biz;
 
-import com.ruoyi.sms.facade.dto.SysOrderDTO;
+import com.ruoyi.reward.facade.dto.SysOrderDTO;
 import com.ruoyi.system.service.ISysConfigService;
 import lombok.extern.slf4j.Slf4j;
 import org.near.toolkit.common.StringUtil;

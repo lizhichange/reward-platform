@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.sms.mapper.TsMapper">
-  <resultMap id="BaseResultMap" type="com.ruoyi.sms.domain.Ts">
+<mapper namespace="com.ruoyi.reward.mapper.TsMapper">
+  <resultMap id="BaseResultMap" type="com.ruoyi.reward.domain.Ts">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="ip" jdbcType="VARCHAR" property="ip" />
     <result column="zt" jdbcType="VARCHAR" property="zt" />
@@ -75,7 +75,7 @@
   <sql id="Base_Column_List">
     id, ip, zt, neirong, shijian, typeto, sid, userid, create_time, update_time, open_id
   </sql>
-  <select id="selectByExample" parameterType="com.ruoyi.sms.domain.TsExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.ruoyi.reward.domain.TsExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -107,13 +107,13 @@
     delete from ts
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ruoyi.sms.domain.TsExample">
+  <delete id="deleteByExample" parameterType="com.ruoyi.reward.domain.TsExample">
     delete from ts
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.ruoyi.sms.domain.Ts" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.ruoyi.reward.domain.Ts" useGeneratedKeys="true">
     insert into ts (ip, zt, neirong, 
       shijian, typeto, sid, 
       userid, create_time, update_time, 
@@ -123,7 +123,7 @@
       #{userid,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{openId,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.ruoyi.sms.domain.Ts" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.ruoyi.reward.domain.Ts" useGeneratedKeys="true">
     insert into ts
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="ip != null">
@@ -190,7 +190,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ruoyi.sms.domain.TsExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.ruoyi.reward.domain.TsExample" resultType="java.lang.Long">
     select count(*) from ts
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -254,7 +254,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ruoyi.sms.domain.Ts">
+  <update id="updateByPrimaryKeySelective" parameterType="com.ruoyi.reward.domain.Ts">
     update ts
     <set>
       <if test="ip != null">
@@ -290,7 +290,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ruoyi.sms.domain.Ts">
+  <update id="updateByPrimaryKey" parameterType="com.ruoyi.reward.domain.Ts">
     update ts
     set ip = #{ip,jdbcType=VARCHAR},
       zt = #{zt,jdbcType=VARCHAR},

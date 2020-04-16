@@ -16,13 +16,13 @@ import com.ruoyi.common.sequence.ConcurrentSequence;
 import com.ruoyi.common.utils.IpUtils;
 import com.ruoyi.framework.interceptor.impl.WxPnUserAuth;
 import com.ruoyi.framework.interceptor.util.SessionContext;
-import com.ruoyi.sms.facade.IShipinFacade;
-import com.ruoyi.sms.facade.ITsFacade;
-import com.ruoyi.sms.facade.dto.ShipinDTO;
-import com.ruoyi.sms.facade.dto.TsDTO;
-import com.ruoyi.sms.facade.enums.OrderPayType;
-import com.ruoyi.sms.facade.enums.OrderStatusType;
-import com.ruoyi.sms.facade.enums.WebMainStatus;
+import com.ruoyi.reward.facade.api.IShipinFacade;
+import com.ruoyi.reward.facade.api.ITsFacade;
+import com.ruoyi.reward.facade.dto.ShipinDTO;
+import com.ruoyi.reward.facade.dto.TsDTO;
+import com.ruoyi.reward.facade.enums.OrderPayType;
+import com.ruoyi.reward.facade.enums.OrderStatusType;
+import com.ruoyi.reward.facade.enums.WebMainStatus;
 import com.ruoyi.system.domain.SysCategory;
 import com.ruoyi.system.domain.SysOrder;
 import com.ruoyi.system.domain.SysWebMain;
@@ -52,7 +52,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.ruoyi.sms.facade.enums.OrderPayType.WE_CHAT_PAY;
+import static com.ruoyi.reward.facade.enums.OrderPayType.WE_CHAT_PAY;
 
 /**
  * @author sunflower

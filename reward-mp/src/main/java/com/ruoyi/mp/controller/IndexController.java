@@ -2,9 +2,9 @@ package com.ruoyi.mp.controller;
 
 import cn.hutool.core.util.RandomUtil;
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.ruoyi.sms.facade.ISysWebMainFacade;
-import com.ruoyi.sms.facade.dto.SysWebMainDTO;
-import com.ruoyi.sms.facade.enums.WebMainStatus;
+import com.ruoyi.reward.facade.api.ISysWebMainFacade;
+import com.ruoyi.reward.facade.dto.SysWebMainDTO;
+import com.ruoyi.reward.facade.enums.WebMainStatus;
 import org.near.toolkit.common.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

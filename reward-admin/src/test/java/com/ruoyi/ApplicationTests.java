@@ -1,8 +1,8 @@
 package com.ruoyi;
 
-import com.ruoyi.sms.domain.Shipin;
-import com.ruoyi.sms.domain.ShipinExample;
-import com.ruoyi.sms.mapper.ShipinMapper;
+import com.ruoyi.reward.domain.Shipin;
+import com.ruoyi.reward.domain.ShipinExample;
+import com.ruoyi.reward.mapper.ShipinMapper;
 import com.ruoyi.system.domain.Account;
 import com.ruoyi.system.mapper.AccountMapper;
 import org.junit.Test;

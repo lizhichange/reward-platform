@@ -4,7 +4,7 @@
 
 package com.ruoyi.system.repository.impl;
 
-import com.ruoyi.sms.facade.dto.AccountDTO;
+import com.ruoyi.reward.facade.dto.AccountDTO;
 import com.ruoyi.system.domain.Account;
 import com.ruoyi.system.domain.AccountExample;
 import com.ruoyi.system.mapper.AccountMapper;

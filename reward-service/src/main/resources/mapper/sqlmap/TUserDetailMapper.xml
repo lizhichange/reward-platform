@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.sms.mapper.TUserDetailMapper">
-  <resultMap id="BaseResultMap" type="com.ruoyi.sms.domain.TUserDetail">
+<mapper namespace="com.ruoyi.reward.mapper.TUserDetailMapper">
+  <resultMap id="BaseResultMap" type="com.ruoyi.reward.domain.TUserDetail">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="user_id" jdbcType="VARCHAR" property="userId" />
     <result column="nickname" jdbcType="VARCHAR" property="nickname" />
@@ -86,7 +86,7 @@
     gmt_modified, modified_by, user_source, user_referee, user_referee_ids, marker, reg_date, 
     level, avatar_url, reg_url
   </sql>
-  <select id="selectByExample" parameterType="com.ruoyi.sms.domain.TUserDetailExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.ruoyi.reward.domain.TUserDetailExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -118,13 +118,13 @@
     delete from t_user_detail
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ruoyi.sms.domain.TUserDetailExample">
+  <delete id="deleteByExample" parameterType="com.ruoyi.reward.domain.TUserDetailExample">
     delete from t_user_detail
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.ruoyi.sms.domain.TUserDetail" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.ruoyi.reward.domain.TUserDetail" useGeneratedKeys="true">
     insert into t_user_detail (user_id, nickname, name, 
       gender, id_card, mobile_no, 
       birthday, gmt_create, create_by, 
@@ -140,7 +140,7 @@
       #{regDate,jdbcType=DATE}, #{level,jdbcType=INTEGER}, #{avatarUrl,jdbcType=VARCHAR}, 
       #{regUrl,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.ruoyi.sms.domain.TUserDetail" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.ruoyi.reward.domain.TUserDetail" useGeneratedKeys="true">
     insert into t_user_detail
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -261,7 +261,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ruoyi.sms.domain.TUserDetailExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.ruoyi.reward.domain.TUserDetailExample" resultType="java.lang.Long">
     select count(*) from t_user_detail
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -361,7 +361,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ruoyi.sms.domain.TUserDetail">
+  <update id="updateByPrimaryKeySelective" parameterType="com.ruoyi.reward.domain.TUserDetail">
     update t_user_detail
     <set>
       <if test="userId != null">
@@ -424,7 +424,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ruoyi.sms.domain.TUserDetail">
+  <update id="updateByPrimaryKey" parameterType="com.ruoyi.reward.domain.TUserDetail">
     update t_user_detail
     set user_id = #{userId,jdbcType=VARCHAR},
       nickname = #{nickname,jdbcType=VARCHAR},

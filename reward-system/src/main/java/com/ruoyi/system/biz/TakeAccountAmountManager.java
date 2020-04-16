@@ -1,9 +1,9 @@
 package com.ruoyi.system.biz;
 
 
-import com.ruoyi.sms.facade.dto.AccountDTO;
-import com.ruoyi.sms.facade.request.UserAccountCreateRequest;
-import com.ruoyi.sms.facade.request.UserAccountOperatorRequest;
+import com.ruoyi.reward.facade.dto.AccountDTO;
+import com.ruoyi.reward.facade.request.UserAccountCreateRequest;
+import com.ruoyi.reward.facade.request.UserAccountOperatorRequest;
 
 /**
  * 关联用户账户余额管理

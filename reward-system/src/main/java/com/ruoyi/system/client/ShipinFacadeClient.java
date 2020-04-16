@@ -1,6 +1,6 @@
 package com.ruoyi.system.client;
 
-import com.ruoyi.sms.facade.dto.ShipinDTO;
+import com.ruoyi.reward.facade.dto.ShipinDTO;
 
 import java.util.List;
 

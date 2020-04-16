@@ -2,10 +2,10 @@ package com.ruoyi.system.facade;
 
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.ruoyi.sms.facade.IAccountFacade;
-import com.ruoyi.sms.facade.ISysOrderFacade;
-import com.ruoyi.sms.facade.dto.SysOrderDTO;
-import com.ruoyi.sms.facade.enums.OrderStatusType;
+import com.ruoyi.reward.facade.api.IAccountFacade;
+import com.ruoyi.reward.facade.api.ISysOrderFacade;
+import com.ruoyi.reward.facade.dto.SysOrderDTO;
+import com.ruoyi.reward.facade.enums.OrderStatusType;
 import com.ruoyi.system.biz.OrderStatusDispatcher;
 import com.ruoyi.system.biz.UserOrderStatusProcessor;
 import com.ruoyi.system.mapper.AccountMapper;

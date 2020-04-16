@@ -2,8 +2,8 @@ package com.ruoyi.system.facade;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.google.common.collect.Lists;
-import com.ruoyi.sms.facade.ISysWebMainFacade;
-import com.ruoyi.sms.facade.dto.SysWebMainDTO;
+import com.ruoyi.reward.facade.api.ISysWebMainFacade;
+import com.ruoyi.reward.facade.dto.SysWebMainDTO;
 import com.ruoyi.system.domain.SysWebMain;
 import com.ruoyi.system.service.ISysWebMainService;
 import org.springframework.beans.BeanUtils;

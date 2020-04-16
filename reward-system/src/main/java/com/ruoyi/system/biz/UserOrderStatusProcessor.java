@@ -1,8 +1,8 @@
 package com.ruoyi.system.biz;
 
 
-import com.ruoyi.sms.facade.dto.SysOrderDTO;
-import com.ruoyi.sms.facade.enums.OrderStatusType;
+import com.ruoyi.reward.facade.dto.SysOrderDTO;
+import com.ruoyi.reward.facade.enums.OrderStatusType;
 
 /**
  * The interface User order status processor.

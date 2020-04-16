@@ -39,7 +39,7 @@
                         userId="root"
                         password="root"/>
 
-        <javaModelGenerator targetPackage="com.ruoyi.sms.domain"
+        <javaModelGenerator targetPackage="com.ruoyi.reward.domain"
                             targetProject="src/main/java">
             <property name="trimStrings" value="true"/>
 
@@ -61,7 +61,7 @@
 
         <sqlMapGenerator targetPackage="mapper/sqlmap" targetProject="src/main/resources"/>
 
-        <javaClientGenerator targetPackage="com.ruoyi.sms.mapper"
+        <javaClientGenerator targetPackage="com.ruoyi.reward.mapper"
                              targetProject="src/main/java" type="XMLMAPPER">
 
             <property name="enableSubPackages" value=""/>

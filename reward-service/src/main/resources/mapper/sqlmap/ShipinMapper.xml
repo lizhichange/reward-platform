@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.sms.mapper.ShipinMapper">
-  <resultMap id="BaseResultMap" type="com.ruoyi.sms.domain.Shipin">
+<mapper namespace="com.ruoyi.reward.mapper.ShipinMapper">
+  <resultMap id="BaseResultMap" type="com.ruoyi.reward.domain.Shipin">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="money" jdbcType="VARCHAR" property="money" />
     <result column="sj" jdbcType="VARCHAR" property="sj" />
@@ -84,7 +84,7 @@
     id, money, sj, cs, url, userid, name, zykey, shijian, lx, zt, logo, is_lei, is_allow, 
     click, is_preview, shorturl, category_id, create_time
   </sql>
-  <select id="selectByExample" parameterType="com.ruoyi.sms.domain.ShipinExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.ruoyi.reward.domain.ShipinExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -116,13 +116,13 @@
     delete from shipin
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ruoyi.sms.domain.ShipinExample">
+  <delete id="deleteByExample" parameterType="com.ruoyi.reward.domain.ShipinExample">
     delete from shipin
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.ruoyi.sms.domain.Shipin" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.ruoyi.reward.domain.Shipin" useGeneratedKeys="true">
     insert into shipin (money, sj, cs, 
       url, userid, name, 
       zykey, shijian, lx, 
@@ -136,7 +136,7 @@
       #{click,jdbcType=INTEGER}, #{isPreview,jdbcType=BIT}, #{shorturl,jdbcType=VARCHAR}, 
       #{categoryId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.ruoyi.sms.domain.Shipin" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.ruoyi.reward.domain.Shipin" useGeneratedKeys="true">
     insert into shipin
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="money != null">
@@ -251,7 +251,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ruoyi.sms.domain.ShipinExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.ruoyi.reward.domain.ShipinExample" resultType="java.lang.Long">
     select count(*) from shipin
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -347,7 +347,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ruoyi.sms.domain.Shipin">
+  <update id="updateByPrimaryKeySelective" parameterType="com.ruoyi.reward.domain.Shipin">
     update shipin
     <set>
       <if test="money != null">
@@ -407,7 +407,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ruoyi.sms.domain.Shipin">
+  <update id="updateByPrimaryKey" parameterType="com.ruoyi.reward.domain.Shipin">
     update shipin
     set money = #{money,jdbcType=VARCHAR},
       sj = #{sj,jdbcType=VARCHAR},

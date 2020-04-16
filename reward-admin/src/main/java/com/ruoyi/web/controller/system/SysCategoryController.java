@@ -9,8 +9,8 @@ import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.framework.util.ShiroUtils;
 
-import com.ruoyi.sms.facade.IShipinFacade;
-import com.ruoyi.sms.facade.dto.ShipinDTO;
+import com.ruoyi.reward.facade.api.IShipinFacade;
+import com.ruoyi.reward.facade.dto.ShipinDTO;
 import com.ruoyi.system.domain.SysCategory;
 import com.ruoyi.system.domain.SysRole;
 

@@ -2,8 +2,8 @@ package com.ruoyi.system.facade;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.google.common.collect.Lists;
-import com.ruoyi.sms.facade.ISysOrderFacade;
-import com.ruoyi.sms.facade.dto.SysOrderDTO;
+import com.ruoyi.reward.facade.api.ISysOrderFacade;
+import com.ruoyi.reward.facade.dto.SysOrderDTO;
 import com.ruoyi.system.domain.SysOrder;
 import com.ruoyi.system.domain.ext.ExtSysOrder;
 import com.ruoyi.system.domain.ext.SysOrderExample;
