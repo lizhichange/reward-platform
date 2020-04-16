@@ -3,9 +3,10 @@ package com.ruoyi.reward.facade;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.google.common.collect.Lists;
 import com.ruoyi.common.core.text.Convert;
+import com.ruoyi.reward.convert.ShipinConvert;
 import com.ruoyi.reward.facade.api.IShipinFacade;
 import com.ruoyi.reward.facade.dto.ShipinDTO;
-import com.ruoyi.sms.convert.ShipinConvert;
+
 import com.ruoyi.reward.domain.Shipin;
 import com.ruoyi.reward.domain.ShipinExample;
 import com.ruoyi.reward.mapper.ExtShipinMapper;

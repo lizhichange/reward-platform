@@ -1,6 +1,7 @@
 package com.ruoyi.reward.repository.impl;
 
-import com.ruoyi.sms.convert.ShipinConvert;
+
+import com.ruoyi.reward.convert.ShipinConvert;
 import com.ruoyi.reward.domain.Shipin;
 import com.ruoyi.reward.domain.ShipinExample;
 import com.ruoyi.reward.facade.dto.ShipinDTO;
