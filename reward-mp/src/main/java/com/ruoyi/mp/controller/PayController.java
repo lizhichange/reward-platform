@@ -185,7 +185,7 @@ public class PayController {
             HashMap<String, Object> map = Maps.newHashMap();
             map.put("type", WxPayConstants.TradeType.JSAPI);
             map.put("data", createOrder);
-            return AjaxResult.success(createOrder);
+            return AjaxResult.success(map);
         }
         return AjaxResult.error();
     }
