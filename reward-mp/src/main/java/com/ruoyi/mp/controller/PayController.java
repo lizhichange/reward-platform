@@ -144,7 +144,7 @@ public class PayController {
         } else {
             request.setTotalFee(item.getMoney());
         }
-        request.setBody("会员充值");
+        request.setBody("支付测试");
         request.setMchId(configFactory.getSysWechatConfig().getMchId());
         try {
             InetAddress netAddress = InetAddress.getLocalHost();
