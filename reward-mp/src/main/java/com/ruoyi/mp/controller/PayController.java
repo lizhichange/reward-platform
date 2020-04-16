@@ -138,8 +138,6 @@ public class PayController {
         if (StringUtil.equals(OrderStatusType.Y_PAY.getCode(), item.getStatus().toString())) {
             throw new Exception("已经支付过,请不要重复支付");
         }
-
-
         WxPayUnifiedOrderRequest request = new WxPayUnifiedOrderRequest();
         request.setOutTradeNo(item.getOrderId());
         if (mpAuthConfig.isMockMoney()) {
