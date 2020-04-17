@@ -248,6 +248,7 @@ public class PayController {
             log.info("回调成功,transactionId:{},outTradeNo:{}", transactionId, notifyResult.getOutTradeNo());
             Date now = new Date();
             newOrder.setPayTime(now);
+            newOrder.setPayNo(transactionId);
             newOrder.setStatus(Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
             LOGGER.info("newOrder:{}", newOrder);
             accountFacade.take(newOrder);
