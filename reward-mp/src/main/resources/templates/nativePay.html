@@ -2,9 +2,9 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta http-equiv="content-type" content="text/html;charset=utf8"/>
+    <meta http-equiv="content-type" content="text/html;charset=utf8" />
     <meta id="viewport" name="viewport"
-          content="width=device-width; initial-scale=1.0; maximum-scale=1; user-scalable=no;"/>
+        content="width=device-width; initial-scale=1.0; maximum-scale=1; user-scalable=no;" />
     <title></title>
 
 
@@ -196,27 +196,31 @@
             box-sizing: border-box;
             overflow: hidden;
         }
-
     </style>
 </head>
 
 <body>
 
 
-<article class="charge">
-    <h1>微信支付购买</h1>
-    <section class="content">
-        <h2>商品：会员服务。</h2>
-        <ul class="selectImg cf">
-            <li><button class="weui-btn weui-btn_default weui-vcode-btn">获取验证码</button></li>
-            <li><img th:src="@{'http://qr.liantu.com/api.php?text='+${result.codeUrl} }"/></li>
-            <li><img src="/img/sm.png"/></li>
-        </ul>
-        <p class="copy-right">亲，此商品不提供退款和发货服务哦</p>
-        <div class="price">微信价：<strong>￥[[${order.moneyStr}]]元</strong></div>
-        <input type="hidden" th:value="${order.orderId}" id="orderId"/>
-    </section>
-</article>
+    <article class="charge">
+        <h1>微信支付购买</h1>
+        <section class="content">
+            <h2>商品：会员服务。</h2>
+            <h2 style="color:#1aad19"> 订单剩余时间 / 到期后请勿支付</h2>
+            <a href="javascript:" id="minute_show" class="weui-btn weui-btn_primary">
+                 倒计时：[[${timeExpire}]]分00秒
+            </a>
+            <ul class="selectImg cf">
+                <li><img th:src="@{'http://qr.liantu.com/api.php?text='+${result.codeUrl} }" /></li>
+                <li style="line-height:0"><img src="/img/sm.png" /></li>
+            </ul>
+            <p class="copy-right">亲，此商品不提供退款和发货服务哦</p>
+            <div class="price">微信价：<strong>￥[[${order.moneyStr}]]元</strong></div>
+            <input type="hidden" th:value="${order.orderId}" id="orderId" />
+            <input type="hidden" th:value="${timeExpire}" id="timeExpire" />
+
+        </section>
+    </article>
 </body>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
 <script type="text/javascript" src="/js/zepto.min.js"></script>
@@ -225,6 +229,54 @@
 
 <script type="text/javascript">
 
+
+    var timeTask = setInterval(function () {
+        callFunction();
+    }, 2000);
+    var timeExpire=parseInt($("#timeExpire").val());
+    //秒
+    var ge_time = timeExpire * 60;
+    var intDiff = parseInt(ge_time);//倒计时总秒数量
+
+    function CountDown() {
+        if (intDiff >= 0) {
+            hours = Math.floor(intDiff / 3600);
+            minutes = Math.floor((intDiff - hours * 3600) / 60);
+            seconds = Math.floor(intDiff % 60);
+            let text = '倒计时：' + minutes + '分' + seconds + '秒';
+            $("#minute_show").text(text);
+            intDiff--;
+            ge_time = intDiff;
+        } else {
+            clearInterval(timeTask);
+        }
+    }
+    timer = setInterval("CountDown()", 1000);
+
+    function callFunction() {
+        $.ajax({
+            type: "post",
+            url: "/pay/queryOrder",
+            data: {
+                "orderId": $("#orderId").val()
+            },
+            success: function (r) {
+                console.log(r);
+                if (r.code === 0) {
+                    var rep = r.data;
+                    //未支付
+                    if (rep.status === 0 || rep.status === 2) {
+
+                        //已支付
+                    } else if (rep.status === 1) {
+                        clearInterval(timeTask);
+                    }
+                } else {
+                    
+                }
+            }
+        });
+    }
 </script>
 
 </html>

@@ -102,9 +102,17 @@ public class PayController {
                 HashMap data = (HashMap) ajaxResult.get("data");
                 WxPayNativeOrderResult result = (WxPayNativeOrderResult) data.get("data");
                 modelmap.addAttribute("result", result);
+                int timeExpire = (int) data.get("timeExpire");
+                modelmap.addAttribute("timeExpire", timeExpire);
             }
         }
         return "nativePay";
+    }
+
+    @PostMapping("/queryOrder")
+    @ResponseBody
+    public AjaxResult queryOrder(String orderId) throws Exception {
+        return AjaxResult.success(getSysOrderDTO(orderId));
     }
 
     private SysOrderDTO getSysOrderDTO(String orderId) throws Exception {
@@ -198,20 +206,25 @@ public class PayController {
         String getRequestUrl = servletRequest.getRequestURL().toString();
         String doMain = DoMainUtil.getDoMain(getRequestUrl);
         //2分钟
-        Date date = DateUtils.addSeconds(new Date(), 60 * 2);
-        request.setTimeExpire(DateUtils.formatLongFormat(date));
+        Date date = DateUtils.addMinutes(new Date(), 2);
+        String timeExpire = DateUtils.formatLongFormat(date);
+        request.setTimeExpire(timeExpire);
         request.setNotifyUrl("http://" + doMain + "/pay/notify/order");
         WxPayNativeOrderResult createOrder = wxPayService.createOrder(request);
         LOGGER.info("createOrder:{}", createOrder);
         if (createOrder != null && StringUtil.isNotBlank(createOrder.getCodeUrl())) {
             SysOrderDTO newOrder = new SysOrderDTO();
             newOrder.setId(item.getId());
+            //支付失效时间
+            newOrder.setParam(timeExpire);
             newOrder.setStatus(Integer.valueOf(OrderStatusType.PAY_ING.getCode()));
             LOGGER.info("newOrder:{}", newOrder);
             sysOrderFacade.updateSysOrder(newOrder);
             HashMap<String, Object> map = Maps.newHashMap();
             map.put("type", WxPayConstants.TradeType.NATIVE);
             map.put("data", createOrder);
+            //分给前端
+            map.put("timeExpire", 2);
             return AjaxResult.success(map);
         }
         return AjaxResult.error();
