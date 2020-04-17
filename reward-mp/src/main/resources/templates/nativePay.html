@@ -206,8 +206,9 @@
         <h1>微信支付购买</h1>
         <section class="content">
             <h2>商品：会员服务。</h2>
-            <ul class="selectImg cf">
-                <li><img th:src="@{'http://qr.liantu.com/api.php?text='+${result.codeUrl} }" /></li>
+             <ul class="selectImg cf">
+                 <h3>订单剩余时间 / 到期后请勿支付</h3>
+                 <li><img th:src="@{'http://qr.liantu.com/api.php?text='+${result.codeUrl} }" /></li>
                 <li><img src="/img/sm.png" /></li>
             </ul>
             <p class="copy-right">亲，此商品不提供退款和发货服务哦</p>
