@@ -61,7 +61,7 @@ public class WeChatOrderStatusCheckScheduled {
     }
 
 
-    private void syncPayState(SysOrderDTO order) throws WxPayException {
+    private void syncPayState(SysOrderDTO order) throws Exception {
         if (!mpAuthConfig.isMockWeChatOrderSuccess()) {
             SysOrderDTO newOrder = new SysOrderDTO();
             newOrder.setPayTime(new Date());

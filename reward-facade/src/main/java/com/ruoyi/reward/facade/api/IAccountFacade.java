@@ -10,5 +10,5 @@ public interface IAccountFacade {
      * @param dto
      */
 
-    void take(SysOrderDTO dto);
+    void take(SysOrderDTO dto) throws Exception;
 }

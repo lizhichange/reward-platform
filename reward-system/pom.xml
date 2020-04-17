@@ -8,21 +8,21 @@
         <version>4.1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    
+
     <artifactId>reward-system</artifactId>
-    
+
     <description>
-	    system系统模块
-	</description>
-	
+        system系统模块
+    </description>
+
     <dependencies>
-    
-    	 <!-- Mysql驱动包 -->
+
+        <!-- Mysql驱动包 -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
-    
+
         <!-- 通用工具-->
         <dependency>
             <groupId>com.reward</groupId>
@@ -57,7 +57,10 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-recipes</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>com.alibaba.boot</groupId>
@@ -114,7 +117,6 @@
 
         </plugins>
     </build>
-
 
 
     <repositories>

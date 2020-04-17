@@ -226,7 +226,7 @@ public class PayController {
      */
     @PostMapping("/notify/order")
     @ResponseBody
-    public String parseOrderNotifyResult(@RequestBody String xmlData) throws WxPayException {
+    public String parseOrderNotifyResult(@RequestBody String xmlData) throws Exception {
         Assert.notNull(xmlData, "xmlData is not null");
         log.info("支付成功回调信息,xmlData:{}", xmlData);
         final WxPayOrderNotifyResult notifyResult = this.wxPayService.parseOrderNotifyResult(xmlData);

@@ -299,6 +299,12 @@
                 <version>${curator-framework.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-recipes</artifactId>
+                <version>${curator-framework.version}</version>
+            </dependency>
+
 
             <dependency>
                 <groupId>cn.hutool</groupId>
