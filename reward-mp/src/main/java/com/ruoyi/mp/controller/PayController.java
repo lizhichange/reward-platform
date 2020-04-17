@@ -228,6 +228,7 @@ public class PayController {
     @ResponseBody
     public String parseOrderNotifyResult(@RequestBody String xmlData) throws WxPayException {
         Assert.notNull(xmlData, "xmlData is not null");
+        log.info("支付成功回调信息,xmlData:{}", xmlData);
         final WxPayOrderNotifyResult notifyResult = this.wxPayService.parseOrderNotifyResult(xmlData);
         if (notifyResult != null && notifyResult.getReturnCode().equals(WxPayConstants.ResultCode.SUCCESS)) {
             SysOrderDTO newOrder = new SysOrderDTO();
@@ -244,7 +245,7 @@ public class PayController {
             } catch (ParseException ignored) {
             }
             String transactionId = notifyResult.getTransactionId();
-            log.info("transactionId:{},outTradeNo:{}", transactionId, notifyResult.getOutTradeNo());
+            log.info("回调成功,transactionId:{},outTradeNo:{}", transactionId, notifyResult.getOutTradeNo());
             Date now = new Date();
             newOrder.setPayTime(now);
             newOrder.setStatus(Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
