@@ -38,7 +38,7 @@ public class ConfigFactory {
 
 
     @PostConstruct
-    @Scheduled(cron = "0 * * * * ? ")
+    @Scheduled(cron = "0 0/3 * * * ?")
     void init() {
         try {
             String profile = env.getActiveProfiles()[0];

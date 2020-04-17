@@ -41,7 +41,7 @@ public class WeChatOrderStatusCheckScheduled {
     @Reference(version = "1.0.0", check = false)
     IAccountFacade accountFacade;
 
-    @Scheduled(cron = "0/60 * * * * ?")
+    @Scheduled(cron = "0 0/3 * * * ?")
     public void execute() {
         if (!mpAuthConfig.isMockWeChatOrderQuery()) {
             SysOrderDTO item = new SysOrderDTO();
