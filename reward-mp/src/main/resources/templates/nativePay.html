@@ -206,6 +206,8 @@
         <h1>微信支付购买</h1>
         <section class="content">
             <h2>商品：会员服务。</h2>
+            <p class="copy-right">亲，此商品不提供退款和发货服务哦</p>
+            <div class="price">微信价：<strong>￥[[${order.moneyStr}]]元</strong></div>
             <h2 style="color:#1aad19"> 订单剩余时间 / 到期后请勿支付</h2>
             <a href="javascript:" id="minute_show" class="weui-btn weui-btn_primary">
                  倒计时：[[${timeExpire}]]分00秒
@@ -214,8 +216,7 @@
                 <li><img id="codeUrl" th:src="@{'http://qr.liantu.com/api.php?text='+${result.codeUrl} }" /></li>
                 <li style="line-height:0"><img src="/img/sm.png" /></li>
             </ul>
-            <p class="copy-right">亲，此商品不提供退款和发货服务哦</p>
-            <div class="price">微信价：<strong>￥[[${order.moneyStr}]]元</strong></div>
+
             <input type="hidden" th:value="${order.orderId}" id="orderId" />
             <input type="hidden" th:value="${timeExpire}" id="timeExpire" />
             <input type="hidden" th:value="${callbackUrl}" id="callbackUrl" />
