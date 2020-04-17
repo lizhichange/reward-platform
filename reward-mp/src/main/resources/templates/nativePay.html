@@ -248,8 +248,12 @@
             intDiff--;
             ge_time = intDiff;
         } else {
-            $('#codeUrl').attr('src','/img/wexin.jpg');
+            $('#codeUrl').attr('src','/img/weixin.jpg');
             clearInterval(timeTask);
+            $("#minute_show").text("重新支付");
+            $("#minute_show").bind('click',function(){
+                window.location.reload();
+            });
         }
     }
     timer = setInterval("CountDown()", 1000);
