@@ -44,8 +44,6 @@ public class AccountFacadeImpl implements IAccountFacade {
         Assert.notNull(status, "status is not null");
         Assert.notNull(dto.getOrderId(), "dto is not null");
         sysOrderFacade.updateSysOrderByOrderId(dto);
-
-
         SysOrderDTO ext = new SysOrderDTO();
         ext.setOrderId(dto.getOrderId());
         List<SysOrderDTO> result = sysOrderFacade.selectSysOrderListExt(ext);
