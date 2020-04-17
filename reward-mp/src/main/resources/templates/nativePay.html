@@ -2,9 +2,9 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta http-equiv="content-type" content="text/html;charset=utf8" />
+    <meta http-equiv="content-type" content="text/html;charset=utf8"/>
     <meta id="viewport" name="viewport"
-        content="width=device-width; initial-scale=1.0; maximum-scale=1; user-scalable=no;" />
+          content="width=device-width; initial-scale=1.0; maximum-scale=1; user-scalable=no;"/>
     <title></title>
 
 
@@ -196,26 +196,27 @@
             box-sizing: border-box;
             overflow: hidden;
         }
+
     </style>
 </head>
 
 <body>
 
 
-    <article class="charge">
-        <h1>微信支付购买</h1>
-        <section class="content">
-            <h2>商品：会员服务。</h2>
-             <ul class="selectImg cf">
-                 <h3>订单剩余时间 / 到期后请勿支付</h3>
-                 <li><img th:src="@{'http://qr.liantu.com/api.php?text='+${result.codeUrl} }" /></li>
-                <li><img src="/img/sm.png" /></li>
-            </ul>
-            <p class="copy-right">亲，此商品不提供退款和发货服务哦</p>
-            <div class="price">微信价：<strong>￥[[${order.moneyStr}]]元</strong></div>
-            <input type="hidden" th:value="${order.orderId}" id="orderId" />
-        </section>
-    </article>
+<article class="charge">
+    <h1>微信支付购买</h1>
+    <section class="content">
+        <h2>商品：会员服务。</h2>
+        <ul class="selectImg cf">
+            <li>订单剩余时间 / 到期后请勿支付</li>
+            <li><img th:src="@{'http://qr.liantu.com/api.php?text='+${result.codeUrl} }"/></li>
+            <li><img src="/img/sm.png"/></li>
+        </ul>
+        <p class="copy-right">亲，此商品不提供退款和发货服务哦</p>
+        <div class="price">微信价：<strong>￥[[${order.moneyStr}]]元</strong></div>
+        <input type="hidden" th:value="${order.orderId}" id="orderId"/>
+    </section>
+</article>
 </body>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
 <script type="text/javascript" src="/js/zepto.min.js"></script>
