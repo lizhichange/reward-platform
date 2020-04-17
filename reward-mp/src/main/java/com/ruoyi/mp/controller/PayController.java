@@ -206,7 +206,7 @@ public class PayController {
         String getRequestUrl = servletRequest.getRequestURL().toString();
         String doMain = DoMainUtil.getDoMain(getRequestUrl);
         //2分钟
-        Date date = DateUtils.addMinutes(new Date(), 2);
+        Date date = DateUtils.addMinutes(new Date(), 1);
         String timeExpire = DateUtils.formatLongFormat(date);
         request.setTimeExpire(timeExpire);
         request.setNotifyUrl("http://" + doMain + "/pay/notify/order");
@@ -224,7 +224,7 @@ public class PayController {
             map.put("type", WxPayConstants.TradeType.NATIVE);
             map.put("data", createOrder);
             //分给前端
-            map.put("timeExpire", 2);
+            map.put("timeExpire", 1);
             return AjaxResult.success(map);
         }
         return AjaxResult.error();

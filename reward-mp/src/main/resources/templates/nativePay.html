@@ -211,7 +211,7 @@
                  倒计时：[[${timeExpire}]]分00秒
             </a>
             <ul class="selectImg cf">
-                <li><img th:src="@{'http://qr.liantu.com/api.php?text='+${result.codeUrl} }" /></li>
+                <li><img id="codeUrl" th:src="@{'http://qr.liantu.com/api.php?text='+${result.codeUrl} }" /></li>
                 <li style="line-height:0"><img src="/img/sm.png" /></li>
             </ul>
             <p class="copy-right">亲，此商品不提供退款和发货服务哦</p>
@@ -248,6 +248,7 @@
             intDiff--;
             ge_time = intDiff;
         } else {
+            $('#codeUrl').attr('src','/img/wexin.jpg');
             clearInterval(timeTask);
         }
     }
