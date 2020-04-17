@@ -78,6 +78,7 @@ public class PayController {
     @GetMapping
     public String pay(@RequestParam(value = "orderId") String orderId,
                       @RequestParam(value = "tradeType") String tradeType,
+                      @RequestParam(value = "callbackUrl") String callbackUrl,
                       ModelMap modelmap,
                       HttpServletRequest request) throws Exception {
         String ua = request.getHeader("User-Agent").toLowerCase();
@@ -89,11 +90,10 @@ public class PayController {
         SysOrderDTO item = getSysOrderDTO(orderId);
         item.setTradeType(tradeType);
         modelmap.addAttribute("order", item);
+        modelmap.addAttribute("callbackUrl", callbackUrl);
         if (StringUtil.equals(WxPayConstants.TradeType.JSAPI, tradeType)) {
-
             return "jsApiPay";
         }
-
         AjaxResult ajaxResult = create(item, request);
         log.info("ajax:{}", ajaxResult);
         if (ajaxResult != null) {

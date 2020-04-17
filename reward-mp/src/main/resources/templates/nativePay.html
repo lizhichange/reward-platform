@@ -218,7 +218,9 @@
             <div class="price">微信价：<strong>￥[[${order.moneyStr}]]元</strong></div>
             <input type="hidden" th:value="${order.orderId}" id="orderId" />
             <input type="hidden" th:value="${timeExpire}" id="timeExpire" />
+            <input type="hidden" th:value="${callbackUrl}" id="callbackUrl" />
 
+    
         </section>
     </article>
 </body>
@@ -275,6 +277,7 @@
                         //已支付
                     } else if (rep.status === 1) {
                         clearInterval(timeTask);
+                        window.location.href=$("#callbackUrl").val()
                     }
                 } else {
                     

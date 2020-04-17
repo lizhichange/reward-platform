@@ -215,10 +215,11 @@
                                         let value = document.getElementById('wxPayUrl').value;
                                         console.log(value);
                                         let flag = value.indexOf("?") != -1;
+                                          var callbackUrl=window.location.href;
                                         if (flag) {
-                                            window.location.href = value + "&orderId=" + rep.orderId;
+                                            window.location.href = value + "&orderId=" + rep.orderId+"&callbackUrl="+encodeURIComponent(callbackUrl);
                                         }else{
-                                            window.location.href = value + "?orderId=" + rep.orderId;
+                                            window.location.href = value + "?orderId=" + rep.orderId+"&callbackUrl="+encodeURIComponent(callbackUrl);
                                         }
                                     });
                                 } else if (rep.status === 1) {
