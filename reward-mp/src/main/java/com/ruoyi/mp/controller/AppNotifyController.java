@@ -10,6 +10,7 @@ import com.ruoyi.reward.facade.dto.SysOrderDTO;
 import com.ruoyi.reward.facade.dto.UserDto;
 import com.ruoyi.reward.facade.request.UserWechatLoginRequest;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
@@ -31,28 +32,19 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 @RequestMapping("/notify")
+@Slf4j
 public class AppNotifyController {
 
 
     @PostMapping("/notify")
     @ResponseBody
-    public Result notify(NotifyLoginParam param,
-                         HttpServletRequest servletRequest) {
-        Result result = new Result();
-        result.setAppid("123");
-        result.setToken("123");
-        result.setSecret("123");
-        result.setWebapp("123");
-        return result;
-
-
+    public Result notify(NotifyLoginParam param) {
+        log.info("param:{}", param);
+        return new Result();
     }
 
     @Data
     class Result extends ToString {
-        private String appid;
-        private String token;
-        private String secret;
-        private String webapp;
+
     }
 }

@@ -5,8 +5,11 @@ import org.near.toolkit.model.ToString;
 
 @Data
 public class NotifyLoginParam extends ToString {
-    private String _type;
-    private String _appid;
-    private String _token;
-    private String device_id;
+    //{"time":"2018-09-20 23:18:00","money":"139.34","title":"微信支付","content":"测试收款","deviceid":"yourdeviceid","encrypt":"0"}
+    private String time;
+    private String money;
+    private String title;
+    private String content;
+    private String deviceid;
+    private String encrypt;
 }
