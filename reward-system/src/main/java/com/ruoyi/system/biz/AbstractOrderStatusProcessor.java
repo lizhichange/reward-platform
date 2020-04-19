@@ -44,6 +44,13 @@ public abstract class AbstractOrderStatusProcessor implements UserOrderStatusPro
         return amount;
     }
 
+    public static void main(String[] args) {
+        //1分钱
+        Integer promotionAmount =1;
+        Long amount = (long) ((promotionAmount * 20) / 100);
+        System.out.println(amount);
+
+    }
 
     protected abstract void confuseTarget(SysOrderDTO target);
 
