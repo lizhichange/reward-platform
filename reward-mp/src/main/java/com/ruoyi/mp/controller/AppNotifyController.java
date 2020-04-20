@@ -2,6 +2,7 @@ package com.ruoyi.mp.controller;
 
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.fastjson.JSONObject;
 import com.ruoyi.mp.config.MpAuthConfig;
 import com.ruoyi.mp.param.NotifyLoginParam;
 import com.ruoyi.mp.util.AjaxResult;
@@ -36,9 +37,9 @@ import javax.servlet.http.HttpServletRequest;
 public class AppNotifyController {
 
 
-    @PostMapping("/notify")
     @ResponseBody
-    public AjaxResult notify(@RequestBody NotifyLoginParam param) {
+    @RequestMapping(value = "/notify", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    public AjaxResult notify(@RequestBody JSONObject param) {
         log.info("param:{}", param);
         return AjaxResult.success("success");
     }
