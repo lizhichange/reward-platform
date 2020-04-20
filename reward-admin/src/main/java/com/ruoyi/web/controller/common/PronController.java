@@ -92,7 +92,6 @@ public class PronController extends BaseController {
     ThreadPoolTaskExecutor threadPoolTaskExecutor;
 
     @GetMapping("/redirect")
-    @WxPnUserAuth
     @com.ruoyi.common.annotation.Log(title = "视频重定向", businessType = BusinessType.QUERY)
     public String redirect(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
         xxx(userid, modelmap);
@@ -102,7 +101,6 @@ public class PronController extends BaseController {
 
 
     @PostMapping("/queryOrder")
-    @WxPnUserAuth
     @ResponseBody
     @com.ruoyi.common.annotation.Log(title = "前台查询订单", businessType = BusinessType.QUERY)
     public AjaxResult queryOrder(ShipinDTO shipinDTO) {
@@ -168,7 +166,6 @@ public class PronController extends BaseController {
 
 
     @GetMapping()
-    @WxPnUserAuth
     @com.ruoyi.common.annotation.Log(title = "视频首页", businessType = BusinessType.QUERY)
     public String index(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
         String user = StringUtil.isBlank(userid) ? "" : userid;
@@ -214,7 +211,6 @@ public class PronController extends BaseController {
 
 
     @GetMapping("/category")
-    @WxPnUserAuth
     @com.ruoyi.common.annotation.Log(title = "前台类目首页", businessType = BusinessType.QUERY)
     public String category(@RequestParam(value = "categoryId") Long categoryId, @RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
         LOGGER.info("user:{},categoryId:{}", userid, categoryId);
@@ -232,7 +228,6 @@ public class PronController extends BaseController {
     ISysConfigService configService;
 
     @GetMapping("/detail")
-    @WxPnUserAuth
     @com.ruoyi.common.annotation.Log(title = "视频详情页面", businessType = BusinessType.QUERY)
     public String detail(@RequestParam(value = "id") Long id,
                          @RequestParam(value = "userid", required = false) String userid,

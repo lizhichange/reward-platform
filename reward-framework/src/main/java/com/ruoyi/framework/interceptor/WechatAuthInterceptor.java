@@ -2,6 +2,8 @@ package com.ruoyi.framework.interceptor;
 
 
 import cn.hutool.core.util.URLUtil;
+import cn.hutool.http.useragent.UserAgent;
+import cn.hutool.http.useragent.UserAgentUtil;
 import com.ruoyi.common.config.Global;
 import com.ruoyi.framework.interceptor.impl.WxPnUserAuth;
 import com.ruoyi.framework.interceptor.util.SessionContext;
@@ -52,7 +54,6 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         LOGGER.info("====用户进入拦截器===WechatAuthInterceptor===");
-
         HttpServletRequest myRequest = getHttpServletRequest();
         StringBuffer requestUrl = myRequest.getRequestURL();
         log.info("requestURL:{}", requestUrl);
@@ -74,6 +75,13 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
             return true;
         }
 
+        //如果不是微信环境 直接返回
+        String ua = request.getHeader("User-Agent").toLowerCase();
+        UserAgent parse = UserAgentUtil.parse(ua);
+        if (!parse.isMobile()) {
+            return true;
+        }
+
         if (handler instanceof HandlerMethod) {
             HandlerMethod handlerMethod = (HandlerMethod) handler;
             Method method = handlerMethod.getMethod();
@@ -83,7 +91,6 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
                 return true;
             }
             String doMain = DoMainUtil.getDoMain(requestUrl.toString());
-
             //授权回来之后中定向会带有openId参数
             String openId = myRequest.getParameter("op");
             //推广人的userid
@@ -97,7 +104,6 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
                 if (redirect(response, openId)) {
                     return false;
                 }
-
                 return true;
             }
             userId = read(request, COOKIE_USER_KEY);
