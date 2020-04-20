@@ -74,8 +74,7 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
             SessionContext.set(session, "x", "x");
             return true;
         }
-
-        //如果不是微信环境 直接返回
+        //如果不是微信环境 直接返回pc 浏览
         String ua = request.getHeader("User-Agent").toLowerCase();
         UserAgent parse = UserAgentUtil.parse(ua);
         if (!parse.isMobile()) {
