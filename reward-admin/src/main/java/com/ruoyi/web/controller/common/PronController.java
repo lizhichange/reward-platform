@@ -108,7 +108,7 @@ public class PronController extends BaseController {
     public AjaxResult queryOrder(ShipinDTO shipinDTO) {
         String openId = SessionContext.getOpenId();
         String userId = SessionContext.getUserId();
-        logger.info("id:{},openId:{}", shipinDTO.getId(), openId);
+        LOGGER.info("id:{},openId:{}", shipinDTO.getId(), openId);
         SysOrder order = new SysOrder();
         order.setGoodsId(shipinDTO.getId());
         order.setOpenId(openId);
@@ -172,11 +172,9 @@ public class PronController extends BaseController {
     @com.ruoyi.common.annotation.Log(title = "视频首页", businessType = BusinessType.QUERY)
     public String index(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
         String user = StringUtil.isBlank(userid) ? "" : userid;
-
         if (Global.isMock()) {
             return redirect(userid, modelmap);
         }
-
         SysWebMain webMain = new SysWebMain();
         webMain.setMainStatus(WebMainStatus.OK.getCode());
         List<SysWebMain> list = sysWebMainService.selectSysWebMainList(webMain);
@@ -190,14 +188,14 @@ public class PronController extends BaseController {
                 item = list.get(i);
             }
             String url = item.getMainUrl() + "/pron/redirect?userid=" + user;
-            logger.info("redirect.url:{}", url);
+            LOGGER.info("redirect.url:{}", url);
             return "redirect:" + url;
         }
         return redirect(userid, modelmap);
     }
 
     private void xxx(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
-        logger.info("userId:{}", userid);
+        LOGGER.info("userId:{}", userid);
         ShipinDTO shipinDTO = new ShipinDTO();
         PageHelper.startPage(1, 12, StringUtil.EMPTY_STRING);
         List<ShipinDTO> list = shipinFacade.selectShipinDTOList(shipinDTO);
@@ -219,7 +217,7 @@ public class PronController extends BaseController {
     @WxPnUserAuth
     @com.ruoyi.common.annotation.Log(title = "前台类目首页", businessType = BusinessType.QUERY)
     public String category(@RequestParam(value = "categoryId") Long categoryId, @RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
-        logger.info("user:{},categoryId:{}", userid, categoryId);
+        LOGGER.info("user:{},categoryId:{}", userid, categoryId);
         getCategory(modelmap);
         SysCategory sysCategory = categoryService.selectDeptById(categoryId);
         if (sysCategory == null) {
@@ -240,7 +238,7 @@ public class PronController extends BaseController {
                          @RequestParam(value = "userid", required = false) String userid,
                          @RequestParam(value = "author", required = false) String author,
                          ModelMap modelmap) {
-        logger.info("user:{},id:{},author:{}", userid, id, author);
+        LOGGER.info("user:{},id:{},author:{}", userid, id, author);
         ShipinDTO shipin = shipinFacade.selectShipinDTOById(id);
         if (shipin != null) {
             convert(new Date(), shipin);
