@@ -1,0 +1,125 @@
+*{margin: 0;padding: 0;}
+body{
+background: #f7f7f7;
+font-family: "微软雅黑";
+}
+
+#pay{
+width: 160px;
+height: 60px;
+background: #108EE9;
+border-radius: 5px;
+text-align: center;
+line-height: 60px;
+display: block;
+color: #fff;
+font-size: 18px;
+text-decoration: none;
+margin:300px auto 0;
+-webkit-tap-highlight-color:rgba(255,0,0,0);
+cursor: pointer;
+}
+
+#pay:hover{
+background: #3BA3ED;
+}
+
+
+#topcon{
+width: 600px;
+height: 72px;
+margin:0 auto;
+}
+
+#topcon .top{
+    width: 600px;
+    height: 72px;
+    margin:0 auto;
+    border-bottom: 1px solid #eee;
+    background: #fff;
+    overflow: hidden;
+}
+#topcon .top .logo{
+    width: 120px;
+    height: 40px;
+    margin:20px auto 0;
+}
+#topcon .top .logo img{
+    width: 120px;
+    height: 40px;
+}
+#ewmcon{
+    width: 600px;
+    margin:25px auto 0;
+}
+
+
+#ewmcon .ewmdiv{
+    width: 600px;
+    height:620px;
+    background: #fff;
+    margin:25px auto 0;
+    border: 1px solid #f2f2f2;
+}
+
+
+#ewmcon .ewmdiv .tips{
+    width: 538px;
+    padding: 20px 0;
+    color: #8a6d3b;
+    border: 1px solid #faebcc;
+    border-radius: 4px;
+    background-color: #fcf8e3;
+    margin:35px auto;
+    text-align: center;
+    font-family: "微软雅黑";
+}
+#ewmcon .ewmdiv .tofee{
+    text-align: center;
+    font-size: 42px;
+    margin: 25px auto;
+    font-family: verdana;
+    color: #222;
+    font-family: "微软雅黑";
+}
+#ewmcon .ewmdiv .qrcode{
+    width: 220px;
+    height: 220px;
+    border:1px solid #eee;
+    border-radius: 4px;
+    margin:10px auto;
+    position: relative;
+}
+#ewmcon .ewmdiv .qrcode img{
+    width: 200px;
+    height: 200px;
+    margin:10px 10px;
+}
+#expire{
+    text-align: center;
+    font-size: 35px;
+    margin-top: 5px;
+}
+#ewmcon .qrcode .ewmstatus .isexpire{
+    width: 220px;
+    height: 220px;
+    background: #fff;
+    position: absolute;
+    opacity: .9;
+    text-align: center;
+    line-height: 220px;
+    font-size: 35px;
+}
+
+
+#download{
+    text-align: center;
+    font-size: 28px;
+    margin-top: 50px;
+}
+
+
+#download a{
+    text-decoration: none;
+    color: #333;
+}

@@ -75,6 +75,15 @@ public class PayController {
     @Autowired
     ConfigFactory configFactory;
 
+    @GetMapping("/aliPay")
+    public String aliPay(
+            ModelMap modelmap,
+            HttpServletRequest request) {
+
+        return "aliPay";
+
+    }
+
     @GetMapping
     public String pay(@RequestParam(value = "orderId") String orderId,
                       @RequestParam(value = "tradeType") String tradeType,
@@ -93,20 +102,22 @@ public class PayController {
         modelmap.addAttribute("callbackUrl", callbackUrl);
         if (StringUtil.equals(WxPayConstants.TradeType.JSAPI, tradeType)) {
             return "jsApiPay";
-        }
-        AjaxResult ajaxResult = create(item, request);
-        log.info("ajax:{}", ajaxResult);
-        if (ajaxResult != null) {
-            Integer code = (Integer) ajaxResult.get("code");
-            if (code == 0) {
-                HashMap data = (HashMap) ajaxResult.get("data");
-                WxPayNativeOrderResult result = (WxPayNativeOrderResult) data.get("data");
-                modelmap.addAttribute("result", result);
-                int timeExpire = (int) data.get("timeExpire");
-                modelmap.addAttribute("timeExpire", timeExpire);
+        } else if (StringUtil.equals(WxPayConstants.TradeType.NATIVE, tradeType)) {
+            AjaxResult ajaxResult = create(item, request);
+            log.info("ajax:{}", ajaxResult);
+            if (ajaxResult != null) {
+                Integer code = (Integer) ajaxResult.get("code");
+                if (code == 0) {
+                    HashMap data = (HashMap) ajaxResult.get("data");
+                    WxPayNativeOrderResult result = (WxPayNativeOrderResult) data.get("data");
+                    modelmap.addAttribute("result", result);
+                    int timeExpire = (int) data.get("timeExpire");
+                    modelmap.addAttribute("timeExpire", timeExpire);
+                }
             }
+            return "nativePay";
         }
-        return "nativePay";
+        return "aliPay";
     }
 
     @PostMapping("/queryOrder")
