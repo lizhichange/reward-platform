@@ -53,9 +53,4 @@ public class AppNotifyController {
         System.out.println(parse);
     }
 
-    @Data
-    static
-    class Result extends ToString {
-
-    }
 }

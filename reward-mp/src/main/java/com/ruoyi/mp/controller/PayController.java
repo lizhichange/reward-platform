@@ -21,6 +21,7 @@ import com.ruoyi.mp.config.MpAuthConfig;
 import com.ruoyi.mp.factory.ConfigFactory;
 import com.ruoyi.mp.util.AjaxResult;
 import com.ruoyi.reward.facade.api.IAccountFacade;
+import com.ruoyi.reward.facade.api.ISysConfigFacade;
 import com.ruoyi.reward.facade.api.ISysOrderFacade;
 import com.ruoyi.reward.facade.api.ISysWebMainFacade;
 import com.ruoyi.reward.facade.dto.SysOrderDTO;
@@ -35,6 +36,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.near.toolkit.common.DateUtils;
 import org.near.toolkit.common.DoMainUtil;
 import org.near.toolkit.common.StringUtil;
+import org.near.toolkit.model.Money;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,6 +76,8 @@ public class PayController {
     IAccountFacade accountFacade;
     @Autowired
     ConfigFactory configFactory;
+    @Reference(version = "1.0.0", check = false)
+    ISysConfigFacade sysConfigFacade;
 
     @GetMapping("/aliPay")
     public String aliPay(
@@ -116,6 +120,15 @@ public class PayController {
                 }
             }
             return "nativePay";
+        } else {
+            String userId = sysConfigFacade.selectConfigByKey("sys.aliPay.userId");
+            if (StringUtil.isBlank(userId)) {
+                throw new Exception("系统异常,userId is not null");
+            }
+            String amount = item.getMoneyStr();
+            String memo = "pay";
+            String qrCode = "alipays://platformapi/startapp?appId=09999988&actionType=toAccount&goBack=NO&amount=" + amount + "&userId=" + userId + "&memo=" + memo;
+            modelmap.addAttribute("qrCode", qrCode);
         }
         return "aliPay";
     }
