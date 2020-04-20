@@ -38,12 +38,13 @@ public class AppNotifyController {
 
     @PostMapping("/notify")
     @ResponseBody
-    public Result notify(NotifyLoginParam param) {
+    public AjaxResult notify(NotifyLoginParam param) {
         log.info("param:{}", param);
-        return new Result();
+        return AjaxResult.success("success");
     }
 
     @Data
+    static
     class Result extends ToString {
 
     }
