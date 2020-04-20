@@ -9,6 +9,7 @@ public class NotifyLoginParam extends ToString {
     private String time;
     private String money;
     private String title;
+    private String type;
     private String content;
     private String deviceid;
     private String encrypt;

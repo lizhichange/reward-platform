@@ -38,7 +38,7 @@ public class AppNotifyController {
 
     @PostMapping("/notify")
     @ResponseBody
-    public AjaxResult notify(NotifyLoginParam param) {
+    public AjaxResult notify(@RequestBody NotifyLoginParam param) {
         log.info("param:{}", param);
         return AjaxResult.success("success");
     }
