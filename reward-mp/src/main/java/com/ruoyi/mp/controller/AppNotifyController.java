@@ -24,6 +24,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.spring.web.json.Json;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -41,7 +42,15 @@ public class AppNotifyController {
     @RequestMapping(value = "/notify", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public AjaxResult notify(@RequestBody JSONObject param) {
         log.info("param:{}", param);
+        NotifyLoginParam parse = JSONObject.parseObject(param.toJSONString(), NotifyLoginParam.class);
+        log.info("parse:{}", parse);
         return AjaxResult.success("success");
+    }
+
+    public static void main(String[] args) {
+        String str = "{\"money\":\"3.00\",\"encrypt\":\"0\",\"sign\":\"0FED8573B36D070A5F516D5DD475B35B\",\"time\":\"2020-04-20 13:57:56\",\"type\":\"alipay\",\"title\":\"支付宝支付\",\"deviceid\":\"ffffffff-9333-31f6-ffff-ffffef05ac4a\",\"content\":\"成功收款3.00元。享免费提现等更多专属服务，点击查看\"}";
+        NotifyLoginParam parse = JSONObject.parseObject(str, NotifyLoginParam.class);
+        System.out.println(parse);
     }
 
     @Data
