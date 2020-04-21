@@ -110,7 +110,7 @@ public class PronController extends BaseController {
         LOGGER.info("id:{},openId:{}", shipinDTO.getId(), openId);
         SysOrder order = new SysOrder();
         order.setGoodsId(shipinDTO.getId());
-        order.setOpenId(openId);
+        order.setOpenId(StringUtil.isBlank(openId) ? "x" : "1");
         // TODO: 2020/4/20 必填参数
         List<SysOrder> sysOrders = sysOrderService.selectSysOrder(order);
         if (CollectionUtils.isEmpty(sysOrders)) {
