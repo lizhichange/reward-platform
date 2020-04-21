@@ -19,6 +19,9 @@ import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.EntPayService;
 import com.github.binarywang.wxpay.service.WxPayService;
 import com.google.common.collect.Maps;
+import com.ruoyi.mp.client.IAccountFacadeClient;
+import com.ruoyi.mp.client.ISysConfigClient;
+import com.ruoyi.mp.client.ISysOrderClient;
 import com.ruoyi.mp.config.MpAuthConfig;
 import com.ruoyi.mp.factory.ConfigFactory;
 import com.ruoyi.mp.service.ImageService;
@@ -72,31 +75,9 @@ import java.util.concurrent.TimeUnit;
 @RequestMapping("/pay")
 @Slf4j
 @Api("支付")
-public class PayController {
+public class PayController extends BaseController {
     private final static Logger LOGGER = LoggerFactory.getLogger(PayController.class);
-    @Reference(version = "1.0.0", check = false)
-    ISysWebMainFacade sysWebMainFacade;
-    @Autowired
-    WxPayService wxPayService;
-    @Autowired
-    MpAuthConfig mpAuthConfig;
-    @Reference(version = "1.0.0", check = false)
-    ISysOrderFacade sysOrderFacade;
-    @Reference(version = "1.0.0", check = false)
-    IAccountFacade accountFacade;
-    @Autowired
-    ConfigFactory configFactory;
-    @Reference(version = "1.0.0", check = false)
-    ISysConfigFacade sysConfigFacade;
 
-    @GetMapping("/aliPay")
-    public String aliPay(
-            ModelMap modelmap,
-            HttpServletRequest request) {
-
-        return "aliPay";
-
-    }
 
     @GetMapping
     public String pay(@RequestParam(value = "orderId") String orderId,
@@ -131,7 +112,7 @@ public class PayController {
             }
             return "nativePay";
         } else {
-            String userId = sysConfigFacade.selectConfigByKey("sys.aliPay.userId");
+            String userId = sysConfigClient.selectConfigByKey("sys.aliPay.userId");
             if (StringUtil.isBlank(userId)) {
                 throw new Exception("系统异常,userId is not null");
             }
@@ -180,7 +161,7 @@ public class PayController {
         Assert.notNull(orderId, "orderId is not null");
         SysOrderDTO sysOrderDTO = new SysOrderDTO();
         sysOrderDTO.setOrderId(orderId);
-        List<SysOrderDTO> list = sysOrderFacade.selectSysOrderList(sysOrderDTO);
+        List<SysOrderDTO> list = sysOrderClient.selectSysOrderList(sysOrderDTO);
         if (CollectionUtils.isEmpty(list)) {
             throw new Exception("系统异常");
         }
@@ -250,7 +231,7 @@ public class PayController {
                 //支付中
                 newOrder.setStatus(Integer.valueOf(OrderStatusType.PAY_ING.getCode()));
                 LOGGER.info("newOrder:{}", newOrder);
-                sysOrderFacade.updateSysOrder(newOrder);
+                sysOrderClient.updateSysOrder(newOrder);
             }
             HashMap<String, Object> map = Maps.newHashMap();
             map.put("type", WxPayConstants.TradeType.JSAPI);
@@ -280,7 +261,7 @@ public class PayController {
             newOrder.setParam(timeExpire);
             newOrder.setStatus(Integer.valueOf(OrderStatusType.PAY_ING.getCode()));
             LOGGER.info("newOrder:{}", newOrder);
-            sysOrderFacade.updateSysOrder(newOrder);
+            sysOrderClient.updateSysOrder(newOrder);
             HashMap<String, Object> map = Maps.newHashMap();
             map.put("type", WxPayConstants.TradeType.NATIVE);
             map.put("data", createOrder);
@@ -311,7 +292,7 @@ public class PayController {
             newOrder.setOrderId(orderId);
             //支付中
             newOrder.setStatus(Integer.valueOf(OrderStatusType.PAY_ING.getCode()));
-            List<SysOrderDTO> dtoList = sysOrderFacade.selectSysOrderListExt(newOrder);
+            List<SysOrderDTO> dtoList = sysOrderClient.selectSysOrderListExt(newOrder);
             if (CollectionUtils.isEmpty(dtoList)) {
                 return WxPayNotifyResponse.fail("FAIL");
             }
@@ -326,7 +307,7 @@ public class PayController {
             newOrder.setPayNo(transactionId);
             newOrder.setStatus(Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
             LOGGER.info("newOrder:{}", newOrder);
-            accountFacade.take(newOrder);
+            accountFacadeClient.take(newOrder);
             return WxPayNotifyResponse.success("SUCCESS");
         }
         return WxPayNotifyResponse.fail("FAIL");

@@ -10,9 +10,8 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="format-detection" content="telephone=no">
-    <title>支付宝监听支付demo</title>
+    <title>支付</title>
     <script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
-
     <link rel="stylesheet" type="text/css" href="/css/Alipay.css">
 </head>
 
@@ -33,14 +32,14 @@
         <div class="tofee">￥[[${order.moneyStr}]]元</div>
         <div class="qrcode">
             <div class="ewmstatus"></div>
-
             <img id="codeUrl" width="220" height="220" th:src="${qrCode}"
-                 alt="Please visit Spring Boot" title="Please visit Spring Boot"/>
-
+                 alt="Please" title="Please"/>
         </div>
-        <div id="goodsname" style="text-align: center;font-size: 18px;margin-top: 30px; color: #666;">支付测试</div>
-        <div id="dingdanhao" style="text-align: center;font-size: 18px;margin-top: 10px; color: #666;"></div>
-        <div id="expire">04:18</div>
+        <div id="goodsname" style="text-align: center;font-size: 18px;margin-top: 30px; color: #666;">商品名称：服务</div>
+        <div id="dingdanhao" style="text-align: center;font-size: 18px;margin-top: 10px; color: #666;">
+            订单号：[[${order.orderId}]]
+        </div>
+        <div id="expire">05:0</div>
     </div>
 </div>
 
@@ -90,6 +89,10 @@
 
 
 
+
+
+
+
 </script>
 
 <!-- 过期时间倒计时 -->
@@ -110,8 +113,7 @@
                 $("#ewmcon .ewmdiv .qrcode .ewmstatus").html("<div class=\"isexpire\">已过期</div>");
             }
         }
-        expire = setInterval("countDown()", 2000);
-
+        expire = setInterval("countDown()", 1000);
 
 
 
