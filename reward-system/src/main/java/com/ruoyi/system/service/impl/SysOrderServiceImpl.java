@@ -1,5 +1,6 @@
 package com.ruoyi.system.service.impl;
 
+import com.google.common.collect.Lists;
 import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.system.domain.SysOrder;
@@ -8,10 +9,14 @@ import com.ruoyi.system.domain.ext.SysOrderExample;
 import com.ruoyi.system.mapper.ExtSysOrderMapper;
 import com.ruoyi.system.mapper.SysOrderMapper;
 import com.ruoyi.system.service.ISysOrderService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 订单列表Service业务层处理
@@ -36,6 +41,21 @@ public class SysOrderServiceImpl implements ISysOrderService {
     @Override
     public SysOrder selectSysOrderById(Long id) {
         return sysOrderMapper.selectSysOrderById(id);
+    }
+
+    @Override
+    public List<SysOrder> selectSysOrder(SysOrder extSysOrder) {
+        SysOrderExample example = new SysOrderExample();
+        example.createCriteria().andGoodsIdEqualTo(extSysOrder.getGoodsId()).andOpenIdEqualTo(extSysOrder.getOpenId());
+        List<ExtSysOrder> list = extSysOrderMapper.selectByExample(example);
+        if (CollectionUtils.isEmpty(list)) {
+            return Lists.newArrayList();
+        }
+        return list.stream().map(item -> {
+            SysOrder sysOrder = new SysOrder();
+            BeanUtils.copyProperties(item, sysOrder);
+            return sysOrder;
+        }).collect(Collectors.toList());
     }
 
     @Override

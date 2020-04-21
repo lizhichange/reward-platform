@@ -18,7 +18,9 @@ public interface ISysOrderService {
      * @param id 订单列表ID
      * @return 订单列表
      */
-    public SysOrder selectSysOrderById(Long id);
+    SysOrder selectSysOrderById(Long id);
+
+    List<SysOrder> selectSysOrder(SysOrder extSysOrder);
 
     long countByExample(ExtSysOrder extSysOrder);
 
@@ -30,7 +32,7 @@ public interface ISysOrderService {
      * @param sysOrder 订单列表
      * @return 订单列表集合
      */
-    public List<SysOrder> selectSysOrderList(SysOrder sysOrder);
+    List<SysOrder> selectSysOrderList(SysOrder sysOrder);
 
     /**
      * 新增订单列表

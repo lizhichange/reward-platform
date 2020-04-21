@@ -5,22 +5,20 @@ import lombok.Data;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * @author sunflower
+ */
 @Data
 public class ExtSysOrder implements Serializable {
     /**
-    *
-    *
-    * sys_order.id
-    
+     * sys_order.id
      *
      * @mbg.generated 2020-04-02 14:18:39
      */
     private Integer id;
 
     /**
-    *
-    *
-    * sys_order.order_id
+     * sys_order.order_id
      * 订单ID
      *
      * @mbg.generated 2020-04-02 14:18:39
@@ -28,31 +26,23 @@ public class ExtSysOrder implements Serializable {
     private String orderId;
 
     /**
-    *
-    *
-    * sys_order.money
+     * sys_order.money
      * 实际金额，单位分
-
      *
      * @mbg.generated 2020-04-02 14:18:39
      */
     private Integer money;
 
     /**
-    *
-    *
-    * sys_order.price
+     * sys_order.price
      * 原价，单位分
-
      *
      * @mbg.generated 2020-04-02 14:18:39
      */
     private Integer price;
 
     /**
-    *
-    *
-    * sys_order.type
+     * sys_order.type
      * 支付方式
      *
      * @mbg.generated 2020-04-02 14:18:39
@@ -60,9 +50,7 @@ public class ExtSysOrder implements Serializable {
     private Integer type;
 
     /**
-    *
-    *
-    * sys_order.pay_no
+     * sys_order.pay_no
      * 流水号
      *
      * @mbg.generated 2020-04-02 14:18:39
@@ -70,9 +58,7 @@ public class ExtSysOrder implements Serializable {
     private String payNo;
 
     /**
-    *
-    *
-    * sys_order.param
+     * sys_order.param
      * 自定义参数
      *
      * @mbg.generated 2020-04-02 14:18:39
@@ -80,9 +66,7 @@ public class ExtSysOrder implements Serializable {
     private String param;
 
     /**
-    *
-    *
-    * sys_order.pay_time
+     * sys_order.pay_time
      * 付款时间
      *
      * @mbg.generated 2020-04-02 14:18:39
@@ -90,9 +74,7 @@ public class ExtSysOrder implements Serializable {
     private Date payTime;
 
     /**
-    *
-    *
-    * sys_order.pay_tag
+     * sys_order.pay_tag
      * 金额的备注
      *
      * @mbg.generated 2020-04-02 14:18:39
@@ -100,9 +82,7 @@ public class ExtSysOrder implements Serializable {
     private String payTag;
 
     /**
-    *
-    *
-    * sys_order.status
+     * sys_order.status
      * 订单状态
      *
      * @mbg.generated 2020-04-02 14:18:39
@@ -110,9 +90,7 @@ public class ExtSysOrder implements Serializable {
     private Integer status;
 
     /**
-    *
-    *
-    * sys_order.create_time
+     * sys_order.create_time
      * 创建时间
      *
      * @mbg.generated 2020-04-02 14:18:39
@@ -120,9 +98,7 @@ public class ExtSysOrder implements Serializable {
     private Date createTime;
 
     /**
-    *
-    *
-    * sys_order.update_time
+     * sys_order.update_time
      * 更新时间
      *
      * @mbg.generated 2020-04-02 14:18:39
@@ -130,9 +106,7 @@ public class ExtSysOrder implements Serializable {
     private Date updateTime;
 
     /**
-    *
-    *
-    * sys_order.goods_id
+     * sys_order.goods_id
      * 商品信息
      *
      * @mbg.generated 2020-04-02 14:18:39
@@ -140,9 +114,7 @@ public class ExtSysOrder implements Serializable {
     private Integer goodsId;
 
     /**
-    *
-    *
-    * sys_order.open_id
+     * sys_order.open_id
      * 用户的openId
      *
      * @mbg.generated 2020-04-02 14:18:39
@@ -150,9 +122,7 @@ public class ExtSysOrder implements Serializable {
     private String openId;
 
     /**
-    *
-    *
-    * sys_order.extension_user_id
+     * sys_order.extension_user_id
      * 推广人的id
      *
      * @mbg.generated 2020-04-02 14:18:39
@@ -160,9 +130,7 @@ public class ExtSysOrder implements Serializable {
     private String extensionUserId;
 
     /**
-    *
-    *
-    * sys_order.goods_snapshot
+     * sys_order.goods_snapshot
      * 商品快照
      *
      * @mbg.generated 2020-04-02 14:18:39

@@ -27,6 +27,7 @@ import com.ruoyi.reward.facade.enums.WebMainStatus;
 import com.ruoyi.system.domain.SysCategory;
 import com.ruoyi.system.domain.SysOrder;
 import com.ruoyi.system.domain.SysWebMain;
+import com.ruoyi.system.domain.ext.ExtSysOrder;
 import com.ruoyi.system.service.ISysCategoryService;
 import com.ruoyi.system.service.ISysConfigService;
 import com.ruoyi.system.service.ISysOrderService;
@@ -110,7 +111,8 @@ public class PronController extends BaseController {
         SysOrder order = new SysOrder();
         order.setGoodsId(shipinDTO.getId());
         order.setOpenId(openId);
-        List<SysOrder> sysOrders = sysOrderService.selectSysOrderList(order);
+        // TODO: 2020/4/20 必填参数
+        List<SysOrder> sysOrders = sysOrderService.selectSysOrder(order);
         if (CollectionUtils.isEmpty(sysOrders)) {
             ShipinDTO dto = shipinFacade.selectShipinDTOById(shipinDTO.getId().longValue());
             order.setCreateTime(new Date());
