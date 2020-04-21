@@ -6,7 +6,7 @@
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport"
-        content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,viewport-fit=cover">
+          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="format-detection" content="telephone=no">
@@ -17,43 +17,46 @@
 </head>
 
 <body>
-    <!-- 顶部 -->
-    <div id="topcon">
-        <div class="top">
-            <div class="logo">
-                <img src="/img/alipay-icon.png">
-            </div>
+<!-- 顶部 -->
+<div id="topcon">
+    <div class="top">
+        <div class="logo">
+            <img src="/img/alipay-icon.png">
         </div>
     </div>
+</div>
 
-    <!-- 二维码区域 -->
-    <div id="ewmcon">
-        <div class="ewmdiv">
-            <div class="tips">请打开支付宝扫码支付</div>
-            <div class="tofee">￥元</div>
-            <div class="qrcode">
-                <div class="ewmstatus"></div>
-                <img id="codeUrl" th:src="@{'http://qr.liantu.com/api.php?text='+${codeUrl} }" />
-            </div>
-            <div id="goodsname" style="text-align: center;font-size: 18px;margin-top: 30px; color: #666;">支付测试</div>
-            <div id="dingdanhao" style="text-align: center;font-size: 18px;margin-top: 10px; color: #666;"></div>
-            <div id="expire">04:18</div>
+<!-- 二维码区域 -->
+<div id="ewmcon">
+    <div class="ewmdiv">
+        <div class="tips">请打开支付宝扫码支付</div>
+        <div class="tofee">￥[[${order.moneyStr}]]元</div>
+        <div class="qrcode">
+            <div class="ewmstatus"></div>
+
+            <img id="codeUrl" width="220" height="220" th:src="${qrCode}"
+                 alt="Please visit Spring Boot" title="Please visit Spring Boot"/>
+
         </div>
+        <div id="goodsname" style="text-align: center;font-size: 18px;margin-top: 30px; color: #666;">支付测试</div>
+        <div id="dingdanhao" style="text-align: center;font-size: 18px;margin-top: 10px; color: #666;"></div>
+        <div id="expire">04:18</div>
     </div>
+</div>
 
-    <!-- 异步查单 -->
-    <form>
-        <input type="hidden" th:value="${order.orderId}" id="orderId" />
-        <input type="hidden" th:value="${callbackUrl}" id="callbackUrl" />
-        <div id="abc"></div>
-        <div id="buy"></div>
-        <div id="lunxun" style="display: none;"></div>
-    </form>
+<!-- 异步查单 -->
+<form>
+    <input type="hidden" th:value="${order.orderId}" id="orderId"/>
+    <input type="hidden" th:value="${callbackUrl}" id="callbackUrl"/>
+    <div id="abc"></div>
+    <div id="buy"></div>
+    <div id="lunxun" style="display: none;"></div>
+</form>
 
 
-    <!-- 异步订单 -->
-    <script>
-        var lunxun = setInterval("test()", 1000);
+<!-- 异步订单 -->
+<script>
+        var lunxun = setInterval("test()", 2000);
         function test() {
             var id = $("#lunxun").html();
             $.ajax({
@@ -70,20 +73,27 @@
                         if (rep.status === 0 || rep.status === 2) {
                             console.log("正在监听订单支付状态...")
                         } else if (rep.status === 1) {
-                            $("#topcon").html("<div class=\"top\"><div class=\"logo\"><img src=\"alipay-icon.png\"/></div></div>");
-                            $("#ewmcon").html("<div class=\"ewmdiv\"><div class=\"tips\">您已扫码完成支付</div><div class=\"tofee\">支付成功</div><div class=\"qrcode\" style='border:none;'><div class=\"ewmstatus\"></div><img src=\"5c663de220b82.png\"></div><div id=\"download\"><a href=\"buycode/index.html\" style=\"padding: 8px 10px;width:140px;border-radius:5px;margin:0 auto;border:1px solid #333;display: block;font-size:18px;\">下载源码</a></div></div>");
+                            var html = "<div class='top'><div class='logo'><img src='/img/alipay-icon.png'/></div></div>";
+                            $("#topcon").html(html);
+                            html = "<div class='ewmdiv'><div class='tips'>您已扫码完成支付</div><div class='tofee'>支付成功</div><div class='qrcode' style='border:none;'><div class='ewmstatus'></div></div></div>";
+                            $("#ewmcon").html(html);
                             console.log("支付完成，停止监听...")
                             //停止轮询
                             clearInterval(lunxun);
+                            window.location.href=$('#callbackUrl').val();
                         }
                     }
                 }
             });
         }
-    </script>
 
-    <!-- 过期时间倒计时 -->
-    <script type="text/javascript">
+
+
+
+</script>
+
+<!-- 过期时间倒计时 -->
+<script type="text/javascript">
         var maxtime = 5 * 60;
         function countDown() {
             if (maxtime >= 0) {
@@ -100,8 +110,12 @@
                 $("#ewmcon .ewmdiv .qrcode .ewmstatus").html("<div class=\"isexpire\">已过期</div>");
             }
         }
-        expire = setInterval("countDown()", 1000);                
-    </script>
+        expire = setInterval("countDown()", 2000);
+
+
+
+
+</script>
 
 </body>
 

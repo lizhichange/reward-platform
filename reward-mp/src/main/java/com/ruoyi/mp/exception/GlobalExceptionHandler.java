@@ -4,6 +4,8 @@ package com.ruoyi.mp.exception;
 import com.ruoyi.mp.util.AjaxResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -26,6 +28,8 @@ public class GlobalExceptionHandler {
         log.error(e.getMessage(), e);
         return AjaxResult.error("不支持' " + e.getMethod() + "'请求");
     }
+
+
 
     /**
      * 拦截未知的运行时异常

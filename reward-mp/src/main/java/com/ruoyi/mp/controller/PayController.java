@@ -1,8 +1,10 @@
 package com.ruoyi.mp.controller;
 
 import cn.hutool.core.util.RandomUtil;
+import cn.hutool.core.util.URLUtil;
 import cn.hutool.http.useragent.UserAgent;
 import cn.hutool.http.useragent.UserAgentUtil;
+import com.alibaba.dubbo.common.URL;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.github.binarywang.wxpay.bean.entpay.EntPayRequest;
 import com.github.binarywang.wxpay.bean.entpay.EntPayResult;
@@ -19,6 +21,7 @@ import com.github.binarywang.wxpay.service.WxPayService;
 import com.google.common.collect.Maps;
 import com.ruoyi.mp.config.MpAuthConfig;
 import com.ruoyi.mp.factory.ConfigFactory;
+import com.ruoyi.mp.service.ImageService;
 import com.ruoyi.mp.util.AjaxResult;
 import com.ruoyi.reward.facade.api.IAccountFacade;
 import com.ruoyi.reward.facade.api.ISysConfigFacade;
@@ -40,11 +43,17 @@ import org.near.toolkit.model.Money;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.CacheControl;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Mono;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
@@ -54,6 +63,7 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author sunflower
@@ -94,17 +104,17 @@ public class PayController {
                       @RequestParam(value = "callbackUrl") String callbackUrl,
                       ModelMap modelmap,
                       HttpServletRequest request) throws Exception {
-        String ua = request.getHeader("User-Agent").toLowerCase();
-        UserAgent parse = UserAgentUtil.parse(ua);
-        if (!parse.isMobile()) {
-            throw new Exception("系统异常,请使用移动端打开");
-        }
         LOGGER.info("orderId:{},payType:{}", orderId, tradeType);
         SysOrderDTO item = getSysOrderDTO(orderId);
         item.setTradeType(tradeType);
         modelmap.addAttribute("order", item);
         modelmap.addAttribute("callbackUrl", callbackUrl);
         if (StringUtil.equals(WxPayConstants.TradeType.JSAPI, tradeType)) {
+            String ua = request.getHeader("User-Agent").toLowerCase();
+            UserAgent parse = UserAgentUtil.parse(ua);
+            if (!parse.isMobile()) {
+                throw new Exception("系统异常,请使用移动端打开");
+            }
             return "jsApiPay";
         } else if (StringUtil.equals(WxPayConstants.TradeType.NATIVE, tradeType)) {
             AjaxResult ajaxResult = create(item, request);
@@ -128,9 +138,36 @@ public class PayController {
             String amount = item.getMoneyStr();
             String memo = "pay";
             String qrCode = "alipays://platformapi/startapp?appId=09999988&actionType=toAccount&goBack=NO&amount=" + amount + "&userId=" + userId + "&memo=" + memo;
-            modelmap.addAttribute("qrCode", qrCode);
+            String getRequestURL = request.getRequestURL().toString();
+            Assert.hasText(getRequestURL, "getRequestURL must not be empty");
+            modelmap.addAttribute("qrCode", getRequestURL + "/" + QRCODE_ENDPOINT + "?text=" + URL.encode(qrCode));
         }
         return "aliPay";
+    }
+
+    public static final String QRCODE_ENDPOINT = "/qrcode";
+    public static final long THIRTY_MINUTES = 1800000;
+    @Autowired
+    ImageService imageService;
+
+    @GetMapping(value = QRCODE_ENDPOINT, produces = MediaType.IMAGE_PNG_VALUE)
+    public Mono<ResponseEntity<byte[]>> getQrCode(@RequestParam(value = "text") String text) {
+        log.info("text:{}", text);
+        return imageService.generateQRCode(text, 220, 220).map(imageBuff ->
+                ResponseEntity.ok().cacheControl(CacheControl.maxAge(30, TimeUnit.MINUTES)).body(imageBuff)
+        );
+    }
+
+    @Scheduled(fixedRate = THIRTY_MINUTES)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping(value = QRCODE_ENDPOINT)
+    public void deleteAllCachedImages() {
+        imageService.purgeCache();
+    }
+
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<String> handleRuntimeException(RuntimeException ex) {
+        return ResponseEntity.status(500).contentType(MediaType.TEXT_PLAIN).body(ex.getMessage());
     }
 
     @PostMapping("/queryOrder")
