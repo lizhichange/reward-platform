@@ -4,7 +4,6 @@ import cn.hutool.core.util.RandomUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.parser.Feature;
-import com.github.binarywang.wxpay.constant.WxPayConstants;
 import com.github.pagehelper.PageHelper;
 import com.ruoyi.common.config.Global;
 import com.ruoyi.common.core.controller.BaseController;
@@ -15,7 +14,6 @@ import com.ruoyi.common.core.page.TableSupport;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.sequence.ConcurrentSequence;
 import com.ruoyi.common.utils.IpUtils;
-import com.ruoyi.framework.interceptor.impl.WxPnUserAuth;
 import com.ruoyi.framework.interceptor.util.SessionContext;
 import com.ruoyi.reward.facade.api.IShipinFacade;
 import com.ruoyi.reward.facade.api.ITsFacade;
@@ -27,7 +25,6 @@ import com.ruoyi.reward.facade.enums.WebMainStatus;
 import com.ruoyi.system.domain.SysCategory;
 import com.ruoyi.system.domain.SysOrder;
 import com.ruoyi.system.domain.SysWebMain;
-import com.ruoyi.system.domain.ext.ExtSysOrder;
 import com.ruoyi.system.service.ISysCategoryService;
 import com.ruoyi.system.service.ISysConfigService;
 import com.ruoyi.system.service.ISysOrderService;
@@ -130,7 +127,6 @@ public class PronController extends BaseController {
             //这个单位是元
             int i = RandomUtil.randomInt(start, end);
             //实际金额 转换单位分
-
             Money m = new Money(i);
             order.setMoney(Math.toIntExact(m.getCent()));
             order.setMoneyStr(m.getAmount().toString());

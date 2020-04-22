@@ -1,11 +1,9 @@
 package com.ruoyi.mp.controller;
 
 import cn.hutool.core.util.RandomUtil;
-import cn.hutool.core.util.URLUtil;
 import cn.hutool.http.useragent.UserAgent;
 import cn.hutool.http.useragent.UserAgentUtil;
 import com.alibaba.dubbo.common.URL;
-import com.alibaba.dubbo.config.annotation.Reference;
 import com.github.binarywang.wxpay.bean.entpay.EntPayRequest;
 import com.github.binarywang.wxpay.bean.entpay.EntPayResult;
 import com.github.binarywang.wxpay.bean.notify.WxPayNotifyResponse;
@@ -17,32 +15,18 @@ import com.github.binarywang.wxpay.bean.request.WxPayUnifiedOrderRequest;
 import com.github.binarywang.wxpay.constant.WxPayConstants;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.EntPayService;
-import com.github.binarywang.wxpay.service.WxPayService;
 import com.google.common.collect.Maps;
-import com.ruoyi.mp.client.IAccountFacadeClient;
-import com.ruoyi.mp.client.ISysConfigClient;
-import com.ruoyi.mp.client.ISysOrderClient;
-import com.ruoyi.mp.config.MpAuthConfig;
-import com.ruoyi.mp.factory.ConfigFactory;
 import com.ruoyi.mp.service.ImageService;
 import com.ruoyi.mp.util.AjaxResult;
-import com.ruoyi.reward.facade.api.IAccountFacade;
-import com.ruoyi.reward.facade.api.ISysConfigFacade;
-import com.ruoyi.reward.facade.api.ISysOrderFacade;
-import com.ruoyi.reward.facade.api.ISysWebMainFacade;
 import com.ruoyi.reward.facade.dto.SysOrderDTO;
-import com.ruoyi.reward.facade.dto.SysWebMainDTO;
 import com.ruoyi.reward.facade.enums.OrderStatusType;
-import com.ruoyi.reward.facade.enums.WebMainStatus;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.near.toolkit.common.DateUtils;
 import org.near.toolkit.common.DoMainUtil;
 import org.near.toolkit.common.StringUtil;
-import org.near.toolkit.model.Money;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,8 +45,6 @@ import reactor.core.publisher.Mono;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.text.ParseException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -78,6 +60,8 @@ import java.util.concurrent.TimeUnit;
 public class PayController extends BaseController {
     private final static Logger LOGGER = LoggerFactory.getLogger(PayController.class);
 
+    public static final String QRCODE_ENDPOINT = "/qrcode";
+    public static final long THIRTY_MINUTES = 1800000;
 
     @GetMapping
     public String pay(@RequestParam(value = "orderId") String orderId,
@@ -103,7 +87,7 @@ public class PayController extends BaseController {
             if (ajaxResult != null) {
                 Integer code = (Integer) ajaxResult.get("code");
                 if (code == 0) {
-                    HashMap data = (HashMap) ajaxResult.get("data");
+                    HashMap<String, Object> data = (HashMap<String, Object>) ajaxResult.get("data");
                     WxPayNativeOrderResult result = (WxPayNativeOrderResult) data.get("data");
                     modelmap.addAttribute("result", result);
                     int timeExpire = (int) data.get("timeExpire");
@@ -112,11 +96,13 @@ public class PayController extends BaseController {
             }
             return "nativePay";
         } else {
+            //支付宝支付
             String userId = sysConfigClient.selectConfigByKey("sys.aliPay.userId");
             if (StringUtil.isBlank(userId)) {
                 throw new Exception("系统异常,userId is not null");
             }
             String amount = item.getMoneyStr();
+
             String memo = "pay";
             String qrCode = "alipays://platformapi/startapp?appId=09999988&actionType=toAccount&goBack=NO&amount=" + amount + "&userId=" + userId + "&memo=" + memo;
             String getRequestURL = request.getRequestURL().toString();
@@ -126,8 +112,6 @@ public class PayController extends BaseController {
         return "aliPay";
     }
 
-    public static final String QRCODE_ENDPOINT = "/qrcode";
-    public static final long THIRTY_MINUTES = 1800000;
     @Autowired
     ImageService imageService;
 
@@ -184,6 +168,23 @@ public class PayController extends BaseController {
         return create(dto, servletRequest);
     }
 
+    //对价格给一个后两位的随机减免
+    int getMoney(Integer money) {
+        int randomInt = 0;
+        if (money == null || money == 0) {
+            return randomInt;
+        }
+        //1-9
+        if (money <= 10) {
+            return RandomUtil.randomInt(1, money + 1);
+        }
+        //11-100
+        if (money <= 100) {
+            return RandomUtil.randomInt(money, 100);
+        }
+        return randomInt;
+    }
+
     private AjaxResult create(SysOrderDTO dto, HttpServletRequest servletRequest) throws Exception {
         SysOrderDTO item = getSysOrderDTO(dto.getOrderId());
         if (StringUtil.equals(OrderStatusType.Y_PAY.getCode(), item.getStatus().toString())) {
@@ -194,19 +195,13 @@ public class PayController extends BaseController {
         if (mpAuthConfig.isMockMoney()) {
             request.setTotalFee(1);
         } else {
-            request.setTotalFee(item.getMoney());
+            int money = item.getMoney() - RandomUtil.randomInt(1, 100);
+            request.setTotalFee(money);
         }
         request.setBody("支付测试");
         request.setMchId(configFactory.getSysWechatConfig().getMchId());
-        try {
-            InetAddress netAddress = InetAddress.getLocalHost();
-            if (netAddress != null) {
-                request.setSpbillCreateIp(netAddress.getHostAddress());
-            }
-        } catch (UnknownHostException e) {
-            LOGGER.error(e.getMessage(), e);
-        }
-
+        InetAddress netAddress = InetAddress.getLocalHost();
+        request.setSpbillCreateIp(netAddress.getHostAddress());
         if (StringUtil.equals(dto.getTradeType(), WxPayConstants.TradeType.JSAPI)) {
             return tradeTypeJsApi(servletRequest, item, request);
         }
@@ -296,14 +291,9 @@ public class PayController extends BaseController {
             if (CollectionUtils.isEmpty(dtoList)) {
                 return WxPayNotifyResponse.fail("FAIL");
             }
-            try {
-                newOrder.setPayTime(DateUtils.parseLongFormat(notifyResult.getTimeEnd()));
-            } catch (ParseException ignored) {
-            }
+            newOrder.setPayTime(DateUtils.parseLongFormat(notifyResult.getTimeEnd()));
             String transactionId = notifyResult.getTransactionId();
             log.info("回调成功,transactionId:{},outTradeNo:{}", transactionId, notifyResult.getOutTradeNo());
-            Date now = new Date();
-            newOrder.setPayTime(now);
             newOrder.setPayNo(transactionId);
             newOrder.setStatus(Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
             LOGGER.info("newOrder:{}", newOrder);
@@ -391,4 +381,5 @@ public class PayController extends BaseController {
     public byte[] createScanPayQrcodeMode2(String codeUrl, File logoFile, Integer sideLength) {
         return this.wxPayService.createScanPayQrcodeMode2(codeUrl, logoFile, sideLength);
     }
+
 }

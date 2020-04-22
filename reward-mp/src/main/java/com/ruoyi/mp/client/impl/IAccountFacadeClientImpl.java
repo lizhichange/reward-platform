@@ -10,8 +10,7 @@ import org.springframework.stereotype.Component;
  * @author sunflower
  */
 @Component
-public class
-IAccountFacadeClientImpl implements IAccountFacadeClient {
+public class IAccountFacadeClientImpl implements IAccountFacadeClient {
 
     @Reference(version = "1.0.0", check = false)
     IAccountFacade accountFacade;

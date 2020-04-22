@@ -1,5 +1,5 @@
 package com.ruoyi.mp.client;
 
-public interface ISysConfigClient {
+public interface ISysConfigFacadeClient {
     String selectConfigByKey(String key);
 }

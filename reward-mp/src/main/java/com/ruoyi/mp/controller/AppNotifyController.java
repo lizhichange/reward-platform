@@ -1,32 +1,23 @@
 package com.ruoyi.mp.controller;
 
 
-import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSONObject;
-import com.ruoyi.mp.config.MpAuthConfig;
 import com.ruoyi.mp.param.NotifyLoginParam;
 import com.ruoyi.mp.util.AjaxResult;
-import com.ruoyi.reward.facade.api.UserDetailFacade;
 import com.ruoyi.reward.facade.dto.SysOrderDTO;
-import com.ruoyi.reward.facade.dto.UserDto;
-import com.ruoyi.reward.facade.request.UserWechatLoginRequest;
-import lombok.Data;
+import com.ruoyi.reward.facade.enums.OrderStatusType;
 import lombok.extern.slf4j.Slf4j;
-import me.chanjar.weixin.common.api.WxConsts;
-import me.chanjar.weixin.common.error.WxErrorException;
-import me.chanjar.weixin.mp.api.WxMpService;
-import me.chanjar.weixin.mp.bean.result.WxMpOAuth2AccessToken;
-import me.chanjar.weixin.mp.bean.result.WxMpUser;
-import me.chanjar.weixin.mp.config.WxMpConfigStorage;
-import org.near.toolkit.model.ToString;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.near.toolkit.common.DateUtils;
+import org.near.toolkit.model.Money;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import springfox.documentation.spring.web.json.Json;
+import org.springframework.util.Assert;
+import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 
 /**
@@ -35,15 +26,29 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping("/notify")
 @Slf4j
-public class AppNotifyController {
+public class AppNotifyController extends BaseController {
 
 
     @ResponseBody
     @RequestMapping(value = "/notify", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-    public AjaxResult notify(@RequestBody JSONObject param) {
+    public AjaxResult notify(@RequestBody JSONObject param) throws Exception {
         log.info("param:{}", param);
+        Assert.notNull(param, "param must not be empty");
         NotifyLoginParam parse = JSONObject.parseObject(param.toJSONString(), NotifyLoginParam.class);
-        log.info("parse:{}", parse);
+        Assert.hasText(parse.getMoney(), "parse.getMoney must not be empty");
+        Money money = new Money(parse.getMoney());
+        SysOrderDTO orderDTO = new SysOrderDTO();
+        orderDTO.setMoney((int) money.getCent());
+        List<SysOrderDTO> dtoList = sysOrderClient.selectSysOrderList(orderDTO);
+        if (!CollectionUtils.isEmpty(dtoList)) {
+            //查询的
+            SysOrderDTO newOrder = new SysOrderDTO();
+            newOrder.setOrderId(dtoList.get(0).getOrderId());
+            newOrder.setPayTime(DateUtils.parseNewFormat(parse.getTime()));
+            newOrder.setStatus(Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
+            log.info("newOrder:{}", newOrder);
+            accountFacadeClient.take(newOrder);
+        }
         return AjaxResult.success("success");
     }
 

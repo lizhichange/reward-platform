@@ -1,12 +1,13 @@
 package com.ruoyi.mp.client.impl;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.ruoyi.mp.client.ISysConfigClient;
+
+import com.ruoyi.mp.client.ISysConfigFacadeClient;
 import com.ruoyi.reward.facade.api.ISysConfigFacade;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ISysConfigClientImpl implements ISysConfigClient {
+public class ISysConfigFacadeClientImpl implements ISysConfigFacadeClient {
 
     @Reference(version = "1.0.0", check = false)
     ISysConfigFacade sysConfigFacade;
