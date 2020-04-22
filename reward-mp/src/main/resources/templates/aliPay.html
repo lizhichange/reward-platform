@@ -68,7 +68,6 @@
                     "orderId": $("#orderId").val()
                 },
                 success: function (r, textStatus) {
-                    console.log(r);
                     if (r.code === 0) {
                         var rep = r.data;
                         if (rep.status === 0 || rep.status === 2) {

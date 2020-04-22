@@ -269,12 +269,10 @@
                 "orderId": $("#orderId").val()
             },
             success: function (r) {
-                console.log(r);
                 if (r.code === 0) {
                     var rep = r.data;
                     //未支付
                     if (rep.status === 0 || rep.status === 2) {
-
                         //已支付
                     } else if (rep.status === 1) {
                         clearInterval(timeTask);
