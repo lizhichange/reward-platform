@@ -128,13 +128,16 @@ public class PronController extends BaseController {
             int i = RandomUtil.randomInt(start, end);
             //实际金额 转换单位分
             Money m = new Money(i);
-            order.setMoney(Math.toIntExact(m.getCent()));
-            order.setMoneyStr(m.getAmount().toString());
+            int amount = Math.toIntExact(m.getCent()) - RandomUtil.randomInt(1, 100);
+            logger.info("实际支付金额:{}", amount);
+            order.setMoney(amount);
+            order.setMoneyStr(String.valueOf(amount));
+
             //原价 转换单位分
             order.setPrice(Math.toIntExact(m.getCent()));
             //备注
             order.setPayTag(m.toString());
-
+            //支付类型
             order.setType(Integer.valueOf(WE_CHAT_PAY.getCode()));
             order.setTypeStr(WE_CHAT_PAY.getDesc());
             order.setStatus(Integer.valueOf(OrderStatusType.N_PAY.getCode()));

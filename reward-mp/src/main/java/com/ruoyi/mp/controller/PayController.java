@@ -102,12 +102,11 @@ public class PayController extends BaseController {
                 throw new Exception("系统异常,userId is not null");
             }
             String amount = item.getMoneyStr();
-
             String memo = "pay";
             String qrCode = "alipays://platformapi/startapp?appId=09999988&actionType=toAccount&goBack=NO&amount=" + amount + "&userId=" + userId + "&memo=" + memo;
-            String getRequestURL = request.getRequestURL().toString();
-            Assert.hasText(getRequestURL, "getRequestURL must not be empty");
-            modelmap.addAttribute("qrCode", getRequestURL + "/" + QRCODE_ENDPOINT + "?text=" + URL.encode(qrCode));
+            String getRequestUrl = request.getRequestURL().toString();
+            Assert.hasText(getRequestUrl, "getRequestUrl must not be empty");
+            modelmap.addAttribute("qrCode", getRequestUrl + "/" + QRCODE_ENDPOINT + "?text=" + URL.encode(qrCode));
         }
         return "aliPay";
     }
@@ -195,8 +194,7 @@ public class PayController extends BaseController {
         if (mpAuthConfig.isMockMoney()) {
             request.setTotalFee(1);
         } else {
-            int money = item.getMoney() - RandomUtil.randomInt(1, 100);
-            request.setTotalFee(money);
+            request.setTotalFee(item.getMoney());
         }
         request.setBody("支付测试");
         request.setMchId(configFactory.getSysWechatConfig().getMchId());
