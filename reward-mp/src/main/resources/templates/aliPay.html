@@ -55,7 +55,7 @@
 
 <!-- 异步订单 -->
 <script>
-        var lunxun = setInterval("test()", 2000);
+        var lunxun = setInterval("test()", 1000);
         function test() {
             var id = $("#lunxun").html();
             $.ajax({
@@ -87,12 +87,6 @@
         }
 
 
-
-
-
-
-
-
 </script>
 
 <!-- 过期时间倒计时 -->
@@ -114,9 +108,6 @@
             }
         }
         expire = setInterval("countDown()", 1000);
-
-
-
 </script>
 
 </body>
