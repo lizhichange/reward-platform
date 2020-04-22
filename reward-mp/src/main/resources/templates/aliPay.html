@@ -91,14 +91,14 @@
 
 <!-- 过期时间倒计时 -->
 <script type="text/javascript">
-        var maxtime = 5 * 60;
+        var maxtime = 1 * 60;
         function countDown() {
             if (maxtime >= 0) {
                 minutes = Math.floor(maxtime / 60);
                 seconds = Math.floor(maxtime % 60);
                 msg = "0" + minutes + ":" + seconds;
                 document.all["expire"].innerHTML = msg;
-                if (maxtime == 5 * 60)
+                if (maxtime == 1 * 60)
                     console.log(maxtime);
                 --maxtime;
             } else {
