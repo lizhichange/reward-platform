@@ -6,7 +6,7 @@
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport"
-          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,viewport-fit=cover">
+        content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="format-detection" content="telephone=no">
@@ -16,45 +16,47 @@
 </head>
 
 <body>
-<!-- 顶部 -->
-<div id="topcon">
-    <div class="top">
-        <div class="logo">
-            <img src="/img/alipay-icon.png">
+    <!-- 顶部 -->
+    <div id="topcon">
+        <div class="top">
+            <div class="logo">
+                <img src="/img/alipay-icon.png">
+            </div>
         </div>
     </div>
-</div>
 
-<!-- 二维码区域 -->
-<div id="ewmcon">
-    <div class="ewmdiv">
-        <div class="tips">请打开支付宝扫码支付</div>
-        <div class="tofee">￥[[${order.moneyStr}]]元</div>
-        <div class="qrcode">
-            <div class="ewmstatus"></div>
-            <img id="codeUrl" width="220" height="220" th:src="${qrCode}"
-                 alt="Please" title="Please"/>
+    <!-- 二维码区域 -->
+    <div id="ewmcon">
+        <div class="ewmdiv">
+            <div class="tips">请打开支付宝扫码支付</div>
+            <div class="tofee">￥[[${order.moneyStr}]]元</div>
+            <div class="qrcode">
+                <div class="ewmstatus"></div>
+                <img id="codeUrl" width="220" height="220" th:src="${qrCode}" alt="Please" title="Please" />
+            </div>
+            <div id="goodsname" style="text-align: center;font-size: 18px;margin-top: 30px; color: #666;">商品名称：服务</div>
+            <div id="dingdanhao" style="text-align: center;font-size: 18px;margin-top: 10px; color: #666;">
+                订单号：[[${order.orderId}]]
+            </div>
+            <div id="expire">05:0</div>
         </div>
-        <div id="goodsname" style="text-align: center;font-size: 18px;margin-top: 30px; color: #666;">商品名称：服务</div>
-        <div id="dingdanhao" style="text-align: center;font-size: 18px;margin-top: 10px; color: #666;">
-            订单号：[[${order.orderId}]]
-        </div>
-        <div id="expire">05:0</div>
     </div>
-</div>
 
-<!-- 异步查单 -->
-<form>
-    <input type="hidden" th:value="${order.orderId}" id="orderId"/>
-    <input type="hidden" th:value="${callbackUrl}" id="callbackUrl"/>
-    <div id="abc"></div>
-    <div id="buy"></div>
-    <div id="lunxun" style="display: none;"></div>
-</form>
+    <!-- 异步查单 -->
+    <form>
+        <input type="hidden" th:value="${order.orderId}" id="orderId" />
+        <input type="hidden" th:value="${callbackUrl}" id="callbackUrl" />
+        <div id="abc"></div>
+        <div id="buy"></div>
+        <div id="lunxun" style="display: none;"></div>
+    </form>
 
 
-<!-- 异步订单 -->
-<script>
+    <!-- 异步订单 -->
+
+    <!-- 过期时间倒计时 -->
+    <script type="text/javascript">
+
         var lunxun = setInterval("test()", 1000);
         function test() {
             var id = $("#lunxun").html();
@@ -79,7 +81,7 @@
                             console.log("支付完成，停止监听...")
                             //停止轮询
                             clearInterval(lunxun);
-                            window.location.href=$('#callbackUrl').val();
+                            window.location.href = $('#callbackUrl').val();
                         }
                     }
                 }
@@ -87,10 +89,6 @@
         }
 
 
-</script>
-
-<!-- 过期时间倒计时 -->
-<script type="text/javascript">
         var maxtime = 1 * 60;
         function countDown() {
             if (maxtime >= 0) {
@@ -103,12 +101,13 @@
                 --maxtime;
             } else {
                 clearInterval(expire);
+                clearInterval(lunxun);
                 $("#expire").text("请重新发起支付")
                 $("#ewmcon .ewmdiv .qrcode .ewmstatus").html("<div class=\"isexpire\">已过期</div>");
             }
         }
         expire = setInterval("countDown()", 1000);
-</script>
+    </script>
 
 </body>
 
