@@ -16,10 +16,12 @@ public class Errors {
             this.errmsg = errmsg;
         }
 
+        @Override
         public int getErrcode() {
             return this.errcode;
         }
 
+        @Override
         public String getErrmsg() {
             return this.errmsg;
         }

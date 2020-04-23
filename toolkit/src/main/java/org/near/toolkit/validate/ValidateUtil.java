@@ -16,6 +16,7 @@ import java.util.regex.Pattern;
  * <li>判断输入的字符串是否是合法的固话</li>
  * <li>判断是否是合法的金额</li>
  * <li>利用money类转换判断输入的金额书否合法</li>
+ * @author sunflower
  */
 public class ValidateUtil {
 
@@ -33,6 +34,7 @@ public class ValidateUtil {
      * 支付宝登录号的正则表达式
      */
     public final static String REGEX_LOGON_ID = CommonValidateUtil.REGEX_LOGON_ID;
+    public static final Pattern p = Pattern.compile("[\u4e00-\u9fa5]");
 
     /**
      * 手机6位数字校验码
@@ -415,7 +417,6 @@ public class ValidateUtil {
      */
     private static boolean isChineseChar(String str) {
         boolean temp = false;
-        Pattern p = Pattern.compile("[\u4e00-\u9fa5]");
         Matcher m = p.matcher(str);
         if (m.find()) {
             temp = true;

@@ -1,4 +1,4 @@
-package com.ruoyi.common.config;
+package com.ruoyi.mp.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

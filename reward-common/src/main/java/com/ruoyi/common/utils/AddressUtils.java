@@ -48,7 +48,6 @@ public class AddressUtils {
             String call = null;
             try {
                 call = ret.call(() -> {
-                    threadPoolExecutor.submit(() -> null);
                     String rspStr = HttpUtils.sendPost(IP_URL, "ip=" + ip);
                     log.info("rspStr:{}", rspStr);
                     if (StringUtils.isEmpty(rspStr)) {
@@ -76,10 +75,5 @@ public class AddressUtils {
             }
         }
         return address;
-    }
-
-    public static void main(String[] args) {
-        String url = "https://cleanuri.com/api/v1/shorten";
-
     }
 }

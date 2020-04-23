@@ -95,7 +95,7 @@ public class PayController extends BaseController {
                 }
             }
             return "nativePay";
-        } else {
+        } else if (StringUtil.equals("aliPay", tradeType)) {
             //支付宝支付
             String userId = sysConfigClient.selectConfigByKey("sys.aliPay.userId");
             if (StringUtil.isBlank(userId)) {
@@ -107,6 +107,17 @@ public class PayController extends BaseController {
             String getRequestUrl = request.getRequestURL().toString();
             Assert.hasText(getRequestUrl, "getRequestUrl must not be empty");
             modelmap.addAttribute("qrCode", getRequestUrl + "/" + QRCODE_ENDPOINT + "?text=" + URL.encode(qrCode));
+            return "aliPay";
+        } else {
+
+            String amount = item.getMoneyStr();
+            ImageService.Result result = imageService.queryWeChatQrCode(amount);
+            List<ImageService.Result.DataBean.RowsBean> rows = result.getData().getRows();
+            ImageService.Result.DataBean.RowsBean rowsBean = rows.get(0);
+            String qr_url = rowsBean.getQr_url();
+            String getRequestUrl = request.getRequestURL().toString();
+            modelmap.addAttribute("qrCode", getRequestUrl + "/" + QRCODE_ENDPOINT + "?text=" + URL.encode(qr_url));
+
         }
         return "aliPay";
     }
