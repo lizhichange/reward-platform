@@ -80,11 +80,12 @@ public class ImageService {
      * @param amount
      * @return
      */
-    public Result queryWeChatQrCode(String amount) {
+    public Result queryWeChatQrCode(String amount, String qrType) {
         Map<String, String> map = Maps.newHashMap();
         map.put("page", "1");
         map.put("qr_price", amount);
-        ResponseEntity<Result> forEntity = restTemplate.getForEntity("http://yuluncc.top/end/addons/pay/api/qrcode?page={page}&qr_price={qr_price}", Result.class, map);
+        map.put("qr_type", qrType);
+        ResponseEntity<Result> forEntity = restTemplate.getForEntity("http://yuluncc.top/end/addons/pay/api/qrcode?page={page}&qr_price={qr_price}&qr_type={qr_type}", Result.class, map);
         log.info("forEntity:{}", forEntity);
         if (forEntity.getStatusCode() == HttpStatus.OK) {
             return forEntity.getBody();

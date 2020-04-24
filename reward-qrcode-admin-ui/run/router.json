@@ -1,0 +1,168 @@
+[
+  {
+    "name": null,
+    "methods": [
+      "HEAD",
+      "GET"
+    ],
+    "paramNames": [],
+    "path": "/addons/pay/api/setting",
+    "regexp": "/^\\/addons\\/pay\\/api\\/setting(?:\\/(?=$))?$/",
+    "stack": [
+      "wrappedController"
+    ]
+  },
+  {
+    "name": null,
+    "methods": [
+      "HEAD",
+      "GET"
+    ],
+    "paramNames": [],
+    "path": "/addons/pay/api/notify",
+    "regexp": "/^\\/addons\\/pay\\/api\\/notify(?:\\/(?=$))?$/",
+    "stack": [
+      "wrappedController"
+    ]
+  },
+  {
+    "name": null,
+    "methods": [
+      "HEAD",
+      "GET"
+    ],
+    "paramNames": [],
+    "path": "/addons/pay/api/qrcode",
+    "regexp": "/^\\/addons\\/pay\\/api\\/qrcode(?:\\/(?=$))?$/",
+    "stack": [
+      "wrappedController"
+    ]
+  },
+  {
+    "name": "logins",
+    "methods": [
+      "HEAD",
+      "GET"
+    ],
+    "paramNames": [],
+    "path": "/api/login",
+    "regexp": "/^\\/api\\/login(?:\\/(?=$))?$/",
+    "stack": [
+      "wrappedController"
+    ]
+  },
+  {
+    "name": "logins",
+    "methods": [
+      "POST"
+    ],
+    "paramNames": [],
+    "path": "/api/login",
+    "regexp": "/^\\/api\\/login(?:\\/(?=$))?$/",
+    "stack": [
+      "wrappedController"
+    ]
+  },
+  {
+    "name": null,
+    "methods": [
+      "POST"
+    ],
+    "paramNames": [],
+    "path": "/api/updata",
+    "regexp": "/^\\/api\\/updata(?:\\/(?=$))?$/",
+    "stack": [
+      "islogin",
+      "wrappedController"
+    ]
+  },
+  {
+    "name": "qrcodes",
+    "methods": [
+      "HEAD",
+      "GET"
+    ],
+    "paramNames": [],
+    "path": "/api/qrcode",
+    "regexp": "/^\\/api\\/qrcode(?:\\/(?=$))?$/",
+    "stack": [
+      "islogin",
+      "wrappedController"
+    ]
+  },
+  {
+    "name": "destroy_qrcode",
+    "methods": [
+      "DELETE"
+    ],
+    "paramNames": [
+      {
+        "name": "id",
+        "prefix": "/",
+        "delimiter": "/",
+        "optional": false,
+        "repeat": false,
+        "partial": false,
+        "asterisk": false,
+        "pattern": "[^\\/]+?"
+      }
+    ],
+    "path": "/api/qrcode/:id",
+    "regexp": "/^\\/api\\/qrcode\\/((?:[^\\/]+?))(?:\\/(?=$))?$/",
+    "stack": [
+      "islogin",
+      "wrappedController"
+    ]
+  },
+  {
+    "name": "orders",
+    "methods": [
+      "HEAD",
+      "GET"
+    ],
+    "paramNames": [],
+    "path": "/api/order",
+    "regexp": "/^\\/api\\/order(?:\\/(?=$))?$/",
+    "stack": [
+      "islogin",
+      "wrappedController"
+    ]
+  },
+  {
+    "name": "order",
+    "methods": [
+      "PATCH",
+      "PUT"
+    ],
+    "paramNames": [
+      {
+        "name": "id",
+        "prefix": "/",
+        "delimiter": "/",
+        "optional": false,
+        "repeat": false,
+        "partial": false,
+        "asterisk": false,
+        "pattern": "[^\\/]+?"
+      }
+    ],
+    "path": "/api/order/:id",
+    "regexp": "/^\\/api\\/order\\/((?:[^\\/]+?))(?:\\/(?=$))?$/",
+    "stack": [
+      "islogin",
+      "wrappedController"
+    ]
+  },
+  {
+    "name": null,
+    "methods": [
+      "POST"
+    ],
+    "paramNames": [],
+    "path": "/api/order",
+    "regexp": "/^\\/api\\/order(?:\\/(?=$))?$/",
+    "stack": [
+      "wrappedController"
+    ]
+  }
+]

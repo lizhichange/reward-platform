@@ -22,6 +22,7 @@
         <module>reward-facade</module>
         <module>reward-mp</module>
         <module>toolkit</module>
+        <module>reward-qrcode-admin-ui</module>
     </modules>
     <packaging>pom</packaging>
 

@@ -109,14 +109,12 @@ public class PayController extends BaseController {
             modelmap.addAttribute("qrCode", getRequestUrl + "/" + QRCODE_ENDPOINT + "?text=" + URL.encode(qrCode));
             return "aliPay";
         } else {
-
             String amount = item.getMoneyStr();
-            ImageService.Result result = imageService.queryWeChatQrCode(amount);
+            ImageService.Result result = imageService.queryWeChatQrCode(amount,StringUtil.toLowerCase(tradeType));
             List<ImageService.Result.DataBean.RowsBean> rows = result.getData().getRows();
             ImageService.Result.DataBean.RowsBean rowsBean = rows.get(0);
-            String qr_url = rowsBean.getQr_url();
             String getRequestUrl = request.getRequestURL().toString();
-            modelmap.addAttribute("qrCode", getRequestUrl + "/" + QRCODE_ENDPOINT + "?text=" + URL.encode(qr_url));
+            modelmap.addAttribute("qrCode", getRequestUrl + "/" + QRCODE_ENDPOINT + "?text=" + URL.encode(rowsBean.getQr_url()));
 
         }
         return "aliPay";
