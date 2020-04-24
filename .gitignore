@@ -34,7 +34,7 @@ nbdist/
 node_modules/
 run/
 logs/
-
+package-lock.json
 
 ######################################################################
 # Others
