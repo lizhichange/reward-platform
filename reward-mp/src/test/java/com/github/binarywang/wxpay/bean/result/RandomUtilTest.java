@@ -1,7 +1,17 @@
 package com.github.binarywang.wxpay.bean.result;
 
 import cn.hutool.core.util.RandomUtil;
+import com.google.common.collect.Maps;
+import com.google.zxing.*;
+import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
+import com.google.zxing.common.HybridBinarizer;
 import org.junit.Test;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.Map;
 
 public class RandomUtilTest {
     @Test
@@ -38,6 +48,9 @@ public class RandomUtilTest {
             System.out.println(money);
         }
 
-
     }
+
+
+
+
 }
