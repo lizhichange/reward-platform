@@ -4,7 +4,7 @@
 <head>
 
     <!-- player skin -->
-    <link rel="stylesheet" th:href="@{/proncss/skin/skin.css}">
+    <link rel="stylesheet" th:href="@{/video/skin/skin.css}">
 
     <!-- site specific styling -->
     <style>
@@ -23,9 +23,9 @@
     <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
 
     <!-- include flowplayer -->
-    <script th:src="@{/proncss/flowplayer/flowplayer.min.js}"></script>
+    <script th:src="@{/video/flowplayer/flowplayer.min.js}"></script>
 
-    <script th:src="@{/proncss/flowplayer/hls.min.js}"></script>
+    <script th:src="@{/video/flowplayer/hls.min.js}"></script>
 
 </head>
 
@@ -42,7 +42,7 @@
     $(function () {
         let video = $("#area1").flowplayer({
             src: "https://edge.flowplayer.org/bauhaus.mp4",
-            swf: "/pron/flowplayer/flowplayer.swf",
+            swf: "/video/flowplayer/flowplayer.swf",
             title: "my video",
             autoplay: false,
             preload: "none",
