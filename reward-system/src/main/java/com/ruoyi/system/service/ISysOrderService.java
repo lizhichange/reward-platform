@@ -40,7 +40,7 @@ public interface ISysOrderService {
      * @param sysOrder 订单列表
      * @return 结果
      */
-    public int insertSysOrder(SysOrder sysOrder);
+    int insertSysOrder(SysOrder sysOrder);
 
     /**
      * 修改订单列表

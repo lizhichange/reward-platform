@@ -87,8 +87,9 @@ dubbo:
     port: 12345
     name: dubbo
     status: server
-    serialization: fastjson
+    serialization: hessian2
     threads: 2000
+    lazy: true
   application:
     name: dubbo-sms-zk-service
     id: dubbo-sms-zk-service

@@ -28,6 +28,8 @@ public interface ISysOrderFacade {
      */
     public List<SysOrderDTO> selectSysOrderList(SysOrderDTO sysOrder);
 
+    List<SysOrderDTO> selectSysOrder(SysOrderDTO extSysOrder);
+
 
     public List<SysOrderDTO> selectSysOrderListExt(SysOrderDTO sysOrder);
 
@@ -46,6 +48,7 @@ public interface ISysOrderFacade {
      * @return 结果
      */
     public int updateSysOrder(SysOrderDTO sysOrder);
+
     int updateSysOrderByOrderId(SysOrderDTO sysOrder);
 
     /**

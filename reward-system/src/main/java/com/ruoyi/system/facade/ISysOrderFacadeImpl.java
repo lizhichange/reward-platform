@@ -44,7 +44,18 @@ public class ISysOrderFacadeImpl implements ISysOrderFacade {
         SysOrder item = new SysOrder();
         BeanUtils.copyProperties(sysOrder, item);
         List<SysOrder> list = sysOrderService.selectSysOrderList(item);
+        return convert(list);
+    }
 
+    @Override
+    public List<SysOrderDTO> selectSysOrder(SysOrderDTO extSysOrder) {
+        SysOrder item = new SysOrder();
+        BeanUtils.copyProperties(extSysOrder, item);
+        List<SysOrder> list = sysOrderService.selectSysOrder(item);
+        return convert(list);
+    }
+
+    private List<SysOrderDTO> convert(List<SysOrder> list) {
         if (CollectionUtils.isEmpty(list)) {
             return Lists.newArrayList();
         }
@@ -91,7 +102,9 @@ public class ISysOrderFacadeImpl implements ISysOrderFacade {
 
     @Override
     public int insertSysOrder(SysOrderDTO sysOrder) {
-        return 0;
+        SysOrder item = new SysOrder();
+        BeanUtils.copyProperties(sysOrder, item);
+        return sysOrderService.insertSysOrder(item);
     }
 
     @Override

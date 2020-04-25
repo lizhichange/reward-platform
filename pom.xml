@@ -23,6 +23,7 @@
         <module>reward-mp</module>
         <module>toolkit</module>
         <module>reward-qrcode-admin-ui</module>
+        <module>reward-video-web</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -243,7 +244,11 @@
                 <artifactId>reward-facade</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
             </dependency>
-
+            <dependency>
+                <groupId>com.reward</groupId>
+                <artifactId>reward-video-web</artifactId>
+                <version>${reward.version</version>
+            </dependency>
 
             <dependency>
                 <groupId>com.reward</groupId>

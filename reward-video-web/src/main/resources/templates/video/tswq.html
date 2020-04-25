@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta id="viewport" name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+    <title>投诉</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/weui.min.css}">
+    <link rel="stylesheet" th:href="@{/css/0361fffae382d0e25a2429290f7be5cf.css}">
+    <script th:src="@{/js/jquery.min.js}"></script>
+
+    <style type="text/css">
+        body {
+            background-color: var(--weui-BG-0);
+            color: var(--weui-FG-0)
+        }
+
+        .wx-sh {
+            display: none;
+        }
+
+    </style>
+</head>
+
+<body ontouchstart="">
+<div class="body">
+    <div class="weui-cells__title">请选择投诉该网页的原因:</div>
+
+    <div class="weui-cells">
+        <a class="weui-cell weui-cell_access js_item" data-id="button" href="javascript:">
+            <div class="weui-cell__bd">网页包含欺诈信息（如：假红包）</div>
+            <div class="weui-cell__ft"></div>
+        </a>
+
+
+        <a class="weui-cell weui-cell_access js_item" data-id="dialog" href="javascript:">
+            <div class="weui-cell__bd">网页包含违法信息</div>
+            <div class="weui-cell__ft"></div>
+        </a>
+
+
+        <a class="weui-cell weui-cell_access js_item" data-id="msg" href="javascript:">
+            <div class="weui-cell__bd">网页可能包含谣言信息</div>
+            <div class="weui-cell__ft"></div>
+        </a>
+
+
+        <a class="weui-cell weui-cell_access js_item" data-id="picker" href="javascript:">
+            <div class="weui-cell__bd">网页包含诱导分享/关注性质的内容</div>
+            <div class="weui-cell__ft"></div>
+        </a>
+
+
+        <a class="weui-cell weui-cell_access js_item" data-id="toast" href="javascript:">
+            <div class="weui-cell__bd">网页包含（虚假/抽奖性质/欺诈）拼
+                <br/>
+                团信息
+            </div>
+            <div class="weui-cell__ft"></div>
+        </a>
+
+
+        <a class="weui-cell weui-cell_access js_item" data-id="top" href="javascript:">
+            <div class="weui-cell__bd">网页包含不适当的内容对我造成骚扰</div>
+            <div class="weui-cell__ft"></div>
+        </a>
+
+
+        <a class="weui-cell weui-cell_access js_item" data-id="tips" href="javascript:">
+            <div class="weui-cell__bd">网页包含有偿投票信息</div>
+            <div class="weui-cell__ft"></div>
+        </a>
+
+
+        <a class="weui-cell weui-cell_access js_item" data-id="navbar" href="javascript:">
+            <div class="weui-cell__bd">网页包含隐私泄露风险</div>
+            <div class="weui-cell__ft"></div>
+        </a>
+
+
+    </div>
+
+
+    <p class="link">
+        <a href="https://kf.qq.com/touch/scene_product.html?scene_id=kf186">投诉须知</a>
+    </p>
+</div>
+
+<script>
+    !function (e) {
+        function i(s) {
+            if (l[s]) return l[s].exports;
+            var c = l[s] = {exports: {}, id: s, loaded: !1};
+            return e[s].call(c.exports, c, c.exports, i), c.loaded = !0, c.exports
+        }
+
+        var l = {};
+        return i.m = e, i.c = l, i.p = "//res.wx.qq.com/a/wx_fed/wx110/res/", i(0)
+    }([function (e, i) {
+        e.exports = ""
+    }]);/* vhtml-webpack-plugin version: 0.2.2 */
+
+
+</script>
+
+<script type="text/javascript" class="home js_show">
+    $(function () {
+        $('.js_item').on('click', function () {
+            let obj = $(this);
+            let id = $(this).data('id');
+            let weui = $(".weui-cells");
+            if (id === 'button' || id === 'msg' || id === 'toast' || id === 'tips') {
+                obj.prop('href', '/pron/audit');
+            } else if (id === 'dialog' || id === 'picker' || id === 'top' || id === 'navbar') {
+                obj.prop('href', '/video/multi?type=' + id);
+            }
+        });
+    });
+
+
+</script>
+</body>
+</html>

@@ -2,6 +2,7 @@ package com.ruoyi.system.service.impl;
 
 import com.google.common.collect.Lists;
 import com.ruoyi.common.core.text.Convert;
+import com.ruoyi.common.sequence.ConcurrentSequence;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.system.domain.SysOrder;
 import com.ruoyi.system.domain.ext.ExtSysOrder;
@@ -11,7 +12,6 @@ import com.ruoyi.system.mapper.SysOrderMapper;
 import com.ruoyi.system.service.ISysOrderService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -29,6 +29,8 @@ public class SysOrderServiceImpl implements ISysOrderService {
     @Autowired
     private SysOrderMapper sysOrderMapper;
 
+    @Autowired
+    ConcurrentSequence concurrentSequence;
     @Autowired
     private ExtSysOrderMapper extSysOrderMapper;
 
@@ -88,6 +90,7 @@ public class SysOrderServiceImpl implements ISysOrderService {
      */
     @Override
     public int insertSysOrder(SysOrder sysOrder) {
+        sysOrder.setOrderId(concurrentSequence.nextId().toString());
         sysOrder.setCreateTime(DateUtils.getNowDate());
         return sysOrderMapper.insertSysOrder(sysOrder);
     }

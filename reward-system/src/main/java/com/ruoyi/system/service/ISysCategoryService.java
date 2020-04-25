@@ -18,7 +18,7 @@ public interface ISysCategoryService {
      * @param dept 部门信息
      * @return 部门信息集合
      */
-    public List<SysCategory> selectDeptList(SysCategory dept);
+    List<SysCategory> selectDeptList(SysCategory dept);
 
     /**
      * 查询部门管理树
@@ -26,7 +26,7 @@ public interface ISysCategoryService {
      * @param dept 部门信息
      * @return 所有部门信息
      */
-    public List<Ztree> selectDeptTree(SysCategory dept);
+    List<Ztree> selectDeptTree(SysCategory dept);
 
     /**
      * 根据角色ID查询菜单

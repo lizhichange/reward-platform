@@ -5,7 +5,7 @@ import com.ruoyi.common.enums.BusinessStatus;
 import com.ruoyi.common.json.JSON;
 import com.ruoyi.common.utils.ServletUtils;
 import com.ruoyi.common.utils.StringUtils;
-import com.ruoyi.framework.interceptor.util.SessionContext;
+import org.near.toolkit.context.SessionContext;
 import com.ruoyi.framework.manager.AsyncManager;
 import com.ruoyi.framework.manager.factory.AsyncFactory;
 import com.ruoyi.framework.util.ShiroUtils;

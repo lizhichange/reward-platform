@@ -10,6 +10,9 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+/**
+ * @author sunflower
+ */
 public class BaiduDwz {
     final static String CREATE_API = "https://dwz.cn/admin/v2/create";
     final static String TOKEN = "c9d8cf063aef5ef75f425ba05e06891d";

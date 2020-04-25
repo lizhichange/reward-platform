@@ -12,6 +12,6 @@ public class ImageServiceTest extends ApplicationTests {
     @Test
     public void test01() {
         String account = "1.00";
-        imageService.queryWeChatQrCode(account);
+        imageService.queryWeChatQrCode(account, "alipay");
     }
 }

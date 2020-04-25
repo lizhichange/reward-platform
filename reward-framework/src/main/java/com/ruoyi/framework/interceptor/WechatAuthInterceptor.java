@@ -6,7 +6,7 @@ import cn.hutool.http.useragent.UserAgent;
 import cn.hutool.http.useragent.UserAgentUtil;
 import com.ruoyi.common.config.Global;
 import com.ruoyi.framework.interceptor.impl.WxPnUserAuth;
-import com.ruoyi.framework.interceptor.util.SessionContext;
+import org.near.toolkit.context.SessionContext;
 import com.ruoyi.reward.facade.api.ITsFacade;
 import com.ruoyi.reward.facade.dto.TsDTO;
 import lombok.extern.slf4j.Slf4j;

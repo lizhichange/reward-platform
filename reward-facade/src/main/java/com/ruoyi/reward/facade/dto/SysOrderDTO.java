@@ -102,6 +102,9 @@ public class SysOrderDTO extends ToString {
 
     private String tradeType;
 
+    private Date createTime;
+
+
     public void setId(Integer id) {
         this.id = id;
     }
@@ -295,5 +298,13 @@ public class SysOrderDTO extends ToString {
 
     public void setTradeType(String tradeType) {
         this.tradeType = tradeType;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }
