@@ -334,7 +334,6 @@ public class PayController extends BaseController {
     @PostMapping("/notify/scanpay")
     public String parseScanPayNotifyResult(String xmlData) throws WxPayException {
         final WxScanPayNotifyResult result = this.wxPayService.parseScanPayNotifyResult(xmlData);
-        // TODO 根据自己业务场景需要构造返回对象
         return WxPayNotifyResponse.success("成功");
     }
 
