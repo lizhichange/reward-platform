@@ -9,7 +9,6 @@ import org.near.toolkit.common.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,7 +25,7 @@ public class IndexController {
     ISysWebMainFacade sysWebMainFacade;
 
     @GetMapping("/")
-    public String index(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
+    public String index(@RequestParam(value = "userid", required = false) String userid) {
         String user = StringUtil.isBlank(userid) ? "" : userid;
         SysWebMainDTO webMain = new SysWebMainDTO();
         webMain.setMainStatus(WebMainStatus.OK.getCode());
@@ -40,7 +39,7 @@ public class IndexController {
                 int i = RandomUtil.randomInt(0, size - 1);
                 item = list.get(i);
             }
-            String url = item.getMainUrl() + "/pron/redirect?userid=" + user;
+            String url = item.getMainUrl() + "/video/redirect?userid=" + user;
             LOGGER.info("redirect.url:{}", url);
             return "redirect:" + url;
         }
