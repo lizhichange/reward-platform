@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class ShipinFacadeImpl implements ShipinFacadeClient {
+public class ShipinFacadeClientImpl implements ShipinFacadeClient {
 
     @Reference(version = "1.0.0", check = false)
     IShipinFacade shipinFacade;

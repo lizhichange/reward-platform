@@ -37,7 +37,8 @@ spring:
     enabled: false
   cache:
     type: simple
-
+  main:
+    allow-bean-definition-overriding: true
 
 endpoints:
   dubbo:

@@ -10,12 +10,8 @@ import com.ruoyi.reward.facade.enums.OrderPayType;
 import com.ruoyi.reward.facade.enums.OrderStatusType;
 import com.ruoyi.reward.facade.enums.WebMainStatus;
 import com.ruoyi.web.PageForm;
-import com.ruoyi.web.client.ShipinFacadeClient;
 import com.ruoyi.web.config.AppConfig;
-import com.ruoyi.web.feign.ISysConfigFacadeFeign;
-import com.ruoyi.web.feign.ISysOrderFacadeFeign;
-import com.ruoyi.web.feign.ISysWebMainFacadeFeign;
-import com.ruoyi.web.feign.SysCategoryFacadeFeign;
+import com.ruoyi.web.feign.*;
 import com.ruoyi.web.result.TableDataInfo;
 import com.ruoyi.web.util.AjaxResult;
 import lombok.extern.slf4j.Slf4j;
@@ -50,7 +46,7 @@ public class VideoController {
     @Autowired
     ThreadPoolTaskExecutor threadPoolTaskExecutor;
     @Autowired
-    ShipinFacadeClient shipinFacadeClient;
+    ShiFacadeFeign shiFacadeFeign;
     @Autowired
     SysCategoryFacadeFeign SysCategoryFacadeFeign;
     @Autowired
@@ -64,7 +60,7 @@ public class VideoController {
         log.info("userId:{}", userid);
         ShipinDTO shipinDTO = new ShipinDTO();
         String orderByClause = " create_time desc ";
-        TPageResult<ShipinDTO> result = shipinFacadeClient.queryPage(1, 12, shipinDTO, orderByClause);
+        TPageResult<ShipinDTO> result = shiFacadeFeign.queryPage(1, 12, shipinDTO, orderByClause);
         List<ShipinDTO> list = result.getValues();
         convert(list);
         list.sort((o1, o2) -> o2.getCreateTime().compareTo(o1.getCreateTime()));
@@ -123,7 +119,7 @@ public class VideoController {
                          @RequestParam(value = "author", required = false) String author,
                          ModelMap modelmap) {
         log.info("user:{},id:{},author:{}", userid, id, author);
-        ShipinDTO shipin = shipinFacadeClient.selectShipinDTOById(id);
+        ShipinDTO shipin = shiFacadeFeign.selectShipinDTOById(id);
         if (shipin != null) {
             convert(new Date(), shipin);
             modelmap.put("shipin", shipin);
@@ -132,11 +128,11 @@ public class VideoController {
                 modelmap.put("category", category);
             }
             //异步执行浏览加1
-            threadPoolTaskExecutor.execute(() -> shipinFacadeClient.updateClickPlus(shipin.getId().longValue()));
+            threadPoolTaskExecutor.execute(() -> shiFacadeFeign.updateClickPlus(shipin.getId().longValue()));
         }
 
         String orderByClause = " create_time desc ";
-        TPageResult<ShipinDTO> result = shipinFacadeClient.queryPage(1, 12, new ShipinDTO(), orderByClause);
+        TPageResult<ShipinDTO> result = shiFacadeFeign.queryPage(1, 12, new ShipinDTO(), orderByClause);
         List<ShipinDTO> list = result.getValues();
         convert(list);
         modelmap.addAttribute("list", list);
@@ -154,7 +150,7 @@ public class VideoController {
         int pageNum = pageForm.getPageNum();
         int pageSize = pageForm.getPageSize();
         String orderByClause = " create_time desc ";
-        TPageResult<ShipinDTO> result = shipinFacadeClient.queryPage(pageNum, pageSize, shipinDTO, orderByClause);
+        TPageResult<ShipinDTO> result = shiFacadeFeign.queryPage(pageNum, pageSize, shipinDTO, orderByClause);
         List<ShipinDTO> list = result.getValues();
         convert(list);
         if (CollectionUtils.isEmpty(list)) {
@@ -183,7 +179,7 @@ public class VideoController {
         int pageNum = pageForm.getPageNum();
         int pageSize = pageForm.getPageSize();
         String orderByClause = " create_time desc ";
-        TPageResult<ShipinDTO> result = shipinFacadeClient.queryPage(pageNum, pageSize, shipinDTO, orderByClause);
+        TPageResult<ShipinDTO> result = shiFacadeFeign.queryPage(pageNum, pageSize, shipinDTO, orderByClause);
         List<ShipinDTO> list = result.getValues();
         convert(list);
         TableDataInfo dataTable = getDataTable(list);
@@ -211,7 +207,7 @@ public class VideoController {
         order.setOpenId(StringUtil.isBlank(openId) ? "x" : "1");
         List<SysOrderDTO> sysOrders = sysOrderFacadeFeign.selectSysOrder(order);
         if (CollectionUtils.isEmpty(sysOrders)) {
-            ShipinDTO dto = shipinFacadeClient.selectShipinDTOById(shipinDTO.getId().longValue());
+            ShipinDTO dto = shiFacadeFeign.selectShipinDTOById(shipinDTO.getId().longValue());
             order.setCreateTime(new Date());
             //代理推广的id
             order.setExtensionUserId(userId);
