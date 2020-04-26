@@ -18,12 +18,11 @@ package com.ruoyi.reward.facade;
 
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.ruoyi.reward.facade.api.DemoFacade;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 /**
@@ -48,13 +47,6 @@ public class DefaultDemoFacadeImpl implements DemoFacade {
     public List<String> abs() {
 
 
-        List<String> transform = Lists.transform(Lists.newArrayList(1), new Function<Integer, String>() {
-            @Nullable
-            @Override
-            public String apply(@Nullable Integer input) {
-                return input.toString();
-            }
-        });
-        return transform;
+        return Lists.newArrayList(1).stream().map(Object::toString).collect(Collectors.toList());
     }
 }
