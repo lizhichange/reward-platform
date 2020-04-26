@@ -7,16 +7,14 @@ spring:
     name: Eureka-Server
 
 
-
 eureka:
+  instance:
+    ip-address: 139.196.101.246 #决定Eureka服务显示host
+    hostname: ${eureka.instance.ip-address} #决定服务跳转host，必须指定
+    prefer-ip-address: true
+    non-secure-port: ${server.port}
+    instance-id: ${eureka.instance.ip-address}:${server.port}
   client:
     service-url:
-      defaultZone: http://eureka.grkfcs.cn/:8761/eureka/
-  instance:
-    hostname: ${spring.cloud.client.ip-address}
-    instance-id: ${spring.cloud.client.ip-address}:${server.port}
-    ip-address: 139.196.101.246
-    lease-expiration-duration-in-seconds: 5
-    lease-renewal-interval-in-seconds: 1
-    prefer-ip-address: true
-
+      defaultZone: http://eureka.grkfcs.cn:80/eureka/
+    register-with-eureka: true
