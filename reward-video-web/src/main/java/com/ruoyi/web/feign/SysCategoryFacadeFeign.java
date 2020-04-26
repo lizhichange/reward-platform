@@ -4,6 +4,7 @@ import com.ruoyi.reward.facade.dto.SysCategoryDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  *
  * @author ruoyi
  */
-@FeignClient(value = "reward-service")
+@FeignClient(value = "reward-service", path = "/rest/category")
 public interface SysCategoryFacadeFeign {
 
 
@@ -20,11 +21,11 @@ public interface SysCategoryFacadeFeign {
     List<SysCategoryDTO> selectDeptList(@RequestBody SysCategoryDTO dept);
 
     @PostMapping("/selectDeptCount")
-    int selectDeptCount(Long parentId);
+    int selectDeptCount(@RequestParam("parentId") Long parentId);
 
     @PostMapping("/deleteDeptById")
-    int deleteDeptById(Long deptId);
+    int deleteDeptById(@RequestParam("parentId") Long deptId);
 
     @PostMapping("/selectDeptById")
-    SysCategoryDTO selectDeptById(Long deptId);
+    SysCategoryDTO selectDeptById(@RequestParam("parentId") Long deptId);
 }

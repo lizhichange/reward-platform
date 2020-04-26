@@ -78,10 +78,6 @@
         </dependency>
 
 
-        <dependency>
-            <groupId>com.alibaba.boot</groupId>
-            <artifactId>nacos-config-spring-boot-starter</artifactId>
-        </dependency>
 
 
         <dependency>

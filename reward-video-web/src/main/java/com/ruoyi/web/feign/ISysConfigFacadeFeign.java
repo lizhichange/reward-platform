@@ -3,14 +3,15 @@ package com.ruoyi.web.feign;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @author sunflower
  */
-@FeignClient(value = "reward-service")
+@FeignClient(value = "reward-service", path = "/rest/config")
 
 public interface ISysConfigFacadeFeign {
 
     @PostMapping("/selectConfigByKey")
-    public String selectConfigByKey(String configKey);
+    String selectConfigByKey(@RequestParam("configKey") String configKey);
 }

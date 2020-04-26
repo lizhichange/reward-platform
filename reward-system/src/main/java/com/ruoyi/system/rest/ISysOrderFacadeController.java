@@ -5,6 +5,7 @@ import com.ruoyi.reward.facade.dto.SysOrderDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -12,8 +13,9 @@ import java.util.List;
 /**
  * @author sunflower
  */
+@RestController
 
-@RestController("/rest/order")
+@RequestMapping("/rest/order")
 @Slf4j
 public class ISysOrderFacadeController {
 

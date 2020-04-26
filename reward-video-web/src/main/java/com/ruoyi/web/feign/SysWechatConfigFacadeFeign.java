@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * @author sunflower
  */
-@FeignClient(value = "reward-service")
+@FeignClient(value = "reward-service", path = "/rest/wechat")
 public interface SysWechatConfigFacadeFeign {
 
 

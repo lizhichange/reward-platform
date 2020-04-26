@@ -11,9 +11,7 @@ import java.util.List;
  * @author sunflower
  */
 @FeignClient(value = "reward-service", path = "/rest/webMain")
-
 public interface ISysWebMainFacadeFeign {
-
     @PostMapping("/selectSysWebMainList")
     List<SysWebMainDTO> selectSysWebMainList(@RequestBody SysWebMainDTO sysWebMain);
 }

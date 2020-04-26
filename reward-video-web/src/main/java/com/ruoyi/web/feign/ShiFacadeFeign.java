@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-@FeignClient(value = "reward-service")
+@FeignClient(value = "reward-service", path = "/rest/shi")
 public interface ShiFacadeFeign {
     /**
      * 查询公共片库
@@ -18,10 +18,10 @@ public interface ShiFacadeFeign {
      * @return 公共片库
      */
     @PostMapping("/selectShipinDTOById")
-    ShipinDTO selectShipinDTOById(Long id);
+    ShipinDTO selectShipinDTOById(@RequestParam("id") Long id);
 
     @PostMapping("/updateClickPlus")
-    int updateClickPlus(Long id);
+    int updateClickPlus(@RequestParam("id") Long id);
 
     /**
      * 查询公共片库列表
@@ -30,13 +30,13 @@ public interface ShiFacadeFeign {
      * @return 公共片库集合
      */
     @PostMapping("/selectShipinDTOList")
-    List<ShipinDTO> selectShipinDTOList(ShipinDTO item);
+    List<ShipinDTO> selectShipinDTOList(@RequestBody ShipinDTO item);
 
     @PostMapping("/count")
-    int count(ShipinDTO item);
+    int count(@RequestBody ShipinDTO item);
 
     @PostMapping("/insertShipinDTO")
-    int insertShipinDTO(ShipinDTO item);
+    int insertShipinDTO(@RequestBody ShipinDTO item);
 
     /**
      * 修改公共片库
@@ -63,9 +63,9 @@ public interface ShiFacadeFeign {
      * @return 结果
      */
     @PostMapping("/deleteShipinDTOByIds")
-    int deleteShipinDTOByIds(String ids);
+    int deleteShipinDTOByIds(@RequestParam("ids") String ids);
 
     @PostMapping("/deleteShipinDTOById")
-    int deleteShipinDTOById(Long id);
+    int deleteShipinDTOById(@RequestParam("id") Long id);
 
 }
