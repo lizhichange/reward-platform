@@ -9,12 +9,12 @@ spring:
 
 eureka:
   instance:
-    ip-address: 139.196.101.246 #决定Eureka服务显示host
+    ip-address: 127.0.0.1 #决定Eureka服务显示host
     hostname: ${eureka.instance.ip-address} #决定服务跳转host，必须指定
     prefer-ip-address: true
     non-secure-port: ${server.port}
     instance-id: ${eureka.instance.ip-address}:${server.port}
   client:
     service-url:
-      defaultZone: http://139.196.101.246:8761/eureka/
+      defaultZone: http://127.0.0.1:8761/eureka/
     register-with-eureka: true
