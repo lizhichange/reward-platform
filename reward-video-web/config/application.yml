@@ -13,4 +13,4 @@ feign:
 eureka:
   client:
     service-url:
-      defaultZone: http://eureka.grkfcs.cn/eureka/
+      defaultZone: http://eureka.didispace.com/eureka/
