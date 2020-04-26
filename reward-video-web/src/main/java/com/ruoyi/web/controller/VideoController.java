@@ -2,12 +2,6 @@ package com.ruoyi.web.controller;
 
 import cn.hutool.core.util.RandomUtil;
 import com.alibaba.fastjson.JSON;
-import com.ruoyi.web.PageForm;
-
-import com.ruoyi.web.client.*;
-import com.ruoyi.web.config.AppConfig;
-import com.ruoyi.web.result.TableDataInfo;
-import com.ruoyi.web.util.AjaxResult;
 import com.ruoyi.reward.facade.dto.ShipinDTO;
 import com.ruoyi.reward.facade.dto.SysCategoryDTO;
 import com.ruoyi.reward.facade.dto.SysOrderDTO;
@@ -15,6 +9,15 @@ import com.ruoyi.reward.facade.dto.SysWebMainDTO;
 import com.ruoyi.reward.facade.enums.OrderPayType;
 import com.ruoyi.reward.facade.enums.OrderStatusType;
 import com.ruoyi.reward.facade.enums.WebMainStatus;
+import com.ruoyi.web.PageForm;
+import com.ruoyi.web.client.ShipinFacadeClient;
+import com.ruoyi.web.config.AppConfig;
+import com.ruoyi.web.feign.ISysConfigFacadeFeign;
+import com.ruoyi.web.feign.ISysOrderFacadeFeign;
+import com.ruoyi.web.feign.ISysWebMainFacadeFeign;
+import com.ruoyi.web.feign.SysCategoryFacadeFeign;
+import com.ruoyi.web.result.TableDataInfo;
+import com.ruoyi.web.util.AjaxResult;
 import lombok.extern.slf4j.Slf4j;
 import org.near.servicesupport.result.TPageResult;
 import org.near.toolkit.common.DateUtils;
@@ -49,13 +52,13 @@ public class VideoController {
     @Autowired
     ShipinFacadeClient shipinFacadeClient;
     @Autowired
-    ISysCategoryFacadeClient sysCategoryFacadeClient;
+    SysCategoryFacadeFeign SysCategoryFacadeFeign;
     @Autowired
-    ISysOrderFacadeClient sysOrderFacadeClient;
+    ISysOrderFacadeFeign sysOrderFacadeFeign;
     @Autowired
-    ISysWebMainFacadeClient sysWebMainFacadeClient;
+    ISysWebMainFacadeFeign sysWebMainFacadeFeign;
     @Autowired
-    ISysConfigFacadeClient sysConfigFacadeClient;
+    ISysConfigFacadeFeign sysConfigFacadeFeign;
 
     private void xxx(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
         log.info("userId:{}", userid);
@@ -81,7 +84,7 @@ public class VideoController {
         String user = StringUtil.isBlank(userid) ? "" : userid;
         SysWebMainDTO webMain = new SysWebMainDTO();
         webMain.setMainStatus(WebMainStatus.OK.getCode());
-        List<SysWebMainDTO> list = sysWebMainFacadeClient.selectSysWebMainList(webMain);
+        List<SysWebMainDTO> list = sysWebMainFacadeFeign.selectSysWebMainList(webMain);
         if (!CollectionUtils.isEmpty(list)) {
             int size = list.size();
             SysWebMainDTO item;
@@ -102,7 +105,7 @@ public class VideoController {
     public String category(@RequestParam(value = "categoryId") Long categoryId, @RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
         log.info("user:{},categoryId:{}", userid, categoryId);
         getCategory(modelmap);
-        SysCategoryDTO sysCategory = sysCategoryFacadeClient.selectDeptById(categoryId);
+        SysCategoryDTO sysCategory = SysCategoryFacadeFeign.selectDeptById(categoryId);
         if (sysCategory == null) {
             modelmap.addAttribute("category", new SysCategoryDTO());
         } else {
@@ -124,7 +127,7 @@ public class VideoController {
         if (shipin != null) {
             convert(new Date(), shipin);
             modelmap.put("shipin", shipin);
-            SysCategoryDTO category = sysCategoryFacadeClient.selectDeptById(shipin.getCategoryId().longValue());
+            SysCategoryDTO category = SysCategoryFacadeFeign.selectDeptById(shipin.getCategoryId().longValue());
             if (category != null) {
                 modelmap.put("category", category);
             }
@@ -138,7 +141,7 @@ public class VideoController {
         convert(list);
         modelmap.addAttribute("list", list);
         getCategory(modelmap);
-        String tradeType = sysConfigFacadeClient.selectConfigByKey("sys.tradeType");
+        String tradeType = sysConfigFacadeFeign.selectConfigByKey("sys.tradeType");
         modelmap.addAttribute("wxPayUrl", appConfig.getWxPayUrl() + "?tradeType=" + tradeType);
         return prefix + "/detail";
     }
@@ -206,7 +209,7 @@ public class VideoController {
         order.setGoodsId(shipinDTO.getId());
         // TODO: 2020/4/20 必填参数
         order.setOpenId(StringUtil.isBlank(openId) ? "x" : "1");
-        List<SysOrderDTO> sysOrders = sysOrderFacadeClient.selectSysOrder(order);
+        List<SysOrderDTO> sysOrders = sysOrderFacadeFeign.selectSysOrder(order);
         if (CollectionUtils.isEmpty(sysOrders)) {
             ShipinDTO dto = shipinFacadeClient.selectShipinDTOById(shipinDTO.getId().longValue());
             order.setCreateTime(new Date());
@@ -238,7 +241,7 @@ public class VideoController {
             order.setTypeStr(WE_CHAT_PAY.getDesc());
             order.setStatus(Integer.valueOf(OrderStatusType.N_PAY.getCode()));
             order.setStatusStr(OrderStatusType.N_PAY.getDesc());
-            sysOrderFacadeClient.insertSysOrder(order);
+            sysOrderFacadeFeign.insertSysOrder(order);
             return AjaxResult.success(order);
         } else {
             SysOrderDTO sysOrder = sysOrders.get(0);
@@ -249,7 +252,7 @@ public class VideoController {
                     SysOrderDTO upOrder = new SysOrderDTO();
                     upOrder.setOrderId(sysOrder.getOrderId());
                     upOrder.setExtensionUserId(userId);
-                    sysOrderFacadeClient.updateSysOrderByOrderId(upOrder);
+                    sysOrderFacadeFeign.updateSysOrderByOrderId(upOrder);
                 });
             }
             Money money = new Money();
@@ -288,7 +291,7 @@ public class VideoController {
     private void getCategory(ModelMap modelmap) {
         SysCategoryDTO sysCategory = new SysCategoryDTO();
         sysCategory.setParentId(100L);
-        List<SysCategoryDTO> categoryList = sysCategoryFacadeClient.selectDeptList(sysCategory);
+        List<SysCategoryDTO> categoryList = SysCategoryFacadeFeign.selectDeptList(sysCategory);
         modelmap.addAttribute("categoryList", categoryList);
     }
 }

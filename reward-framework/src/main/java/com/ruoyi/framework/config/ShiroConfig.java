@@ -245,6 +245,8 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/login", "anon,captchaValidate");
         filterChainDefinitionMap.put("/pron/**", "anon");
         filterChainDefinitionMap.put("/webLogin/**", "anon");
+        filterChainDefinitionMap.put("/rest/**", "anon");
+
         //微信预授权回调不拦截
         filterChainDefinitionMap.put("/wechat/callback", "anon");
 
