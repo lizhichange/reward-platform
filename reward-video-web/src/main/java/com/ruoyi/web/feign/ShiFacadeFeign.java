@@ -4,6 +4,8 @@ import com.ruoyi.reward.facade.dto.ShipinDTO;
 import org.near.servicesupport.result.TPageResult;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -46,7 +48,13 @@ public interface ShiFacadeFeign {
     int updateShipinDTO(ShipinDTO item);
 
     @PostMapping("/queryPage")
-    TPageResult<ShipinDTO> queryPage(int start, int rows, ShipinDTO shipinDTO, String orderByClause);
+    TPageResult<ShipinDTO> queryPage(@RequestParam("start") int start,
+                                     @RequestParam("rows") int rows,
+
+
+                                     @RequestBody final ShipinDTO shipinDTO,
+                                     @RequestParam("orderByClause")
+                                             String orderByClause);
 
     /**
      * 批量删除公共片库

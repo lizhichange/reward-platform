@@ -107,7 +107,3 @@ nacos:
     file-extension: yaml
 
 
-eureka:
-  client:
-    service-url:
-      defaultZone: http://eureka.grkfcs.cn/eureka/

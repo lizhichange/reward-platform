@@ -4,6 +4,12 @@ spring:
     active: druid
 
 
+feign:
+  client:
+    config:
+      default:
+        connect-timeout: 20000
+        read-timeout: 20000
 eureka:
   client:
     service-url:

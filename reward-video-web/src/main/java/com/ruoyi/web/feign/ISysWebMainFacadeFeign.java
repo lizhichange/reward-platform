@@ -10,10 +10,10 @@ import java.util.List;
 /**
  * @author sunflower
  */
-@FeignClient(value = "reward-service")
+@FeignClient(value = "reward-service", path = "/rest/webMain")
 
 public interface ISysWebMainFacadeFeign {
 
     @PostMapping("/selectSysWebMainList")
-    public List<SysWebMainDTO> selectSysWebMainList(@RequestBody SysWebMainDTO sysWebMain);
+    List<SysWebMainDTO> selectSysWebMainList(@RequestBody SysWebMainDTO sysWebMain);
 }
