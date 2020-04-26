@@ -16,5 +16,5 @@ eureka:
     instance-id: ${eureka.instance.ip-address}:${server.port}
   client:
     service-url:
-      defaultZone: http://eureka.grkfcs.cn:80/eureka/
+      defaultZone: http://139.196.101.246:8761/eureka/
     register-with-eureka: true
