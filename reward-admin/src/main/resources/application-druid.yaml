@@ -107,3 +107,10 @@ nacos:
   config:
     server-addr: 127.0.0.1:8848
     file-extension: yaml
+
+
+
+eureka:
+  client:
+    service-url:
+      defaultZoon: http://127.0.0.1:8761/eureka/

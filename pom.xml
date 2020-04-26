@@ -24,6 +24,7 @@
         <module>toolkit</module>
         <module>reward-qrcode-admin-ui</module>
         <module>reward-video-web</module>
+        <module>eureka-server</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -66,6 +67,15 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>2.1.2.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- SpringCloud 的依赖配置-->
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Greenwich.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
