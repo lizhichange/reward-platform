@@ -26,6 +26,7 @@ server:
 
 app:
   wxPayUrl: http://yuluncc.top/pay
+  myUrl: http://admin.grkfcs.cn
 
 
 
