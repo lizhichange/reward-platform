@@ -12,7 +12,7 @@ eureka:
   instance:
     health-check-url: http://${eureka.instance.ip-address}:${eureka.instance.non-secure-port}/health
     instance-id: ${eureka.instance.ip-address}:${spring.application.name}:${eureka.instance.non-secure-port}
-    ip-address: eureka.grkfcs.cn
-    non-secure-port: 80
+    ip-address: 139.196.101.246
+    non-secure-port: 8761
     prefer-ip-address: true
     status-page-url: http://${eureka.instance.ip-address}:${eureka.instance.non-secure-port}/doc.html
