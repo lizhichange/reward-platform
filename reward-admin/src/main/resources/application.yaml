@@ -142,8 +142,7 @@ sequence:
 
 
 
-
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://eureka.didispace.com/eureka/
+      defaultZone: http://eureka.grkfcs.cn/eureka/

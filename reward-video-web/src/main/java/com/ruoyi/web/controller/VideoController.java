@@ -48,7 +48,7 @@ public class VideoController {
     @Autowired
     ShiFacadeFeign shiFacadeFeign;
     @Autowired
-    SysCategoryFacadeFeign SysCategoryFacadeFeign;
+    SysCategoryFacadeFeign sysCategoryFacadeFeign;
     @Autowired
     ISysOrderFacadeFeign sysOrderFacadeFeign;
     @Autowired
@@ -101,7 +101,7 @@ public class VideoController {
     public String category(@RequestParam(value = "categoryId") Long categoryId, @RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
         log.info("user:{},categoryId:{}", userid, categoryId);
         getCategory(modelmap);
-        SysCategoryDTO sysCategory = SysCategoryFacadeFeign.selectDeptById(categoryId);
+        SysCategoryDTO sysCategory = sysCategoryFacadeFeign.selectDeptById(categoryId);
         if (sysCategory == null) {
             modelmap.addAttribute("category", new SysCategoryDTO());
         } else {
@@ -123,7 +123,7 @@ public class VideoController {
         if (shipin != null) {
             convert(new Date(), shipin);
             modelmap.put("shipin", shipin);
-            SysCategoryDTO category = SysCategoryFacadeFeign.selectDeptById(shipin.getCategoryId().longValue());
+            SysCategoryDTO category = sysCategoryFacadeFeign.selectDeptById(shipin.getCategoryId().longValue());
             if (category != null) {
                 modelmap.put("category", category);
             }
@@ -287,7 +287,7 @@ public class VideoController {
     private void getCategory(ModelMap modelmap) {
         SysCategoryDTO sysCategory = new SysCategoryDTO();
         sysCategory.setParentId(100L);
-        List<SysCategoryDTO> categoryList = SysCategoryFacadeFeign.selectDeptList(sysCategory);
+        List<SysCategoryDTO> categoryList = sysCategoryFacadeFeign.selectDeptList(sysCategory);
         modelmap.addAttribute("categoryList", categoryList);
     }
 }
