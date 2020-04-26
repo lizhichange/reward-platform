@@ -12,7 +12,10 @@ feign:
       default:
         connect-timeout: 20000
         read-timeout: 20000
+
+
+
 eureka:
   client:
-    service-url:
-      defaultZone: http://eureka.grkfcs.cn/eureka/
+    serviceUrl:
+      defaultZone: http://eureka.didispace.com/eureka/
