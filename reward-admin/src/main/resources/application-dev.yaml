@@ -105,3 +105,9 @@ nacos:
   config:
     server-addr: 127.0.0.1:8848
     file-extension: yaml
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka.grkfcs.cn/eureka/
