@@ -208,7 +208,7 @@
     });
 
     $("#search").click(function () {
-        $.modal.loading("");
+            $.showLoading("数据加载中");
         var name = $("input[name='name']").val();
         $.ajax({
             dataType: 'json',
@@ -222,7 +222,7 @@
 
             },
             success: function (res) {
-                $.modal.closeLoading();
+                $.hideLoading();
                 if (res && res.code === 0) {
                     $("#list_videos_common_videos_list_items").empty();
                     $("#list_videos_most_recent_videos_pagination").css('display','none');
@@ -241,8 +241,9 @@
                     });
                     $("#list_videos_common_videos_list_items").html(html);
                 } else {
-                    $.modal.closeLoading();
-                    $.modal.msg(r.msg);
+                    $.hideLoading();
+                    $.toast(r.msg);
+
                 }
             }
         });
