@@ -10,23 +10,23 @@ import java.util.List;
 /**
  * @author sunflower
  */
-@FeignClient( value = "reward-service",path = "/rest/order")
+@FeignClient(value = "reward-service", path = "/rest/order")
 public interface ISysOrderFacadeFeign {
     @PostMapping("/selectSysOrderById")
     SysOrderDTO selectSysOrderById(Long id);
 
     @PostMapping("/selectSysOrderList")
-    List<SysOrderDTO> selectSysOrderList(@RequestBody  SysOrderDTO sysOrder);
+    List<SysOrderDTO> selectSysOrderList(@RequestBody SysOrderDTO sysOrder);
 
     @PostMapping("/selectSysOrder")
-    public List<SysOrderDTO> selectSysOrder(@RequestBody  SysOrderDTO extSysOrder);
+    List<SysOrderDTO> selectSysOrder(@RequestBody SysOrderDTO extSysOrder);
 
     @PostMapping("/insertSysOrder")
-    public int insertSysOrder(@RequestBody  SysOrderDTO sysOrder);
+    int insertSysOrder(@RequestBody SysOrderDTO sysOrder);
 
     @PostMapping("/updateSysOrder")
-    public int updateSysOrder(@RequestBody  SysOrderDTO sysOrder);
+    int updateSysOrder(@RequestBody SysOrderDTO sysOrder);
 
     @PostMapping("/updateSysOrderByOrderId")
-    public int updateSysOrderByOrderId(@RequestBody SysOrderDTO sysOrder);
+    int updateSysOrderByOrderId(@RequestBody SysOrderDTO sysOrder);
 }

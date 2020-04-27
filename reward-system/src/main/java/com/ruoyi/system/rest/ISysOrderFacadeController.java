@@ -5,6 +5,7 @@ import com.ruoyi.reward.facade.dto.SysOrderDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,7 +15,6 @@ import java.util.List;
  * @author sunflower
  */
 @RestController
-
 @RequestMapping("/rest/order")
 @Slf4j
 public class ISysOrderFacadeController {
@@ -28,14 +28,13 @@ public class ISysOrderFacadeController {
     }
 
     @PostMapping("/selectSysOrderList")
-    public List<SysOrderDTO> selectSysOrderList(SysOrderDTO sysOrder) {
+    public List<SysOrderDTO> selectSysOrderList(@RequestBody SysOrderDTO sysOrder) {
 
         return sysOrderFacade.selectSysOrderList(sysOrder);
     }
 
     @PostMapping("/selectSysOrder")
-
-    public List<SysOrderDTO> selectSysOrder(SysOrderDTO extSysOrder) {
+    public List<SysOrderDTO> selectSysOrder(@RequestBody SysOrderDTO extSysOrder) {
         return sysOrderFacade.selectSysOrder(extSysOrder);
 
     }
