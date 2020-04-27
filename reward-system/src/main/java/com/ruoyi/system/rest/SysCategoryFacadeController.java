@@ -5,6 +5,7 @@ import com.ruoyi.reward.facade.dto.SysCategoryDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,7 +27,7 @@ public class SysCategoryFacadeController {
     ISysCategoryFacade sysCategoryFacade;
 
     @PostMapping("/selectDeptList")
-    public List<SysCategoryDTO> selectDeptList(SysCategoryDTO dept) {
+    public List<SysCategoryDTO> selectDeptList(@RequestBody SysCategoryDTO dept) {
         return sysCategoryFacade.selectDeptList(dept);
     }
 

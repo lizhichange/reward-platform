@@ -41,17 +41,17 @@ public class ISysOrderFacadeController {
 
 
     @PostMapping("/insertSysOrder")
-    public int insertSysOrder(SysOrderDTO sysOrder) {
+    public int insertSysOrder(@RequestBody SysOrderDTO sysOrder) {
         return sysOrderFacade.insertSysOrder(sysOrder);
     }
 
     @PostMapping("/updateSysOrder")
-    public int updateSysOrder(SysOrderDTO sysOrder) {
+    public int updateSysOrder(@RequestBody SysOrderDTO sysOrder) {
         return sysOrderFacade.updateSysOrder(sysOrder);
     }
 
     @PostMapping("/updateSysOrderByOrderId")
-    public int updateSysOrderByOrderId(SysOrderDTO sysOrder) {
+    public int updateSysOrderByOrderId(@RequestBody SysOrderDTO sysOrder) {
         return sysOrderFacade.updateSysOrderByOrderId(sysOrder);
     }
 

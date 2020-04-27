@@ -201,6 +201,12 @@
                         data: {
                             "id": $("#id").val()
                         },
+                         error: function (jqXHR, textStatus, errorThrown) {
+                            /*错误信息处理*/
+                              player.pause();
+                              console.log(errorThrown);
+
+                        },
                         success: function (r) {
                             console.log(r);
                             if (r.code === 0) {
