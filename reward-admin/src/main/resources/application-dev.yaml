@@ -106,4 +106,16 @@ nacos:
     server-addr: 127.0.0.1:8848
     file-extension: yaml
 
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/eureka/
+  instance:
+    preferIpAddress: true
+    ipAddress: 127.0.0.1
+    nonSecurePort: 8761
+    lease-renewal-interval-in-seconds: 10
+    lease-expiration-duration-in-seconds: 90
+    instance-id: ${spring.cloud.client.ipAddress}:${spring.application.name}:${eureka.instance.nonSecurePort}
+
 
