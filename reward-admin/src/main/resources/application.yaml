@@ -55,7 +55,8 @@ spring:
     restart:
       # 热部署开关
       enabled: true
-
+  application:
+    name: reward-service
 # MyBatis
 mybatis:
   # 搜索指定包别名
@@ -141,3 +142,14 @@ sequence:
 
 
 
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka.grkfcs.cn/eureka/
+  instance:
+    preferIpAddress: true
+    ipAddress: admin.grkfcs.cn
+    nonSecurePort: 80
+    lease-renewal-interval-in-seconds: 10
+    lease-expiration-duration-in-seconds: 90
+    instance-id: ${spring.cloud.client.ipAddress}:${spring.application.name}:${eureka.instance.nonSecurePort}

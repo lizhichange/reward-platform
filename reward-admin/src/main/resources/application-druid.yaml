@@ -55,8 +55,7 @@ spring:
         wall:
           config:
             multi-statement-allow: true
-  application:
-    name: reward-service
+
 # 项目相关配置
 ruoyi:
   # 名称
@@ -109,16 +108,4 @@ nacos:
     server-addr: 127.0.0.1:8848
     file-extension: yaml
 
-
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://127.0.0.1:8761/eureka/
-  instance:
-    preferIpAddress: true
-    ipAddress: admin.grkfcs.cn
-    nonSecurePort: 80
-    lease-renewal-interval-in-seconds: 10
-    lease-expiration-duration-in-seconds: 90
-    instance-id: ${spring.cloud.client.ipAddress}:${spring.application.name}:${eureka.instance.nonSecurePort}
 
