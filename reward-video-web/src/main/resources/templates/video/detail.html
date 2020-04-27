@@ -229,6 +229,7 @@
                                         }
                                         },
                                         onCancel: function () {
+
                                         }
                                     });
                             
@@ -237,8 +238,7 @@
                                 }
                             } else if (r.code === 500) {
                                 player.pause();
-                                $.modal.alert(r.msg);
-
+                                $.toast(r.msg);
                             } else {
                                 player.pause();
                             }
