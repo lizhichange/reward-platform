@@ -29,4 +29,8 @@ public interface ISysOrderFacadeFeign {
 
     @PostMapping("/updateSysOrderByOrderId")
     int updateSysOrderByOrderId(@RequestBody SysOrderDTO sysOrder);
+
+
+    @PostMapping("/selectSysOrderListExt")
+    List<SysOrderDTO> selectSysOrderListExt(@RequestBody SysOrderDTO extSysOrder);
 }

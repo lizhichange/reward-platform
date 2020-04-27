@@ -1,8 +1,8 @@
 package com.ruoyi.mp.factory;
 
 
-import com.ruoyi.mp.client.SysWechatConfigClient;
 import com.ruoyi.mp.config.MpAuthConfig;
+import com.ruoyi.mp.feign.SysWechatConfigFacadeFeign;
 import com.ruoyi.reward.facade.dto.SysWechatConfigDTO;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +29,7 @@ public class ConfigFactory {
     @Getter
     SysWechatConfigDTO sysWechatConfig;
     @Autowired
-    SysWechatConfigClient sysWechatConfigClient;
+    SysWechatConfigFacadeFeign sysWechatConfigFacadeFeign;
 
     @Autowired
     MpAuthConfig mpAuthConfig;
@@ -43,7 +43,7 @@ public class ConfigFactory {
             SysWechatConfigDTO item = new SysWechatConfigDTO();
             item.setEnvType(profile);
             item.setConfigCode(mpAuthConfig.getConfigCode());
-            List<SysWechatConfigDTO> list = sysWechatConfigClient.selectSysWechatConfigList(item);
+            List<SysWechatConfigDTO> list = sysWechatConfigFacadeFeign.selectSysWechatConfigList(item);
             if (!CollectionUtils.isEmpty(list)) {
                 sysWechatConfig = list.get(0);
             }

@@ -1,7 +1,6 @@
 package com.ruoyi.mp.controller;
 
 
-import com.ruoyi.mp.client.UserDetailClient;
 import com.ruoyi.mp.config.MpAuthConfig;
 import com.ruoyi.reward.facade.request.UserWechatLoginRequest;
 import me.chanjar.weixin.common.api.WxConsts;
@@ -26,14 +25,12 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 @RequestMapping("/wechat")
-public class WechatController {
+public class WechatController extends BaseController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(WechatController.class);
     @Autowired
     WxMpService wxMpService;
-    @Autowired
 
-    UserDetailClient userDetailClient;
 
     @Autowired
     MpAuthConfig mpAuthConfig;
@@ -72,7 +69,7 @@ public class WechatController {
             userWechatLoginRequest.setGender(wxMpUser.getSexDesc());
             userWechatLoginRequest.setUnionid(wxMpUser.getUnionId());
             userWechatLoginRequest.setHeadImg(wxMpUser.getHeadImgUrl());
-            userDetailClient.wechatLogin(userWechatLoginRequest);
+            userDetailFeign.wechatLogin(userWechatLoginRequest);
             if (callback.contains("?")) {
                 callback += "&op=" + wxMpUser.getOpenId();
             } else {

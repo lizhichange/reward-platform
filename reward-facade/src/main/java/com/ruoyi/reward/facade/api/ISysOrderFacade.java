@@ -31,7 +31,7 @@ public interface ISysOrderFacade {
     List<SysOrderDTO> selectSysOrder(SysOrderDTO extSysOrder);
 
 
-    public List<SysOrderDTO> selectSysOrderListExt(SysOrderDTO sysOrder);
+    List<SysOrderDTO> selectSysOrderListExt(SysOrderDTO sysOrder);
 
     /**
      * 新增订单列表

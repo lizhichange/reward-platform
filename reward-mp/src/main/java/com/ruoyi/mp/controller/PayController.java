@@ -97,7 +97,7 @@ public class PayController extends BaseController {
             return "nativePay";
         } else if (StringUtil.equals("aliPay", tradeType)) {
             //支付宝支付
-            String userId = sysConfigClient.selectConfigByKey("sys.aliPay.userId");
+            String userId = sysConfigFacadeFeign.selectConfigByKey("sys.aliPay.userId");
             if (StringUtil.isBlank(userId)) {
                 throw new Exception("系统异常,userId is not null");
             }
@@ -110,7 +110,7 @@ public class PayController extends BaseController {
             return "aliPay";
         } else {
             String amount = item.getMoneyStr();
-            ImageService.Result result = imageService.queryWeChatQrCode(amount,StringUtil.toLowerCase(tradeType));
+            ImageService.Result result = imageService.queryWeChatQrCode(amount, StringUtil.toLowerCase(tradeType));
             List<ImageService.Result.DataBean.RowsBean> rows = result.getData().getRows();
             ImageService.Result.DataBean.RowsBean rowsBean = rows.get(0);
             String getRequestUrl = request.getRequestURL().toString();
@@ -153,7 +153,7 @@ public class PayController extends BaseController {
         Assert.notNull(orderId, "orderId is not null");
         SysOrderDTO sysOrderDTO = new SysOrderDTO();
         sysOrderDTO.setOrderId(orderId);
-        List<SysOrderDTO> list = sysOrderClient.selectSysOrderList(sysOrderDTO);
+        List<SysOrderDTO> list = sysOrderFacadeFeign.selectSysOrderList(sysOrderDTO);
         if (CollectionUtils.isEmpty(list)) {
             throw new Exception("系统异常");
         }
@@ -233,7 +233,7 @@ public class PayController extends BaseController {
                 //支付中
                 newOrder.setStatus(Integer.valueOf(OrderStatusType.PAY_ING.getCode()));
                 LOGGER.info("newOrder:{}", newOrder);
-                sysOrderClient.updateSysOrder(newOrder);
+                sysOrderFacadeFeign.updateSysOrder(newOrder);
             }
             HashMap<String, Object> map = Maps.newHashMap();
             map.put("type", WxPayConstants.TradeType.JSAPI);
@@ -263,7 +263,7 @@ public class PayController extends BaseController {
             newOrder.setParam(timeExpire);
             newOrder.setStatus(Integer.valueOf(OrderStatusType.PAY_ING.getCode()));
             LOGGER.info("newOrder:{}", newOrder);
-            sysOrderClient.updateSysOrder(newOrder);
+            sysOrderFacadeFeign.updateSysOrder(newOrder);
             HashMap<String, Object> map = Maps.newHashMap();
             map.put("type", WxPayConstants.TradeType.NATIVE);
             map.put("data", createOrder);
@@ -294,7 +294,7 @@ public class PayController extends BaseController {
             newOrder.setOrderId(orderId);
             //支付中
             newOrder.setStatus(Integer.valueOf(OrderStatusType.PAY_ING.getCode()));
-            List<SysOrderDTO> dtoList = sysOrderClient.selectSysOrderListExt(newOrder);
+            List<SysOrderDTO> dtoList = sysOrderFacadeFeign.selectSysOrderListExt(newOrder);
             if (CollectionUtils.isEmpty(dtoList)) {
                 return WxPayNotifyResponse.fail("FAIL");
             }
@@ -304,7 +304,7 @@ public class PayController extends BaseController {
             newOrder.setPayNo(transactionId);
             newOrder.setStatus(Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
             LOGGER.info("newOrder:{}", newOrder);
-            accountFacadeClient.take(newOrder);
+            accountFacadeFeign.take(newOrder);
             return WxPayNotifyResponse.success("SUCCESS");
         }
         return WxPayNotifyResponse.fail("FAIL");

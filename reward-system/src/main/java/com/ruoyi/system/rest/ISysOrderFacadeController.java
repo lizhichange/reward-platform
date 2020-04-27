@@ -39,6 +39,11 @@ public class ISysOrderFacadeController {
 
     }
 
+    @PostMapping("/selectSysOrderListExt")
+    public List<SysOrderDTO> selectSysOrderListExt(@RequestBody SysOrderDTO extSysOrder) {
+        return sysOrderFacade.selectSysOrderListExt(extSysOrder);
+
+    }
 
     @PostMapping("/insertSysOrder")
     public int insertSysOrder(@RequestBody SysOrderDTO sysOrder) {

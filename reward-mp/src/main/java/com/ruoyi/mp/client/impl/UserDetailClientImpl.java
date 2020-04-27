@@ -8,6 +8,9 @@ import com.ruoyi.reward.facade.dto.UserDto;
 import com.ruoyi.reward.facade.request.UserWechatLoginRequest;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author sunflower
+ */
 @Component
 public class UserDetailClientImpl implements UserDetailClient {
 
