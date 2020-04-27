@@ -24,8 +24,8 @@ public interface SysCategoryFacadeFeign {
     int selectDeptCount(@RequestParam("parentId") Long parentId);
 
     @PostMapping("/deleteDeptById")
-    int deleteDeptById(@RequestParam("parentId") Long deptId);
+    int deleteDeptById(@RequestParam("deptId") Long deptId);
 
     @PostMapping("/selectDeptById")
-    SysCategoryDTO selectDeptById(@RequestParam("parentId") Long deptId);
+    SysCategoryDTO selectDeptById(@RequestParam("deptId") Long deptId);
 }
