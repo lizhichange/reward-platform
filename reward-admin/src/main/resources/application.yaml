@@ -141,11 +141,18 @@ sequence:
   workerId: 1
 
 
+security:
+  # 开启认证，Spring Cloud2.0后添加jar会自动集成并开启
+  # basic.enabled: true
+  # 用户名密码
+  user:
+    name: admin
+    password: admin
 
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://eureka.grkfcs.cn/eureka/
+      defaultZone: http://${security.user.name}:${security.user.password}@eureka.grkfcs.cn/eureka/
   instance:
     preferIpAddress: true
     ipAddress: admin.grkfcs.cn
