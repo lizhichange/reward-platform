@@ -85,7 +85,7 @@ public class ImageService {
         map.put("page", "1");
         map.put("qr_price", amount);
         map.put("qr_type", qrType);
-        ResponseEntity<Result> forEntity = restTemplate.getForEntity("http://yuluncc.top/end/addons/pay/api/qrcode?page={page}&qr_price={qr_price}&qr_type={qr_type}", Result.class, map);
+        ResponseEntity<Result> forEntity = restTemplate.getForEntity("http://admin.grkfcs.cn/end/addons/pay/api/qrcode?page={page}&qr_price={qr_price}&qr_type={qr_type}", Result.class, map);
         log.info("forEntity:{}", forEntity);
         if (forEntity.getStatusCode() == HttpStatus.OK) {
             return forEntity.getBody();

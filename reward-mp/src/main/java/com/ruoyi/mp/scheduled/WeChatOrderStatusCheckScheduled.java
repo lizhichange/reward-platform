@@ -1,13 +1,11 @@
 package com.ruoyi.mp.scheduled;
 
-import com.alibaba.dubbo.config.annotation.Reference;
 import com.github.binarywang.wxpay.bean.request.WxPayOrderQueryRequest;
 import com.github.binarywang.wxpay.bean.result.WxPayOrderQueryResult;
-import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.WxPayService;
 import com.ruoyi.mp.config.MpAuthConfig;
-import com.ruoyi.reward.facade.api.IAccountFacade;
-import com.ruoyi.reward.facade.api.ISysOrderFacade;
+import com.ruoyi.mp.feign.IAccountFacadeFeign;
+import com.ruoyi.mp.feign.ISysOrderFacadeFeign;
 import com.ruoyi.reward.facade.dto.SysOrderDTO;
 import com.ruoyi.reward.facade.enums.OrderStatusType;
 import lombok.Getter;
@@ -36,10 +34,11 @@ public class WeChatOrderStatusCheckScheduled {
     WxPayService wxPayService;
     @Autowired
     MpAuthConfig mpAuthConfig;
-    @Reference(version = "1.0.0", check = false)
-    ISysOrderFacade sysOrderFacade;
-    @Reference(version = "1.0.0", check = false)
-    IAccountFacade accountFacade;
+    @Autowired
+    ISysOrderFacadeFeign sysOrderFacadeFeign;
+    @Autowired
+
+    IAccountFacadeFeign accountFacadeFeign;
 
     @Scheduled(cron = "0 0/3 * * * ?")
     public void execute() {
@@ -47,7 +46,7 @@ public class WeChatOrderStatusCheckScheduled {
             SysOrderDTO item = new SysOrderDTO();
             item.setLimit(ROWS);
             item.setStatus(Integer.valueOf(OrderStatusType.PAY_ING.getCode()));
-            List<SysOrderDTO> list = sysOrderFacade.selectSysOrderListExt(item);
+            List<SysOrderDTO> list = sysOrderFacadeFeign.selectSysOrderListExt(item);
             if (!CollectionUtils.isEmpty(list)) {
                 for (SysOrderDTO dto : list) {
                     try {
@@ -67,7 +66,7 @@ public class WeChatOrderStatusCheckScheduled {
             newOrder.setPayTime(new Date());
             newOrder.setOrderId(order.getOrderId());
             newOrder.setStatus(Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
-            accountFacade.take(newOrder);
+            accountFacadeFeign.take(newOrder);
             return;
         }
 
@@ -85,7 +84,7 @@ public class WeChatOrderStatusCheckScheduled {
                     //微信支付订单号
                     newOrder.setPayNo(result.getTransactionId());
                     newOrder.setStatus(Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
-                    accountFacade.take(newOrder);
+                    accountFacadeFeign.take(newOrder);
                 }
             }
         }
