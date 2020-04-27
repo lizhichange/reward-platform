@@ -116,6 +116,7 @@ public class PronController extends BaseController {
             int i = RandomUtil.randomInt(start, end);
             //实际金额 转换单位分
             Money m = new Money(i);
+            //随机立减
             int amount = Math.toIntExact(m.getCent()) - RandomUtil.randomInt(1, 100);
             logger.info("实际支付金额:{}", amount);
             order.setMoney(amount);

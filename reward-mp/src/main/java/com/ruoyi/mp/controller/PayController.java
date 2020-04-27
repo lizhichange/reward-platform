@@ -95,7 +95,7 @@ public class PayController extends BaseController {
                 }
             }
             return "nativePay";
-        } else if (StringUtil.equals("aliPay", tradeType)) {
+        } else if (StringUtil.equals("aliPay-transfer", tradeType)) {
             //支付宝支付
             String userId = sysConfigFacadeFeign.selectConfigByKey("sys.aliPay.userId");
             if (StringUtil.isBlank(userId)) {
