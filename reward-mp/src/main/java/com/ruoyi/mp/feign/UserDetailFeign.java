@@ -9,6 +9,9 @@ import com.ruoyi.reward.facade.dto.TWechatAuthDTO;
 import com.ruoyi.reward.facade.dto.UserDto;
 import com.ruoyi.reward.facade.request.UserWechatLoginRequest;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 /**
@@ -23,7 +26,8 @@ public interface UserDetailFeign {
      * @param request {@link UserWechatLoginRequest}
      * @return {@link UserDto}
      */
-    UserDto wechatLogin(UserWechatLoginRequest request);
+    @PostMapping("/wechatLogin")
+    UserDto wechatLogin(@RequestBody UserWechatLoginRequest request);
 
     /**
      * 用户唯一标识查询用户
@@ -31,7 +35,8 @@ public interface UserDetailFeign {
      * @param userId 用户唯一标识
      * @return {@link UserDto}
      */
-    UserDto queryByUserId(String userId);
+    @PostMapping("/queryByUserId")
+    UserDto queryByUserId(@RequestParam("userId") String userId);
 
     /**
      * 用户唯一标识查询用户
@@ -39,7 +44,8 @@ public interface UserDetailFeign {
      * @param openId 用户openId
      * @return {@link UserDto}
      */
-    TWechatAuthDTO queryByOpenId(String openId);
+    @PostMapping("/queryByOpenId")
+    TWechatAuthDTO queryByOpenId(@RequestParam("openId") String openId);
 
 
     /**
@@ -48,5 +54,6 @@ public interface UserDetailFeign {
      * @param userId 用户openId
      * @return {@link UserDto}
      */
-    TWechatAuthDTO queryWechatByUserId(String userId);
+    @PostMapping("/queryWechatByUserId")
+    TWechatAuthDTO queryWechatByUserId(@RequestParam("userId") String userId);
 }
