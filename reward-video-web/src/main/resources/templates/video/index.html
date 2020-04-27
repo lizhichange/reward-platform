@@ -765,7 +765,7 @@
                 "pageSize": 24
             },
             success: function (res) {
-                $.modal.closeLoading();
+                $.hideLoading();
                 if (res && res.code === 0) {
                     $("#list_videos_videos_watched_right_now_items").empty();
                     let html = "";
@@ -788,8 +788,8 @@
                     });
                     $("#list_videos_videos_watched_right_now_items").html(html);
                 } else {
-                    $.modal.closeLoading();
-                    $.modal.msg(r.msg);
+                     $.hideLoading();
+                    $.toast(r.msg);
                 }
             }
         });
