@@ -45,13 +45,11 @@ public interface ShiFacadeFeign {
      * @return 结果
      */
     @PostMapping("/updateShipinDTO")
-    int updateShipinDTO(ShipinDTO item);
+    int updateShipinDTO(@RequestBody ShipinDTO item);
 
     @PostMapping("/queryPage")
     TPageResult<ShipinDTO> queryPage(@RequestParam("start") int start,
                                      @RequestParam("rows") int rows,
-
-
                                      @RequestBody final ShipinDTO shipinDTO,
                                      @RequestParam("orderByClause")
                                              String orderByClause);

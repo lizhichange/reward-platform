@@ -5,9 +5,7 @@ import com.ruoyi.reward.facade.dto.ShipinDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.near.servicesupport.result.TPageResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,12 +23,12 @@ public class ShiController {
      * @return 公共片库
      */
     @PostMapping("/selectShipinDTOById")
-    ShipinDTO selectShipinDTOById(Long id) {
+    ShipinDTO selectShipinDTOById(@RequestParam("id") Long id) {
         return shipinFacade.selectShipinDTOById(id);
     }
 
     @PostMapping("/updateClickPlus")
-    int updateClickPlus(Long id) {
+    int updateClickPlus(@RequestParam("id") Long id) {
         return shipinFacade.updateClickPlus(id);
 
     }
@@ -42,18 +40,18 @@ public class ShiController {
      * @return 公共片库集合
      */
     @PostMapping("/selectShipinDTOList")
-    List<ShipinDTO> selectShipinDTOList(ShipinDTO item) {
+    List<ShipinDTO> selectShipinDTOList(@RequestBody ShipinDTO item) {
         return shipinFacade.selectShipinDTOList(item);
     }
 
     @PostMapping("/count")
-    int count(ShipinDTO item) {
+    int count(@RequestBody ShipinDTO item) {
         return shipinFacade.count(item);
 
     }
 
     @PostMapping("/insertShipinDTO")
-    int insertShipinDTO(ShipinDTO item) {
+    int insertShipinDTO(@RequestBody ShipinDTO item) {
         return shipinFacade.insertShipinDTO(item);
     }
 
@@ -64,13 +62,17 @@ public class ShiController {
      * @return 结果
      */
     @PostMapping("/updateShipinDTO")
-    int updateShipinDTO(ShipinDTO item) {
+    int updateShipinDTO(@RequestBody ShipinDTO item) {
         return shipinFacade.updateShipinDTO(item);
 
     }
 
     @PostMapping("/queryPage")
-    TPageResult<ShipinDTO> queryPage(int start, int rows, ShipinDTO shipinDTO, String orderByClause) {
+    TPageResult<ShipinDTO> queryPage(@RequestParam("start") int start,
+                                     @RequestParam("rows") int rows,
+                                     @RequestBody ShipinDTO shipinDTO,
+                                     @RequestParam("orderByClause")
+                                             String orderByClause) {
         return shipinFacade.queryPage(start, rows, shipinDTO, orderByClause);
     }
 
@@ -81,12 +83,12 @@ public class ShiController {
      * @return 结果
      */
     @PostMapping("/deleteShipinDTOByIds")
-    int deleteShipinDTOByIds(String ids) {
+    int deleteShipinDTOByIds(@RequestParam("ids") String ids) {
         return shipinFacade.deleteShipinDTOByIds(ids);
     }
 
     @PostMapping("/deleteShipinDTOById")
-    int deleteShipinDTOById(Long id) {
+    int deleteShipinDTOById(@RequestParam("id") Long id) {
         return shipinFacade.deleteShipinDTOById(id);
 
     }
