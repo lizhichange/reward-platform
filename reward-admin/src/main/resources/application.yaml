@@ -159,4 +159,4 @@ eureka:
     nonSecurePort: 80
     lease-renewal-interval-in-seconds: 10
     lease-expiration-duration-in-seconds: 90
-    instance-id: ${spring.cloud.client.ipAddress}:${spring.application.name}:${eureka.instance.nonSecurePort}
+    instance-id: ${eureka.client.ipAddress}:${spring.application.name}:${eureka.instance.nonSecurePort}

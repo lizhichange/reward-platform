@@ -1,10 +1,8 @@
 package com.ruoyi.mp.controller;
 
 
-import com.alibaba.dubbo.config.annotation.Reference;
+import com.ruoyi.mp.client.UserDetailClient;
 import com.ruoyi.mp.config.MpAuthConfig;
-import com.ruoyi.reward.facade.api.UserDetailFacade;
-import com.ruoyi.reward.facade.dto.UserDto;
 import com.ruoyi.reward.facade.request.UserWechatLoginRequest;
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.error.WxErrorException;
@@ -33,9 +31,9 @@ public class WechatController {
     private static final Logger LOGGER = LoggerFactory.getLogger(WechatController.class);
     @Autowired
     WxMpService wxMpService;
+    @Autowired
 
-    @Reference(version = "1.0.0", check = false)
-    UserDetailFacade userDetailFacade;
+    UserDetailClient userDetailClient;
 
     @Autowired
     MpAuthConfig mpAuthConfig;
@@ -74,8 +72,7 @@ public class WechatController {
             userWechatLoginRequest.setGender(wxMpUser.getSexDesc());
             userWechatLoginRequest.setUnionid(wxMpUser.getUnionId());
             userWechatLoginRequest.setHeadImg(wxMpUser.getHeadImgUrl());
-            UserDto dto = userDetailFacade.wechatLogin(userWechatLoginRequest);
-
+            userDetailClient.wechatLogin(userWechatLoginRequest);
             if (callback.contains("?")) {
                 callback += "&op=" + wxMpUser.getOpenId();
             } else {
