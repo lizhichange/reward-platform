@@ -14,8 +14,7 @@ feign:
         read-timeout: 20000
 
 
-
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://139.196.101.246:8761/eureka/
+      defaultZone: http://eureka.grkfcs.cn/eureka/
