@@ -8,8 +8,7 @@ server:
     encoding: utf-8
     # 禁用缓存
     cache: false
-  main:
-    allow-bean-definition-overriding: true
+
   port: 8082
   tomcat:
     # tomcat的URI编码
@@ -43,7 +42,8 @@ spring:
     enabled: false
   cache:
     type: simple
-
+  main:
+    allow-bean-definition-overriding: true
 
 endpoints:
   dubbo:
