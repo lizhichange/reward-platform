@@ -41,7 +41,7 @@ import static com.ruoyi.reward.facade.enums.OrderPayType.WE_CHAT_PAY;
 @Controller
 @RequestMapping("/video")
 @Slf4j
-public class VideoController {
+public class VideoController extends BaseController {
     private static final String prefix = "video";
     @Autowired
     ThreadPoolTaskExecutor threadPoolTaskExecutor;
@@ -284,10 +284,5 @@ public class VideoController {
         }
     }
 
-    private void getCategory(ModelMap modelmap) {
-        SysCategoryDTO sysCategory = new SysCategoryDTO();
-        sysCategory.setParentId(100L);
-        List<SysCategoryDTO> categoryList = sysCategoryFacadeFeign.selectDeptList(sysCategory);
-        modelmap.addAttribute("categoryList", categoryList);
-    }
+
 }

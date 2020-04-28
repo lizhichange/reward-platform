@@ -135,8 +135,11 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
-
-
+        <!-- 熔断降级-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+        </dependency>
 
     </dependencies>
 

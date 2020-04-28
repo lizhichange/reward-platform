@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>电影</title>
+    <meta name="viewport"
+          content="target-densitydpi=device-dpi, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="generator" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="/css/all-responsive-metal.css" rel="stylesheet" type="text/css">
+    <link href="/css/jquery.fancybox-metal.css" rel="stylesheet" type="text/css">
+
+
+    <style type="text/css">
+		.at-branding-logo {
+			font-family: helvetica, arial, sans-serif;
+			text-decoration: none;
+			font-size: 10px;
+			display: inline-block;
+			margin: 2px 0;
+			letter-spacing: .2px
+		}
+
+		.at-branding-logo .at-branding-icon {
+			background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAMAAAC67D+PAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAZQTFRF////+GlNUkcc1QAAAB1JREFUeNpiYIQDBjQmAwMmkwEM0JnY1WIxFyDAABGeAFEudiZsAAAAAElFTkSuQmCC")
+		}
+
+		.at-branding-logo .at-branding-icon,
+		.at-branding-logo .at-privacy-icon {
+			display: inline-block;
+			height: 10px;
+			width: 10px;
+			margin-left: 4px;
+			margin-right: 3px;
+			margin-bottom: -1px;
+			background-repeat: no-repeat
+		}
+
+		.at-branding-logo .at-privacy-icon {
+			background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAKCAMAAABR24SMAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABhQTFRF8fr9ot/xXcfn2/P5AKva////////AKTWodjhjAAAAAd0Uk5T////////ABpLA0YAAAA6SURBVHjaJMzBDQAwCAJAQaj7b9xifV0kUKJ9ciWxlzWEWI5gMF65KUTv0VKkjVeTerqE/x7+9BVgAEXbAWI8QDcfAAAAAElFTkSuQmCC")
+		}
+
+		.at-branding-logo span {
+			text-decoration: none
+		}
+
+		.at-branding-logo .at-branding-addthis,
+		.at-branding-logo .at-branding-powered-by {
+			color: #666
+		}
+
+		.at-branding-logo .at-branding-addthis:hover {
+			color: #333
+		}
+
+		.at-cv-with-image .at-branding-addthis,
+		.at-cv-with-image .at-branding-addthis:hover {
+			color: #fff
+		}
+
+		a.at-branding-logo:visited {
+			color: initial
+		}
+
+		.at-branding-info {
+			display: inline-block;
+			padding: 0 5px;
+			color: #666;
+			border: 1px solid #666;
+			border-radius: 50%;
+			font-size: 10px;
+			line-height: 9pt;
+			opacity: .7;
+			transition: all .3s ease;
+			text-decoration: none
+		}
+
+		.at-branding-info span {
+			border: 0;
+			clip: rect(0 0 0 0);
+			height: 1px;
+			margin: -1px;
+			overflow: hidden;
+			padding: 0;
+			position: absolute;
+			width: 1px
+		}
+
+		.at-branding-info:before {
+			content: 'i';
+			font-family: Times New Roman
+		}
+
+		.at-branding-info:hover {
+			color: #0780df;
+			border-color: #0780df
+		}
+
+
+
+
+    </style>
+    <style type="text/css">
+		.fancybox-margin {
+			margin-right: 0px;
+		}
+
+
+
+
+    </style>
+
+</head>
+
+<body class="no-touch">
+<div class="top-links">
+    <div class="center-hold">
+        <div class="network">
+            <strong></strong>
+            <ul>
+            </ul>
+        </div>
+        <div class="box tags-cloud">
+            <a class="highlight" th:each="item:${categoryList}" style="font-weight: bold; font-size: 13px;"
+               th:href="@{'/video/category?categoryId='+${item.categoryId}}">[[${item.categoryName}]] &nbsp;&nbsp;
+            </a>
+        </div>
+        <div class="member-links">
+            <ul>
+                <li><a href="/video">首页</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="header">
+        <div class="logo">
+            <a href="javascript:"></a>
+        </div>
+        <div class="social-bookmarks">
+            <div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+                <div class="atclear" tabindex="1000"></div>
+            </div>
+        </div>
+
+        <div class="search">
+            <form id="user-form">
+                <span id="search" class="search-button">搜索</span>
+                <div class="search-text"><input type="text" name="name" placeholder="请输入搜索关键词,至少两个字符" value=""></div>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="box bottom-adv"></div>
+    <div class="content">
+        <strong class="popup-title">注册</strong>
+        <div class="popup-holder">
+            <form action="http://www.xiaobi021.com/signup/" data-form="ajax" method="post">
+                <div class="generic-error hidden"></div>
+                <div>
+                    <div class="row">
+                        <label for="signup_username" class="field-label required">用户名字</label>
+                        <input type="text" name="username" id="signup_username" class="textfield" maxlength="100"
+                               placeholder="您的用户名，可以使用字母 数字。禁止使用中文、特殊符号如 ！ @ -">
+                        <div class="field-error down"></div>
+                    </div>
+
+                    <div class="row">
+                        <label for="signup_pass" class="field-label required">密码</label>
+                        <input type="password" name="pass" id="signup_pass" class="textfield" placeholder="至少5个字符">
+                        <div class="field-error down"></div>
+                    </div>
+
+                    <div class="row">
+                        <label for="signup_pass2" class="field-label required">确认密码</label>
+                        <input type="password" name="pass2" id="signup_pass2" class="textfield" placeholder="重复密码">
+                        <div class="field-error down"></div>
+                    </div>
+
+                    <div class="row">
+                        <label for="signup_email" class="field-label required">电子邮件</label>
+                        <input type="text" name="email" id="signup_email" class="textfield" maxlength="100"
+                               placeholder="禁止使用QQ邮箱(无法找回密码),推荐使用126、163、谷歌邮箱">
+                        <div class="field-error down"></div>
+                    </div>
+
+
+                    <div class="bottom">
+                        <label></label>
+                        <div class="captcha-control">
+                            <div class="image">
+                            </div>
+                            <input type="hidden" name="action" value="signup">
+                            <input type="hidden" name="email_link" value="http://www.xiaobi021.com/email/">
+                            <input type="submit" class="submit" value="注册">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="footer-margin">
+        <div class="content">
+            <div class="box bottom-adv">
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <div class="footer-wrap">
+        <ul class="nav">
+            <li><a href="/video">主页</a></li>
+            <li><a href="/reg" target="_blank">注册</a></li>
+            <li><a href="/login" target="_blank" id="login">登录</a></li>
+        </ul>
+        <div class="copyright">
+
+        </div>
+
+    </div>
+
+    <script src="/js/main.min.js"></script>
+
+</div>
+
+</body>
+
+</html>
