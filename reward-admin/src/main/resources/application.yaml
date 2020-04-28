@@ -149,10 +149,16 @@ security:
     name: admin
     password: admin
 
+
+reward-service:
+  ribbon:
+    listOfServers: http://admin:admin@eureka.grkfcs.cn
+
 eureka:
   client:
     serviceUrl:
       defaultZone: http://admin:admin@eureka.grkfcs.cn/eureka/
+    fetchRegistry: true
   instance:
     preferIpAddress: true
     ipAddress: admin.grkfcs.cn

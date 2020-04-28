@@ -1,6 +1,5 @@
 package com.ruoyi.web.controller.system;
 
-import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.alibaba.csp.sentinel.slots.block.RuleConstant;
 import com.alibaba.csp.sentinel.slots.block.flow.FlowRule;
@@ -78,7 +77,7 @@ public class SysCaptchaController extends BaseController {
      * 验证码生成
      */
     @GetMapping(value = "/captchaImage")
-    @SentinelResource(value = "captchaImage", blockHandler = "exceptionHandler", fallback = "fallback")
+//    @SentinelResource(value = "captchaImage", blockHandler = "exceptionHandler", fallback = "fallback")
     public ModelAndView getKaptchaImage(HttpServletRequest request, HttpServletResponse response) {
         logger.info("captchaImage");
         ServletOutputStream out = null;
