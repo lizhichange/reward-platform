@@ -9,11 +9,13 @@ import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
@@ -32,6 +34,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/captcha")
+@Slf4j
 public class SysCaptchaController extends BaseController {
     @Resource(name = "captchaProducer")
     private Producer captchaProducer;
@@ -55,6 +58,11 @@ public class SysCaptchaController extends BaseController {
         return AjaxResult.error();
     }
 
+    @PostConstruct
+    void init() {
+        initFlowQpsRule();
+    }
+
     private void initFlowQpsRule() {
         List<FlowRule> rules = new ArrayList<>();
         FlowRule rule = new FlowRule("captchaImage");
@@ -72,6 +80,7 @@ public class SysCaptchaController extends BaseController {
     @GetMapping(value = "/captchaImage")
     @SentinelResource(value = "captchaImage", blockHandler = "exceptionHandler", fallback = "fallback")
     public ModelAndView getKaptchaImage(HttpServletRequest request, HttpServletResponse response) {
+        logger.info("captchaImage");
         ServletOutputStream out = null;
         String code = null;
         try {
