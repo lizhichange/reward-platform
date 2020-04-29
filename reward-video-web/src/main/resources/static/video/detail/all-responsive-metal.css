@@ -831,7 +831,6 @@ form .progressbar .progress {
 	background: none;
 }
 .search .search-text input:focus {
-	background: url('../images/bg-grey.gif');
 	outline: none;
 }
 .search .search-button {

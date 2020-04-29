@@ -150,10 +150,21 @@
                 <div class="atclear" tabindex="1000"></div>
             </div>
         </div>
-
+        <style>
+            .search-button-ext{
+                float: right;
+                display: block;
+                width: 39px;
+                height: 30px;
+                background: url('/images/btn-search.png') no-repeat;
+                text-indent: -1000px;
+                overflow: hidden;
+                cursor: pointer;
+            }
+        </style>
         <div class="search">
             <form id="user-form">
-                <span id="search" class="search-button">搜索</span>
+                <span id="search" class="search-button-ext">搜索</span>
                 <div class="search-text"><input type="text" name="name" placeholder="请输入搜索关键词,至少两个字符" value=""></div>
             </form>
         </div>
