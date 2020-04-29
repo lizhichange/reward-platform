@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/rest/ts")
 @RestController
 @Slf4j
-public class TsController {
+public class TsRestController {
     @Autowired
     private TsFacade tsFacade;
 
