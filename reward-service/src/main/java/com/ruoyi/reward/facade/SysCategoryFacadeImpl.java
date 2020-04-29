@@ -1,11 +1,11 @@
-package com.ruoyi.system.facade;
+package com.ruoyi.reward.facade;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.google.common.collect.Lists;
+import com.ruoyi.reward.domain.SysCategory;
 import com.ruoyi.reward.facade.api.SysCategoryFacade;
 import com.ruoyi.reward.facade.dto.SysCategoryDTO;
-import com.ruoyi.system.domain.SysCategory;
-import com.ruoyi.system.service.ISysCategoryService;
+import com.ruoyi.reward.service.ISysCategoryService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;

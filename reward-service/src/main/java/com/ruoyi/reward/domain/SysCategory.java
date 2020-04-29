@@ -1,4 +1,4 @@
-package com.ruoyi.system.domain;
+package com.ruoyi.reward.domain;
 
 import com.ruoyi.common.core.domain.BaseEntity;
 import lombok.Data;

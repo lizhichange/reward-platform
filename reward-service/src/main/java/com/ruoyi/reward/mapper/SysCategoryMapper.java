@@ -1,6 +1,7 @@
-package com.ruoyi.system.mapper;
+package com.ruoyi.reward.mapper;
 
-import com.ruoyi.system.domain.SysCategory;
+
+import com.ruoyi.reward.domain.SysCategory;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

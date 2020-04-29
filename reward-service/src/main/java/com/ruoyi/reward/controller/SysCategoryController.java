@@ -1,4 +1,4 @@
-package com.ruoyi.web.controller.system;
+package com.ruoyi.reward.controller;
 
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.constant.UserConstants;
@@ -7,14 +7,11 @@ import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.domain.Ztree;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.StringUtils;
-import com.ruoyi.framework.util.ShiroUtils;
 
+import com.ruoyi.reward.domain.SysCategory;
 import com.ruoyi.reward.facade.api.ShipinFacade;
 import com.ruoyi.reward.facade.dto.ShipinDTO;
-import com.ruoyi.system.domain.SysCategory;
-import com.ruoyi.system.domain.SysRole;
-
-import com.ruoyi.system.service.ISysCategoryService;
+import com.ruoyi.reward.service.ISysCategoryService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -71,7 +68,6 @@ public class SysCategoryController extends BaseController {
         if (UserConstants.DEPT_NAME_NOT_UNIQUE.equals(categoryService.checkDeptNameUnique(dept))) {
             return error("新增栏目'" + dept.getCategoryName() + "'失败，栏目名称已存在");
         }
-        dept.setCreateBy(ShiroUtils.getLoginName());
         return toAjax(categoryService.insertDept(dept));
     }
 
@@ -101,7 +97,7 @@ public class SysCategoryController extends BaseController {
         } else if (dept.getParentId().equals(dept.getCategoryId())) {
             return error("修改栏目'" + dept.getCategoryName() + "'失败，上级栏目不能是自己");
         }
-        dept.setUpdateBy(ShiroUtils.getLoginName());
+
         return toAjax(categoryService.updateDept(dept));
     }
 
@@ -143,7 +139,7 @@ public class SysCategoryController extends BaseController {
     @GetMapping("/selectDeptTree/{deptId}")
     public String selectDeptTree(@PathVariable("deptId") Long deptId, ModelMap mmap) {
         SysCategory sysCategory = categoryService.selectDeptById(deptId);
-        mmap.put("dept",sysCategory );
+        mmap.put("dept", sysCategory);
         return prefix + "/tree";
     }
 
@@ -153,17 +149,8 @@ public class SysCategoryController extends BaseController {
     @GetMapping("/treeData")
     @ResponseBody
     public List<Ztree> treeData() {
-        List<Ztree> ztrees = categoryService.selectDeptTree(new SysCategory());
-        return ztrees;
+        return categoryService.selectDeptTree(new SysCategory());
     }
 
-    /**
-     * 加载角色栏目（数据权限）列表树
-     */
-    @GetMapping("/roleDeptTreeData")
-    @ResponseBody
-    public List<Ztree> deptTreeData(SysRole role) {
-        List<Ztree> ztrees = categoryService.roleDeptTreeData(role);
-        return ztrees;
-    }
+
 }

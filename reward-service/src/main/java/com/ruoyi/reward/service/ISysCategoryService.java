@@ -1,8 +1,7 @@
-package com.ruoyi.system.service;
+package com.ruoyi.reward.service;
 
 import com.ruoyi.common.core.domain.Ztree;
-import com.ruoyi.system.domain.SysCategory;
-import com.ruoyi.system.domain.SysRole;
+import com.ruoyi.reward.domain.SysCategory;
 
 import java.util.List;
 
@@ -34,7 +33,7 @@ public interface ISysCategoryService {
      * @param role 角色对象
      * @return 菜单列表
      */
-    public List<Ztree> roleDeptTreeData(SysRole role);
+
 
     /**
      * 查询部门人数

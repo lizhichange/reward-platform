@@ -1,13 +1,12 @@
-package com.ruoyi.system.service.impl;
+package com.ruoyi.reward.service.impl;
 
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.core.domain.Ztree;
 import com.ruoyi.common.exception.BusinessException;
 import com.ruoyi.common.utils.StringUtils;
-import com.ruoyi.system.domain.SysCategory;
-import com.ruoyi.system.domain.SysRole;
-import com.ruoyi.system.mapper.SysCategoryMapper;
-import com.ruoyi.system.service.ISysCategoryService;
+import com.ruoyi.reward.domain.SysCategory;
+import com.ruoyi.reward.mapper.SysCategoryMapper;
+import com.ruoyi.reward.service.ISysCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,25 +49,6 @@ public class SysCategoryServiceImpl implements ISysCategoryService {
         return initZtree(deptList);
     }
 
-    /**
-     * 根据角色ID查询部门（数据权限）
-     *
-     * @param role 角色对象
-     * @return 部门列表（数据权限）
-     */
-    @Override
-    public List<Ztree> roleDeptTreeData(SysRole role) {
-        Long roleId = role.getRoleId();
-        List<Ztree> ztrees;
-        List<SysCategory> deptList = selectDeptList(new SysCategory());
-        if (StringUtils.isNotNull(roleId)) {
-            List<String> roleDeptList = sysCategoryMapper.selectRoleDeptTree(roleId);
-            ztrees = initZtree(deptList, roleDeptList);
-        } else {
-            ztrees = initZtree(deptList);
-        }
-        return ztrees;
-    }
 
     /**
      * 对象转部门树
