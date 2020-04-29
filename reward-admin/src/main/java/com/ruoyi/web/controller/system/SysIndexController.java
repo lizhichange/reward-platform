@@ -3,6 +3,8 @@ package com.ruoyi.web.controller.system;
 import com.ruoyi.common.config.Global;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.framework.util.ShiroUtils;
+import com.ruoyi.reward.domain.SysShort;
+import com.ruoyi.reward.service.ISysShortService;
 import com.ruoyi.system.domain.Account;
 import com.ruoyi.system.domain.SysMenu;
 import com.ruoyi.system.domain.SysUser;
