@@ -1,4 +1,4 @@
-package com.ruoyi.web.controller.system;
+package com.ruoyi.reward.controller;
 
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;

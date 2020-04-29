@@ -1,7 +1,9 @@
-package com.ruoyi.system.service;
+package com.ruoyi.reward.service;
+
+import com.ruoyi.reward.domain.SysWechatConfig;
 
 import java.util.List;
-import com.ruoyi.system.domain.SysWechatConfig;
+
 
 /**
  * 公众号配置信息Service接口
