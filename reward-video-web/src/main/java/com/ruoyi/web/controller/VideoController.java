@@ -172,6 +172,10 @@ public class VideoController extends BaseController {
         dataTable.setTotal(result.getTotalRows());
         return dataTable;
     }
+    @GetMapping("/tswq")
+    public String renderTs(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
+        return prefix + "/tswq";
+    }
 
     @PostMapping("/list")
     @ResponseBody

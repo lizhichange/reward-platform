@@ -3,7 +3,6 @@ package com.ruoyi.web.controller.common;
 import cn.hutool.core.util.RandomUtil;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
-import com.ruoyi.web.controller.enums.MultiTypeEnum;
 import com.ruoyi.common.config.Global;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
@@ -12,7 +11,6 @@ import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.core.page.TableSupport;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.IpUtils;
-import org.near.toolkit.context.SessionContext;
 import com.ruoyi.reward.facade.api.IShipinFacade;
 import com.ruoyi.reward.facade.api.ITsFacade;
 import com.ruoyi.reward.facade.dto.ShipinDTO;
@@ -27,11 +25,13 @@ import com.ruoyi.system.service.ISysCategoryService;
 import com.ruoyi.system.service.ISysConfigService;
 import com.ruoyi.system.service.ISysOrderService;
 import com.ruoyi.system.service.ISysWebMainService;
+import com.ruoyi.web.controller.enums.MultiTypeEnum;
 import lombok.extern.java.Log;
 import org.near.servicesupport.result.TPageResult;
 import org.near.toolkit.common.DateUtils;
 import org.near.toolkit.common.EnumUtil;
 import org.near.toolkit.common.StringUtil;
+import org.near.toolkit.context.SessionContext;
 import org.near.toolkit.model.Money;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -78,6 +78,7 @@ public class PronController extends BaseController {
 
     @Autowired
     ISysConfigService configService;
+
     @GetMapping("/redirect")
     @com.ruoyi.common.annotation.Log(title = "视频重定向", businessType = BusinessType.QUERY)
     public String redirect(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
@@ -323,6 +324,7 @@ public class PronController extends BaseController {
     public String pagination() {
         return prefix + "/pagination";
     }
+
     @GetMapping("/tips")
     @com.ruoyi.common.annotation.Log(title = "投诉页面", businessType = BusinessType.QUERY)
 
@@ -362,6 +364,12 @@ public class PronController extends BaseController {
         modelmap.addAttribute("list", list);
         return prefix + "/multi";
     }
+
+    @GetMapping("/tswq")
+    public String renderTs(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
+        return prefix + "/tswq";
+    }
+
 }
 
 
