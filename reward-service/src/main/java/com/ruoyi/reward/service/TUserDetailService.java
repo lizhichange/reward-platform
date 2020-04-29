@@ -11,7 +11,7 @@ import java.util.List;
  * @author ruoyi
  * @date 2020-04-11
  */
-public interface ITUserDetailService 
+public interface TUserDetailService
 {
     /**
      * 查询平台用户

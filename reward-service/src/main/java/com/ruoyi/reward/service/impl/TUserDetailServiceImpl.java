@@ -3,7 +3,7 @@ package com.ruoyi.reward.service.impl;
 import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.reward.domain.TUserDetail;
 import com.ruoyi.reward.mapper.ExtTUserDetailMapper;
-import com.ruoyi.reward.service.ITUserDetailService;
+import com.ruoyi.reward.service.TUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +16,7 @@ import java.util.List;
  * @date 2020-04-11
  */
 @Service
-public class TUserDetailServiceImpl implements ITUserDetailService {
+public class TUserDetailServiceImpl implements TUserDetailService {
     @Autowired
     private ExtTUserDetailMapper tUserDetailMapper;
 

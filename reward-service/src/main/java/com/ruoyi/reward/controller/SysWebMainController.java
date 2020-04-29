@@ -7,7 +7,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.reward.domain.SysWebMain;
-import com.ruoyi.reward.service.ISysWebMainService;
+import com.ruoyi.reward.service.SysWebMainService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.near.toolkit.common.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class SysWebMainController extends BaseController {
     private String prefix = "system/webmain";
 
     @Autowired
-    private ISysWebMainService sysWebMainService;
+    private SysWebMainService sysWebMainService;
 
     @RequiresPermissions("system:webmain:view")
     @GetMapping()

@@ -5,7 +5,7 @@ import com.google.common.collect.Lists;
 import com.ruoyi.reward.domain.SysWebMain;
 import com.ruoyi.reward.facade.api.SysWebMainFacade;
 import com.ruoyi.reward.facade.dto.SysWebMainDTO;
-import com.ruoyi.reward.service.ISysWebMainService;
+import com.ruoyi.reward.service.SysWebMainService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 )
 public class ISysWebMainFacadeImpl implements SysWebMainFacade {
     @Autowired
-    ISysWebMainService sysWebMainService;
+    SysWebMainService sysWebMainService;
 
     @Override
     public List<SysWebMainDTO> selectSysWebMainList(SysWebMainDTO sysWebMain) {

@@ -13,12 +13,12 @@ import com.ruoyi.reward.domain.Shipin;
 import com.ruoyi.reward.facade.api.ShipinFacade;
 import com.ruoyi.reward.facade.dto.ShipinDTO;
 import com.ruoyi.reward.facade.dto.SysCategoryDTO;
-import com.ruoyi.reward.service.IShipinService;
+import com.ruoyi.reward.service.ShipinService;
 import com.ruoyi.reward.domain.SysCategory;
 import com.ruoyi.system.domain.SysRole;
 import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.system.domain.ext.ExtSysOrder;
-import com.ruoyi.reward.service.ISysCategoryService;
+import com.ruoyi.reward.service.SysCategoryService;
 import com.ruoyi.system.service.ISysOrderService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.BeanUtils;
@@ -47,11 +47,11 @@ public class ShipinController extends BaseController {
     private ShipinFacade shipinFacade;
     @Autowired
 
-    IShipinService shipinService;
+    ShipinService shipinService;
 
 
     @Autowired
-    ISysCategoryService sysCategoryService;
+    SysCategoryService sysCategoryService;
 
     @RequiresPermissions("system:shipin:view")
     @GetMapping()

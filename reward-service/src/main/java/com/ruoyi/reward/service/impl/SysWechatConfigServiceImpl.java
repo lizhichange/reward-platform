@@ -4,7 +4,7 @@ import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.reward.domain.SysWechatConfig;
 import com.ruoyi.reward.mapper.SysWechatConfigMapper;
-import com.ruoyi.reward.service.ISysWechatConfigService;
+import com.ruoyi.reward.service.SysWechatConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,7 @@ import java.util.List;
  * @date 2020-03-24
  */
 @Service
-public class SysWechatConfigServiceImpl implements ISysWechatConfigService {
+public class SysWechatConfigServiceImpl implements SysWechatConfigService {
     @Autowired
     private SysWechatConfigMapper sysWechatConfigMapper;
 

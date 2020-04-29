@@ -11,7 +11,7 @@ import java.util.List;
  * @author ruoyi
  * @date 2020-03-24
  */
-public interface ISysWechatConfigService 
+public interface SysWechatConfigService
 {
     /**
      * 查询公众号配置信息

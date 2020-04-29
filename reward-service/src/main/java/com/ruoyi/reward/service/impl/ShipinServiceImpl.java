@@ -4,7 +4,7 @@ import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.reward.domain.Shipin;
 import com.ruoyi.reward.mapper.ExtShipinMapper;
-import com.ruoyi.reward.service.IShipinService;
+import com.ruoyi.reward.service.ShipinService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ import java.util.List;
  * @author sunflower
  */
 @Service
-public class ShipinServiceImpl implements IShipinService {
+public class ShipinServiceImpl implements ShipinService {
     @Autowired
     private ExtShipinMapper extShipinMapper;
 

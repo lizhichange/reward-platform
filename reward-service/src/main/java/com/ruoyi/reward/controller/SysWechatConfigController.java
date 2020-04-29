@@ -7,7 +7,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.reward.domain.SysWechatConfig;
-import com.ruoyi.reward.service.ISysWechatConfigService;
+import com.ruoyi.reward.service.SysWechatConfigService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,7 +28,7 @@ public class SysWechatConfigController extends BaseController {
     private String prefix = "system/wechatConfig";
 
     @Autowired
-    private ISysWechatConfigService sysWechatConfigService;
+    private SysWechatConfigService sysWechatConfigService;
 
     @RequiresPermissions("system:wechatConfig:view")
     @GetMapping()

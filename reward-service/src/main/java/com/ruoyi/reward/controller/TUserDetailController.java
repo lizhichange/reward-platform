@@ -7,7 +7,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.reward.domain.TUserDetail;
-import com.ruoyi.reward.service.ITUserDetailService;
+import com.ruoyi.reward.service.TUserDetailService;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class TUserDetailController extends BaseController {
     private String prefix = "system/wxuser";
 
     @Autowired
-    private ITUserDetailService tUserDetailService;
+    private TUserDetailService tUserDetailService;
 
     @RequiresPermissions("system:wxuser:view")
     @GetMapping()

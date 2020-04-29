@@ -11,7 +11,7 @@ import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.reward.domain.SysCategory;
 import com.ruoyi.reward.facade.api.ShipinFacade;
 import com.ruoyi.reward.facade.dto.ShipinDTO;
-import com.ruoyi.reward.service.ISysCategoryService;
+import com.ruoyi.reward.service.SysCategoryService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,7 +33,7 @@ public class SysCategoryController extends BaseController {
     private String prefix = "system/category";
 
     @Autowired
-    private ISysCategoryService categoryService;
+    private SysCategoryService categoryService;
 
     @RequiresPermissions("system:category:view")
     @GetMapping()

@@ -4,7 +4,7 @@ import com.ruoyi.reward.domain.Shipin;
 
 import java.util.List;
 
-public interface IShipinService {
+public interface ShipinService {
     /**
      * 查询邀请码管理
      *

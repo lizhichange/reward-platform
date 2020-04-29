@@ -11,7 +11,7 @@ import java.util.List;
  * @author ruoyi
  * @date 2020-03-23
  */
-public interface ISysWebMainService {
+public interface SysWebMainService {
     /**
      * 查询域名管理
      *

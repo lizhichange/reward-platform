@@ -4,7 +4,7 @@ import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.reward.domain.SysWebMain;
 import com.ruoyi.reward.mapper.SysWebMainMapper;
-import com.ruoyi.reward.service.ISysWebMainService;
+import com.ruoyi.reward.service.SysWebMainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +19,7 @@ import java.util.List;
  * @date 2020-03-23
  */
 @Service
-public class SysWebMainServiceImpl implements ISysWebMainService {
+public class SysWebMainServiceImpl implements SysWebMainService {
     @Autowired
     private SysWebMainMapper sysWebMainMapper;
 

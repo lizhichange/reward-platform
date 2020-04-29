@@ -6,7 +6,7 @@ import com.ruoyi.common.exception.BusinessException;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.reward.domain.SysCategory;
 import com.ruoyi.reward.mapper.SysCategoryMapper;
-import com.ruoyi.reward.service.ISysCategoryService;
+import com.ruoyi.reward.service.SysCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,7 +20,7 @@ import java.util.List;
  * @author ruoyi
  */
 @Service
-public class SysCategoryServiceImpl implements ISysCategoryService {
+public class SysCategoryServiceImpl implements SysCategoryService {
 
 
     @Autowired

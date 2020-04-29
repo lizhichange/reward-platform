@@ -4,14 +4,14 @@ import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.reward.domain.Ts;
 import com.ruoyi.reward.mapper.ExtTsMapper;
-import com.ruoyi.reward.service.ITsService;
+import com.ruoyi.reward.service.TsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class TsServiceImpl implements ITsService {
+public class TsServiceImpl implements TsService {
     @Autowired
     private ExtTsMapper extTsMapper;
 

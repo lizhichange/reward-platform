@@ -4,7 +4,7 @@ import com.ruoyi.reward.domain.Ts;
 
 import java.util.List;
 
-public interface ITsService {
+public interface TsService {
     /**
      * 查询投诉列表
      *

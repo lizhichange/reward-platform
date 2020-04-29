@@ -5,7 +5,7 @@ import com.google.common.collect.Lists;
 import com.ruoyi.reward.domain.SysCategory;
 import com.ruoyi.reward.facade.api.SysCategoryFacade;
 import com.ruoyi.reward.facade.dto.SysCategoryDTO;
-import com.ruoyi.reward.service.ISysCategoryService;
+import com.ruoyi.reward.service.SysCategoryService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 
 
     @Autowired
-    ISysCategoryService sysCategoryService;
+    SysCategoryService sysCategoryService;
 
     @Override
     public List<SysCategoryDTO> selectDeptList(SysCategoryDTO dept) {
