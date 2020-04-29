@@ -1,14 +1,16 @@
-package com.ruoyi.system.service.impl;
+package com.ruoyi.reward.service.impl;
 
 import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.common.utils.DateUtils;
-import com.ruoyi.system.domain.SysWebMain;
-import com.ruoyi.system.mapper.SysWebMainMapper;
-import com.ruoyi.system.service.ISysWebMainService;
+import com.ruoyi.reward.domain.SysWebMain;
+import com.ruoyi.reward.mapper.SysWebMainMapper;
+import com.ruoyi.reward.service.ISysWebMainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+;
 
 /**
  * 域名管理Service业务层处理

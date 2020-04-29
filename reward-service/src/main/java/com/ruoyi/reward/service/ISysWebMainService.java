@@ -1,6 +1,7 @@
-package com.ruoyi.system.service;
+package com.ruoyi.reward.service;
 
-import com.ruoyi.system.domain.SysWebMain;
+
+import com.ruoyi.reward.domain.SysWebMain;
 
 import java.util.List;
 

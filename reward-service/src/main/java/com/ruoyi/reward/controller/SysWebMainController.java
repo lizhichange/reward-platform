@@ -1,4 +1,4 @@
-package com.ruoyi.web.controller.system;
+package com.ruoyi.reward.controller;
 
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
@@ -6,8 +6,8 @@ import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
-import com.ruoyi.system.domain.SysWebMain;
-import com.ruoyi.system.service.ISysWebMainService;
+import com.ruoyi.reward.domain.SysWebMain;
+import com.ruoyi.reward.service.ISysWebMainService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.near.toolkit.common.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;

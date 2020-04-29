@@ -1,20 +1,20 @@
-package com.ruoyi.system.mapper;
+package com.ruoyi.reward.mapper;
 
-import com.ruoyi.system.domain.SysWebMain;
+
+import com.ruoyi.reward.domain.SysWebMain;
 
 import java.util.List;
 
 /**
  * 域名管理Mapper接口
- * 
+ *
  * @author ruoyi
  * @date 2020-03-23
  */
-public interface SysWebMainMapper 
-{
+public interface SysWebMainMapper {
     /**
      * 查询域名管理
-     * 
+     *
      * @param id 域名管理ID
      * @return 域名管理
      */
@@ -22,7 +22,7 @@ public interface SysWebMainMapper
 
     /**
      * 查询域名管理列表
-     * 
+     *
      * @param sysWebMain 域名管理
      * @return 域名管理集合
      */
@@ -30,7 +30,7 @@ public interface SysWebMainMapper
 
     /**
      * 新增域名管理
-     * 
+     *
      * @param sysWebMain 域名管理
      * @return 结果
      */
@@ -38,7 +38,7 @@ public interface SysWebMainMapper
 
     /**
      * 修改域名管理
-     * 
+     *
      * @param sysWebMain 域名管理
      * @return 结果
      */
@@ -46,7 +46,7 @@ public interface SysWebMainMapper
 
     /**
      * 删除域名管理
-     * 
+     *
      * @param id 域名管理ID
      * @return 结果
      */
@@ -54,7 +54,7 @@ public interface SysWebMainMapper
 
     /**
      * 批量删除域名管理
-     * 
+     *
      * @param ids 需要删除的数据ID
      * @return 结果
      */
