@@ -1,5 +1,5 @@
 package com.ruoyi.web.client;
 
-public interface ISysConfigFacadeClient {
+public interface SysConfigFacadeClient {
     String selectConfigByKey(String key);
 }

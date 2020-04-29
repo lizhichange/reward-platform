@@ -1,4 +1,4 @@
-package com.ruoyi.web.client;
+package com.ruoyi.reward.facade.api;
 
 import com.ruoyi.reward.facade.dto.SysCategoryDTO;
 
@@ -9,7 +9,7 @@ import java.util.List;
  *
  * @author ruoyi
  */
-public interface ISysCategoryFacadeClient {
+public interface SysCategoryFacade {
     /**
      * 查询部门管理数据
      *

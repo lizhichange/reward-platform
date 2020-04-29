@@ -2,7 +2,7 @@ package com.ruoyi.system.facade;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.google.common.collect.Lists;
-import com.ruoyi.reward.facade.api.ISysWebMainFacade;
+import com.ruoyi.reward.facade.api.SysWebMainFacade;
 import com.ruoyi.reward.facade.dto.SysWebMainDTO;
 import com.ruoyi.system.domain.SysWebMain;
 import com.ruoyi.system.service.ISysWebMainService;
@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
         version = "1.0.0",
         timeout = 15000
 )
-public class ISysWebMainFacadeImpl implements ISysWebMainFacade {
+public class ISysWebMainFacadeImpl implements SysWebMainFacade {
     @Autowired
     ISysWebMainService sysWebMainService;
 

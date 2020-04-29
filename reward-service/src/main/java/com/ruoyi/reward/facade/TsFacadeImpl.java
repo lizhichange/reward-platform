@@ -3,7 +3,7 @@ package com.ruoyi.reward.facade;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.ruoyi.common.core.text.Convert;
-import com.ruoyi.reward.facade.api.ITsFacade;
+import com.ruoyi.reward.facade.api.TsFacade;
 import com.ruoyi.reward.facade.dto.TsDTO;
 import com.ruoyi.reward.mapper.ExtTsMapper;
 import com.ruoyi.reward.mapper.TsMapper;
@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
         version = "1.0.0",
         timeout = 15000
 )
-public class TsFacadeImpl implements ITsFacade {
+public class TsFacadeImpl implements TsFacade {
     @Autowired
     private ExtTsMapper extTsMapper;
 

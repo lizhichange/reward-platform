@@ -2,6 +2,7 @@ package com.ruoyi.web.controller;
 
 import com.ruoyi.reward.facade.dto.SysCategoryDTO;
 import com.ruoyi.web.feign.SysCategoryFacadeFeign;
+import com.ruoyi.web.feign.TsFeign;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 
@@ -13,6 +14,8 @@ import java.util.List;
 public class BaseController {
     @Autowired
     SysCategoryFacadeFeign sysCategoryFacadeFeign;
+    @Autowired
+    TsFeign tsFeign;
 
     protected void getCategory(ModelMap modelmap) {
         SysCategoryDTO sysCategory = new SysCategoryDTO();

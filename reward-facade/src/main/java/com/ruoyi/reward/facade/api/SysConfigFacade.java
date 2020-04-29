@@ -1,5 +1,5 @@
 package com.ruoyi.reward.facade.api;
 
-public interface ISysConfigFacade {
+public interface SysConfigFacade {
     String selectConfigByKey(String configKey);
 }

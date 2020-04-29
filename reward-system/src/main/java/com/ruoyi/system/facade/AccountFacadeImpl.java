@@ -2,14 +2,13 @@ package com.ruoyi.system.facade;
 
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.ruoyi.reward.facade.api.IAccountFacade;
-import com.ruoyi.reward.facade.api.ISysOrderFacade;
+import com.ruoyi.reward.facade.api.AccountFacade;
+import com.ruoyi.reward.facade.api.SysOrderFacade;
 import com.ruoyi.reward.facade.dto.SysOrderDTO;
 import com.ruoyi.reward.facade.enums.OrderStatusType;
 import com.ruoyi.system.CuratorClientUtils;
 import com.ruoyi.system.biz.OrderStatusDispatcher;
 import com.ruoyi.system.biz.UserOrderStatusProcessor;
-import com.ruoyi.system.mapper.AccountMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.locks.InterProcessMutex;
@@ -33,12 +32,12 @@ import java.util.List;
         timeout = 15000
 )
 @Slf4j
-public class AccountFacadeImpl implements IAccountFacade {
+public class AccountFacadeImpl implements AccountFacade {
 
     @Autowired
     OrderStatusDispatcher orderStatusDispatcher;
     @Autowired
-    ISysOrderFacade sysOrderFacade;
+    SysOrderFacade sysOrderFacade;
     @Autowired
     CuratorClientUtils curatorClientUtils;
 
@@ -69,7 +68,7 @@ public class AccountFacadeImpl implements IAccountFacade {
             }
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            throw  e;
+            throw e;
         } finally {
             //判断是否持有锁 进而进行锁是否释放的操作
             if (interProcessMutex.isAcquiredInThisProcess()) {

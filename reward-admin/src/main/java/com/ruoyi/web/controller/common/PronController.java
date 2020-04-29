@@ -10,9 +10,9 @@ import com.ruoyi.common.core.page.PageDomain;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.core.page.TableSupport;
 import com.ruoyi.common.enums.BusinessType;
-import com.ruoyi.common.utils.IpUtils;
-import com.ruoyi.reward.facade.api.IShipinFacade;
-import com.ruoyi.reward.facade.api.ITsFacade;
+import org.near.utils.IpUtils;
+import com.ruoyi.reward.facade.api.ShipinFacade;
+import com.ruoyi.reward.facade.api.TsFacade;
 import com.ruoyi.reward.facade.dto.ShipinDTO;
 import com.ruoyi.reward.facade.dto.TsDTO;
 import com.ruoyi.reward.facade.enums.OrderPayType;
@@ -25,7 +25,7 @@ import com.ruoyi.system.service.ISysCategoryService;
 import com.ruoyi.system.service.ISysConfigService;
 import com.ruoyi.system.service.ISysOrderService;
 import com.ruoyi.system.service.ISysWebMainService;
-import com.ruoyi.web.controller.enums.MultiTypeEnum;
+import com.ruoyi.reward.facade.enums.MultiTypeEnum;
 import lombok.extern.java.Log;
 import org.near.servicesupport.result.TPageResult;
 import org.near.toolkit.common.DateUtils;
@@ -64,9 +64,9 @@ public class PronController extends BaseController {
 
 
     @Autowired
-    IShipinFacade shipinFacade;
+    ShipinFacade shipinFacade;
     @Autowired
-    ITsFacade tsService;
+    TsFacade tsFacade;
     @Autowired
     ISysWebMainService sysWebMainService;
     @Autowired
@@ -349,7 +349,7 @@ public class PronController extends BaseController {
             tsDTO.setOpenId(SessionContext.getOpenId());
             tsDTO.setUserid(SessionContext.getUserId());
             tsDTO.setIp(IpUtils.getIpAddr(request));
-            tsService.insertTs(tsDTO);
+            tsFacade.insertTs(tsDTO);
         });
         return prefix + "/sub";
     }

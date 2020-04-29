@@ -2,7 +2,7 @@ package com.ruoyi.system.facade;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.google.common.collect.Lists;
-import com.ruoyi.reward.facade.api.ISysCategoryFacade;
+import com.ruoyi.reward.facade.api.SysCategoryFacade;
 import com.ruoyi.reward.facade.dto.SysCategoryDTO;
 import com.ruoyi.system.domain.SysCategory;
 import com.ruoyi.system.service.ISysCategoryService;
@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 @Service(
         version = "1.0.0",
         timeout = 15000
-)public class SysCategoryFacadeImpl implements ISysCategoryFacade {
+)public class SysCategoryFacadeImpl implements SysCategoryFacade {
 
 
     @Autowired

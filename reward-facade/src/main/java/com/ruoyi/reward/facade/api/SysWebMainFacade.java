@@ -1,4 +1,4 @@
-package com.ruoyi.mp.client;
+package com.ruoyi.reward.facade.api;
 
 import com.ruoyi.reward.facade.dto.SysWebMainDTO;
 
@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * @author sunflower
  */
-public interface ISysWebMainFacadeClient {
+public interface SysWebMainFacade {
 
     List<SysWebMainDTO> selectSysWebMainList(SysWebMainDTO sysWebMain);
 

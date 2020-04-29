@@ -2,10 +2,8 @@ package com.ruoyi.web.controller;
 
 import cn.hutool.core.util.RandomUtil;
 import com.alibaba.fastjson.JSON;
-import com.ruoyi.reward.facade.dto.ShipinDTO;
-import com.ruoyi.reward.facade.dto.SysCategoryDTO;
-import com.ruoyi.reward.facade.dto.SysOrderDTO;
-import com.ruoyi.reward.facade.dto.SysWebMainDTO;
+import com.ruoyi.reward.facade.dto.*;
+import com.ruoyi.reward.facade.enums.MultiTypeEnum;
 import com.ruoyi.reward.facade.enums.OrderPayType;
 import com.ruoyi.reward.facade.enums.OrderStatusType;
 import com.ruoyi.reward.facade.enums.WebMainStatus;
@@ -21,6 +19,7 @@ import org.near.toolkit.common.EnumUtil;
 import org.near.toolkit.common.StringUtil;
 import org.near.toolkit.context.SessionContext;
 import org.near.toolkit.model.Money;
+import org.near.utils.IpUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Controller;
@@ -28,6 +27,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -50,11 +50,11 @@ public class VideoController extends BaseController {
     @Autowired
     SysCategoryFacadeFeign sysCategoryFacadeFeign;
     @Autowired
-    ISysOrderFacadeFeign sysOrderFacadeFeign;
+    SysOrderFacadeFeign sysOrderFacadeFeign;
     @Autowired
-    ISysWebMainFacadeFeign sysWebMainFacadeFeign;
+    SysWebMainFacadeFeign sysWebMainFacadeFeign;
     @Autowired
-    ISysConfigFacadeFeign sysConfigFacadeFeign;
+    SysConfigFacadeFeign sysConfigFacadeFeign;
 
     private void xxx(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
         log.info("userId:{}", userid);
@@ -172,10 +172,7 @@ public class VideoController extends BaseController {
         dataTable.setTotal(result.getTotalRows());
         return dataTable;
     }
-    @GetMapping("/tswq")
-    public String renderTs(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
-        return prefix + "/tswq";
-    }
+
 
     @PostMapping("/list")
     @ResponseBody
@@ -288,5 +285,47 @@ public class VideoController extends BaseController {
         }
     }
 
+
+    @GetMapping("/tips")
+
+    public String tips(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
+        return prefix + "/tips";
+    }
+
+    @GetMapping("/audit")
+    public String audit(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
+        return prefix + "/audit";
+    }
+
+    @GetMapping("/sub")
+    public String success(@RequestParam(value = "userid", required = false) String userid,
+                          HttpServletRequest request,
+                          ModelMap modelmap) {
+
+        threadPoolTaskExecutor.execute(() -> {
+            TsDTO tsDTO = new TsDTO();
+            tsDTO.setOpenId(SessionContext.getOpenId());
+            tsDTO.setUserid(SessionContext.getUserId());
+            tsDTO.setIp(IpUtils.getIpAddr(request));
+            tsFeign.insertTs(tsDTO);
+        });
+        return prefix + "/sub";
+    }
+
+
+    @GetMapping("/multi")
+    public String multi(@RequestParam(value = "userid", required = false) String userid,
+                        @RequestParam(value = "type") String type,
+                        ModelMap modelmap) {
+        MultiTypeEnum multiTypeEnum = EnumUtil.queryByCode(type, MultiTypeEnum.class);
+        List<MultiTypeEnum.ItemContent> list = multiTypeEnum.getList();
+        modelmap.addAttribute("list", list);
+        return prefix + "/multi";
+    }
+
+    @GetMapping("/tswq")
+    public String renderTs(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
+        return prefix + "/tswq";
+    }
 
 }

@@ -5,7 +5,7 @@ import com.ruoyi.reward.facade.dto.SysOrderDTO;
 /**
  * @author sunflower
  */
-public interface IAccountFacade {
+public interface AccountFacade {
     /**
      * @param dto
      */

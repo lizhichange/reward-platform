@@ -8,7 +8,7 @@ import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.ruoyi.common.json.JSON;
-import com.ruoyi.common.utils.IpUtils;
+import org.near.utils.IpUtils;
 
 /**
  * 处理并记录日志文件

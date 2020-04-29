@@ -11,7 +11,7 @@ import java.util.List;
  * @author ruoyi
  * @date 2020-03-26
  */
-public interface ISysOrderFacade {
+public interface SysOrderFacade {
     /**
      * 查询订单列表
      *

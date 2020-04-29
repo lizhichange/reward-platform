@@ -1,7 +1,7 @@
 package com.ruoyi.system.rest;
 
 
-import com.ruoyi.reward.facade.api.IAccountFacade;
+import com.ruoyi.reward.facade.api.AccountFacade;
 import com.ruoyi.reward.facade.dto.SysOrderDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class AccountFacadeController {
     @Autowired
-    IAccountFacade accountFacade;
+    AccountFacade accountFacade;
 
     @PostMapping("/take")
     public String take(@RequestBody SysOrderDTO dto) {

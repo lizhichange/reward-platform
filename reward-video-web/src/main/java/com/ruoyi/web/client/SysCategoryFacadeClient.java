@@ -1,4 +1,4 @@
-package com.ruoyi.reward.facade.api;
+package com.ruoyi.web.client;
 
 import com.ruoyi.reward.facade.dto.SysCategoryDTO;
 
@@ -9,7 +9,7 @@ import java.util.List;
  *
  * @author ruoyi
  */
-public interface ISysCategoryFacade {
+public interface SysCategoryFacadeClient {
     /**
      * 查询部门管理数据
      *
@@ -17,7 +17,6 @@ public interface ISysCategoryFacade {
      * @return 部门信息集合
      */
     List<SysCategoryDTO> selectDeptList(SysCategoryDTO dept);
-
 
 
     int selectDeptCount(Long parentId);
@@ -29,4 +28,4 @@ public interface ISysCategoryFacade {
     SysCategoryDTO selectDeptById(Long deptId);
 
 
- }
+}

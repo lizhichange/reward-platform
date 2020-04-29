@@ -2,7 +2,7 @@ package com.ruoyi.web.client.impl;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.ruoyi.web.client.ShipinFacadeClient;
-import com.ruoyi.reward.facade.api.IShipinFacade;
+import com.ruoyi.reward.facade.api.ShipinFacade;
 import com.ruoyi.reward.facade.dto.ShipinDTO;
 import org.near.servicesupport.result.TPageResult;
 import org.springframework.stereotype.Component;
@@ -13,7 +13,7 @@ import java.util.List;
 public class ShipinFacadeClientImpl implements ShipinFacadeClient {
 
     @Reference(version = "1.0.0", check = false)
-    IShipinFacade shipinFacade;
+    ShipinFacade shipinFacade;
 
     @Override
     public ShipinDTO selectShipinDTOById(Long id) {

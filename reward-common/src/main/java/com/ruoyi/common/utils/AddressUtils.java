@@ -6,6 +6,7 @@ import com.ruoyi.common.config.Global;
 import com.ruoyi.common.json.JSON;
 import com.ruoyi.common.json.JSONObject;
 import com.ruoyi.common.utils.http.HttpUtils;
+import org.near.utils.IpUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

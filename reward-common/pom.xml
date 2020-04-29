@@ -141,6 +141,10 @@
             <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.reward</groupId>
+            <artifactId>toolkit</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

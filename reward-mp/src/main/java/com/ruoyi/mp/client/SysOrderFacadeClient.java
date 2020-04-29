@@ -4,7 +4,7 @@ import com.ruoyi.reward.facade.dto.SysOrderDTO;
 
 import java.util.List;
 
-public interface ISysOrderFacadeClient {
+public interface SysOrderFacadeClient {
 
       List<SysOrderDTO> selectSysOrderList(SysOrderDTO sysOrder);
 

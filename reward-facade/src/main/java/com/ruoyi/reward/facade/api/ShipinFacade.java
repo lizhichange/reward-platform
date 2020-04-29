@@ -12,7 +12,7 @@ import java.util.List;
  * @author ruoyi
  * @date 2020-03-17
  */
-public interface IShipinFacade {
+public interface ShipinFacade {
     /**
      * 查询公共片库
      *

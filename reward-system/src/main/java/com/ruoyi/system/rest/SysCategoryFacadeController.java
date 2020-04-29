@@ -1,6 +1,6 @@
 package com.ruoyi.system.rest;
 
-import com.ruoyi.reward.facade.api.ISysCategoryFacade;
+import com.ruoyi.reward.facade.api.SysCategoryFacade;
 import com.ruoyi.reward.facade.dto.SysCategoryDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class SysCategoryFacadeController {
 
 
     @Autowired
-    ISysCategoryFacade sysCategoryFacade;
+    SysCategoryFacade sysCategoryFacade;
 
     @PostMapping("/selectDeptList")
     public List<SysCategoryDTO> selectDeptList(@RequestBody SysCategoryDTO dept) {

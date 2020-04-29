@@ -4,7 +4,7 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.google.common.collect.Lists;
 import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.reward.convert.ShipinConvert;
-import com.ruoyi.reward.facade.api.IShipinFacade;
+import com.ruoyi.reward.facade.api.ShipinFacade;
 import com.ruoyi.reward.facade.dto.ShipinDTO;
 
 import com.ruoyi.reward.domain.Shipin;
@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
         version = "1.0.0",
         timeout = 15000
 )
-public class ShipinFacadeImpl implements IShipinFacade {
+public class ShipinFacadeImpl implements ShipinFacade {
     @Autowired
     private ShipinMapper shipinMapper;
     @Autowired

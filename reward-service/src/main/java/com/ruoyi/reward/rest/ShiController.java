@@ -1,6 +1,6 @@
 package com.ruoyi.reward.rest;
 
-import com.ruoyi.reward.facade.api.IShipinFacade;
+import com.ruoyi.reward.facade.api.ShipinFacade;
 import com.ruoyi.reward.facade.dto.ShipinDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.near.servicesupport.result.TPageResult;
@@ -14,7 +14,7 @@ import java.util.List;
 @Slf4j
 public class ShiController {
     @Autowired
-    IShipinFacade shipinFacade;
+    ShipinFacade shipinFacade;
 
     /**
      * 查询公共片库

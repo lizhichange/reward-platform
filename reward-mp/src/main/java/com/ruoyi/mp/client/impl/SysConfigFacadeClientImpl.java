@@ -2,15 +2,18 @@ package com.ruoyi.mp.client.impl;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 
-import com.ruoyi.mp.client.ISysConfigFacadeClient;
-import com.ruoyi.reward.facade.api.ISysConfigFacade;
+import com.ruoyi.mp.client.SysConfigFacadeClient;
+import com.ruoyi.reward.facade.api.SysConfigFacade;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author sunflower
+ */
 @Component
-public class ISysConfigFacadeClientImpl implements ISysConfigFacadeClient {
+public class SysConfigFacadeClientImpl implements SysConfigFacadeClient {
 
     @Reference(version = "1.0.0", check = false)
-    ISysConfigFacade sysConfigFacade;
+    SysConfigFacade sysConfigFacade;
 
     @Override
     public String selectConfigByKey(String key) {

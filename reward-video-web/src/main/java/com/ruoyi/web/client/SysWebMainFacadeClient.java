@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * @author sunflower
  */
-public interface ISysWebMainFacadeClient {
+public interface SysWebMainFacadeClient {
     List<SysWebMainDTO> selectSysWebMainList(SysWebMainDTO sysWebMain);
 
 }

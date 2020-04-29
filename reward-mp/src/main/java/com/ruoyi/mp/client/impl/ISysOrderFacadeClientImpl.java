@@ -1,9 +1,8 @@
 package com.ruoyi.mp.client.impl;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-
-import com.ruoyi.mp.client.ISysOrderFacadeClient;
-import com.ruoyi.reward.facade.api.ISysOrderFacade;
+import com.ruoyi.mp.client.SysOrderFacadeClient;
+import com.ruoyi.reward.facade.api.SysOrderFacade;
 import com.ruoyi.reward.facade.dto.SysOrderDTO;
 import org.springframework.stereotype.Component;
 
@@ -13,9 +12,9 @@ import java.util.List;
  * @author sunflower
  */
 @Component
-public class ISysOrderFacadeClientImpl implements ISysOrderFacadeClient {
+public class ISysOrderFacadeClientImpl implements SysOrderFacadeClient {
     @Reference(version = "1.0.0", check = false)
-    ISysOrderFacade sysOrderFacade;
+    SysOrderFacade sysOrderFacade;
 
     @Override
     public List<SysOrderDTO> selectSysOrderList(SysOrderDTO sysOrder) {

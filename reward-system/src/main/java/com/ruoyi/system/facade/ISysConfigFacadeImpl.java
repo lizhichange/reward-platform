@@ -1,7 +1,7 @@
 package com.ruoyi.system.facade;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.ruoyi.reward.facade.api.ISysConfigFacade;
+import com.ruoyi.reward.facade.api.SysConfigFacade;
 import com.ruoyi.system.service.ISysConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
         version = "1.0.0",
         timeout = 15000
 )
-public class ISysConfigFacadeImpl implements ISysConfigFacade {
+public class ISysConfigFacadeImpl implements SysConfigFacade {
     @Autowired
     ISysConfigService sysConfigService;
 

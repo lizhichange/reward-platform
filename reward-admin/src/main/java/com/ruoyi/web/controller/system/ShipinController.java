@@ -10,7 +10,7 @@ import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.reward.domain.Shipin;
-import com.ruoyi.reward.facade.api.IShipinFacade;
+import com.ruoyi.reward.facade.api.ShipinFacade;
 import com.ruoyi.reward.facade.dto.ShipinDTO;
 import com.ruoyi.reward.facade.dto.SysCategoryDTO;
 import com.ruoyi.reward.service.IShipinService;
@@ -44,7 +44,7 @@ public class ShipinController extends BaseController {
     private String prefix = "system/shipin";
 
     @Autowired
-    private IShipinFacade shipinFacade;
+    private ShipinFacade shipinFacade;
     @Autowired
 
     IShipinService shipinService;

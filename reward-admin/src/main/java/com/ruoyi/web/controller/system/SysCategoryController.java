@@ -9,7 +9,7 @@ import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.framework.util.ShiroUtils;
 
-import com.ruoyi.reward.facade.api.IShipinFacade;
+import com.ruoyi.reward.facade.api.ShipinFacade;
 import com.ruoyi.reward.facade.dto.ShipinDTO;
 import com.ruoyi.system.domain.SysCategory;
 import com.ruoyi.system.domain.SysRole;
@@ -126,7 +126,7 @@ public class SysCategoryController extends BaseController {
     }
 
     @Autowired
-    IShipinFacade shipinFacade;
+    ShipinFacade shipinFacade;
 
     /**
      * 校验栏目名称

@@ -1,6 +1,6 @@
 package com.ruoyi.system.rest;
 
-import com.ruoyi.reward.facade.api.ISysWebMainFacade;
+import com.ruoyi.reward.facade.api.SysWebMainFacade;
 import com.ruoyi.reward.facade.dto.SysWebMainDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ import java.util.List;
 @Slf4j
 public class ISysWebMainFacadeController {
     @Autowired
-    ISysWebMainFacade sysWebMainFacade;
+    SysWebMainFacade sysWebMainFacade;
 
     @PostMapping("/selectSysWebMainList")
     public List<SysWebMainDTO> selectSysWebMainList(@RequestBody SysWebMainDTO sysWebMain) {

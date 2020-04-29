@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * @author sunflower
  */
-public interface ISysOrderFacadeClient {
+public interface SysOrderFacadeClient {
 
     List<SysOrderDTO> selectSysOrderList(SysOrderDTO sysOrder);
 

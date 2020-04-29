@@ -2,7 +2,7 @@ package com.ruoyi.system.facade;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.google.common.collect.Lists;
-import com.ruoyi.reward.facade.api.ISysOrderFacade;
+import com.ruoyi.reward.facade.api.SysOrderFacade;
 import com.ruoyi.reward.facade.dto.SysOrderDTO;
 import com.ruoyi.system.domain.SysOrder;
 import com.ruoyi.system.domain.ext.ExtSysOrder;
@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
         timeout = 15000
 )
 @Slf4j
-public class ISysOrderFacadeImpl implements ISysOrderFacade {
+public class ISysOrderFacadeImpl implements SysOrderFacade {
 
     @Autowired
     ISysOrderService sysOrderService;

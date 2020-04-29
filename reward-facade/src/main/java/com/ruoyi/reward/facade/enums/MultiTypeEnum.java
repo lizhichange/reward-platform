@@ -1,4 +1,4 @@
-package com.ruoyi.web.controller.enums;
+package com.ruoyi.reward.facade.enums;
 
 import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;

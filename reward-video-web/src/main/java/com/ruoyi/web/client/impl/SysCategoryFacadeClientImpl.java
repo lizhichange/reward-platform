@@ -1,8 +1,8 @@
 package com.ruoyi.web.client.impl;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.ruoyi.web.client.ISysCategoryFacadeClient;
-import com.ruoyi.reward.facade.api.ISysCategoryFacade;
+import com.ruoyi.web.client.SysCategoryFacadeClient;
+import com.ruoyi.reward.facade.api.SysCategoryFacade;
 import com.ruoyi.reward.facade.dto.SysCategoryDTO;
 import org.springframework.stereotype.Component;
 
@@ -12,10 +12,10 @@ import java.util.List;
  * @author sunflower
  */
 @Component
-public class ISysCategoryFacadeClientImpl implements ISysCategoryFacadeClient {
+public class SysCategoryFacadeClientImpl implements SysCategoryFacadeClient {
 
     @Reference(version = "1.0.0", check = false)
-    ISysCategoryFacade sysCategoryFacade;
+    SysCategoryFacade sysCategoryFacade;
 
     @Override
     public List<SysCategoryDTO> selectDeptList(SysCategoryDTO dept) {

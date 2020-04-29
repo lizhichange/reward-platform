@@ -1,6 +1,6 @@
 package com.ruoyi.system.rest;
 
-import com.ruoyi.reward.facade.api.ISysOrderFacade;
+import com.ruoyi.reward.facade.api.SysOrderFacade;
 import com.ruoyi.reward.facade.dto.SysOrderDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ import java.util.List;
 public class ISysOrderFacadeController {
 
     @Autowired
-    ISysOrderFacade sysOrderFacade;
+    SysOrderFacade sysOrderFacade;
 
     @PostMapping("/selectSysOrderById")
     public SysOrderDTO selectSysOrderById(Long id) {

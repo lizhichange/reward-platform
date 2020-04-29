@@ -8,7 +8,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.reward.domain.Ts;
-import com.ruoyi.reward.facade.api.ITsFacade;
+import com.ruoyi.reward.facade.api.TsFacade;
 import com.ruoyi.reward.service.ITsService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,7 @@ public class TsController extends BaseController {
     private String prefix = "system/ts";
 
     @Autowired
-    ITsFacade tsFacade;
+    TsFacade tsFacade;
     @Autowired
     ITsService tsService;
 
