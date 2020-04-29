@@ -1,6 +1,6 @@
-package com.ruoyi.system.service;
+package com.ruoyi.reward.service;
 
-import com.ruoyi.system.domain.SysShort;
+import com.ruoyi.reward.domain.SysShort;
 
 import java.util.List;
 

@@ -1,7 +1,10 @@
-package com.ruoyi.system.service.impl;
+package com.ruoyi.reward.service.impl;
 
 import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.reward.domain.SysShort;
+import com.ruoyi.reward.mapper.SysShortMapper;
+import com.ruoyi.reward.service.ISysShortService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +17,7 @@ import java.util.List;
  * @date 2020-03-23
  */
 @Service
-public class SysShortServiceImpl implements ISysShortService 
+public class SysShortServiceImpl implements ISysShortService
 {
     @Autowired
     private SysShortMapper sysShortMapper;
