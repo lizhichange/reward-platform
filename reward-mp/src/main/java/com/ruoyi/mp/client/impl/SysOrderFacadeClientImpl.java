@@ -12,7 +12,7 @@ import java.util.List;
  * @author sunflower
  */
 @Component
-public class ISysOrderFacadeClientImpl implements SysOrderFacadeClient {
+public class SysOrderFacadeClientImpl implements SysOrderFacadeClient {
     @Reference(version = "1.0.0", check = false)
     SysOrderFacade sysOrderFacade;
 
