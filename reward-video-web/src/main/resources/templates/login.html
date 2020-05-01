@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
     <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
     <script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
-    <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
     <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
 
     <style type="text/css">
@@ -106,11 +105,13 @@
         }
 
 
+
     </style>
     <style type="text/css">
         .fancybox-margin {
             margin-right: 0px;
         }
+
 
 
     </style>
@@ -161,6 +162,7 @@
                     overflow: hidden;
                     cursor: pointer;
                 }
+
 
 
         </style>
@@ -225,8 +227,6 @@
 
     </div>
 
-    <script src="/js/main.min.js"></script>
-
 </div>
 
 <script>
@@ -238,8 +238,8 @@ $(function(){
 });
         function login() {
             $.showLoading("登录中");
-            var username = $.common.trim($("input[name='username']").val());
-            var password = $.common.trim($("input[name='password']").val());
+            var username = $("input[name='username']").val();
+            var password = $("input[name='password']").val();
             $.ajax({
                 type: "post",
                 url: "/login",
@@ -257,6 +257,7 @@ $(function(){
                 }
             });
         }
+
 
 
 </script>

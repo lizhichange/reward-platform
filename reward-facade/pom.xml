@@ -16,8 +16,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.reward</groupId>
-            <artifactId>toolkit</artifactId>
+            <groupId>org.near</groupId>
+            <artifactId>near-toolkit</artifactId>
         </dependency>
     </dependencies>
 

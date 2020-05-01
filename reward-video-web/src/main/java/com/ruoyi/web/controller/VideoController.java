@@ -328,4 +328,9 @@ public class VideoController extends BaseController {
         return prefix + "/tswq";
     }
 
+    @GetMapping("/demo")
+    public String demo(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
+        return prefix + "/demo";
+    }
+
 }

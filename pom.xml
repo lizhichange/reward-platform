@@ -21,7 +21,6 @@
         <module>reward-service</module>
         <module>reward-facade</module>
         <module>reward-mp</module>
-        <module>toolkit</module>
         <module>reward-qrcode-admin-ui</module>
         <module>reward-video-web</module>
         <module>eureka-server</module>
@@ -251,13 +250,11 @@
                 <artifactId>reward-service</artifactId>
                 <version>${reward.version}</version>
             </dependency>
-
             <dependency>
-                <groupId>com.reward</groupId>
-                <artifactId>toolkit</artifactId>
-                <version>${reward.version}</version>
+                <groupId>org.near</groupId>
+                <artifactId>near-toolkit</artifactId>
+                <version>1.0.2</version>
             </dependency>
-
             <dependency>
                 <groupId>com.reward</groupId>
                 <artifactId>reward-facade</artifactId>
@@ -359,10 +356,8 @@
             </dependency>
 
 
-
         </dependencies>
     </dependencyManagement>
-
 
 
     <dependencies>
