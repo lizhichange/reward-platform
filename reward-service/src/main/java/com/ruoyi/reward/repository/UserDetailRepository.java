@@ -22,6 +22,6 @@ public interface UserDetailRepository {
     boolean update(TUserDetail record, String operator);
 
     UserDto queryByPK(String userId);
-
+    UserDto queryByUserName(String userName);
     List<UserDto> queryByUserIds(List<String> userIds);
 }

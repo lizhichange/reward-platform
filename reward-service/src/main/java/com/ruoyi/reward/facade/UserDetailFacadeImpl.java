@@ -56,6 +56,12 @@ public class UserDetailFacadeImpl implements UserDetailFacade {
         return res;
     }
 
+    @Override
+    public UserDto queryByUserName(String userName) {
+        return userDetailRepository.queryByUserName(userName);
+
+    }
+
     private UserDto take(UserWechatLoginRequest request, PrincipalTypeEnum principalType) {
         UserDto res;
         String userId = UUID.randomUUID().toString();

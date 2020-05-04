@@ -22,6 +22,7 @@ import org.near.toolkit.model.Money;
 import org.near.utils.IpUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.CollectionUtils;
@@ -198,6 +199,7 @@ public class VideoController extends BaseController {
 
     @PostMapping("/queryOrder")
     @ResponseBody
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public AjaxResult queryOrder(ShipinDTO shipinDTO) {
         String openId = SessionContext.getOpenId();
         String userId = SessionContext.getUserId();

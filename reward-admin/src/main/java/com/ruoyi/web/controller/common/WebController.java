@@ -11,7 +11,7 @@ import com.ruoyi.framework.shiro.service.SysPasswordService;
 import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.reward.domain.SysShort;
 import com.ruoyi.reward.facade.enums.YqmStatusEnum;
-import com.ruoyi.reward.service.ISysShortService;
+import com.ruoyi.reward.service.SysShortService;
 import com.ruoyi.system.domain.SysPost;
 import com.ruoyi.system.domain.SysRole;
 import com.ruoyi.system.domain.SysUser;
@@ -67,7 +67,7 @@ public class WebController extends BaseController {
     IYqmService yqmService;
 
     @Autowired
-    ISysShortService sysShortService;
+    SysShortService sysShortService;
 
 
     @Autowired

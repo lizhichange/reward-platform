@@ -7,7 +7,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.reward.domain.SysShort;
-import com.ruoyi.reward.service.ISysShortService;
+import com.ruoyi.reward.service.SysShortService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,7 +28,7 @@ public class SysShortController extends BaseController {
     private String prefix = "system/short";
 
     @Autowired
-    private ISysShortService sysShortService;
+    private SysShortService sysShortService;
 
     @RequiresPermissions("system:short:view")
     @GetMapping()

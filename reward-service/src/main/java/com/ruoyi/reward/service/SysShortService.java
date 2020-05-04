@@ -10,7 +10,7 @@ import java.util.List;
  * @author ruoyi
  * @date 2020-03-23
  */
-public interface ISysShortService 
+public interface SysShortService
 {
     /**
      * 查询链接管理

@@ -57,6 +57,14 @@ public class UserDetailRepositoryImpl implements UserDetailRepository {
     }
 
     @Override
+    public UserDto queryByUserName(String userName) {
+        TUserDetailExample example = new TUserDetailExample();
+        // TODO: 2020/5/3
+        return conv(tUserDetailMapper.selectByExample(example).get(0));
+
+    }
+
+    @Override
     public List<UserDto> queryByUserIds(List<String> userIds) {
         TUserDetailExample example = new TUserDetailExample();
         example.createCriteria().andUserIdIn(userIds);

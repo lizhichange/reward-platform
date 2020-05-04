@@ -22,7 +22,7 @@ public interface UserDetailFacade {
      * @return {@link UserDto}
      */
     UserDto wechatLogin(UserWechatLoginRequest request);
-
+    UserDto queryByUserName(String userName);
     /**
      * 用户唯一标识查询用户
      *
