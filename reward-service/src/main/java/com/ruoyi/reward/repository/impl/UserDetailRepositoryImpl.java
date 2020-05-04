@@ -59,7 +59,7 @@ public class UserDetailRepositoryImpl implements UserDetailRepository {
     @Override
     public UserDto queryByUserName(String userName) {
         TUserDetailExample example = new TUserDetailExample();
-        // TODO: 2020/5/3
+        example.createCriteria().andUserNameEqualTo(userName);
         return conv(tUserDetailMapper.selectByExample(example).get(0));
 
     }
@@ -85,6 +85,8 @@ public class UserDetailRepositoryImpl implements UserDetailRepository {
         target.setMobileNo(src.getMobileNo());
         target.setBirthday(src.getBirthday());
         target.setCreateBy(src.getCreateBy());
+        target.setUserName(src.getUserName());
+        target.setPassword(src.getPassword());
         target.setGmtCreate(src.getGmtCreate());
         target.setModifiedBy(src.getModifiedBy());
         target.setAvatarUrl(src.getAvatarUrl());

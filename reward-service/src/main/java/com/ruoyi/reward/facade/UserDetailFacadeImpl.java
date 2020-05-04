@@ -6,6 +6,8 @@ package com.ruoyi.reward.facade;
 
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.ruoyi.common.sequence.ConcurrentSequence;
+import com.ruoyi.common.sequence.Sequence;
 import com.ruoyi.reward.facade.api.UserDetailFacade;
 import com.ruoyi.reward.facade.dto.TWechatAuthDTO;
 import com.ruoyi.reward.facade.dto.UserDto;
@@ -62,9 +64,12 @@ public class UserDetailFacadeImpl implements UserDetailFacade {
 
     }
 
+    @Autowired
+    ConcurrentSequence concurrentSequence;
+
     private UserDto take(UserWechatLoginRequest request, PrincipalTypeEnum principalType) {
         UserDto res;
-        String userId = UUID.randomUUID().toString();
+        String userId = concurrentSequence.nextId().toString();
         TUserDetail uRecord = new TUserDetail();
         uRecord.setUserId(userId);
         uRecord.setNickname(request.getNickName());
