@@ -207,6 +207,18 @@ public class UserDto implements Serializable {
      */
     private String regUrl;
 
+    private String password;
+
+    /**
+     *
+     *
+     * t_user_detail.user_name
+
+     *
+     * @mbg.generated 2020-05-04 16:25:45
+     */
+    private String userName;
+
     private static final long serialVersionUID = 1L;
 
     @Override

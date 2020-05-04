@@ -22,6 +22,8 @@
     <result column="level" jdbcType="INTEGER" property="level" />
     <result column="avatar_url" jdbcType="VARCHAR" property="avatarUrl" />
     <result column="reg_url" jdbcType="VARCHAR" property="regUrl" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -84,7 +86,7 @@
   <sql id="Base_Column_List">
     id, user_id, nickname, name, gender, id_card, mobile_no, birthday, gmt_create, create_by, 
     gmt_modified, modified_by, user_source, user_referee, user_referee_ids, marker, reg_date, 
-    level, avatar_url, reg_url
+    level, avatar_url, reg_url, password, user_name
   </sql>
   <select id="selectByExample" parameterType="com.ruoyi.reward.domain.TUserDetailExample" resultMap="BaseResultMap">
     select
@@ -131,14 +133,16 @@
       gmt_modified, modified_by, user_source, 
       user_referee, user_referee_ids, marker, 
       reg_date, level, avatar_url, 
-      reg_url)
+      reg_url, password, user_name
+      )
     values (#{userId,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
       #{gender,jdbcType=CHAR}, #{idCard,jdbcType=VARCHAR}, #{mobileNo,jdbcType=VARCHAR}, 
       #{birthday,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, 
       #{gmtModified,jdbcType=TIMESTAMP}, #{modifiedBy,jdbcType=VARCHAR}, #{userSource,jdbcType=VARCHAR}, 
       #{userReferee,jdbcType=VARCHAR}, #{userRefereeIds,jdbcType=VARCHAR}, #{marker,jdbcType=VARCHAR}, 
       #{regDate,jdbcType=DATE}, #{level,jdbcType=INTEGER}, #{avatarUrl,jdbcType=VARCHAR}, 
-      #{regUrl,jdbcType=VARCHAR})
+      #{regUrl,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.ruoyi.reward.domain.TUserDetail" useGeneratedKeys="true">
     insert into t_user_detail
@@ -200,6 +204,12 @@
       <if test="regUrl != null">
         reg_url,
       </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -258,6 +268,12 @@
       </if>
       <if test="regUrl != null">
         #{regUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -330,6 +346,12 @@
       <if test="record.regUrl != null">
         reg_url = #{record.regUrl,jdbcType=VARCHAR},
       </if>
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null">
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -356,7 +378,9 @@
       reg_date = #{record.regDate,jdbcType=DATE},
       level = #{record.level,jdbcType=INTEGER},
       avatar_url = #{record.avatarUrl,jdbcType=VARCHAR},
-      reg_url = #{record.regUrl,jdbcType=VARCHAR}
+      reg_url = #{record.regUrl,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      user_name = #{record.userName,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -421,6 +445,12 @@
       <if test="regUrl != null">
         reg_url = #{regUrl,jdbcType=VARCHAR},
       </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -444,7 +474,9 @@
       reg_date = #{regDate,jdbcType=DATE},
       level = #{level,jdbcType=INTEGER},
       avatar_url = #{avatarUrl,jdbcType=VARCHAR},
-      reg_url = #{regUrl,jdbcType=VARCHAR}
+      reg_url = #{regUrl,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
