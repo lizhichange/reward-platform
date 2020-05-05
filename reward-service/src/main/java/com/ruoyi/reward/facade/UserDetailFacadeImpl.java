@@ -7,10 +7,9 @@ package com.ruoyi.reward.facade;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.ruoyi.common.sequence.ConcurrentSequence;
-import com.ruoyi.common.sequence.Sequence;
 import com.ruoyi.reward.facade.api.UserDetailFacade;
 import com.ruoyi.reward.facade.dto.TWechatAuthDTO;
-import com.ruoyi.reward.facade.dto.UserDto;
+import com.ruoyi.reward.facade.dto.UserDTO;
 import com.ruoyi.reward.facade.enums.PrincipalTypeEnum;
 import com.ruoyi.reward.facade.request.UserWechatLoginRequest;
 import com.ruoyi.reward.domain.TUserDetail;
@@ -18,8 +17,6 @@ import com.ruoyi.reward.domain.TWechatAuth;
 import com.ruoyi.reward.repository.UserDetailRepository;
 import com.ruoyi.reward.repository.WechatAuthRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.UUID;
 
 
 /**
@@ -36,10 +33,10 @@ public class UserDetailFacadeImpl implements UserDetailFacade {
     UserDetailRepository userDetailRepository;
 
     @Override
-    public UserDto wechatLogin(UserWechatLoginRequest request) {
+    public UserDTO wechatLogin(UserWechatLoginRequest request) {
         PrincipalTypeEnum principalType = PrincipalTypeEnum.USER;
         TWechatAuthDTO wechat = wechatRepository.queryByOpenId(request.getOpenId(), principalType);
-        UserDto res;
+        UserDTO res;
         // 已注册
         if (wechat != null) {
             res = userDetailRepository.queryByPK(wechat.getUserId());
@@ -59,7 +56,7 @@ public class UserDetailFacadeImpl implements UserDetailFacade {
     }
 
     @Override
-    public UserDto queryByUserName(String userName) {
+    public UserDTO queryByUserName(String userName) {
         return userDetailRepository.queryByUserName(userName);
 
     }
@@ -67,8 +64,8 @@ public class UserDetailFacadeImpl implements UserDetailFacade {
     @Autowired
     ConcurrentSequence concurrentSequence;
 
-    private UserDto take(UserWechatLoginRequest request, PrincipalTypeEnum principalType) {
-        UserDto res;
+    private UserDTO take(UserWechatLoginRequest request, PrincipalTypeEnum principalType) {
+        UserDTO res;
         String userId = concurrentSequence.nextId().toString();
         TUserDetail uRecord = new TUserDetail();
         uRecord.setUserId(userId);
@@ -91,7 +88,7 @@ public class UserDetailFacadeImpl implements UserDetailFacade {
     }
 
     @Override
-    public UserDto queryByUserId(String userId) {
+    public UserDTO queryByUserId(String userId) {
         return userDetailRepository.queryByPK(userId);
     }
 

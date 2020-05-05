@@ -14,6 +14,7 @@ public class Users extends ToString {
     private String username;
     private String lastName;
     private int active;
+    private String userId;
 
     public Users() {
     }

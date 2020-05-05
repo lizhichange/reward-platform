@@ -5,11 +5,9 @@
 package com.ruoyi.reward.repository;
 
 import com.ruoyi.reward.domain.TUserDetail;
-import com.ruoyi.reward.facade.dto.UserDto;
+import com.ruoyi.reward.facade.dto.UserDTO;
 
 import java.util.List;
-
-
 
 
 /**
@@ -21,7 +19,9 @@ public interface UserDetailRepository {
 
     boolean update(TUserDetail record, String operator);
 
-    UserDto queryByPK(String userId);
-    UserDto queryByUserName(String userName);
-    List<UserDto> queryByUserIds(List<String> userIds);
+    UserDTO queryByPK(String userId);
+
+    UserDTO queryByUserName(String userName);
+
+    List<UserDTO> queryByUserIds(List<String> userIds);
 }

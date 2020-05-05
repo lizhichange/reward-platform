@@ -6,7 +6,7 @@ package com.ruoyi.reward.repository.impl;
 
 import com.ruoyi.reward.domain.TUserDetail;
 import com.ruoyi.reward.domain.TUserDetailExample;
-import com.ruoyi.reward.facade.dto.UserDto;
+import com.ruoyi.reward.facade.dto.UserDTO;
 import com.ruoyi.reward.mapper.TUserDetailMapper;
 import com.ruoyi.reward.repository.UserDetailRepository;
 import org.apache.commons.codec.binary.Base64;
@@ -49,7 +49,7 @@ public class UserDetailRepositoryImpl implements UserDetailRepository {
     }
 
     @Override
-    public UserDto queryByPK(String userId) {
+    public UserDTO queryByPK(String userId) {
         TUserDetailExample example = new TUserDetailExample();
         example.createCriteria().andUserIdEqualTo(userId);
         List<TUserDetail> list = tUserDetailMapper.selectByExample(example);
@@ -60,7 +60,7 @@ public class UserDetailRepositoryImpl implements UserDetailRepository {
     }
 
     @Override
-    public UserDto queryByUserName(String userName) {
+    public UserDTO queryByUserName(String userName) {
         TUserDetailExample example = new TUserDetailExample();
         example.createCriteria().andUserNameEqualTo(userName);
         List<TUserDetail> list = tUserDetailMapper.selectByExample(example);
@@ -72,19 +72,20 @@ public class UserDetailRepositoryImpl implements UserDetailRepository {
     }
 
     @Override
-    public List<UserDto> queryByUserIds(List<String> userIds) {
+    public List<UserDTO> queryByUserIds(List<String> userIds) {
         TUserDetailExample example = new TUserDetailExample();
         example.createCriteria().andUserIdIn(userIds);
         return conv(tUserDetailMapper.selectByExample(example));
     }
 
-    private UserDto conv(TUserDetail src) {
+    private UserDTO conv(TUserDetail src) {
         if (src == null) {
             return null;
         }
         // emoji 处理
-        UserDto target = new UserDto();
+        UserDTO target = new UserDTO();
         target.setUserId(src.getUserId());
+        target.setId(src.getId());
         target.setNickname(new String(Base64.decodeBase64(src.getNickname())));
         target.setName(src.getName());
         target.setGender(src.getGender());
@@ -92,16 +93,16 @@ public class UserDetailRepositoryImpl implements UserDetailRepository {
         target.setMobileNo(src.getMobileNo());
         target.setBirthday(src.getBirthday());
         target.setCreateBy(src.getCreateBy());
-        target.setUserName(src.getUserName());
-        target.setPassword(src.getPassword());
         target.setGmtCreate(src.getGmtCreate());
         target.setModifiedBy(src.getModifiedBy());
         target.setAvatarUrl(src.getAvatarUrl());
         target.setGmtModified(src.getGmtModified());
+        target.setUserName(src.getUserName());
+        target.setPassword(src.getPassword());
         return target;
     }
 
-    private List<UserDto> conv(List<TUserDetail> list) {
+    private List<UserDTO> conv(List<TUserDetail> list) {
         if (CollectionUtils.isEmpty(list)) {
             return Collections.emptyList();
         }

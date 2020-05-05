@@ -5,9 +5,7 @@
 package com.ruoyi.web.feign;
 
 
-import com.ruoyi.reward.facade.dto.TWechatAuthDTO;
-import com.ruoyi.reward.facade.dto.UserDto;
-import com.ruoyi.reward.facade.request.UserWechatLoginRequest;
+import com.ruoyi.reward.facade.dto.UserDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface UserDetailFacadeFeign {
 
     @PostMapping("/queryByUserName")
-    UserDto queryByUserName(@RequestParam("userName") String userName);
+    UserDTO queryByUserName(@RequestParam("userName") String userName);
 
 
 }

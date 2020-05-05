@@ -1,12 +1,12 @@
 package com.ruoyi.web.service;
 
-import com.ruoyi.reward.facade.dto.UserDto;
+import com.ruoyi.reward.facade.dto.UserDTO;
 
 import com.ruoyi.web.feign.UserDetailFacadeFeign;
 import com.ruoyi.web.model.CustomUserDetails;
 import com.ruoyi.web.model.Users;
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -29,13 +29,16 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserDto userDto = userDetailFacadeFeign.queryByUserName(username);
-        if (userDto == null) {
+        UserDTO src = userDetailFacadeFeign.queryByUserName(username);
+        if (src == null) {
             throw new UsernameNotFoundException("Username not found");
         }
-        Users users = new Users();
-        BeanUtils.copyProperties(userDto, users);
-        Optional<Users> optionalUsers = Optional.of(users);
+        Users target = new Users();
+        target.setUserId(src.getUserId());
+        target.setId(src.getId());
+        target.setUsername(src.getUserName());
+        target.setPassword(src.getPassword());
+        Optional<Users> optionalUsers = Optional.of(target);
         return optionalUsers.map(CustomUserDetails::new).get();
     }
 }

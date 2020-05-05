@@ -6,7 +6,7 @@ package com.ruoyi.reward.facade.api;
 
 
 import com.ruoyi.reward.facade.dto.TWechatAuthDTO;
-import com.ruoyi.reward.facade.dto.UserDto;
+import com.ruoyi.reward.facade.dto.UserDTO;
 import com.ruoyi.reward.facade.request.UserWechatLoginRequest;
 
 
@@ -19,25 +19,25 @@ public interface UserDetailFacade {
      * 微信登录，已存在信息则直接返回用户信息，否则执行注册后返回用户信息
      *
      * @param request {@link UserWechatLoginRequest}
-     * @return {@link UserDto}
+     * @return {@link UserDTO}
      */
-    UserDto wechatLogin(UserWechatLoginRequest request);
+    UserDTO wechatLogin(UserWechatLoginRequest request);
 
-    UserDto queryByUserName(String userName);
+    UserDTO queryByUserName(String userName);
 
     /**
      * 用户唯一标识查询用户
      *
      * @param userId 用户唯一标识
-     * @return {@link UserDto}
+     * @return {@link UserDTO}
      */
-    UserDto queryByUserId(String userId);
+    UserDTO queryByUserId(String userId);
 
     /**
      * 用户唯一标识查询用户
      *
      * @param openId 用户openId
-     * @return {@link UserDto}
+     * @return {@link UserDTO}
      */
     TWechatAuthDTO queryByOpenId(String openId);
 
@@ -46,7 +46,7 @@ public interface UserDetailFacade {
      * 用户唯一标识查询用户
      *
      * @param userId 用户openId
-     * @return {@link UserDto}
+     * @return {@link UserDTO}
      */
     TWechatAuthDTO queryWechatByUserId(String userId);
 }

@@ -2,7 +2,7 @@ package com.ruoyi;
 
 import com.ruoyi.reward.domain.Shipin;
 import com.ruoyi.reward.domain.ShipinExample;
-import com.ruoyi.reward.facade.dto.UserDto;
+import com.ruoyi.reward.facade.dto.UserDTO;
 import com.ruoyi.reward.mapper.ShipinMapper;
 import com.ruoyi.reward.repository.UserDetailRepository;
 import com.ruoyi.system.domain.Account;
@@ -38,7 +38,7 @@ public class ApplicationTests {
 
     @Test
     public void test02() {
-        UserDto userDto = userDetailRepository.queryByUserName("");
+        UserDTO userDto = userDetailRepository.queryByUserName("");
         System.out.println(userDto);
 
     }

@@ -1,7 +1,7 @@
 package com.ruoyi.system.rest;
 
 import com.ruoyi.reward.facade.api.UserDetailFacade;
-import com.ruoyi.reward.facade.dto.UserDto;
+import com.ruoyi.reward.facade.dto.UserDTO;
 import com.ruoyi.reward.facade.request.UserWechatLoginRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class UserDetailFacadeController {
     UserDetailFacade userDetailFacade;
 
     @PostMapping("/wechatLogin")
-    public UserDto wechatLogin(@RequestBody UserWechatLoginRequest request) {
+    public UserDTO wechatLogin(@RequestBody UserWechatLoginRequest request) {
         return userDetailFacade.wechatLogin(request);
     }
 }
