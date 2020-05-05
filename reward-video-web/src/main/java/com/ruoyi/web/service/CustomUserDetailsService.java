@@ -20,12 +20,19 @@ import java.util.Optional;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
-    @Autowired
+    final
     UserDetailFacadeFeign userDetailFacadeFeign;
+
+    public CustomUserDetailsService(UserDetailFacadeFeign userDetailFacadeFeign) {
+        this.userDetailFacadeFeign = userDetailFacadeFeign;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserDto userDto = userDetailFacadeFeign.queryByUserName(username);
+        if (userDto == null) {
+            new UsernameNotFoundException("Username not found");
+        }
         Users users = new Users();
         BeanUtils.copyProperties(userDto, users);
         Optional<Users> optionalUsers = Optional.of(users);

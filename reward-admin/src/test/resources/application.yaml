@@ -28,7 +28,7 @@ user:
 # Spring配置
 spring:
   profiles:
-    active: dev
+    active: druid
   # 模板引擎
   thymeleaf:
     mode: HTML
@@ -55,7 +55,8 @@ spring:
     restart:
       # 热部署开关
       enabled: true
-
+  application:
+    name: reward-service
 # MyBatis
 mybatis:
   # 搜索指定包别名
@@ -138,3 +139,30 @@ management:
 
 sequence:
   workerId: 1
+
+
+security:
+  # 开启认证，Spring Cloud2.0后添加jar会自动集成并开启
+  # basic.enabled: true
+  # 用户名密码
+  user:
+    name: admin
+    password: admin
+
+
+reward-service:
+  ribbon:
+    listOfServers: http://admin:admin@eureka.grkfcs.cn
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://admin:admin@eureka.grkfcs.cn/eureka/
+    fetchRegistry: true
+  instance:
+    preferIpAddress: true
+    ipAddress: admin.grkfcs.cn
+    nonSecurePort: 80
+    lease-renewal-interval-in-seconds: 10
+    lease-expiration-duration-in-seconds: 90
+    instance-id: ${eureka.client.ipAddress}:${spring.application.name}:${eureka.instance.nonSecurePort}

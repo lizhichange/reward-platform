@@ -10,13 +10,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * @author sunflower
+ */
 @RequestMapping("/rest/user")
 @RestController
 @Slf4j
 public class UserDetailController {
 
-    @Autowired
+    final
     UserDetailFacade userDetailFacade;
+
+    public UserDetailController(UserDetailFacade userDetailFacade) {
+        this.userDetailFacade = userDetailFacade;
+    }
 
     @PostMapping("/queryByUserName")
     public UserDto queryByUserName(@RequestParam("userName") String userName) {

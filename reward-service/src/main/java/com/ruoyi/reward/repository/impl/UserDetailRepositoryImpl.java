@@ -20,9 +20,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-
 /**
-
+ *
  */
 @Repository
 public class UserDetailRepositoryImpl implements UserDetailRepository {
@@ -53,14 +52,22 @@ public class UserDetailRepositoryImpl implements UserDetailRepository {
     public UserDto queryByPK(String userId) {
         TUserDetailExample example = new TUserDetailExample();
         example.createCriteria().andUserIdEqualTo(userId);
-        return conv(tUserDetailMapper.selectByExample(example).get(0));
+        List<TUserDetail> list = tUserDetailMapper.selectByExample(example);
+        if (CollectionUtils.isEmpty(list)) {
+            return null;
+        }
+        return conv(list.get(0));
     }
 
     @Override
     public UserDto queryByUserName(String userName) {
         TUserDetailExample example = new TUserDetailExample();
         example.createCriteria().andUserNameEqualTo(userName);
-        return conv(tUserDetailMapper.selectByExample(example).get(0));
+        List<TUserDetail> list = tUserDetailMapper.selectByExample(example);
+        if (CollectionUtils.isEmpty(list)) {
+            return null;
+        }
+        return conv(list.get(0));
 
     }
 

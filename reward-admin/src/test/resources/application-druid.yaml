@@ -87,8 +87,9 @@ dubbo:
   protocol:
     port: 12345
     name: dubbo
+    lazy: true
     status: server
-    serialization: fastjson
+    serialization: hessian2
     threads: 2000
   application:
     name: dubbo-sms-zk-service
@@ -106,3 +107,5 @@ nacos:
   config:
     server-addr: 127.0.0.1:8848
     file-extension: yaml
+
+

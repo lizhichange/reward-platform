@@ -2,7 +2,9 @@ package com.ruoyi;
 
 import com.ruoyi.reward.domain.Shipin;
 import com.ruoyi.reward.domain.ShipinExample;
+import com.ruoyi.reward.facade.dto.UserDto;
 import com.ruoyi.reward.mapper.ShipinMapper;
+import com.ruoyi.reward.repository.UserDetailRepository;
 import com.ruoyi.system.domain.Account;
 import com.ruoyi.system.mapper.AccountMapper;
 import org.junit.Test;
@@ -21,15 +23,26 @@ public class ApplicationTests {
     ShipinMapper shipinMapper;
     @Autowired
     AccountMapper accountMapper;
+    @Autowired
+    UserDetailRepository userDetailRepository;
+
     @Test
     public void test01() {
-        Account account=new Account();
+        Account account = new Account();
         account.setAccountId("admin");
         account.setState("0");
         account.setBalance(110L);
         accountMapper.insertSelective(account);
 
     }
+
+    @Test
+    public void test02() {
+        UserDto userDto = userDetailRepository.queryByUserName("");
+        System.out.println(userDto);
+
+    }
+
     @Test
     public void testOne() {
         List<Shipin> list = shipinMapper.selectByExample(new ShipinExample());
