@@ -6,7 +6,7 @@
 </head>
 <body class="white-bg">
 <div class="wrapper wrapper-content animated fadeInRight ibox-content">
-    <form class="form-horizontal m" id="form-detail-add">
+    <form class="form-horizontal m" id="form-wxuser-add">
         <div class="form-group">
             <label class="col-sm-3 control-label is-required">用户唯一标识：</label>
             <div class="col-sm-8">
@@ -141,14 +141,14 @@
 <th:block th:include="include :: footer" />
 <th:block th:include="include :: datetimepicker-js" />
 <script type="text/javascript">
-    var prefix = ctx + "system/detail"
-    $("#form-detail-add").validate({
+    var prefix = ctx + "system/wxuser"
+    $("#form-wxuser-add").validate({
         focusCleanup: true
     });
 
     function submitHandler() {
         if ($.validate.form()) {
-            $.operate.save(prefix + "/add", $('#form-detail-add').serialize());
+            $.operate.save(prefix + "/add", $('#form-wxuser-add').serialize());
         }
     }
 
