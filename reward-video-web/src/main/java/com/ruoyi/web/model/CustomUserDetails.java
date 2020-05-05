@@ -1,4 +1,4 @@
-package com.ruoyi.web;
+package com.ruoyi.web.model;
 
 import com.ruoyi.reward.facade.dto.UserDto;
 import com.ruoyi.web.model.Users;

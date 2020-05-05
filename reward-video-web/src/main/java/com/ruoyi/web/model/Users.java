@@ -3,6 +3,9 @@ package com.ruoyi.web.model;
 import lombok.Data;
 import org.near.toolkit.model.ToString;
 
+/**
+ * @author sunflower
+ */
 @Data
 public class Users extends ToString {
     private int id;

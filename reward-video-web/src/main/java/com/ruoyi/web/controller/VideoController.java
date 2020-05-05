@@ -75,6 +75,10 @@ public class VideoController extends BaseController {
         return prefix + "/index";
     }
 
+    @GetMapping("/index")
+    public String render(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
+        return index(userid, modelmap);
+    }
 
     @GetMapping()
     public String index(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {

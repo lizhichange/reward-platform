@@ -18,14 +18,14 @@ import javax.servlet.http.HttpServletResponse;
 @Slf4j
 public class LoginController extends BaseController {
 
-    @GetMapping("/reg")
-    public String reg(HttpServletRequest request, ModelMap modelMap, HttpServletResponse response) {
+    @GetMapping("/register")
+    public String register(HttpServletRequest request, ModelMap modelMap, HttpServletResponse response) {
         // 如果是Ajax请求，返回Json字符串。
         getCategory(modelMap);
-        return "reg";
+        return "register";
     }
 
-    @PostMapping("/reg")
+    @PostMapping("/register")
     @ResponseBody
     public AjaxResult ajaxReg(String username, String password, Boolean rememberMe) {
         return null;
