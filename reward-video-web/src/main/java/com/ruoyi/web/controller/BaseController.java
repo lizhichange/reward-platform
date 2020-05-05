@@ -6,6 +6,9 @@ import com.ruoyi.web.feign.TsFeign;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -16,6 +19,23 @@ public class BaseController {
     SysCategoryFacadeFeign sysCategoryFacadeFeign;
     @Autowired
     TsFeign tsFeign;
+
+    public static String renderString(HttpServletResponse response, String string) {
+        try {
+            response.setContentType("application/json");
+            response.setCharacterEncoding("utf-8");
+            response.getWriter().print(string);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static boolean isAjaxRequest(HttpServletRequest request) {
+        String ajaxFlag = request.getHeader("X-Requested-With");
+        return "XMLHttpRequest".equals(ajaxFlag);
+    }
+
 
     protected void getCategory(ModelMap modelmap) {
         SysCategoryDTO sysCategory = new SysCategoryDTO();

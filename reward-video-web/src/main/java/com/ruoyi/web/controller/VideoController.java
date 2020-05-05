@@ -7,7 +7,7 @@ import com.ruoyi.reward.facade.enums.MultiTypeEnum;
 import com.ruoyi.reward.facade.enums.OrderPayType;
 import com.ruoyi.reward.facade.enums.OrderStatusType;
 import com.ruoyi.reward.facade.enums.WebMainStatus;
-import com.ruoyi.web.PageForm;
+import com.ruoyi.web.model.PageForm;
 import com.ruoyi.web.config.AppConfig;
 import com.ruoyi.web.feign.*;
 import com.ruoyi.web.result.TableDataInfo;

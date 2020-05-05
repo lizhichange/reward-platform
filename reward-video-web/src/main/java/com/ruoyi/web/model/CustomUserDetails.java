@@ -1,13 +1,12 @@
 package com.ruoyi.web.model;
 
-import com.ruoyi.reward.facade.dto.UserDto;
+
 import com.ruoyi.web.model.Users;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.stream.Collectors;
+
 
 /**
  * @author sunflower
@@ -32,7 +31,7 @@ public class CustomUserDetails extends Users implements UserDetails {
 
     @Override
     public String getUsername() {
-        return super.getName();
+        return super.getUsername();
     }
 
     @Override

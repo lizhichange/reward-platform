@@ -105,13 +105,11 @@
         }
 
 
-
     </style>
     <style type="text/css">
         .fancybox-margin {
             margin-right: 0px;
         }
-
 
 
     </style>
@@ -152,17 +150,16 @@
             </div>
         </div>
         <style>
-                .search-button-ext {
-                    float: right;
-                    display: block;
-                    width: 39px;
-                    height: 30px;
-                    background: url('/img/btn-search.png') no-repeat;
-                    text-indent: -1000px;
-                    overflow: hidden;
-                    cursor: pointer;
-                }
-
+            .search-button-ext {
+                float: right;
+                display: block;
+                width: 39px;
+                height: 30px;
+                background: url('/img/btn-search.png') no-repeat;
+                text-indent: -1000px;
+                overflow: hidden;
+                cursor: pointer;
+            }
 
 
         </style>
@@ -230,36 +227,34 @@
 </div>
 
 <script>
-$(function(){
-
-    $(".submit").click(function(){
-        login();
+    $(function () {
+        $(".submit").click(function () {
+            login();
+        });
     });
-});
-        function login() {
-            $.showLoading("登录中");
-            var username = $("input[name='username']").val();
-            var password = $("input[name='password']").val();
-            $.ajax({
-                type: "post",
-                url: "/login",
-                data: {
-                    "username": username,
-                    "password": password
-                },
-                success: function (r) {
-                    if (r.code === 0) {
-                        location.href = ctx + 'index';
-                    } else {
-                        $.hideLoading();
-                        $.toast(r.msg);
-                    }
+
+    function login() {
+        $.showLoading("登录中");
+        const username = $("input[name='username']").val();
+        const password = $("input[name='password']").val();
+        $.ajax({
+            type: "post",
+            url: "/login",
+            data: {
+                "username": username,
+                "password": password
+            },
+            success: function (r) {
+                console.log(r);
+                if (r.code === 0) {
+                    location.href = ctx + 'index';
+                } else {
+                    $.hideLoading();
+                    $.toast(r.msg);
                 }
-            });
-        }
-
-
-
+            }
+        });
+    }
 </script>
 </body>
 

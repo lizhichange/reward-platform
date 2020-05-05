@@ -11,7 +11,7 @@ public class Users extends ToString {
     private int id;
     private String email;
     private String password;
-    private String name;
+    private String username;
     private String lastName;
     private int active;
 
@@ -22,7 +22,7 @@ public class Users extends ToString {
     public Users(Users users) {
         this.active = users.getActive();
         this.email = users.getEmail();
-        this.name = users.getName();
+        this.username = users.getUsername();
         this.lastName = users.getLastName();
         this.id = users.getId();
         this.password = users.getPassword();

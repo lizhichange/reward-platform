@@ -31,14 +31,11 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserDto userDto = userDetailFacadeFeign.queryByUserName(username);
         if (userDto == null) {
-            new UsernameNotFoundException("Username not found");
+            throw new UsernameNotFoundException("Username not found");
         }
         Users users = new Users();
         BeanUtils.copyProperties(userDto, users);
         Optional<Users> optionalUsers = Optional.of(users);
-        optionalUsers
-                .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
-        return optionalUsers
-                .map(CustomUserDetails::new).get();
+        return optionalUsers.map(CustomUserDetails::new).get();
     }
 }
