@@ -8,7 +8,7 @@ import org.near.toolkit.model.ToString;
  */
 @Data
 public class Users extends ToString {
-    private int id;
+    private Long id;
     private String email;
     private String password;
     private String username;

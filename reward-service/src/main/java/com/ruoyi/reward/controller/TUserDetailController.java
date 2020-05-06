@@ -81,6 +81,8 @@ public class TUserDetailController extends BaseController {
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult addSave(TUserDetail tUserDetail) {
+        String password = tUserDetail.getPassword();
+
         return toAjax(tUserDetailService.insertTUserDetail(tUserDetail));
     }
 

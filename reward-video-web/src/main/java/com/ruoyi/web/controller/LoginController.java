@@ -1,5 +1,6 @@
 package com.ruoyi.web.controller;
 
+import com.ruoyi.reward.facade.dto.UserDTO;
 import com.ruoyi.web.util.AjaxResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -27,9 +28,11 @@ public class LoginController extends BaseController {
 
     @PostMapping("/register")
     @ResponseBody
-    public AjaxResult ajaxReg(String username, String password, Boolean rememberMe) {
-        return null;
+    public AjaxResult ajaxReg(UserDTO userDTO) {
+        int register = userDetailFacadeFeign.register(userDTO);
+        return register > 0 ? AjaxResult.success() : AjaxResult.error("注册失败");
     }
+
 
     @GetMapping("/login")
     public String login(HttpServletRequest request, ModelMap modelMap, HttpServletResponse response) {

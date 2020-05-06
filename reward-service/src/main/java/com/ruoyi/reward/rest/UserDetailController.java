@@ -3,10 +3,7 @@ package com.ruoyi.reward.rest;
 import com.ruoyi.reward.facade.api.UserDetailFacade;
 import com.ruoyi.reward.facade.dto.UserDTO;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author sunflower
@@ -26,6 +23,12 @@ public class UserDetailController {
     @PostMapping("/queryByUserName")
     public UserDTO queryByUserName(@RequestParam("userName") String userName) {
         return userDetailFacade.queryByUserName(userName);
+    }
+
+    @PostMapping("/register")
+    @ResponseBody
+    public int register(@RequestBody UserDTO userDTO) {
+        return userDetailFacade.insertTUserDetail(userDTO);
     }
 
 }

@@ -3,6 +3,7 @@ package com.ruoyi.web.controller;
 import com.ruoyi.reward.facade.dto.SysCategoryDTO;
 import com.ruoyi.web.feign.SysCategoryFacadeFeign;
 import com.ruoyi.web.feign.TsFeign;
+import com.ruoyi.web.feign.UserDetailFacadeFeign;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 
@@ -19,6 +20,9 @@ public class BaseController {
     SysCategoryFacadeFeign sysCategoryFacadeFeign;
     @Autowired
     TsFeign tsFeign;
+    @Autowired
+    UserDetailFacadeFeign userDetailFacadeFeign;
+
 
     public static String renderString(HttpServletResponse response, String string) {
         try {

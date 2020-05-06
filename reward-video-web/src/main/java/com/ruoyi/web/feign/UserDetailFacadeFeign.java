@@ -8,6 +8,7 @@ package com.ruoyi.web.feign;
 import com.ruoyi.reward.facade.dto.UserDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -20,5 +21,6 @@ public interface UserDetailFacadeFeign {
     @PostMapping("/queryByUserName")
     UserDTO queryByUserName(@RequestParam("userName") String userName);
 
-
+    @PostMapping("/register")
+    int register(@RequestBody UserDTO userDTO);
 }

@@ -7,15 +7,17 @@ package com.ruoyi.reward.facade;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.ruoyi.common.sequence.ConcurrentSequence;
+import com.ruoyi.reward.domain.TUserDetail;
+import com.ruoyi.reward.domain.TWechatAuth;
 import com.ruoyi.reward.facade.api.UserDetailFacade;
 import com.ruoyi.reward.facade.dto.TWechatAuthDTO;
 import com.ruoyi.reward.facade.dto.UserDTO;
 import com.ruoyi.reward.facade.enums.PrincipalTypeEnum;
 import com.ruoyi.reward.facade.request.UserWechatLoginRequest;
-import com.ruoyi.reward.domain.TUserDetail;
-import com.ruoyi.reward.domain.TWechatAuth;
 import com.ruoyi.reward.repository.UserDetailRepository;
 import com.ruoyi.reward.repository.WechatAuthRepository;
+import com.ruoyi.reward.service.TUserDetailService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
@@ -26,11 +28,14 @@ import org.springframework.beans.factory.annotation.Autowired;
         version = "1.0.0",
         timeout = 15000
 )
-public class UserDetailFacadeImpl implements UserDetailFacade {
+public class
+UserDetailFacadeImpl implements UserDetailFacade {
     @Autowired
     WechatAuthRepository wechatRepository;
     @Autowired
     UserDetailRepository userDetailRepository;
+    @Autowired
+    TUserDetailService userDetailService;
 
     @Override
     public UserDTO wechatLogin(UserWechatLoginRequest request) {
@@ -96,6 +101,13 @@ public class UserDetailFacadeImpl implements UserDetailFacade {
     public TWechatAuthDTO queryByOpenId(String openId) {
         PrincipalTypeEnum principalType = PrincipalTypeEnum.USER;
         return wechatRepository.queryByOpenId(openId, principalType);
+    }
+
+    @Override
+    public int insertTUserDetail(UserDTO userDTO) {
+        TUserDetail tUserDetail=new TUserDetail ();
+        BeanUtils.copyProperties(userDTO,tUserDetail);
+        return userDetailService.insertTUserDetail(tUserDetail);
     }
 
     @Override

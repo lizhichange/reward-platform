@@ -41,6 +41,7 @@ public interface UserDetailFacade {
      */
     TWechatAuthDTO queryByOpenId(String openId);
 
+    int insertTUserDetail(UserDTO userDTO);
 
     /**
      * 用户唯一标识查询用户
