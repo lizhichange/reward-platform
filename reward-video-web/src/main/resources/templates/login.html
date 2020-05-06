@@ -244,10 +244,15 @@
                 "username": username,
                 "password": password
             },
+            // error: function (jqXHR, textStatus, errorThrown) {
+            //     /*错误信息处理*/
+            //     console.log(errorThrown);
+            //     $.hideLoading();
+            // },
             success: function (r) {
                 console.log(r);
                 if (r.code === 0) {
-                    location.href = ctx + 'index';
+                    location.href = '/index';
                 } else {
                     $.hideLoading();
                     $.toast(r.msg);

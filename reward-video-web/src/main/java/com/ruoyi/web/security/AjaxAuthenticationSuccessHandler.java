@@ -1,5 +1,7 @@
 package com.ruoyi.web.security;
 
+import com.alibaba.fastjson.JSONObject;
+import com.ruoyi.web.util.AjaxResult;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -13,15 +15,17 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * @author sunflower
+ */
 @Component("ajaxAuthenticationSuccessHandler")
 public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication auth)
             throws IOException, ServletException {
-        // TODO: 2020/5/5
-
-        response.getWriter().print("");
+        AjaxResult success = AjaxResult.success();
+        response.getWriter().print(JSONObject.toJSONString(success));
         response.getWriter().flush();
 
     }

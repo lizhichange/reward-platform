@@ -1,263 +1,339 @@
 package com.ruoyi.reward.domain;
 
-import java.io.Serializable;
+
 import java.util.Date;
-import lombok.Data;
 
-@Data
-public class TUserDetail implements Serializable {
+import com.ruoyi.common.annotation.Excel;
+import com.ruoyi.common.core.domain.BaseEntity;
+
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
+/**
+ * @author sunflower
+ */
+
+public class TUserDetail extends BaseEntity {
+    private static final long serialVersionUID = 1L;
+
     /**
-    *
-    *
-    * t_user_detail.id
-    
-     *
-     * @mbg.generated 2020-05-04 16:25:45
+     * 主键
      */
-    private Integer id;
+    private Long id;
 
     /**
-    *
-    *
-    * t_user_detail.user_id
      * 用户唯一标识
-     *
-     * @mbg.generated 2020-05-04 16:25:45
      */
+    @Excel(name = "用户唯一标识")
     private String userId;
 
     /**
-    *
-    *
-    * t_user_detail.nickname
      * 昵称
-     *
-     * @mbg.generated 2020-05-04 16:25:45
      */
+    @Excel(name = "昵称")
     private String nickname;
 
     /**
-    *
-    *
-    * t_user_detail.name
      * 用户姓名
-     *
-     * @mbg.generated 2020-05-04 16:25:45
      */
+    @Excel(name = "用户姓名")
     private String name;
 
     /**
-    *
-    *
-    * t_user_detail.gender
      * 用户性别
-     *
-     * @mbg.generated 2020-05-04 16:25:45
      */
+    @Excel(name = "用户性别")
     private String gender;
 
     /**
-    *
-    *
-    * t_user_detail.id_card
      * 身份证号
-     *
-     * @mbg.generated 2020-05-04 16:25:45
      */
+    @Excel(name = "身份证号")
     private String idCard;
 
     /**
-    *
-    *
-    * t_user_detail.mobile_no
      * 手机号
-     *
-     * @mbg.generated 2020-05-04 16:25:45
      */
+    @Excel(name = "手机号")
     private String mobileNo;
 
     /**
-    *
-    *
-    * t_user_detail.birthday
      * 生日yyyyMMdd
-     *
-     * @mbg.generated 2020-05-04 16:25:45
      */
+    @Excel(name = "生日yyyyMMdd")
     private String birthday;
 
     /**
-    *
-    *
-    * t_user_detail.gmt_create
      * 创建时间
-     *
-     * @mbg.generated 2020-05-04 16:25:45
      */
+    @Excel(name = "创建时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date gmtCreate;
 
     /**
-    *
-    *
-    * t_user_detail.create_by
-    
-     *
-     * @mbg.generated 2020-05-04 16:25:45
-     */
-    private String createBy;
-
-    /**
-    *
-    *
-    * t_user_detail.gmt_modified
      * 修改时间
-     *
-     * @mbg.generated 2020-05-04 16:25:45
      */
+    @Excel(name = "修改时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date gmtModified;
 
     /**
-    *
-    *
-    * t_user_detail.modified_by
-    
-     *
-     * @mbg.generated 2020-05-04 16:25:45
+     * 修改人
      */
+    @Excel(name = "修改人")
     private String modifiedBy;
 
     /**
-    *
-    *
-    * t_user_detail.user_source
      * 用户注册来源
-     *
-     * @mbg.generated 2020-05-04 16:25:45
      */
+    @Excel(name = "用户注册来源")
     private String userSource;
 
     /**
-    *
-    *
-    * t_user_detail.user_referee
      * 用户推荐人
-     *
-     * @mbg.generated 2020-05-04 16:25:45
      */
+    @Excel(name = "用户推荐人")
     private String userReferee;
 
     /**
-    *
-    *
-    * t_user_detail.user_referee_ids
-    
-     *
-     * @mbg.generated 2020-05-04 16:25:45
+     * 推荐人信息
      */
+    @Excel(name = "推荐人信息")
     private String userRefereeIds;
 
     /**
-    *
-    *
-    * t_user_detail.marker
-    
-     *
-     * @mbg.generated 2020-05-04 16:25:45
+     * 标记
      */
+    @Excel(name = "标记")
     private String marker;
 
     /**
-    *
-    *
-    * t_user_detail.reg_date
      * 注册时间
-     *
-     * @mbg.generated 2020-05-04 16:25:45
      */
+    @Excel(name = "注册时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date regDate;
 
     /**
-    *
-    *
-    * t_user_detail.level
-    
-     *
-     * @mbg.generated 2020-05-04 16:25:45
+     * 级别
      */
-    private Integer level;
+    @Excel(name = "级别")
+    private Long level;
 
     /**
-    *
-    *
-    * t_user_detail.avatar_url
      * 用户头像地址
-     *
-     * @mbg.generated 2020-05-04 16:25:45
      */
+    @Excel(name = "用户头像地址")
     private String avatarUrl;
 
     /**
-    *
-    *
-    * t_user_detail.reg_url
      * 注册页面路径
-     *
-     * @mbg.generated 2020-05-04 16:25:45
      */
+    @Excel(name = "注册页面路径")
     private String regUrl;
 
     /**
-    *
-    *
-    * t_user_detail.password
-    
-     *
-     * @mbg.generated 2020-05-04 16:25:45
+     * 密码
      */
+    @Excel(name = "密码")
     private String password;
 
     /**
-    *
-    *
-    * t_user_detail.user_name
-    
-     *
-     * @mbg.generated 2020-05-04 16:25:45
+     * 用户账号
      */
+    @Excel(name = "用户账号")
     private String userName;
 
-    private static final long serialVersionUID = 1L;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setIdCard(String idCard) {
+        this.idCard = idCard;
+    }
+
+    public String getIdCard() {
+        return idCard;
+    }
+
+    public void setMobileNo(String mobileNo) {
+        this.mobileNo = mobileNo;
+    }
+
+    public String getMobileNo() {
+        return mobileNo;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setGmtCreate(Date gmtCreate) {
+        this.gmtCreate = gmtCreate;
+    }
+
+    public Date getGmtCreate() {
+        return gmtCreate;
+    }
+
+    public void setGmtModified(Date gmtModified) {
+        this.gmtModified = gmtModified;
+    }
+
+    public Date getGmtModified() {
+        return gmtModified;
+    }
+
+    public void setModifiedBy(String modifiedBy) {
+        this.modifiedBy = modifiedBy;
+    }
+
+    public String getModifiedBy() {
+        return modifiedBy;
+    }
+
+    public void setUserSource(String userSource) {
+        this.userSource = userSource;
+    }
+
+    public String getUserSource() {
+        return userSource;
+    }
+
+    public void setUserReferee(String userReferee) {
+        this.userReferee = userReferee;
+    }
+
+    public String getUserReferee() {
+        return userReferee;
+    }
+
+    public void setUserRefereeIds(String userRefereeIds) {
+        this.userRefereeIds = userRefereeIds;
+    }
+
+    public String getUserRefereeIds() {
+        return userRefereeIds;
+    }
+
+    public void setMarker(String marker) {
+        this.marker = marker;
+    }
+
+    public String getMarker() {
+        return marker;
+    }
+
+    public void setRegDate(Date regDate) {
+        this.regDate = regDate;
+    }
+
+    public Date getRegDate() {
+        return regDate;
+    }
+
+    public void setLevel(Long level) {
+        this.level = level;
+    }
+
+    public Long getLevel() {
+        return level;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setRegUrl(String regUrl) {
+        this.regUrl = regUrl;
+    }
+
+    public String getRegUrl() {
+        return regUrl;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", userId=").append(userId);
-        sb.append(", nickname=").append(nickname);
-        sb.append(", name=").append(name);
-        sb.append(", gender=").append(gender);
-        sb.append(", idCard=").append(idCard);
-        sb.append(", mobileNo=").append(mobileNo);
-        sb.append(", birthday=").append(birthday);
-        sb.append(", gmtCreate=").append(gmtCreate);
-        sb.append(", createBy=").append(createBy);
-        sb.append(", gmtModified=").append(gmtModified);
-        sb.append(", modifiedBy=").append(modifiedBy);
-        sb.append(", userSource=").append(userSource);
-        sb.append(", userReferee=").append(userReferee);
-        sb.append(", userRefereeIds=").append(userRefereeIds);
-        sb.append(", marker=").append(marker);
-        sb.append(", regDate=").append(regDate);
-        sb.append(", level=").append(level);
-        sb.append(", avatarUrl=").append(avatarUrl);
-        sb.append(", regUrl=").append(regUrl);
-        sb.append(", password=").append(password);
-        sb.append(", userName=").append(userName);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
+                .append("id", getId())
+                .append("userId", getUserId())
+                .append("nickname", getNickname())
+                .append("name", getName())
+                .append("gender", getGender())
+                .append("idCard", getIdCard())
+                .append("mobileNo", getMobileNo())
+                .append("birthday", getBirthday())
+                .append("gmtCreate", getGmtCreate())
+                .append("createBy", getCreateBy())
+                .append("gmtModified", getGmtModified())
+                .append("modifiedBy", getModifiedBy())
+                .append("userSource", getUserSource())
+                .append("userReferee", getUserReferee())
+                .append("userRefereeIds", getUserRefereeIds())
+                .append("marker", getMarker())
+                .append("regDate", getRegDate())
+                .append("level", getLevel())
+                .append("avatarUrl", getAvatarUrl())
+                .append("regUrl", getRegUrl())
+                .append("password", getPassword())
+                .append("userName", getUserName())
+                .toString();
     }
 }
