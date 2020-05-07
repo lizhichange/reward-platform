@@ -17,6 +17,7 @@ import com.ruoyi.reward.facade.request.UserWechatLoginRequest;
 import com.ruoyi.reward.repository.UserDetailRepository;
 import com.ruoyi.reward.repository.WechatAuthRepository;
 import com.ruoyi.reward.service.TUserDetailService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -30,6 +31,7 @@ import java.util.Date;
         version = "1.0.0",
         timeout = 15000
 )
+@Slf4j
 public class
 UserDetailFacadeImpl implements UserDetailFacade {
     @Autowired
@@ -66,7 +68,10 @@ UserDetailFacadeImpl implements UserDetailFacade {
 
     @Override
     public UserDTO queryByUserName(String userName) {
-        return userDetailRepository.queryByUserName(userName);
+        UserDTO userDTO = userDetailRepository.queryByUserName(userName);
+        log.info("userName:{},userDTO:{}", userName, userDTO);
+
+        return userDTO;
 
     }
 

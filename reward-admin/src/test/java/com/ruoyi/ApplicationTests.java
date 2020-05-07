@@ -38,7 +38,7 @@ public class ApplicationTests {
 
     @Test
     public void test02() {
-        UserDTO userDto = userDetailRepository.queryByUserName("");
+        UserDTO userDto = userDetailRepository.queryByUserName("admin");
         System.out.println(userDto);
 
     }
