@@ -110,7 +110,7 @@ public class VideoController extends BaseController {
     public String category(@RequestParam(value = "categoryId") Long categoryId, @RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
         log.info("user:{},categoryId:{}", userid, categoryId);
         getCategory(modelmap);
-        Users currentUser = getCurrentUser();
+        Object currentUser = getCurrentUser();
         log.info("currentUser:{}", currentUser);
         SysCategoryDTO sysCategory = sysCategoryFacadeFeign.selectDeptById(categoryId);
         if (sysCategory == null) {
@@ -208,7 +208,7 @@ public class VideoController extends BaseController {
     @PostMapping("/queryOrder")
     @ResponseBody
     public AjaxResult queryOrder(ShipinDTO shipinDTO) {
-        Users currentUser = getCurrentUser();
+        Object currentUser = getCurrentUser();
         log.info("currentUser:{}", currentUser);
 
         String openId = SessionContext.getOpenId();
