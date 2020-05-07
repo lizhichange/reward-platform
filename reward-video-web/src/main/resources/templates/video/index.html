@@ -513,7 +513,6 @@
         }
 
 
-
         .at-branding-logo span {
             text-decoration: none
         }
@@ -530,28 +529,23 @@
         }
 
 
+        .s1 span {
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+            color: #00FF00;
+        }
 
+        .s1 span a {
+            color: #00FF00
+        }
 
-
- .s1 span {
-        text-align: center;
-        font-size: 15px;
-        font-weight: bold;
-        color: #00FF00;
-    }
-
-    .s1 span a {
-        color: #00FF00
-    }
-
-    .s2 {
-        position: absolute;
-        right: 5px;
-        bottom: 0;
-        font-size: 15px;
-    }
-
-
+        .s2 {
+            position: absolute;
+            right: 5px;
+            bottom: 0;
+            font-size: 15px;
+        }
 
 
     </style>
@@ -575,8 +569,9 @@
         <div class="member-links">
             <ul>
                 <li><a href="/video">首页</a></li>
-                <li><a href="/login">登录</a></li>
-                <li><a href="/logout">注销</a></li>
+                <li th:if="${user.id}"><a href="/logout">注销</a></li>
+                <li th:unless="${user.id}"><a href="/login">登录</a></li>
+
 
             </ul>
         </div>
@@ -792,15 +787,12 @@
                     });
                     $("#list_videos_videos_watched_right_now_items").html(html);
                 } else {
-                     $.hideLoading();
+                    $.hideLoading();
                     $.toast(r.msg);
                 }
             }
         });
     });
-
-
-
 
 
 </script>

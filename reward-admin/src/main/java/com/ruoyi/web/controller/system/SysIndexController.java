@@ -11,7 +11,6 @@ import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.system.service.IAccountService;
 import com.ruoyi.system.service.ISysConfigService;
 import com.ruoyi.system.service.ISysMenuService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.CollectionUtils;
@@ -26,14 +25,21 @@ import java.util.List;
  */
 @Controller
 public class SysIndexController extends BaseController {
-    @Autowired
+    final
     ISysMenuService menuService;
-    @Autowired
+    final
     ISysConfigService configService;
-    @Autowired
+    final
     SysShortService sysShortService;
-    @Autowired
+    final
     IAccountService accountService;
+
+    public SysIndexController(ISysMenuService menuService, ISysConfigService configService, SysShortService sysShortService, IAccountService accountService) {
+        this.menuService = menuService;
+        this.configService = configService;
+        this.sysShortService = sysShortService;
+        this.accountService = accountService;
+    }
 
     /**
      * 系统首页

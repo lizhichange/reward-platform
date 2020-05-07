@@ -44,8 +44,8 @@
         <div class="member-links">
             <ul>
                 <li><a href="/video">首页</a></li>
-                <li><a href="/login">登录</a></li>
-                <li><a href="/logout">注销</a></li>
+                <li th:if="${user.id}"><a href="/logout">注销</a></li>
+                <li th:unless="${user.id}"><a href="/login">登录</a></li>
 
             </ul>
         </div>
@@ -171,7 +171,7 @@
                 data: {
                     pageNum: options.current,
                     pageSize: options.length,
-                    categoryId:$('#categoryId').val(), //类目id
+                    categoryId: $('#categoryId').val(), //类目id
                 },
                 dataType: 'json'
             }).done(function (res) {
@@ -186,7 +186,7 @@
                     $.each(res.rows, function (i, row) {
                         var ctx = '';
                         html += '<div class="item  "> '
-                            + '<a href="/video/detail?id=' + row.id +  '&author=' + row.userid + '" title="' + row.name + '"> <div class="img"> <img class="thumb lazy-load" src="' + row.url + '"'
+                            + '<a href="/video/detail?id=' + row.id + '&author=' + row.userid + '" title="' + row.name + '"> <div class="img"> <img class="thumb lazy-load" src="' + row.url + '"'
                             + 'data-original="' + row.url + '" alt="' + row.name + '" data-cnt="5" width="180"'
                             + 'height="135">  </div>  <strong class="' + row.name + '"> ' + row.name + '  </strong>  <div class="wrap">  <div class="duration">' + row.shijianStr + '</div>'
                             + '</div>  <div class="wrap">'
@@ -210,7 +210,7 @@
     });
 
     $("#search").click(function () {
-            $.showLoading("数据加载中");
+        $.showLoading("数据加载中");
         var name = $("input[name='name']").val();
         $.ajax({
             dataType: 'json',
@@ -220,26 +220,26 @@
                 "name": name,
                 "pageNum": 1,
                 "pageSize": 50,
-                "categoryId":$('#categoryId').val(), //类目id
+                "categoryId": $('#categoryId').val(), //类目id
 
             },
             success: function (res) {
                 $.hideLoading();
                 if (res && res.code === 0) {
                     $("#list_videos_common_videos_list_items").empty();
-                    $("#list_videos_most_recent_videos_pagination").css('display','none');
+                    $("#list_videos_most_recent_videos_pagination").css('display', 'none');
                     let html = "";
                     $.each(res.rows, function (i, row) {
-                          html += '<div class="item  "> '
-                                + '<a href="/video/detail?id=' + row.id +  '&author=' + row.userid + '" title="' + row.name + '"> <div class="img"> <img class="thumb lazy-load" src="' + row.url + '"'
-                                + 'data-original="' + row.url + '" alt="' + row.name + '" data-cnt="5" width="180"'
-                                + 'height="135">  </div>  <strong class="' + row.name + '"> ' + row.name + '  </strong>  <div class="wrap">  <div class="duration">' + row.shijianStr + '</div>'
-                                + '</div>  <div class="wrap">'
-                                + ' <div class="added"><em>' + row.diffDays + '</em></div>'
-                                + '   <div class="views">' + row.click + '</div>'
-                                + '  </div>'
-                                + ' </a>'
-                                + ' </div>';
+                        html += '<div class="item  "> '
+                            + '<a href="/video/detail?id=' + row.id + '&author=' + row.userid + '" title="' + row.name + '"> <div class="img"> <img class="thumb lazy-load" src="' + row.url + '"'
+                            + 'data-original="' + row.url + '" alt="' + row.name + '" data-cnt="5" width="180"'
+                            + 'height="135">  </div>  <strong class="' + row.name + '"> ' + row.name + '  </strong>  <div class="wrap">  <div class="duration">' + row.shijianStr + '</div>'
+                            + '</div>  <div class="wrap">'
+                            + ' <div class="added"><em>' + row.diffDays + '</em></div>'
+                            + '   <div class="views">' + row.click + '</div>'
+                            + '  </div>'
+                            + ' </a>'
+                            + ' </div>';
                     });
                     $("#list_videos_common_videos_list_items").html(html);
                 } else {
