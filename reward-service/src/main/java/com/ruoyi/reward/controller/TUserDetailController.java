@@ -5,6 +5,7 @@ import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
+import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.reward.domain.TUserDetail;
 import com.ruoyi.reward.service.TUserDetailService;
@@ -47,7 +48,9 @@ public class TUserDetailController extends BaseController {
         startPage();
         List<TUserDetail> list = tUserDetailService.selectTUserDetailList(tUserDetail);
         for (TUserDetail userDetail : list) {
-            userDetail.setNickname(new String(Base64.decodeBase64(userDetail.getNickname())));
+            if (StringUtils.isNotEmpty(userDetail.getNickname())) {
+                userDetail.setNickname(new String(Base64.decodeBase64(userDetail.getNickname())));
+            }
         }
         return getDataTable(list);
     }
@@ -82,7 +85,9 @@ public class TUserDetailController extends BaseController {
     @ResponseBody
     public AjaxResult addSave(TUserDetail tUserDetail) {
         String password = tUserDetail.getPassword();
-
+        if (StringUtils.isNotEmpty(tUserDetail.getNickname())) {
+            tUserDetail.setNickname(Base64.encodeBase64String(tUserDetail.getNickname().getBytes()));
+        }
         return toAjax(tUserDetailService.insertTUserDetail(tUserDetail));
     }
 
