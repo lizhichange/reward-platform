@@ -10,6 +10,7 @@ import com.ruoyi.reward.facade.dto.UserDTO;
 import com.ruoyi.reward.mapper.TUserDetailMapper;
 import com.ruoyi.reward.repository.UserDetailRepository;
 import org.apache.commons.codec.binary.Base64;
+import org.near.toolkit.common.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
@@ -86,7 +87,9 @@ public class UserDetailRepositoryImpl implements UserDetailRepository {
         UserDTO target = new UserDTO();
         target.setUserId(src.getUserId());
         target.setId(src.getId());
-        target.setNickname(new String(Base64.decodeBase64(src.getNickname())));
+        if (StringUtil.isNotBlank(src.getNickname())) {
+            target.setNickname(new String(Base64.decodeBase64(src.getNickname())));
+        }
         target.setName(src.getName());
         target.setGender(src.getGender());
         target.setIdCard(src.getIdCard());
