@@ -34,7 +34,9 @@ public class UserDetailRepositoryImpl implements UserDetailRepository {
     public void insert(TUserDetail record, String operator) {
         Date now = new Date();
         // emoji 处理
-        record.setNickname(Base64.encodeBase64String(record.getNickname().getBytes()));
+        if (StringUtil.isNotBlank(record.getNickname())) {
+            record.setNickname(Base64.encodeBase64String(record.getNickname().getBytes()));
+        }
         record.setGmtCreate(now);
         record.setCreateBy(operator);
         record.setGmtModified(now);
