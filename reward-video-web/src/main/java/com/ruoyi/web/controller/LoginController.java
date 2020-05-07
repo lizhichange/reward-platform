@@ -3,6 +3,7 @@ package com.ruoyi.web.controller;
 import com.ruoyi.reward.facade.dto.UserDTO;
 import com.ruoyi.web.util.AjaxResult;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,12 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 @Slf4j
 public class LoginController extends BaseController {
+    final
+    BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    public LoginController(BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    }
 
     @GetMapping("/register")
     public String register(HttpServletRequest request, ModelMap modelMap, HttpServletResponse response) {
@@ -29,6 +36,9 @@ public class LoginController extends BaseController {
     @PostMapping("/register")
     @ResponseBody
     public AjaxResult ajaxReg(UserDTO userDTO) {
+        String password = userDTO.getPassword();
+        String encode = bCryptPasswordEncoder.encode(password);
+        userDTO.setPassword(encode);
         int register = userDetailFacadeFeign.register(userDTO);
         return register > 0 ? AjaxResult.success() : AjaxResult.error("注册失败");
     }

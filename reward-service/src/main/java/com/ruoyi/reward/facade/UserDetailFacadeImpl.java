@@ -20,6 +20,8 @@ import com.ruoyi.reward.service.TUserDetailService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Date;
+
 
 /**
  * @author Willard Hu on 2017/11/1.
@@ -36,6 +38,8 @@ UserDetailFacadeImpl implements UserDetailFacade {
     UserDetailRepository userDetailRepository;
     @Autowired
     TUserDetailService userDetailService;
+    @Autowired
+    ConcurrentSequence concurrentSequence;
 
     @Override
     public UserDTO wechatLogin(UserWechatLoginRequest request) {
@@ -66,8 +70,6 @@ UserDetailFacadeImpl implements UserDetailFacade {
 
     }
 
-    @Autowired
-    ConcurrentSequence concurrentSequence;
 
     private UserDTO take(UserWechatLoginRequest request, PrincipalTypeEnum principalType) {
         UserDTO res;
@@ -105,8 +107,12 @@ UserDetailFacadeImpl implements UserDetailFacade {
 
     @Override
     public int insertTUserDetail(UserDTO userDTO) {
-        TUserDetail tUserDetail=new TUserDetail ();
-        BeanUtils.copyProperties(userDTO,tUserDetail);
+        TUserDetail tUserDetail = new TUserDetail();
+        BeanUtils.copyProperties(userDTO, tUserDetail);
+        String userId = concurrentSequence.nextId().toString();
+        tUserDetail.setUserId(userId);
+        tUserDetail.setCreateTime(new Date());
+        tUserDetail.setGmtModified(new Date());
         return userDetailService.insertTUserDetail(tUserDetail);
     }
 

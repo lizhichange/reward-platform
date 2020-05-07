@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>电影</title>
     <meta name="viewport"
-        content="target-densitydpi=device-dpi, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+          content="target-densitydpi=device-dpi, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
     <meta name="description" content="">
     <meta name="keywords" content="">
@@ -14,8 +14,8 @@
 
     <link href="/css/all-responsive-metal.css" rel="stylesheet" type="text/css">
     <link href="/css/jquery.fancybox-metal.css" rel="stylesheet" type="text/css">
- 
-     <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
     <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
     <script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
@@ -114,166 +114,166 @@
 </head>
 
 <body class="no-touch">
-    <div class="top-links">
-        <div class="center-hold">
-            <div class="network">
-                <strong></strong>
-                <ul>
-                </ul>
-            </div>
-            <div class="box tags-cloud">
-                <a class="highlight" th:each="item:${categoryList}" style="font-weight: bold; font-size: 13px;"
-                    th:href="@{'/video/category?categoryId='+${item.categoryId}}">[[${item.categoryName}]] &nbsp;&nbsp;
-                </a>
-            </div>
-            <div class="member-links">
-                <ul>
-                    <li><a href="/video">首页</a></li>
-                    <li><a href="/login">登录</a></li>
-
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="header">
-            <div class="logo">
-                <a href="javascript:"></a>
-            </div>
-            <div class="social-bookmarks">
-                <div class="addthis_toolbox addthis_default_style addthis_32x32_style">
-                    <div class="atclear" tabindex="1000"></div>
-                </div>
-            </div>
-            <style>
-                .search-button-ext {
-                    float: right;
-                    display: block;
-                    width: 39px;
-                    height: 30px;
-                    background: url('/img/btn-search.png') no-repeat;
-                    text-indent: -1000px;
-                    overflow: hidden;
-                    cursor: pointer;
-                }
-            </style>
-            <div class="search">
-                <form id="user-form">
-                    <span id="search" class="search-button-ext">搜索</span>
-                    <div class="search-text"><input type="text" name="name" placeholder="请输入搜索关键词,至少两个字符" value="">
-                    </div>
-                </form>
-            </div>
-
-        </div>
-
-        <div class="box bottom-adv"></div>
-        <div class="content">
-            <strong class="popup-title">注册</strong>
-            <div class="popup-holder">
-                <form>
-                    <div class="generic-error hidden"></div>
-                    <div>
-                        <div class="row">
-                            <label for="signup_username" class="field-label required">用户名字</label>
-                            <input type="text" name="username" id="signup_username" class="textfield" maxlength="100"
-                                placeholder="您的用户名，可以使用字母 数字。禁止使用中文、特殊符号如 ！ @ -">
-                            <div class="field-error down"></div>
-                        </div>
-
-                        <div class="row">
-                            <label for="signup_pass" class="field-label required">密码</label>
-                            <input type="password" name="password" id="signup_pass" class="textfield"
-                                placeholder="至少5个字符">
-                            <div class="field-error down"></div>
-                        </div>
-
-                        <div class="row">
-                            <label for="signup_pass2" class="field-label required">确认密码</label>
-                            <input type="password" name="password2" id="signup_pass2" class="textfield"
-                                placeholder="重复密码">
-                            <div class="field-error down"></div>
-                        </div>
-
-                        <div class="row">
-                            <label for="signup_email" class="field-label required">电子邮件</label>
-                            <input type="text" name="email" id="signup_email" class="textfield" maxlength="100"
-                                placeholder="禁止使用QQ邮箱(无法找回密码),推荐使用126、163、谷歌邮箱">
-                            <div class="field-error down"></div>
-                        </div>
-
-
-                        <div class="bottom">
-                            <label></label>
-                            <div class="captcha-control">
-                                <div class="image">
-                                </div>
-                                <input type="button" class="submit" value="注册">
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div class="footer-margin">
-            <div class="content">
-                <div class="box bottom-adv">
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="footer">
-        <div class="footer-wrap">
-            <ul class="nav">
-                <li><a href="/video">主页</a></li>
-                <li><a href="/reg">注册</a></li>
-                <li><a href="/login" id="login">登录</a></li>
+<div class="top-links">
+    <div class="center-hold">
+        <div class="network">
+            <strong></strong>
+            <ul>
             </ul>
-            <div class="copyright">
+        </div>
+        <div class="box tags-cloud">
+            <a class="highlight" th:each="item:${categoryList}" style="font-weight: bold; font-size: 13px;"
+               th:href="@{'/video/category?categoryId='+${item.categoryId}}">[[${item.categoryName}]] &nbsp;&nbsp;
+            </a>
+        </div>
+        <div class="member-links">
+            <ul>
+                <li><a href="/video">首页</a></li>
+                <li><a href="/login">登录</a></li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="header">
+        <div class="logo">
+            <a href="javascript:"></a>
+        </div>
+        <div class="social-bookmarks">
+            <div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+                <div class="atclear" tabindex="1000"></div>
+            </div>
+        </div>
+        <style>
+            .search-button-ext {
+                float: right;
+                display: block;
+                width: 39px;
+                height: 30px;
+                background: url('/img/btn-search.png') no-repeat;
+                text-indent: -1000px;
+                overflow: hidden;
+                cursor: pointer;
+            }
+        </style>
+        <div class="search">
+            <form id="user-form">
+                <span id="search" class="search-button-ext">搜索</span>
+                <div class="search-text"><input type="text" name="name" placeholder="请输入搜索关键词,至少两个字符" value="">
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="box bottom-adv"></div>
+    <div class="content">
+        <strong class="popup-title">注册</strong>
+        <div class="popup-holder">
+            <form>
+                <div class="generic-error hidden"></div>
+                <div>
+                    <div class="row">
+                        <label for="signup_username" class="field-label required">用户名字</label>
+                        <input type="text" name="username" id="signup_username" class="textfield" maxlength="100"
+                               placeholder="您的用户名，可以使用字母 数字。禁止使用中文、特殊符号如 ！ @ -">
+                        <div class="field-error down"></div>
+                    </div>
+
+                    <div class="row">
+                        <label for="signup_pass" class="field-label required">密码</label>
+                        <input type="password" name="password" id="signup_pass" class="textfield"
+                               placeholder="至少5个字符">
+                        <div class="field-error down"></div>
+                    </div>
+
+                    <div class="row">
+                        <label for="signup_pass2" class="field-label required">确认密码</label>
+                        <input type="password" name="password2" id="signup_pass2" class="textfield"
+                               placeholder="重复密码">
+                        <div class="field-error down"></div>
+                    </div>
+
+                    <div class="row">
+                        <label for="signup_email" class="field-label required">电子邮件</label>
+                        <input type="text" name="email" id="signup_email" class="textfield" maxlength="100"
+                               placeholder="禁止使用QQ邮箱(无法找回密码),推荐使用126、163、谷歌邮箱">
+                        <div class="field-error down"></div>
+                    </div>
+
+
+                    <div class="bottom">
+                        <label></label>
+                        <div class="captcha-control">
+                            <div class="image">
+                            </div>
+                            <input type="button" class="submit" value="注册">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="footer-margin">
+        <div class="content">
+            <div class="box bottom-adv">
 
             </div>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <div class="footer-wrap">
+        <ul class="nav">
+            <li><a href="/video">主页</a></li>
+            <li><a href="/reg">注册</a></li>
+            <li><a href="/login" id="login">登录</a></li>
+        </ul>
+        <div class="copyright">
 
         </div>
 
     </div>
-    <script>
-        $(function () {
 
-            $(".submit").click(function () {
-                reg();
-            });
+</div>
+<script>
+    $(function () {
+
+        $(".submit").click(function () {
+            reg();
         });
-        function reg() {
-            $.showLoading("注册中");
-            var username = $("input[name='username']").val();
-            var password = $("input[name='password']").val();
-            var password2 = $("input[name='password2']").val();
-            var email = $("input[name='email']").val();
+    });
 
-            $.ajax({
-                type: "post",
-                url: "/reg",
-                data: {
-                    "username": username,
-                    "password": password
-                },
-                success: function (r) {
+    function reg() {
+        $.showLoading("注册中");
+        var userName = $("input[name='username']").val();
+        var password = $("input[name='password']").val();
+        var password2 = $("input[name='password2']").val();
+        var email = $("input[name='email']").val();
+
+        $.ajax({
+            type: "post",
+            url: "/register",
+            data: {
+                "userName": userName,
+                "password": password
+            },
+            success: function (r) {
+                $.hideLoading();
+                if (r.code === 0) {
+                    location.href = ctx + 'index';
+                } else {
                     $.hideLoading();
-                    if (r.code === 0) {
-                        location.href = ctx + 'index';
-                    } else {
-                        $.hideLoading();
-                        $.toast(r.msg);
-                    }
+                    $.toast(r.msg);
                 }
-            });
-        }
+            }
+        });
+    }
 
 
-
-    </script>
+</script>
 </body>
 
 </html>
