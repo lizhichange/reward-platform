@@ -4,7 +4,11 @@ import com.ruoyi.reward.facade.dto.SysCategoryDTO;
 import com.ruoyi.web.feign.SysCategoryFacadeFeign;
 import com.ruoyi.web.feign.TsFeign;
 import com.ruoyi.web.feign.UserDetailFacadeFeign;
+import com.ruoyi.web.model.Users;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.ModelMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +26,12 @@ public class BaseController {
     TsFeign tsFeign;
     @Autowired
     UserDetailFacadeFeign userDetailFacadeFeign;
+
+    public static Users getCurrentUser() {
+        SecurityContext securityContext = SecurityContextHolder.getContext();
+        Authentication authentication = securityContext.getAuthentication();
+        return (Users) authentication.getPrincipal();
+    }
 
 
     public static String renderString(HttpServletResponse response, String string) {

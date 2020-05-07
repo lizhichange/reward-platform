@@ -11,8 +11,12 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.util.matcher.RequestMatcher;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author sunflower
@@ -30,7 +34,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final CustomUserDetailsService userDetailsService;
 
     private final UnauthorizedEntryPoint unauthorizedEntryPoint;
-
+    // AccessDenied Handler
+    private AccessDeniedHandler accessDeniedHandler;
 
     // Success Handler
     private final AuthenticationSuccessHandler authenticationSuccessHandler;
@@ -42,6 +47,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     public SecurityConfiguration(
             @Qualifier("ajaxAuthenticationSuccessHandler") AuthenticationSuccessHandler authenticationSuccessHandler,
+            @Qualifier("articleAccesDeniedHandler") AccessDeniedHandler accessDeniedHandler,
             @Qualifier("ajaxAuthenticationFailureHandler") AuthenticationFailureHandler authenticationFailureHandler,
             CustomUserDetailsService userDetailsService,
             UnauthorizedEntryPoint unauthorizedEntryPoint, PasswordEncoder passwordEncoder) {
@@ -50,7 +56,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         this.userDetailsService = userDetailsService;
         this.unauthorizedEntryPoint = unauthorizedEntryPoint;
         this.passwordEncoder = passwordEncoder;
-        
+        this.accessDeniedHandler = accessDeniedHandler;
+
     }
 
     /**
@@ -104,10 +111,32 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutUrl("/logout")
-                .permitAll();
+                .permitAll()
+
+                .and()
+                .exceptionHandling()
+                .defaultAuthenticationEntryPointFor(unauthorizedEntryPoint, new AjaxRequestMatcher())
+        ;
 
 
     }
 
+    static class AjaxRequestMatcher implements RequestMatcher {
+
+        /**
+         * 匹配Ajax请求
+         *
+         * @param request
+         * @return
+         */
+        @Override
+        public boolean matches(HttpServletRequest request) {
+            return "XMLHttpRequest".equals(request.getHeader("X-Requested-With")) ||
+                    request.getHeader("Accept") != null &&
+                            request.getHeader("Accept").contains("application/json");
+        }
+
+
+    }
 
 }

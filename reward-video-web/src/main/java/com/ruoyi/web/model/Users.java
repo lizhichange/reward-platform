@@ -27,5 +27,7 @@ public class Users extends ToString {
         this.lastName = users.getLastName();
         this.id = users.getId();
         this.password = users.getPassword();
+        this
+                .userId = users.getUserId();
     }
 }

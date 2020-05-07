@@ -7,9 +7,10 @@ import com.ruoyi.reward.facade.enums.MultiTypeEnum;
 import com.ruoyi.reward.facade.enums.OrderPayType;
 import com.ruoyi.reward.facade.enums.OrderStatusType;
 import com.ruoyi.reward.facade.enums.WebMainStatus;
-import com.ruoyi.web.model.PageForm;
 import com.ruoyi.web.config.AppConfig;
 import com.ruoyi.web.feign.*;
+import com.ruoyi.web.model.PageForm;
+import com.ruoyi.web.model.Users;
 import com.ruoyi.web.result.TableDataInfo;
 import com.ruoyi.web.util.AjaxResult;
 import lombok.extern.slf4j.Slf4j;
@@ -20,9 +21,7 @@ import org.near.toolkit.common.StringUtil;
 import org.near.toolkit.context.SessionContext;
 import org.near.toolkit.model.Money;
 import org.near.utils.IpUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.CollectionUtils;
@@ -44,18 +43,23 @@ import static com.ruoyi.reward.facade.enums.OrderPayType.WE_CHAT_PAY;
 @Slf4j
 public class VideoController extends BaseController {
     private static final String prefix = "video";
-    @Autowired
-    ThreadPoolTaskExecutor threadPoolTaskExecutor;
-    @Autowired
-    ShiFacadeFeign shiFacadeFeign;
-    @Autowired
-    SysCategoryFacadeFeign sysCategoryFacadeFeign;
-    @Autowired
-    SysOrderFacadeFeign sysOrderFacadeFeign;
-    @Autowired
-    SysWebMainFacadeFeign sysWebMainFacadeFeign;
-    @Autowired
-    SysConfigFacadeFeign sysConfigFacadeFeign;
+    final private ThreadPoolTaskExecutor threadPoolTaskExecutor;
+    private final ShiFacadeFeign shiFacadeFeign;
+    private final SysCategoryFacadeFeign sysCategoryFacadeFeign;
+    private final SysOrderFacadeFeign sysOrderFacadeFeign;
+    private final SysWebMainFacadeFeign sysWebMainFacadeFeign;
+    private final SysConfigFacadeFeign sysConfigFacadeFeign;
+    private final AppConfig appConfig;
+
+    public VideoController(AppConfig appConfig, SysConfigFacadeFeign sysConfigFacadeFeign, SysWebMainFacadeFeign sysWebMainFacadeFeign, SysOrderFacadeFeign sysOrderFacadeFeign, SysCategoryFacadeFeign sysCategoryFacadeFeign, ShiFacadeFeign shiFacadeFeign, ThreadPoolTaskExecutor threadPoolTaskExecutor) {
+        this.appConfig = appConfig;
+        this.sysConfigFacadeFeign = sysConfigFacadeFeign;
+        this.sysWebMainFacadeFeign = sysWebMainFacadeFeign;
+        this.sysOrderFacadeFeign = sysOrderFacadeFeign;
+        this.sysCategoryFacadeFeign = sysCategoryFacadeFeign;
+        this.shiFacadeFeign = shiFacadeFeign;
+        this.threadPoolTaskExecutor = threadPoolTaskExecutor;
+    }
 
     private void xxx(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
         log.info("userId:{}", userid);
@@ -106,6 +110,8 @@ public class VideoController extends BaseController {
     public String category(@RequestParam(value = "categoryId") Long categoryId, @RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
         log.info("user:{},categoryId:{}", userid, categoryId);
         getCategory(modelmap);
+        Users currentUser = getCurrentUser();
+        log.info("currentUser:{}", currentUser);
         SysCategoryDTO sysCategory = sysCategoryFacadeFeign.selectDeptById(categoryId);
         if (sysCategory == null) {
             modelmap.addAttribute("category", new SysCategoryDTO());
@@ -115,8 +121,6 @@ public class VideoController extends BaseController {
         return prefix + "/category";
     }
 
-    @Autowired
-    AppConfig appConfig;
 
     @GetMapping("/detail")
     public String detail(@RequestParam(value = "id") Long id,
@@ -203,8 +207,10 @@ public class VideoController extends BaseController {
 
     @PostMapping("/queryOrder")
     @ResponseBody
-    @PreAuthorize("hasAnyRole('ADMIN')")
     public AjaxResult queryOrder(ShipinDTO shipinDTO) {
+        Users currentUser = getCurrentUser();
+        log.info("currentUser:{}", currentUser);
+
         String openId = SessionContext.getOpenId();
         String userId = SessionContext.getUserId();
         log.info("id:{},openId:{}", shipinDTO.getId(), openId);

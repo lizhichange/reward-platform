@@ -252,7 +252,7 @@
             success: function (r) {
                 console.log(r);
                 if (r.code === 0) {
-                    location.href = '/index';
+                    location.href = '/video/redirect';
                 } else {
                     $.hideLoading();
                     $.toast(r.msg);

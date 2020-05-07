@@ -1,12 +1,9 @@
 package com.ruoyi.web.service;
 
 import com.ruoyi.reward.facade.dto.UserDTO;
-
 import com.ruoyi.web.feign.UserDetailFacadeFeign;
 import com.ruoyi.web.model.CustomUserDetails;
 import com.ruoyi.web.model.Users;
-import org.apache.commons.codec.binary.Base64;
-import org.springframework.beans.BeanUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -39,6 +36,8 @@ public class CustomUserDetailsService implements UserDetailsService {
         target.setUsername(src.getUserName());
         target.setPassword(src.getPassword());
         Optional<Users> optionalUsers = Optional.of(target);
-        return optionalUsers.map(CustomUserDetails::new).get();
+        UserDetails item = optionalUsers.map(CustomUserDetails::new).get();
+        return item;
+
     }
 }
