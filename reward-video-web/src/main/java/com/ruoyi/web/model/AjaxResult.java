@@ -1,4 +1,4 @@
-package com.ruoyi.web.util;
+package com.ruoyi.web.model;
 
 
 import java.util.HashMap;

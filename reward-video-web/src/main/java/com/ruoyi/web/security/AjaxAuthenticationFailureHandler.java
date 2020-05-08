@@ -2,7 +2,7 @@ package com.ruoyi.web.security;
 
 import com.alibaba.dubbo.common.utils.StringUtils;
 import com.google.gson.Gson;
-import com.ruoyi.web.util.AjaxResult;
+import com.ruoyi.web.model.AjaxResult;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.stereotype.Component;

@@ -1,7 +1,7 @@
 package com.ruoyi.web.security;
 
 import com.google.gson.Gson;
-import com.ruoyi.web.util.AjaxResult;
+import com.ruoyi.web.model.AjaxResult;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;

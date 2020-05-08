@@ -12,7 +12,7 @@ import com.ruoyi.web.feign.*;
 import com.ruoyi.web.model.PageForm;
 import com.ruoyi.web.model.Users;
 import com.ruoyi.web.result.TableDataInfo;
-import com.ruoyi.web.util.AjaxResult;
+import com.ruoyi.web.model.AjaxResult;
 import lombok.extern.slf4j.Slf4j;
 import org.near.servicesupport.result.TPageResult;
 import org.near.toolkit.common.DateUtils;
