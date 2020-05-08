@@ -36,6 +36,11 @@ public class LoginController extends BaseController {
         String password = userDTO.getPassword();
         String encode = passwordEncoder.encode(password);
         userDTO.setPassword(encode);
+
+        UserDTO item = userDetailFacadeFeign.queryByUserName(userDTO.getUserName());
+        if (item != null) {
+            return AjaxResult.error("用户账户已经存在");
+        }
         int register = userDetailFacadeFeign.register(userDTO);
         return register > 0 ? AjaxResult.success() : AjaxResult.error("注册失败");
     }
