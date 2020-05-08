@@ -21,11 +21,11 @@
         <result property="goodsSnapshot" column="goods_snapshot"/>
         <result property="openId" column="open_id"/>
         <result property="extensionUserId" column="extension_user_id"/>
+        <result property="userId" column="user_id"/>
     </resultMap>
 
     <sql id="selectSysOrderVo">
-        select id, order_id, money, price, type, pay_no, param, pay_time, pay_tag, status, create_time, update_time,
-        goods_id, goods_snapshot, open_id, extension_user_id from sys_order
+        select id, order_id, money, price, type, pay_no, param, pay_time, pay_tag, status, create_time, update_time, goods_id, goods_snapshot, open_id, extension_user_id, user_id from sys_order
     </sql>
 
     <select id="selectSysOrderList" parameterType="SysOrder" resultMap="SysOrderResult">
@@ -45,6 +45,7 @@
             <if test="openId != null  and openId != ''">and open_id = #{openId}</if>
             <if test="extensionUserId != null  and extensionUserId != ''">and extension_user_id = #{extensionUserId}
             </if>
+            <if test="userId != null  and userId != ''">and user_id = #{userId}</if>
         </where>
     </select>
 
@@ -71,6 +72,7 @@
             <if test="goodsSnapshot != null  and goodsSnapshot != ''">goods_snapshot,</if>
             <if test="openId != null  and openId != ''">open_id,</if>
             <if test="extensionUserId != null  and extensionUserId != ''">extension_user_id,</if>
+            <if test="userId != null  and userId != ''">user_id,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="orderId != null  and orderId != ''">#{orderId},</if>
@@ -88,6 +90,7 @@
             <if test="goodsSnapshot != null  and goodsSnapshot != ''">#{goodsSnapshot},</if>
             <if test="openId != null  and openId != ''">#{openId},</if>
             <if test="extensionUserId != null  and extensionUserId != ''">#{extensionUserId},</if>
+            <if test="userId != null  and userId != ''">#{userId},</if>
         </trim>
     </insert>
 
@@ -109,31 +112,10 @@
             <if test="goodsSnapshot != null  and goodsSnapshot != ''">goods_snapshot = #{goodsSnapshot},</if>
             <if test="openId != null  and openId != ''">open_id = #{openId},</if>
             <if test="extensionUserId != null  and extensionUserId != ''">extension_user_id = #{extensionUserId},</if>
+            <if test="userId != null  and userId != ''">user_id = #{userId},</if>
         </trim>
         where id = #{id}
     </update>
-
-    <update id="updateSysOrderByOrderId" parameterType="SysOrder">
-        update sys_order
-        <trim prefix="SET" suffixOverrides=",">
-            <if test="money != null ">money = #{money},</if>
-            <if test="price != null ">price = #{price},</if>
-            <if test="type != null ">type = #{type},</if>
-            <if test="payNo != null  and payNo != ''">pay_no = #{payNo},</if>
-            <if test="param != null  and param != ''">param = #{param},</if>
-            <if test="payTime != null ">pay_time = #{payTime},</if>
-            <if test="payTag != null  and payTag != ''">pay_tag = #{payTag},</if>
-            <if test="status != null ">status = #{status},</if>
-            <if test="createTime != null ">create_time = #{createTime},</if>
-            <if test="updateTime != null ">update_time = #{updateTime},</if>
-            <if test="goodsId != null ">goods_id = #{goodsId},</if>
-            <if test="goodsSnapshot != null  and goodsSnapshot != ''">goods_snapshot = #{goodsSnapshot},</if>
-            <if test="openId != null  and openId != ''">open_id = #{openId},</if>
-            <if test="extensionUserId != null  and extensionUserId != ''">extension_user_id = #{extensionUserId},</if>
-        </trim>
-        where order_id = #{orderId}
-    </update>
-
 
     <delete id="deleteSysOrderById" parameterType="Long">
         delete from sys_order where id = #{id}

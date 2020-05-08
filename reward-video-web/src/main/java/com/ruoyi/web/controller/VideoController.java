@@ -208,7 +208,7 @@ public class VideoController extends BaseController {
     @PostMapping("/queryOrder")
     @ResponseBody
     public AjaxResult queryOrder(ShipinDTO shipinDTO) {
-        Object currentUser = getCurrentUser();
+        Users currentUser = getCurrentUser();
         log.info("currentUser:{}", currentUser);
 
         String openId = SessionContext.getOpenId();

@@ -111,6 +111,10 @@ public class SysOrder extends BaseEntity {
      */
     @Excel(name = "推广人的id")
     private String extensionUserId;
+    @Excel(name = "用户id")
+
+    private String userId;
+
 
     public void setId(Integer id) {
         this.id = id;
@@ -288,5 +292,13 @@ public class SysOrder extends BaseEntity {
 
     public void setPriceStr(String priceStr) {
         this.priceStr = priceStr;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

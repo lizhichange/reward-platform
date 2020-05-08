@@ -11,7 +11,6 @@ import me.chanjar.weixin.mp.bean.result.WxMpUser;
 import me.chanjar.weixin.mp.config.WxMpConfigStorage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,12 +27,17 @@ import javax.servlet.http.HttpServletRequest;
 public class WechatController extends BaseController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(WechatController.class);
-    @Autowired
+    final
     WxMpService wxMpService;
 
 
-    @Autowired
+    final
     MpAuthConfig mpAuthConfig;
+
+    public WechatController(WxMpService wxMpService, MpAuthConfig mpAuthConfig) {
+        this.wxMpService = wxMpService;
+        this.mpAuthConfig = mpAuthConfig;
+    }
 
 
     @GetMapping("/auth")

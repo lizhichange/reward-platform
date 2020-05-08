@@ -103,7 +103,7 @@ public class SysOrderDTO extends ToString {
     private String tradeType;
 
     private Date createTime;
-
+    private String userId;
 
     public void setId(Integer id) {
         this.id = id;
@@ -306,5 +306,13 @@ public class SysOrderDTO extends ToString {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }
