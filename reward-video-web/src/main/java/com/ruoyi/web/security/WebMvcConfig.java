@@ -2,6 +2,7 @@ package com.ruoyi.web.security;
 
 import com.ruoyi.web.interceptor.CurrentUserInterceptor;
 import com.ruoyi.web.interceptor.WechatAuthInterceptor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
@@ -15,10 +16,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
-    public WebMvcConfig(CurrentUserInterceptor currentUserInterceptor, WechatAuthInterceptor wechatAuthInterceptor) {
-        this.currentUserInterceptor = currentUserInterceptor;
-        this.wechatAuthInterceptor = wechatAuthInterceptor;
-    }
 
     /**
      * 明文密码
@@ -30,10 +27,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
         return NoOpPasswordEncoder.getInstance();
     }
 
-    final
+    @Autowired
     CurrentUserInterceptor currentUserInterceptor;
 
-    final
+    @Autowired
     WechatAuthInterceptor wechatAuthInterceptor;
 
 
