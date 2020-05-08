@@ -5,8 +5,8 @@ import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.common.sequence.ConcurrentSequence;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.system.domain.SysOrder;
-import com.ruoyi.system.domain.ext.ExtSysOrder;
-import com.ruoyi.system.domain.ext.SysOrderExample;
+import com.ruoyi.system.domain.ExtSysOrder;
+import com.ruoyi.system.domain.ExtSysOrderExample;
 import com.ruoyi.system.mapper.ExtSysOrderMapper;
 import com.ruoyi.system.mapper.SysOrderMapper;
 import com.ruoyi.system.service.ISysOrderService;
@@ -50,7 +50,7 @@ public class SysOrderServiceImpl implements ISysOrderService {
 
     @Override
     public List<SysOrder> selectSysOrder(SysOrder extSysOrder) {
-        SysOrderExample example = new SysOrderExample();
+        ExtSysOrderExample example = new ExtSysOrderExample();
         example.createCriteria().andGoodsIdEqualTo(extSysOrder.getGoodsId().intValue()).andOpenIdEqualTo(extSysOrder.getOpenId());
         List<ExtSysOrder> list = extSysOrderMapper.selectByExample(example);
         if (CollectionUtils.isEmpty(list)) {
@@ -65,8 +65,8 @@ public class SysOrderServiceImpl implements ISysOrderService {
 
     @Override
     public long countByExample(ExtSysOrder extSysOrder) {
-        SysOrderExample example = new SysOrderExample();
-        SysOrderExample.Criteria criteria = example.createCriteria();
+        ExtSysOrderExample example = new ExtSysOrderExample();
+        ExtSysOrderExample.Criteria criteria = example.createCriteria();
         if (extSysOrder.getGoodsId() != null) {
             criteria.andGoodsIdEqualTo(extSysOrder.getGoodsId());
         }

@@ -1,15 +1,15 @@
 package com.ruoyi.system.mapper;
 
-import com.ruoyi.system.domain.ext.ExtSysOrder;
-import com.ruoyi.system.domain.ext.SysOrderExample;
+import com.ruoyi.system.domain.ExtSysOrder;
+import com.ruoyi.system.domain.ExtSysOrderExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 public interface ExtSysOrderMapper {
-    long countByExample(SysOrderExample example);
+    long countByExample(ExtSysOrderExample example);
 
-    int deleteByExample(SysOrderExample example);
+    int deleteByExample(ExtSysOrderExample example);
 
     int deleteByPrimaryKey(Integer id);
 
@@ -17,17 +17,17 @@ public interface ExtSysOrderMapper {
 
     int insertSelective(ExtSysOrder record);
 
-    List<ExtSysOrder> selectByExampleWithBLOBs(SysOrderExample example);
+    List<ExtSysOrder> selectByExampleWithBLOBs(ExtSysOrderExample example);
 
-    List<ExtSysOrder> selectByExample(SysOrderExample example);
+    List<ExtSysOrder> selectByExample(ExtSysOrderExample example);
 
     ExtSysOrder selectByPrimaryKey(Integer id);
 
-    int updateByExampleSelective(@Param("record") ExtSysOrder record, @Param("example") SysOrderExample example);
+    int updateByExampleSelective(@Param("record") ExtSysOrder record, @Param("example") ExtSysOrderExample example);
 
-    int updateByExampleWithBLOBs(@Param("record") ExtSysOrder record, @Param("example") SysOrderExample example);
+    int updateByExampleWithBLOBs(@Param("record") ExtSysOrder record, @Param("example") ExtSysOrderExample example);
 
-    int updateByExample(@Param("record") ExtSysOrder record, @Param("example") SysOrderExample example);
+    int updateByExample(@Param("record") ExtSysOrder record, @Param("example") ExtSysOrderExample example);
 
     int updateByPrimaryKeySelective(ExtSysOrder record);
 

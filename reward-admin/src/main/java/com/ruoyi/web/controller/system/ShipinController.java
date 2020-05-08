@@ -17,7 +17,7 @@ import com.ruoyi.reward.service.ShipinService;
 import com.ruoyi.reward.domain.SysCategory;
 import com.ruoyi.system.domain.SysRole;
 import com.ruoyi.system.domain.SysUser;
-import com.ruoyi.system.domain.ext.ExtSysOrder;
+import com.ruoyi.system.domain.ExtSysOrder;
 import com.ruoyi.reward.service.SysCategoryService;
 import com.ruoyi.system.service.ISysOrderService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;

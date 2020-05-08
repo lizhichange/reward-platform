@@ -5,8 +5,8 @@ import com.google.common.collect.Lists;
 import com.ruoyi.reward.facade.api.SysOrderFacade;
 import com.ruoyi.reward.facade.dto.SysOrderDTO;
 import com.ruoyi.system.domain.SysOrder;
-import com.ruoyi.system.domain.ext.ExtSysOrder;
-import com.ruoyi.system.domain.ext.SysOrderExample;
+import com.ruoyi.system.domain.ExtSysOrder;
+import com.ruoyi.system.domain.ExtSysOrderExample;
 import com.ruoyi.system.mapper.ExtSysOrderMapper;
 import com.ruoyi.system.service.ISysOrderService;
 import lombok.extern.slf4j.Slf4j;
@@ -71,14 +71,14 @@ public class SysOrderFacadeImpl implements SysOrderFacade {
     @Override
     public List<SysOrderDTO> selectSysOrderListExt(SysOrderDTO sysOrder) {
 
-        SysOrderExample example = new SysOrderExample();
+        ExtSysOrderExample example = new ExtSysOrderExample();
         if (sysOrder.getOffset() != null) {
             example.setOffset(sysOrder.getOffset());
         }
         if (sysOrder.getLimit() != null) {
             example.setLimit(sysOrder.getLimit());
         }
-        SysOrderExample.Criteria criteria = example.createCriteria();
+        ExtSysOrderExample.Criteria criteria = example.createCriteria();
         if (null != sysOrder.getStatus()) {
             criteria.andStatusEqualTo(sysOrder.getStatus());
         }

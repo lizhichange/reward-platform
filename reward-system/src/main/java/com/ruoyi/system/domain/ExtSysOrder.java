@@ -1,19 +1,16 @@
-package com.ruoyi.system.domain.ext;
+package com.ruoyi.system.domain;
 
 import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * @author sunflower
- */
 @Data
 public class ExtSysOrder implements Serializable {
     /**
      * sys_order.id
      *
-     * @mbg.generated 2020-04-02 14:18:39
+     * @mbg.generated 2020-05-08 17:59:03
      */
     private Integer id;
 
@@ -21,7 +18,7 @@ public class ExtSysOrder implements Serializable {
      * sys_order.order_id
      * 订单ID
      *
-     * @mbg.generated 2020-04-02 14:18:39
+     * @mbg.generated 2020-05-08 17:59:03
      */
     private String orderId;
 
@@ -29,7 +26,7 @@ public class ExtSysOrder implements Serializable {
      * sys_order.money
      * 实际金额，单位分
      *
-     * @mbg.generated 2020-04-02 14:18:39
+     * @mbg.generated 2020-05-08 17:59:03
      */
     private Integer money;
 
@@ -37,7 +34,7 @@ public class ExtSysOrder implements Serializable {
      * sys_order.price
      * 原价，单位分
      *
-     * @mbg.generated 2020-04-02 14:18:39
+     * @mbg.generated 2020-05-08 17:59:03
      */
     private Integer price;
 
@@ -45,7 +42,7 @@ public class ExtSysOrder implements Serializable {
      * sys_order.type
      * 支付方式
      *
-     * @mbg.generated 2020-04-02 14:18:39
+     * @mbg.generated 2020-05-08 17:59:03
      */
     private Integer type;
 
@@ -53,7 +50,7 @@ public class ExtSysOrder implements Serializable {
      * sys_order.pay_no
      * 流水号
      *
-     * @mbg.generated 2020-04-02 14:18:39
+     * @mbg.generated 2020-05-08 17:59:03
      */
     private String payNo;
 
@@ -61,7 +58,7 @@ public class ExtSysOrder implements Serializable {
      * sys_order.param
      * 自定义参数
      *
-     * @mbg.generated 2020-04-02 14:18:39
+     * @mbg.generated 2020-05-08 17:59:03
      */
     private String param;
 
@@ -69,7 +66,7 @@ public class ExtSysOrder implements Serializable {
      * sys_order.pay_time
      * 付款时间
      *
-     * @mbg.generated 2020-04-02 14:18:39
+     * @mbg.generated 2020-05-08 17:59:03
      */
     private Date payTime;
 
@@ -77,7 +74,7 @@ public class ExtSysOrder implements Serializable {
      * sys_order.pay_tag
      * 金额的备注
      *
-     * @mbg.generated 2020-04-02 14:18:39
+     * @mbg.generated 2020-05-08 17:59:03
      */
     private String payTag;
 
@@ -85,7 +82,7 @@ public class ExtSysOrder implements Serializable {
      * sys_order.status
      * 订单状态
      *
-     * @mbg.generated 2020-04-02 14:18:39
+     * @mbg.generated 2020-05-08 17:59:03
      */
     private Integer status;
 
@@ -93,7 +90,7 @@ public class ExtSysOrder implements Serializable {
      * sys_order.create_time
      * 创建时间
      *
-     * @mbg.generated 2020-04-02 14:18:39
+     * @mbg.generated 2020-05-08 17:59:03
      */
     private Date createTime;
 
@@ -101,7 +98,7 @@ public class ExtSysOrder implements Serializable {
      * sys_order.update_time
      * 更新时间
      *
-     * @mbg.generated 2020-04-02 14:18:39
+     * @mbg.generated 2020-05-08 17:59:03
      */
     private Date updateTime;
 
@@ -109,7 +106,7 @@ public class ExtSysOrder implements Serializable {
      * sys_order.goods_id
      * 商品信息
      *
-     * @mbg.generated 2020-04-02 14:18:39
+     * @mbg.generated 2020-05-08 17:59:03
      */
     private Integer goodsId;
 
@@ -117,7 +114,7 @@ public class ExtSysOrder implements Serializable {
      * sys_order.open_id
      * 用户的openId
      *
-     * @mbg.generated 2020-04-02 14:18:39
+     * @mbg.generated 2020-05-08 17:59:03
      */
     private String openId;
 
@@ -125,15 +122,23 @@ public class ExtSysOrder implements Serializable {
      * sys_order.extension_user_id
      * 推广人的id
      *
-     * @mbg.generated 2020-04-02 14:18:39
+     * @mbg.generated 2020-05-08 17:59:03
      */
     private String extensionUserId;
+
+    /**
+     * sys_order.user_id
+     * 用户id
+     *
+     * @mbg.generated 2020-05-08 17:59:03
+     */
+    private String userId;
 
     /**
      * sys_order.goods_snapshot
      * 商品快照
      *
-     * @mbg.generated 2020-04-02 14:18:39
+     * @mbg.generated 2020-05-08 17:59:03
      */
     private String goodsSnapshot;
 
@@ -160,6 +165,7 @@ public class ExtSysOrder implements Serializable {
         sb.append(", goodsId=").append(goodsId);
         sb.append(", openId=").append(openId);
         sb.append(", extensionUserId=").append(extensionUserId);
+        sb.append(", userId=").append(userId);
         sb.append(", goodsSnapshot=").append(goodsSnapshot);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

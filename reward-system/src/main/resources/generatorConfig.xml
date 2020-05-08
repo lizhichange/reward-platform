@@ -39,7 +39,7 @@
                         userId="root"
                         password="root"/>
 
-        <javaModelGenerator targetPackage="com.ruoyi.system.domain.ext"
+        <javaModelGenerator targetPackage="com.ruoyi.system.domain"
                             targetProject="src/main/java">
             <property name="trimStrings" value="true"/>
 
@@ -59,9 +59,9 @@
             <property name="trimStrings" value="false"/>
         </javaModelGenerator>
 
-        <sqlMapGenerator targetPackage="mapper/ext" targetProject="src/main/resources"/>
+        <sqlMapGenerator targetPackage="mapper/system" targetProject="src/main/resources"/>
 
-        <javaClientGenerator targetPackage="com.ruoyi.system.mapper.ext"
+        <javaClientGenerator targetPackage="com.ruoyi.system.mapper"
                              targetProject="src/main/java" type="XMLMAPPER">
 
             <property name="enableSubPackages" value=""/>
@@ -75,7 +75,8 @@
         </javaClientGenerator>
 
 
-        <table tableName="sys_order" mapperName="">
+        <table tableName="sys_order" mapperName="ExtSysOrderMapper" domainObjectName="ExtSysOrder"
+               sqlProviderName="ExtSysOrderMapper">
             <generatedKey column="id" sqlStatement="JDBC"/>
         </table>
 

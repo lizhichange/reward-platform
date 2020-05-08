@@ -1,7 +1,7 @@
 package com.ruoyi.system.service;
 
 import com.ruoyi.system.domain.SysOrder;
-import com.ruoyi.system.domain.ext.ExtSysOrder;
+import com.ruoyi.system.domain.ExtSysOrder;
 
 import java.util.List;
 

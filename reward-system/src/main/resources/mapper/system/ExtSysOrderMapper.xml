@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.system.mapper.ExtSysOrderMapper">
-  <resultMap id="BaseResultMap" type="com.ruoyi.system.domain.ext.ExtSysOrder">
+  <resultMap id="BaseResultMap" type="com.ruoyi.system.domain.ExtSysOrder">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="order_id" jdbcType="VARCHAR" property="orderId" />
     <result column="money" jdbcType="INTEGER" property="money" />
@@ -17,8 +17,9 @@
     <result column="goods_id" jdbcType="INTEGER" property="goodsId" />
     <result column="open_id" jdbcType="VARCHAR" property="openId" />
     <result column="extension_user_id" jdbcType="VARCHAR" property="extensionUserId" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ruoyi.system.domain.ext.ExtSysOrder">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ruoyi.system.domain.ExtSysOrder">
     <result column="goods_snapshot" jdbcType="LONGVARCHAR" property="goodsSnapshot" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -81,12 +82,12 @@
   </sql>
   <sql id="Base_Column_List">
     id, order_id, money, price, type, pay_no, param, pay_time, pay_tag, status, create_time, 
-    update_time, goods_id, open_id, extension_user_id
+    update_time, goods_id, open_id, extension_user_id, user_id
   </sql>
   <sql id="Blob_Column_List">
     goods_snapshot
   </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.ruoyi.system.domain.ext.SysOrderExample" resultMap="ResultMapWithBLOBs">
+  <select id="selectByExampleWithBLOBs" parameterType="com.ruoyi.system.domain.ExtSysOrderExample" resultMap="ResultMapWithBLOBs">
     select
     <if test="distinct">
       distinct
@@ -110,7 +111,7 @@
       </if>
     </if>
   </select>
-  <select id="selectByExample" parameterType="com.ruoyi.system.domain.ext.SysOrderExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.ruoyi.system.domain.ExtSysOrderExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -144,27 +145,27 @@
     delete from sys_order
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ruoyi.system.domain.ext.SysOrderExample">
+  <delete id="deleteByExample" parameterType="com.ruoyi.system.domain.ExtSysOrderExample">
     delete from sys_order
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.ruoyi.system.domain.ext.ExtSysOrder" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.ruoyi.system.domain.ExtSysOrder" useGeneratedKeys="true">
     insert into sys_order (order_id, money, price, 
       type, pay_no, param, 
       pay_time, pay_tag, status, 
       create_time, update_time, goods_id, 
-      open_id, extension_user_id, goods_snapshot
-      )
+      open_id, extension_user_id, user_id, 
+      goods_snapshot)
     values (#{orderId,jdbcType=VARCHAR}, #{money,jdbcType=INTEGER}, #{price,jdbcType=INTEGER}, 
       #{type,jdbcType=INTEGER}, #{payNo,jdbcType=VARCHAR}, #{param,jdbcType=VARCHAR}, 
       #{payTime,jdbcType=TIMESTAMP}, #{payTag,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{goodsId,jdbcType=INTEGER}, 
-      #{openId,jdbcType=VARCHAR}, #{extensionUserId,jdbcType=VARCHAR}, #{goodsSnapshot,jdbcType=LONGVARCHAR}
-      )
+      #{openId,jdbcType=VARCHAR}, #{extensionUserId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      #{goodsSnapshot,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.ruoyi.system.domain.ext.ExtSysOrder" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.ruoyi.system.domain.ExtSysOrder" useGeneratedKeys="true">
     insert into sys_order
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="orderId != null">
@@ -208,6 +209,9 @@
       </if>
       <if test="extensionUserId != null">
         extension_user_id,
+      </if>
+      <if test="userId != null">
+        user_id,
       </if>
       <if test="goodsSnapshot != null">
         goods_snapshot,
@@ -256,12 +260,15 @@
       <if test="extensionUserId != null">
         #{extensionUserId,jdbcType=VARCHAR},
       </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
       <if test="goodsSnapshot != null">
         #{goodsSnapshot,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ruoyi.system.domain.ext.SysOrderExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.ruoyi.system.domain.ExtSysOrderExample" resultType="java.lang.Long">
     select count(*) from sys_order
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -315,6 +322,9 @@
       <if test="record.extensionUserId != null">
         extension_user_id = #{record.extensionUserId,jdbcType=VARCHAR},
       </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
       <if test="record.goodsSnapshot != null">
         goods_snapshot = #{record.goodsSnapshot,jdbcType=LONGVARCHAR},
       </if>
@@ -340,6 +350,7 @@
       goods_id = #{record.goodsId,jdbcType=INTEGER},
       open_id = #{record.openId,jdbcType=VARCHAR},
       extension_user_id = #{record.extensionUserId,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=VARCHAR},
       goods_snapshot = #{record.goodsSnapshot,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -361,12 +372,13 @@
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       goods_id = #{record.goodsId,jdbcType=INTEGER},
       open_id = #{record.openId,jdbcType=VARCHAR},
-      extension_user_id = #{record.extensionUserId,jdbcType=VARCHAR}
+      extension_user_id = #{record.extensionUserId,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ruoyi.system.domain.ext.ExtSysOrder">
+  <update id="updateByPrimaryKeySelective" parameterType="com.ruoyi.system.domain.ExtSysOrder">
     update sys_order
     <set>
       <if test="orderId != null">
@@ -411,13 +423,16 @@
       <if test="extensionUserId != null">
         extension_user_id = #{extensionUserId,jdbcType=VARCHAR},
       </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
       <if test="goodsSnapshot != null">
         goods_snapshot = #{goodsSnapshot,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ruoyi.system.domain.ext.ExtSysOrder">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ruoyi.system.domain.ExtSysOrder">
     update sys_order
     set order_id = #{orderId,jdbcType=VARCHAR},
       money = #{money,jdbcType=INTEGER},
@@ -433,10 +448,11 @@
       goods_id = #{goodsId,jdbcType=INTEGER},
       open_id = #{openId,jdbcType=VARCHAR},
       extension_user_id = #{extensionUserId,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
       goods_snapshot = #{goodsSnapshot,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ruoyi.system.domain.ext.ExtSysOrder">
+  <update id="updateByPrimaryKey" parameterType="com.ruoyi.system.domain.ExtSysOrder">
     update sys_order
     set order_id = #{orderId,jdbcType=VARCHAR},
       money = #{money,jdbcType=INTEGER},
@@ -451,7 +467,8 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       goods_id = #{goodsId,jdbcType=INTEGER},
       open_id = #{openId,jdbcType=VARCHAR},
-      extension_user_id = #{extensionUserId,jdbcType=VARCHAR}
+      extension_user_id = #{extensionUserId,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
