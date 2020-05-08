@@ -2,8 +2,6 @@ package com.ruoyi.web.interceptor;
 
 
 import cn.hutool.core.util.URLUtil;
-import cn.hutool.http.useragent.UserAgent;
-import cn.hutool.http.useragent.UserAgentUtil;
 import com.ruoyi.reward.facade.dto.TsDTO;
 import com.ruoyi.web.config.AppConfig;
 import com.ruoyi.web.feign.TsFeign;
@@ -74,13 +72,17 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
 
         String referer = requestUrl.toString() + "?" + str;
         HttpSession session = request.getSession();
-
-        //如果不是微信环境 直接返回pc 浏览
-        String ua = request.getHeader("User-Agent").toLowerCase();
-        UserAgent parse = UserAgentUtil.parse(ua);
-        if (!parse.isMobile()) {
-            return true;
+        String doMain = DoMainUtil.getDoMain(requestUrl.toString());
+        //推广人的userid
+        String userId = myRequest.getParameter("userid");
+        if (StringUtil.isNotBlank(userId)) {
+            write(userId, COOKIE_USER_KEY, doMain, response);
+            SessionContext.setUserId(session, userId);
+            log.info("userId:{}", userId);
         }
+        userId = read(request, COOKIE_USER_KEY);
+        SessionContext.setUserId(session, userId);
+
 
         if (handler instanceof HandlerMethod) {
             HandlerMethod handlerMethod = (HandlerMethod) handler;
@@ -90,24 +92,18 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
             if (annotation == null) {
                 return true;
             }
-            String doMain = DoMainUtil.getDoMain(requestUrl.toString());
             //授权回来之后中定向会带有openId参数
             String openId = myRequest.getParameter("op");
-            //推广人的userid
-            String userId = myRequest.getParameter("userid");
-            if (StringUtil.isNotBlank(userId)) {
-                write(userId, COOKIE_USER_KEY, doMain, response);
-            }
             if (StringUtil.isNotBlank(openId)) {
                 write(openId, COOKIE_OP_KEY, doMain, response);
-                SessionContext.set(session, userId, openId);
+                SessionContext.setOpenId(session, openId);
                 return true;
             }
-            userId = read(request, COOKIE_USER_KEY);
+
             openId = read(request, COOKIE_OP_KEY);
             log.info("openId:{}", openId);
             if (StringUtil.isNotBlank(openId)) {
-                SessionContext.set(session, userId, openId);
+                SessionContext.setOpenId(session, openId);
                 return true;
             }
 
