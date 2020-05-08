@@ -3,7 +3,6 @@ package com.ruoyi.system.rest;
 import com.ruoyi.reward.facade.api.SysOrderFacade;
 import com.ruoyi.reward.facade.dto.SysOrderDTO;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,10 +16,14 @@ import java.util.List;
 @RestController
 @RequestMapping("/rest/order")
 @Slf4j
-public class ISysOrderFacadeController {
+public class SysOrderFacadeController {
 
-    @Autowired
+    private final
     SysOrderFacade sysOrderFacade;
+
+    public SysOrderFacadeController(SysOrderFacade sysOrderFacade) {
+        this.sysOrderFacade = sysOrderFacade;
+    }
 
     @PostMapping("/selectSysOrderById")
     public SysOrderDTO selectSysOrderById(Long id) {

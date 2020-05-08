@@ -12,14 +12,11 @@ import com.ruoyi.reward.facade.enums.OrderStatusType;
 import com.ruoyi.system.domain.SysOrder;
 import com.ruoyi.system.service.ISysOrderService;
 import com.ruoyi.web.controller.vo.SelectOptionVO;
-import com.ruoyi.web.controller.vo.SysOrderVO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -79,23 +76,6 @@ public class SysOrderController extends BaseController {
         return getDataTable(list);
     }
 
-    private ArrayList<SysOrderVO> convert(List<SysOrder> list) {
-        ArrayList<SysOrderVO> objects = Lists.newArrayList();
-        for (SysOrder order : list) {
-            SysOrderVO vo = convert(order);
-            objects.add(vo);
-        }
-        return objects;
-    }
-
-    private SysOrderVO convert(SysOrder order) {
-        if (order == null) {
-            return null;
-        }
-        SysOrderVO vo = new SysOrderVO();
-        BeanUtils.copyProperties(order, vo);
-        return vo;
-    }
 
     /**
      * 导出订单列表列表

@@ -7,6 +7,9 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+/**
+ * @author sunflower
+ */
 public interface AccountMapper {
     long countByExample(AccountExample example);
 

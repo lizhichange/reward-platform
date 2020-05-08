@@ -18,7 +18,7 @@ import java.util.List;
 @RestController
 
 @Slf4j
-public class ISysWebMainFacadeController {
+public class SysWebMainFacadeController {
     @Autowired
     SysWebMainFacade sysWebMainFacade;
 

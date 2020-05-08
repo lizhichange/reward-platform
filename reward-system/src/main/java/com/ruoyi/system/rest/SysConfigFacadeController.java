@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RequestMapping("/rest/config")
 @Slf4j
-public class ISysConfigFacadeController {
+public class SysConfigFacadeController {
     @Autowired
     ISysConfigService sysConfigService;
 

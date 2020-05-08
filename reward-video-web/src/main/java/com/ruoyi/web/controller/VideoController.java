@@ -210,21 +210,16 @@ public class VideoController extends BaseController {
     public AjaxResult queryOrder(ShipinDTO shipinDTO) {
         Users currentUser = getCurrentUser();
         log.info("currentUser:{}", currentUser);
-
-        String openId = SessionContext.getOpenId();
-        String userId = SessionContext.getUserId();
-        log.info("id:{},openId:{}", shipinDTO.getId(), openId);
         SysOrderDTO order = new SysOrderDTO();
+
         order.setGoodsId(shipinDTO.getId());
-        // TODO: 2020/4/20 必填参数
-        order.setOpenId(StringUtil.isBlank(openId) ? "x" : "1");
+        order.setUserId(currentUser.getUserId());
         List<SysOrderDTO> sysOrders = sysOrderFacadeFeign.selectSysOrder(order);
         if (CollectionUtils.isEmpty(sysOrders)) {
             ShipinDTO dto = shiFacadeFeign.selectShipinDTOById(shipinDTO.getId().longValue());
-            order.setCreateTime(new Date());
-            //代理推广的id
-            order.setExtensionUserId(userId);
-            order.setUpdateTime(new Date());
+            Date now = new Date();
+            order.setCreateTime(now);
+            order.setUpdateTime(now);
             //商品快照信息
             order.setGoodsSnapshot(JSON.toJSONString(dto));
             //商品价格区间 原价
@@ -260,7 +255,6 @@ public class VideoController extends BaseController {
                 threadPoolTaskExecutor.execute(() -> {
                     SysOrderDTO upOrder = new SysOrderDTO();
                     upOrder.setOrderId(sysOrder.getOrderId());
-                    upOrder.setExtensionUserId(userId);
                     sysOrderFacadeFeign.updateSysOrderByOrderId(upOrder);
                 });
             }

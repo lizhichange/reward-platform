@@ -10,6 +10,7 @@ import com.ruoyi.system.domain.ExtSysOrderExample;
 import com.ruoyi.system.mapper.ExtSysOrderMapper;
 import com.ruoyi.system.mapper.SysOrderMapper;
 import com.ruoyi.system.service.ISysOrderService;
+import org.near.toolkit.common.StringUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -51,7 +52,16 @@ public class SysOrderServiceImpl implements ISysOrderService {
     @Override
     public List<SysOrder> selectSysOrder(SysOrder extSysOrder) {
         ExtSysOrderExample example = new ExtSysOrderExample();
-        example.createCriteria().andGoodsIdEqualTo(extSysOrder.getGoodsId().intValue()).andOpenIdEqualTo(extSysOrder.getOpenId());
+        ExtSysOrderExample.Criteria criteria = example.createCriteria();
+        if (extSysOrder.getGoodsId() != null) {
+            criteria.andGoodsIdEqualTo(extSysOrder.getGoodsId());
+        }
+        if (StringUtil.isNotBlank(extSysOrder.getOpenId())) {
+            criteria.andOpenIdEqualTo(extSysOrder.getOpenId());
+        }
+        if (StringUtil.isNotBlank(extSysOrder.getUserId())) {
+            criteria.andUserIdEqualTo(extSysOrder.getUserId());
+        }
         List<ExtSysOrder> list = extSysOrderMapper.selectByExample(example);
         if (CollectionUtils.isEmpty(list)) {
             return Lists.newArrayList();
