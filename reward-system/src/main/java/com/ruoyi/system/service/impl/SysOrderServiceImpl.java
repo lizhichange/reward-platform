@@ -11,7 +11,6 @@ import com.ruoyi.system.mapper.ExtSysOrderMapper;
 import com.ruoyi.system.mapper.SysOrderMapper;
 import com.ruoyi.system.service.ISysOrderService;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -26,13 +25,17 @@ import java.util.stream.Collectors;
  */
 @Service
 public class SysOrderServiceImpl implements ISysOrderService {
-    @Autowired
-    private SysOrderMapper sysOrderMapper;
+    private final SysOrderMapper sysOrderMapper;
 
-    @Autowired
+    private final
     ConcurrentSequence concurrentSequence;
-    @Autowired
-    private ExtSysOrderMapper extSysOrderMapper;
+    private final ExtSysOrderMapper extSysOrderMapper;
+
+    public SysOrderServiceImpl(SysOrderMapper sysOrderMapper, ConcurrentSequence concurrentSequence, ExtSysOrderMapper extSysOrderMapper) {
+        this.sysOrderMapper = sysOrderMapper;
+        this.concurrentSequence = concurrentSequence;
+        this.extSysOrderMapper = extSysOrderMapper;
+    }
 
     /**
      * 查询订单列表
@@ -48,7 +51,7 @@ public class SysOrderServiceImpl implements ISysOrderService {
     @Override
     public List<SysOrder> selectSysOrder(SysOrder extSysOrder) {
         SysOrderExample example = new SysOrderExample();
-        example.createCriteria().andGoodsIdEqualTo(extSysOrder.getGoodsId()).andOpenIdEqualTo(extSysOrder.getOpenId());
+        example.createCriteria().andGoodsIdEqualTo(extSysOrder.getGoodsId().intValue()).andOpenIdEqualTo(extSysOrder.getOpenId());
         List<ExtSysOrder> list = extSysOrderMapper.selectByExample(example);
         if (CollectionUtils.isEmpty(list)) {
             return Lists.newArrayList();
