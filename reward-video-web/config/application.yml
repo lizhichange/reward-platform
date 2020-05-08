@@ -4,7 +4,10 @@ spring:
     active: druid
 
 
-
+server:
+  servlet:
+    session:
+      timeout: 1800s
 
 feign:
   client:

@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
@@ -85,7 +86,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         //这里是重点，必须要禁用csrf才能使用ajax登录方式，为了保证安全,否则会出现怎么样都无法请求到ajax登录接口
         http.csrf().disable();
-
+        /**
+         * always –如果一个会话不存在，将始终创建一个会话
+         * ifRequired – 仅在需要时才创建会话（默认）
+         * never –框架将永远不会创建会话，但是如果会话已经存在，它将使用一个会话
+         * stateless – Spring Security不会创建或使用任何会话
+         */
+        http.sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
         /**
          *
          *          http.authorizeRequests()
