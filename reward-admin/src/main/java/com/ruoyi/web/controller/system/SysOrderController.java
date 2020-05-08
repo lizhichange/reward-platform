@@ -76,8 +76,7 @@ public class SysOrderController extends BaseController {
     public TableDataInfo list(SysOrder sysOrder) {
         startPage();
         List<SysOrder> list = sysOrderService.selectSysOrderList(sysOrder);
-        ArrayList<SysOrderVO> objects = convert(list);
-        return getDataTable(objects);
+        return getDataTable(list);
     }
 
     private ArrayList<SysOrderVO> convert(List<SysOrder> list) {
@@ -107,9 +106,8 @@ public class SysOrderController extends BaseController {
     @ResponseBody
     public AjaxResult export(SysOrder sysOrder) {
         List<SysOrder> list = sysOrderService.selectSysOrderList(sysOrder);
-        ArrayList<SysOrderVO> objects = convert(list);
-        ExcelUtil<SysOrderVO> util = new ExcelUtil<>(SysOrderVO.class);
-        return util.exportExcel(objects, "sysOrder");
+        ExcelUtil<SysOrder> util = new ExcelUtil<>(SysOrder.class);
+        return util.exportExcel(list, "sysOrder");
     }
 
     /**
@@ -137,8 +135,7 @@ public class SysOrderController extends BaseController {
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") Long id, ModelMap mmap) {
         SysOrder sysOrder = sysOrderService.selectSysOrderById(id);
-        SysOrderVO convert = convert(sysOrder);
-        mmap.put("sysOrder", convert);
+        mmap.put("sysOrder", sysOrder);
         return prefix + "/edit";
     }
 

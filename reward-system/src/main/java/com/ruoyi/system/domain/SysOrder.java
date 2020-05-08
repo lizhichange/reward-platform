@@ -1,25 +1,30 @@
 package com.ruoyi.system.domain;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
+import com.ruoyi.reward.facade.enums.OrderPayType;
+import com.ruoyi.reward.facade.enums.OrderStatusType;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+import org.near.toolkit.common.EnumUtil;
+import org.near.toolkit.model.Money;
 
 import java.util.Date;
 
 /**
- * 订单对象 sys_order
+ * 订单列表对象 sys_order
  *
  * @author ruoyi
- * @date 2020-05-08
+ * @date 2020-03-26
  */
 public class SysOrder extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     /**
-     * $column.columnComment
+     * null
      */
-    private Long id;
+    private Integer id;
 
     /**
      * 订单ID
@@ -28,22 +33,29 @@ public class SysOrder extends BaseEntity {
     private String orderId;
 
     /**
-     * 实际金额，单位分
+     * 实际金额
      */
-    @Excel(name = "实际金额，单位分")
+    @Excel(name = "实际金额")
     private Integer money;
 
+
+    private String moneyStr;
     /**
-     * 原价，单位分
+     * 原价
      */
-    @Excel(name = "原价，单位分")
-    private Long price;
+    @Excel(name = "原价")
+    private Integer price;
+
+    private String priceStr;
 
     /**
      * 支付方式
      */
     @Excel(name = "支付方式")
     private Integer type;
+
+    @Excel(name = "支付方式描述")
+    private String typeStr;
 
     /**
      * 流水号
@@ -60,7 +72,7 @@ public class SysOrder extends BaseEntity {
     /**
      * 付款时间
      */
-    @Excel(name = "付款时间", width = 30, dateFormat = "yyyy-MM-dd")
+    @Excel(name = "付款时间")
     private Date payTime;
 
     /**
@@ -75,11 +87,13 @@ public class SysOrder extends BaseEntity {
     @Excel(name = "订单状态")
     private Integer status;
 
+
+    private String statusStr;
     /**
      * 商品信息
      */
     @Excel(name = "商品信息")
-    private Long goodsId;
+    private Integer goodsId;
 
     /**
      * 商品快照
@@ -98,18 +112,16 @@ public class SysOrder extends BaseEntity {
      */
     @Excel(name = "推广人的id")
     private String extensionUserId;
+    @Excel(name = "用户id")
 
-    /**
-     * $column.columnComment
-     */
-    @Excel(name = "推广人的id")
     private String userId;
 
-    public void setId(Long id) {
+
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -129,11 +141,11 @@ public class SysOrder extends BaseEntity {
         return money;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 
-    public Long getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
@@ -185,11 +197,11 @@ public class SysOrder extends BaseEntity {
         return status;
     }
 
-    public void setGoodsId(Long goodsId) {
+    public void setGoodsId(Integer goodsId) {
         this.goodsId = goodsId;
     }
 
-    public Long getGoodsId() {
+    public Integer getGoodsId() {
         return goodsId;
     }
 
@@ -217,14 +229,6 @@ public class SysOrder extends BaseEntity {
         return extensionUserId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
@@ -244,7 +248,58 @@ public class SysOrder extends BaseEntity {
                 .append("goodsSnapshot", getGoodsSnapshot())
                 .append("openId", getOpenId())
                 .append("extensionUserId", getExtensionUserId())
-                .append("userId", getUserId())
                 .toString();
+    }
+
+    public String getMoneyStr() {
+
+        Money m = new Money();
+        m.setCent(this.money == null ? 0 : this.money);
+        return moneyStr = m.toString();
+
+    }
+
+    public void setMoneyStr(String moneyStr) {
+        this.moneyStr = moneyStr;
+    }
+
+    public String getTypeStr() {
+        if (this.type != null) {
+            typeStr = EnumUtil.queryByCode(this.type.toString(), OrderPayType.class).getDesc();
+        }
+        return typeStr;
+    }
+
+    public void setTypeStr(String typeStr) {
+        this.typeStr = typeStr;
+    }
+
+    public String getStatusStr() {
+        if (this.status != null) {
+            statusStr = EnumUtil.queryByCode(this.status.toString(), OrderStatusType.class).getDesc();
+        }
+        return statusStr;
+    }
+
+    public void setStatusStr(String statusStr) {
+        this.statusStr = statusStr;
+    }
+
+    public String getPriceStr() {
+        Money m = new Money();
+        m.setCent(this.price == null ? 0 : this.price);
+        return priceStr = m.toString();
+    }
+
+    public void setPriceStr(String priceStr) {
+        this.priceStr = priceStr;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }
