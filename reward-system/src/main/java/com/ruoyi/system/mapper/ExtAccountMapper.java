@@ -11,7 +11,7 @@ import java.util.List;
  * @author ruoyi
  * @date 2020-04-06
  */
-public interface IAccountMapper {
+public interface ExtAccountMapper {
     /**
      * 查询【请填写功能名称】
      *
@@ -43,6 +43,7 @@ public interface IAccountMapper {
      * @return 结果
      */
     public int updateAccount(Account account);
+
     public int updateAccountByAccountId(Account account);
 
     /**

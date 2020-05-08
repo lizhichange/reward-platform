@@ -3,7 +3,7 @@ package com.ruoyi.system.service.impl;
 
 import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.system.domain.Account;
-import com.ruoyi.system.mapper.IAccountMapper;
+import com.ruoyi.system.mapper.ExtAccountMapper;
 import com.ruoyi.system.service.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ import java.util.List;
 @Service
 public class AccountServiceImpl implements IAccountService {
     @Autowired
-    private IAccountMapper accountMapper;
+    private ExtAccountMapper accountMapper;
 
     /**
      * 查询【请填写功能名称】
