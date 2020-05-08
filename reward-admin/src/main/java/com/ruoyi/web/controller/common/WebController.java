@@ -94,9 +94,7 @@ public class WebController extends BaseController {
     public AjaxResult reg(String loginName, String userName, String password,
                           String yqm,
                           String payee,
-                          String payeeAccount, HttpServletRequest request
-
-    ) {
+                          String payeeAccount, HttpServletRequest request) {
 
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
         ServletRequestAttributes my = (ServletRequestAttributes) requestAttributes;
