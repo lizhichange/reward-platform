@@ -55,10 +55,10 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        LOGGER.info("====用户进入拦截器===WechatAuthInterceptor===");
+        LOGGER.debug("====用户进入拦截器===WechatAuthInterceptor===");
         HttpServletRequest myRequest = getHttpServletRequest();
         StringBuffer requestUrl = myRequest.getRequestURL();
-        log.info("requestURL:{}", requestUrl);
+        log.debug("requestURL:{}", requestUrl);
         Map<String, String[]> parameterMap = myRequest.getParameterMap();
         StringBuilder str = new StringBuilder();
         if (!CollectionUtils.isEmpty(parameterMap)) {
@@ -170,7 +170,7 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
     }
 
     /**
-     * // 在请求已经返回之后执行
+     * 在请求已经返回之后执行
      *
      * @param request
      * @param response
@@ -180,7 +180,13 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response,
                                 Object handler, Exception ex) {
-        SessionContext.clearSessionContext();
+
+        if (SessionContext.hasAttribute(SessionContext.OPEN_ID_KEY)) {
+            SessionContext.removeAttribute(SessionContext.OPEN_ID_KEY);
+        }
+        if (SessionContext.hasAttribute(SessionContext.USER_ID_KEY)) {
+            SessionContext.removeAttribute(SessionContext.USER_ID_KEY);
+        }
     }
 
     /**

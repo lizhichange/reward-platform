@@ -220,6 +220,8 @@ public class VideoController extends BaseController {
             Date now = new Date();
             order.setCreateTime(now);
             order.setUpdateTime(now);
+            //推广人userId
+            order.setExtensionUserId(SessionContext.getUserId());
             //商品快照信息
             order.setGoodsSnapshot(JSON.toJSONString(dto));
             //商品价格区间 原价
@@ -255,6 +257,8 @@ public class VideoController extends BaseController {
                 threadPoolTaskExecutor.execute(() -> {
                     SysOrderDTO upOrder = new SysOrderDTO();
                     upOrder.setOrderId(sysOrder.getOrderId());
+                    //推广人userId
+                    upOrder.setExtensionUserId(SessionContext.getUserId());
                     sysOrderFacadeFeign.updateSysOrderByOrderId(upOrder);
                 });
             }
