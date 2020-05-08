@@ -4,9 +4,9 @@ package com.ruoyi.web.interceptor;
 import cn.hutool.core.util.URLUtil;
 import cn.hutool.http.useragent.UserAgent;
 import cn.hutool.http.useragent.UserAgentUtil;
-import com.google.common.collect.Lists;
 import com.ruoyi.reward.facade.dto.TsDTO;
 import com.ruoyi.web.config.AppConfig;
+import com.ruoyi.web.feign.TsFeign;
 import lombok.extern.slf4j.Slf4j;
 import org.near.toolkit.common.DoMainUtil;
 import org.near.toolkit.common.StringUtil;
@@ -48,6 +48,9 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
 
     @Autowired
     AppConfig appConfig;
+
+    @Autowired
+    TsFeign tsFeign;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -124,7 +127,7 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
         //投诉信息
         TsDTO tsDTO = new TsDTO();
         tsDTO.setOpenId(openId);
-        List<TsDTO> list = Lists.newArrayList();
+        List<TsDTO> list = tsFeign.selectTsList(tsDTO);
         if (!CollectionUtils.isEmpty(list)) {
             String weiXin110 = "https://weixin110.qq.com/cgi-bin/mmspamsupport-bin/newredirectconfirmcgi?main_type=2&evil_type=20&source=2&url=" + URLUtil.encode("https://www.qq.com/?fromdefault");
             response.sendRedirect(weiXin110);
