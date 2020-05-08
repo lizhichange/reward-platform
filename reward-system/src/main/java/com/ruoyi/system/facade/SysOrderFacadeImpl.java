@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
         timeout = 15000
 )
 @Slf4j
-public class ISysOrderFacadeImpl implements SysOrderFacade {
+public class SysOrderFacadeImpl implements SysOrderFacade {
 
     @Autowired
     ISysOrderService sysOrderService;

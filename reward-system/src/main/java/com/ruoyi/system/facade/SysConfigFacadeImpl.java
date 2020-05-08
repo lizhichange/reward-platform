@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
         version = "1.0.0",
         timeout = 15000
 )
-public class ISysConfigFacadeImpl implements SysConfigFacade {
+public class SysConfigFacadeImpl implements SysConfigFacade {
     @Autowired
     ISysConfigService sysConfigService;
 
