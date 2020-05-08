@@ -1,6 +1,7 @@
 package com.ruoyi.web.security;
 
 import com.ruoyi.web.interceptor.CurrentUserInterceptor;
+import com.ruoyi.web.interceptor.WechatAuthInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,9 +28,15 @@ public class WebMvcConfig implements WebMvcConfigurer {
     }
 
     @Autowired
+    WechatAuthInterceptor wechatAuthInterceptor;
+
+    @Bean
+    WechatAuthInterceptor wechatAuthInterceptor() {
+        return new WechatAuthInterceptor();
+    }
+
+    @Autowired
     CurrentUserInterceptor currentUserInterceptor;
-
-
 
 
     /**
@@ -38,6 +45,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(currentUserInterceptor).addPathPatterns("/video/**");
+        registry.addInterceptor(wechatAuthInterceptor).addPathPatterns("/video/**");
+
         // TODO: 2020/5/8 拦截
 
 

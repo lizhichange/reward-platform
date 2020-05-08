@@ -31,8 +31,7 @@ public interface TsFeign {
      * @return 投诉列表
      */
     @PostMapping("/selectTsList")
-
-    public List<TsDTO> selectTsList(@RequestBody TsDTO ts);
+    List<TsDTO> selectTsList(@RequestBody TsDTO ts);
 
     /**
      * 新增投诉列表

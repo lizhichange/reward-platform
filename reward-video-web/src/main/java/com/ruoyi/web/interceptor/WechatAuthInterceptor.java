@@ -52,6 +52,7 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
     @Autowired
     TsFeign tsFeign;
 
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         LOGGER.info("====用户进入拦截器===WechatAuthInterceptor===");
