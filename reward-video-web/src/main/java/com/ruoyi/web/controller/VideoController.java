@@ -247,6 +247,7 @@ public class VideoController extends BaseController {
             order.setTypeStr(WE_CHAT_PAY.getDesc());
             order.setStatus(Integer.valueOf(OrderStatusType.N_PAY.getCode()));
             order.setStatusStr(OrderStatusType.N_PAY.getDesc());
+            order.setStatus(Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
             sysOrderFacadeFeign.insertSysOrder(order);
             return AjaxResult.success(order);
         } else {
@@ -267,6 +268,8 @@ public class VideoController extends BaseController {
             sysOrder.setMoneyStr(money.toString());
             sysOrder.setTypeStr(EnumUtil.queryByCode(sysOrder.getType().toString(), OrderPayType.class).getDesc());
             sysOrder.setStatusStr(EnumUtil.queryByCode(sysOrder.getStatus().toString(), OrderStatusType.class).getDesc());
+            // TODO: 2020/5/8
+            sysOrder.setStatus(Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
             return AjaxResult.success(sysOrder);
         }
     }
