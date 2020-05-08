@@ -81,8 +81,9 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
             log.info("userId:{}", userId);
         }
         userId = read(request, COOKIE_USER_KEY);
-        SessionContext.setUserId(session, userId);
-
+        if (StringUtil.isNotBlank(userId)) {
+            SessionContext.setUserId(session, userId);
+        }
 
         if (handler instanceof HandlerMethod) {
             HandlerMethod handlerMethod = (HandlerMethod) handler;
