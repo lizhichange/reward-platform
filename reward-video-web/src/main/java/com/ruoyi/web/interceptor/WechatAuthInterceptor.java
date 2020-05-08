@@ -56,10 +56,9 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         LOGGER.debug("====用户进入拦截器===WechatAuthInterceptor===");
-        HttpServletRequest myRequest = getHttpServletRequest();
-        StringBuffer requestUrl = myRequest.getRequestURL();
+        StringBuffer requestUrl = request.getRequestURL();
         log.debug("requestURL:{}", requestUrl);
-        Map<String, String[]> parameterMap = myRequest.getParameterMap();
+        Map<String, String[]> parameterMap = request.getParameterMap();
         StringBuilder str = new StringBuilder();
         if (!CollectionUtils.isEmpty(parameterMap)) {
             for (Map.Entry<String, String[]> entry : parameterMap.entrySet()) {
@@ -74,7 +73,7 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
         HttpSession session = request.getSession();
         String doMain = DoMainUtil.getDoMain(requestUrl.toString());
         //推广人的userid
-        String userId = myRequest.getParameter("userid");
+        String userId = request.getParameter("userid");
         if (StringUtil.isNotBlank(userId)) {
             write(userId, COOKIE_USER_KEY, doMain, response);
             SessionContext.setUserId(session, userId);
@@ -94,7 +93,7 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
                 return true;
             }
             //授权回来之后中定向会带有openId参数
-            String openId = myRequest.getParameter("op");
+            String openId = request.getParameter("op");
             if (StringUtil.isNotBlank(openId)) {
                 write(openId, COOKIE_OP_KEY, doMain, response);
                 SessionContext.setOpenId(session, openId);
