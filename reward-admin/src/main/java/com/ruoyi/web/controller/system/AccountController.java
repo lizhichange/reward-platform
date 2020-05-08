@@ -12,7 +12,7 @@ import com.ruoyi.reward.facade.enums.AccountType;
 import com.ruoyi.reward.facade.enums.SwitchEnum;
 import com.ruoyi.system.domain.Account;
 import com.ruoyi.system.service.IAccountService;
-import com.ruoyi.web.controller.vo.SelectOption;
+import com.ruoyi.web.controller.vo.SelectOptionVO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.near.toolkit.common.EnumUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,9 +41,9 @@ public class AccountController extends BaseController {
     public String account(ModelMap modelMap) {
 
 
-        List<SelectOption> states = Lists.newArrayList();
+        List<SelectOptionVO> states = Lists.newArrayList();
         for (SwitchEnum value : SwitchEnum.values()) {
-            SelectOption option = new SelectOption();
+            SelectOptionVO option = new SelectOptionVO();
             option.setCode(value.getCode());
             option.setDesc(value.getDesc());
             states.add(option);
@@ -51,9 +51,9 @@ public class AccountController extends BaseController {
         modelMap.addAttribute("states", states);
 
 
-        List<SelectOption> types = Lists.newArrayList();
+        List<SelectOptionVO> types = Lists.newArrayList();
         for (AccountType value : AccountType.values()) {
-            SelectOption option = new SelectOption();
+            SelectOptionVO option = new SelectOptionVO();
             option.setCode(value.getCode());
             option.setDesc(value.getDesc());
             types.add(option);

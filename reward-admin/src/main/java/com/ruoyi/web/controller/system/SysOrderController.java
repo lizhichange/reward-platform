@@ -11,13 +11,15 @@ import com.ruoyi.reward.facade.enums.OrderPayType;
 import com.ruoyi.reward.facade.enums.OrderStatusType;
 import com.ruoyi.system.domain.SysOrder;
 import com.ruoyi.system.service.ISysOrderService;
-import com.ruoyi.web.controller.vo.SelectOption;
+import com.ruoyi.web.controller.vo.SelectOptionVO;
+import com.ruoyi.web.controller.vo.SysOrderVO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,8 +33,11 @@ import java.util.List;
 public class SysOrderController extends BaseController {
     private String prefix = "system/sysOrder";
 
-    @Autowired
-    private ISysOrderService sysOrderService;
+    private final ISysOrderService sysOrderService;
+
+    public SysOrderController(ISysOrderService sysOrderService) {
+        this.sysOrderService = sysOrderService;
+    }
 
     @RequiresPermissions("system:sysOrder:view")
     @GetMapping()
@@ -40,9 +45,9 @@ public class SysOrderController extends BaseController {
 
 
         OrderPayType[] values = OrderPayType.values();
-        List<SelectOption> types = Lists.newArrayList();
+        List<SelectOptionVO> types = Lists.newArrayList();
         for (OrderPayType value : values) {
-            SelectOption option = new SelectOption();
+            SelectOptionVO option = new SelectOptionVO();
             option.setCode(value.getCode());
             option.setDesc(value.getDesc());
             types.add(option);
@@ -50,9 +55,9 @@ public class SysOrderController extends BaseController {
         modelMap.addAttribute("types", types);
 
         OrderStatusType[] status = OrderStatusType.values();
-        List<SelectOption> statusList = Lists.newArrayList();
+        List<SelectOptionVO> statusList = Lists.newArrayList();
         for (OrderStatusType value : status) {
-            SelectOption option = new SelectOption();
+            SelectOptionVO option = new SelectOptionVO();
             option.setCode(value.getCode());
             option.setDesc(value.getDesc());
             statusList.add(option);
@@ -71,7 +76,26 @@ public class SysOrderController extends BaseController {
     public TableDataInfo list(SysOrder sysOrder) {
         startPage();
         List<SysOrder> list = sysOrderService.selectSysOrderList(sysOrder);
-        return getDataTable(list);
+        ArrayList<SysOrderVO> objects = convert(list);
+        return getDataTable(objects);
+    }
+
+    private ArrayList<SysOrderVO> convert(List<SysOrder> list) {
+        ArrayList<SysOrderVO> objects = Lists.newArrayList();
+        for (SysOrder order : list) {
+            SysOrderVO vo = convert(order);
+            objects.add(vo);
+        }
+        return objects;
+    }
+
+    private SysOrderVO convert(SysOrder order) {
+        if (order == null) {
+            return null;
+        }
+        SysOrderVO vo = new SysOrderVO();
+        BeanUtils.copyProperties(order, vo);
+        return vo;
     }
 
     /**
@@ -83,8 +107,9 @@ public class SysOrderController extends BaseController {
     @ResponseBody
     public AjaxResult export(SysOrder sysOrder) {
         List<SysOrder> list = sysOrderService.selectSysOrderList(sysOrder);
-        ExcelUtil<SysOrder> util = new ExcelUtil<SysOrder>(SysOrder.class);
-        return util.exportExcel(list, "sysOrder");
+        ArrayList<SysOrderVO> objects = convert(list);
+        ExcelUtil<SysOrderVO> util = new ExcelUtil<>(SysOrderVO.class);
+        return util.exportExcel(objects, "sysOrder");
     }
 
     /**
@@ -112,7 +137,8 @@ public class SysOrderController extends BaseController {
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") Long id, ModelMap mmap) {
         SysOrder sysOrder = sysOrderService.selectSysOrderById(id);
-        mmap.put("sysOrder", sysOrder);
+        SysOrderVO convert = convert(sysOrder);
+        mmap.put("sysOrder", convert);
         return prefix + "/edit";
     }
 

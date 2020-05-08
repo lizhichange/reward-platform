@@ -11,7 +11,7 @@ import com.ruoyi.reward.facade.enums.AccountBizCode;
 import com.ruoyi.reward.facade.enums.AccountOptType;
 import com.ruoyi.system.domain.AccountDetail;
 import com.ruoyi.system.service.IAccountDetailService;
-import com.ruoyi.web.controller.vo.SelectOption;
+import com.ruoyi.web.controller.vo.SelectOptionVO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.near.toolkit.common.EnumUtil;
 import org.near.toolkit.model.Money;
@@ -41,9 +41,9 @@ public class AccountDetailController extends BaseController {
     public String accountDetail(ModelMap modelMap) {
 
 
-        List<SelectOption> types = Lists.newArrayList();
+        List<SelectOptionVO> types = Lists.newArrayList();
         for (AccountOptType value : AccountOptType.values()) {
-            SelectOption option = new SelectOption();
+            SelectOptionVO option = new SelectOptionVO();
             option.setCode(value.getCode());
             option.setDesc(value.getDesc());
             types.add(option);
@@ -51,9 +51,9 @@ public class AccountDetailController extends BaseController {
         modelMap.addAttribute("types", types);
 
 
-        List<SelectOption> biz = Lists.newArrayList();
+        List<SelectOptionVO> biz = Lists.newArrayList();
         for (AccountBizCode value : AccountBizCode.values()) {
-            SelectOption option = new SelectOption();
+            SelectOptionVO option = new SelectOptionVO();
             option.setCode(value.getCode());
             option.setDesc(value.getDesc());
             biz.add(option);

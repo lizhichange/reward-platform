@@ -7,7 +7,7 @@ import org.near.toolkit.model.ToString;
  * @author sunflower
  */
 @Data
-public class SelectOption extends ToString {
+public class SelectOptionVO extends ToString {
     private String code;
     private String desc;
 }
