@@ -14,7 +14,7 @@ public class SecurityUtil {
         SecurityContext securityContext = SecurityContextHolder.getContext();
         Authentication authentication = securityContext.getAuthentication();
         Users users = null;
-        if (authentication.getPrincipal() != null) {
+        if (authentication.getPrincipal() != null && authentication.getPrincipal() instanceof Users) {
             users = new Users();
             BeanUtils.copyProperties(authentication.getPrincipal(), users);
         }
