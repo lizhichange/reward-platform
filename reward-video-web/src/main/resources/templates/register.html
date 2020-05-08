@@ -263,7 +263,7 @@
             success: function (r) {
                 $.hideLoading();
                 if (r.code === 0) {
-                    location.href = ctx + 'index';
+                    location.href = '/login';
                 } else {
                     $.hideLoading();
                     $.toast(r.msg);
