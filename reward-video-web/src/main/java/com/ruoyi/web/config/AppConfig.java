@@ -18,6 +18,8 @@ public class AppConfig extends ToString {
     private String wxPayUrl;
     @Value("${app.myUrl}")
     private String myUrl;
+    @Value("${app.wxAuthUrl}")
+    private String wxAuthUrl;
 
 
 }

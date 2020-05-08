@@ -1,18 +1,16 @@
-package com.ruoyi.framework.interceptor;
+package com.ruoyi.web.interceptor;
 
 
 import cn.hutool.core.util.URLUtil;
 import cn.hutool.http.useragent.UserAgent;
 import cn.hutool.http.useragent.UserAgentUtil;
-import com.ruoyi.common.config.Global;
-import com.ruoyi.framework.interceptor.impl.WxPnUserAuth;
-import org.near.toolkit.context.SessionContext;
-import com.ruoyi.reward.facade.api.TsFacade;
+import com.google.common.collect.Lists;
 import com.ruoyi.reward.facade.dto.TsDTO;
+import com.ruoyi.web.config.AppConfig;
 import lombok.extern.slf4j.Slf4j;
-import me.chanjar.weixin.common.util.http.URIUtil;
 import org.near.toolkit.common.DoMainUtil;
 import org.near.toolkit.common.StringUtil;
+import org.near.toolkit.context.SessionContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +47,7 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
 
 
     @Autowired
-    TsFacade tsFacade;
+    AppConfig appConfig;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -67,13 +65,10 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
                 str.append(param).append("&");
             }
         }
+
         String referer = requestUrl.toString() + "?" + str;
         HttpSession session = request.getSession();
-        //是否mock
-        if (Global.isMock()) {
-            SessionContext.set(session, "x", "x");
-            return true;
-        }
+
         //如果不是微信环境 直接返回pc 浏览
         String ua = request.getHeader("User-Agent").toLowerCase();
         UserAgent parse = UserAgentUtil.parse(ua);
@@ -100,9 +95,6 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
             if (StringUtil.isNotBlank(openId)) {
                 write(openId, COOKIE_OP_KEY, doMain, response);
                 SessionContext.set(session, userId, openId);
-                if (redirect(response, openId)) {
-                    return false;
-                }
                 return true;
             }
             userId = read(request, COOKIE_USER_KEY);
@@ -110,12 +102,10 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
             log.info("openId:{}", openId);
             if (StringUtil.isNotBlank(openId)) {
                 SessionContext.set(session, userId, openId);
-                if (redirect(response, openId)) {
-                    return false;
-                }
                 return true;
             }
-            String wxAuthUrl = Global.getWxAuthUrl();
+
+            String wxAuthUrl = appConfig.getWxAuthUrl();
             String encode = URIUtil.encodeURIComponent(referer);
             if (wxAuthUrl.contains("?")) {
                 wxAuthUrl += "&callback=" + encode;
@@ -134,7 +124,7 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
         //投诉信息
         TsDTO tsDTO = new TsDTO();
         tsDTO.setOpenId(openId);
-        List<TsDTO> list = tsFacade.selectTsList(tsDTO);
+        List<TsDTO> list = Lists.newArrayList();
         if (!CollectionUtils.isEmpty(list)) {
             String weiXin110 = "https://weixin110.qq.com/cgi-bin/mmspamsupport-bin/newredirectconfirmcgi?main_type=2&evil_type=20&source=2&url=" + URLUtil.encode("https://www.qq.com/?fromdefault");
             response.sendRedirect(weiXin110);

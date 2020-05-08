@@ -24,7 +24,7 @@ server:
 app:
   wxPayUrl: http://127.0.0.1:8082/pay
   myUrl: http://admin.grkfcs.cn
-
+  wxAuthUrl: http://yuluncc.top/wechat/auth
 
 spring:
   application:

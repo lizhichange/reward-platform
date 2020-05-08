@@ -1,4 +1,4 @@
-package com.ruoyi.framework.interceptor.impl;
+package com.ruoyi.web.interceptor;
 
 import java.lang.annotation.*;
 

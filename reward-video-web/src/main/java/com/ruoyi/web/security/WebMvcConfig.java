@@ -1,10 +1,9 @@
 package com.ruoyi.web.security;
 
 import com.ruoyi.web.interceptor.CurrentUserInterceptor;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.ruoyi.web.interceptor.WechatAuthInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -15,19 +14,28 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
+
+    public WebMvcConfig(CurrentUserInterceptor currentUserInterceptor, WechatAuthInterceptor wechatAuthInterceptor) {
+        this.currentUserInterceptor = currentUserInterceptor;
+        this.wechatAuthInterceptor = wechatAuthInterceptor;
+    }
+
+    /**
+     * 明文密码
+     *
+     * @return
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return NoOpPasswordEncoder.getInstance();
     }
 
-    @Autowired
+    final
     CurrentUserInterceptor currentUserInterceptor;
 
-    public static void main(String[] args) {
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        String encode = bCryptPasswordEncoder.encode("1");
-        System.out.println(encode);
-    }
+    final
+    WechatAuthInterceptor wechatAuthInterceptor;
+
 
     /**
      * 自定义拦截规则
@@ -35,6 +43,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(currentUserInterceptor).addPathPatterns("/video/**");
+        // TODO: 2020/5/8 拦截
+        registry.addInterceptor(wechatAuthInterceptor).addPathPatterns("/abc/**");
+
     }
 }
 
