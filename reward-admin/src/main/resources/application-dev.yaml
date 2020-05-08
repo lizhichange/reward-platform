@@ -102,4 +102,8 @@ nacos:
     server-addr: 127.0.0.1:8848
     file-extension: yaml
 
-
+# 日志配置
+logging:
+  level:
+    com.ruoyi: debug
+    org.springframework: warn

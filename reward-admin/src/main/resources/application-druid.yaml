@@ -103,3 +103,8 @@ nacos:
     file-extension: yaml
 
 
+# 日志配置
+logging:
+  level:
+    com.ruoyi: info
+    org.springframework: warn
