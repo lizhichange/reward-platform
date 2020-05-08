@@ -29,7 +29,6 @@ import org.near.toolkit.common.DoMainUtil;
 import org.near.toolkit.common.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -62,6 +61,14 @@ public class PayController extends BaseController {
 
     public static final String QRCODE_ENDPOINT = "/qrcode";
     public static final long THIRTY_MINUTES = 1800000;
+
+    private final
+    ImageService imageService;
+
+
+    public PayController(ImageService imageService) {
+        this.imageService = imageService;
+    }
 
     @GetMapping
     public String pay(@RequestParam(value = "orderId") String orderId,
@@ -120,8 +127,6 @@ public class PayController extends BaseController {
         return "aliPay";
     }
 
-    @Autowired
-    ImageService imageService;
 
     @GetMapping(value = QRCODE_ENDPOINT, produces = MediaType.IMAGE_PNG_VALUE)
     public Mono<ResponseEntity<byte[]>> getQrCode(@RequestParam(value = "text") String text) {
@@ -159,7 +164,6 @@ public class PayController extends BaseController {
         }
         return list.get(0);
     }
-
 
     /**
      * 调用统一下单接口，并组装生成支付所需参数对象.*
@@ -217,6 +221,8 @@ public class PayController extends BaseController {
 
     private AjaxResult tradeTypeJsApi(HttpServletRequest servletRequest, SysOrderDTO item, WxPayUnifiedOrderRequest request) throws WxPayException {
         request.setTradeType(WxPayConstants.TradeType.JSAPI);
+        Assert.hasText(item.getOpenId()
+                , "openId is not null");
         request.setOpenid(item.getOpenId());
         String getRequestUrl = servletRequest.getRequestURL().toString();
         String doMain = DoMainUtil.getDoMain(getRequestUrl);
