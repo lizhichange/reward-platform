@@ -30,10 +30,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Autowired
     WechatAuthInterceptor wechatAuthInterceptor;
 
-    @Bean
-    WechatAuthInterceptor wechatAuthInterceptor() {
-        return new WechatAuthInterceptor();
-    }
 
     @Autowired
     CurrentUserInterceptor currentUserInterceptor;

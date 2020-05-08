@@ -1,7 +1,6 @@
 package com.ruoyi.web.model;
 
 
-import com.ruoyi.web.model.Users;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
