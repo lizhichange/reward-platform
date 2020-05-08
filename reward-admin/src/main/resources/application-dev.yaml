@@ -70,6 +70,7 @@ ruoyi:
   profile: /Users/sunflower/Downloads/uploadPath
   # 获取ip地址开关
   addressEnabled: true
+  wxAuthUrl: http://yuluncc.top/wechat/auth
 
 
 
