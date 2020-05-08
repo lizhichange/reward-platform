@@ -61,6 +61,13 @@
     <!-- 依赖声明 -->
     <dependencyManagement>
         <dependencies>
+
+            <dependency>
+                <groupId>org.near</groupId>
+                <artifactId>near-toolkit</artifactId>
+                <version>1.0.2</version>
+            </dependency>
+
             <!-- SpringBoot的依赖配置-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -250,11 +257,9 @@
                 <artifactId>reward-service</artifactId>
                 <version>${reward.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.near</groupId>
-                <artifactId>near-toolkit</artifactId>
-                <version>1.0.2</version>
-            </dependency>
+
+
+
             <dependency>
                 <groupId>com.reward</groupId>
                 <artifactId>reward-facade</artifactId>
