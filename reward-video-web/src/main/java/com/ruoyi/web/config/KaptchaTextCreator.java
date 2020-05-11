@@ -15,7 +15,7 @@ public class KaptchaTextCreator extends DefaultTextCreator {
 
     @Override
     public String getText() {
-        Integer result = 0;
+        int result;
         Random random = new SecureRandom();
         int x = random.nextInt(10);
         int y = random.nextInt(10);
