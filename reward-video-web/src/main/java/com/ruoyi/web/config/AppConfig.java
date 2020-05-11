@@ -19,5 +19,9 @@ public class AppConfig extends ToString {
     @Value("${app.wxAuthUrl}")
     private String wxAuthUrl;
 
-
+    /**
+     * / 验证码开关
+     */
+    @Value("${app.captchaEnabled}")
+    private boolean captchaEnabled;
 }

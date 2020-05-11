@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
@@ -45,6 +46,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     // Failure Handler
     private final AuthenticationFailureHandler authenticationFailureHandler;
 
+    @Autowired
+    ValidateCodeFilter validateCodeFilter;
 
     @Autowired
     public SecurityConfiguration(
@@ -70,7 +73,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         //定义security应该忽略的策略
-        // web.ignoring().antMatchers("/login/doLogin");
         web.ignoring().antMatchers("/register");
 
     }
@@ -86,32 +88,27 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         //这里是重点，必须要禁用csrf才能使用ajax登录方式，为了保证安全,否则会出现怎么样都无法请求到ajax登录接口
         http.csrf().disable();
+        //添加验证码效验过滤器
+        http.addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class);
+
         /**
          * always –如果一个会话不存在，将始终创建一个会话
          * ifRequired – 仅在需要时才创建会话（默认）
          * never –框架将永远不会创建会话，但是如果会话已经存在，它将使用一个会话
          * stateless – Spring Security不会创建或使用任何会话
          */
-        http.sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
-        /**
-         *
-         *          http.authorizeRequests()
-         *                 .antMatchers("/video/queryOrder").authenticated()
-         *                 .anyRequest().permitAll()
-         *                 .and()
-         *                 .formLogin().loginPage("/login").permitAll();
-         *
-         */
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
 
         http.exceptionHandling().authenticationEntryPoint(unauthorizedEntryPoint)
-                .and()
-                .authorizeRequests().antMatchers("/video/queryOrder").authenticated() //需要
+                .and() //需要
+                .authorizeRequests().antMatchers("/video/queryOrder").authenticated()
                 .anyRequest().permitAll() //其他不需要
                 .and()
                 .formLogin()
-                .loginPage("/login.html")//登录页面，加载登录的html页面
-                .loginProcessingUrl("/login")//发送Ajax请求的路径
+                //登录页面，加载登录的html页面
+                .loginPage("/login.html")
+                //发送Ajax请求的路径
+                .loginProcessingUrl("/login")
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .successHandler(authenticationSuccessHandler)

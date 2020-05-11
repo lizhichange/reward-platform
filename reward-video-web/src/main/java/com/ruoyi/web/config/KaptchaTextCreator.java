@@ -1,4 +1,4 @@
-package com.ruoyi.framework.config;
+package com.ruoyi.web.config;
 
 import com.google.code.kaptcha.text.impl.DefaultTextCreator;
 

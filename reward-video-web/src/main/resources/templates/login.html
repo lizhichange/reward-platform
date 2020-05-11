@@ -14,105 +14,13 @@
 
     <link href="/css/all-responsive-metal.css" rel="stylesheet" type="text/css">
     <link href="/css/jquery.fancybox-metal.css" rel="stylesheet" type="text/css">
+
+
     <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
     <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
     <script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
 
-    <style type="text/css">
-        .at-branding-logo {
-            font-family: helvetica, arial, sans-serif;
-            text-decoration: none;
-            font-size: 10px;
-            display: inline-block;
-            margin: 2px 0;
-            letter-spacing: .2px
-        }
-
-        .at-branding-logo .at-branding-icon {
-            background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAMAAAC67D+PAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAZQTFRF////+GlNUkcc1QAAAB1JREFUeNpiYIQDBjQmAwMmkwEM0JnY1WIxFyDAABGeAFEudiZsAAAAAElFTkSuQmCC")
-        }
-
-        .at-branding-logo .at-branding-icon,
-        .at-branding-logo .at-privacy-icon {
-            display: inline-block;
-            height: 10px;
-            width: 10px;
-            margin-left: 4px;
-            margin-right: 3px;
-            margin-bottom: -1px;
-            background-repeat: no-repeat
-        }
-
-        .at-branding-logo .at-privacy-icon {
-            background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAKCAMAAABR24SMAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABhQTFRF8fr9ot/xXcfn2/P5AKva////////AKTWodjhjAAAAAd0Uk5T////////ABpLA0YAAAA6SURBVHjaJMzBDQAwCAJAQaj7b9xifV0kUKJ9ciWxlzWEWI5gMF65KUTv0VKkjVeTerqE/x7+9BVgAEXbAWI8QDcfAAAAAElFTkSuQmCC")
-        }
-
-        .at-branding-logo span {
-            text-decoration: none
-        }
-
-        .at-branding-logo .at-branding-addthis,
-        .at-branding-logo .at-branding-powered-by {
-            color: #666
-        }
-
-        .at-branding-logo .at-branding-addthis:hover {
-            color: #333
-        }
-
-        .at-cv-with-image .at-branding-addthis,
-        .at-cv-with-image .at-branding-addthis:hover {
-            color: #fff
-        }
-
-        a.at-branding-logo:visited {
-            color: initial
-        }
-
-        .at-branding-info {
-            display: inline-block;
-            padding: 0 5px;
-            color: #666;
-            border: 1px solid #666;
-            border-radius: 50%;
-            font-size: 10px;
-            line-height: 9pt;
-            opacity: .7;
-            transition: all .3s ease;
-            text-decoration: none
-        }
-
-        .at-branding-info span {
-            border: 0;
-            clip: rect(0 0 0 0);
-            height: 1px;
-            margin: -1px;
-            overflow: hidden;
-            padding: 0;
-            position: absolute;
-            width: 1px
-        }
-
-        .at-branding-info:before {
-            content: 'i';
-            font-family: Times New Roman
-        }
-
-        .at-branding-info:hover {
-            color: #0780df;
-            border-color: #0780df
-        }
-
-
-    </style>
-    <style type="text/css">
-        .fancybox-margin {
-            margin-right: 0px;
-        }
-
-
-    </style>
 
 </head>
 
@@ -149,54 +57,47 @@
                 <div class="atclear" tabindex="1000"></div>
             </div>
         </div>
-        <style>
-            .search-button-ext {
-                float: right;
-                display: block;
-                width: 39px;
-                height: 30px;
-                background: url('/img/btn-search.png') no-repeat;
-                text-indent: -1000px;
-                overflow: hidden;
-                cursor: pointer;
-            }
-
-
-        </style>
-        <div class="search">
-            <form id="user-form">
-                <span id="search" class="search-button-ext">搜索</span>
-                <div class="search-text"><input type="text" name="name" placeholder="请输入搜索关键词,至少两个字符" value="">
-                </div>
-            </form>
-        </div>
-
     </div>
 
     <div class="box bottom-adv"></div>
+
     <div class="content">
+
         <strong class="popup-title">输入</strong>
         <div class="popup-holder">
-            <form>
+            <form action="http://www.xiaobi021.com/login/" data-form="ajax" method="post">
+                <div class="generic-error hidden">
+                </div>
                 <div>
                     <div class="row">
                         <label for="login_username" class="field-label required">用户名字</label>
-                        <input type="text" name="username" id="login_username" class="textfield"
-                               placeholder="输入用户名">
+                        <input type="text" name="username" id="login_username" class="textfield" placeholder="输入用户名"/>
+                        <div class="field-error down"></div>
                     </div>
 
                     <div class="row">
                         <label for="login_pass" class="field-label required">密码</label>
-                        <input type="password" name="password" id="login_pass" class="textfield">
+                        <input type="password" name="password" id="login_pass" class="textfield"/>
+                        <div class="field-error down"></div>
+                    </div>
+
+                    <div class="row" th:if="${captchaEnabled==true}">
+                        <div class="captcha-control">
+                            <div class="image">
+                                <img src="/captcha/captchaImage?type=char" alt="看不清,点击刷新"
+                                     title="看不清,点击刷新"
+                                     onclick="javascript:this.src=this.src"/>
+
+                                <label for="login_code" class="field-label required">验证码</label>
+                                <input type="text" name="imageCode" id="login_code" class="textfield"/>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="bottom">
-                        <input type="button" class="submit" value="登入">
+                        <input type="hidden" name="action" value="login"/>
+                        <input type="button" class="submit" value="登入"/>
                         <div class="links">
-                            <p><a href="" target="_blank">没有私人主页吗？免费加入！</a></p>
-                            <p>
-                                <a href="" target="_blank">忘记密码？</a> /
-                            </p>
                         </div>
                     </div>
                 </div>
@@ -215,52 +116,52 @@
     <div class="footer-wrap">
         <ul class="nav">
             <li><a href="/video">主页</a></li>
-            <li><a href="/login">登录</a></li>
             <li><a href="/register">注册</a></li>
+            <li><a href="/login" id="login">登录</a></li>
         </ul>
-        <div class="copyright">
+        <div class="txt">
 
         </div>
-
     </div>
 
-</div>
-
-<script>
-    $(function () {
-        $(".submit").click(function () {
-            login();
+    <script>
+        $(function () {
+            $(".submit").click(function () {
+                login();
+            });
         });
-    });
 
-    function login() {
-        $.showLoading("登录中");
-        const username = $("input[name='username']").val();
-        const password = $("input[name='password']").val();
-        $.ajax({
-            type: "post",
-            url: "/login",
-            data: {
-                "username": username,
-                "password": password
-            },
-            // error: function (jqXHR, textStatus, errorThrown) {
-            //     /*错误信息处理*/
-            //     console.log(errorThrown);
-            //     $.hideLoading();
-            // },
-            success: function (r) {
-                console.log(r);
-                if (r.code === 0) {
-                    location.href = '/video/redirect';
-                } else {
-                    $.hideLoading();
-                    $.toast(r.msg);
+        function login() {
+            $.showLoading("登录中");
+            const username = $("input[name='username']").val();
+            const password = $("input[name='password']").val();
+            const imageCode = $("input[name='imageCode']").val();
+
+            $.ajax({
+                type: "post",
+                url: "/login",
+                data: {
+                    "username": username,
+                    "password": password,
+                    "imageCode": imageCode
+                },
+                // error: function (jqXHR, textStatus, errorThrown) {
+                //     /*错误信息处理*/
+                //     console.log(errorThrown);
+                //     $.hideLoading();
+                // },
+                success: function (r) {
+                    console.log(r);
+                    if (r.code === 0) {
+                        location.href = '/video/redirect';
+                    } else {
+                        $.hideLoading();
+                        $.toast(r.msg);
+                    }
                 }
-            }
-        });
-    }
-</script>
+            });
+        }
+    </script>
+</div>
 </body>
-
 </html>

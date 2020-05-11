@@ -27,7 +27,8 @@ server:
 app:
   wxPayUrl: http://yuluncc.top/pay
   wxAuthUrl: http://yuluncc.top/wechat/auth
-
+  # 验证码开关
+  captchaEnabled: false
 
 
 spring:
