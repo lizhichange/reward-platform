@@ -9,6 +9,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * @author sunflower
+ */
 @Component
 public class ShipinFacadeClientImpl implements ShipinFacadeClient {
 

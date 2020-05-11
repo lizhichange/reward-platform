@@ -7,7 +7,7 @@ spring:
 server:
   servlet:
     session:
-      timeout: 1800s
+      timeout: 18000s
 
 feign:
   client:
