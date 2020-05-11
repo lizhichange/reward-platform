@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
         version = "1.0.0",
         timeout = 15000
 )
-public class ISysWebMainFacadeImpl implements SysWebMainFacade {
+public class SysWebMainFacadeImpl implements SysWebMainFacade {
     @Autowired
     SysWebMainService sysWebMainService;
 
