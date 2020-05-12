@@ -38,7 +38,6 @@ import java.util.Map;
  * @author ruoyi
  */
 @Component
-@Slf4j
 public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
     private final static Logger LOGGER = LoggerFactory.getLogger(WechatAuthInterceptor.class);
     public final static String COOKIE_OP_KEY = "OPEN_INFO_KEY";
@@ -57,7 +56,7 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         LOGGER.debug("====用户进入拦截器===WechatAuthInterceptor===");
         StringBuffer requestUrl = request.getRequestURL();
-        log.debug("requestURL:{}", requestUrl);
+        LOGGER.debug("requestURL:{}", requestUrl);
         Map<String, String[]> parameterMap = request.getParameterMap();
         StringBuilder str = new StringBuilder();
         if (!CollectionUtils.isEmpty(parameterMap)) {
@@ -77,7 +76,7 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
         if (StringUtil.isNotBlank(userId)) {
             write(userId, COOKIE_USER_KEY, doMain, response);
             SessionContext.setUserId(session, userId);
-            log.info("userId:{}", userId);
+            LOGGER.info("userId:{}", userId);
         }
         userId = read(request, COOKIE_USER_KEY);
         if (StringUtil.isNotBlank(userId)) {
@@ -101,7 +100,7 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
             }
 
             openId = read(request, COOKIE_OP_KEY);
-            log.info("openId:{}", openId);
+            LOGGER.info("openId:{}", openId);
             if (StringUtil.isNotBlank(openId)) {
                 SessionContext.setOpenId(session, openId);
                 return true;

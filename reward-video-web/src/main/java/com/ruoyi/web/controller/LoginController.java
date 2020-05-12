@@ -18,7 +18,6 @@ import javax.servlet.http.HttpServletResponse;
  * @author sunflower
  */
 @Controller
-@Slf4j
 public class LoginController extends BaseController {
     @Autowired
     PasswordEncoder passwordEncoder;

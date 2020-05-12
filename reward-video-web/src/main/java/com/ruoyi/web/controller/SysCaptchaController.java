@@ -5,6 +5,8 @@ import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
 
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,8 +30,9 @@ import java.io.IOException;
  */
 @Controller
 @RequestMapping("/captcha")
-@Slf4j
 public class SysCaptchaController extends BaseController {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(SysCaptchaController.class);
     @Resource(name = "captchaProducer")
     private Producer captchaProducer;
 
@@ -44,7 +47,7 @@ public class SysCaptchaController extends BaseController {
      */
     @GetMapping(value = "/captchaImage")
     public ModelAndView getKaptchaImage(HttpServletRequest request, HttpServletResponse response) {
-        log.info("captchaImage");
+        LOGGER.info("captchaImage");
         ServletOutputStream out = null;
         String code = null;
         try {

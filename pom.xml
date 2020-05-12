@@ -65,7 +65,6 @@
         <dependencies>
 
 
-
             <dependency>
                 <groupId>org.near</groupId>
                 <artifactId>near-toolkit</artifactId>
@@ -261,7 +260,6 @@
                 <artifactId>reward-service</artifactId>
                 <version>${reward.version}</version>
             </dependency>
-
 
 
             <dependency>

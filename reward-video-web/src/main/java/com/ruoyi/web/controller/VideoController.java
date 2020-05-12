@@ -21,6 +21,8 @@ import org.near.toolkit.common.StringUtil;
 import org.near.toolkit.context.SessionContext;
 import org.near.toolkit.model.Money;
 import org.near.utils.IpUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -40,8 +42,10 @@ import static com.ruoyi.reward.facade.enums.OrderPayType.WE_CHAT_PAY;
  */
 @Controller
 @RequestMapping("/video")
-@Slf4j
 public class VideoController extends BaseController {
+
+    private static final Logger log = LoggerFactory.getLogger(VideoController.class);
+
     private static final String prefix = "video";
     final private ThreadPoolTaskExecutor threadPoolTaskExecutor;
     private final ShiFacadeFeign shiFacadeFeign;

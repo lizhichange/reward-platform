@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
  * @author sunflower
  */
 @Component
-@Data
 public class AppConfig extends ToString {
     /**
      *
@@ -24,4 +23,28 @@ public class AppConfig extends ToString {
      */
     @Value("${app.captchaEnabled}")
     private boolean captchaEnabled;
+
+    public String getWxPayUrl() {
+        return wxPayUrl;
+    }
+
+    public void setWxPayUrl(String wxPayUrl) {
+        this.wxPayUrl = wxPayUrl;
+    }
+
+    public String getWxAuthUrl() {
+        return wxAuthUrl;
+    }
+
+    public void setWxAuthUrl(String wxAuthUrl) {
+        this.wxAuthUrl = wxAuthUrl;
+    }
+
+    public boolean isCaptchaEnabled() {
+        return captchaEnabled;
+    }
+
+    public void setCaptchaEnabled(boolean captchaEnabled) {
+        this.captchaEnabled = captchaEnabled;
+    }
 }

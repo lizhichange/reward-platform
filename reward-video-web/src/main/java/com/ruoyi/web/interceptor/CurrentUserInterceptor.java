@@ -20,7 +20,6 @@ import javax.servlet.http.HttpServletResponse;
  * @author ruoyi
  */
 @Component
-@Slf4j
 public class CurrentUserInterceptor extends HandlerInterceptorAdapter {
     private final static Logger LOGGER = LoggerFactory.getLogger(CurrentUserInterceptor.class);
 
