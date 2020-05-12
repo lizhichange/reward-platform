@@ -62,7 +62,7 @@ public class YqmController extends BaseController {
         startPage();
         startOrderBy();
         //如果是不管理员
-        if (!ShiroUtils.getLoginName().equals("admin")) {
+        if (!"admin".equals(ShiroUtils.getLoginName())) {
             yqm.setUseridList(Lists.newArrayList(ShiroUtils.getLoginName()));
         }
         List<Yqm> list = yqmService.selectYqmList(yqm);

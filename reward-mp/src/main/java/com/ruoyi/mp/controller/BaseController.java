@@ -18,7 +18,7 @@ public abstract class BaseController {
 
 
     @Autowired
-    ISysWebMainFacadeFeign sysWebMainFacadeFeign;
+    SysWebMainFacadeFeign sysWebMainFacadeFeign;
 
 
     @Autowired
@@ -26,15 +26,15 @@ public abstract class BaseController {
 
 
     @Autowired
-    IAccountFacadeFeign accountFacadeFeign;
+    AccountFacadeFeign accountFacadeFeign;
 
 
     @Autowired
-    ISysConfigFacadeFeign sysConfigFacadeFeign;
+    SysConfigFacadeFeign sysConfigFacadeFeign;
 
 
     @Autowired
-    ISysOrderFacadeFeign sysOrderFacadeFeign;
+    SysOrderFacadeFeign sysOrderFacadeFeign;
 
 
     @Autowired

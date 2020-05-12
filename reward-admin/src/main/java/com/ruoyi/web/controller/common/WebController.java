@@ -123,11 +123,11 @@ public class WebController extends BaseController {
 
         List<SysRole> sysRoles = roleService.selectRoleAll();
 
-        Optional<SysRole> common = sysRoles.stream().filter(sysRole -> sysRole.getRoleKey().equals("common")).findFirst();
+        Optional<SysRole> common = sysRoles.stream().filter(sysRole -> "common".equals(sysRole.getRoleKey())).findFirst();
         SysRole sysRole = common.get();
 
         List<SysPost> sysPosts = postService.selectPostAll();
-        Optional<SysPost> sysPost = sysPosts.stream().filter(it -> it.getPostCode().equals("user")).findFirst();
+        Optional<SysPost> sysPost = sysPosts.stream().filter(it -> "user".equals(it.getPostCode())).findFirst();
 
         SysUser user = new SysUser();
         user.setLoginName(loginName);

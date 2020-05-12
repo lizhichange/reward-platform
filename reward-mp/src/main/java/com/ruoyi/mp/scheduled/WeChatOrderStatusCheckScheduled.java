@@ -4,8 +4,8 @@ import com.github.binarywang.wxpay.bean.request.WxPayOrderQueryRequest;
 import com.github.binarywang.wxpay.bean.result.WxPayOrderQueryResult;
 import com.github.binarywang.wxpay.service.WxPayService;
 import com.ruoyi.mp.config.MpAuthConfig;
-import com.ruoyi.mp.feign.IAccountFacadeFeign;
-import com.ruoyi.mp.feign.ISysOrderFacadeFeign;
+import com.ruoyi.mp.feign.AccountFacadeFeign;
+import com.ruoyi.mp.feign.SysOrderFacadeFeign;
 import com.ruoyi.reward.facade.dto.SysOrderDTO;
 import com.ruoyi.reward.facade.enums.OrderStatusType;
 import lombok.Getter;
@@ -35,10 +35,10 @@ public class WeChatOrderStatusCheckScheduled {
     @Autowired
     MpAuthConfig mpAuthConfig;
     @Autowired
-    ISysOrderFacadeFeign sysOrderFacadeFeign;
+    SysOrderFacadeFeign sysOrderFacadeFeign;
     @Autowired
 
-    IAccountFacadeFeign accountFacadeFeign;
+    AccountFacadeFeign accountFacadeFeign;
 
     @Scheduled(cron = "0 0/3 * * * ?")
     public void execute() {

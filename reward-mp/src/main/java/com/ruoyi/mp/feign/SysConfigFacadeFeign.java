@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author sunflower
  */
 @FeignClient(value = "reward-service", path = "/rest/config")
-public interface ISysConfigFacadeFeign {
+public interface SysConfigFacadeFeign {
 
     @PostMapping("/selectConfigByKey")
     String selectConfigByKey(@RequestParam("configKey") String configKey);

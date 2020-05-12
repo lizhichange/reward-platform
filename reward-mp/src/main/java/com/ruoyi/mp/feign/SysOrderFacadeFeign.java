@@ -11,7 +11,7 @@ import java.util.List;
  * @author sunflower
  */
 @FeignClient(value = "reward-service", path = "/rest/order")
-public interface ISysOrderFacadeFeign {
+public interface SysOrderFacadeFeign {
     @PostMapping("/selectSysOrderById")
     SysOrderDTO selectSysOrderById(Long id);
 

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @author sunflower
  */
 @FeignClient(value = "reward-service", path = "/rest/account")
-public interface IAccountFacadeFeign {
+public interface AccountFacadeFeign {
     @PostMapping("/take")
     String take(@RequestBody SysOrderDTO dto);
 }

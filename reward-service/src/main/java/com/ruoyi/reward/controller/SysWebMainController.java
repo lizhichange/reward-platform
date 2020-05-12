@@ -91,7 +91,7 @@ public class SysWebMainController extends BaseController {
     @ResponseBody
     public AjaxResult addSave(SysWebMain sysWebMain) {
         if (StringUtil.isNotBlank(sysWebMain.getMainStatus())
-                && sysWebMain.getMainStatus().equals("on")) {
+                && "on".equals(sysWebMain.getMainStatus())) {
             sysWebMain.setMainStatus("0");
         }
         return toAjax(sysWebMainService.insertSysWebMain(sysWebMain));

@@ -144,7 +144,7 @@ public class HttpUtils {
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
             String ret = "";
             while ((ret = br.readLine()) != null) {
-                if (!ret.trim().equals("")) {
+                if (!"".equals(ret.trim())) {
                     result.append(new String(ret.getBytes("ISO-8859-1"), "utf-8"));
                 }
             }

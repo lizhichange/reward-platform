@@ -67,7 +67,7 @@ public class ShipinController extends BaseController {
     @ResponseBody
     public TableDataInfo list(Shipin shipin) {
         startPage();
-        if (!ShiroUtils.getLoginName().equals("admin")){
+        if (!"admin".equals(ShiroUtils.getLoginName())){
             shipin.setUseridList(Lists.newArrayList("admin", ShiroUtils.getLoginName()));
         }
         List<Shipin> list = shipinService.selectShipinList(shipin);
@@ -163,7 +163,7 @@ public class ShipinController extends BaseController {
         List<SysRole> roles = sysUser.getRoles();
         SysRole sysRole = roles.get(0);
         //如果是管理员。直接删除
-        if (sysRole.getRoleKey().equals("admin")) {
+        if ("admin".equals(sysRole.getRoleKey())) {
             return toAjax(shipinFacade.deleteShipinDTOByIds(ids));
         }
 

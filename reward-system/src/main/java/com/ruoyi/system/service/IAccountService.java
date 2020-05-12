@@ -11,15 +11,14 @@ import java.util.List;
  * @author ruoyi
  * @date 2020-04-06
  */
-public interface IAccountService
-{
+public interface IAccountService {
     /**
      * 查询【请填写功能名称】
      *
      * @param id 【请填写功能名称】ID
      * @return 【请填写功能名称】
      */
-    public Account selectAccountById(Long id);
+    Account selectAccountById(Long id);
 
     /**
      * 查询【请填写功能名称】列表
@@ -27,7 +26,7 @@ public interface IAccountService
      * @param account 【请填写功能名称】
      * @return 【请填写功能名称】集合
      */
-    public List<Account> selectAccountList(Account account);
+    List<Account> selectAccountList(Account account);
 
     /**
      * 新增【请填写功能名称】
@@ -35,7 +34,7 @@ public interface IAccountService
      * @param account 【请填写功能名称】
      * @return 结果
      */
-    public int insertAccount(Account account);
+    int insertAccount(Account account);
 
     /**
      * 修改【请填写功能名称】
@@ -43,7 +42,7 @@ public interface IAccountService
      * @param account 【请填写功能名称】
      * @return 结果
      */
-    public int updateAccount(Account account);
+    int updateAccount(Account account);
 
     /**
      * 批量删除【请填写功能名称】
@@ -51,7 +50,7 @@ public interface IAccountService
      * @param ids 需要删除的数据ID
      * @return 结果
      */
-    public int deleteAccountByIds(String ids);
+    int deleteAccountByIds(String ids);
 
     /**
      * 删除【请填写功能名称】信息
@@ -59,7 +58,7 @@ public interface IAccountService
      * @param id 【请填写功能名称】ID
      * @return 结果
      */
-    public int deleteAccountById(Long id);
+    int deleteAccountById(Long id);
 
-    public int changeStatus(Account account);
+    int changeStatus(Account account);
 }
