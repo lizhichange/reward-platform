@@ -27,8 +27,7 @@ public class UnauthorizedEntryPoint implements AuthenticationEntryPoint {
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
         if (isAjaxRequest(request)) {
             String referer = request.getHeader("referer");
-            String requestURI = request.getRequestURI();
-            LOGGER.info("requestURI:{}", requestURI);
+            LOGGER.info("referer:{}", referer);
             // response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage());
             String msg = "未登录或登录超时。请重新登录";
             AjaxResult error = AjaxResult.error(msg);
