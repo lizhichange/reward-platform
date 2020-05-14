@@ -59,6 +59,8 @@ public class LoginController extends BaseController {
     public String loginPage(HttpServletRequest request, ModelMap modelMap, HttpServletResponse response) {
         // 如果是Ajax请求，返回Json字符串。
         getCategory(modelMap);
+        String redirect_uri = request.getParameter("redirect_uri");
+        LOGGER.info("redirect_uri:{}", redirect_uri);
         if (isAjaxRequest(request)) {
             return renderString(response, "{\"code\":\"1\",\"msg\":\"未登录或登录超时。请重新登录\"}");
         }

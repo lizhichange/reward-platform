@@ -145,11 +145,11 @@
                     "password": password,
                     "imageCode": imageCode
                 },
-                // error: function (jqXHR, textStatus, errorThrown) {
-                //     /*错误信息处理*/
-                //     console.log(errorThrown);
-                //     $.hideLoading();
-                // },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    /*错误信息处理*/
+                    console.log(errorThrown);
+                    $.hideLoading();
+                },
                 success: function (r) {
                     console.log(r);
                     if (r.code === 0) {

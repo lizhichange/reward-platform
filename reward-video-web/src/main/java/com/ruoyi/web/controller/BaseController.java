@@ -6,6 +6,8 @@ import com.ruoyi.web.feign.TsFeign;
 import com.ruoyi.web.feign.UserDetailFacadeFeign;
 import com.ruoyi.web.model.Users;
 import com.ruoyi.web.security.SecurityUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 
@@ -18,6 +20,8 @@ import java.util.List;
  * @author sunflower
  */
 public class BaseController {
+
+    public static final Logger LOGGER = LoggerFactory.getLogger(BaseController.class);
     @Autowired
     SysCategoryFacadeFeign sysCategoryFacadeFeign;
     @Autowired

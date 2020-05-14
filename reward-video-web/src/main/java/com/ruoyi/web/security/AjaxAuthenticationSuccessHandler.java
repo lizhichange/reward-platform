@@ -2,8 +2,10 @@ package com.ruoyi.web.security;
 
 import com.google.gson.Gson;
 import com.ruoyi.web.model.AjaxResult;
+import lombok.Data;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletException;
@@ -21,6 +23,9 @@ public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHa
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication auth)
             throws IOException, ServletException {
+
+        SimpleUrlAuthenticationSuccessHandler handler = new SimpleUrlAuthenticationSuccessHandler();
+        handler.setUseReferer(true);
         response.setContentType("application/json;charset=utf-8");
         PrintWriter out = response.getWriter();
 
@@ -33,3 +38,4 @@ public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHa
 
 
 }
+
