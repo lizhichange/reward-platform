@@ -8,7 +8,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.savedrequest.DefaultSavedRequest;
+import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
+import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.ServletRequestUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -26,13 +30,15 @@ public class UnauthorizedEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
         if (isAjaxRequest(request)) {
-            String referer = request.getHeader("referer");
-            LOGGER.info("referer:{}", referer);
+
+
+            String redirect_uri = ServletRequestUtils.getStringParameter(request, "redirect_uri");
+            LOGGER.info("redirect_uri:{}", redirect_uri);
             // response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage());
             String msg = "未登录或登录超时。请重新登录";
             AjaxResult error = AjaxResult.error(msg);
             //包装成Json 发送的前台
-            error.put("redirect_uri", URIUtil.encodeURIComponent(referer));
+            error.put("redirect_uri", URIUtil.encodeURIComponent(redirect_uri));
             String json = new Gson().toJson(error);
             response.setContentType("application/json;charset=utf-8");
             PrintWriter out = response.getWriter();

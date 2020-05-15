@@ -64,6 +64,7 @@ public class LoginController extends BaseController {
         if (isAjaxRequest(request)) {
             return renderString(response, "{\"code\":\"1\",\"msg\":\"未登录或登录超时。请重新登录\"}");
         }
+        modelMap.addAttribute("redirect_uri", redirect_uri);
         return "login";
     }
 

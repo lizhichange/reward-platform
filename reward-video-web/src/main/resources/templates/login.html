@@ -93,6 +93,7 @@
                             </div>
                         </div>
                     </div>
+                    <input type="hidden" id="redirect_uri" th:value="${redirect_uri}">
 
                     <div class="bottom">
                         <input type="hidden" name="action" value="login"/>
@@ -137,13 +138,18 @@
             const password = $("input[name='password']").val();
             const imageCode = $("input[name='imageCode']").val();
 
+            let searchURL = window.location.search;
+            searchURL = searchURL.substring(1, searchURL.length);
+            const redirect_uri = searchURL.split("&")[0].split("=")[1];
+            console.log(redirect_uri);
             $.ajax({
                 type: "post",
                 url: "/login",
                 data: {
                     "username": username,
                     "password": password,
-                    "imageCode": imageCode
+                    "imageCode": imageCode,
+                    "redirect_uri": $("#redirect_uri").val()
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     /*错误信息处理*/
@@ -153,7 +159,7 @@
                 success: function (r) {
                     console.log(r);
                     if (r.code === 0) {
-                        location.href = '/video/redirect';
+                        window.location.href = r.redirect_uri;
                     } else {
                         $.hideLoading();
                         $.toast(r.msg);

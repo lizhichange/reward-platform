@@ -202,7 +202,8 @@
                         type: "post",
                         url: "/video/queryOrder",
                         data: {
-                            "id": $("#id").val()
+                            "id": $("#id").val(),
+                            "redirect_uri": window.location.href
                         },
                         error: function (jqXHR, textStatus, errorThrown) {
                             /*错误信息处理*/
@@ -242,12 +243,13 @@
                             } else if (r.code === 500) {
                                 player.pause();
                                 const text = "<font color='#4F4F4F'> " + r.msg + "</font>";
+                                const redirect_uri = r.redirect_uri;
                                 //如果参数过多，建议通过 object 方式传入
                                 $.confirm({
                                     title: '标题',
                                     text: text,
                                     onOK: function () {
-                                        window.location.href = "/login.html";
+                                        window.location.href = "/login.html?redirect_uri=" + redirect_uri;
                                     },
                                     onCancel: function () {
 

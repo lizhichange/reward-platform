@@ -1,6 +1,8 @@
 package com.ruoyi.web.security;
 
 import com.ruoyi.web.service.CustomUserDetailsService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -31,6 +33,7 @@ import javax.servlet.http.HttpServletRequest;
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+    public static final Logger LOGGER = LoggerFactory.getLogger(SecurityConfiguration.class);
 
     private final PasswordEncoder passwordEncoder;
 
@@ -141,9 +144,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
          */
         @Override
         public boolean matches(HttpServletRequest request) {
-            return "XMLHttpRequest".equals(request.getHeader("X-Requested-With")) ||
+            boolean matches = "XMLHttpRequest".equals(request.getHeader("X-Requested-With")) ||
                     request.getHeader("Accept") != null &&
                             request.getHeader("Accept").contains("application/json");
+            LOGGER.info("matches:{}", matches);
+            return matches;
         }
 
 
