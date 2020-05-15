@@ -42,8 +42,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final CustomUserDetailsService userDetailsService;
 
     private final UnauthorizedEntryPoint unauthorizedEntryPoint;
-    // AccessDenied Handler
-    private AccessDeniedHandler accessDeniedHandler;
 
     // Success Handler
     private final AuthenticationSuccessHandler authenticationSuccessHandler;
@@ -51,23 +49,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     // Failure Handler
     private final AuthenticationFailureHandler authenticationFailureHandler;
 
-    @Autowired
+    private final
     ValidateCodeFilter validateCodeFilter;
 
     @Autowired
     public SecurityConfiguration(
             @Qualifier("ajaxAuthenticationSuccessHandler") AuthenticationSuccessHandler authenticationSuccessHandler,
-            @Qualifier("articleAccesDeniedHandler") AccessDeniedHandler accessDeniedHandler,
             @Qualifier("ajaxAuthenticationFailureHandler") AuthenticationFailureHandler authenticationFailureHandler,
             CustomUserDetailsService userDetailsService,
-            UnauthorizedEntryPoint unauthorizedEntryPoint, PasswordEncoder passwordEncoder) {
+            UnauthorizedEntryPoint unauthorizedEntryPoint, PasswordEncoder passwordEncoder, ValidateCodeFilter validateCodeFilter) {
         this.authenticationFailureHandler = authenticationFailureHandler;
         this.authenticationSuccessHandler = authenticationSuccessHandler;
         this.userDetailsService = userDetailsService;
         this.unauthorizedEntryPoint = unauthorizedEntryPoint;
         this.passwordEncoder = passwordEncoder;
-        this.accessDeniedHandler = accessDeniedHandler;
-
+        this.validateCodeFilter = validateCodeFilter;
     }
 
     /**
