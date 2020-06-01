@@ -3,6 +3,7 @@ package com.ruoyi.web.security;
 import com.alibaba.dubbo.common.utils.StringUtils;
 import com.google.gson.Gson;
 import com.ruoyi.web.model.AjaxResult;
+import org.near.toolkit.common.StringUtil;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
@@ -26,7 +27,9 @@ public class AjaxAuthenticationFailureHandler implements AuthenticationFailureHa
 
         String msg = "用户或密码错误";
         if (StringUtils.isNotEmpty(authEx.getMessage())) {
-            msg = authEx.getMessage();
+            if (!StringUtil.equals("Bad credentials", authEx.getMessage())) {
+                msg = authEx.getMessage();
+            }
         }
         AjaxResult error = AjaxResult.error(msg);
         //包装成Json 发送的前台
