@@ -53,6 +53,10 @@ spring:
       enabled: true
   application:
     name: reward-service
+  security:
+    user:
+      name: admin
+      password: admin
 # MyBatis
 mybatis:
   # 搜索指定包别名
@@ -138,12 +142,7 @@ sequence:
 
 
 security:
-  # 开启认证，Spring Cloud2.0后添加jar会自动集成并开启
-  # basic.enabled: true
-  # 用户名密码
-  user:
-    name: admin
-    password: admin
+
 
 
 reward-service:

@@ -98,46 +98,44 @@
 
 <script>
     var prefix = ctx + "system/shipin";
-    $(document).ready(function () {
 
 
-        $("#fileinput-demo-1").fileinput({
-            'theme': 'explorer-fas',
-            'uploadUrl': ctx + "common/uploadFileName",
-            allowedFileExtensions: ['jpg', 'jpeg','gif', 'png'],//接收的文件后缀
-            overwriteInitial: false,
-            initialPreviewAsData: true,
-            initialPreview: [
-                ""
-            ]
-        });
-        $("#fileinput-demo-1").on("fileuploaded", function (event, data, previewId, index) {
-            if (data && data.response) {
-                let response = data.response;
-                if (response.code === 500) {
-                    $.modal.msg(response.msg);
-                } else if (response.code === 0) {
-                    $('#logo').val(response.fileName);
-                    $('#url').val(response.url);
-                }
+    let fileinput = $("#fileinput-demo-1").fileinput({
+        'theme': 'explorer-fas',
+        'uploadUrl': ctx + "common/uploadFileName",
+        allowedFileExtensions: ['jpg', 'jpeg', 'gif', 'png'],//接收的文件后缀
+        overwriteInitial: false,
+        initialPreviewAsData: true,
+        initialPreview: [
+            ""
+        ]
+    });
+
+    $("#fileinput-demo-1").on("fileuploaded", function (event, data, previewId, index) {
+        if (data && data.response) {
+            let response = data.response;
+            if (response.code === 500) {
+                $.modal.msg(response.msg);
+            } else if (response.code === 0) {
+                $('#logo').val(response.fileName);
+                $('#url').val(response.url);
             }
-        });
-
+        }
     });
 
 
-    $(document).ready(function () {
-        $("#fileinput-demo-2").fileinput({
-            'theme': 'explorer-fas',
-            'uploadUrl': ctx + "common/uploadFileName",
-            overwriteInitial: false,
-            initialPreviewAsData: true,
-            allowedFileExtensions: ['avi', 'mp4'],//接收的文件后缀
-            initialPreview: [
-                ""
-            ]
-        });
+    let fileinput1 = $("#fileinput-demo-2").fileinput({
+        'theme': 'explorer-fas',
+        'uploadUrl': ctx + "common/uploadFileName",
+        overwriteInitial: false,
+        initialPreviewAsData: true,
+        allowedFileExtensions: ['avi', 'mp4'],//接收的文件后缀
+        initialPreview: [
+            ""
+        ]
     });
+
+
     //这是视频
     $("#fileinput-demo-2").on("fileuploaded", function (event, data, previewId, index) {
         if (data && data.response) {
@@ -151,6 +149,8 @@
             }
         }
     });
+
+
     $("#form-shipin-add").validate({
         onkeyup: false,
         rules: {},
@@ -160,6 +160,7 @@
 
     function submitHandler() {
         if ($.validate.form()) {
+
             let url = $('#url').val();
             let zykey = $('#zykey').val();
             if (url == null || url === '') {
@@ -198,8 +199,6 @@
             layer.close(index);
         }
     }
-
-
 
 
 </script>
