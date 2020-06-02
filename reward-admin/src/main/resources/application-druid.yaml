@@ -70,7 +70,7 @@ ruoyi:
   profile: /home/fulihui/uploadPath
   # 获取ip地址开关
 
-  addressEnabled: true
+  addressEnabled: false
   wxAuthUrl: http://yuluncc.top/wechat/auth
 
 

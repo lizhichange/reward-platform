@@ -69,7 +69,7 @@ ruoyi:
   # 文件路径 示例（ Windows配置D:/ruoyi/uploadPath，Linux配置 /home/ruoyi/uploadPath）
   profile: /Users/sunflower/Downloads/uploadPath
   # 获取ip地址开关
-  addressEnabled: true
+  addressEnabled: false
   wxAuthUrl: http://yuluncc.top/wechat/auth
 
 
