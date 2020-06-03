@@ -87,10 +87,13 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
 
         if (handler instanceof HandlerMethod) {
             HandlerMethod handlerMethod = (HandlerMethod) handler;
+
+
+            WxPnUserAuth classAnnotation = handlerMethod.getClass().getAnnotation(WxPnUserAuth.class);
             Method method = handlerMethod.getMethod();
-            WxPnUserAuth annotation = method.getAnnotation(WxPnUserAuth.class);
+            WxPnUserAuth methodAnnotation = method.getAnnotation(WxPnUserAuth.class);
             //如果注解为空说明不需要拦截,直接放过
-            if (annotation == null) {
+            if (methodAnnotation == null || classAnnotation == null) {
                 return true;
             }
             //授权回来之后中定向会带有openId参数
