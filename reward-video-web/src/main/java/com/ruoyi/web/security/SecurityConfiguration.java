@@ -100,7 +100,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.exceptionHandling().authenticationEntryPoint(unauthorizedEntryPoint)
                 .and() //需要
-                .authorizeRequests().antMatchers("/video/queryOrder").authenticated()
+                // TODO: 2020/6/3 xxxx
+                .authorizeRequests().antMatchers("/xxx/queryOrder").authenticated()
                 .anyRequest().permitAll() //其他不需要
                 .and()
                 .formLogin()
