@@ -114,12 +114,12 @@ logging:
 
 reward-service:
   ribbon:
-    listOfServers: http://admin:admin@127.0.0.1:8761
+    listOfServers: http://127.0.0.1:8761
 
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://admin:admin@127.0.0.1:8761/eureka/
+      defaultZone: http://127.0.0.1:8761/eureka/
     fetchRegistry: true
   instance:
     preferIpAddress: true
