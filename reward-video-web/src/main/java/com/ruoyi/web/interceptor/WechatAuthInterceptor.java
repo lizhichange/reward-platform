@@ -6,7 +6,10 @@ import com.ruoyi.reward.facade.api.TsFacade;
 import com.ruoyi.reward.facade.dto.TsDTO;
 import com.ruoyi.web.client.TsFacadeClient;
 import com.ruoyi.web.config.AppConfig;
+import com.ruoyi.web.config.RedisUtil;
 import com.ruoyi.web.feign.TsFeign;
+import com.ruoyi.web.model.Users;
+import com.ruoyi.web.security.SecurityUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.near.toolkit.common.DoMainUtil;
 import org.near.toolkit.common.StringUtil;
@@ -15,6 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.context.request.RequestAttributes;
@@ -53,9 +57,21 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
     @Autowired
     TsFacadeClient tsFacadeClient;
 
+    @Autowired
+    RedisUtil redisUtil;
+    @Autowired
+    ThreadPoolTaskExecutor threadPoolTaskExecutor;
+
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+
+        Users currentUser = SecurityUtil.getCurrentUser();
+        request.setAttribute("user", currentUser);
+        threadPoolTaskExecutor.execute(() -> redisUtil.set("user", currentUser));
+        request.setAttribute("authMpEnabled", appConfig.isAuthMpEnabled());
+
+
         LOGGER.debug("====用户进入拦截器===WechatAuthInterceptor===");
         StringBuffer requestUrl = request.getRequestURL();
         LOGGER.debug("requestURL:{}", requestUrl);
@@ -211,5 +227,6 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
         }
         return null;
     }
+
 
 }
