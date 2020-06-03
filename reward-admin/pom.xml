@@ -62,12 +62,6 @@
             <artifactId>reward-framework</artifactId>
         </dependency>
 
-        <!-- 定时任务-->
-        <dependency>
-            <groupId>com.reward</groupId>
-            <artifactId>reward-quartz</artifactId>
-        </dependency>
-
         <!-- 代码生成-->
         <dependency>
             <groupId>com.reward</groupId>
