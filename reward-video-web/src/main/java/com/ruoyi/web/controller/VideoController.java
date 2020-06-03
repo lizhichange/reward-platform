@@ -218,6 +218,7 @@ public class VideoController extends BaseController {
 
     @PostMapping("/queryOrder")
     @ResponseBody
+    @WxPnUserAuth
     public AjaxResult queryOrder(ShipinDTO shipinDTO) {
         String openId = SessionContext.getOpenId();
         log.info("openId:{}", openId);
