@@ -93,6 +93,7 @@ public class VideoController extends BaseController {
     }
 
     @GetMapping()
+    @WxPnUserAuth
     public String index(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
         String user = StringUtil.isBlank(userid) ? "" : userid;
         SysWebMainDTO webMain = new SysWebMainDTO();
@@ -115,6 +116,7 @@ public class VideoController extends BaseController {
     }
 
     @GetMapping("/category")
+    @WxPnUserAuth
     public String category(@RequestParam(value = "categoryId") Long categoryId, @RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
         log.info("user:{},categoryId:{}", userid, categoryId);
         getCategory(modelmap);
@@ -131,6 +133,7 @@ public class VideoController extends BaseController {
 
 
     @GetMapping("/detail")
+    @WxPnUserAuth
     public String detail(@RequestParam(value = "id") Long id,
                          @RequestParam(value = "userid", required = false) String userid,
                          @RequestParam(value = "author", required = false) String author,
@@ -216,12 +219,12 @@ public class VideoController extends BaseController {
     @PostMapping("/queryOrder")
     @ResponseBody
     public AjaxResult queryOrder(ShipinDTO shipinDTO) {
-        Users currentUser = getCurrentUser();
-        log.info("currentUser:{}", currentUser);
+        String openId = SessionContext.getOpenId();
+        log.info("openId:{}", openId);
         SysOrderDTO order = new SysOrderDTO();
-
         order.setGoodsId(shipinDTO.getId());
-        order.setUserId(currentUser.getUserId());
+        order.setOpenId(openId);
+
         List<SysOrderDTO> sysOrders = sysOrderFacadeClient.selectSysOrder(order);
         if (CollectionUtils.isEmpty(sysOrders)) {
             ShipinDTO dto = shipinFacadeClient.selectShipinDTOById(shipinDTO.getId().longValue());
@@ -245,7 +248,6 @@ public class VideoController extends BaseController {
             log.info("实际支付金额:{}", amount);
             order.setMoney(amount);
             order.setMoneyStr(String.valueOf(amount));
-
             //原价 转换单位分
             order.setPrice(Math.toIntExact(m.getCent()));
             //备注
@@ -255,7 +257,6 @@ public class VideoController extends BaseController {
             order.setTypeStr(WE_CHAT_PAY.getDesc());
             order.setStatus(Integer.valueOf(OrderStatusType.N_PAY.getCode()));
             order.setStatusStr(OrderStatusType.N_PAY.getDesc());
-            order.setStatus(Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
             sysOrderFacadeClient.insertSysOrder(order);
             return AjaxResult.success(order);
         } else {
@@ -276,8 +277,6 @@ public class VideoController extends BaseController {
             sysOrder.setMoneyStr(money.toString());
             sysOrder.setTypeStr(EnumUtil.queryByCode(sysOrder.getType().toString(), OrderPayType.class).getDesc());
             sysOrder.setStatusStr(EnumUtil.queryByCode(sysOrder.getStatus().toString(), OrderStatusType.class).getDesc());
-            // TODO: 2020/5/8
-            sysOrder.setStatus(Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
             return AjaxResult.success(sysOrder);
         }
     }
