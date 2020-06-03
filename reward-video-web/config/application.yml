@@ -24,10 +24,3 @@ feign:
       default:
         connect-timeout: 20000
         read-timeout: 20000
-
-security:
-  user:
-    name: admin
-    password: admin
-
-
