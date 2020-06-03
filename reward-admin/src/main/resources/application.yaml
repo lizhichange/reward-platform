@@ -140,24 +140,3 @@ management:
 sequence:
   workerId: 1
 
-
-security:
-
-
-
-reward-service:
-  ribbon:
-    listOfServers: http://admin:admin@eureka.grkfcs.cn
-
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://admin:admin@eureka.grkfcs.cn/eureka/
-    fetchRegistry: true
-  instance:
-    preferIpAddress: true
-    ipAddress: admin.grkfcs.cn
-    nonSecurePort: 80
-    lease-renewal-interval-in-seconds: 10
-    lease-expiration-duration-in-seconds: 90
-    instance-id: ${eureka.client.ipAddress}:${spring.application.name}:${eureka.instance.nonSecurePort}

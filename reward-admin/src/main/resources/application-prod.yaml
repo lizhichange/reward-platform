@@ -65,13 +65,13 @@ ruoyi:
   # 版权年份
   copyrightYear: 2019
   # 实例演示开关
-  demoEnabled: true
+  demoEnabled: false
   # 文件路径 示例（ Windows配置D:/ruoyi/uploadPath，Linux配置 /home/ruoyi/uploadPath）
-  profile: /Users/sunflower/Downloads/uploadPath
+  profile: /home/fulihui/uploadPath
   # 获取ip地址开关
+
   addressEnabled: false
   wxAuthUrl: http://yuluncc.top/wechat/auth
-
 
 
 dubbo:
@@ -82,10 +82,10 @@ dubbo:
   protocol:
     port: 12345
     name: dubbo
+    lazy: true
     status: server
     serialization: hessian2
     threads: 2000
-    lazy: true
   application:
     name: dubbo-sms-zk-service
     id: dubbo-sms-zk-service
@@ -97,32 +97,34 @@ dubbo:
       foreign:
         ip: false
 
+
 nacos:
   config:
     server-addr: 127.0.0.1:8848
     file-extension: yaml
 
+
 # 日志配置
 logging:
   level:
-    com.ruoyi: debug
+    com.ruoyi: info
     org.springframework: warn
 
 
 
 reward-service:
   ribbon:
-    listOfServers: http://admin:admin@127.0.0.1:8761
+    listOfServers: http://admin:admin@eureka.grkfcs.cn
 
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://admin:admin@127.0.0.1:8761/eureka/
+      defaultZone: http://admin:admin@eureka.grkfcs.cn/eureka/
     fetchRegistry: true
   instance:
     preferIpAddress: true
-    ipAddress: 127.0.0.1
-    nonSecurePort: 8761
+    ipAddress: admin.grkfcs.cn
+    nonSecurePort: 80
     lease-renewal-interval-in-seconds: 10
     lease-expiration-duration-in-seconds: 90
     instance-id: ${eureka.client.ipAddress}:${spring.application.name}:${eureka.instance.nonSecurePort}
