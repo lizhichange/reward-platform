@@ -10,13 +10,13 @@ else
 fi
 
 
-cd  //home/fulihui/javacode/${project}${path}
+cd  //home/fulihui/code/${project}${path}
 
 git pull
 
 mvn clean package -DskipTests
 
 
-scp  /home/fulihui/javacode/${project}${path}/reward-admin/config/*  /home/fulihui/micro-svr/${project}/reward-admin/config/.
+scp  /home/fulihui/code/${project}${path}/reward-admin/config/*  /home/fulihui/micro-svr/${project}/reward-admin/config/.
 
-scp  /home/fulihui/javacode/${project}${path}/reward-admin/target/reward-admin.jar  /home/fulihui/micro-svr/${project}/reward-admin/.
+scp  /home/fulihui/code/${project}${path}/reward-admin/target/reward-admin.jar  /home/fulihui/micro-svr/${project}/reward-admin/.

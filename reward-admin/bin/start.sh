@@ -16,7 +16,7 @@ if [ -n "$tpid" ]; then
 fi
 rm -f tpid
 JAVA_OPTS=" -Djava.awt.headless=true -Djava.net.preferIPv4Stack=true "
-JAVA_MEM_OPTS=" -server -Xmx512m -Xms512m -Xmn512m -Xss256k -XX:+DisableExplicitGC -XX:+UseConcMarkSweepGC -XX:+CMSParallelRemarkEnabled -XX:LargePageSizeInBytes=128m"
+JAVA_MEM_OPTS=" -server  -Xss256k -XX:+DisableExplicitGC -XX:+UseConcMarkSweepGC -XX:+CMSParallelRemarkEnabled -XX:LargePageSizeInBytes=128m"
 echo "Starting the $SERVER_NAME ..."
 JAVA_DEBUG_OPTS=""
 if [[ "$1" = "debug" ]]; then
