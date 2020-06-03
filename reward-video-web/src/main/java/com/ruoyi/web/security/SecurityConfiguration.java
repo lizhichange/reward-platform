@@ -37,8 +37,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final PasswordEncoder passwordEncoder;
 
-    // CustomUserDetailsService
-
     private final CustomUserDetailsService userDetailsService;
 
     private final UnauthorizedEntryPoint unauthorizedEntryPoint;

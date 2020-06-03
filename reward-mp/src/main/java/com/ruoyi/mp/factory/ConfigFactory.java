@@ -3,12 +3,13 @@ package com.ruoyi.mp.factory;
 
 import com.ruoyi.mp.client.SysWechatConfigClient;
 import com.ruoyi.mp.config.MpAuthConfig;
-import com.ruoyi.mp.feign.SysWechatConfigFacadeFeign;
+
 import com.ruoyi.reward.facade.dto.SysWechatConfigDTO;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.ConfigurableEnvironment;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
@@ -36,7 +37,7 @@ public class ConfigFactory {
 
 
     @PostConstruct
-//    @Scheduled(cron = "0 0/3 * * * ?")
+    @Scheduled(cron = "0 0/50 * * * ?")
     void init() {
         try {
             String profile = env.getActiveProfiles()[0];

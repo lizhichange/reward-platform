@@ -23,6 +23,11 @@ public class AppConfig extends ToString {
      */
     @Value("${app.captchaEnabled}")
     private boolean captchaEnabled;
+    /**
+     * / 微信授权开关
+     */
+    @Value("${app.authMpEnabled}")
+    private boolean authMpEnabled;
 
     public String getWxPayUrl() {
         return wxPayUrl;
@@ -46,5 +51,13 @@ public class AppConfig extends ToString {
 
     public void setCaptchaEnabled(boolean captchaEnabled) {
         this.captchaEnabled = captchaEnabled;
+    }
+
+    public boolean isAuthMpEnabled() {
+        return authMpEnabled;
+    }
+
+    public void setAuthMpEnabled(boolean authMpEnabled) {
+        this.authMpEnabled = authMpEnabled;
     }
 }

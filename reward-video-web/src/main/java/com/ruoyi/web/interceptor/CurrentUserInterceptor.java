@@ -1,6 +1,7 @@
 package com.ruoyi.web.interceptor;
 
 
+import com.ruoyi.web.config.AppConfig;
 import com.ruoyi.web.config.RedisUtil;
 import com.ruoyi.web.model.Users;
 import com.ruoyi.web.security.SecurityUtil;
@@ -30,6 +31,8 @@ public class CurrentUserInterceptor extends HandlerInterceptorAdapter {
     RedisUtil redisUtil;
     final
     ThreadPoolTaskExecutor threadPoolTaskExecutor;
+    @Autowired
+    AppConfig appConfig;
 
     public CurrentUserInterceptor(RedisUtil redisUtil, ThreadPoolTaskExecutor threadPoolTaskExecutor) {
         this.redisUtil = redisUtil;
@@ -41,11 +44,9 @@ public class CurrentUserInterceptor extends HandlerInterceptorAdapter {
         Users currentUser = SecurityUtil.getCurrentUser();
         request.setAttribute("user", currentUser);
         threadPoolTaskExecutor.execute(() -> redisUtil.set("user", currentUser));
+        request.setAttribute("authMpEnabled", appConfig.isAuthMpEnabled());
         return super.preHandle(request, response, handler);
-
-
     }
-
 
     /**
      * 执行目标方法之后执行
