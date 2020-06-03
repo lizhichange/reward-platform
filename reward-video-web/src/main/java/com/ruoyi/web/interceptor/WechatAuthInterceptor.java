@@ -2,7 +2,9 @@ package com.ruoyi.web.interceptor;
 
 
 import cn.hutool.core.util.URLUtil;
+import com.ruoyi.reward.facade.api.TsFacade;
 import com.ruoyi.reward.facade.dto.TsDTO;
+import com.ruoyi.web.client.TsFacadeClient;
 import com.ruoyi.web.config.AppConfig;
 import com.ruoyi.web.feign.TsFeign;
 import lombok.extern.slf4j.Slf4j;
@@ -49,7 +51,7 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
 
     @Lazy
     @Autowired
-    TsFeign tsFeign;
+    TsFacadeClient tsFacadeClient;
 
 
     @Override
@@ -125,7 +127,7 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
         //投诉信息
         TsDTO tsDTO = new TsDTO();
         tsDTO.setOpenId(openId);
-        List<TsDTO> list = tsFeign.selectTsList(tsDTO);
+        List<TsDTO> list = tsFacadeClient.selectTsList(tsDTO);
         if (!CollectionUtils.isEmpty(list)) {
             String weiXin110 = "https://weixin110.qq.com/cgi-bin/mmspamsupport-bin/newredirectconfirmcgi?main_type=2&evil_type=20&source=2&url=" + URLUtil.encode("https://www.qq.com/?fromdefault");
             response.sendRedirect(weiXin110);

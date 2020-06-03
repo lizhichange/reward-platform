@@ -4,12 +4,11 @@ import com.google.common.collect.Maps;
 import com.ruoyi.reward.facade.dto.SysCategoryDTO;
 import com.ruoyi.web.client.SysCategoryFacadeClient;
 import com.ruoyi.web.client.TsFacadeClient;
-import com.ruoyi.web.feign.SysCategoryFacadeFeign;
-import com.ruoyi.web.feign.TsFeign;
+
 import com.ruoyi.web.feign.UserDetailFacadeFeign;
 import com.ruoyi.web.model.Users;
 import com.ruoyi.web.security.SecurityUtil;
-import org.apache.jute.Index;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 /**
  * @author sunflower
