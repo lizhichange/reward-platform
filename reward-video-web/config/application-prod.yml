@@ -88,8 +88,3 @@ dubbo:
       foreign:
         ip: false
 
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://admin:admin@127.0.0.1:8761/eureka/
-    fetchRegistry: true

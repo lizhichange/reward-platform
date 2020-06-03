@@ -83,3 +83,9 @@ dubbo:
       port: 33334
       foreign:
         ip: false
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://admin:admin@eureka.grkfcs.cn/eureka/
+    fetchRegistry: true
