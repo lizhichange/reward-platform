@@ -106,6 +106,8 @@ public class SysOrderServiceImpl implements ISysOrderService {
         sysOrder.setOrderId(concurrentSequence.nextId().toString());
         sysOrder.setCreateTime(DateUtils.getNowDate());
         return sysOrderMapper.insertSysOrder(sysOrder);
+
+
     }
 
     /**

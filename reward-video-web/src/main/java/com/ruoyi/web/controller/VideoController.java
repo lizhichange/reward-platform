@@ -225,7 +225,6 @@ public class VideoController extends BaseController {
         SysOrderDTO order = new SysOrderDTO();
         order.setGoodsId(shipinDTO.getId());
         order.setOpenId(openId);
-
         List<SysOrderDTO> sysOrders = sysOrderFacadeClient.selectSysOrder(order);
         if (CollectionUtils.isEmpty(sysOrders)) {
             ShipinDTO dto = shipinFacadeClient.selectShipinDTOById(shipinDTO.getId().longValue());
@@ -251,7 +250,7 @@ public class VideoController extends BaseController {
             order.setMoneyStr(String.valueOf(amount));
             //原价 转换单位分
             order.setPrice(Math.toIntExact(m.getCent()));
-            order.setOpenId(SessionContext.getOpenId());
+            order.setOpenId(openId);
             //备注
             order.setPayTag(m.toString());
             //支付类型
@@ -260,7 +259,15 @@ public class VideoController extends BaseController {
             order.setStatus(Integer.valueOf(OrderStatusType.N_PAY.getCode()));
             order.setStatusStr(OrderStatusType.N_PAY.getDesc());
             sysOrderFacadeClient.insertSysOrder(order);
-            return AjaxResult.success(order);
+
+            SysOrderDTO newOrder = new SysOrderDTO();
+            newOrder.setGoodsId(shipinDTO.getId());
+            newOrder.setOpenId(openId);
+            List<SysOrderDTO> newOrderDTO = sysOrderFacadeClient.selectSysOrder(newOrder);
+            if (!CollectionUtils.isEmpty(newOrderDTO)) {
+                return AjaxResult.success(newOrderDTO.get(0));
+            }
+            return AjaxResult.error("系统异常");
         } else {
             SysOrderDTO sysOrder = sysOrders.get(0);
             //如果为空
