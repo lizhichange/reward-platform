@@ -273,7 +273,7 @@
     $(function () {
         var $loadingToast = $('#loadingToast');
         $('#showLoadingToast').on('click', function () {
-            if ($loadingToast.css('display') != 'none') return;
+            if ($loadingToast.css('display') !== 'none') return;
             $loadingToast.fadeIn(100);
             setTimeout(function () {
                 $loadingToast.fadeOut(100);

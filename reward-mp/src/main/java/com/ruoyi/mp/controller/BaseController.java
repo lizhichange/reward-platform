@@ -1,6 +1,7 @@
 package com.ruoyi.mp.controller;
 
 import com.github.binarywang.wxpay.service.WxPayService;
+import com.ruoyi.mp.client.*;
 import com.ruoyi.mp.config.MpAuthConfig;
 import com.ruoyi.mp.factory.ConfigFactory;
 import com.ruoyi.mp.feign.*;
@@ -20,7 +21,6 @@ public abstract class BaseController {
     @Autowired
     SysWebMainFacadeFeign sysWebMainFacadeFeign;
 
-
     @Autowired
     ConfigFactory configFactory;
 
@@ -39,6 +39,25 @@ public abstract class BaseController {
 
     @Autowired
     UserDetailFeign userDetailFeign;
+
+    @Autowired
+
+    AccountFacadeClient accountFacadeClient;
+    @Autowired
+
+    SysConfigFacadeClient sysConfigFacadeClient;
+    @Autowired
+
+    SysOrderFacadeClient sysOrderFacadeClient;
+    @Autowired
+
+    SysWebMainFacadeClient sysWebMainFacadeClient;
+    @Autowired
+
+    SysWechatConfigClient sysWechatConfigClient;
+    @Autowired
+
+    UserDetailClient userDetailClient;
 
 
 }
