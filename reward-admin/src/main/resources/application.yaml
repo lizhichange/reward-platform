@@ -135,8 +135,3 @@ management:
 
 sequence:
   workerId: 1
-
-security:
-  user:
-    name: admin
-    password: admin
