@@ -25,7 +25,7 @@ public class IndexController extends BaseController {
         String user = StringUtil.isBlank(userid) ? "" : userid;
         SysWebMainDTO webMain = new SysWebMainDTO();
         webMain.setMainStatus(WebMainStatus.OK.getCode());
-        List<SysWebMainDTO> list = sysWebMainFacadeFeign.selectSysWebMainList(webMain);
+        List<SysWebMainDTO> list = sysWebMainFacadeClient.selectSysWebMainList(webMain);
         if (!CollectionUtils.isEmpty(list)) {
             SysWebMainDTO item;
             int size = list.size();

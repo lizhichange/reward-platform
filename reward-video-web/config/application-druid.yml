@@ -23,7 +23,6 @@ server:
     static-locations: classpath:static/
 
 
-
 app:
   wxPayUrl: http://yuluncc.top/pay
   wxAuthUrl: http://yuluncc.top/wechat/auth
@@ -34,7 +33,6 @@ app:
 spring:
   application:
     name: reward-video-web
-
   jackson:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
@@ -45,31 +43,7 @@ spring:
   main:
     allow-bean-definition-overriding: true
 
-endpoints:
-  dubbo:
-    enabled: true
 
-
-management:
-  server:
-    port: 8083
-  endpoint:
-    dubbo-configs:
-      enabled: true
-    dubbo:
-      enabled: true
-    dubbo-services:
-      enabled: true
-    dubbo-properties:
-      enabled: true
-    dubbo-shutdown:
-      enabled: true
-    dubbo-references:
-      enabled: true
-  health:
-    dubbo:
-      status:
-        defaults: memory
 dubbo:
   registry:
     address: 127.0.0.1:2181
@@ -82,11 +56,10 @@ dubbo:
   application:
     name: reward-video-web
     id: reward-video-web
-    qos:
-      enable: true
-      port: 33334
-      foreign:
-        ip: false
+    qosEnable: true
+    qosPort: 44444
+    qosAcceptForeignIp: false
+
 
 eureka:
   client:

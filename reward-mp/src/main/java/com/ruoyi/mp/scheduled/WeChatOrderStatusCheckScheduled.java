@@ -3,9 +3,11 @@ package com.ruoyi.mp.scheduled;
 import com.github.binarywang.wxpay.bean.request.WxPayOrderQueryRequest;
 import com.github.binarywang.wxpay.bean.result.WxPayOrderQueryResult;
 import com.github.binarywang.wxpay.service.WxPayService;
+import com.ruoyi.mp.client.AccountFacadeClient;
+import com.ruoyi.mp.client.SysOrderFacadeClient;
 import com.ruoyi.mp.config.MpAuthConfig;
-import com.ruoyi.mp.feign.AccountFacadeFeign;
-import com.ruoyi.mp.feign.SysOrderFacadeFeign;
+
+
 import com.ruoyi.reward.facade.dto.SysOrderDTO;
 import com.ruoyi.reward.facade.enums.OrderStatusType;
 import lombok.Getter;
@@ -13,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.near.toolkit.common.EnumUtil;
 import org.near.toolkit.common.StringUtil;
 import org.near.toolkit.model.BaseEnum;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -30,15 +32,23 @@ public class WeChatOrderStatusCheckScheduled {
 
 
     private static final int ROWS = 100;
-    @Autowired
+    final
     WxPayService wxPayService;
-    @Autowired
+    final
     MpAuthConfig mpAuthConfig;
-    @Autowired
-    SysOrderFacadeFeign sysOrderFacadeFeign;
-    @Autowired
 
-    AccountFacadeFeign accountFacadeFeign;
+
+    final
+    AccountFacadeClient accountFacadeClient;
+    final
+    SysOrderFacadeClient sysOrderFacadeClient;
+
+    public WeChatOrderStatusCheckScheduled(WxPayService wxPayService, MpAuthConfig mpAuthConfig, AccountFacadeClient accountFacadeClient, SysOrderFacadeClient sysOrderFacadeClient) {
+        this.wxPayService = wxPayService;
+        this.mpAuthConfig = mpAuthConfig;
+        this.accountFacadeClient = accountFacadeClient;
+        this.sysOrderFacadeClient = sysOrderFacadeClient;
+    }
 
     @Scheduled(cron = "0 0/3 * * * ?")
     public void execute() {
@@ -46,7 +56,7 @@ public class WeChatOrderStatusCheckScheduled {
             SysOrderDTO item = new SysOrderDTO();
             item.setLimit(ROWS);
             item.setStatus(Integer.valueOf(OrderStatusType.PAY_ING.getCode()));
-            List<SysOrderDTO> list = sysOrderFacadeFeign.selectSysOrderListExt(item);
+            List<SysOrderDTO> list = sysOrderFacadeClient.selectSysOrderListExt(item);
             if (!CollectionUtils.isEmpty(list)) {
                 for (SysOrderDTO dto : list) {
                     try {
@@ -66,7 +76,7 @@ public class WeChatOrderStatusCheckScheduled {
             newOrder.setPayTime(new Date());
             newOrder.setOrderId(order.getOrderId());
             newOrder.setStatus(Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
-            accountFacadeFeign.take(newOrder);
+            accountFacadeClient.take(newOrder);
             return;
         }
 
@@ -84,7 +94,7 @@ public class WeChatOrderStatusCheckScheduled {
                     //微信支付订单号
                     newOrder.setPayNo(result.getTransactionId());
                     newOrder.setStatus(Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
-                    accountFacadeFeign.take(newOrder);
+                    accountFacadeClient.take(newOrder);
                 }
             }
         }

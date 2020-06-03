@@ -113,25 +113,6 @@ xss:
   urlPatterns: /system/*,/monitor/*,/tool/*
 
 
-management:
-  endpoint:
-    dubbo-configs:
-      enabled: true
-    dubbo:
-      enabled: true
-    dubbo-services:
-      enabled: true
-    dubbo-properties:
-      enabled: true
-    dubbo-shutdown:
-      enabled: true
-    dubbo-references:
-      enabled: true
-  health:
-    dubbo:
-      status:
-        defaults: memory
-        extras: load,threadpool
 
 sequence:
   workerId: 1

@@ -19,30 +19,30 @@ public abstract class BaseController {
 
 
     @Autowired
-    SysWebMainFacadeFeign sysWebMainFacadeFeign;
-
-    @Autowired
     ConfigFactory configFactory;
 
 
+//    @Autowired
+//    AccountFacadeFeign accountFacadeFeign;
+//
+//    @Autowired
+//    SysWebMainFacadeFeign sysWebMainFacadeFeign;
+//
+//    @Autowired
+//    SysConfigFacadeFeign sysConfigFacadeFeign;
+//
+//    @Autowired
+//    SysOrderFacadeFeign sysOrderFacadeFeign;
+//
+//    @Autowired
+//    UserDetailFeign userDetailFeign;
+
+
+
     @Autowired
-    AccountFacadeFeign accountFacadeFeign;
-
-
-    @Autowired
-    SysConfigFacadeFeign sysConfigFacadeFeign;
-
-
-    @Autowired
-    SysOrderFacadeFeign sysOrderFacadeFeign;
-
-
-    @Autowired
-    UserDetailFeign userDetailFeign;
-
-    @Autowired
-
     AccountFacadeClient accountFacadeClient;
+
+
     @Autowired
 
     SysConfigFacadeClient sysConfigFacadeClient;

@@ -89,19 +89,12 @@ dubbo:
   application:
     name: dubbo-sms-zk-service
     id: dubbo-sms-zk-service
+    qosEnable: true
+    qosPort: 35353
+    qosAcceptForeignIp: false
   scan:
     basePackages: com.ruoyi.reward.facade,com.ruoyi.system.facade
-    qos:
-      enable: true
-      port: 44444
-      foreign:
-        ip: false
 
-
-nacos:
-  config:
-    server-addr: 127.0.0.1:8848
-    file-extension: yaml
 
 
 # 日志配置
@@ -114,12 +107,12 @@ logging:
 
 reward-service:
   ribbon:
-    listOfServers: http://127.0.0.1:8761
+    listOfServers: http://admin:admin@127.0.0.1
 
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://127.0.0.1:8761/eureka/
+      defaultZone: http://admin:admin@127.0.0.1:8761/eureka/
     fetchRegistry: true
   instance:
     preferIpAddress: true

@@ -26,7 +26,6 @@ mp:
   # 微信预授权回调
   wxPnCallbackUrl: http://yuluncc.top/wechat/callback
   configCode: FULIHUI_YOUFULI
-
   mockMoney: true
   mockWeChatOrderQuery: false
   mockWeChatOrderSuccess: true
@@ -48,31 +47,7 @@ spring:
   jackson:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
-endpoints:
-  dubbo:
-    enabled: true
 
-
-management:
-  server:
-    port: 8082
-  endpoint:
-    dubbo-configs:
-      enabled: true
-    dubbo:
-      enabled: true
-    dubbo-services:
-      enabled: true
-    dubbo-properties:
-      enabled: true
-    dubbo-shutdown:
-      enabled: true
-    dubbo-references:
-      enabled: true
-  health:
-    dubbo:
-      status:
-        defaults: memory
 dubbo:
   registry:
     address: 127.0.0.1:2181
@@ -84,16 +59,12 @@ dubbo:
   application:
     name: ruoyi-mp
     id: ruoyi-mp
-    qos:
-      enable: true
-      port: 33333
-      foreign:
-        ip: false
-
-
+    qosEnable: true
+    qosPort: 33333
+    qosAcceptForeignIp: false
 
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://127.0.0.1:8761/eureka/
+      defaultZone: http://admin:admin@127.0.0.1:8761/eureka/
     fetchRegistry: true

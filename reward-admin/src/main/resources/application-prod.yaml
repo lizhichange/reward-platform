@@ -89,19 +89,12 @@ dubbo:
   application:
     name: dubbo-sms-zk-service
     id: dubbo-sms-zk-service
+    qosEnable: true
+    qosPort: 35353
+    qosAcceptForeignIp: false
   scan:
     basePackages: com.ruoyi.reward.facade,com.ruoyi.system.facade
-    qos:
-      enable: true
-      port: 44444
-      foreign:
-        ip: false
 
-
-nacos:
-  config:
-    server-addr: 127.0.0.1:8848
-    file-extension: yaml
 
 
 # 日志配置

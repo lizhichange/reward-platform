@@ -39,7 +39,7 @@ public class AppNotifyController extends BaseController {
         Money money = new Money(parse.getMoney());
         SysOrderDTO orderDTO = new SysOrderDTO();
         orderDTO.setMoney((int) money.getCent());
-        List<SysOrderDTO> dtoList = sysOrderFacadeFeign.selectSysOrderList(orderDTO);
+        List<SysOrderDTO> dtoList = sysOrderFacadeClient.selectSysOrderList(orderDTO);
         if (!CollectionUtils.isEmpty(dtoList)) {
             //查询的
             SysOrderDTO newOrder = new SysOrderDTO();
@@ -47,7 +47,7 @@ public class AppNotifyController extends BaseController {
             newOrder.setPayTime(DateUtils.parseNewFormat(parse.getTime()));
             newOrder.setStatus(Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
             log.info("newOrder:{}", newOrder);
-            accountFacadeFeign.take(newOrder);
+            accountFacadeClient.take(newOrder);
         }
         return AjaxResult.success("success");
     }

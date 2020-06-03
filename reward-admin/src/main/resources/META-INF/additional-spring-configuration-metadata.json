@@ -4,5 +4,10 @@
       "name": "security",
       "type": "java.lang.String",
       "description": "Description for security."
-  }
-] }
+    },
+    {
+      "name": "reward-service.ribbon.listOfServers",
+      "type": "java.lang.String",
+      "description": "Description for reward-service.ribbon.listOfServers."
+    }
+  ] }

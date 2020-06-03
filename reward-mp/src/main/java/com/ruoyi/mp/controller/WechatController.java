@@ -73,7 +73,7 @@ public class WechatController extends BaseController {
             userWechatLoginRequest.setGender(wxMpUser.getSexDesc());
             userWechatLoginRequest.setUnionid(wxMpUser.getUnionId());
             userWechatLoginRequest.setHeadImg(wxMpUser.getHeadImgUrl());
-            userDetailFeign.wechatLogin(userWechatLoginRequest);
+            userDetailClient.wechatLogin(userWechatLoginRequest);
             if (callback.contains("?")) {
                 callback += "&op=" + wxMpUser.getOpenId();
             } else {
