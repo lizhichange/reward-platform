@@ -250,6 +250,7 @@ public class VideoController extends BaseController {
             order.setMoneyStr(String.valueOf(amount));
             //原价 转换单位分
             order.setPrice(Math.toIntExact(m.getCent()));
+            order.setOpenId(SessionContext.getOpenId());
             //备注
             order.setPayTag(m.toString());
             //支付类型
