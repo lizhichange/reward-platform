@@ -40,6 +40,15 @@ public class SysOrderFacadeImpl implements SysOrderFacade {
     }
 
     @Override
+    public SysOrderDTO selectSysOrderByOrderId(String orderId) {
+        ExtSysOrderExample example = new ExtSysOrderExample();
+        example.createCriteria().andOrderIdEqualTo(orderId);
+        List<ExtSysOrder> list = extSysOrderMapper.selectByExample(example);
+        return convertOrder(list).get(0);
+
+    }
+
+    @Override
     public List<SysOrderDTO> selectSysOrderList(SysOrderDTO sysOrder) {
         SysOrder item = new SysOrder();
         BeanUtils.copyProperties(sysOrder, item);
@@ -91,13 +100,17 @@ public class SysOrderFacadeImpl implements SysOrderFacade {
         if (CollectionUtils.isEmpty(list)) {
             return Lists.newArrayList();
         }
+        return convertOrder(list);
+
+    }
+
+    private List<SysOrderDTO> convertOrder(List<ExtSysOrder> list) {
         return list.stream().map(it ->
         {
             SysOrderDTO dto = new SysOrderDTO();
             BeanUtils.copyProperties(it, dto);
             return dto;
         }).collect(Collectors.toList());
-
     }
 
     @Override

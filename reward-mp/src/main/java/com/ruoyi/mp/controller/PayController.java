@@ -81,6 +81,8 @@ public class PayController extends BaseController {
         item.setTradeType(tradeType);
         modelmap.addAttribute("order", item);
         modelmap.addAttribute("callbackUrl", callbackUrl);
+        log.info("order:{}", item);
+
         if (StringUtil.equals(WxPayConstants.TradeType.JSAPI, tradeType)) {
             String ua = request.getHeader("User-Agent").toLowerCase();
             UserAgent parse = UserAgentUtil.parse(ua);
@@ -156,13 +158,11 @@ public class PayController extends BaseController {
 
     private SysOrderDTO getSysOrderDTO(String orderId) throws Exception {
         Assert.notNull(orderId, "orderId is not null");
-        SysOrderDTO sysOrderDTO = new SysOrderDTO();
-        sysOrderDTO.setOrderId(orderId);
-        List<SysOrderDTO> list = sysOrderFacadeClient.selectSysOrderList(sysOrderDTO);
-        if (CollectionUtils.isEmpty(list)) {
+        SysOrderDTO dto = sysOrderFacadeClient.selectSysOrderByOrderId(orderId);
+        if (dto == null) {
             throw new Exception("系统异常");
         }
-        return list.get(0);
+        return dto;
     }
 
     /**

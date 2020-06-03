@@ -18,7 +18,9 @@ public interface SysOrderFacade {
      * @param id 订单列表ID
      * @return 订单列表
      */
-    public SysOrderDTO selectSysOrderById(Long id);
+    SysOrderDTO selectSysOrderById(Long id);
+
+    SysOrderDTO selectSysOrderByOrderId(String orderId);
 
     /**
      * 查询订单列表列表
@@ -26,7 +28,7 @@ public interface SysOrderFacade {
      * @param sysOrder 订单列表
      * @return 订单列表集合
      */
-    public List<SysOrderDTO> selectSysOrderList(SysOrderDTO sysOrder);
+    List<SysOrderDTO> selectSysOrderList(SysOrderDTO sysOrder);
 
     List<SysOrderDTO> selectSysOrder(SysOrderDTO extSysOrder);
 
@@ -39,7 +41,7 @@ public interface SysOrderFacade {
      * @param sysOrder 订单列表
      * @return 结果
      */
-    public int insertSysOrder(SysOrderDTO sysOrder);
+    int insertSysOrder(SysOrderDTO sysOrder);
 
     /**
      * 修改订单列表
@@ -47,7 +49,7 @@ public interface SysOrderFacade {
      * @param sysOrder 订单列表
      * @return 结果
      */
-    public int updateSysOrder(SysOrderDTO sysOrder);
+    int updateSysOrder(SysOrderDTO sysOrder);
 
     int updateSysOrderByOrderId(SysOrderDTO sysOrder);
 
@@ -57,7 +59,7 @@ public interface SysOrderFacade {
      * @param ids 需要删除的数据ID
      * @return 结果
      */
-    public int deleteSysOrderByIds(String ids);
+    int deleteSysOrderByIds(String ids);
 
     /**
      * 删除订单列表信息
@@ -65,5 +67,5 @@ public interface SysOrderFacade {
      * @param id 订单列表ID
      * @return 结果
      */
-    public int deleteSysOrderById(Long id);
+    int deleteSysOrderById(Long id);
 }

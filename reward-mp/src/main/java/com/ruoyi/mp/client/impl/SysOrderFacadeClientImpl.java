@@ -12,7 +12,8 @@ import java.util.List;
  * @author sunflower
  */
 @Component
-public class SysOrderFacadeClientImpl implements SysOrderFacadeClient {
+public class
+SysOrderFacadeClientImpl implements SysOrderFacadeClient {
     @Reference(version = "1.0.0", check = false)
     SysOrderFacade sysOrderFacade;
 
@@ -24,6 +25,11 @@ public class SysOrderFacadeClientImpl implements SysOrderFacadeClient {
     @Override
     public int updateSysOrder(SysOrderDTO newOrder) {
         return sysOrderFacade.updateSysOrder(newOrder);
+    }
+
+    @Override
+    public SysOrderDTO selectSysOrderByOrderId(String orderId) {
+        return sysOrderFacade.selectSysOrderByOrderId(orderId);
     }
 
     @Override
