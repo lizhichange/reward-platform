@@ -2,6 +2,8 @@ package com.ruoyi.web.controller;
 
 import com.google.common.collect.Maps;
 import com.ruoyi.reward.facade.dto.SysCategoryDTO;
+import com.ruoyi.web.client.SysCategoryFacadeClient;
+import com.ruoyi.web.client.TsFacadeClient;
 import com.ruoyi.web.feign.SysCategoryFacadeFeign;
 import com.ruoyi.web.feign.TsFeign;
 import com.ruoyi.web.feign.UserDetailFacadeFeign;
@@ -27,9 +29,9 @@ public class BaseController {
 
     public static final Logger LOGGER = LoggerFactory.getLogger(BaseController.class);
     @Autowired
-    SysCategoryFacadeFeign sysCategoryFacadeFeign;
+    SysCategoryFacadeClient sysCategoryFacadeClient;
     @Autowired
-    TsFeign tsFeign;
+    TsFacadeClient tsFacadeClient;
     @Autowired
     UserDetailFacadeFeign userDetailFacadeFeign;
 
@@ -58,15 +60,15 @@ public class BaseController {
     protected void getCategory(ModelMap modelmap) {
         SysCategoryDTO sysCategory = new SysCategoryDTO();
         sysCategory.setParentId(100L);
-        List<SysCategoryDTO> categoryList = sysCategoryFacadeFeign.selectDeptList(sysCategory);
+        List<SysCategoryDTO> categoryList = sysCategoryFacadeClient.selectDeptList(sysCategory);
         modelmap.addAttribute("categoryList", categoryList);
     }
 
     public static void main(String[] args) {
         HashMap<Integer, Integer> objectObjectHashMap = Maps.newHashMap();
-        for (int i=0;i<100;++i){
-            objectObjectHashMap.put(i, Integer.valueOf(i+""));
-            objectObjectHashMap.remove(i-1);
+        for (int i = 0; i < 100; ++i) {
+            objectObjectHashMap.put(i, Integer.valueOf(i + ""));
+            objectObjectHashMap.remove(i - 1);
         }
         System.out.println(objectObjectHashMap.size());
     }

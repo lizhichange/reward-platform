@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @FeignClient(value = "reward-service", path = "/rest/shi")
-public interface ShiFacadeFeign {
+public interface ShipinFacadeFeign {
     /**
      * 查询公共片库
      *

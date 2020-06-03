@@ -7,13 +7,13 @@ import com.ruoyi.reward.facade.enums.MultiTypeEnum;
 import com.ruoyi.reward.facade.enums.OrderPayType;
 import com.ruoyi.reward.facade.enums.OrderStatusType;
 import com.ruoyi.reward.facade.enums.WebMainStatus;
+import com.ruoyi.web.client.*;
 import com.ruoyi.web.config.AppConfig;
 import com.ruoyi.web.feign.*;
 import com.ruoyi.web.model.PageForm;
 import com.ruoyi.web.model.Users;
 import com.ruoyi.web.result.TableDataInfo;
 import com.ruoyi.web.model.AjaxResult;
-import lombok.extern.slf4j.Slf4j;
 import org.near.servicesupport.result.TPageResult;
 import org.near.toolkit.common.DateUtils;
 import org.near.toolkit.common.EnumUtil;
@@ -23,6 +23,7 @@ import org.near.toolkit.model.Money;
 import org.near.utils.IpUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -47,29 +48,28 @@ public class VideoController extends BaseController {
     private static final Logger log = LoggerFactory.getLogger(VideoController.class);
 
     private static final String prefix = "video";
-    final private ThreadPoolTaskExecutor threadPoolTaskExecutor;
-    private final ShiFacadeFeign shiFacadeFeign;
-    private final SysCategoryFacadeFeign sysCategoryFacadeFeign;
-    private final SysOrderFacadeFeign sysOrderFacadeFeign;
-    private final SysWebMainFacadeFeign sysWebMainFacadeFeign;
-    private final SysConfigFacadeFeign sysConfigFacadeFeign;
-    private final AppConfig appConfig;
 
-    public VideoController(AppConfig appConfig, SysConfigFacadeFeign sysConfigFacadeFeign, SysWebMainFacadeFeign sysWebMainFacadeFeign, SysOrderFacadeFeign sysOrderFacadeFeign, SysCategoryFacadeFeign sysCategoryFacadeFeign, ShiFacadeFeign shiFacadeFeign, ThreadPoolTaskExecutor threadPoolTaskExecutor) {
-        this.appConfig = appConfig;
-        this.sysConfigFacadeFeign = sysConfigFacadeFeign;
-        this.sysWebMainFacadeFeign = sysWebMainFacadeFeign;
-        this.sysOrderFacadeFeign = sysOrderFacadeFeign;
-        this.sysCategoryFacadeFeign = sysCategoryFacadeFeign;
-        this.shiFacadeFeign = shiFacadeFeign;
-        this.threadPoolTaskExecutor = threadPoolTaskExecutor;
-    }
+    @Autowired
+    private AppConfig appConfig;
+
+    @Autowired
+    ThreadPoolTaskExecutor threadPoolTaskExecutor;
+    @Autowired
+    private ShipinFacadeClient shipinFacadeClient;
+    @Autowired
+    private SysCategoryFacadeClient sysCategoryFacadeClient;
+    @Autowired
+    private SysOrderFacadeClient sysOrderFacadeClient;
+    @Autowired
+    private SysWebMainFacadeClient sysWebMainFacadeClient;
+    @Autowired
+    private SysConfigFacadeClient sysConfigFacadeClient;
 
     private void xxx(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
         log.info("userId:{}", userid);
         ShipinDTO shipinDTO = new ShipinDTO();
         String orderByClause = " create_time desc ";
-        TPageResult<ShipinDTO> result = shiFacadeFeign.queryPage(1, 12, shipinDTO, orderByClause);
+        TPageResult<ShipinDTO> result = shipinFacadeClient.queryPage(1, 12, shipinDTO, orderByClause);
         List<ShipinDTO> list = result.getValues();
         convert(list);
         list.sort((o1, o2) -> o2.getCreateTime().compareTo(o1.getCreateTime()));
@@ -93,7 +93,7 @@ public class VideoController extends BaseController {
         String user = StringUtil.isBlank(userid) ? "" : userid;
         SysWebMainDTO webMain = new SysWebMainDTO();
         webMain.setMainStatus(WebMainStatus.OK.getCode());
-        List<SysWebMainDTO> list = sysWebMainFacadeFeign.selectSysWebMainList(webMain);
+        List<SysWebMainDTO> list = sysWebMainFacadeClient.selectSysWebMainList(webMain);
         if (!CollectionUtils.isEmpty(list)) {
             int size = list.size();
             SysWebMainDTO item;
@@ -116,7 +116,7 @@ public class VideoController extends BaseController {
         getCategory(modelmap);
         Object currentUser = getCurrentUser();
         log.info("currentUser:{}", currentUser);
-        SysCategoryDTO sysCategory = sysCategoryFacadeFeign.selectDeptById(categoryId);
+        SysCategoryDTO sysCategory = sysCategoryFacadeClient.selectDeptById(categoryId);
         if (sysCategory == null) {
             modelmap.addAttribute("category", new SysCategoryDTO());
         } else {
@@ -132,25 +132,25 @@ public class VideoController extends BaseController {
                          @RequestParam(value = "author", required = false) String author,
                          ModelMap modelmap) {
         log.info("user:{},id:{},author:{}", userid, id, author);
-        ShipinDTO shipin = shiFacadeFeign.selectShipinDTOById(id);
+        ShipinDTO shipin = shipinFacadeClient.selectShipinDTOById(id);
         if (shipin != null) {
             convert(new Date(), shipin);
             modelmap.put("shipin", shipin);
-            SysCategoryDTO category = sysCategoryFacadeFeign.selectDeptById(shipin.getCategoryId().longValue());
+            SysCategoryDTO category = sysCategoryFacadeClient.selectDeptById(shipin.getCategoryId().longValue());
             if (category != null) {
                 modelmap.put("category", category);
             }
             //异步执行浏览加1
-            threadPoolTaskExecutor.execute(() -> shiFacadeFeign.updateClickPlus(shipin.getId().longValue()));
+            threadPoolTaskExecutor.execute(() -> shipinFacadeClient.updateClickPlus(shipin.getId().longValue()));
         }
 
         String orderByClause = " create_time desc ";
-        TPageResult<ShipinDTO> result = shiFacadeFeign.queryPage(1, 12, new ShipinDTO(), orderByClause);
+        TPageResult<ShipinDTO> result = shipinFacadeClient.queryPage(1, 12, new ShipinDTO(), orderByClause);
         List<ShipinDTO> list = result.getValues();
         convert(list);
         modelmap.addAttribute("list", list);
         getCategory(modelmap);
-        String tradeType = sysConfigFacadeFeign.selectConfigByKey("sys.tradeType");
+        String tradeType = sysConfigFacadeClient.selectConfigByKey("sys.tradeType");
         modelmap.addAttribute("wxPayUrl", appConfig.getWxPayUrl() + "?tradeType=" + tradeType);
         return prefix + "/detail";
     }
@@ -163,7 +163,7 @@ public class VideoController extends BaseController {
         int pageNum = pageForm.getPageNum();
         int pageSize = pageForm.getPageSize();
         String orderByClause = " create_time desc ";
-        TPageResult<ShipinDTO> result = shiFacadeFeign.queryPage(pageNum, pageSize, shipinDTO, orderByClause);
+        TPageResult<ShipinDTO> result = shipinFacadeClient.queryPage(pageNum, pageSize, shipinDTO, orderByClause);
         List<ShipinDTO> list = result.getValues();
         convert(list);
         if (CollectionUtils.isEmpty(list)) {
@@ -193,7 +193,7 @@ public class VideoController extends BaseController {
         int pageNum = pageForm.getPageNum();
         int pageSize = pageForm.getPageSize();
         String orderByClause = " create_time desc ";
-        TPageResult<ShipinDTO> result = shiFacadeFeign.queryPage(pageNum, pageSize, shipinDTO, orderByClause);
+        TPageResult<ShipinDTO> result = shipinFacadeClient.queryPage(pageNum, pageSize, shipinDTO, orderByClause);
         List<ShipinDTO> list = result.getValues();
         convert(list);
         TableDataInfo dataTable = getDataTable(list);
@@ -218,9 +218,9 @@ public class VideoController extends BaseController {
 
         order.setGoodsId(shipinDTO.getId());
         order.setUserId(currentUser.getUserId());
-        List<SysOrderDTO> sysOrders = sysOrderFacadeFeign.selectSysOrder(order);
+        List<SysOrderDTO> sysOrders = sysOrderFacadeClient.selectSysOrder(order);
         if (CollectionUtils.isEmpty(sysOrders)) {
-            ShipinDTO dto = shiFacadeFeign.selectShipinDTOById(shipinDTO.getId().longValue());
+            ShipinDTO dto = shipinFacadeClient.selectShipinDTOById(shipinDTO.getId().longValue());
             Date now = new Date();
             order.setCreateTime(now);
             order.setUpdateTime(now);
@@ -252,7 +252,7 @@ public class VideoController extends BaseController {
             order.setStatus(Integer.valueOf(OrderStatusType.N_PAY.getCode()));
             order.setStatusStr(OrderStatusType.N_PAY.getDesc());
             order.setStatus(Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
-            sysOrderFacadeFeign.insertSysOrder(order);
+            sysOrderFacadeClient.insertSysOrder(order);
             return AjaxResult.success(order);
         } else {
             SysOrderDTO sysOrder = sysOrders.get(0);
@@ -264,7 +264,7 @@ public class VideoController extends BaseController {
                     upOrder.setOrderId(sysOrder.getOrderId());
                     //推广人userId
                     upOrder.setExtensionUserId(SessionContext.getUserId());
-                    sysOrderFacadeFeign.updateSysOrderByOrderId(upOrder);
+                    sysOrderFacadeClient.updateSysOrderByOrderId(upOrder);
                 });
             }
             Money money = new Money();
@@ -324,7 +324,7 @@ public class VideoController extends BaseController {
             tsDTO.setOpenId(SessionContext.getOpenId());
             tsDTO.setUserid(SessionContext.getUserId());
             tsDTO.setIp(IpUtils.getIpAddr(request));
-            tsFeign.insertTs(tsDTO);
+            tsFacadeClient.insertTs(tsDTO);
         });
         return prefix + "/sub";
     }
