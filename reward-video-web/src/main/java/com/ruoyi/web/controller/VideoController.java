@@ -9,7 +9,7 @@ import com.ruoyi.reward.facade.enums.OrderStatusType;
 import com.ruoyi.reward.facade.enums.WebMainStatus;
 import com.ruoyi.web.client.*;
 import com.ruoyi.web.config.AppConfig;
-import com.ruoyi.web.feign.*;
+
 import com.ruoyi.web.interceptor.WxPnUserAuth;
 import com.ruoyi.web.model.PageForm;
 import com.ruoyi.web.model.Users;
@@ -80,12 +80,14 @@ public class VideoController extends BaseController {
     }
 
     @GetMapping("/redirect")
+    @WxPnUserAuth
     public String redirect(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
         xxx(userid, modelmap);
         return prefix + "/index";
     }
 
     @GetMapping("/index")
+    @WxPnUserAuth
     public String render(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
         return index(userid, modelmap);
     }
