@@ -53,10 +53,6 @@ spring:
       enabled: true
   application:
     name: reward-service
-  security:
-    user:
-      name: admin
-      password: admin
 # MyBatis
 mybatis:
   # 搜索指定包别名
@@ -140,3 +136,7 @@ management:
 sequence:
   workerId: 1
 
+security:
+  user:
+    name: admin
+    password: admin
