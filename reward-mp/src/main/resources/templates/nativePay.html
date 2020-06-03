@@ -220,6 +220,7 @@
             <input type="hidden" th:value="${order.orderId}" id="orderId" />
             <input type="hidden" th:value="${timeExpire}" id="timeExpire" />
             <input type="hidden" th:value="${callbackUrl}" id="callbackUrl" />
+            <input type="hidden" th:value="${order.tradeType}" id="tradeType"/>
 
     
         </section>
@@ -262,11 +263,15 @@
     timer = setInterval("CountDown()", 1000);
 
     function callFunction() {
+        var tradeType = $("#tradeType").val();
+
         $.ajax({
             type: "post",
             url: "/pay/queryOrder",
             data: {
-                "orderId": $("#orderId").val()
+                "orderId": $("#orderId").val(),
+                "tradeType": tradeType
+
             },
             success: function (r) {
                 if (r.code === 0) {

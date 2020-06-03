@@ -16,6 +16,7 @@ import com.github.binarywang.wxpay.constant.WxPayConstants;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.EntPayService;
 import com.google.common.collect.Maps;
+import com.ruoyi.mp.param.OrderParam;
 import com.ruoyi.mp.service.ImageService;
 import com.ruoyi.mp.util.AjaxResult;
 import com.ruoyi.reward.facade.dto.SysOrderDTO;
@@ -152,8 +153,8 @@ public class PayController extends BaseController {
 
     @PostMapping("/queryOrder")
     @ResponseBody
-    public AjaxResult queryOrder(String orderId) throws Exception {
-        return AjaxResult.success(getSysOrderDTO(orderId));
+    public AjaxResult queryOrder(@RequestParam OrderParam order) throws Exception {
+        return AjaxResult.success(getSysOrderDTO(order.getOrderId()));
     }
 
     private SysOrderDTO getSysOrderDTO(String orderId) throws Exception {

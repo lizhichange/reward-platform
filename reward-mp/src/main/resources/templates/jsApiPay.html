@@ -230,7 +230,7 @@
             var orderId = $("#orderId").val();
             var tradeType = $("#tradeType").val();
             console.log("orderId=" + orderId + ",tradeType=" + tradeType);
-            $.showLoading("数据加载中");
+            $.showLoading("加载中");
             $.ajax({
                 type: "post",
                 url: "/pay/createOrder",
@@ -240,7 +240,7 @@
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     /*错误信息处理*/
-                    $.toast("系统异常", 2000);
+                    $.toast("系统异常", 3000);
                 },
                 success: function (r) {
                     $.hideLoading();
