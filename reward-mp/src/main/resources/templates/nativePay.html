@@ -2,9 +2,9 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta http-equiv="content-type" content="text/html;charset=utf8" />
+    <meta http-equiv="content-type" content="text/html;charset=utf8"/>
     <meta id="viewport" name="viewport"
-        content="width=device-width; initial-scale=1.0; maximum-scale=1; user-scalable=no;" />
+          content="width=device-width; initial-scale=1.0; maximum-scale=1; user-scalable=no;"/>
     <title></title>
 
 
@@ -178,7 +178,6 @@
         }
 
 
-
         .charge .selectImg li {
             position: relative;
             display: block;
@@ -202,29 +201,29 @@
 <body>
 
 
-    <article class="charge">
-        <h1>微信支付购买</h1>
-        <section class="content">
-            <h2>商品：会员服务。</h2>
-            <p class="copy-right">亲，此商品不提供退款和发货服务哦</p>
-            <div class="price">微信价：<strong>￥[[${order.moneyStr}]]元</strong></div>
-<!--            <h2 style="color:#1aad19"> 订单剩余时间 / 到期后请勿支付</h2>-->
-            <a href="javascript:" id="minute_show" class="weui-btn weui-btn_primary">
-                 倒计时：[[${timeExpire}]]分0秒
-            </a>
-            <ul class="selectImg cf">
-                <li><img id="codeUrl" th:src="@{'http://qr.liantu.com/api.php?text='+${result.codeUrl} }" /></li>
-                <li style="line-height:0"><img src="/img/sm.png" /></li>
-            </ul>
+<article class="charge">
+    <h1>微信支付购买</h1>
+    <section class="content">
+        <h2>商品：会员服务。</h2>
+        <p class="copy-right">亲，此商品不提供退款和发货服务哦</p>
+        <div class="price">微信价：<strong>￥[[${order.moneyStr}]]元</strong></div>
+        <!--            <h2 style="color:#1aad19"> 订单剩余时间 / 到期后请勿支付</h2>-->
+        <a href="javascript:" id="minute_show" class="weui-btn weui-btn_primary">
+            倒计时：[[${timeExpire}]]分0秒
+        </a>
+        <ul class="selectImg cf">
+            <li><img id="codeUrl" th:src="@{'http://qr.liantu.com/api.php?text='+${result.codeUrl} }"/></li>
+            <li style="line-height:0"><img src="/img/sm.png"/></li>
+        </ul>
 
-            <input type="hidden" th:value="${order.orderId}" id="orderId" />
-            <input type="hidden" th:value="${timeExpire}" id="timeExpire" />
-            <input type="hidden" th:value="${callbackUrl}" id="callbackUrl" />
-            <input type="hidden" th:value="${order.tradeType}" id="tradeType"/>
+        <input type="hidden" th:value="${order.orderId}" id="orderId"/>
+        <input type="hidden" th:value="${timeExpire}" id="timeExpire"/>
+        <input type="hidden" th:value="${callbackUrl}" id="callbackUrl"/>
+        <input type="hidden" th:value="${order.tradeType}" id="tradeType"/>
 
-    
-        </section>
-    </article>
+
+    </section>
+</article>
 </body>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
 <script type="text/javascript" src="/js/zepto.min.js"></script>
@@ -232,12 +231,27 @@
 <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
 
 <script type="text/javascript">
+    $(function () {
+        function onBridgeReady() {
+            WeixinJSBridge.call('hideOptionMenu');
+        }
 
+        if (typeof WeixinJSBridge == "undefined") {
+            if (document.addEventListener) {
+                document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+            } else if (document.attachEvent) {
+                document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+                document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+            }
+        } else {
+            onBridgeReady();
+        }
+    });
 
     var timeTask = setInterval(function () {
         callFunction();
     }, 2000);
-    var timeExpire=parseInt($("#timeExpire").val());
+    var timeExpire = parseInt($("#timeExpire").val());
     //秒
     var ge_time = timeExpire * 60;
     var intDiff = parseInt(ge_time);//倒计时总秒数量
@@ -252,14 +266,15 @@
             intDiff--;
             ge_time = intDiff;
         } else {
-            $('#codeUrl').attr('src','/img/weixin.jpg');
+            $('#codeUrl').attr('src', '/img/weixin.jpg');
             clearInterval(timeTask);
             $("#minute_show").text("重新支付");
-            $("#minute_show").bind('click',function(){
+            $("#minute_show").bind('click', function () {
                 window.location.reload();
             });
         }
     }
+
     timer = setInterval("CountDown()", 1000);
 
     function callFunction() {
@@ -281,10 +296,10 @@
                         //已支付
                     } else if (rep.status === 1) {
                         clearInterval(timeTask);
-                        window.location.href=$("#callbackUrl").val()
+                        window.location.href = $("#callbackUrl").val()
                     }
                 } else {
-                    
+
                 }
             }
         });
