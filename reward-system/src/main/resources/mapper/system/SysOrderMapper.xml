@@ -94,6 +94,30 @@
         </trim>
     </insert>
 
+
+    <update id="updateSysOrderByOrderId" parameterType="SysOrder">
+        update sys_order
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="money != null ">money = #{money},</if>
+            <if test="price != null ">price = #{price},</if>
+            <if test="type != null ">type = #{type},</if>
+            <if test="payNo != null  and payNo != ''">pay_no = #{payNo},</if>
+            <if test="param != null  and param != ''">param = #{param},</if>
+            <if test="payTime != null ">pay_time = #{payTime},</if>
+            <if test="payTag != null  and payTag != ''">pay_tag = #{payTag},</if>
+            <if test="status != null ">status = #{status},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="goodsId != null ">goods_id = #{goodsId},</if>
+            <if test="goodsSnapshot != null  and goodsSnapshot != ''">goods_snapshot = #{goodsSnapshot},</if>
+            <if test="openId != null  and openId != ''">open_id = #{openId},</if>
+            <if test="extensionUserId != null  and extensionUserId != ''">extension_user_id = #{extensionUserId},</if>
+            <if test="userId != null  and userId != ''">user_id = #{userId},</if>
+        </trim>
+        where order_id = #{orderId}
+    </update>
+
+
     <update id="updateSysOrder" parameterType="SysOrder">
         update sys_order
         <trim prefix="SET" suffixOverrides=",">

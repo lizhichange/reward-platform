@@ -2,6 +2,7 @@ package com.ruoyi.system.mapper;
 
 import com.ruoyi.system.domain.ExtSysOrder;
 import com.ruoyi.system.domain.ExtSysOrderExample;
+import com.ruoyi.system.domain.SysOrder;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -14,6 +15,7 @@ public interface ExtSysOrderMapper {
     int deleteByPrimaryKey(Integer id);
 
     int insert(ExtSysOrder record);
+
 
     int insertSelective(ExtSysOrder record);
 
