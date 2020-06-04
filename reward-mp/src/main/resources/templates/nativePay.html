@@ -278,15 +278,13 @@
     timer = setInterval("CountDown()", 1000);
 
     function callFunction() {
-        var tradeType = $("#tradeType").val();
 
         $.ajax({
             type: "post",
             url: "/pay/queryOrder",
             data: {
                 "orderId": $("#orderId").val(),
-                "tradeType": tradeType
-
+                "tradeType": $("#tradeType").val()
             },
             success: function (r) {
                 if (r.code === 0) {
