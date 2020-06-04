@@ -288,12 +288,20 @@ public class VideoController extends BaseController {
 
             if (sysOrder.getType() != null) {
                 OrderPayType orderPayType = EnumUtil.queryByCode(sysOrder.getType().toString(), OrderPayType.class);
-                if (orderPayType != null) {
-                    sysOrder.setTypeStr(orderPayType.getDesc());
-                }
+                sysOrder.setTypeStr(orderPayType.getDesc());
+                //微信扫码支付
+                boolean b = orderPayType == OrderPayType.NATIVE;
+
+
             }
             if (sysOrder.getStatus() != null) {
-                sysOrder.setStatusStr(EnumUtil.queryByCode(sysOrder.getStatus().toString(), OrderStatusType.class).getDesc());
+                OrderStatusType orderStatusType = EnumUtil.queryByCode(sysOrder.getStatus().toString(), OrderStatusType.class);
+                boolean b = orderStatusType == OrderStatusType.PAY_ING;
+                //如果支付中
+                if (b) {
+
+                }
+                sysOrder.setStatusStr(orderStatusType.getDesc());
             }
 
             return AjaxResult.success(sysOrder);
