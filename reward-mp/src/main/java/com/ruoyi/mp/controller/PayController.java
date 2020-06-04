@@ -153,7 +153,7 @@ public class PayController extends BaseController {
 
     @PostMapping("/queryOrder")
     @ResponseBody
-    public AjaxResult queryOrder(@RequestParam OrderParam order) throws Exception {
+    public AjaxResult queryOrder(@RequestBody OrderParam order) throws Exception {
         return AjaxResult.success(getSysOrderDTO(order.getOrderId()));
     }
 
