@@ -7,6 +7,7 @@ import com.ruoyi.web.controller.vo.SelectOptionVO;
 import lombok.Data;
 import lombok.Getter;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.near.toolkit.common.StringUtil;
 import org.near.toolkit.model.BaseEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -97,7 +98,8 @@ public class SysConfigController extends BaseController {
      */
     @GetMapping("/edit/{configId}")
     public String edit(@PathVariable("configId") Long configId, ModelMap mmap) {
-        mmap.put("config", configService.selectConfigById(configId));
+        SysConfig sysConfig = configService.selectConfigById(configId);
+        mmap.put("config", sysConfig);
 
         List<SelectOptionVO> voList = Lists.newArrayList();
         PayEnum[] values = PayEnum.values();
@@ -108,6 +110,7 @@ public class SysConfigController extends BaseController {
             voList.add(vo);
         }
         mmap.put("voList", voList);
+        mmap.put("tradeTypeFlag", StringUtil.equals("sys.tradeType", sysConfig.getConfigKey()));
         return prefix + "/edit";
     }
 
