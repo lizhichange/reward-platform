@@ -269,7 +269,8 @@
                                         $.toast("取消支付,返回页面", 2000);
                                         window.location.href = $('#callbackUrl').val();
                                     } else {
-                                        alert("支付失败！");
+                                        $.toast("支付失败,返回页面", 2000);
+                                        window.location.href = $('#callbackUrl').val();
                                     }
                                 });
                             //
