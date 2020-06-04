@@ -20,6 +20,7 @@ import com.ruoyi.mp.param.OrderParam;
 import com.ruoyi.mp.service.ImageService;
 import com.ruoyi.mp.util.AjaxResult;
 import com.ruoyi.reward.facade.dto.SysOrderDTO;
+import com.ruoyi.reward.facade.enums.OrderPayType;
 import com.ruoyi.reward.facade.enums.OrderStatusType;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -236,6 +237,8 @@ public class PayController extends BaseController {
             if (StringUtil.isNotBlank(packageValue)) {
                 String[] split = packageValue.split("=");
                 newOrder.setPayNo(split[1]);
+                //类型
+                newOrder.setType(Integer.valueOf(OrderPayType.JSAPI.getCode()));
                 //支付中
                 newOrder.setStatus(Integer.valueOf(OrderStatusType.PAY_ING.getCode()));
                 LOGGER.info("newOrder:{}", newOrder);
@@ -267,6 +270,7 @@ public class PayController extends BaseController {
             newOrder.setId(item.getId());
             //支付失效时间
             newOrder.setParam(timeExpire);
+            newOrder.setType(Integer.valueOf(OrderPayType.NATIVE.getCode()));
             newOrder.setStatus(Integer.valueOf(OrderStatusType.PAY_ING.getCode()));
             LOGGER.info("newOrder:{}", newOrder);
             sysOrderFacadeClient.updateSysOrder(newOrder);

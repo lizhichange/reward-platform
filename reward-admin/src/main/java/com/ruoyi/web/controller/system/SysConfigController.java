@@ -121,15 +121,15 @@ public class SysConfigController extends BaseController {
         /**
          * 原生扫码支付
          */
-        NATIVE("NATIVE", "原生扫码支付"),
+        NATIVE("NATIVE", "微信原生扫码支付"),
         /**
          * 公众号支付
          */
-        JSAPI("JSAPI", "公众号支付"),
+        JSAPI("JSAPI", "微信公众号支付"),
         /**
-         * 支付宝支付
+         * 支付宝生成动态码支付
          */
-        aliPay_transfer("aliPay_transfer", "支付宝支付"),
+        aliPay_transfer("aliPay_transfer", "支付宝生成动态码支付"),
         ;
 
         String code;

@@ -256,6 +256,7 @@ public class VideoController extends BaseController {
             //支付类型
             order.setType(Integer.valueOf(WE_CHAT_PAY.getCode()));
             order.setTypeStr(WE_CHAT_PAY.getDesc());
+            //状态
             order.setStatus(Integer.valueOf(OrderStatusType.N_PAY.getCode()));
             order.setStatusStr(OrderStatusType.N_PAY.getDesc());
             sysOrderFacadeClient.insertSysOrder(order);
@@ -284,8 +285,17 @@ public class VideoController extends BaseController {
             Money money = new Money();
             money.setCent(sysOrder.getMoney());
             sysOrder.setMoneyStr(money.toString());
-            sysOrder.setTypeStr(EnumUtil.queryByCode(sysOrder.getType().toString(), OrderPayType.class).getDesc());
-            sysOrder.setStatusStr(EnumUtil.queryByCode(sysOrder.getStatus().toString(), OrderStatusType.class).getDesc());
+
+            if (sysOrder.getType() != null) {
+                OrderPayType orderPayType = EnumUtil.queryByCode(sysOrder.getType().toString(), OrderPayType.class);
+                if (orderPayType != null) {
+                    sysOrder.setTypeStr(orderPayType.getDesc());
+                }
+            }
+            if (sysOrder.getStatus() != null) {
+                sysOrder.setStatusStr(EnumUtil.queryByCode(sysOrder.getStatus().toString(), OrderStatusType.class).getDesc());
+            }
+
             return AjaxResult.success(sysOrder);
         }
     }
