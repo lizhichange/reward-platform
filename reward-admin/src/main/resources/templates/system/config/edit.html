@@ -8,13 +8,14 @@
     <form class="form-horizontal m" id="form-config-edit" th:object="${config}">
         <div class="form-group">
 
-            <label class="col-sm-3 control-label">参数名称：</label>
+            <label class="col-sm-3 control-label">参数类型：</label>
             <div class="col-sm-8">
-                <label class="check-box" th:each="item:${voList}">
-                    <input name="role"
-                           th:text="${item.desc}"
-                           th:value="${item.code}" type="checkbox">
-                </label>
+                <div class="radio check-box" th:each="item:${voList}">
+                    <label><input th:checked="${item.code==config.configValue}" name="a" type="radio"
+                                  th:value="${item.code}"> <i></i>
+                        [[${item.desc}]]</label>
+                </div>
+
             </div>
         </div>
 
