@@ -11,7 +11,7 @@
             <label class="col-sm-3 control-label">参数类型：</label>
             <div class="col-sm-8">
                 <div class="radio check-box" th:each="item:${voList}">
-                    <label><input th:checked="${item.code==config.configValue}" name="a" type="radio"
+                    <label><input th:checked="${item.code==config.configValue}" name="tradeType" type="radio"
                                   th:value="${item.code}"> <i></i>
                         [[${item.desc}]]</label>
                 </div>
@@ -62,6 +62,7 @@
 </div>
 <th:block th:include="include :: footer"/>
 <script type="text/javascript">
+
     var prefix = ctx + "system/config";
 
     $("#form-config-edit").validate({
@@ -99,6 +100,12 @@
             $.operate.save(prefix + "/edit", $('#form-config-edit').serialize());
         }
     }
+
+    $(document).ready(function () {
+        $('input[type=radio][name=tradeType]').change(function () {
+            $("#configValue").val(this.value);
+        });
+    });
 </script>
 </body>
 </html>
