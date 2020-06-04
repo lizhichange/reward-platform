@@ -2,7 +2,12 @@ package com.ruoyi.web.controller.system;
 
 import java.util.List;
 
+import com.google.common.collect.Lists;
+import com.ruoyi.web.controller.vo.SelectOptionVO;
+import lombok.Data;
+import lombok.Getter;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.near.toolkit.model.BaseEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -93,8 +98,46 @@ public class SysConfigController extends BaseController {
     @GetMapping("/edit/{configId}")
     public String edit(@PathVariable("configId") Long configId, ModelMap mmap) {
         mmap.put("config", configService.selectConfigById(configId));
+
+        List<SelectOptionVO> voList = Lists.newArrayList();
+        PayEnum[] values = PayEnum.values();
+        for (PayEnum value : values) {
+            SelectOptionVO vo = new SelectOptionVO();
+            vo.setCode(value.getCode());
+            vo.setDesc(value.getDesc());
+            voList.add(vo);
+        }
+        mmap.put("voList", voList);
         return prefix + "/edit";
     }
+
+    @Getter
+    enum PayEnum implements BaseEnum {
+
+
+        /**
+         * 原生扫码支付
+         */
+        NATIVE("NATIVE", "原生扫码支付"),
+        /**
+         * 公众号支付
+         */
+        JSAPI("JSAPI", "公众号支付"),
+        /**
+         * 支付宝支付
+         */
+        aliPay_transfer("aliPay_transfer", "支付宝支付"),
+        ;
+
+        String code;
+        String desc;
+
+        PayEnum(String code, String desc) {
+            this.code = code;
+            this.desc = desc;
+        }
+    }
+
 
     /**
      * 修改保存参数配置

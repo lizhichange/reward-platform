@@ -125,7 +125,6 @@ public class PayController extends BaseController {
             ImageService.Result.DataBean.RowsBean rowsBean = rows.get(0);
             String getRequestUrl = request.getRequestURL().toString();
             modelmap.addAttribute("qrCode", getRequestUrl + "/" + QRCODE_ENDPOINT + "?text=" + URL.encode(rowsBean.getQr_url()));
-
         }
         return "aliPay";
     }
