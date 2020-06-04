@@ -10,7 +10,7 @@
             <label class="col-sm-3 control-label">参数类型：</label>
             <div class="col-sm-8">
                 <div class="radio check-box" th:each="item:${voList}">
-                    <label class="itemRadio" th:data="${item.code}">
+                    <label class="itemRadio" th:value="${item.desc}" th:data="${item.code}">
                         <input name="tradeType" th:checked="${item.code==config.configValue}"
                                type="radio"
                                th:value="${item.code}"> <i></i>
@@ -105,7 +105,9 @@
     $(document).ready(function () {
         $('.itemRadio').on('click', function () {
             const item = $(this).attr("data");
+            const value = $(this).attr("value");
             $("#configValue").val(item);
+            $("#remark").val(value);
         });
     });
 </script>

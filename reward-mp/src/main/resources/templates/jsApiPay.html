@@ -255,7 +255,6 @@
 
         $("#back").click(function () {
             window.location.href = $('#callbackUrl').val();
-
         });
 
         function pay() {
@@ -312,7 +311,10 @@
         }
 
         pay();
-        $('#getBrandWCPayRequest').click(pay());
+
+        $('#getBrandWCPayRequest').on('click', function () {
+            pay();
+        });
     });
     // loading
     $(function () {
