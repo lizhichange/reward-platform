@@ -201,6 +201,9 @@
 <body>
 <article class="charge">
     <h1>请等待。。。</h1>
+    <section class="content">
+        <div class="operation"><a class="btn-green" id="back">返回上一个页面</a></div>
+    </section>
 </article>
 <article class="charge" style="display: none">
     <h1>微信支付购买</h1>
@@ -229,6 +232,11 @@
 
 
     $(function () {
+        $("#back").click(function () {
+            window.location.href = $('#callbackUrl').val();
+
+        });
+
         function pay() {
             var orderId = $("#orderId").val();
             var tradeType = $("#tradeType").val();
@@ -267,10 +275,8 @@
                                         window.location.href = $('#callbackUrl').val();
                                     } else if (res.err_msg === "get_brand_wcpay_request：cancel") {
                                         $.toast("取消支付,返回页面", 2000);
-                                        window.location.href = $('#callbackUrl').val();
                                     } else {
                                         $.toast("支付失败,返回页面", 2000);
-                                        window.location.href = $('#callbackUrl').val();
                                     }
                                 });
                             //
