@@ -19,6 +19,8 @@
     <link th:href="@{/video/skin/skin.css}" rel="stylesheet"/>
     <link th:href="@{/video/detail/all-responsive-metal.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{/video/detail/jquery.fancybox-metal.css}" rel="stylesheet" type="text/css"/>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+
     <script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
     <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
@@ -372,6 +374,22 @@
         </div>
     </div>
 </div>
+<script>
+    function onBridgeReady() {
+        WeixinJSBridge.call('hideOptionMenu');
+    }
+
+    if (typeof WeixinJSBridge == "undefined") {
+        if (document.addEventListener) {
+            document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+        } else if (document.attachEvent) {
+            document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+            document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+        }
+    } else {
+        onBridgeReady();
+    }
+</script>
 </body>
 
 </html>
