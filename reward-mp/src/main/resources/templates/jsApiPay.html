@@ -199,7 +199,9 @@
 </head>
 
 <body>
-<h1>请等待。。。</h1>
+<article class="charge">
+    <h1>请等待。。。</h1>
+</article>
 <article class="charge" style="display: none">
     <h1>微信支付购买</h1>
     <section class="content">
@@ -263,6 +265,11 @@
                                         //res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
                                         $.toast("支付成功", 2000);
                                         window.location.href = $('#callbackUrl').val();
+                                    } else if (res.err_msg === "get_brand_wcpay_request：cancel") {
+                                        $.toast("取消支付,返回页面", 2000);
+                                        window.location.href = $('#callbackUrl').val();
+                                    } else {
+                                        alert("支付失败！");
                                     }
                                 });
                             //
