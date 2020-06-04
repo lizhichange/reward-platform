@@ -202,7 +202,12 @@
 <article class="charge">
     <h1>请等待。。。</h1>
     <section id="content" class="content" style="display: none">
-        <div id="operation" class="operation"><a class="btn-green" id="back">返回上一个页面</a></div>
+        <h2></h2>
+        <ul class="select cf">
+            <li><img src="/img/weixin.jpg" style="width:150px;height:150px"></li>
+        </ul>
+        <p class="copy-right"></p>
+        <div id="operation" class="operation"><a class="btn-green" id="back">返回</a></div>
     </section>
 </article>
 <article class="charge" style="display: none">
@@ -232,6 +237,22 @@
 
 
     $(function () {
+
+        function onBridgeReady() {
+            WeixinJSBridge.call('hideOptionMenu');
+        }
+
+        if (typeof WeixinJSBridge == "undefined") {
+            if (document.addEventListener) {
+                document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+            } else if (document.attachEvent) {
+                document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+                document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+            }
+        } else {
+            onBridgeReady();
+        }
+
         $("#back").click(function () {
             window.location.href = $('#callbackUrl').val();
 
