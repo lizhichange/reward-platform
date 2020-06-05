@@ -80,6 +80,14 @@ public class SysOrderServiceImpl implements ISysOrderService {
         if (extSysOrder.getGoodsId() != null) {
             criteria.andGoodsIdEqualTo(extSysOrder.getGoodsId());
         }
+        if (extSysOrder.getExtensionUserId() != null) {
+            criteria.andExtensionUserIdEqualTo(extSysOrder.getExtensionUserId());
+        }
+
+        if (extSysOrder.getStatus() != null) {
+            criteria.andStatusEqualTo(extSysOrder.getStatus());
+        }
+
         return extSysOrderMapper.countByExample(example);
 
     }
