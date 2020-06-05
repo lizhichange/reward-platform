@@ -227,10 +227,14 @@ public class VideoController extends BaseController {
         order.setOpenId(openId);
         List<SysOrderDTO> sysOrders = sysOrderFacadeClient.selectSysOrder(order);
         if (CollectionUtils.isEmpty(sysOrders)) {
+
+            TWechatAuthDTO authDTO = userDetailFacadeClient.queryByOpenId(openId);
+
             ShipinDTO dto = shipinFacadeClient.selectShipinDTOById(shipinDTO.getId().longValue());
             Date now = new Date();
             order.setCreateTime(now);
             order.setUpdateTime(now);
+            order.setUserId(authDTO.getUserId());
             //推广人userId
             order.setExtensionUserId(SessionContext.getUserId());
             //商品快照信息

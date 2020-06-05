@@ -5,6 +5,7 @@ import com.ruoyi.reward.facade.dto.SysCategoryDTO;
 import com.ruoyi.web.client.SysCategoryFacadeClient;
 import com.ruoyi.web.client.TsFacadeClient;
 
+import com.ruoyi.web.client.UserDetailFacadeClient;
 import com.ruoyi.web.feign.UserDetailFacadeFeign;
 import com.ruoyi.web.model.Users;
 import com.ruoyi.web.security.SecurityUtil;
@@ -33,6 +34,8 @@ public class BaseController {
     TsFacadeClient tsFacadeClient;
     @Autowired
     UserDetailFacadeFeign userDetailFacadeFeign;
+    @Autowired
+    UserDetailFacadeClient userDetailFacadeClient;
 
     public static Users getCurrentUser() {
         return SecurityUtil.getCurrentUser();

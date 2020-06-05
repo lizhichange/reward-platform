@@ -32,8 +32,7 @@ import java.util.Date;
         timeout = 15000
 )
 @Slf4j
-public class
-UserDetailFacadeImpl implements UserDetailFacade {
+public class UserDetailFacadeImpl implements UserDetailFacade {
     @Autowired
     WechatAuthRepository wechatRepository;
     @Autowired
