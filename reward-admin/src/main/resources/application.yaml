@@ -24,7 +24,7 @@ user:
 # Spring配置
 spring:
   profiles:
-    active: dev
+    active: druid
   # 模板引擎
   thymeleaf:
     mode: HTML
