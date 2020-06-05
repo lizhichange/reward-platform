@@ -1,10 +1,11 @@
 package com.ruoyi.web.controller.statistics;
 
+import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
+import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.page.TableDataInfo;
+import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.framework.util.ShiroUtils;
-import com.ruoyi.reward.facade.enums.OrderStatusType;
-import com.ruoyi.system.domain.ExtSysOrder;
 import com.ruoyi.system.domain.SysOrder;
 import com.ruoyi.system.service.ISysOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,32 +24,28 @@ import java.util.List;
  * @author ruoyi
  */
 @Controller
-@RequestMapping("/statistics/record")
-public class StatisticsRecordController extends BaseController {
+@RequestMapping("/statistics/withdrawal")
+public class WithdrawalRecordController extends BaseController {
 
-    private final String prefix = "statistics/record";
+    private final String prefix = "statistics/withdrawal";
     @Autowired
     ISysOrderService sysOrderService;
 
-    @GetMapping()
-    public String record(ModelMap modelMap) {
-        String loginName = ShiroUtils.getLoginName();
-        ExtSysOrder extSysOrder = new ExtSysOrder();
-        extSysOrder.setExtensionUserId(loginName);
-        extSysOrder.setStatus(Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
-        long count = sysOrderService.countByExample(extSysOrder);
-        modelMap.put("dayCount", 1);
-        modelMap.put("dayMoney", 1);
-        modelMap.put("yesterdayCount", 1);
-        modelMap.put("yesterdayMoney", 1);
-        modelMap.put("historyCount", 1);
-        modelMap.put("historyMoney", 1);
-        return prefix + "/index";
+    @GetMapping("/applyWithdrawal")
+    public String applyWithdrawal(ModelMap modelMap) {
+
+        return prefix + "/applyWithdrawal";
+    }
+
+
+    @GetMapping("/withdrawalRecord")
+    public String withdrawalRecord(ModelMap modelMap) {
+        return prefix + "/withdrawalRecord";
     }
 
 
     /**
-     * 查询订单列表列表
+     *
      */
     @PostMapping("/list")
     @ResponseBody
@@ -59,4 +56,12 @@ public class StatisticsRecordController extends BaseController {
         List<SysOrder> list = sysOrderService.selectSysOrderList(sysOrder);
         return getDataTable(list);
     }
+
+    @Log(title = "申请提现", businessType = BusinessType.INSERT)
+    @PostMapping("/add")
+    @ResponseBody
+    public AjaxResult addSave(SysOrder sysOrder) {
+        return toAjax(sysOrderService.insertSysOrder(sysOrder));
+    }
+
 }

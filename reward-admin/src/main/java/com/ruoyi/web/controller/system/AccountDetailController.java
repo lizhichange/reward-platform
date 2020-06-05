@@ -89,7 +89,6 @@ public class AccountDetailController extends BaseController {
             detail.setBizCodeStr(bizCode.getDesc());
 
 
-
         }
         return getDataTable(list);
     }

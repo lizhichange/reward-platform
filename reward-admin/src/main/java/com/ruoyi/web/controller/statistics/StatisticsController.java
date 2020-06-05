@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/statistics/statistics")
 public class StatisticsController extends BaseController {
 
-    private String prefix = "statistics/statistics";
+    private final String prefix = "statistics/statistics";
 
 
     @GetMapping()
