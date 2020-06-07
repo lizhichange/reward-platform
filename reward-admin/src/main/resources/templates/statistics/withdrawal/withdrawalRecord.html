@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="include :: header('提现记录列表')"/>
+</head>
+<body class="gray-bg">
+<div class="container-div">
+    <div class="row">
+        <div class="col-sm-12 search-collapse">
+            <form id="formId">
+                <div class="select-list">
+                    <ul>
+                        <li>
+                            状态：<select name="state">
+                            <option value="">所有</option>
+                            <option th:each="dict : ${states}" th:text="${dict.desc}"
+                                    th:value="${dict.code}"></option>
+                        </select>
+                        </li>
+                        <li class="select-time">
+                            <label>创建时间：</label>
+                            <input type="text" class="time-input" id="startTime" placeholder="开始时间"
+                                   name="params[beginGmtCreate]"/>
+                            <span>-</span>
+                            <input type="text" class="time-input" id="endTime" placeholder="结束时间"
+                                   name="params[endGmtCreate]"/>
+                        </li>
+                        <li>
+                            <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i
+                                    class="fa fa-search"></i>&nbsp;搜索</a>
+                            <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i
+                                    class="fa fa-refresh"></i>&nbsp;重置</a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+
+        <div class="btn-group-sm" id="toolbar" role="group">
+            <a class="btn btn-success" onclick="$.operate.addTab()">
+                <i class="fa fa-plus"></i> 申请提现
+            </a>
+        </div>
+
+        <div class="col-sm-12 select-table table-striped">
+            <table id="bootstrap-table"></table>
+        </div>
+    </div>
+</div>
+<th:block th:include="include :: footer"/>
+<script th:inline="javascript">
+ /* 状态显示 */
+    function statusTools(row) {
+        if (row.state == 1) {
+              return '已支付';
+        } else {
+            return '未支付';
+        }
+    }
+
+
+        var prefix = ctx + "statistics/withdrawal";
+        $(function() {
+            var options = {
+                createUrl: prefix + "/applyWithdrawal",
+                url: prefix + "/list",
+                modalName: "提现记录",
+                columns: [{
+                    checkbox: true
+                },
+                {
+                    field : 'payee',
+                    title : '收款方'
+                },
+                {
+                    field : 'payeeNo',
+                    title : '收款账号'
+                },
+
+                {
+                    field : 'amount',
+                    title : '金额'
+                },
+
+
+                 {
+
+                    title: '状态',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        return statusTools(row);
+                    }
+                },
+
+                {
+                    field : 'description',
+                    title : '描述'
+                },
+                {
+                    field : 'remark',
+                    title : '标记'
+                },
+                {
+                    field : 'gmtCreate',
+                    title : '创建时间'
+                }
+                ]
+            };
+            $.table.init(options);
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

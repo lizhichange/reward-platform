@@ -1,23 +1,6 @@
 package com.ruoyi.web.controller.system;
 
-import java.util.List;
-
 import com.google.common.collect.Lists;
-import com.ruoyi.web.controller.vo.SelectOptionVO;
-import lombok.Data;
-import lombok.Getter;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.near.toolkit.common.StringUtil;
-import org.near.toolkit.model.BaseEnum;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.core.controller.BaseController;
@@ -28,6 +11,18 @@ import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.system.domain.SysConfig;
 import com.ruoyi.system.service.ISysConfigService;
+import lombok.Getter;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.near.toolkit.common.StringUtil;
+import org.near.toolkit.model.BaseEnum;
+import org.near.toolkit.model.SelectOptionVO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 参数配置 信息操作处理

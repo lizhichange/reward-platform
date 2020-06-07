@@ -1,16 +1,25 @@
 package com.ruoyi.web.controller.statistics;
 
+import com.google.common.collect.Lists;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
+import com.ruoyi.framework.shiro.service.SysPasswordService;
 import com.ruoyi.framework.util.ShiroUtils;
-import com.ruoyi.system.domain.SysOrder;
-import com.ruoyi.system.service.ISysOrderService;
+import com.ruoyi.reward.domain.Trade;
+import com.ruoyi.reward.facade.enums.TradeStateEnum;
+import com.ruoyi.reward.service.ITradeService;
+import com.ruoyi.system.domain.Account;
+import com.ruoyi.system.service.IAccountService;
+import com.ruoyi.system.service.ISysUserService;
+import org.near.toolkit.model.Money;
+import org.near.toolkit.model.SelectOptionVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,39 +38,90 @@ public class WithdrawalRecordController extends BaseController {
 
     private final String prefix = "statistics/withdrawal";
     @Autowired
-    ISysOrderService sysOrderService;
+    ITradeService tradeService;
+    @Autowired
+    IAccountService accountService;
+    @Autowired
+    ISysUserService userService;
+
+    @Autowired
+    private SysPasswordService passwordService;
 
     @GetMapping("/applyWithdrawal")
     public String applyWithdrawal(ModelMap modelMap) {
+        long balance = getBalance(ShiroUtils.getLoginName());
+        Money money = new Money();
+        money.setCent(balance);
+        //转换元
+        long amount = money.getAmount().longValue();
+        modelMap.put("balance", amount);
 
         return prefix + "/applyWithdrawal";
+    }
+
+    private long getBalance(String accountId) {
+        Account account = new Account();
+        account.setAccountId(accountId);
+        List<Account> accounts = accountService.selectAccountList(account);
+        long balance = 0;
+        if (!CollectionUtils.isEmpty(accounts)) {
+            balance = accounts.get(0).getBalance();
+        }
+        return balance;
     }
 
 
     @GetMapping("/withdrawalRecord")
     public String withdrawalRecord(ModelMap modelMap) {
+        List<SelectOptionVO> states = Lists.newArrayList();
+        for (TradeStateEnum value : TradeStateEnum.values()) {
+            SelectOptionVO option = new SelectOptionVO();
+            option.setCode(value.getCode());
+            option.setDesc(value.getDesc());
+            states.add(option);
+        }
+        modelMap.addAttribute("states", states);
+
         return prefix + "/withdrawalRecord";
     }
 
-
     /**
-     *
+     * 查询申请提现
      */
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(SysOrder sysOrder) {
+    public TableDataInfo list(Trade trade) {
         startPage();
-        String loginName = ShiroUtils.getLoginName();
-        sysOrder.setExtensionUserId(loginName);
-        List<SysOrder> list = sysOrderService.selectSysOrderList(sysOrder);
+        trade.setCreateBy(ShiroUtils.getLoginName());
+        List<Trade> list = tradeService.selectTradeList(trade);
         return getDataTable(list);
     }
+
 
     @Log(title = "申请提现", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(SysOrder sysOrder) {
-        return toAjax(sysOrderService.insertSysOrder(sysOrder));
+    public AjaxResult addSave(Trade trade, String password) {
+
+        //check  用户提交申请的是元的单位
+        Long amount = trade.getAmount();
+        Money money = new Money(amount);
+        //账户余额
+        long balance = getBalance(ShiroUtils.getLoginName());
+        if (balance < money.getCent()) {
+            return AjaxResult.error("余额不足");
+        }
+        trade.setState(TradeStateEnum.N_PAY.getCode());
+        boolean matches = passwordService.matches(ShiroUtils.getSysUser(), password);
+        if (!matches) {
+            return AjaxResult.error("用户密码错误");
+        }
+        trade.setPayer("system");
+        trade.setPayerType("system");
+        trade.setPayType("system");
+        trade.setCreateBy(ShiroUtils.getLoginName());
+        return toAjax(tradeService.insertTrade(trade));
     }
+
 
 }
