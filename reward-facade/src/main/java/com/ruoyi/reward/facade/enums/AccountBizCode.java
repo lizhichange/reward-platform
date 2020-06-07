@@ -21,7 +21,6 @@ public enum AccountBizCode implements BaseEnum {
      */
     ORDER_AUTHOR_REBATE("ORDER_AUTHOR_REBATE", "订单视频作者返利"),
 
-
     /**
      * 用户提现
      */
@@ -31,7 +30,6 @@ public enum AccountBizCode implements BaseEnum {
      */
 
     REFUND("REFUND", "提现退款"),
-
 
     ;
 

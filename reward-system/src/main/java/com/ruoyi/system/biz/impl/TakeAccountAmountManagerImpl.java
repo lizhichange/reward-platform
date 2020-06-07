@@ -54,6 +54,7 @@ public class TakeAccountAmountManagerImpl implements TakeAccountAmountManager {
     }
 
     @Override
+    @Transactional
     public AccountDTO minusBalance(UserAccountOperatorRequest request) {
         AccountDTO acc = userAccountRepository.queryByUserId(request.getUserId());
         // 没有账户不能减余额

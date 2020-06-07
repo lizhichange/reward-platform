@@ -8,7 +8,11 @@ import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.reward.domain.Trade;
+import com.ruoyi.reward.facade.api.AccountFacade;
+import com.ruoyi.reward.facade.enums.AccountBizCode;
+import com.ruoyi.reward.facade.enums.AccountOptType;
 import com.ruoyi.reward.facade.enums.TradeStateEnum;
+import com.ruoyi.reward.facade.request.UserAccountOperatorRequest;
 import com.ruoyi.reward.service.ITradeService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.near.toolkit.model.SelectOptionVO;
@@ -33,6 +37,8 @@ public class TradeController extends BaseController {
 
     @Autowired
     private ITradeService tradeService;
+    @Autowired
+    private AccountFacade accountFacade;
 
     @RequiresPermissions("system:trade:view")
     @GetMapping()
@@ -68,9 +74,20 @@ public class TradeController extends BaseController {
     @PostMapping("/changeState")
     @ResponseBody
     public AjaxResult changeState(Trade trade) {
+        String tradeNo = trade.getTradeNo();
+        Trade tradeById = tradeService.selectTradeById(tradeNo);
+        if (tradeById == null) {
+            return error("系统异常,未查询到交易信息");
+        }
         trade.setGmtModified(new Date());
-        tradeService.updateTrade(trade);
-        return toAjax(tradeService.updateTrade(trade));
+        int i = tradeService.updateTrade(trade);
+        UserAccountOperatorRequest request = new UserAccountOperatorRequest();
+        request.setUserId(tradeById.getCreateBy());
+        request.setAmount(tradeById.getAmount());
+        request.setOptType(AccountOptType.OUTLAY.getCode());
+        request.setBizCode(AccountBizCode.WITHDRAW.getCode());
+        accountFacade.minusBalance(request);
+        return toAjax(i > 0);
     }
 
     /**

@@ -4,10 +4,13 @@ package com.ruoyi.system.facade;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.ruoyi.reward.facade.api.AccountFacade;
 import com.ruoyi.reward.facade.api.SysOrderFacade;
+import com.ruoyi.reward.facade.dto.AccountDTO;
 import com.ruoyi.reward.facade.dto.SysOrderDTO;
 import com.ruoyi.reward.facade.enums.OrderStatusType;
+import com.ruoyi.reward.facade.request.UserAccountOperatorRequest;
 import com.ruoyi.system.CuratorClientUtils;
 import com.ruoyi.system.biz.OrderStatusDispatcher;
+import com.ruoyi.system.biz.TakeAccountAmountManager;
 import com.ruoyi.system.biz.UserOrderStatusProcessor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.curator.framework.CuratorFramework;
@@ -40,6 +43,8 @@ public class AccountFacadeImpl implements AccountFacade {
     SysOrderFacade sysOrderFacade;
     @Autowired
     CuratorClientUtils curatorClientUtils;
+    @Autowired
+    TakeAccountAmountManager takeAccountAmountManager;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -81,5 +86,10 @@ public class AccountFacadeImpl implements AccountFacade {
 
             }
         }
+    }
+
+    @Override
+    public AccountDTO minusBalance(UserAccountOperatorRequest request) {
+        return takeAccountAmountManager.minusBalance(request);
     }
 }
