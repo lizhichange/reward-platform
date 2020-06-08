@@ -52,7 +52,7 @@
 
 
     $(function () {
-        var item =document.getElementById("item").value;
+        var item =[[${item}]];
         var barChart = echarts.init(document.getElementById("echarts-bar-chart"));
         var baroption = {
             title: {
@@ -102,6 +102,7 @@
         window.onresize = barChart.resize;
 
     });
+
 
 
 
