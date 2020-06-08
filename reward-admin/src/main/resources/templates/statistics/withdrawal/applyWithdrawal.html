@@ -80,7 +80,7 @@
                         <div class="form-group" id="form-group-payeeBank">
                             <label class="col-sm-2 control-label">收款银行：</label>
                             <div class="col-sm-10">
-                                <input name="remark" class="form-control" placeholder="请输入收款银行" type="text"
+                                <input name="remark" id="remark" class="form-control" placeholder="请输入收款银行" type="text"
                                        required>
                             </div>
                         </div>
@@ -136,10 +136,16 @@
             //如果是支付宝
            if(this.value==='alipay'){
             $("#form-group-payeeBank").css("display","none");
+            $("#remark").prop('disabled', true);
+            $("#remark").val('');
            } else {
             $("#form-group-payeeBank").css("display","block");
+            $("#remark").prop('disabled', false);
            }
         });
+
+
+
 
 
 </script>

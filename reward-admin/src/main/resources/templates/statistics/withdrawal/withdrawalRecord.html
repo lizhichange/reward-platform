@@ -49,6 +49,14 @@
             return '未支付';
         }
     }
+        function typeTools(row) {
+        if (row.payeeType === "alipay") {
+            return '支付宝';
+        } else {
+            return '银行';
+        }
+    }
+
         var prefix = ctx + "statistics/withdrawal";
         $(function() {
             var options = {
@@ -60,6 +68,14 @@
                 columns: [{
                     checkbox: true
                 },
+
+                title: '收款类型',
+                 align: 'center',
+                    formatter: function (value, row, index) {
+                        return typeTools(row);
+                    }
+
+
                 {
                     field : 'payee',
                     title : '收款方'
@@ -77,7 +93,6 @@
                     field : 'amount',
                     title : '金额'
                 },
-
 
                  {
 
@@ -101,6 +116,9 @@
             };
             $.table.init(options);
         });
+
+
+
 
 
 
