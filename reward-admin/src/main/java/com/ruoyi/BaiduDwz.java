@@ -15,7 +15,7 @@ import java.net.URL;
  */
 public class BaiduDwz {
     final static String CREATE_API = "https://dwz.cn/admin/v2/create";
-    final static String TOKEN = "c9d8cf063aef5ef75f425ba05e06891d";
+    final static String TOKEN = "f760103812ce750d0b2f6f771b461667";
 
     static class UrlResponse {
         @SerializedName("Code")

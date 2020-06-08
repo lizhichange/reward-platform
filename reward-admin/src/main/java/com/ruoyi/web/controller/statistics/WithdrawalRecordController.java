@@ -9,6 +9,7 @@ import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.framework.shiro.service.SysPasswordService;
 import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.reward.domain.Trade;
+import com.ruoyi.reward.facade.enums.PayeeTypeEnum;
 import com.ruoyi.reward.facade.enums.TradeStateEnum;
 import com.ruoyi.reward.service.ITradeService;
 import com.ruoyi.system.domain.Account;
@@ -55,6 +56,16 @@ public class WithdrawalRecordController extends BaseController {
         //转换元
         long amount = money.getAmount().longValue();
         modelMap.put("balance", amount);
+
+
+        List<SelectOptionVO> types = Lists.newArrayList();
+        for (PayeeTypeEnum value : PayeeTypeEnum.values()) {
+            SelectOptionVO option = new SelectOptionVO();
+            option.setCode(value.getCode());
+            option.setDesc(value.getDesc());
+            types.add(option);
+        }
+        modelMap.addAttribute("types", types);
 
         return prefix + "/applyWithdrawal";
     }
