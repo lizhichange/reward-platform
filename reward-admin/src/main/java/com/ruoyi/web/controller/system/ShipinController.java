@@ -10,17 +10,18 @@ import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.reward.domain.Shipin;
+import com.ruoyi.reward.domain.SysCategory;
 import com.ruoyi.reward.facade.api.ShipinFacade;
 import com.ruoyi.reward.facade.dto.ShipinDTO;
 import com.ruoyi.reward.facade.dto.SysCategoryDTO;
 import com.ruoyi.reward.service.ShipinService;
-import com.ruoyi.reward.domain.SysCategory;
+import com.ruoyi.reward.service.SysCategoryService;
+import com.ruoyi.system.domain.ExtSysOrder;
 import com.ruoyi.system.domain.SysRole;
 import com.ruoyi.system.domain.SysUser;
-import com.ruoyi.system.domain.ExtSysOrder;
-import com.ruoyi.reward.service.SysCategoryService;
 import com.ruoyi.system.service.ISysOrderService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -67,7 +68,7 @@ public class ShipinController extends BaseController {
     @ResponseBody
     public TableDataInfo list(Shipin shipin) {
         startPage();
-        if (!"admin".equals(ShiroUtils.getLoginName())){
+        if (!"admin".equals(ShiroUtils.getLoginName())) {
             shipin.setUseridList(Lists.newArrayList("admin", ShiroUtils.getLoginName()));
         }
         List<Shipin> list = shipinService.selectShipinList(shipin);
@@ -79,6 +80,7 @@ public class ShipinController extends BaseController {
      */
     @RequiresPermissions("system:shipin:export")
     @PostMapping("/export")
+    @RequiresRoles("admin")
     @ResponseBody
     public AjaxResult export(Shipin shipin) {
         List<Shipin> list = shipinService.selectShipinList(shipin);
@@ -90,6 +92,8 @@ public class ShipinController extends BaseController {
      * 新增公共片库
      */
     @GetMapping("/add")
+    @RequiresPermissions("system:shipin:add")
+    @RequiresRoles("admin")
     public String add() {
         return prefix + "/add";
     }
@@ -101,6 +105,7 @@ public class ShipinController extends BaseController {
      * 新增保存公共片库
      */
     @RequiresPermissions("system:shipin:add")
+    @RequiresRoles("admin")
     @Log(title = "公共片库", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
@@ -118,6 +123,7 @@ public class ShipinController extends BaseController {
      * 修改公共片库
      */
     @GetMapping("/edit/{id}")
+    @RequiresRoles("admin")
     public String edit(@PathVariable("id") Long id, ModelMap mmap) {
         ShipinDTO shipin = shipinFacade.selectShipinDTOById(id);
         String money = shipin.getMoney();
@@ -138,6 +144,7 @@ public class ShipinController extends BaseController {
      * 修改保存公共片库
      */
     @RequiresPermissions("system:shipin:edit")
+    @RequiresRoles("admin")
     @Log(title = "公共片库", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
@@ -153,6 +160,7 @@ public class ShipinController extends BaseController {
      * 删除公共片库
      */
     @RequiresPermissions("system:shipin:remove")
+    @RequiresRoles("admin")
     @Log(title = "公共片库", businessType = BusinessType.DELETE)
     @PostMapping("/remove")
     @ResponseBody
