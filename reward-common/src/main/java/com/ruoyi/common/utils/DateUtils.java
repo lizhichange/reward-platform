@@ -66,7 +66,7 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
         return new SimpleDateFormat(format).format(date);
     }
 
-    public static final Date dateTime(final String format, final String ts) {
+    public static Date dateTime(final String format, final String ts) {
         try {
             return new SimpleDateFormat(format).parse(ts);
         } catch (ParseException e) {
@@ -77,7 +77,7 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
     /**
      * 日期路径 即年/月/日 如2018/08/08
      */
-    public static final String datePath() {
+    public static String datePath() {
         Date now = new Date();
         return DateFormatUtils.format(now, "yyyy/MM/dd");
     }
@@ -85,7 +85,7 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
     /**
      * 日期路径 即年/月/日 如20180808
      */
-    public static final String dateTime() {
+    public static String dateTime() {
         Date now = new Date();
         return DateFormatUtils.format(now, "yyyyMMdd");
     }

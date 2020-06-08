@@ -2,7 +2,7 @@ package com.ruoyi.system.mapper;
 
 import com.ruoyi.system.domain.ExtSysOrder;
 import com.ruoyi.system.domain.ExtSysOrderExample;
-import com.ruoyi.system.domain.SysOrder;
+import com.ruoyi.system.domain.ExtSysOrderTimeCount;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -28,6 +28,13 @@ public interface ExtSysOrderMapper {
     int updateByExampleSelective(@Param("record") ExtSysOrder record, @Param("example") ExtSysOrderExample example);
 
     int updateByExampleWithBLOBs(@Param("record") ExtSysOrder record, @Param("example") ExtSysOrderExample example);
+
+
+    List<ExtSysOrderTimeCount> selectGroupByTime(
+            @Param("startTime") String startTime,
+            @Param("endTime") String endTime,
+            @Param("extensionUserId") String extensionUserId);
+
 
     int updateByExample(@Param("record") ExtSysOrder record, @Param("example") ExtSysOrderExample example);
 

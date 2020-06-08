@@ -93,14 +93,6 @@
         })
     }
 
-
-
-
-
-
-
-
-
         $(function() {
             var options = {
                 url: prefix + "/list",
@@ -117,17 +109,14 @@
                     title : '交易号',
                     visible: false
                 },
-                {
-                    field : 'payerType', 
-                    title : ''
-                },
+
                 {
                     field : 'payer', 
                     title : '付款方'
                 },
                 {
                     field : 'payeeType', 
-                    title : ''
+                    title : '收款方类型'
                 },
                 {
                     field : 'payee', 
@@ -180,6 +169,9 @@
             };
             $.table.init(options);
         });
+
+
+
 
 
 

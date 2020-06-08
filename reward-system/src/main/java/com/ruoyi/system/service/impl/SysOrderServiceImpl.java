@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.common.sequence.ConcurrentSequence;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.system.domain.ExtSysOrderTimeCount;
 import com.ruoyi.system.domain.SysOrder;
 import com.ruoyi.system.domain.ExtSysOrder;
 import com.ruoyi.system.domain.ExtSysOrderExample;
@@ -158,4 +159,10 @@ public class SysOrderServiceImpl implements ISysOrderService {
     public int deleteSysOrderById(Long id) {
         return sysOrderMapper.deleteSysOrderById(id);
     }
+
+    @Override
+    public List<ExtSysOrderTimeCount> selectGroupByTime(String startTime, String endTime, String extensionUserId) {
+        return extSysOrderMapper.selectGroupByTime(startTime, endTime, extensionUserId);
+    }
+
 }

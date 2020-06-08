@@ -1,7 +1,8 @@
 package com.ruoyi.system.service;
 
-import com.ruoyi.system.domain.SysOrder;
 import com.ruoyi.system.domain.ExtSysOrder;
+import com.ruoyi.system.domain.ExtSysOrderTimeCount;
+import com.ruoyi.system.domain.SysOrder;
 
 import java.util.List;
 
@@ -48,7 +49,7 @@ public interface ISysOrderService {
      * @param sysOrder 订单列表
      * @return 结果
      */
-    public int updateSysOrder(SysOrder sysOrder);
+    int updateSysOrder(SysOrder sysOrder);
 
     /**
      * 批量删除订单列表
@@ -56,7 +57,7 @@ public interface ISysOrderService {
      * @param ids 需要删除的数据ID
      * @return 结果
      */
-    public int deleteSysOrderByIds(String ids);
+    int deleteSysOrderByIds(String ids);
 
     /**
      * 删除订单列表信息
@@ -64,5 +65,11 @@ public interface ISysOrderService {
      * @param id 订单列表ID
      * @return 结果
      */
-    public int deleteSysOrderById(Long id);
+    int deleteSysOrderById(Long id);
+
+
+    List<ExtSysOrderTimeCount> selectGroupByTime(
+            String startTime,
+            String endTime,
+            String extensionUserId);
 }
