@@ -91,6 +91,7 @@ public class WithdrawalRecordController extends BaseController {
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(Trade trade) {
+        logger.info("trade:{}", trade);
         startPage();
         trade.setCreateBy(ShiroUtils.getLoginName());
         List<Trade> list = tradeService.selectTradeList(trade);
