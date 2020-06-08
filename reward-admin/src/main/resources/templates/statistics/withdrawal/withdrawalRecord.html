@@ -17,14 +17,6 @@
                                     th:value="${dict.code}"></option>
                         </select>
                         </li>
-                        <li class="select-time">
-                            <label>创建时间：</label>
-                            <input type="text" class="time-input" id="startTime" placeholder="开始时间"
-                                   name="params[beginGmtCreate]"/>
-                            <span>-</span>
-                            <input type="text" class="time-input" id="endTime" placeholder="结束时间"
-                                   name="params[endGmtCreate]"/>
-                        </li>
                         <li>
                             <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i
                                     class="fa fa-search"></i>&nbsp;搜索</a>
@@ -52,19 +44,19 @@
  /* 状态显示 */
     function statusTools(row) {
         if (row.state == 1) {
-              return '已支付';
+            return '已支付';
         } else {
             return '未支付';
         }
     }
-
-
         var prefix = ctx + "statistics/withdrawal";
         $(function() {
             var options = {
                 createUrl: prefix + "/applyWithdrawal",
                 url: prefix + "/list",
                 modalName: "提现记录",
+                sortName: "createTime",
+                sortOrder: "desc",
                 columns: [{
                     checkbox: true
                 },
@@ -108,6 +100,7 @@
             };
             $.table.init(options);
         });
+
 
 
 
