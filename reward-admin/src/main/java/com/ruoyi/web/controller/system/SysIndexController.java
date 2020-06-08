@@ -11,6 +11,7 @@ import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.system.service.IAccountService;
 import com.ruoyi.system.service.ISysConfigService;
 import com.ruoyi.system.service.ISysMenuService;
+import org.near.toolkit.model.Money;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.CollectionUtils;
@@ -81,11 +82,15 @@ public class SysIndexController extends BaseController {
         Account account = new Account();
         String loginName = ShiroUtils.getLoginName();
         account.setAccountId(loginName);
+        String balanceStr = "0.0";
         List<Account> accounts = accountService.selectAccountList(account);
         if (!CollectionUtils.isEmpty(accounts)) {
             Account item = accounts.get(0);
-            mmap.put("account", item);
+            Money money = new Money();
+            money.setCent(item.getBalance());
+            balanceStr = money.getAmount().toString();
         }
+        mmap.put("account", balanceStr);
         return "main";
     }
 }

@@ -37,28 +37,11 @@
                     <h5>我的推广收益</h5>
                 </div>
                 <div class="ibox-content">
-                    <p><i class="fa fa-send-o"></i> 我的余额：[[${account?.getBalanceStr()}]] 元
+                    <p><i class="fa fa-send-o"></i> 我的余额：[[${account}]] 元
                     </p>
                 </div>
             </div>
         </div>
-        <!--        <div class="col-sm-4">-->
-        <!--            <div class="ibox float-e-margins">-->
-        <!--                <div class="ibox-title">-->
-        <!--                    <h5>捐赠</h5>-->
-        <!--                </div>-->
-        <!--                <div class="ibox-content">-->
-        <!--                    <div class="alert alert-warning">-->
-        <!--                        请作者喝杯咖啡（点击图片放大）-->
-        <!--                    </div>-->
-        <!--                    <p id="pay-qrcode">-->
-        <!--                        <a href="javascript:;"><img th:src="@{/img/pay.png}" width="100%" alt="请使用手机支付宝或者微信扫码支付">-->
-        <!--                        </a>-->
-        <!--                    </p>-->
-
-        <!--                </div>-->
-        <!--            </div>-->
-        <!--        </div>-->
     </div>
 </div>
 <script th:src="@{/js/jquery.min.js}"></script>
@@ -76,6 +59,8 @@
             content: html
         });
     });
+
+
 
 
 
