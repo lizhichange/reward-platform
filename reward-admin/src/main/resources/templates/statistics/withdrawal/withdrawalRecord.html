@@ -68,18 +68,20 @@
                 columns: [{
                     checkbox: true
                 },
-
-                title: '收款类型',
-                 align: 'center',
-                    formatter: function (value, row, index) {
-                        return typeTools(row);
-                    }
-
-
                 {
                     field : 'payee',
                     title : '收款方'
                 },
+
+                {
+                    title: '收款类型',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        return typeTools(row);
+                    }
+                },
+
+
                 {
                     field : 'payeeNo',
                     title : '收款账号'
