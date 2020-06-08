@@ -41,18 +41,10 @@ public class Global {
      * 获取地址开关
      */
     private static boolean addressEnabled;
-    private static String wxAuthUrl;
+
 
     public static String getName() {
         return name;
-    }
-
-    public static String getWxAuthUrl() {
-        return wxAuthUrl;
-    }
-
-    public static void setWxAuthUrl(String wxAuthUrl) {
-        Global.wxAuthUrl = wxAuthUrl;
     }
 
 

@@ -1,7 +1,6 @@
 package com.ruoyi.web.controller.common;
 
 import com.ruoyi.BaiduDwz;
-import com.ruoyi.common.config.Global;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
@@ -20,12 +19,15 @@ import com.ruoyi.system.service.ISysPostService;
 import com.ruoyi.system.service.ISysRoleService;
 import com.ruoyi.system.service.ISysUserService;
 import com.ruoyi.system.service.IYqmService;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.java.Log;
 import org.near.toolkit.common.DoMainUtil;
 import org.near.toolkit.common.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
@@ -52,7 +54,12 @@ public class WebController extends BaseController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(WebController.class);
 
-    private String prefix = "webLogin";
+    private final String prefix = "webLogin";
+
+    @Getter
+    @Setter
+    @Value("${ruoyi.wxAuthUrl}")
+    private String wxAuthUrl;
 
     @Autowired
     ISysUserService userService;
@@ -161,7 +168,7 @@ public class WebController extends BaseController {
                 sysShort.setShortKey(loginName);
                 sysShort.setShortStatus(ShortStatus.OK.getCode());
                 //我的推广链接
-                String doMain = DoMainUtil.getDoMain(Global.getWxAuthUrl());
+                String doMain = DoMainUtil.getDoMain(this.wxAuthUrl);
                 String longUrl = "http://" + doMain + "/?userid=" + loginName;
                 sysShort.setLongUrl(longUrl);
                 logger.info("longUrl:{}", longUrl);
