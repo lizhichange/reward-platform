@@ -46,6 +46,7 @@
             <if test="gmtCreate != null ">and gmt_create = #{gmtCreate}</if>
             <if test="gmtModified != null ">and gmt_modified = #{gmtModified}</if>
             <if test="modifiedBy != null  and modifiedBy != ''">and modified_by = #{modifiedBy}</if>
+            <if test="createBy != null  and createBy != ''">and create_by = #{createBy}</if>
             <if test="createTime != null ">and create_time = #{createTime}</if>
             <if test="payeeNo != null  and payeeNo != ''">and payee_no = #{payeeNo}</if>
         </where>
