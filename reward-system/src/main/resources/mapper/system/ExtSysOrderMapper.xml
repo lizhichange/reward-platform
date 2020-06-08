@@ -32,6 +32,7 @@
         FROM sys_order
         WHERE create_time BETWEEN #{startTime} AND #{endTime}
         AND extension_user_id = #{extensionUserId}
+        AND status=#{status}
         GROUP BY
         time
         ORDER BY

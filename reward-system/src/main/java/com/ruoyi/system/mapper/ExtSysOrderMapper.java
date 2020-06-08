@@ -33,7 +33,12 @@ public interface ExtSysOrderMapper {
     List<ExtSysOrderTimeCount> selectGroupByTime(
             @Param("startTime") String startTime,
             @Param("endTime") String endTime,
-            @Param("extensionUserId") String extensionUserId);
+            @Param("extensionUserId") String extensionUserId
+
+    ,
+            @Param("status") Integer status
+
+             );
 
 
     int updateByExample(@Param("record") ExtSysOrder record, @Param("example") ExtSysOrderExample example);

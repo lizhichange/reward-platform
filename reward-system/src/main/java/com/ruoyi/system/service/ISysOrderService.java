@@ -71,5 +71,9 @@ public interface ISysOrderService {
     List<ExtSysOrderTimeCount> selectGroupByTime(
             String startTime,
             String endTime,
-            String extensionUserId);
+            String extensionUserId,
+
+
+      Integer status
+);
 }

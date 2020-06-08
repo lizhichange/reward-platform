@@ -91,13 +91,13 @@
         var barChart = echarts.init(document.getElementById("echarts-bar-chart"));
         var baroption = {
             title: {
-                text: '某地区蒸发量和降水量'
+                text: '成功订单数量'
             },
             tooltip: {
                 trigger: 'axis'
             },
             legend: {
-                data: ['蒸发量', '降水量']
+                data: ['数量1', '数量2']
             },
             grid: {
                 x: 30,
@@ -120,36 +120,15 @@
             ],
             series: [
                 {
-                    name: '蒸发量',
+                    name: '数量1',
                     type: 'bar',
-                    data: item,
-                    markPoint: {
-                        data: [
-                            {type: 'max', name: '最大值'},
-                            {type: 'min', name: '最小值'}
-                        ]
-                    },
-                    markLine: {
-                        data: [
-                            {type: 'average', name: '平均值'}
-                        ]
-                    }
+                    data: item
+
                 },
                 {
-                    name: '降水量',
+                    name: '数量2',
                     type: 'bar',
-                    data: item,
-                    markPoint: {
-                        data: [
-                            {name: '年最高', value: max.count, xAxis: max.time, yAxis: 183, symbolSize: 18},
-                            {name: '年最低', value: 2.3, xAxis: 11, yAxis: 3}
-                        ]
-                    },
-                    markLine: {
-                        data: [
-                            {type: 'average', name: '平均值'}
-                        ]
-                    }
+                    data: item
                 }
             ]
         };
@@ -736,6 +715,10 @@
         $(window).resize(funnelChart.resize);
 
     });
+
+
+
+
 
 
 

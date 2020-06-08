@@ -5,6 +5,7 @@ import com.google.common.collect.Maps;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.framework.util.ShiroUtils;
+import com.ruoyi.reward.facade.enums.OrderStatusType;
 import com.ruoyi.system.domain.ExtSysOrderTimeCount;
 import com.ruoyi.system.service.ISysOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,7 @@ public class StatisticsController extends BaseController {
         String loginName = ShiroUtils.getLoginName();
         String start = DateUtils.getDate() + " 00:00:00";
         String end = DateUtils.getDate() + " 23:59:59";
-        List<ExtSysOrderTimeCount> list = orderService.selectGroupByTime(start, end, loginName);
+        List<ExtSysOrderTimeCount> list = orderService.selectGroupByTime(start, end, loginName, Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
         int[] item = new int[24];
         if (CollectionUtils.isEmpty(list)) {
             Arrays.fill(item, 0);
