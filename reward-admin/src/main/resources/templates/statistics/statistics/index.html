@@ -41,7 +41,7 @@
 
 
 </div>
-<input type="hidden" name="number" id="number" th:value="${item}"/>
+<input type="hidden" name="item" id="item" th:value="${item}"/>
 <input type="hidden" name="max" id="max" th:value="${max}"/>
 <input type="hidden" name="min" id="min" th:value="${min}"/>
 
@@ -52,10 +52,7 @@
 
 
     $(function () {
-        var item =[[${item}]];
-
-        var max= $.parseJSON( document.getElementById("max").value );
-
+        var item =document.getElementById("item").value;
         var barChart = echarts.init(document.getElementById("echarts-bar-chart"));
         var baroption = {
             title: {
