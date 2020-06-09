@@ -7,6 +7,7 @@ import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.reward.facade.enums.OrderStatusType;
 import com.ruoyi.system.domain.SysOrder;
 import com.ruoyi.system.service.ISysOrderService;
+import org.near.toolkit.model.Money;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -49,7 +50,7 @@ public class StatisticsRecordController extends BaseController {
                 loginName,
                 Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
 
-        modelMap.put("dayMoney", dayMoney);
+        modelMap.put("dayMoney", convert(dayMoney));
 
         Date date = org.near.toolkit.common.DateUtils.addDays(new Date(), -1);
         start = DateUtils.parseDateToStr(YYYY_MM_DD, date) + " 00:00:00";
@@ -65,7 +66,7 @@ public class StatisticsRecordController extends BaseController {
                 end,
                 loginName,
                 Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
-        modelMap.put("yesterdayMoney", yesterdayMoney);
+        modelMap.put("yesterdayMoney", convert(yesterdayMoney));
 
 
         long historyCount = sysOrderService.countStatus(null,
@@ -80,10 +81,15 @@ public class StatisticsRecordController extends BaseController {
                 null,
                 loginName,
                 Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
-        modelMap.put("historyMoney", historyMoney);
+        modelMap.put("historyMoney", convert(historyMoney));
         return prefix + "/index";
     }
 
+    String convert(long money) {
+        Money amount = new Money();
+        amount.setCent(money);
+        return amount.toString();
+    }
 
     /**
      * 查询订单列表列表
