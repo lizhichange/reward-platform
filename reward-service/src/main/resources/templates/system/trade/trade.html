@@ -87,15 +87,15 @@
             return '<i class=\"fa fa-toggle-on text-info fa-2x\" onclick="disable(\'' + row.tradeNo + '\')"></i> ';
         }
     }
-  /* 管理-支付 */
-    function disable(tradeNo) {
+    /* 管理-已支付 */
+    function enable(tradeNo) {
         $.modal.confirm("确认设置已支付吗？", function () {
             $.operate.post(prefix + "/changeState", {"tradeNo": tradeNo, "status": 1});
         })
     }
 
-    /* 支付 */
-    function enable(tradeNo) {
+    /* 未支付 */
+    function disable(tradeNo) {
         $.modal.confirm("确认设置未支付吗？", function () {
             $.operate.post(prefix + "/changeState", {"tradeNo": tradeNo, "status": 0});
         })
@@ -187,6 +187,8 @@
             };
             $.table.init(options);
         });
+
+
 
 
 
