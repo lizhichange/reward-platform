@@ -1,5 +1,6 @@
 package com.ruoyi.web.controller.system;
 
+import com.github.pagehelper.PageHelper;
 import com.ruoyi.common.config.Global;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.framework.util.ShiroUtils;
@@ -108,9 +109,11 @@ public class SysIndexController extends BaseController {
         }
         mmap.put("account", balanceStr);
 
+        PageHelper.startPage(1, 1, "createTime desc");
         SysNotice sysNotice = new SysNotice();
         sysNotice.setStatus("0");
         List<SysNotice> sysNotices = sysNoticeService.selectNoticeList(sysNotice);
+        logger.info("sysNotices:{}", sysNotices);
         SysNotice item = sysNotices.get(0);
         mmap.put("notice", item);
 
