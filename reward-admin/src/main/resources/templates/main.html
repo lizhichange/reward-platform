@@ -97,8 +97,14 @@
 
 
 $(document).ready(function(){
-     $('#btn').trigger("click");
+    var item=[[${status}]]
+     if (item==="0"){
+        $('#btn').trigger("click");
+     }
  });
+
+
+
 
 
 

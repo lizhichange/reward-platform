@@ -111,12 +111,15 @@ public class SysIndexController extends BaseController {
 
         PageHelper.startPage(1, 1, " create_time desc");
         SysNotice sysNotice = new SysNotice();
-        sysNotice.setStatus("0");
         List<SysNotice> sysNotices = sysNoticeService.selectNoticeList(sysNotice);
-        logger.info("sysNotices:{}", sysNotices);
-        SysNotice item = sysNotices.get(0);
-        mmap.put("notice", item);
-
+        if (!CollectionUtils.isEmpty(sysNotices)) {
+            logger.info("sysNotices:{}", sysNotices);
+            SysNotice item = sysNotices.get(0);
+            mmap.put("notice", item);
+            mmap.put("status", item.getStatus());
+        } else {
+            mmap.put("status", "1");
+        }
         return "main";
     }
 }
