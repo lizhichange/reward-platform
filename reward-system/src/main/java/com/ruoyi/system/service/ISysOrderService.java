@@ -72,8 +72,17 @@ public interface ISysOrderService {
             String startTime,
             String endTime,
             String extensionUserId,
+            Integer status);
+
+    long countStatus(String startTime,
+                     String endTime,
+                     String extensionUserId,
+                     Integer status);
+
+    long countMoney(String startTime,
+                    String endTime,
+                    String extensionUserId,
+                    Integer status);
 
 
-      Integer status
-);
 }

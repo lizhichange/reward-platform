@@ -25,6 +25,31 @@
         <result column="count" property="count"/>
     </resultMap>
 
+
+    <select id="countStatus" resultType="long">
+        SELECT count(1)
+        FROM sys_order
+        WHERE 1=1
+        <if test="startTime != null and endTime != null ">
+            AND create_time BETWEEN #{startTime} AND #{endTime}
+        </if>
+        AND extension_user_id = #{extensionUserId}
+        AND status=#{status}
+
+    </select>
+
+    <select id="countMoney" resultType="long">
+        SELECT sum(money)
+        FROM sys_order
+        WHERE 1=1
+        <if test="startTime != null and endTime != null ">
+            AND create_time BETWEEN #{startTime} AND #{endTime}
+        </if>
+        AND extension_user_id = #{extensionUserId}
+        AND status=#{status}
+    </select>
+
+
     <select id="selectGroupByTime" resultMap="TimeResultMap">
         SELECT
         DATE_FORMAT( create_time, '%Y-%m-%d %H' ) as time,

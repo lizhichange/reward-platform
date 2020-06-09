@@ -161,11 +161,19 @@ public class SysOrderServiceImpl implements ISysOrderService {
     }
 
     @Override
-    public List<ExtSysOrderTimeCount> selectGroupByTime(String startTime, String endTime, String extensionUserId
-
-      ,
-      Integer status) {
-        return extSysOrderMapper.selectGroupByTime(startTime, endTime, extensionUserId,status);
+    public List<ExtSysOrderTimeCount> selectGroupByTime(String startTime, String endTime, String extensionUserId,
+                                                        Integer status) {
+        return extSysOrderMapper.selectGroupByTime(startTime, endTime, extensionUserId, status);
     }
 
+    @Override
+    public long countStatus(String startTime, String endTime, String extensionUserId, Integer status) {
+        return extSysOrderMapper.countStatus(startTime, endTime, extensionUserId, status);
+
+    }
+
+    @Override
+    public long countMoney(String startTime, String endTime, String extensionUserId, Integer status) {
+        return extSysOrderMapper.countMoney(startTime, endTime, extensionUserId, status);
+    }
 }

@@ -2,9 +2,9 @@ package com.ruoyi.web.controller.statistics;
 
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.page.TableDataInfo;
+import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.reward.facade.enums.OrderStatusType;
-import com.ruoyi.system.domain.ExtSysOrder;
 import com.ruoyi.system.domain.SysOrder;
 import com.ruoyi.system.service.ISysOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
 import java.util.List;
+
+import static com.ruoyi.common.utils.DateUtils.YYYY_MM_DD;
 
 /**
  * 打赏记录
@@ -33,16 +36,51 @@ public class StatisticsRecordController extends BaseController {
     @GetMapping()
     public String record(ModelMap modelMap) {
         String loginName = ShiroUtils.getLoginName();
-        ExtSysOrder extSysOrder = new ExtSysOrder();
-        extSysOrder.setExtensionUserId(loginName);
-        extSysOrder.setStatus(Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
-        long count = sysOrderService.countByExample(extSysOrder);
-        modelMap.put("dayCount", 1);
-        modelMap.put("dayMoney", 1);
-        modelMap.put("yesterdayCount", 1);
-        modelMap.put("yesterdayMoney", 1);
-        modelMap.put("historyCount", 1);
-        modelMap.put("historyMoney", 1);
+        String start = DateUtils.getDate() + " 00:00:00";
+        String end = DateUtils.getDate() + " 23:59:59";
+        long dayCount = sysOrderService.countStatus(start,
+                end,
+                loginName,
+                Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
+        modelMap.put("dayCount", dayCount);
+
+        long dayMoney = sysOrderService.countMoney(start,
+                end,
+                loginName,
+                Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
+
+        modelMap.put("dayMoney", dayMoney);
+
+        Date date = org.near.toolkit.common.DateUtils.addDays(new Date(), -1);
+        start = DateUtils.parseDateToStr(YYYY_MM_DD, date) + " 00:00:00";
+        end = DateUtils.parseDateToStr(YYYY_MM_DD, date) + " 23:59:59";
+        long yesterdayCount = sysOrderService.countStatus(start,
+                end,
+                loginName,
+                Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
+
+        modelMap.put("yesterdayCount", yesterdayCount);
+
+        long yesterdayMoney = sysOrderService.countMoney(start,
+                end,
+                loginName,
+                Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
+        modelMap.put("yesterdayMoney", yesterdayMoney);
+
+
+        long historyCount = sysOrderService.countStatus(null,
+                null,
+                loginName,
+                Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
+
+
+        modelMap.put("historyCount", historyCount);
+
+        long historyMoney = sysOrderService.countMoney(null,
+                null,
+                loginName,
+                Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
+        modelMap.put("historyMoney", historyMoney);
         return prefix + "/index";
     }
 
