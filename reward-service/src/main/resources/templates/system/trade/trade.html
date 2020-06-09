@@ -71,6 +71,14 @@
         var prefix = ctx + "system/trade";
 
 
+    function statusStrTools(row) {
+
+  if (row.state == 0) {
+          return '未支付 ';
+        } else {
+            return '已支付';
+        }
+    }
  /* 状态显示 */
     function statusTools(row) {
         if (row.state == 0) {
@@ -128,6 +136,14 @@
                     field : 'amount', 
                     title : '金额'
                 },
+                  {
+                    visible: editFlag === 'hidden' ? false : true,
+                    title: '状态',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        return statusStrTools(row);
+                    }
+                },
                {
                     visible: editFlag === 'hidden' ? false : true,
                     title: '状态',
@@ -171,6 +187,7 @@
             };
             $.table.init(options);
         });
+
 
 
 
