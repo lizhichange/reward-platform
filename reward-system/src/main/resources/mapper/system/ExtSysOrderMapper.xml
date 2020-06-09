@@ -26,7 +26,7 @@
     </resultMap>
 
 
-    <select id="countStatus"  resultType="java.lang.Long">
+    <select id="countStatus" resultType="int">
         SELECT count(1)
         FROM sys_order
         WHERE 1=1
@@ -38,7 +38,7 @@
 
     </select>
 
-    <select id="countMoney"  resultType="java.lang.Long">
+    <select id="countMoney" resultType="int">
         SELECT sum(money)
         FROM sys_order
         WHERE 1=1
