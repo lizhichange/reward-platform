@@ -7,11 +7,14 @@ import com.ruoyi.reward.domain.SysShort;
 import com.ruoyi.reward.service.SysShortService;
 import com.ruoyi.system.domain.Account;
 import com.ruoyi.system.domain.SysMenu;
+import com.ruoyi.system.domain.SysNotice;
 import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.system.service.IAccountService;
 import com.ruoyi.system.service.ISysConfigService;
 import com.ruoyi.system.service.ISysMenuService;
+import com.ruoyi.system.service.ISysNoticeService;
 import org.near.toolkit.model.Money;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.CollectionUtils;
@@ -42,6 +45,9 @@ public class SysIndexController extends BaseController {
         this.accountService = accountService;
     }
 
+    @Autowired
+    ISysNoticeService sysNoticeService;
+
     /**
      * 系统首页
      */
@@ -61,13 +67,23 @@ public class SysIndexController extends BaseController {
         return "index";
     }
 
-    // 切换主题
+    /**
+     * 切换主题
+     *
+     * @param mmap
+     * @return
+     */
     @GetMapping("/system/switchSkin")
     public String switchSkin(ModelMap mmap) {
         return "skin";
     }
 
-    // 系统介绍
+    /**
+     * 系统介绍
+     *
+     * @param mmap
+     * @return
+     */
     @GetMapping("/system/main")
     public String main(ModelMap mmap) {
         mmap.put("version", Global.getVersion());
@@ -91,6 +107,13 @@ public class SysIndexController extends BaseController {
             balanceStr = money.getAmount().toString();
         }
         mmap.put("account", balanceStr);
+
+        SysNotice sysNotice = new SysNotice();
+        sysNotice.setStatus("0");
+        List<SysNotice> sysNotices = sysNoticeService.selectNoticeList(sysNotice);
+        SysNotice item = sysNotices.get(0);
+        mmap.put("notice", item);
+
         return "main";
     }
 }
