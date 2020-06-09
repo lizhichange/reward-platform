@@ -73,7 +73,7 @@
 
  /* 状态显示 */
     function statusTools(row) {
-        if (row.state == 1) {
+        if (row.state == 0) {
               return '<i class=\"fa fa-toggle-off text-info fa-2x\" onclick="enable(\'' + row.tradeNo + '\')"></i> ';
         } else {
             return '<i class=\"fa fa-toggle-on text-info fa-2x\" onclick="disable(\'' + row.tradeNo + '\')"></i> ';
@@ -171,6 +171,7 @@
             };
             $.table.init(options);
         });
+
 
 
 
