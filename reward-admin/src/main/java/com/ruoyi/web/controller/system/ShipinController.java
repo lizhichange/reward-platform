@@ -14,6 +14,7 @@ import com.ruoyi.reward.domain.SysCategory;
 import com.ruoyi.reward.facade.api.ShipinFacade;
 import com.ruoyi.reward.facade.dto.ShipinDTO;
 import com.ruoyi.reward.facade.dto.SysCategoryDTO;
+import com.ruoyi.reward.facade.enums.OrderStatusType;
 import com.ruoyi.reward.service.ShipinService;
 import com.ruoyi.reward.service.SysCategoryService;
 import com.ruoyi.system.domain.ExtSysOrder;
@@ -26,6 +27,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -54,6 +56,9 @@ public class ShipinController extends BaseController {
     @Autowired
     SysCategoryService sysCategoryService;
 
+    @Autowired
+    ISysOrderService sysOrderService;
+
     @RequiresPermissions("system:shipin:view")
     @GetMapping()
     public String shipin() {
@@ -72,6 +77,16 @@ public class ShipinController extends BaseController {
             shipin.setUseridList(Lists.newArrayList("admin", ShiroUtils.getLoginName()));
         }
         List<Shipin> list = shipinService.selectShipinList(shipin);
+        if (!CollectionUtils.isEmpty(list)) {
+            for (Shipin item : list) {
+                ExtSysOrder extSysOrder = new ExtSysOrder();
+                extSysOrder.setGoodsId(item.getId());
+                extSysOrder.setStatus(Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
+                long count = sysOrderService.countByExample(extSysOrder);
+                item.setCs(String.valueOf(count));
+            }
+        }
+
         return getDataTable(list);
     }
 
@@ -153,8 +168,6 @@ public class ShipinController extends BaseController {
         return toAjax(shipinFacade.updateShipinDTO(shipin));
     }
 
-    @Autowired
-    ISysOrderService sysOrderService;
 
     /**
      * 删除公共片库
