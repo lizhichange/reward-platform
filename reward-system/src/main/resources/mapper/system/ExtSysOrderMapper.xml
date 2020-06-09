@@ -27,7 +27,8 @@
 
 
     <select id="countStatus" resultType="int">
-        SELECT count(1)
+        select COALESCE(count(1),0)
+
         FROM sys_order
         WHERE 1=1
         <if test="startTime != null and endTime != null ">
@@ -39,7 +40,9 @@
     </select>
 
     <select id="countMoney" resultType="int">
-        SELECT sum(money)
+
+        select COALESCE(sum(money),0)
+
         FROM sys_order
         WHERE 1=1
         <if test="startTime != null and endTime != null ">
