@@ -31,17 +31,14 @@ public class VideoController {
 
     @GetMapping("/list")
     @ResponseBody
-    public TableDataInfo list(ShipinDTO shipinDTO, PageForm pageForm) {
+    public List<ShipinDTO> list(ShipinDTO shipinDTO, PageForm pageForm) {
         int pageNum = pageForm.getPageNum();
         int pageSize = pageForm.getPageSize();
         String orderByClause = " create_time desc ";
-
         TPageResult<ShipinDTO> result = shipinFacadeClient.queryPage(pageNum, pageSize, shipinDTO, orderByClause);
         List<ShipinDTO> list = result.getValues();
         convert(list);
-        TableDataInfo dataTable = getDataTable(list);
-        dataTable.setTotal(result.getTotalRows());
-        return dataTable;
+        return list;
     }
 
     private void convert(List<ShipinDTO> list) {
