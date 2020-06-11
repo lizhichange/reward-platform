@@ -61,40 +61,40 @@
     </div>
 </div>
 
-<div class="col-sm-4">
-    <div class="ibox ">
-        <div class="ibox-content">
-            <div aria-hidden="true" class="modal inmodal" id="myModal" role="dialog" tabindex="-1">
-                <div class="modal-dialog">
-                    <div class="modal-content animated bounceInRight">
-                        <div class="modal-header">
-                            <button class="close" data-dismiss="modal" type="button"><span
-                                    aria-hidden="true">&times;</span><span
-                                    class="sr-only">关闭</span>
-                            </button>
-                            <i class="fa fa-laptop modal-icon"></i>
-                            <h4 class="modal-title">修改价格</h4>
-                            <small class="font-bold">
-                        </div>
-                        <div class="modal-body">
-                            <p><strong></strong>
-                            </p>
-                            <div class="form-group">
-                                <label>视频价格</label>
-                                <input class="form-control" placeholder="请输入视频价格" type="text">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-white" data-dismiss="modal" type="button">关闭</button>
-                            <button class="btn btn-primary" type="button">保存</button>
-                        </div>
+
+
+<div class="ibox-content">
+    <div aria-hidden="true" class="modal inmodal" id="myModal" role="dialog" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content animated bounceInRight">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal" type="button"><span
+                            aria-hidden="true">&times;</span><span
+                            class="sr-only">关闭</span>
+                    </button>
+                    <i class="fa fa-laptop modal-icon"></i>
+                    <h4 class="modal-title">修改价格</h4>
+                    <small class="font-bold">
+                </div>
+                <div class="modal-body">
+                    <p><strong></strong>
+                    </p>
+                    <div class="form-group">
+                        <label>视频价格</label>
+                        <input class="form-control" placeholder="请输入视频价格" type="text">
                     </div>
                 </div>
+                <div class="modal-footer">
+                    <button class="btn btn-white" data-dismiss="modal" type="button">关闭</button>
+                    <button class="btn btn-primary" type="button">保存</button>
+                </div>
             </div>
-
         </div>
     </div>
+
 </div>
+
+
 
 <th:block th:include="include :: footer"/>
 <th:block th:include="include :: layout-latest-js"/>
@@ -193,6 +193,8 @@
         $(this).hide();
         $('#btnExpand').show();
     });
+
+
 
 
 
