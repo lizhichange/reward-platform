@@ -1,5 +1,6 @@
 package com.ruoyi.web.controller.system;
 
+import com.alibaba.fastjson.JSONArray;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import com.ruoyi.common.annotation.Log;
@@ -18,9 +19,12 @@ import com.ruoyi.reward.facade.enums.OrderStatusType;
 import com.ruoyi.reward.service.ShipinService;
 import com.ruoyi.reward.service.SysCategoryService;
 import com.ruoyi.system.domain.ExtSysOrder;
+import com.ruoyi.system.domain.SysConfig;
 import com.ruoyi.system.domain.SysRole;
 import com.ruoyi.system.domain.SysUser;
+import com.ruoyi.system.service.ISysConfigService;
 import com.ruoyi.system.service.ISysOrderService;
+import com.ruoyi.web.param.PriceParam;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.BeanUtils;
@@ -31,6 +35,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -142,6 +147,35 @@ public class ShipinController extends BaseController {
         shipin.setCreateTime(new Date());
         shipin.setMoney(shipin.getStartMoney() + "-" + shipin.getEndMoney());
         return toAjax(shipinFacade.insertShipinDTO(shipin));
+    }
+
+    @Autowired
+    ISysConfigService sysConfigService;
+
+    @Log(title = "一键发布价格", businessType = BusinessType.INSERT)
+    @PostMapping("/price")
+    @ResponseBody
+    public AjaxResult price(PriceParam param) {
+        String loginName = ShiroUtils.getLoginName();
+        SysConfig item = sysConfigService.queryConfigByKey(loginName);
+        if (item == null) {
+            SysConfig config = new SysConfig();
+            config.setConfigKey(loginName);
+            ArrayList<PriceParam> priceParams = Lists.newArrayList(param);
+            config.setConfigValue(JSONArray.toJSONString(priceParams));
+            config.setConfigType("N");
+            config.setCreateBy(loginName);
+            config.setCreateTime(new Date());
+            return toAjax(sysConfigService.insertConfig(config));
+        } else {
+            Long configId = item.getConfigId();
+            SysConfig config = new SysConfig();
+            config.setConfigId(configId);
+            ArrayList<PriceParam> priceParams = Lists.newArrayList(param);
+            config.setConfigValue(JSONArray.toJSONString(priceParams));
+            config.setUpdateTime(new Date());
+            return toAjax(sysConfigService.updateConfig(config));
+        }
     }
 
 

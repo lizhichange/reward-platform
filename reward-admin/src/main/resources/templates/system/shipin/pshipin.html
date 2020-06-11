@@ -49,9 +49,8 @@
                     <i class="fa fa-edit"></i> 修改
                 </a>
 
-                <button class="btn btn-primary" data-target="#myModal" data-toggle="modal" type="button">
-                    一键发布价格
-                </button>
+                <button class="btn btn-primary" id="button-open-9" type="button">一键发布价格</button>
+
             </div>
 
             <div class="col-sm-12 select-table table-striped">
@@ -60,40 +59,6 @@
         </div>
     </div>
 </div>
-
-
-
-<div class="ibox-content">
-    <div aria-hidden="true" class="modal inmodal" id="myModal" role="dialog" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content animated bounceInRight">
-                <div class="modal-header">
-                    <button class="close" data-dismiss="modal" type="button"><span
-                            aria-hidden="true">&times;</span><span
-                            class="sr-only">关闭</span>
-                    </button>
-                    <i class="fa fa-laptop modal-icon"></i>
-                    <h4 class="modal-title">修改价格</h4>
-                    <small class="font-bold">
-                </div>
-                <div class="modal-body">
-                    <p><strong></strong>
-                    </p>
-                    <div class="form-group">
-                        <label>视频价格</label>
-                        <input class="form-control" placeholder="请输入视频价格" type="text">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-white" data-dismiss="modal" type="button">关闭</button>
-                    <button class="btn btn-primary" type="button">保存</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
-
 
 
 <th:block th:include="include :: footer"/>
@@ -173,7 +138,6 @@
                     formatter: function (value, row, index) {
                         var actions = [];
                         actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.editTab(\'' + row.id + '\')"><i class="fa fa-edit"></i>编辑</a> ');
-                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.id + '\')"><i class="fa fa-remove"></i>删除</a> ');
                         return actions.join('');
                     }
                 }]
@@ -193,6 +157,34 @@
         $(this).hide();
         $('#btnExpand').show();
     });
+
+
+      $("#button-open-9").click(function () {
+            layer.prompt({title: '请输入视频价格，并确认', formType: 0}, function (text, index) {
+                save(price)
+                layer.close(index);
+            });
+        })
+function save(price) {
+    $.modal.loading("保存中...");
+    $.ajax({
+        type: "post",
+        url: ctx + "/price",
+        data: {
+            "price": price
+        },
+        success: function (r) {
+            if (r.code === 0) {
+               $.modal.closeLoading();
+
+            } else {
+                $.modal.closeLoading();
+
+                $.modal.msg(r.msg);
+            }
+        }
+    });
+}
 
 
 
