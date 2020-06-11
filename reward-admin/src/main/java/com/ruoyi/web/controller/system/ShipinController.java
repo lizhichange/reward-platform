@@ -1,13 +1,16 @@
 package com.ruoyi.web.controller.system;
 
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
+import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.reward.domain.Shipin;
@@ -35,9 +38,9 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -161,8 +164,9 @@ public class ShipinController extends BaseController {
         if (item == null) {
             SysConfig config = new SysConfig();
             config.setConfigKey(loginName);
-            ArrayList<PriceParam> priceParams = Lists.newArrayList(param);
-            config.setConfigValue(JSONArray.toJSONString(priceParams));
+            Map<String, Object> map = Maps.newHashMap();
+            map.put("main", param.getPrice());
+            config.setConfigValue(JSONObject.toJSONString(map));
             config.setConfigType("N");
             config.setCreateBy(loginName);
             config.setCreateTime(new Date());
@@ -171,8 +175,17 @@ public class ShipinController extends BaseController {
             Long configId = item.getConfigId();
             SysConfig config = new SysConfig();
             config.setConfigId(configId);
-            ArrayList<PriceParam> priceParams = Lists.newArrayList(param);
-            config.setConfigValue(JSONArray.toJSONString(priceParams));
+            Map<String, Object> map = Maps.newHashMap();
+            map.put("main", param.getPrice());
+            String configValue = config.getConfigValue();
+            if (StringUtils.isNotBlank(configValue)) {
+                Map<String, Object> valueMap = JSONObject.parseObject(configValue, Map.class);
+                if (valueMap.containsKey("item")) {
+                    List<PriceParam> itemList = (List<PriceParam>) valueMap.get("item");
+                    map.put("item", itemList);
+                }
+            }
+            config.setConfigValue(JSONArray.toJSONString(map));
             config.setUpdateTime(new Date());
             return toAjax(sysConfigService.updateConfig(config));
         }
