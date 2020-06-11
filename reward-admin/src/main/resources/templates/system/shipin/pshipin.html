@@ -160,36 +160,28 @@
 
 
       $("#button-open-9").click(function () {
-            layer.prompt({title: '请输入视频价格，并确认', formType: 0}, function (text, index) {
-                save(price)
-                layer.close(index);
+            layer.prompt({title: '请输入视频价格，并确认', formType: 0}, function (price, index) {
+                 $.modal.loading("保存中...");
+                    $.ajax({
+                        type: "post",
+                        url: ctx + "/price",
+                        data: {
+                            "price": price
+                        },
+                        success: function (r) {
+                            if (r.code === 0) {
+                               $.modal.closeLoading();
+                                 layer.close(index);
+                            } else {
+                                $.modal.closeLoading();
+                                $.modal.msg(r.msg);
+                                layer.close(index);
+                            }
+                        }
+                    });
+
             });
         })
-function save(price) {
-    $.modal.loading("保存中...");
-    $.ajax({
-        type: "post",
-        url: ctx + "/price",
-        data: {
-            "price": price
-        },
-        success: function (r) {
-            if (r.code === 0) {
-               $.modal.closeLoading();
-
-            } else {
-                $.modal.closeLoading();
-
-                $.modal.msg(r.msg);
-            }
-        }
-    });
-}
-
-
-
-
-
 
 
 </script>
