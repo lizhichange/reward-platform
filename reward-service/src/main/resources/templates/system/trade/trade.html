@@ -143,8 +143,8 @@
                     title : '收款方'
                 },
                 {
-                    field : 'amount', 
-                    title : '金额'
+                    field : 'amountStr',
+                    title : '金额/单位元'
                 },
                   {
                     visible: editFlag === 'hidden' ? false : true,
@@ -197,6 +197,8 @@
             };
             $.table.init(options);
         });
+
+
 
 
 

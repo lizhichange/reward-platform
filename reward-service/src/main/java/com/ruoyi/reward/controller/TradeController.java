@@ -12,10 +12,12 @@ import com.ruoyi.reward.facade.api.AccountFacade;
 import com.ruoyi.reward.facade.enums.TradeStateEnum;
 import com.ruoyi.reward.service.ITradeService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.near.toolkit.model.Money;
 import org.near.toolkit.model.SelectOptionVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -60,6 +62,14 @@ public class TradeController extends BaseController {
     public TableDataInfo list(Trade trade) {
         startPage();
         List<Trade> list = tradeService.selectTradeList(trade);
+        if (!CollectionUtils.isEmpty(list)) {
+            for (Trade item : list) {
+                Long amount = item.getAmount();
+                Money money = new Money();
+                money.setCent(amount);
+                item.setAmountStr(money.toString());
+            }
+        }
         return getDataTable(list);
     }
 

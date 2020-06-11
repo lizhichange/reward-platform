@@ -108,6 +108,14 @@ public class WithdrawalRecordController extends BaseController {
         startPage();
         trade.setCreateBy(ShiroUtils.getLoginName());
         List<Trade> list = tradeService.selectTradeList(trade);
+        if (!CollectionUtils.isEmpty(list)) {
+            for (Trade item : list) {
+                Long amount = item.getAmount();
+                Money money = new Money();
+                money.setCent(amount);
+                item.setAmountStr(money.toString());
+            }
+        }
         return getDataTable(list);
     }
 
