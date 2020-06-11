@@ -66,6 +66,17 @@ public class ShipinController extends BaseController {
     }
 
     /**
+     * 私人片库
+     *
+     * @return
+     */
+    @GetMapping("/pshipin")
+    public String pshipin() {
+        return prefix + "/pshipin";
+    }
+
+
+    /**
      * 查询公共片库列表
      */
     @RequiresPermissions("system:shipin:list")
