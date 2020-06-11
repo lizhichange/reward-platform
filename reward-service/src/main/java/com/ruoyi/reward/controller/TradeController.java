@@ -9,10 +9,7 @@ import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.reward.domain.Trade;
 import com.ruoyi.reward.facade.api.AccountFacade;
-import com.ruoyi.reward.facade.enums.AccountBizCode;
-import com.ruoyi.reward.facade.enums.AccountOptType;
 import com.ruoyi.reward.facade.enums.TradeStateEnum;
-import com.ruoyi.reward.facade.request.UserAccountOperatorRequest;
 import com.ruoyi.reward.service.ITradeService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.near.toolkit.model.SelectOptionVO;
@@ -81,14 +78,6 @@ public class TradeController extends BaseController {
         }
         trade.setGmtModified(new Date());
         int i = tradeService.updateTrade(trade);
-        UserAccountOperatorRequest request = new UserAccountOperatorRequest();
-        request.setUserId(tradeById.getCreateBy());
-        //单位分
-        Long amount = tradeById.getAmount();
-        request.setAmount(amount);
-        request.setOptType(AccountOptType.OUTLAY.getCode());
-        request.setBizCode(AccountBizCode.WITHDRAW.getCode());
-        accountFacade.minusBalance(request);
         return toAjax(i > 0);
     }
 
@@ -121,7 +110,8 @@ public class TradeController extends BaseController {
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult addSave(Trade trade) {
-        return toAjax(tradeService.insertTrade(trade));
+        tradeService.insertTrade(trade);
+        return toAjax(1);
     }
 
     /**

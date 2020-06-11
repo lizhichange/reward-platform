@@ -54,13 +54,15 @@ public class TradeServiceImpl implements ITradeService {
      * @return 结果
      */
     @Override
-    public int insertTrade(Trade trade) {
-        trade.setTradeNo(concurrentSequence.nextId().toString());
+    public String insertTrade(Trade trade) {
+        String tradeNo = concurrentSequence.nextId().toString();
+        trade.setTradeNo(tradeNo);
         Date nowDate = DateUtils.getNowDate();
         trade.setCreateTime(nowDate);
         trade.setGmtCreate(nowDate);
         trade.setGmtModified(nowDate);
-        return tradeMapper.insertTrade(trade);
+        tradeMapper.insertTrade(trade);
+        return tradeNo;
     }
 
     /**

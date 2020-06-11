@@ -34,7 +34,7 @@ public interface ITradeService
      * @param trade 交易信息
      * @return 结果
      */
-    public int insertTrade(Trade trade);
+    public String insertTrade(Trade trade);
 
     /**
      * 修改交易信息

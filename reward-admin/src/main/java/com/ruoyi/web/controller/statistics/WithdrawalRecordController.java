@@ -9,8 +9,12 @@ import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.framework.shiro.service.SysPasswordService;
 import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.reward.domain.Trade;
+import com.ruoyi.reward.facade.api.AccountFacade;
+import com.ruoyi.reward.facade.enums.AccountBizCode;
+import com.ruoyi.reward.facade.enums.AccountOptType;
 import com.ruoyi.reward.facade.enums.PayeeTypeEnum;
 import com.ruoyi.reward.facade.enums.TradeStateEnum;
+import com.ruoyi.reward.facade.request.UserAccountOperatorRequest;
 import com.ruoyi.reward.service.ITradeService;
 import com.ruoyi.system.domain.Account;
 import com.ruoyi.system.service.IAccountService;
@@ -54,7 +58,7 @@ public class WithdrawalRecordController extends BaseController {
         Money money = new Money();
         money.setCent(balance);
         //转换元
-        long amount = money.getAmount().longValue();
+        String amount = money.getAmount().toString();
         modelMap.put("balance", amount);
         List<SelectOptionVO> types = Lists.newArrayList();
         for (PayeeTypeEnum value : PayeeTypeEnum.values()) {
@@ -107,14 +111,16 @@ public class WithdrawalRecordController extends BaseController {
         return getDataTable(list);
     }
 
+    @Autowired
+    AccountFacade accountFacade;
 
     @Log(title = "申请提现", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult addSave(Trade trade, String password) {
         //check  用户提交申请的是元的单位
-        Long amount = trade.getAmount();
-        Money money = new Money(amount);
+
+        Money money = new Money(trade.getAmount());
         //账户余额
         long balance = getBalance(ShiroUtils.getLoginName());
         if (balance < money.getCent()) {
@@ -131,7 +137,20 @@ public class WithdrawalRecordController extends BaseController {
         trade.setPayerType("system");
         trade.setPayType("system");
         trade.setCreateBy(ShiroUtils.getLoginName());
-        return toAjax(tradeService.insertTrade(trade));
+
+        String tradeNo = tradeService.insertTrade(trade);
+
+        UserAccountOperatorRequest request = new UserAccountOperatorRequest();
+        request.setUserId(ShiroUtils.getLoginName());
+        request.setSourceCode(tradeNo);
+        //单位分
+        request.setAmount(money.getCent());
+        //支出
+        request.setOptType(AccountOptType.OUTLAY.getCode());
+        //用户提现
+        request.setBizCode(AccountBizCode.WITHDRAW.getCode());
+        accountFacade.minusBalance(request);
+        return toAjax(1);
     }
 
 
