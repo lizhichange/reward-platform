@@ -18,6 +18,11 @@ public enum TradeStateEnum implements BaseEnum {
      * 已支付 ,待确认
      */
     Y_PAY("1", "已支付"),
+
+    /**
+     * 交易中 ,待确认
+     */
+    Y_PAY_ING("2", "交易中"),
     ;
     String code;
     String desc;
