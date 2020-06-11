@@ -56,8 +56,6 @@ public class WithdrawalRecordController extends BaseController {
         //转换元
         long amount = money.getAmount().longValue();
         modelMap.put("balance", amount);
-
-
         List<SelectOptionVO> types = Lists.newArrayList();
         for (PayeeTypeEnum value : PayeeTypeEnum.values()) {
             SelectOptionVO option = new SelectOptionVO();
@@ -114,7 +112,6 @@ public class WithdrawalRecordController extends BaseController {
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult addSave(Trade trade, String password) {
-
         //check  用户提交申请的是元的单位
         Long amount = trade.getAmount();
         Money money = new Money(amount);
@@ -128,6 +125,8 @@ public class WithdrawalRecordController extends BaseController {
         if (!matches) {
             return AjaxResult.error("用户密码错误");
         }
+        //转换分
+        trade.setAmount(money.getCent());
         trade.setPayer("system");
         trade.setPayerType("system");
         trade.setPayType("system");

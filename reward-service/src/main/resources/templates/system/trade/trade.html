@@ -78,16 +78,15 @@
         }
     }
 
-    function statusStrTools(row) {
-
-  if (row.state == 0) {
-          return '未支付 ';
-        } else {
-            return '已支付';
+    function stateStrTools(row) {
+      if (row.state == 0) {
+              return '未支付 ';
+            } else {
+                return '已支付';
+            }
         }
-    }
- /* 状态显示 */
-    function statusTools(row) {
+    /* 状态显示 */
+    function stateTools(row) {
         if (row.state == 0) {
               return '<i class=\"fa fa-toggle-off text-info fa-2x\" onclick="enable(\'' + row.tradeNo + '\')"></i> ';
         } else {
@@ -97,15 +96,15 @@
     /* 管理-已支付 */
     function enable(tradeNo) {
         $.modal.confirm("确认设置已支付吗？", function () {
-            $.operate.post(prefix + "/changeState", {"tradeNo": tradeNo, "status": 1});
-        })
+            $.operate.post(prefix + "/changeState", {"tradeNo": tradeNo, "state": 1});
+        });
     }
 
     /* 未支付 */
     function disable(tradeNo) {
         $.modal.confirm("确认设置未支付吗？", function () {
-            $.operate.post(prefix + "/changeState", {"tradeNo": tradeNo, "status": 0});
-        })
+            $.operate.post(prefix + "/changeState", {"tradeNo": tradeNo, "state": 0});
+        });
     }
 
         $(function() {
@@ -152,7 +151,7 @@
                     title: '状态',
                     align: 'center',
                     formatter: function (value, row, index) {
-                        return statusStrTools(row);
+                        return stateStrTools(row);
                     }
                 },
                {
@@ -160,7 +159,7 @@
                     title: '状态',
                     align: 'center',
                     formatter: function (value, row, index) {
-                        return statusTools(row);
+                        return stateTools(row);
                     }
                 },
 
@@ -198,6 +197,7 @@
             };
             $.table.init(options);
         });
+
 
 
 

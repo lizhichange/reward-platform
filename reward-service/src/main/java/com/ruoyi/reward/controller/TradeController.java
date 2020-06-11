@@ -83,7 +83,9 @@ public class TradeController extends BaseController {
         int i = tradeService.updateTrade(trade);
         UserAccountOperatorRequest request = new UserAccountOperatorRequest();
         request.setUserId(tradeById.getCreateBy());
-        request.setAmount(tradeById.getAmount());
+        //单位分
+        Long amount = tradeById.getAmount();
+        request.setAmount(amount);
         request.setOptType(AccountOptType.OUTLAY.getCode());
         request.setBizCode(AccountBizCode.WITHDRAW.getCode());
         accountFacade.minusBalance(request);
