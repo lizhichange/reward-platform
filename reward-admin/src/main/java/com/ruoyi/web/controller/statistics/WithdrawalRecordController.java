@@ -120,7 +120,7 @@ public class WithdrawalRecordController extends BaseController {
     public AjaxResult addSave(Trade trade, String password) {
         //check  用户提交申请的是元的单位
 
-        Money money = new Money(trade.getAmount());
+        Money money = new Money(trade.getAmountStr());
         //账户余额
         long balance = getBalance(ShiroUtils.getLoginName());
         if (balance < money.getCent()) {

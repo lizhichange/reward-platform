@@ -51,6 +51,10 @@ public class Trade extends BaseEntity {
     @Excel(name = "金额")
     private Long amount;
 
+    @Excel(name = "金额")
+    private String amountStr;
+
+
     /**
      * 状态
      */
@@ -243,5 +247,13 @@ public class Trade extends BaseEntity {
 
     public void setPayeeNo(String payeeNo) {
         this.payeeNo = payeeNo;
+    }
+
+    public String getAmountStr() {
+        return amountStr;
+    }
+
+    public void setAmountStr(String amountStr) {
+        this.amountStr = amountStr;
     }
 }
