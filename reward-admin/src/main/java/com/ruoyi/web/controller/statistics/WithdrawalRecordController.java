@@ -58,7 +58,7 @@ public class WithdrawalRecordController extends BaseController {
         Money money = new Money();
         money.setCent(balance);
         //转换元
-        String amount = money.getAmount().toString();
+        String amount = money.toString();
         modelMap.put("balance", amount);
         List<SelectOptionVO> types = Lists.newArrayList();
         for (PayeeTypeEnum value : PayeeTypeEnum.values()) {
