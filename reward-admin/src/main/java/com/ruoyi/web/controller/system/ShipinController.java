@@ -169,6 +169,7 @@ public class ShipinController extends BaseController {
             config.setConfigValue(JSONObject.toJSONString(map));
             config.setConfigType("N");
             config.setCreateBy(loginName);
+            config.setConfigName("视频自定义私人价格");
             config.setCreateTime(new Date());
             return toAjax(sysConfigService.insertConfig(config));
         } else {
