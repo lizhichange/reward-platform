@@ -120,10 +120,9 @@ public class ShipinController extends BaseController {
                 ExtSysOrder extSysOrder = new ExtSysOrder();
                 extSysOrder.setGoodsId(item.getId());
                 extSysOrder.setStatus(Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
+                extSysOrder.setExtensionUserId(ShiroUtils.getLoginName());
                 long count = sysOrderService.countByExample(extSysOrder);
                 item.setCs(String.valueOf(count));
-
-
                 if (!CollectionUtils.isEmpty(itemList)) {
                     List<PriceParam> collect = itemList.stream().filter((Predicate<PriceParam>) param -> {
                         assert param != null;
