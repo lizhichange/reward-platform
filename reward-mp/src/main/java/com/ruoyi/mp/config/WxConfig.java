@@ -18,6 +18,7 @@ import me.chanjar.weixin.mp.config.impl.WxMpDefaultConfigImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.Scheduled;
 
 
 import java.util.List;
@@ -97,8 +98,8 @@ public class WxConfig {
 
 
     @Bean
+    @Scheduled(cron = "0 0/50 * * * ?")
     public WxMpService wxMpService() {
-
         SysWechatConfigDTO weChatConfig = configFactory.getSysWechatConfig();
         if (weChatConfig != null) {
             WxMpProperties wxMpProperties = new WxMpProperties();

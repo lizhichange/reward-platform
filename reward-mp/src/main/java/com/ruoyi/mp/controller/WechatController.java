@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -39,6 +40,13 @@ public class WechatController extends BaseController {
         this.mpAuthConfig = mpAuthConfig;
     }
 
+
+    @GetMapping("/getJsapiTicket")
+    @ResponseBody
+    String getJsapiTicket() throws WxErrorException {
+        String jsapiTicket = wxMpService.getJsapiTicket();
+        return jsapiTicket;
+    }
 
     @GetMapping("/auth")
     public String auth(HttpServletRequest request) {
