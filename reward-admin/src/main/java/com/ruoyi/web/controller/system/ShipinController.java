@@ -97,7 +97,8 @@ public class ShipinController extends BaseController {
     @ResponseBody
     public TableDataInfo list(Shipin shipin) {
         startPage();
-        if (!"admin".equals(ShiroUtils.getLoginName())) {
+        boolean b = !"admin".equals(ShiroUtils.getLoginName());
+        if (b) {
             shipin.setUseridList(Lists.newArrayList("admin", ShiroUtils.getLoginName()));
         }
         List<Shipin> list = shipinService.selectShipinList(shipin);
@@ -120,7 +121,9 @@ public class ShipinController extends BaseController {
                 ExtSysOrder extSysOrder = new ExtSysOrder();
                 extSysOrder.setGoodsId(item.getId());
                 extSysOrder.setStatus(Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
-                extSysOrder.setExtensionUserId(ShiroUtils.getLoginName());
+                if (b) {
+                    extSysOrder.setExtensionUserId(ShiroUtils.getLoginName());
+                }
                 long count = sysOrderService.countByExample(extSysOrder);
                 item.setCs(String.valueOf(count));
                 if (!CollectionUtils.isEmpty(itemList)) {
