@@ -32,6 +32,7 @@ import com.ruoyi.web.param.PriceParam;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
+import org.near.toolkit.common.StringUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -124,7 +125,11 @@ public class ShipinController extends BaseController {
 
 
                 if (!CollectionUtils.isEmpty(itemList)) {
-                    List<PriceParam> collect = itemList.stream().filter((Predicate<PriceParam>) it -> item.getId().equals(it.getId())).collect(Collectors.toList());
+                    List<PriceParam> collect = itemList.stream().filter((Predicate<PriceParam>) param -> {
+                        assert param != null;
+                        String id = param.getId();
+                        return StringUtil.equals(id, item.getId().toString());
+                    }).collect(Collectors.toList());
                     if (!CollectionUtils.isEmpty(collect)) {
                         PriceParam priceParam = collect.get(0);
                         item.setPrivateMoney(priceParam.getPrice());
