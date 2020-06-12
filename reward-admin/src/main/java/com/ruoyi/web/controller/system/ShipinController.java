@@ -2,6 +2,7 @@ package com.ruoyi.web.controller.system;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.google.common.base.Predicate;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -28,6 +29,7 @@ import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.system.service.ISysConfigService;
 import com.ruoyi.system.service.ISysOrderService;
 import com.ruoyi.web.param.PriceParam;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.BeanUtils;
@@ -38,9 +40,11 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 
 /**
@@ -154,6 +158,70 @@ public class ShipinController extends BaseController {
 
     @Autowired
     ISysConfigService sysConfigService;
+
+
+    @Log(title = "批量发布价格", businessType = BusinessType.INSERT)
+    @PostMapping("/batchForceLogout")
+    @ResponseBody
+    public AjaxResult batchForceLogout(PriceParam param, @RequestParam("ids[]") String[] ids) {
+        logger.info("param:{},ids:{}", param, ids);
+        String loginName = ShiroUtils.getLoginName();
+        SysConfig item = sysConfigService.queryConfigByKey(loginName);
+        if (item == null) {
+            SysConfig config = new SysConfig();
+            config.setConfigKey(loginName);
+            Map<String, Object> map = Maps.newHashMap();
+            map.put("main", param.getPrice());
+            config.setConfigValue(JSONObject.toJSONString(map));
+            config.setConfigType("N");
+            config.setCreateBy(loginName);
+            config.setConfigName("视频自定义私人价格");
+            config.setCreateTime(new Date());
+            return toAjax(sysConfigService.insertConfig(config));
+        } else {
+            Long configId = item.getConfigId();
+            SysConfig config = new SysConfig();
+            config.setConfigId(configId);
+            String configValue = config.getConfigValue();
+            if (StringUtils.isNotBlank(configValue)) {
+                Map<String, Object> valueMap = JSONObject.parseObject(configValue, Map.class);
+                ArrayList<PriceParam> newArrayList = Lists.newArrayList();
+                if (valueMap.containsKey("item")) {
+                    List<PriceParam> itemList = (List<PriceParam>) valueMap.get("item");
+                    if (!ArrayUtils.isEmpty(ids)) {
+                        for (String id : ids) {
+                            Stream<PriceParam> stream = itemList.stream().filter((Predicate<PriceParam>) it -> it.getId().equals(id));
+                            //不为空
+                            if (stream.findFirst().isPresent()) {
+                                //modify
+                                PriceParam priceParam = stream.findFirst().get();
+                                priceParam.setPrice(param.getPrice());
+                                newArrayList.add(priceParam);
+                                //原集合remove
+                                itemList.remove(priceParam);
+                            } else {
+                                //add
+                                PriceParam priceParam = new PriceParam();
+                                priceParam.setPrice(priceParam.getPrice());
+                                priceParam.setId(id);
+                                newArrayList.add(priceParam);
+                            }
+                        }
+                        newArrayList.addAll(itemList);
+                        valueMap.put("item", newArrayList);
+                    }
+                }
+
+                config.setConfigValue(JSONArray.toJSONString(valueMap));
+            }
+// 23 24       88 99 23 22   23 m  24 i
+
+            config.setUpdateTime(new Date());
+            return toAjax(sysConfigService.updateConfig(config));
+
+        }
+
+    }
 
     @Log(title = "一键发布价格", businessType = BusinessType.INSERT)
     @PostMapping("/price")

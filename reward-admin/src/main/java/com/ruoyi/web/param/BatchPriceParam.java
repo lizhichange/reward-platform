@@ -4,7 +4,7 @@ import lombok.Data;
 import org.near.toolkit.model.ToString;
 
 @Data
-public class PriceParam extends ToString {
+public class BatchPriceParam extends ToString {
     private String price;
     private String id;
 }
