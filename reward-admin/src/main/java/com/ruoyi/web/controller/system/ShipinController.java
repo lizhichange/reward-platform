@@ -224,51 +224,57 @@ public class ShipinController extends BaseController {
             config.setConfigId(configId);
             String configValue = item.getConfigValue();
             if (StringUtils.isNotBlank(configValue)) {
-                Map valueMap = JSONObject.parseObject(configValue, Map.class);
-                ArrayList<PriceParam> newArrayList = Lists.newArrayList();
-                if (valueMap.containsKey("item")) {
-                    JSONArray array = (JSONArray) valueMap.get("item");
-                    List<PriceParam> itemList = convert(array);
-                    if (!ArrayUtils.isEmpty(ids)) {
-                        for (String id : ids) {
-                            List<PriceParam> collect = itemList.stream().filter((Predicate<PriceParam>) it -> it.getId().equals(id)).collect(Collectors.toList());
-                            //不为空
-                            if (!CollectionUtils.isEmpty(collect)) {
-                                PriceParam priceParam = collect.get(0);
-                                //modify
-                                priceParam.setPrice(param.getPrice());
-                                newArrayList.add(priceParam);
-                                //原集合remove
-                                itemList.remove(priceParam);
-                            } else {
-                                //add
-                                PriceParam priceParam = new PriceParam();
-                                priceParam.setPrice(param.getPrice());
-                                priceParam.setId(id);
-                                newArrayList.add(priceParam);
-                            }
-                        }
-                        newArrayList.addAll(itemList);
-                        valueMap.put("item", newArrayList);
-                    }
-                } else {
-                    if (!ArrayUtils.isEmpty(ids)) {
-                        for (String id : ids) {
-                            PriceParam priceParam = new PriceParam();
-                            priceParam.setPrice(param.getPrice());
-                            priceParam.setId(id);
-                            newArrayList.add(priceParam);
-                        }
-                    }
-                    valueMap.put("item", newArrayList);
-                }
-                config.setConfigValue(JSONArray.toJSONString(valueMap));
+                String string = getString(param, ids, configValue);
+                config.setConfigValue(string);
             }
             config.setUpdateTime(new Date());
             return toAjax(sysConfigService.updateConfig(config));
 
         }
 
+    }
+
+    @Deprecated
+    private String getString(PriceParam param, @RequestParam("ids[]") String[] ids, String configValue) {
+        Map valueMap = JSONObject.parseObject(configValue, Map.class);
+        ArrayList<PriceParam> newArrayList = Lists.newArrayList();
+        if (valueMap.containsKey("item")) {
+            JSONArray array = (JSONArray) valueMap.get("item");
+            List<PriceParam> itemList = convert(array);
+            if (!ArrayUtils.isEmpty(ids)) {
+                for (String id : ids) {
+                    List<PriceParam> collect = itemList.stream().filter((Predicate<PriceParam>) it -> it.getId().equals(id)).collect(Collectors.toList());
+                    //不为空
+                    if (!CollectionUtils.isEmpty(collect)) {
+                        PriceParam priceParam = collect.get(0);
+                        //modify
+                        priceParam.setPrice(param.getPrice());
+                        newArrayList.add(priceParam);
+                        //原集合remove
+                        itemList.remove(priceParam);
+                    } else {
+                        //add
+                        PriceParam priceParam = new PriceParam();
+                        priceParam.setPrice(param.getPrice());
+                        priceParam.setId(id);
+                        newArrayList.add(priceParam);
+                    }
+                }
+                newArrayList.addAll(itemList);
+                valueMap.put("item", newArrayList);
+            }
+        } else {
+            if (!ArrayUtils.isEmpty(ids)) {
+                for (String id : ids) {
+                    PriceParam priceParam = new PriceParam();
+                    priceParam.setPrice(param.getPrice());
+                    priceParam.setId(id);
+                    newArrayList.add(priceParam);
+                }
+            }
+            valueMap.put("item", newArrayList);
+        }
+        return JSONArray.toJSONString(valueMap);
     }
 
     @Log(title = "一键发布价格", businessType = BusinessType.INSERT)
@@ -294,18 +300,24 @@ public class ShipinController extends BaseController {
             config.setConfigId(configId);
             Map<String, Object> map = Maps.newHashMap();
             map.put("main", param.getPrice());
-            String configValue = item.getConfigValue();
-            if (StringUtils.isNotBlank(configValue)) {
-                Map<String, Object> valueMap = JSONObject.parseObject(configValue, Map.class);
-                if (valueMap.containsKey("item")) {
-                    List<PriceParam> itemList = (List<PriceParam>) valueMap.get("item");
-                    map.put("item", itemList);
-                }
-            }
+
+//          String string = getString(map, item.getConfigValue());
             config.setConfigValue(JSONArray.toJSONString(map));
+
             config.setUpdateTime(new Date());
             return toAjax(sysConfigService.updateConfig(config));
         }
+    }
+
+    private String getString(Map<String, Object> map, String configValue) {
+        if (StringUtils.isNotBlank(configValue)) {
+            Map<String, Object> valueMap = JSONObject.parseObject(configValue, Map.class);
+            if (valueMap.containsKey("item")) {
+                List<PriceParam> itemList = (List<PriceParam>) valueMap.get("item");
+                map.put("item", itemList);
+            }
+        }
+        return JSONArray.toJSONString(map);
     }
 
 
