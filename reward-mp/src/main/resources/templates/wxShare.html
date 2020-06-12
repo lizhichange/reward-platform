@@ -198,6 +198,8 @@
 
 
 
+
+
     </style>
 
 </head>
@@ -233,13 +235,13 @@
         });
         //调用接口
 
-        $("#copy-right").on('click',function(){
+        wx.ready(function(){
             //掉用分享给朋友的接口，这里只做分享给朋友，分享到其他地方以此类推
             wx.onMenuShareAppMessage({
-                title: '你要分享的标题', // 分享标题
-                desc: '分享的内容描述', // 分享描述
+                title: '點擊觀看,完整影視', // 分享标题
+                desc: '今日更新，拉無人免提', // 分享描述
                 link: "http://yuluncc.top/wechat/wxShare", // 分享链接，注意：该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-                imgUrl: "分享要展示的图片", // 分享图标
+                imgUrl: "http://pic.616pic.com/ys_b_img/00/04/24/kjweTwwcFM.jpg", // 分享图标
                 success: function (res) {
                     alert('分享成功')
                 }
@@ -248,6 +250,8 @@
 
 
     });
+
+
 
 
 
