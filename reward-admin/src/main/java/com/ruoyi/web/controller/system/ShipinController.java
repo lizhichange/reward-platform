@@ -202,7 +202,7 @@ public class ShipinController extends BaseController {
                             } else {
                                 //add
                                 PriceParam priceParam = new PriceParam();
-                                priceParam.setPrice(priceParam.getPrice());
+                                priceParam.setPrice(param.getPrice());
                                 priceParam.setId(id);
                                 newArrayList.add(priceParam);
                             }
@@ -210,12 +210,19 @@ public class ShipinController extends BaseController {
                         newArrayList.addAll(itemList);
                         valueMap.put("item", newArrayList);
                     }
+                } else {
+                    if (!ArrayUtils.isEmpty(ids)) {
+                        for (String id : ids) {
+                            PriceParam priceParam = new PriceParam();
+                            priceParam.setPrice(param.getPrice());
+                            priceParam.setId(id);
+                            newArrayList.add(priceParam);
+                        }
+                    }
+                    valueMap.put("item", newArrayList);
                 }
-
                 config.setConfigValue(JSONArray.toJSONString(valueMap));
             }
-// 23 24       88 99 23 22   23 m  24 i
-
             config.setUpdateTime(new Date());
             return toAjax(sysConfigService.updateConfig(config));
 
