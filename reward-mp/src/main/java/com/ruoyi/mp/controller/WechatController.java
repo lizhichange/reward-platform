@@ -4,6 +4,7 @@ package com.ruoyi.mp.controller;
 import com.ruoyi.mp.config.MpAuthConfig;
 import com.ruoyi.reward.facade.request.UserWechatLoginRequest;
 import me.chanjar.weixin.common.api.WxConsts;
+import me.chanjar.weixin.common.bean.WxJsapiSignature;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.result.WxMpOAuth2AccessToken;
@@ -12,10 +13,10 @@ import me.chanjar.weixin.mp.config.WxMpConfigStorage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -41,11 +42,15 @@ public class WechatController extends BaseController {
     }
 
 
-    @GetMapping("/getJsapiTicket")
-    @ResponseBody
-    String getJsapiTicket() throws WxErrorException {
-        String jsapiTicket = wxMpService.getJsapiTicket();
-        return jsapiTicket;
+    @GetMapping("/wxShare")
+    public String wxShare(HttpServletRequest request, ModelMap modelMap) throws WxErrorException {
+        WxJsapiSignature jsapiSignature = wxMpService.createJsapiSignature("http://yuluncc.top/");
+        modelMap.put("appId", jsapiSignature.getAppId());
+        modelMap.put("nonceStr", jsapiSignature.getNonceStr());
+        modelMap.put("timestamp", jsapiSignature.getTimestamp());
+        modelMap.put("url", jsapiSignature.getUrl());
+        modelMap.put("signature", jsapiSignature.getSignature());
+        return "wxShare";
     }
 
     @GetMapping("/auth")

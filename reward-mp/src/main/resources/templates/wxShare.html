@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf8"/>
+    <meta id="viewport" name="viewport"
+          content="width=device-width; initial-scale=1.0; maximum-scale=1; user-scalable=no;"/>
+    <title></title>
+
+    <style type="text/css">
+
+    </style>
+</head>
+
+<body>
+
+
+</body>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+<script type="text/javascript">
+
+     //设置配置文件
+    wx.config({
+            debug: false,       //调试模式是否开启，开启则在PC端控制台console里面打印，在手机端就是弹出状态吗
+            appId: "[[${appId}]]",
+            timestamp: "[[${timestamp}]]",
+            nonceStr: "[[${nonceStr}]]",
+            signature: "[[${signature}]]",
+            jsApiList: [
+                'onMenuShareTimeline',       //分享到朋友圈
+                'onMenuShareAppMessage',    //分享给朋友
+                'onMenuShareQQ',           //分享给QQ好友
+                'onMenuShareQZone'        //分享到QQ空间
+            ]
+        });
+        //调用接口
+        wx.ready(function(){
+            //掉用分享给朋友的接口，这里只做分享给朋友，分享到其他地方以此类推
+            wx.onMenuShareAppMessage({
+                title: '你要分享的标题', // 分享标题
+                desc: '分享的内容描述', // 分享描述
+                link: "http://yuluncc.top/", // 分享链接，注意：该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                imgUrl: "分享要展示的图片", // 分享图标
+                success: function (res) {
+                    alert('分享成功')
+                }
+            });
+             // 分享到朋友圈
+            wx.onMenuShareTimeline({
+                title: wxShareTitle, // 分享标题
+                link: wxShareLink, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                imgUrl: wxShareLogo, // 分享图标
+                success: function () {
+                    // 设置成功
+                }
+            });
+        });
+
+</script>
+</html>
