@@ -14,9 +14,14 @@
 
 <body>
 
+<p class="copy-right" id="copy-right">分享</p>
 
 </body>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+<script type="text/javascript" src="/js/zepto.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+
 <script type="text/javascript">
 
      //设置配置文件
@@ -34,7 +39,8 @@
             ]
         });
         //调用接口
-        wx.ready(function(){
+
+        $("#copy-right").on('click',function(){
             //掉用分享给朋友的接口，这里只做分享给朋友，分享到其他地方以此类推
             wx.onMenuShareAppMessage({
                 title: '你要分享的标题', // 分享标题
@@ -45,16 +51,8 @@
                     alert('分享成功')
                 }
             });
-             // 分享到朋友圈
-            wx.onMenuShareTimeline({
-                title: wxShareTitle, // 分享标题
-                link: wxShareLink, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-                imgUrl: wxShareLogo, // 分享图标
-                success: function () {
-                    // 设置成功
-                }
-            });
         });
+
 
 </script>
 </html>
