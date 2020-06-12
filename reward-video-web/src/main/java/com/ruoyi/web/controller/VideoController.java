@@ -2,6 +2,10 @@ package com.ruoyi.web.controller;
 
 import cn.hutool.core.util.RandomUtil;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Lists;
 import com.ruoyi.reward.facade.dto.*;
 import com.ruoyi.reward.facade.enums.MultiTypeEnum;
 import com.ruoyi.reward.facade.enums.OrderPayType;
@@ -9,18 +13,19 @@ import com.ruoyi.reward.facade.enums.OrderStatusType;
 import com.ruoyi.reward.facade.enums.WebMainStatus;
 import com.ruoyi.web.client.*;
 import com.ruoyi.web.config.AppConfig;
-
 import com.ruoyi.web.interceptor.WxPnUserAuth;
-import com.ruoyi.web.model.PageForm;
-import com.ruoyi.web.model.Users;
-import com.ruoyi.web.result.TableDataInfo;
 import com.ruoyi.web.model.AjaxResult;
+import com.ruoyi.web.model.PageForm;
+import com.ruoyi.web.result.TableDataInfo;
+import lombok.Data;
+import org.apache.commons.lang.StringUtils;
 import org.near.servicesupport.result.TPageResult;
 import org.near.toolkit.common.DateUtils;
 import org.near.toolkit.common.EnumUtil;
 import org.near.toolkit.common.StringUtil;
 import org.near.toolkit.context.SessionContext;
 import org.near.toolkit.model.Money;
+import org.near.toolkit.model.ToString;
 import org.near.utils.IpUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,9 +37,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.ruoyi.reward.facade.enums.OrderPayType.WE_CHAT_PAY;
@@ -64,8 +67,6 @@ public class VideoController extends BaseController {
     private SysOrderFacadeClient sysOrderFacadeClient;
     @Autowired
     private SysWebMainFacadeClient sysWebMainFacadeClient;
-    @Autowired
-    private SysConfigFacadeClient sysConfigFacadeClient;
 
     private void xxx(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
         log.info("userId:{}", userid);
@@ -215,6 +216,8 @@ public class VideoController extends BaseController {
         return rspData;
     }
 
+    @Autowired
+    SysConfigFacadeClient sysConfigFacadeClient;
 
     @PostMapping("/queryOrder")
     @ResponseBody
@@ -239,24 +242,111 @@ public class VideoController extends BaseController {
             order.setExtensionUserId(SessionContext.getUserId());
             //商品快照信息
             order.setGoodsSnapshot(JSON.toJSONString(dto));
-            //商品价格区间 原价
-            String money = dto.getMoney();
-            String[] split = money.split("-");
-            int start = Integer.parseInt(split[0]);
-            int end = Integer.parseInt(split[1]);
-            //这个单位是元
-            int i = RandomUtil.randomInt(start, end);
-            //实际金额 转换单位分
-            Money m = new Money(i);
-            int amount = Math.toIntExact(m.getCent()) - RandomUtil.randomInt(1, 100);
-            log.info("实际支付金额:{}", amount);
-            order.setMoney(amount);
-            order.setMoneyStr(String.valueOf(amount));
-            //原价 转换单位分
-            order.setPrice(Math.toIntExact(m.getCent()));
+
+            String extensionUserId = SessionContext.getUserId();
+            if (StringUtil.isBlank(extensionUserId)) {
+                extensionUserId = "admin";
+            }
+            SysConfigDTO configDTO = sysConfigFacadeClient.queryConfigByKey(extensionUserId);
+            if (configDTO != null && StringUtils.isNotBlank(configDTO.getConfigValue())) {
+                String main = null;
+                List<PriceParam> itemList = null;
+                Map valueMap = JSONObject.parseObject(configDTO.getConfigValue(), Map.class);
+                if (valueMap.containsKey("main")) {
+                    main = valueMap.get("main").toString();
+                }
+                if (valueMap.containsKey("item")) {
+                    JSONArray array = (JSONArray) valueMap.get("item");
+                    itemList = convert(array);
+                }
+                if (!CollectionUtils.isEmpty(itemList)) {
+                    List<PriceParam> collect = itemList.stream().filter((Predicate<PriceParam>) param -> {
+                        assert param != null;
+                        String id = param.getId();
+                        return StringUtil.equals(id, shipinDTO.getId().toString());
+                    }).collect(Collectors.toList());
+                    if (!CollectionUtils.isEmpty(collect)) {
+                        PriceParam priceParam = collect.get(0);
+                        Money m = new Money(priceParam.getPrice());
+                        order.setMoney((int) m.getCent());
+                        //原价 转换单位分
+                        order.setPrice(Math.toIntExact(m.getCent()));
+                        order.setPayTag(m.toString());
+
+                    } else {
+                        if (StringUtils.isNotBlank(main)) {
+                            Money m = new Money(main);
+                            order.setMoney((int) m.getCent());
+                            //原价 转换单位分
+                            order.setPrice(Math.toIntExact(m.getCent()));
+                            order.setPayTag(m.toString());
+                        } else {
+
+                            //商品价格区间 原价
+                            String money = dto.getMoney();
+                            String[] split = money.split("-");
+                            int start = Integer.parseInt(split[0]);
+                            int end = Integer.parseInt(split[1]);
+                            //这个单位是元
+                            int i = RandomUtil.randomInt(start, end);
+                            //实际金额 转换单位分
+                            Money m = new Money(i);
+                            int amount = Math.toIntExact(m.getCent()) - RandomUtil.randomInt(1, 100);
+                            log.info("实际支付金额:{}", amount);
+                            order.setMoney(amount);
+                            order.setMoneyStr(String.valueOf(amount));
+                            //原价 转换单位分
+                            order.setPrice(Math.toIntExact(m.getCent()));
+                            order.setPayTag(m.toString());
+                        }
+                    }
+                } else {
+                    if (StringUtils.isNotBlank(main)) {
+                        Money m = new Money(main);
+                        order.setMoney((int) m.getCent());
+                        //原价 转换单位分
+                        order.setPrice(Math.toIntExact(m.getCent()));
+                        order.setPayTag(m.toString());
+                    } else {
+                        String money = dto.getMoney();
+                        String[] split = money.split("-");
+                        int start = Integer.parseInt(split[0]);
+                        int end = Integer.parseInt(split[1]);
+                        //这个单位是元
+                        int i = RandomUtil.randomInt(start, end);
+                        //实际金额 转换单位分
+                        Money m = new Money(i);
+                        int amount = Math.toIntExact(m.getCent()) - RandomUtil.randomInt(1, 100);
+                        log.info("实际支付金额:{}", amount);
+                        order.setMoney(amount);
+                        order.setMoneyStr(String.valueOf(amount));
+                        //原价 转换单位分
+                        order.setPrice(Math.toIntExact(m.getCent()));
+                        order.setPayTag(m.toString());
+                    }
+                }
+            } else {
+
+
+                //商品价格区间 原价
+                String money = dto.getMoney();
+                String[] split = money.split("-");
+                int start = Integer.parseInt(split[0]);
+                int end = Integer.parseInt(split[1]);
+                //这个单位是元
+                int i = RandomUtil.randomInt(start, end);
+                //实际金额 转换单位分
+                Money m = new Money(i);
+                int amount = Math.toIntExact(m.getCent()) - RandomUtil.randomInt(1, 100);
+                log.info("实际支付金额:{}", amount);
+                order.setMoney(amount);
+                order.setMoneyStr(String.valueOf(amount));
+                //原价 转换单位分
+                order.setPrice(Math.toIntExact(m.getCent()));
+                order.setPayTag(m.toString());
+            }
+
             order.setOpenId(openId);
-            //备注
-            order.setPayTag(m.toString());
             //支付类型
             order.setType(Integer.valueOf(WE_CHAT_PAY.getCode()));
             order.setTypeStr(WE_CHAT_PAY.getDesc());
@@ -321,6 +411,12 @@ public class VideoController extends BaseController {
         }
     }
 
+    @Data
+    public class PriceParam extends ToString {
+        private String price;
+        private String id;
+    }
+
     private void convert(Date now, ShipinDTO dto) {
         Date createTime = dto.getCreateTime();
         if (createTime != null) {
@@ -336,6 +432,19 @@ public class VideoController extends BaseController {
         }
     }
 
+    List<PriceParam> convert(JSONArray array) {
+        ArrayList<PriceParam> objects = Lists.newArrayList();
+        for (Object ite : array) {
+            JSONObject a = (JSONObject) ite;
+            String price = a.getString("price");
+            String id = a.getString("id");
+            PriceParam priceParam = new PriceParam();
+            priceParam.setId(id);
+            priceParam.setPrice(price);
+            objects.add(priceParam);
+        }
+        return objects;
+    }
 
     @GetMapping("/tips")
 
