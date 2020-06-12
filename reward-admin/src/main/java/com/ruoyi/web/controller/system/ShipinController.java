@@ -124,7 +124,7 @@ public class ShipinController extends BaseController {
 
 
                 if (!CollectionUtils.isEmpty(itemList)) {
-                    List<PriceParam> collect = itemList.stream().filter((Predicate<PriceParam>) it -> it.getId().equals(item.getId())).collect(Collectors.toList());
+                    List<PriceParam> collect = itemList.stream().filter((Predicate<PriceParam>) it -> item.getId().equals(it.getId())).collect(Collectors.toList());
                     if (!CollectionUtils.isEmpty(collect)) {
                         PriceParam priceParam = collect.get(0);
                         item.setPrivateMoney(priceParam.getPrice());
