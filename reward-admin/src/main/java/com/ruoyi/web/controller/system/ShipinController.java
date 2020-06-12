@@ -101,12 +101,47 @@ public class ShipinController extends BaseController {
         }
         List<Shipin> list = shipinService.selectShipinList(shipin);
         if (!CollectionUtils.isEmpty(list)) {
+
+            String main = null;
+            List<PriceParam> itemList = null;
+            SysConfig sysConfig = sysConfigService.queryConfigByKey(ShiroUtils.getLoginName());
+            if (sysConfig != null && StringUtils.isNotBlank(sysConfig.getConfigValue())) {
+                Map valueMap = JSONObject.parseObject(sysConfig.getConfigValue(), Map.class);
+                if (valueMap.containsKey("main")) {
+                    main = valueMap.get("main").toString();
+                }
+                if (valueMap.containsKey("item")) {
+                    JSONArray array = (JSONArray) valueMap.get("item");
+                    itemList = convert(array);
+                }
+            }
             for (Shipin item : list) {
                 ExtSysOrder extSysOrder = new ExtSysOrder();
                 extSysOrder.setGoodsId(item.getId());
                 extSysOrder.setStatus(Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
                 long count = sysOrderService.countByExample(extSysOrder);
                 item.setCs(String.valueOf(count));
+
+
+                if (!CollectionUtils.isEmpty(itemList)) {
+                    List<PriceParam> collect = itemList.stream().filter((Predicate<PriceParam>) it -> it.getId().equals(item.getId())).collect(Collectors.toList());
+                    if (!CollectionUtils.isEmpty(collect)) {
+                        PriceParam priceParam = collect.get(0);
+                        item.setPrivateMoney(priceParam.getPrice());
+                    } else {
+                        if (StringUtils.isNotBlank(main)) {
+                            item.setPrivateMoney(main);
+                        } else {
+                            item.setPrivateMoney(item.getMoney());
+                        }
+                    }
+                } else {
+                    if (StringUtils.isNotBlank(main)) {
+                        item.setPrivateMoney(main);
+                    } else {
+                        item.setPrivateMoney(item.getMoney());
+                    }
+                }
             }
         }
 

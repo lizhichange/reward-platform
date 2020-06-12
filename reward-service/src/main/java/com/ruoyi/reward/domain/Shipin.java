@@ -154,9 +154,17 @@ public class Shipin implements Serializable {
 
 
     // 视图1
-    public interface OneView{};
+    public interface OneView {
+    }
+
+
     // 视图2 继承视图1
-    public interface TwoView extends OneView{};
+    public interface TwoView extends OneView {
+    }
+
+
+
+    private String privateMoney;
 
     @Override
     public String toString() {
