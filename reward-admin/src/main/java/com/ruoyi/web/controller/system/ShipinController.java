@@ -182,7 +182,7 @@ public class ShipinController extends BaseController {
             Long configId = item.getConfigId();
             SysConfig config = new SysConfig();
             config.setConfigId(configId);
-            String configValue = config.getConfigValue();
+            String configValue = item.getConfigValue();
             if (StringUtils.isNotBlank(configValue)) {
                 Map<String, Object> valueMap = JSONObject.parseObject(configValue, Map.class);
                 ArrayList<PriceParam> newArrayList = Lists.newArrayList();
@@ -246,7 +246,7 @@ public class ShipinController extends BaseController {
             config.setConfigId(configId);
             Map<String, Object> map = Maps.newHashMap();
             map.put("main", param.getPrice());
-            String configValue = config.getConfigValue();
+            String configValue = item.getConfigValue();
             if (StringUtils.isNotBlank(configValue)) {
                 Map<String, Object> valueMap = JSONObject.parseObject(configValue, Map.class);
                 if (valueMap.containsKey("item")) {
