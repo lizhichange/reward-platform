@@ -175,6 +175,7 @@
                             if (r.code === 0) {
                                  $.modal.closeLoading();
                                  layer.close(index);
+                                 $.table.refresh();
                             } else {
                                 $.modal.closeLoading();
                                 $.modal.msg(r.msg);
@@ -216,6 +217,7 @@
                             if (r.code === 0) {
                                  $.modal.closeLoading();
                                  layer.close(index);
+                                 $.table.refresh();
                             } else {
                                 $.modal.closeLoading();
                                 $.modal.msg(r.msg);
