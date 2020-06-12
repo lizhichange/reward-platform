@@ -44,11 +44,6 @@
                 <a class="btn btn-success" onclick="$.operate.addTab()" shiro:hasPermission="system:shipin:add">
                     <i class="fa fa-plus"></i> 新增
                 </a>
-                <a class="btn btn-primary single disabled" onclick="$.operate.editTab()"
-                   shiro:hasPermission="system:shipin:edit">
-                    <i class="fa fa-edit"></i> 修改
-                </a>
-
                 <button class="btn btn-primary" id="button-open-9" type="button">一键发布价格</button>
                 <a class="btn btn-danger multiple disabled" onclick="javascript:batchForceLogout()">
                     <i class="fa fa-sign-out"></i> 修改价格
@@ -225,6 +220,8 @@
 
             });
     }
+
+
 
 
 </script>
