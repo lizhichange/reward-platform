@@ -44,7 +44,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
 
 /**
@@ -184,17 +184,18 @@ public class ShipinController extends BaseController {
             config.setConfigId(configId);
             String configValue = item.getConfigValue();
             if (StringUtils.isNotBlank(configValue)) {
-                Map<String, Object> valueMap = JSONObject.parseObject(configValue, Map.class);
+                Map valueMap = JSONObject.parseObject(configValue, Map.class);
                 ArrayList<PriceParam> newArrayList = Lists.newArrayList();
                 if (valueMap.containsKey("item")) {
-                    List<PriceParam> itemList = (List<PriceParam>) valueMap.get("item");
+                    JSONArray array = (JSONArray) valueMap.get("item");
+                    List<PriceParam> itemList = convert(array);
                     if (!ArrayUtils.isEmpty(ids)) {
                         for (String id : ids) {
-                            Stream<PriceParam> stream = itemList.stream().filter((Predicate<PriceParam>) it -> it.getId().equals(id));
+                            List<PriceParam> collect = itemList.stream().filter((Predicate<PriceParam>) it -> it.getId().equals(id)).collect(Collectors.toList());
                             //不为空
-                            if (stream.findFirst().isPresent()) {
+                            if (!CollectionUtils.isEmpty(collect)) {
+                                PriceParam priceParam = collect.get(0);
                                 //modify
-                                PriceParam priceParam = stream.findFirst().get();
                                 priceParam.setPrice(param.getPrice());
                                 newArrayList.add(priceParam);
                                 //原集合remove
@@ -360,6 +361,21 @@ public class ShipinController extends BaseController {
         sysOrder.setGoodsId(id);
         long count = sysOrderService.countByExample(sysOrder);
         return count == 0;
+
+    }
+
+    List<PriceParam> convert(JSONArray array) {
+        ArrayList<PriceParam> objects = Lists.newArrayList();
+        for (Object ite : array) {
+            JSONObject a = (JSONObject) ite;
+            String price = a.getString("price");
+            String id = a.getString("id");
+            PriceParam priceParam = new PriceParam();
+            priceParam.setId(id);
+            priceParam.setPrice(price);
+            objects.add(priceParam);
+        }
+        return objects;
     }
 
 }
