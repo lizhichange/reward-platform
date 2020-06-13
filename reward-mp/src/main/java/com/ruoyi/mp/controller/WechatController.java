@@ -44,8 +44,9 @@ public class WechatController extends BaseController {
 
     @GetMapping("/wxShare")
     public String wxShare(HttpServletRequest request, ModelMap modelMap) throws WxErrorException {
-        String referer = request.getHeader("referer");
-        WxJsapiSignature jsapiSignature = wxMpService.createJsapiSignature(referer);
+
+        String url = request.getScheme() + "://" + request.getServerName() + request.getRequestURI();
+        WxJsapiSignature jsapiSignature = wxMpService.createJsapiSignature(url);
         modelMap.put("appId", jsapiSignature.getAppId());
         modelMap.put("nonceStr", jsapiSignature.getNonceStr());
         modelMap.put("timestamp", jsapiSignature.getTimestamp());
