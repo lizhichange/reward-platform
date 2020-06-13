@@ -556,9 +556,9 @@
             </ul>
         </div>
         <div class="box tags-cloud">
-            <a  class="highlight" href="/video" style="font-weight: bold; font-size: 13px;">首页</a>
+            <a  class="highlight" href="/video" style="font-weight: bold; font-size: 13px;">首页</a> &nbsp;&nbsp;
             <a class="highlight" th:each="item,stat:${categoryList}"
-               th:style="${(stat.index+1) == stat.size} ?'color: #bfd128':'font-weight: bold; font-size: 13px;' "
+               th:style="${(stat.index+1) == stat.size} ?'color: #bfd128;font-weight: bold; font-size: 13px;':'font-weight: bold; font-size: 13px;' "
                th:href="@{'/video/category?categoryId='+${item.categoryId}}">[[${item.categoryName}]] &nbsp;&nbsp;
             </a>
         </div>
