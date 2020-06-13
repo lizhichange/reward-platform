@@ -7,10 +7,12 @@ import org.near.toolkit.common.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -20,12 +22,16 @@ import java.util.List;
 public class IndexController extends BaseController {
     private final static Logger LOGGER = LoggerFactory.getLogger(IndexController.class);
 
-    @GetMapping("/index")
-    public String index(@RequestParam(value = "userid", required = false) String userid) {
+    @GetMapping("/")
+    public String index(@RequestParam(value = "userid", required = false) String userid,
+                        HttpServletRequest request, ModelMap modelMap) {
+        String url = request.getScheme() + "://" + request.getServerName() + request.getRequestURI();
+        modelMap.put("url", url);
+        modelMap.put("userid", userid);
         return "index";
     }
 
-    @GetMapping("/")
+    @GetMapping("/index")
     public String render(@RequestParam(value = "userid", required = false) String userid) {
         String user = StringUtil.isBlank(userid) ? "" : userid;
         SysWebMainDTO webMain = new SysWebMainDTO();
