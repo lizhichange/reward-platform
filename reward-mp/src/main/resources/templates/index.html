@@ -10,8 +10,8 @@
 
     <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
     <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
-    
-    <input type="hidden" th:value="${userid}" name="userid" id="userid"/>
+
+    <input type="hidden" th:value="${userid}" name="userid" id="userid" />
     <style type="text/css">
         body,
         p,
@@ -210,6 +210,19 @@
 <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
 
 <script type="text/javascript">
+
+    $(function () {
+        var isPageHide = false;
+        window.addEventListener('pageshow', function () {
+            if (isPageHide) {
+                window.location.reload();
+            }
+        });
+        window.addEventListener('pagehide', function () {
+            isPageHide = true;
+        });
+    })
+
     $(function () {
         $.showLoading("加载中");
         $.ajax({
@@ -222,12 +235,13 @@
                 "url": location.href.split("#")[0]
             },
             success: function (data) {
+                $.hideLoading();
                 //设置配置文件
                 wx.config({
                     debug: false,       //调试模式是否开启，开启则在PC端控制台console里面打印，在手机端就是弹出状态吗
                     appId: data.appId,
                     timestamp: data.timestamp,
-                    nonceStr:  data.nonceStr,
+                    nonceStr: data.nonceStr,
                     signature: data.signature,
                     jsApiList: [
                         'onMenuShareTimeline',       //分享到朋友圈
@@ -248,12 +262,13 @@
                             console.log('分享成功')
                         }
                     });
-                    window.location.href="/index?userid="+$("#userid").val();
+                    window.location.href = "/index?userid=" + $("#userid").val();
                 });
+                window.location.href = "/index?userid=" + $("#userid").val();
             },
             error: function () {
                 console.log("二次分享错误！");
-                window.location.href="/index?userid="+$("#userid").val();
+                window.location.href = "/index?userid=" + $("#userid").val();
             }
         });
     });
