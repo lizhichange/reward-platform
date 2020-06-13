@@ -17,6 +17,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -44,15 +45,24 @@ public class WechatController extends BaseController {
 
     @GetMapping("/wxShare")
     public String wxShare(HttpServletRequest request, ModelMap modelMap) throws WxErrorException {
-
         String url = request.getScheme() + "://" + request.getServerName() + request.getRequestURI();
         WxJsapiSignature jsapiSignature = wxMpService.createJsapiSignature(url);
+        create(modelMap, jsapiSignature);
+        return "wxShare";
+    }
+
+    @GetMapping("/createJsapiSignature")
+    @ResponseBody
+    public WxJsapiSignature createJsapiSignature(HttpServletRequest request, @RequestParam("url") String url) throws WxErrorException {
+        return wxMpService.createJsapiSignature(url);
+    }
+
+    private void create(ModelMap modelMap, WxJsapiSignature jsapiSignature) {
         modelMap.put("appId", jsapiSignature.getAppId());
         modelMap.put("nonceStr", jsapiSignature.getNonceStr());
         modelMap.put("timestamp", jsapiSignature.getTimestamp());
         modelMap.put("url", jsapiSignature.getUrl());
         modelMap.put("signature", jsapiSignature.getSignature());
-        return "wxShare";
     }
 
     @GetMapping("/auth")
