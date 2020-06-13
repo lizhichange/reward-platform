@@ -68,7 +68,9 @@ public class VideoController extends BaseController {
     @Autowired
     private SysWebMainFacadeClient sysWebMainFacadeClient;
 
-    private void xxx(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
+    private void xxx(@RequestParam(value = "userid", required = false) String userid,
+                     @RequestParam(value = "categoryId", required = false) String categoryId,
+                     ModelMap modelmap) {
         log.info("userId:{}", userid);
         ShipinDTO shipinDTO = new ShipinDTO();
         String orderByClause = " create_time desc ";
@@ -78,24 +80,30 @@ public class VideoController extends BaseController {
         list.sort((o1, o2) -> o2.getCreateTime().compareTo(o1.getCreateTime()));
         modelmap.addAttribute("list", list);
         getCategory(modelmap);
+        modelmap.addAttribute("categoryId", categoryId);
     }
 
     @GetMapping("/redirect")
     @WxPnUserAuth
-    public String redirect(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
-        xxx(userid, modelmap);
+    public String redirect(@RequestParam(value = "userid", required = false) String userid, @RequestParam(value = "categoryId", required = false) String categoryId,
+                           ModelMap modelmap) {
+        xxx(userid, categoryId, modelmap);
         return prefix + "/index";
     }
 
     @GetMapping("/index")
     @WxPnUserAuth
-    public String render(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
-        return index(userid, modelmap);
+    public String render(@RequestParam(value = "userid", required = false) String userid,
+                         @RequestParam(value = "categoryId", required = false) String categoryId,
+                         ModelMap modelmap) {
+        return index(userid, categoryId, modelmap);
     }
 
     @GetMapping()
     @WxPnUserAuth
-    public String index(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
+    public String index(@RequestParam(value = "userid", required = false) String userid,
+                        @RequestParam(value = "categoryId", required = false) String categoryId,
+                        ModelMap modelmap) {
         String user = StringUtil.isBlank(userid) ? "" : userid;
         SysWebMainDTO webMain = new SysWebMainDTO();
         webMain.setMainStatus(WebMainStatus.OK.getCode());
@@ -113,7 +121,7 @@ public class VideoController extends BaseController {
             log.info("redirect.url:{}", url);
             return "redirect:" + url;
         }
-        return redirect(userid, modelmap);
+        return redirect(userid, categoryId, modelmap);
     }
 
     @GetMapping("/category")
