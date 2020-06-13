@@ -601,30 +601,6 @@
             </div>
             <div class="box">
                 <div class="list-videos">
-                    <div class="margin-fix" id="list_videos_videos_watched_right_now_items">
-                        <div class="item  " th:each="role:${list}">
-                            <a th:href="@{'/video/detail?id='+${role.id}+'&author='+${role.userid}}"
-                               th:title="${role.name}">
-                                <div class="img">
-                                    <img class="thumb lazy-load" th:src="${role.url}"
-                                         th:data-original="${role.url}"
-                                         th:alt="${role.name}" data-cnt="5"
-                                         width="180" height="135">
-
-                                </div>
-                                <strong class="title">
-                                    [[${role.name}]]
-                                </strong>
-                                <!--                                <div class="wrap">-->
-                                <!--                                    <div class="duration">[[${role.shijianStr}]]</div>-->
-                                <!--                                </div>-->
-                                <!--                                <div class="wrap">-->
-                                <!--                                    <div class="added"><em>[[${role.diffDays}]]</em></div>-->
-                                <!--                                    <div class="views">[[${role.click}]]</div>-->
-                                <!--                                </div>-->
-                            </a>
-                        </div>
-                    </div>
                 </div>
             </div>
 
