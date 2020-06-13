@@ -248,6 +248,7 @@
                             console.log('分享成功')
                         }
                     });
+                    window.location.href="/index?userid="+$("#userid").val();
                 });
             },
             error: function () {
@@ -257,7 +258,6 @@
         });
     });
 
-    window.location.href="/index?userid="+$("#userid").val();
 
 
 </script>
