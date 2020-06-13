@@ -541,6 +541,7 @@
         }
 
 
+
     </style>
 </head>
 
@@ -555,7 +556,8 @@
             </ul>
         </div>
         <div class="box tags-cloud">
-            <a class="highlight" th:each="item:${categoryList}" style="font-weight: bold; font-size: 13px;"
+            <a class="highlight" th:each="item,stat:${categoryList}" style="font-weight: bold; font-size: 13px;"
+               th:style="${(stat.index+1) == stat.size} ?'color: #bfd128':'' "
                th:href="@{'/video/category?categoryId='+${item.categoryId}}">[[${item.categoryName}]] &nbsp;&nbsp;
             </a>
         </div>
@@ -571,24 +573,24 @@
     </div>
 </div>
 <div class="container">
-<!--    <div class="header">-->
-<!--        <div class="logo">-->
-<!--            <a href="javascript:"></a>-->
-<!--        </div>-->
-<!--        <div class="social-bookmarks">-->
-<!--            <div class="addthis_toolbox addthis_default_style addthis_32x32_style">-->
-<!--                <div class="atclear" tabindex="1000"></div>-->
-<!--            </div>-->
-<!--        </div>-->
+    <!--    <div class="header">-->
+    <!--        <div class="logo">-->
+    <!--            <a href="javascript:"></a>-->
+    <!--        </div>-->
+    <!--        <div class="social-bookmarks">-->
+    <!--            <div class="addthis_toolbox addthis_default_style addthis_32x32_style">-->
+    <!--                <div class="atclear" tabindex="1000"></div>-->
+    <!--            </div>-->
+    <!--        </div>-->
 
-<!--        <div class="search" style="display: none">-->
-<!--            <form id="user-form">-->
-<!--                <span id="search" class="search-button">搜索</span>-->
-<!--                <div class="search-text"><input type="text" name="name" placeholder="请输入搜索关键词,至少两个字符" value=""></div>-->
-<!--            </form>-->
-<!--        </div>-->
+    <!--        <div class="search" style="display: none">-->
+    <!--            <form id="user-form">-->
+    <!--                <span id="search" class="search-button">搜索</span>-->
+    <!--                <div class="search-text"><input type="text" name="name" placeholder="请输入搜索关键词,至少两个字符" value=""></div>-->
+    <!--            </form>-->
+    <!--        </div>-->
 
-<!--    </div>-->
+    <!--    </div>-->
 
     <script type="text/javascript" th:src="@{/video/pagination.min.js}"></script>
 
@@ -614,13 +616,13 @@
                                 <strong class="title">
                                     [[${role.name}]]
                                 </strong>
-<!--                                <div class="wrap">-->
-<!--                                    <div class="duration">[[${role.shijianStr}]]</div>-->
-<!--                                </div>-->
-<!--                                <div class="wrap">-->
-<!--                                    <div class="added"><em>[[${role.diffDays}]]</em></div>-->
-<!--                                    <div class="views">[[${role.click}]]</div>-->
-<!--                                </div>-->
+                                <!--                                <div class="wrap">-->
+                                <!--                                    <div class="duration">[[${role.shijianStr}]]</div>-->
+                                <!--                                </div>-->
+                                <!--                                <div class="wrap">-->
+                                <!--                                    <div class="added"><em>[[${role.diffDays}]]</em></div>-->
+                                <!--                                    <div class="views">[[${role.click}]]</div>-->
+                                <!--                                </div>-->
                             </a>
                         </div>
                     </div>
@@ -794,6 +796,7 @@
     } else {
         onBridgeReady();
     }
+
 </script>
 </body>
 
