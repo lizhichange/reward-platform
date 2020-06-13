@@ -20,8 +20,13 @@ import java.util.List;
 public class IndexController extends BaseController {
     private final static Logger LOGGER = LoggerFactory.getLogger(IndexController.class);
 
-    @GetMapping("/")
+    @GetMapping("/index")
     public String index(@RequestParam(value = "userid", required = false) String userid) {
+        return "index";
+    }
+
+    @GetMapping("/")
+    public String render(@RequestParam(value = "userid", required = false) String userid) {
         String user = StringUtil.isBlank(userid) ? "" : userid;
         SysWebMainDTO webMain = new SysWebMainDTO();
         webMain.setMainStatus(WebMainStatus.OK.getCode());
