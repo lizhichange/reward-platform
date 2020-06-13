@@ -200,10 +200,9 @@
 
 <body>
     <article class="charge">
-        <h1>请等待。。。</h1>
+
     </article>
-    <article class="charge" style="display: none">
-    </article>
+  
 </body>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
 <script type="text/javascript" src="/js/zepto.min.js"></script>
@@ -212,6 +211,7 @@
 
 <script type="text/javascript">
     $(function () {
+        $.showLoading("加载中");
         $.ajax({
             url: "/wechat/createJsapiSignature",
             async: true,
