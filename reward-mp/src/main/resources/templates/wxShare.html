@@ -201,6 +201,11 @@
 
 
 
+
+
+
+
+
     </style>
 
 </head>
@@ -220,6 +225,8 @@
 
 <script type="text/javascript">
     $(function () {
+
+    var  url="[[${url}]]";
     //设置配置文件
     wx.config({
             debug: false,       //调试模式是否开启，开启则在PC端控制台console里面打印，在手机端就是弹出状态吗
@@ -241,16 +248,21 @@
             wx.onMenuShareAppMessage({
                 title: '點擊觀看,完整影視', // 分享标题
                 desc: '今日更新，拉無人免提', // 分享描述
-                link: "http://yuluncc.top/", // 分享链接，注意：该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                link: url, // 分享链接，注意：该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
                 imgUrl: "http://pic.616pic.com/ys_b_img/00/04/24/kjweTwwcFM.jpg", // 分享图标
                 success: function (res) {
-                    alert('分享成功')
+                    console.log('分享成功')
                 }
             });
         });
 
 
     });
+
+
+
+
+
 
 
 
