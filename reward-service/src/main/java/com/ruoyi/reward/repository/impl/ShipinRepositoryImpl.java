@@ -59,7 +59,7 @@ public class ShipinRepositoryImpl implements ShipinRepository {
         if (shipinDTO.getCategoryId() != null) {
             criteria.andCategoryIdEqualTo(shipinDTO.getCategoryId());
         }
-        if (CollectionUtils.isEmpty(shipinDTO.getIds())) {
+        if (!CollectionUtils.isEmpty(shipinDTO.getIds())) {
             criteria.andIdIn(shipinDTO.getIds());
         }
         return example;

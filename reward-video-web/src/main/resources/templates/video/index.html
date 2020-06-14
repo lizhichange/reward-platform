@@ -614,8 +614,6 @@
     <input type="hidden" id="categoryId" name="categoryId" th:value="${categoryId}" />
 
     <script type="text/javascript">
-
-
         $('#example-3').pagination({
             total: 10, // 总数据条数
             current: 1, // 当前页码
@@ -687,7 +685,7 @@
                 url: '/video/buy',
                 data: {
                     "pageNum": 1,
-                    "pageSize": 48
+                    "pageSize": 100
                 },
                 success: function (res) {
                     $.hideLoading();
