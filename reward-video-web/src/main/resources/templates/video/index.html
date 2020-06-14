@@ -614,7 +614,7 @@
     <script type="text/javascript">
 
         $(".category").on('click', function () {
-          var categoryId=this.attr("data");
+          var categoryId=$(this).attr("data");
             var params = {
                 // 传递参数查询参数
                 current: 1,
