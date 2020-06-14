@@ -693,6 +693,8 @@
                     $.hideLoading();
                     if (res && res.code === 0) {
                         $("#list_videos_most_recent_videos_items").empty();
+                        $("#list_videos_most_recent_videos_pagination").empty();
+
                         let html = "";
                         $.each(res.rows, function (i, row) {
                             html += ' <div class="item  ">'
@@ -737,6 +739,9 @@
                     $.hideLoading();
                     if (res && res.code === 0) {
                         $("#list_videos_most_recent_videos_items").empty();
+                        
+                        $("#list_videos_most_recent_videos_pagination").empty();
+
                         let html = "";
                         $.each(res.rows, function (i, row) {
                             html += ' <div class="item  ">'
