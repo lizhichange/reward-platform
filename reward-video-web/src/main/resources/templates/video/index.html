@@ -613,16 +613,6 @@
 
     <script type="text/javascript">
 
-        $(".category").on('click', function () {
-          var categoryId=$(this).attr("data");
-            var params = {
-                // 传递参数查询参数
-                current: 1,
-                length: 1,
-                total: 1
-            };
-            
-        });
 
         $('#example-3').pagination({
             total: 10, // 总数据条数
@@ -688,18 +678,18 @@
             }
         });
 
-        $("#search").click(function () {
-            $.showLoading("数据加载中");
-            var name = $("input[name='name']").val();
-            var categoryId = $("input[categoryId='categoryId']").val();
 
+        $(".category").on('click', function () {
+            $.showLoading("数据加载中");
+            var categoryId = $(this).attr("data");
+            var name = $("input[name='name']").val();
             $.ajax({
                 dataType: 'json',
                 type: 'post',
                 url: '/video/list',
                 data: {
                     "name": name,
-                    "categoryId":categoryId,
+                    "categoryId": categoryId,
                     "pageNum": 1,
                     "pageSize": 48
                 },
