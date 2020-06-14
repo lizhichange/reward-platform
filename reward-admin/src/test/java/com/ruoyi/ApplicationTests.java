@@ -47,12 +47,8 @@ public class ApplicationTests {
     public void testOne() {
         List<Shipin> list = shipinMapper.selectByExample(new ShipinExample());
         for (Shipin shipin : list) {
-
             for (int i = 0; i < 1000; i++) {
-
-
                 Shipin newShi = new Shipin();
-
                 newShi.setMoney(shipin.getMoney());
                 newShi.setSj(shipin.getSj());
                 newShi.setCs(shipin.getCs());
