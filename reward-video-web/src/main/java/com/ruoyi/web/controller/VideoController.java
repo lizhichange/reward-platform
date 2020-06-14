@@ -228,10 +228,13 @@ public class VideoController extends BaseController {
         sysOrderDTO.setOpenId(openId);
         sysOrderDTO.setStatus(Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
         List<SysOrderDTO> listExt = sysOrderFacadeClient.selectSysOrderListExt(sysOrderDTO);
-        if (!CollectionUtils.isEmpty(listExt)) {
-            List<Integer> collect = listExt.stream().map(SysOrderDTO::getId).collect(Collectors.toList());
-            shipinDTO.setIds(collect);
+        if (CollectionUtils.isEmpty(listExt)) {
+            TableDataInfo dataTable = getDataTable(Lists.newArrayList());
+            dataTable.setTotal(0);
+            return dataTable;
         }
+        List<Integer> collect = listExt.stream().map(SysOrderDTO::getId).collect(Collectors.toList());
+        shipinDTO.setIds(collect);
         String orderByClause = " create_time desc ";
         log.info("shipinDTO:{}", shipinDTO);
         TPageResult<ShipinDTO> result = shipinFacadeClient.queryPage(pageNum, pageSize, shipinDTO, orderByClause);
