@@ -609,7 +609,7 @@
 
         </div>
     </div>
-    <input type="hidden" id="categoryId" th:value="${categoryId}" />
+    <input type="hidden" id="categoryId" name="categoryId" th:value="${categoryId}" />
 
     <script type="text/javascript">
 
@@ -621,7 +621,7 @@
                 length: 1,
                 total: 1
             };
-            $('#example-3').pagination('refresh', params);
+            
         });
 
         $('#example-3').pagination({
@@ -691,19 +691,22 @@
         $("#search").click(function () {
             $.showLoading("数据加载中");
             var name = $("input[name='name']").val();
+            var categoryId = $("input[categoryId='categoryId']").val();
+
             $.ajax({
                 dataType: 'json',
                 type: 'post',
                 url: '/video/list',
                 data: {
                     "name": name,
+                    "categoryId":categoryId,
                     "pageNum": 1,
-                    "pageSize": 24
+                    "pageSize": 48
                 },
                 success: function (res) {
                     $.hideLoading();
                     if (res && res.code === 0) {
-                        $("#list_videos_videos_watched_right_now_items").empty();
+                        $("#list_videos_most_recent_videos_items").empty();
                         let html = "";
                         $.each(res.rows, function (i, row) {
                             html += ' <div class="item  ">'
