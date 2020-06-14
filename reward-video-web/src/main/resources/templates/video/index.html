@@ -557,6 +557,8 @@
                     th:style="${(stat.index+1) == stat.size} ?'color: #bfd128;font-weight: bold; font-size: 13px;':'font-weight: bold; font-size: 13px;' "
                     href="javascript:void(0); ">[[${item.categoryName}]] &nbsp;&nbsp;
                 </a>
+                <a class="highlight" href="/video" id="buy" style="font-weight: bold; color: #bfd128; font-size: 13px;">已购</a> &nbsp;&nbsp;
+
             </div>
             <!--        <div class="member-links">-->
             <!--            <ul>-->
@@ -677,8 +679,46 @@
                 });
             }
         });
-
-
+        
+        $("#buy").on('click', function () {
+            $.ajax({
+                dataType: 'json',
+                type: 'post',
+                url: '/video/buy',
+                data: {
+                    "pageNum": 1,
+                    "pageSize": 48
+                },
+                success: function (res) {
+                    $.hideLoading();
+                    if (res && res.code === 0) {
+                        $("#list_videos_most_recent_videos_items").empty();
+                        let html = "";
+                        $.each(res.rows, function (i, row) {
+                            html += ' <div class="item  ">'
+                                + '<a href="/video/detail?id=' + row.id + '&author=' + row.userid + '" title="' + row.name + '"> '
+                                + '    <div class="img">'
+                                + '        <img class="thumb lazy-load" src="' + row.url + '"  data-original="' + row.url + '" alt="' + row.name + '" data-cnt="5" width="180" height="135">'
+                                + '    </div>'
+                                + '    <strong class="title">' + row.name + '</strong>'
+                                // + '    <div class="wrap">'
+                                // + '        <div class="duration">' + row.shijianStr + '</div>'
+                                // + '    </div>'
+                                // + '    <div class="wrap">'
+                                // + '        <div class="added"><em>' + row.diffDays + '</em></div>'
+                                // + '       <div class="views">' + row.click + '</div>'
+                                // + '   </div>'
+                                + '   </a>'
+                                + '   </div>';
+                        });
+                        $("#list_videos_most_recent_videos_items").html(html);
+                    } else {
+                        $.hideLoading();
+                        $.toast(r.msg);
+                    }
+                }
+            });
+        });
         $(".category").on('click', function () {
             $.showLoading("数据加载中");
             var categoryId = $(this).attr("data");

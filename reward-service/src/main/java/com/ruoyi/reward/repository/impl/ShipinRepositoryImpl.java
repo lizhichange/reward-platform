@@ -10,6 +10,7 @@ import com.ruoyi.reward.repository.ShipinRepository;
 import org.near.toolkit.common.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -58,7 +59,9 @@ public class ShipinRepositoryImpl implements ShipinRepository {
         if (shipinDTO.getCategoryId() != null) {
             criteria.andCategoryIdEqualTo(shipinDTO.getCategoryId());
         }
-
+        if (CollectionUtils.isEmpty(shipinDTO.getIds())) {
+            criteria.andIdIn(shipinDTO.getIds());
+        }
         return example;
     }
 }

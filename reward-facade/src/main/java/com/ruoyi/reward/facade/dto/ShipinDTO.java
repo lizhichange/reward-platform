@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -21,6 +22,7 @@ public class ShipinDTO implements Serializable {
      */
     private Integer id;
 
+    private List<Integer> ids;
     /**
      * shipin.money
      * 资源设置的打赏金额

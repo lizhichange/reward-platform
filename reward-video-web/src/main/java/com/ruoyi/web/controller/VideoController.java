@@ -218,6 +218,31 @@ public class VideoController extends BaseController {
         return dataTable;
     }
 
+    @PostMapping("/buy")
+    @ResponseBody
+    public TableDataInfo buy(ShipinDTO shipinDTO, PageForm pageForm) {
+        String openId = SessionContext.getOpenId();
+        int pageNum = pageForm.getPageNum();
+        int pageSize = pageForm.getPageSize();
+        SysOrderDTO sysOrderDTO = new SysOrderDTO();
+        sysOrderDTO.setOpenId(openId);
+        sysOrderDTO.setStatus(Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
+        List<SysOrderDTO> listExt = sysOrderFacadeClient.selectSysOrderListExt(sysOrderDTO);
+        if (!CollectionUtils.isEmpty(listExt)) {
+            List<Integer> collect = listExt.stream().map(SysOrderDTO::getId).collect(Collectors.toList());
+            shipinDTO.setIds(collect);
+        }
+        String orderByClause = " create_time desc ";
+        log.info("shipinDTO:{}", shipinDTO);
+        TPageResult<ShipinDTO> result = shipinFacadeClient.queryPage(pageNum, pageSize, shipinDTO, orderByClause);
+        List<ShipinDTO> list = result.getValues();
+        convert(list);
+        TableDataInfo dataTable = getDataTable(list);
+        dataTable.setTotal(result.getTotalRows());
+        return dataTable;
+    }
+
+
     protected TableDataInfo getDataTable(List<?> list) {
         TableDataInfo rspData = new TableDataInfo();
         rspData.setCode(0);

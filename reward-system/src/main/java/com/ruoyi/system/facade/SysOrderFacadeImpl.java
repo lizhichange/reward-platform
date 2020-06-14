@@ -95,6 +95,9 @@ public class SysOrderFacadeImpl implements SysOrderFacade {
         if (StringUtil.isNotBlank(sysOrder.getOrderId())) {
             criteria.andOrderIdEqualTo(sysOrder.getOrderId());
         }
+        if (StringUtil.isNotBlank(sysOrder.getOpenId())) {
+            criteria.andOpenIdEqualTo(sysOrder.getOpenId());
+        }
 
         List<ExtSysOrder> list = extSysOrderMapper.selectByExample(example);
         if (CollectionUtils.isEmpty(list)) {
