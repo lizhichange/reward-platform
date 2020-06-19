@@ -65,7 +65,7 @@ ruoyi:
   # 版权年份
   copyrightYear: 2019
   # 实例演示开关
-  demoEnabled: true
+  demoEnabled: false
   # 文件路径 示例（ Windows配置D:/ruoyi/uploadPath，Linux配置 /home/ruoyi/uploadPath）
   profile: /home/fulihui/uploadPath
   # 获取ip地址开关
@@ -107,17 +107,17 @@ logging:
 
 reward-service:
   ribbon:
-    listOfServers: http://admin:admin@127.0.0.1
+    listOfServers: http://admin:admin@eureka.grkfcs.cn
 
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://admin:admin@127.0.0.1:8761/eureka/
+      defaultZone: http://admin:admin@eureka.grkfcs.cn/eureka/
     fetchRegistry: true
   instance:
     preferIpAddress: true
-    ipAddress: 127.0.0.1
-    nonSecurePort: 8761
+    ipAddress: admin.grkfcs.cn
+    nonSecurePort: 80
     lease-renewal-interval-in-seconds: 10
     lease-expiration-duration-in-seconds: 90
     instance-id: ${eureka.client.ipAddress}:${spring.application.name}:${eureka.instance.nonSecurePort}

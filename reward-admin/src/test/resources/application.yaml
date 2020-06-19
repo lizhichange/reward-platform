@@ -53,10 +53,6 @@ spring:
       enabled: true
   application:
     name: reward-service
-  security:
-    user:
-      name: admin
-      password: admin
 # MyBatis
 mybatis:
   # 搜索指定包别名
@@ -117,47 +113,6 @@ xss:
   urlPatterns: /system/*,/monitor/*,/tool/*
 
 
-management:
-  endpoint:
-    dubbo-configs:
-      enabled: true
-    dubbo:
-      enabled: true
-    dubbo-services:
-      enabled: true
-    dubbo-properties:
-      enabled: true
-    dubbo-shutdown:
-      enabled: true
-    dubbo-references:
-      enabled: true
-  health:
-    dubbo:
-      status:
-        defaults: memory
-        extras: load,threadpool
 
 sequence:
   workerId: 1
-
-
-security:
-
-
-
-reward-service:
-  ribbon:
-    listOfServers: http://admin:admin@eureka.grkfcs.cn
-
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://admin:admin@eureka.grkfcs.cn/eureka/
-    fetchRegistry: true
-  instance:
-    preferIpAddress: true
-    ipAddress: admin.grkfcs.cn
-    nonSecurePort: 80
-    lease-renewal-interval-in-seconds: 10
-    lease-expiration-duration-in-seconds: 90
-    instance-id: ${eureka.client.ipAddress}:${spring.application.name}:${eureka.instance.nonSecurePort}
