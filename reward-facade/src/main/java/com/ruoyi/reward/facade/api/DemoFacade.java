@@ -29,4 +29,6 @@ public interface DemoFacade {
 
 
     List<String> abs();
+
+    void testOne();
 }

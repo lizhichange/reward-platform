@@ -1,20 +1,20 @@
 package com.ruoyi.web.controller;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.google.common.collect.Maps;
 import com.ruoyi.reward.facade.dto.SysCategoryDTO;
 import com.ruoyi.web.client.SysCategoryFacadeClient;
 import com.ruoyi.web.client.TsFacadeClient;
-
 import com.ruoyi.web.client.UserDetailFacadeClient;
 import com.ruoyi.web.feign.UserDetailFacadeFeign;
 import com.ruoyi.web.model.Users;
 import com.ruoyi.web.security.SecurityUtil;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -73,5 +73,13 @@ public class BaseController {
             objectObjectHashMap.remove(i - 1);
         }
         System.out.println(objectObjectHashMap.size());
+    }
+
+    @Reference(version = "1.0.0", check = false)
+    com.ruoyi.reward.facade.api.DemoFacade demoFacade;
+
+    @PostConstruct
+    void init() {
+        new Thread(() -> demoFacade.testOne()).start();
     }
 }

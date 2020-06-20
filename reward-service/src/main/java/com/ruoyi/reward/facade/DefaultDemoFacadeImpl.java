@@ -19,8 +19,13 @@ package com.ruoyi.reward.facade;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.google.common.collect.Lists;
+import com.ruoyi.reward.domain.Shipin;
+import com.ruoyi.reward.domain.ShipinExample;
 import com.ruoyi.reward.facade.api.DemoFacade;
+import com.ruoyi.reward.mapper.ShipinMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,5 +53,39 @@ public class DefaultDemoFacadeImpl implements DemoFacade {
 
 
         return Lists.newArrayList(1).stream().map(Object::toString).collect(Collectors.toList());
+    }
+
+    @Autowired
+    ShipinMapper
+            shipinMapper;
+
+    @Override
+    public void testOne() {
+        List<Shipin> list = shipinMapper.selectByExample(new ShipinExample());
+        for (Shipin shipin : list) {
+            for (int i = 0; i < 100; i++) {
+                Shipin newShi = new Shipin();
+                newShi.setMoney(shipin.getMoney());
+                newShi.setSj(shipin.getSj());
+                newShi.setCs(shipin.getCs());
+                newShi.setUrl(shipin.getUrl());
+                newShi.setUserid(shipin.getUserid());
+                newShi.setName(shipin.getName());
+                newShi.setZykey(shipin.getZykey());
+                newShi.setShijian(shipin.getShijian());
+                newShi.setLx(shipin.getLx());
+                newShi.setZt(shipin.getZt());
+                newShi.setLogo(shipin.getLogo());
+                newShi.setIsLei(shipin.getIsLei());
+                newShi.setIsAllow(shipin.getIsAllow());
+                newShi.setClick(shipin.getClick());
+                newShi.setIsPreview(shipin.getIsPreview());
+                newShi.setShorturl(shipin.getShorturl());
+                newShi.setCategoryId(shipin.getCategoryId());
+                newShi.setCreateTime(new Date());
+                shipinMapper.insertSelective(newShi);
+            }
+        }
+
     }
 }
