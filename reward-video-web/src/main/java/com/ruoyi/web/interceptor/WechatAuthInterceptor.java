@@ -110,7 +110,7 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
             if (methodAnnotation == null && classAnnotation == null) {
                 return true;
             }
-//https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx851c20b0d27a586b&redirect_uri=http%3A%2F%2Fyuluncc.top%2Fwechat%2Fcallback%3Fcallback%3Dhttp%3A%2F%2Fvideo.grkfcs.cn%2Fvideo%2Fdetail%3Fid%3D1%26author%3Dadmin%26&response_type=code&scope=snsapi_userinfo&state=http://video.grkfcs.cn/video/detail?id=1&author=admin&&connect_redirect=1&uin=ODcyMzI5MjA5&key=102f8d481f9ecf886111c94f9f22596e64f5993de3df2a17eb7c1316c7bc429f9ad53e85a0f24163e9c0f7bb3da42e53&pass_ticket=SIaGUmWlaMl5uFHS7cHKoAqKybLVE+h/85B6BRh9U8ItFQaqD7fidGJXOCj4IEYcTctmTRFwY4en0+mgHCBKIA==
+//https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx851c20b0d27a586b&redirect_uri=http%3A%2F%2Fauth.grkfcs.cn%2Fwechat%2Fcallback%3Fcallback%3Dhttp%3A%2F%2Fvideo.grkfcs.cn%2Fvideo%2Fdetail%3Fid%3D1%26author%3Dadmin%26&response_type=code&scope=snsapi_userinfo&state=http://video.grkfcs.cn/video/detail?id=1&author=admin&&connect_redirect=1&uin=ODcyMzI5MjA5&key=102f8d481f9ecf886111c94f9f22596e64f5993de3df2a17eb7c1316c7bc429f9ad53e85a0f24163e9c0f7bb3da42e53&pass_ticket=SIaGUmWlaMl5uFHS7cHKoAqKybLVE+h/85B6BRh9U8ItFQaqD7fidGJXOCj4IEYcTctmTRFwY4en0+mgHCBKIA==
             //授权回来之后中定向会带有openId参数
             String openId = request.getParameter("op");
             if (StringUtil.isNotBlank(openId)) {

@@ -24,7 +24,7 @@ server:
 
 mp:
   # 微信预授权回调
-  wxPnCallbackUrl: http://yuluncc.top/wechat/callback
+  wxPnCallbackUrl: http://auth.grkfcs.cn/wechat/callback
   configCode: WY_FULI
   mockMoney: true
   mockWeChatOrderQuery: false

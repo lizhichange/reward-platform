@@ -23,7 +23,7 @@ server:
 
 app:
   wxPayUrl: http://127.0.0.1:8082/pay
-  wxAuthUrl: http://yuluncc.top/wechat/auth
+  wxAuthUrl: http://auth.grkfcs.cn/wechat/auth
   # 验证码开关
   captchaEnabled: false
   # 微信授权开关

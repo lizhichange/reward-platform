@@ -25,8 +25,8 @@ server:
 
 
 app:
-  wxPayUrl: http://yuluncc.top/pay
-  wxAuthUrl: http://yuluncc.top/wechat/auth
+  wxPayUrl: http://auth.grkfcs.cn/pay
+  wxAuthUrl: http://auth.grkfcs.cn/wechat/auth
   # 验证码开关
   captchaEnabled: false
 

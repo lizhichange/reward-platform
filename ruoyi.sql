@@ -1187,10 +1187,10 @@ CREATE TABLE `sys_short` (
 -- ----------------------------
 -- Records of sys_short
 -- ----------------------------
-INSERT INTO `sys_short` VALUES ('9', 'mQFJEj71', 'https://dwz.cn/pUMzLug3', 'http://yuluncc.top/?userid=mQFJEj71', '0', '2020-03-26 18:53:08', null);
-INSERT INTO `sys_short` VALUES ('10', 'SfNYWe5c', 'https://dwz.cn/Hax4dgWG', 'http://yuluncc.top/?userid=SfNYWe5c', '0', '2020-04-09 18:20:24', null);
-INSERT INTO `sys_short` VALUES ('11', 'WNz9dKGm', 'post', 'http://yuluncc.top/?userid=WNz9dKGm', '0', '2020-06-08 18:32:29', null);
-INSERT INTO `sys_short` VALUES ('12', '0K9FpDRK', 'post', 'http://yuluncc.top/?userid=0K9FpDRK', '0', '2020-06-08 19:12:09', null);
+INSERT INTO `sys_short` VALUES ('9', 'mQFJEj71', 'https://dwz.cn/pUMzLug3', 'http://auth.grkfcs.cn/?userid=mQFJEj71', '0', '2020-03-26 18:53:08', null);
+INSERT INTO `sys_short` VALUES ('10', 'SfNYWe5c', 'https://dwz.cn/Hax4dgWG', 'http://auth.grkfcs.cn/?userid=SfNYWe5c', '0', '2020-04-09 18:20:24', null);
+INSERT INTO `sys_short` VALUES ('11', 'WNz9dKGm', 'post', 'http://auth.grkfcs.cn/?userid=WNz9dKGm', '0', '2020-06-08 18:32:29', null);
+INSERT INTO `sys_short` VALUES ('12', '0K9FpDRK', 'post', 'http://auth.grkfcs.cn/?userid=0K9FpDRK', '0', '2020-06-08 19:12:09', null);
 
 -- ----------------------------
 -- Table structure for sys_user
