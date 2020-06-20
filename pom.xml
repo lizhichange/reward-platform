@@ -63,13 +63,6 @@
     <dependencyManagement>
         <dependencies>
 
-
-            <dependency>
-                <groupId>org.near</groupId>
-                <artifactId>near-toolkit</artifactId>
-                <version>1.0.2</version>
-            </dependency>
-
             <!-- SpringBoot的依赖配置-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -87,6 +80,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <!-- spring-cloud-alibaba -->
 
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
@@ -334,7 +328,6 @@
                 <version>5.2.4</version>
             </dependency>
 
-            <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
             <dependency>
                 <groupId>com.google.code.gson</groupId>
                 <artifactId>gson</artifactId>
@@ -355,6 +348,11 @@
                 <version>3.8.0</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.near</groupId>
+                <artifactId>near-toolkit</artifactId>
+                <version>1.0.2</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
@@ -378,13 +376,7 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- 阿里JSON解析器 -->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>${fastjson.version}</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/cglib/cglib -->
+
         <dependency>
             <groupId>cglib</groupId>
             <artifactId>cglib</artifactId>

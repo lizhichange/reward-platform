@@ -52,7 +52,8 @@ spring:
       # 热部署开关
       enabled: true
   application:
-    name: reward-service
+    name: reward-admin
+
 # MyBatis
 mybatis:
   # 搜索指定包别名
