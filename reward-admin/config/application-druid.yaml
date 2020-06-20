@@ -109,3 +109,4 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://172.16.0.157:6900/eureka/
+    fetchRegistry: true
