@@ -725,7 +725,6 @@
                     $.hideLoading();
                     if (res && res.code === 0) {
                         $("#list_videos_most_recent_videos_items").empty();
-                        $("#list_videos_most_recent_videos_pagination").empty();
 
                         let html = "";
                         $.each(res.rows, function (i, row) {
@@ -771,9 +770,6 @@
                     $.hideLoading();
                     if (res && res.code === 0) {
                         $("#list_videos_most_recent_videos_items").empty();
-
-                        $("#list_videos_most_recent_videos_pagination").empty();
-
                         let html = "";
                         $.each(res.rows, function (i, row) {
                             html += ' <div class="item  ">'
@@ -820,7 +816,7 @@
 </script>
 <script type="text/template" id="newsListTemplate">
     <!--each遍历json数组-->
-    {{#each rows}}
+    {{#each this}}
     <div class="item  ">
         <a href="/video/detail?id={{id}}&author={{userid}}" title="{{name}}">
             <div class="img">
