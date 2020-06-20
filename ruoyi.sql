@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50728
 File Encoding         : 65001
 
-Date: 2020-06-20 15:49:37
+Date: 2020-06-20 18:40:02
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -526,12 +526,12 @@ CREATE TABLE `sys_category` (
   `update_by` varchar(64) COLLATE utf8mb4_bin DEFAULT '' COMMENT '更新者',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`category_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=226 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=DYNAMIC COMMENT='类目表';
+) ENGINE=InnoDB AUTO_INCREMENT=231 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=DYNAMIC COMMENT='类目表';
 
 -- ----------------------------
 -- Records of sys_category
 -- ----------------------------
-INSERT INTO `sys_category` VALUES ('100', '0', '0', '大类目', '0', '0', '0', 'admin', '2018-03-16 11:33:00', 'admin', '2020-03-20 18:15:37');
+INSERT INTO `sys_category` VALUES ('100', '0', '0', '大类目', '0', '0', '0', 'admin', '2018-03-16 11:33:00', 'admin', '2020-06-20 18:27:55');
 INSERT INTO `sys_category` VALUES ('200', '100', '0,100', '日韩', '1', '0', '0', 'admin', '2020-03-18 13:22:50', 'admin', '2020-03-20 18:14:38');
 INSERT INTO `sys_category` VALUES ('201', '200', '0,100,200', '淑女', '1', '0', '2', 'admin', '2020-03-18 13:33:05', 'admin', '2020-03-20 13:59:45');
 INSERT INTO `sys_category` VALUES ('202', '100', '0,100', '欧美', '2', '0', '0', 'admin', '2020-03-20 18:07:35', 'admin', '2020-03-20 18:15:07');
@@ -546,18 +546,23 @@ INSERT INTO `sys_category` VALUES ('210', '202', '0,100,202', '欧美', '1', '0'
 INSERT INTO `sys_category` VALUES ('211', '203', '0,100,203', '动物', '1', '0', '2', 'admin', '2020-03-20 18:18:42', '', null);
 INSERT INTO `sys_category` VALUES ('212', '204', '0,100,204', '幼女', '1', '0', '2', 'admin', '2020-03-20 18:18:56', '', null);
 INSERT INTO `sys_category` VALUES ('213', '205', '0,100,205', '乱论', '1', '0', '2', 'admin', '2020-03-20 18:19:20', '', null);
-INSERT INTO `sys_category` VALUES ('214', '100', '0,100', '待添加1', '9', '0', '0', 'admin', '2020-03-20 18:26:16', '', null);
-INSERT INTO `sys_category` VALUES ('215', '100', '0,100', '待添加2', '10', '0', '0', 'admin', '2020-03-20 18:26:25', '', null);
-INSERT INTO `sys_category` VALUES ('216', '100', '0,100', '待添加11', '11', '0', '0', 'admin', '2020-03-20 18:26:33', '', null);
-INSERT INTO `sys_category` VALUES ('217', '100', '0,100', '待添加12', '12', '0', '0', 'admin', '2020-03-20 18:26:39', '', null);
-INSERT INTO `sys_category` VALUES ('218', '100', '0,100', '待添加13', '13', '0', '0', 'admin', '2020-03-20 18:26:46', '', null);
-INSERT INTO `sys_category` VALUES ('219', '100', '0,100', '待添加14', '14', '0', '0', 'admin', '2020-03-20 18:26:54', '', null);
-INSERT INTO `sys_category` VALUES ('220', '100', '0,100', '待添加15', '15', '0', '0', 'admin', '2020-03-20 18:27:01', '', null);
-INSERT INTO `sys_category` VALUES ('221', '100', '0,100', '待添加16', '16', '0', '0', 'admin', '2020-03-20 18:27:09', '', null);
-INSERT INTO `sys_category` VALUES ('222', '100', '0,100', '待添加17', '17', '0', '0', 'admin', '2020-03-20 18:27:16', '', null);
-INSERT INTO `sys_category` VALUES ('223', '100', '0,100', '待添加18', '18', '0', '0', 'admin', '2020-03-20 18:27:23', '', null);
-INSERT INTO `sys_category` VALUES ('224', '100', '0,100', '待添加19', '19', '0', '0', 'admin', '2020-03-20 18:27:30', '', null);
-INSERT INTO `sys_category` VALUES ('225', '100', '0,100', '待添加20', '20', '0', '0', 'admin', '2020-03-20 18:27:38', '', null);
+INSERT INTO `sys_category` VALUES ('214', '100', '0,100', '少女', '9', '0', '0', 'admin', '2020-03-20 18:26:16', '', '2020-06-20 18:23:47');
+INSERT INTO `sys_category` VALUES ('215', '100', '0,100', '少妇', '10', '0', '0', 'admin', '2020-03-20 18:26:25', '', '2020-06-20 18:23:56');
+INSERT INTO `sys_category` VALUES ('216', '100', '0,100', '女同', '11', '0', '0', 'admin', '2020-03-20 18:26:33', '', '2020-06-20 18:24:02');
+INSERT INTO `sys_category` VALUES ('217', '100', '0,100', '野战', '12', '0', '0', 'admin', '2020-03-20 18:26:39', '', '2020-06-20 18:24:52');
+INSERT INTO `sys_category` VALUES ('218', '100', '0,100', '自慰', '13', '0', '0', 'admin', '2020-03-20 18:26:46', '', '2020-06-20 18:25:01');
+INSERT INTO `sys_category` VALUES ('219', '100', '0,100', '巨乳', '14', '0', '0', 'admin', '2020-03-20 18:26:54', '', '2020-06-20 18:25:10');
+INSERT INTO `sys_category` VALUES ('220', '100', '0,100', '萝莉', '15', '0', '0', 'admin', '2020-03-20 18:27:01', '', '2020-06-20 18:25:21');
+INSERT INTO `sys_category` VALUES ('221', '100', '0,100', '人妻', '16', '0', '0', 'admin', '2020-03-20 18:27:09', '', '2020-06-20 18:27:02');
+INSERT INTO `sys_category` VALUES ('222', '100', '0,100', '动漫', '17', '0', '0', 'admin', '2020-03-20 18:27:16', '', '2020-06-20 18:27:16');
+INSERT INTO `sys_category` VALUES ('223', '100', '0,100', '直播', '18', '0', '0', 'admin', '2020-03-20 18:27:23', '', '2020-06-20 18:27:36');
+INSERT INTO `sys_category` VALUES ('224', '100', '0,100', '三级', '19', '0', '0', 'admin', '2020-03-20 18:27:30', '', '2020-06-20 18:27:41');
+INSERT INTO `sys_category` VALUES ('225', '100', '0,100', '另类', '20', '0', '0', 'admin', '2020-03-20 18:27:38', '', '2020-06-20 18:27:55');
+INSERT INTO `sys_category` VALUES ('226', '100', '0,100', '偷拍', '18', '0', '0', '', '2020-06-20 18:30:21', '', null);
+INSERT INTO `sys_category` VALUES ('227', '100', '0,100', '偷情', '1', '0', '0', '', '2020-06-20 18:30:33', '', null);
+INSERT INTO `sys_category` VALUES ('228', '100', '0,100', '素人', '2', '0', '0', '', '2020-06-20 18:31:54', '', null);
+INSERT INTO `sys_category` VALUES ('229', '100', '0,100', '自拍', '3', '0', '0', '', '2020-06-20 18:32:49', '', null);
+INSERT INTO `sys_category` VALUES ('230', '100', '0,100', '口交', '3', '0', '0', '', '2020-06-20 18:33:23', '', null);
 
 -- ----------------------------
 -- Table structure for sys_config
@@ -775,11 +780,12 @@ CREATE TABLE `sys_logininfor` (
   `msg` varchar(120) COLLATE utf8mb4_bin DEFAULT '' COMMENT '提示消息',
   `login_time` datetime DEFAULT NULL COMMENT '访问时间',
   PRIMARY KEY (`info_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=DYNAMIC COMMENT='系统访问记录';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=DYNAMIC COMMENT='系统访问记录';
 
 -- ----------------------------
 -- Records of sys_logininfor
 -- ----------------------------
+INSERT INTO `sys_logininfor` VALUES ('1', 'admin', '139.227.73.78, 172.16.0.101', '内网IP', 'Chrome 8', 'Mac OS X', '0', '登录成功', '2020-06-20 18:19:55');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -1018,7 +1024,7 @@ CREATE TABLE `sys_oper_log` (
   `error_msg` varchar(2000) COLLATE utf8mb4_bin DEFAULT '' COMMENT '错误消息',
   `oper_time` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`oper_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='操作日志记录';
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='操作日志记录';
 
 -- ----------------------------
 -- Records of sys_oper_log
@@ -1045,6 +1051,27 @@ INSERT INTO `sys_oper_log` VALUES ('19', '菜单管理', '2', 'com.ruoyi.web.con
 INSERT INTO `sys_oper_log` VALUES ('20', '菜单管理', '2', 'com.ruoyi.web.controller.system.SysMenuController.editSave()', 'POST', '1', 'admin', '研发部门', '/system/menu/edit', '139.227.73.78, 172.16.0.101', '内网IP', '{\n  \"menuId\" : [ \"2094\" ],\n  \"parentId\" : [ \"2082\" ],\n  \"menuType\" : [ \"C\" ],\n  \"menuName\" : [ \"交易信息\" ],\n  \"url\" : [ \"/system/trade\" ],\n  \"target\" : [ \"menuItem\" ],\n  \"perms\" : [ \"system:trade:view\" ],\n  \"orderNum\" : [ \"1\" ],\n  \"icon\" : [ \"#\" ],\n  \"visible\" : [ \"0\" ]\n}', '{\n  \"msg\" : \"操作成功\",\n  \"code\" : 0\n}', '0', null, '2020-06-20 15:48:20');
 INSERT INTO `sys_oper_log` VALUES ('21', '菜单管理', '2', 'com.ruoyi.web.controller.system.SysMenuController.editSave()', 'POST', '1', 'admin', '研发部门', '/system/menu/edit', '139.227.73.78, 172.16.0.101', '内网IP', '{\n  \"menuId\" : [ \"2002\" ],\n  \"parentId\" : [ \"2082\" ],\n  \"menuType\" : [ \"C\" ],\n  \"menuName\" : [ \"投诉列表\" ],\n  \"url\" : [ \"/system/ts\" ],\n  \"target\" : [ \"menuItem\" ],\n  \"perms\" : [ \"system:ts:view\" ],\n  \"orderNum\" : [ \"1\" ],\n  \"icon\" : [ \"#\" ],\n  \"visible\" : [ \"0\" ]\n}', '{\n  \"msg\" : \"操作成功\",\n  \"code\" : 0\n}', '0', null, '2020-06-20 15:48:45');
 INSERT INTO `sys_oper_log` VALUES ('22', '菜单管理', '2', 'com.ruoyi.web.controller.system.SysMenuController.editSave()', 'POST', '1', 'admin', '研发部门', '/system/menu/edit', '139.227.73.78, 172.16.0.101', '内网IP', '{\n  \"menuId\" : [ \"2012\" ],\n  \"parentId\" : [ \"2082\" ],\n  \"menuType\" : [ \"C\" ],\n  \"menuName\" : [ \"邀请码管理\" ],\n  \"url\" : [ \"/system/yqm\" ],\n  \"target\" : [ \"menuItem\" ],\n  \"perms\" : [ \"system:yqm:view\" ],\n  \"orderNum\" : [ \"1\" ],\n  \"icon\" : [ \"#\" ],\n  \"visible\" : [ \"0\" ]\n}', '{\n  \"msg\" : \"操作成功\",\n  \"code\" : 0\n}', '0', null, '2020-06-20 15:48:53');
+INSERT INTO `sys_oper_log` VALUES ('23', '域名管理', '2', 'com.ruoyi.reward.controller.SysWebMainController.editSave()', 'POST', '1', 'admin', '研发部门', '/system/webmain/edit', '139.227.73.78, 172.16.0.101', '内网IP', '{\n  \"id\" : [ \"7\" ],\n  \"mainUrl\" : [ \"http://video.grfkcs.cn\" ]\n}', '{\n  \"msg\" : \"操作成功\",\n  \"code\" : 0\n}', '0', null, '2020-06-20 16:04:26');
+INSERT INTO `sys_oper_log` VALUES ('24', '域名管理', '2', 'com.ruoyi.reward.controller.SysWebMainController.editSave()', 'POST', '1', 'admin', '研发部门', '/system/webmain/edit', '139.227.73.78, 172.16.0.101', '内网IP', '{\n  \"id\" : [ \"7\" ],\n  \"mainUrl\" : [ \"http://video.grkfcs.cn\" ]\n}', '{\n  \"msg\" : \"操作成功\",\n  \"code\" : 0\n}', '0', null, '2020-06-20 16:04:46');
+INSERT INTO `sys_oper_log` VALUES ('25', '个人信息', '2', 'com.ruoyi.web.controller.system.SysProfileController.updateAvatar()', 'POST', '1', 'admin', '研发部门', '/system/user/profile/updateAvatar', '139.227.73.78, 172.16.0.101', '内网IP', '{ }', '{\n  \"msg\" : \"操作成功\",\n  \"code\" : 0\n}', '0', null, '2020-06-20 18:20:22');
+INSERT INTO `sys_oper_log` VALUES ('26', '栏目管理', '2', 'com.ruoyi.reward.controller.SysCategoryController.editSave()', 'POST', '1', 'admin', '研发部门', '/system/category/edit', '139.227.73.78, 172.16.0.101', '内网IP', '{\n  \"categoryId\" : [ \"214\" ],\n  \"parentId\" : [ \"100\" ],\n  \"parentName\" : [ \"大类目\" ],\n  \"categoryName\" : [ \"少女\" ],\n  \"orderNum\" : [ \"9\" ],\n  \"status\" : [ \"0\" ]\n}', '{\n  \"msg\" : \"操作成功\",\n  \"code\" : 0\n}', '0', null, '2020-06-20 18:23:47');
+INSERT INTO `sys_oper_log` VALUES ('27', '栏目管理', '2', 'com.ruoyi.reward.controller.SysCategoryController.editSave()', 'POST', '1', 'admin', '研发部门', '/system/category/edit', '139.227.73.78, 172.16.0.101', '内网IP', '{\n  \"categoryId\" : [ \"215\" ],\n  \"parentId\" : [ \"100\" ],\n  \"parentName\" : [ \"大类目\" ],\n  \"categoryName\" : [ \"少妇\" ],\n  \"orderNum\" : [ \"10\" ],\n  \"status\" : [ \"0\" ]\n}', '{\n  \"msg\" : \"操作成功\",\n  \"code\" : 0\n}', '0', null, '2020-06-20 18:23:56');
+INSERT INTO `sys_oper_log` VALUES ('28', '栏目管理', '2', 'com.ruoyi.reward.controller.SysCategoryController.editSave()', 'POST', '1', 'admin', '研发部门', '/system/category/edit', '139.227.73.78, 172.16.0.101', '内网IP', '{\n  \"categoryId\" : [ \"216\" ],\n  \"parentId\" : [ \"100\" ],\n  \"parentName\" : [ \"大类目\" ],\n  \"categoryName\" : [ \"女同\" ],\n  \"orderNum\" : [ \"11\" ],\n  \"status\" : [ \"0\" ]\n}', '{\n  \"msg\" : \"操作成功\",\n  \"code\" : 0\n}', '0', null, '2020-06-20 18:24:02');
+INSERT INTO `sys_oper_log` VALUES ('29', '栏目管理', '2', 'com.ruoyi.reward.controller.SysCategoryController.editSave()', 'POST', '1', 'admin', '研发部门', '/system/category/edit', '139.227.73.78, 172.16.0.101', '内网IP', '{\n  \"categoryId\" : [ \"217\" ],\n  \"parentId\" : [ \"100\" ],\n  \"parentName\" : [ \"大类目\" ],\n  \"categoryName\" : [ \"野战\" ],\n  \"orderNum\" : [ \"12\" ],\n  \"status\" : [ \"0\" ]\n}', '{\n  \"msg\" : \"操作成功\",\n  \"code\" : 0\n}', '0', null, '2020-06-20 18:24:52');
+INSERT INTO `sys_oper_log` VALUES ('30', '栏目管理', '2', 'com.ruoyi.reward.controller.SysCategoryController.editSave()', 'POST', '1', 'admin', '研发部门', '/system/category/edit', '139.227.73.78, 172.16.0.101', '内网IP', '{\n  \"categoryId\" : [ \"218\" ],\n  \"parentId\" : [ \"100\" ],\n  \"parentName\" : [ \"大类目\" ],\n  \"categoryName\" : [ \"自慰\" ],\n  \"orderNum\" : [ \"13\" ],\n  \"status\" : [ \"0\" ]\n}', '{\n  \"msg\" : \"操作成功\",\n  \"code\" : 0\n}', '0', null, '2020-06-20 18:25:01');
+INSERT INTO `sys_oper_log` VALUES ('31', '栏目管理', '2', 'com.ruoyi.reward.controller.SysCategoryController.editSave()', 'POST', '1', 'admin', '研发部门', '/system/category/edit', '139.227.73.78, 172.16.0.101', '内网IP', '{\n  \"categoryId\" : [ \"219\" ],\n  \"parentId\" : [ \"100\" ],\n  \"parentName\" : [ \"大类目\" ],\n  \"categoryName\" : [ \"巨乳\" ],\n  \"orderNum\" : [ \"14\" ],\n  \"status\" : [ \"0\" ]\n}', '{\n  \"msg\" : \"操作成功\",\n  \"code\" : 0\n}', '0', null, '2020-06-20 18:25:10');
+INSERT INTO `sys_oper_log` VALUES ('32', '栏目管理', '2', 'com.ruoyi.reward.controller.SysCategoryController.editSave()', 'POST', '1', 'admin', '研发部门', '/system/category/edit', '139.227.73.78, 172.16.0.101', '内网IP', '{\n  \"categoryId\" : [ \"220\" ],\n  \"parentId\" : [ \"100\" ],\n  \"parentName\" : [ \"大类目\" ],\n  \"categoryName\" : [ \"萝莉\" ],\n  \"orderNum\" : [ \"15\" ],\n  \"status\" : [ \"0\" ]\n}', '{\n  \"msg\" : \"操作成功\",\n  \"code\" : 0\n}', '0', null, '2020-06-20 18:25:21');
+INSERT INTO `sys_oper_log` VALUES ('33', '栏目管理', '2', 'com.ruoyi.reward.controller.SysCategoryController.editSave()', 'POST', '1', 'admin', '研发部门', '/system/category/edit', '139.227.73.78, 172.16.0.101', '内网IP', '{\n  \"categoryId\" : [ \"221\" ],\n  \"parentId\" : [ \"100\" ],\n  \"parentName\" : [ \"大类目\" ],\n  \"categoryName\" : [ \"人妻\" ],\n  \"orderNum\" : [ \"16\" ],\n  \"status\" : [ \"0\" ]\n}', '{\n  \"msg\" : \"操作成功\",\n  \"code\" : 0\n}', '0', null, '2020-06-20 18:27:03');
+INSERT INTO `sys_oper_log` VALUES ('34', '栏目管理', '2', 'com.ruoyi.reward.controller.SysCategoryController.editSave()', 'POST', '1', 'admin', '研发部门', '/system/category/edit', '139.227.73.78, 172.16.0.101', '内网IP', '{\n  \"categoryId\" : [ \"222\" ],\n  \"parentId\" : [ \"100\" ],\n  \"parentName\" : [ \"大类目\" ],\n  \"categoryName\" : [ \"动漫\" ],\n  \"orderNum\" : [ \"17\" ],\n  \"status\" : [ \"0\" ]\n}', '{\n  \"msg\" : \"操作成功\",\n  \"code\" : 0\n}', '0', null, '2020-06-20 18:27:16');
+INSERT INTO `sys_oper_log` VALUES ('35', '栏目管理', '2', 'com.ruoyi.reward.controller.SysCategoryController.editSave()', 'POST', '1', 'admin', '研发部门', '/system/category/edit', '139.227.73.78, 172.16.0.101', '内网IP', '{\n  \"categoryId\" : [ \"223\" ],\n  \"parentId\" : [ \"100\" ],\n  \"parentName\" : [ \"大类目\" ],\n  \"categoryName\" : [ \"直播\" ],\n  \"orderNum\" : [ \"18\" ],\n  \"status\" : [ \"0\" ]\n}', '{\n  \"msg\" : \"操作成功\",\n  \"code\" : 0\n}', '0', null, '2020-06-20 18:27:36');
+INSERT INTO `sys_oper_log` VALUES ('36', '栏目管理', '2', 'com.ruoyi.reward.controller.SysCategoryController.editSave()', 'POST', '1', 'admin', '研发部门', '/system/category/edit', '139.227.73.78, 172.16.0.101', '内网IP', '{\n  \"categoryId\" : [ \"224\" ],\n  \"parentId\" : [ \"100\" ],\n  \"parentName\" : [ \"大类目\" ],\n  \"categoryName\" : [ \"三级\" ],\n  \"orderNum\" : [ \"19\" ],\n  \"status\" : [ \"0\" ]\n}', '{\n  \"msg\" : \"操作成功\",\n  \"code\" : 0\n}', '0', null, '2020-06-20 18:27:41');
+INSERT INTO `sys_oper_log` VALUES ('37', '栏目管理', '2', 'com.ruoyi.reward.controller.SysCategoryController.editSave()', 'POST', '1', 'admin', '研发部门', '/system/category/edit', '139.227.73.78, 172.16.0.101', '内网IP', '{\n  \"categoryId\" : [ \"225\" ],\n  \"parentId\" : [ \"100\" ],\n  \"parentName\" : [ \"大类目\" ],\n  \"categoryName\" : [ \"另类\" ],\n  \"orderNum\" : [ \"20\" ],\n  \"status\" : [ \"0\" ]\n}', '{\n  \"msg\" : \"操作成功\",\n  \"code\" : 0\n}', '0', null, '2020-06-20 18:27:55');
+INSERT INTO `sys_oper_log` VALUES ('38', '栏目管理', '1', 'com.ruoyi.reward.controller.SysCategoryController.addSave()', 'POST', '1', 'admin', '研发部门', '/system/category/add', '139.227.73.78, 172.16.0.101', '内网IP', '{\n  \"parentId\" : [ \"100\" ],\n  \"categoryName\" : [ \"偷拍\" ],\n  \"orderNum\" : [ \"18\" ],\n  \"status\" : [ \"0\" ]\n}', '{\n  \"msg\" : \"操作成功\",\n  \"code\" : 0\n}', '0', null, '2020-06-20 18:30:21');
+INSERT INTO `sys_oper_log` VALUES ('39', '栏目管理', '1', 'com.ruoyi.reward.controller.SysCategoryController.addSave()', 'POST', '1', 'admin', '研发部门', '/system/category/add', '139.227.73.78, 172.16.0.101', '内网IP', '{\n  \"parentId\" : [ \"100\" ],\n  \"categoryName\" : [ \"偷情\" ],\n  \"orderNum\" : [ \"1\" ],\n  \"status\" : [ \"0\" ]\n}', '{\n  \"msg\" : \"操作成功\",\n  \"code\" : 0\n}', '0', null, '2020-06-20 18:30:33');
+INSERT INTO `sys_oper_log` VALUES ('40', '栏目管理', '1', 'com.ruoyi.reward.controller.SysCategoryController.addSave()', 'POST', '1', 'admin', '研发部门', '/system/category/add', '139.227.73.78, 172.16.0.101', '内网IP', '{\n  \"parentId\" : [ \"100\" ],\n  \"categoryName\" : [ \"乱伦\" ],\n  \"orderNum\" : [ \"2\" ],\n  \"status\" : [ \"0\" ]\n}', '{\n  \"msg\" : \"新增栏目\'乱伦\'失败，栏目名称已存在\",\n  \"code\" : 500\n}', '0', null, '2020-06-20 18:31:47');
+INSERT INTO `sys_oper_log` VALUES ('41', '栏目管理', '1', 'com.ruoyi.reward.controller.SysCategoryController.addSave()', 'POST', '1', 'admin', '研发部门', '/system/category/add', '139.227.73.78, 172.16.0.101', '内网IP', '{\n  \"parentId\" : [ \"100\" ],\n  \"categoryName\" : [ \"素人\" ],\n  \"orderNum\" : [ \"2\" ],\n  \"status\" : [ \"0\" ]\n}', '{\n  \"msg\" : \"操作成功\",\n  \"code\" : 0\n}', '0', null, '2020-06-20 18:31:54');
+INSERT INTO `sys_oper_log` VALUES ('42', '栏目管理', '1', 'com.ruoyi.reward.controller.SysCategoryController.addSave()', 'POST', '1', 'admin', '研发部门', '/system/category/add', '139.227.73.78, 172.16.0.101', '内网IP', '{\n  \"parentId\" : [ \"100\" ],\n  \"categoryName\" : [ \"自拍\" ],\n  \"orderNum\" : [ \"3\" ],\n  \"status\" : [ \"0\" ]\n}', '{\n  \"msg\" : \"操作成功\",\n  \"code\" : 0\n}', '0', null, '2020-06-20 18:32:49');
+INSERT INTO `sys_oper_log` VALUES ('43', '栏目管理', '1', 'com.ruoyi.reward.controller.SysCategoryController.addSave()', 'POST', '1', 'admin', '研发部门', '/system/category/add', '139.227.73.78, 172.16.0.101', '内网IP', '{\n  \"parentId\" : [ \"100\" ],\n  \"categoryName\" : [ \"口交\" ],\n  \"orderNum\" : [ \"3\" ],\n  \"status\" : [ \"0\" ]\n}', '{\n  \"msg\" : \"操作成功\",\n  \"code\" : 0\n}', '0', null, '2020-06-20 18:33:23');
 
 -- ----------------------------
 -- Table structure for sys_order
@@ -1187,10 +1214,10 @@ CREATE TABLE `sys_short` (
 -- ----------------------------
 -- Records of sys_short
 -- ----------------------------
-INSERT INTO `sys_short` VALUES ('9', 'mQFJEj71', 'https://dwz.cn/pUMzLug3', 'http://auth.grkfcs.cn/?userid=mQFJEj71', '0', '2020-03-26 18:53:08', null);
-INSERT INTO `sys_short` VALUES ('10', 'SfNYWe5c', 'https://dwz.cn/Hax4dgWG', 'http://auth.grkfcs.cn/?userid=SfNYWe5c', '0', '2020-04-09 18:20:24', null);
-INSERT INTO `sys_short` VALUES ('11', 'WNz9dKGm', 'post', 'http://auth.grkfcs.cn/?userid=WNz9dKGm', '0', '2020-06-08 18:32:29', null);
-INSERT INTO `sys_short` VALUES ('12', '0K9FpDRK', 'post', 'http://auth.grkfcs.cn/?userid=0K9FpDRK', '0', '2020-06-08 19:12:09', null);
+INSERT INTO `sys_short` VALUES ('9', 'mQFJEj71', 'https://dwz.cn/pUMzLug3', 'http://yuluncc.top/?userid=mQFJEj71', '0', '2020-03-26 18:53:08', null);
+INSERT INTO `sys_short` VALUES ('10', 'SfNYWe5c', 'https://dwz.cn/Hax4dgWG', 'http://yuluncc.top/?userid=SfNYWe5c', '0', '2020-04-09 18:20:24', null);
+INSERT INTO `sys_short` VALUES ('11', 'WNz9dKGm', 'post', 'http://yuluncc.top/?userid=WNz9dKGm', '0', '2020-06-08 18:32:29', null);
+INSERT INTO `sys_short` VALUES ('12', '0K9FpDRK', 'post', 'http://yuluncc.top/?userid=0K9FpDRK', '0', '2020-06-08 19:12:09', null);
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -1225,7 +1252,7 @@ CREATE TABLE `sys_user` (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', '103', 'admin', 'admin', '00', 'ry@163.com', '15888888888', '0', '/profile/avatar/2020/06/20/b1d802253533f251435cb1a54b2471c2.png', '29c67a30398638269fe600f73a054934', '111111', '0', '0', '139.227.73.78, 172.16.0.101', '2020-06-20 15:38:43', 'admin', '2018-03-16 11:33:00', 'ry', '2020-06-20 15:41:06', '管理员', null, null);
+INSERT INTO `sys_user` VALUES ('1', '103', 'admin', 'admin', '00', 'ry@163.com', '15888888888', '0', '/profile/avatar/2020/06/20/2bc7e27b3b43142fed9918e9dbcdc563.png', '29c67a30398638269fe600f73a054934', '111111', '0', '0', '139.227.73.78, 172.16.0.101', '2020-06-20 18:19:55', 'admin', '2018-03-16 11:33:00', 'ry', '2020-06-20 18:20:22', '管理员', null, null);
 INSERT INTO `sys_user` VALUES ('2', '105', 'ry', '若依', '00', 'ry@qq.com', '15666666666', '1', '', '8e6d98b90472783cc73c17047ddccf36', '222222', '0', '0', '127.0.0.1', '2018-03-16 11:33:00', 'admin', '2018-03-16 11:33:00', 'ry', '2018-03-16 11:33:00', '测试员', null, null);
 INSERT INTO `sys_user` VALUES ('100', '105', '1111', '的订单', '00', 'syst1em@163.com', '13902000000', '1', '', '79f944a0ae0dad2cced8e81fe47aeee1', '5aa645', '0', '2', '', null, 'admin', '2020-03-17 23:19:11', 'admin', '2020-03-17 23:35:32', '', null, null);
 INSERT INTO `sys_user` VALUES ('101', '105', '11111', '11111', '00', 'syst2em@163.com', '13900000000', '1', '', '634df297ad5ee27f8ca538b76ee8b901', '9ca760', '0', '2', '127.0.0.1', '2020-03-17 23:36:10', 'admin', '2020-03-17 23:26:15', '', '2020-03-17 23:36:10', '代理用户', null, null);
@@ -1279,7 +1306,7 @@ CREATE TABLE `sys_user_online` (
 -- ----------------------------
 -- Records of sys_user_online
 -- ----------------------------
-INSERT INTO `sys_user_online` VALUES ('ed953e15-5bbd-47cb-88c3-339d231fdcca', 'admin', '研发部门', '139.227.73.78, 172.16.0.101', '内网IP', 'Chrome 8', 'Mac OS X', 'on_line', '2020-06-20 15:38:39', '2020-06-20 15:48:16', '1800000');
+INSERT INTO `sys_user_online` VALUES ('e47601e2-47bb-484c-a403-ad5a616458cd', 'admin', '研发部门', '139.227.73.78, 172.16.0.101', '内网IP', 'Chrome 8', 'Mac OS X', 'on_line', '2020-06-20 18:19:52', '2020-06-20 18:32:45', '1800000');
 
 -- ----------------------------
 -- Table structure for sys_user_post
@@ -1371,7 +1398,7 @@ CREATE TABLE `sys_web_main` (
 -- ----------------------------
 -- Records of sys_web_main
 -- ----------------------------
-INSERT INTO `sys_web_main` VALUES ('7', 'http://127.0.0.1:8083', '0', '2020-04-08 22:04:04', '2020-04-24 23:08:38');
+INSERT INTO `sys_web_main` VALUES ('7', 'http://video.grkfcs.cn', '0', '2020-04-08 22:04:04', '2020-06-20 16:04:46');
 
 -- ----------------------------
 -- Table structure for sys_wechat_config
@@ -1507,11 +1534,12 @@ CREATE TABLE `t_user_detail` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_id` (`user_id`),
   KEY `user_index` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=319859 DEFAULT CHARSET=utf8 COMMENT='用户信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=319860 DEFAULT CHARSET=utf8 COMMENT='用户信息表';
 
 -- ----------------------------
 -- Records of t_user_detail
 -- ----------------------------
+INSERT INTO `t_user_detail` VALUES ('319859', '543295872423694336', '6ZSZ5Yir5a2X44CC', null, '男', null, null, null, '2020-06-20 16:07:06', null, '2020-06-20 16:07:06', null, null, null, '', null, null, null, 'http://thirdwx.qlogo.cn/mmopen/vi_32/6sc2eGibKjFpmib7vRlr7kyMGuTvtLoiaiaGguPK0jyRFLJsrj4l6TCLYdEB9hsGeCh40tghOiapWNW1GYHBeCNb2Iw/132', null, null, null);
 
 -- ----------------------------
 -- Table structure for t_wechat_auth
@@ -1533,7 +1561,7 @@ CREATE TABLE `t_wechat_auth` (
   UNIQUE KEY `open_id` (`open_id`),
   KEY `user_index` (`user_id`),
   KEY `open_id_index` (`open_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=319081 DEFAULT CHARSET=utf8 COMMENT='小程序授权信息表\r\n';
+) ENGINE=InnoDB AUTO_INCREMENT=319082 DEFAULT CHARSET=utf8 COMMENT='小程序授权信息表\r\n';
 
 -- ----------------------------
 -- Records of t_wechat_auth
@@ -1541,6 +1569,7 @@ CREATE TABLE `t_wechat_auth` (
 INSERT INTO `t_wechat_auth` VALUES ('319078', 'oE-QCw1sLCEA19BxvtPFnaVKmzJg', 'ce76933d-24b5-4692-ae32-fbf3f10935b9', '1', 'wx851c20b0d27a586b', 'odN-NwA2ixxV2hzl09jM2n2eoTSk', '\\0', '2020-04-11 14:05:42', null, '2020-04-11 14:05:42', null);
 INSERT INTO `t_wechat_auth` VALUES ('319079', 'oE-QCw1BX_3TiPLJ68bOs04KLmuQ', '4ed66873-93da-4292-b1c9-0f0740a419a4', '1', 'wx851c20b0d27a586b', 'odN-NwO12CJEGiGvy1UAtdjgIwTg', '\\0', '2020-04-13 11:52:36', null, '2020-04-13 11:52:36', null);
 INSERT INTO `t_wechat_auth` VALUES ('319080', 'oE-QCw8fkoCzw5hNbH_fur4qIgdg', '3e57ac79-abb2-407b-b739-440c61c91e4c', '1', 'wx851c20b0d27a586b', 'odN-NwIXtuN4tJNja-7gQ02vtAv0', '\\0', '2020-04-13 12:21:26', null, '2020-04-13 12:21:26', null);
+INSERT INTO `t_wechat_auth` VALUES ('319081', 'o9Umds_VOxYfdxvq2sjpZlp2Cou8', '543295872423694336', '1', 'wx590af156c3a3eae9', null, '\\0', '2020-06-20 16:07:06', null, '2020-06-20 16:07:06', null);
 
 -- ----------------------------
 -- Table structure for user
