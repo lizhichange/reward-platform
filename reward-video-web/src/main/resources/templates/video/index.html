@@ -820,15 +820,15 @@
 </script>
 <script type="text/template" id="newsListTemplate">
     <!--each遍历json数组-->
-    {{#each rows as role i}}
+    {{#each rows}}
     <div class="item  ">
-        <a href="/video/detail?id={{role.id}}&author={{role.userid}}" title="{{role.name}}">
+        <a href="/video/detail?id={{id}}&author={{userid}}" title="{{name}}">
             <div class="img">
-                <img class="thumb lazy-load" src="{{role.url}}" data-original="{{role.url}}" alt="{{role.name}}"
+                <img class="thumb lazy-load" src="{{url}}" data-original="{{url}}" alt="{{name}}"
                      data-cnt="5" width="180" height="135">
             </div>
             <strong class="title">
-                {{role.name}}
+                {{name}}
             </strong>
         </a>
     </div>
