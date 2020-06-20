@@ -5,13 +5,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>电影</title>
     <meta name="viewport"
-        content="target-densitydpi=device-dpi, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+          content="target-densitydpi=device-dpi, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
     <meta name="description" content="高速在线观看，无需下载播放器。">
     <meta name="keywords" content="电影">
     <meta name="generator" content="CMS">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link th:href="@{/video/pagination.min.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/video/pagination.min.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{/video/detail/all-responsive-metal.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/video/jquery.fancybox-metal.css}" rel="stylesheet" type="text/css">
     <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
@@ -540,6 +540,7 @@
         .s1 span a {
             color: #00FF00
         }
+
     </style>
 
     <script>
@@ -560,80 +561,81 @@
             win.addEventListener(resizeEvt, recalc, false);
             doc.addEventListener('DOMContentLoaded', recalc, false);
         })(document, window);
+
     </script>
 </head>
 
 <body>
 
 
-    <div class="top-links">
-        <div class="center-hold">
-            <div class="network">
-                <strong></strong>
-                <ul>
-                </ul>
-            </div>
-            <div class="box tags-cloud">
-                <!-- th:href="@{'/video/category?categoryId='+${item.categoryId}}"   -->
-                <a class="highlight" href="/video" style="font-weight: bold; font-size: 13px;">首页</a> &nbsp;&nbsp;
-                <a class="highlight category" th:each="item,stat:${categoryList}" th:data="${item.categoryId}"
-                    th:style="${(stat.index+1) == stat.size} ?'color: #bfd128;font-weight: bold; font-size: 13px;':'font-weight: bold; font-size: 13px;' "
-                    href="javascript:void(0);">[[${item.categoryName}]] &nbsp;&nbsp;
-                </a>
-                <a class="highlight" href="javascript:void(0);" id="buy"
-                    style="font-weight: bold; color: #bfd128; font-size: 13px;">已购</a> &nbsp;&nbsp;
-
-            </div>
-            <!--        <div class="member-links">-->
-            <!--            <ul>-->
-            <!--                <li><a href="/video">首页</a></li>-->
-            <!--                <ul th:if="${authMpEnabled==true}">-->
-            <!--                    <li th:if="${user?.id}"><a href="/logout">注销</a></li>-->
-            <!--                    <li th:unless="${user?.id}"><a href="/login">登录</a></li>-->
-            <!--                </ul>-->
-            <!--            </ul>-->
-            <!--        </div>-->
+<div class="top-links">
+    <div class="center-hold">
+        <div class="network">
+            <strong></strong>
+            <ul>
+            </ul>
         </div>
+        <div class="box tags-cloud">
+            <!-- th:href="@{'/video/category?categoryId='+${item.categoryId}}"   -->
+            <a class="highlight" href="/video" style="font-weight: bold; font-size: 13px;">首页</a> &nbsp;&nbsp;
+            <a class="highlight category" th:each="item,stat:${categoryList}" th:data="${item.categoryId}"
+               th:style="${(stat.index+1) == stat.size} ?'color: #bfd128;font-weight: bold; font-size: 13px;':'font-weight: bold; font-size: 13px;' "
+               href="javascript:void(0);">[[${item.categoryName}]] &nbsp;&nbsp;
+            </a>
+            <a class="highlight" href="javascript:void(0);" id="buy"
+               style="font-weight: bold; color: #bfd128; font-size: 13px;">已购</a> &nbsp;&nbsp;
+
+        </div>
+        <!--        <div class="member-links">-->
+        <!--            <ul>-->
+        <!--                <li><a href="/video">首页</a></li>-->
+        <!--                <ul th:if="${authMpEnabled==true}">-->
+        <!--                    <li th:if="${user?.id}"><a href="/logout">注销</a></li>-->
+        <!--                    <li th:unless="${user?.id}"><a href="/login">登录</a></li>-->
+        <!--                </ul>-->
+        <!--            </ul>-->
+        <!--        </div>-->
     </div>
-    <div class="container">
-        <!--    <div class="header">-->
-        <!--        <div class="logo">-->
-        <!--            <a href="javascript:"></a>-->
-        <!--        </div>-->
-        <!--        <div class="social-bookmarks">-->
-        <!--            <div class="addthis_toolbox addthis_default_style addthis_32x32_style">-->
-        <!--                <div class="atclear" tabindex="1000"></div>-->
-        <!--            </div>-->
-        <!--        </div>-->
+</div>
+<div class="container">
+    <!--    <div class="header">-->
+    <!--        <div class="logo">-->
+    <!--            <a href="javascript:"></a>-->
+    <!--        </div>-->
+    <!--        <div class="social-bookmarks">-->
+    <!--            <div class="addthis_toolbox addthis_default_style addthis_32x32_style">-->
+    <!--                <div class="atclear" tabindex="1000"></div>-->
+    <!--            </div>-->
+    <!--        </div>-->
 
-        <!--        <div class="search" style="display: none">-->
-        <!--            <form id="user-form">-->
-        <!--                <span id="search" class="search-button">搜索</span>-->
-        <!--                <div class="search-text"><input type="text" name="name" placeholder="请输入搜索关键词,至少两个字符" value=""></div>-->
-        <!--            </form>-->
-        <!--        </div>-->
-        <!--    </div>-->
+    <!--        <div class="search" style="display: none">-->
+    <!--            <form id="user-form">-->
+    <!--                <span id="search" class="search-button">搜索</span>-->
+    <!--                <div class="search-text"><input type="text" name="name" placeholder="请输入搜索关键词,至少两个字符" value=""></div>-->
+    <!--            </form>-->
+    <!--        </div>-->
+    <!--    </div>-->
 
-        <!-- <script type="text/javascript" th:src="@{/video/pagination.min.js}"></script> -->
+    <!-- <script type="text/javascript" th:src="@{/video/pagination.min.js}"></script> -->
 
-        <div class="content">
-            <div class="main-content">
-                <div id="list_videos_most_recent_videos">
-                    <div class="box">
-                        <div class="list-videos">
-                            <div class="margin-fix" page="1" id="list_videos_most_recent_videos_items">
-                            </div>
-                            <p id="loadTip" class="load-tip" toLoad="true">上拉可以加载更多</p>
+    <div class="content">
+        <div class="main-content">
+            <div id="list_videos_most_recent_videos">
+                <div class="box">
+                    <div class="list-videos">
+                        <div class="margin-fix" page="1" id="list_videos_most_recent_videos_items">
                         </div>
+                        <p id="loadTip" class="load-tip" toLoad="true">上拉可以加载更多</p>
                     </div>
                 </div>
             </div>
-
         </div>
-    </div>
-    <input type="hidden" id="categoryId" name="categoryId" th:value="${categoryId}" />
 
-    <script type="text/javascript">
+    </div>
+</div>
+<input type="hidden" id="categoryId" name="categoryId" th:value="${categoryId}"/>
+
+<script type="text/javascript">
         $(window).load(function () {
             $(window).scroll(function () {
                 //已经滚动到上面的页面高度
@@ -807,23 +809,24 @@
         } else {
             onBridgeReady();
         }
-    </script>
-    <script type="text/template" id="newsListTemplate">
-            <!--each遍历json数组-->
-            {{#each this as role i}}
-                <div class="item  ">
-                    <a href="/video/detail?id={{role.id}}&author={{role.userid}}" title="{{role.name}}">
-                        <div class="img">
-                            <img class="thumb lazy-load" src="{{role.url}}" data-original="{{role.url}}" alt="{{role.name}}"
-                                data-cnt="5" width="180" height="135">
-                        </div>
-                        <strong class="title">
-                            {{role.name}}
-                        </strong>
-                    </a>
-                </div>
+
+</script>
+<script type="text/template" id="newsListTemplate">
+    <!--each遍历json数组-->
+    {{#each this as role i}}
+    <div class="item  ">
+        <a href="/video/detail?id={{role.id}}&author={{role.userid}}" title="{{role.name}}">
+            <div class="img">
+                <img class="thumb lazy-load" src="{{role.url}}" data-original="{{role.url}}" alt="{{role.name}}"
+                     data-cnt="5" width="180" height="135">
+            </div>
+            <strong class="title">
+                {{role.name}}
+            </strong>
+        </a>
+    </div>
     {{/each}}
-    </script>
+</script>
 </body>
 
 </html>
