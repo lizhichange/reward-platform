@@ -813,7 +813,7 @@
 </script>
 <script type="text/template" id="newsListTemplate">
     <!--each遍历json数组-->
-    {{#each this as role i}}
+    {{#each rows as role i}}
     <div class="item  ">
         <a href="/video/detail?id={{role.id}}&author={{role.userid}}" title="{{role.name}}">
             <div class="img">
