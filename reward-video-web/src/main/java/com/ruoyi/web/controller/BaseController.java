@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -78,7 +77,7 @@ public class BaseController {
     @Reference(version = "1.0.0", check = false)
     com.ruoyi.reward.facade.api.DemoFacade demoFacade;
 
-    @PostConstruct
+
     void init() {
         new Thread(() -> demoFacade.testOne()).start();
     }
