@@ -578,7 +578,7 @@
                 <a class="highlight" data="" href="/video" style="font-weight: bold; font-size: 13px;">首页</a>
                 &nbsp;&nbsp;
                 <a class="highlight category" th:each="item,stat:${categoryList}" th:data="${item.categoryId}"
-                    th:style="${(stat.index+9) == stat.size} ?'color: #bfd128;font-weight: bold; font-size: 13px;':'font-weight: bold; font-size: 13px;' "
+                    th:style="${(stat.index+100) == stat.size} ?'color: #bfd128;font-weight: bold; font-size: 13px;':'font-weight: bold; font-size: 13px;' "
                     href="javascript:void(0);">[[${item.categoryName}]] &nbsp;&nbsp;
                 </a>
                 <a class="highlight" href="javascript:void(0);" id="buy"
