@@ -28,6 +28,16 @@ public class IndexController extends BaseController {
         String url = request.getScheme() + "://" + request.getServerName() + request.getRequestURI();
         modelMap.put("url", url);
         modelMap.put("userid", userid);
+        String desc = sysConfigFacadeClient.selectConfigByKey("share.desc");
+        if (StringUtil.isBlank(desc)) {
+            desc = "今日更新，拉無人免提";
+        }
+        String title = sysConfigFacadeClient.selectConfigByKey("share.title");
+        if (StringUtil.isBlank(title)) {
+            title = "點擊觀看,完整影視";
+        }
+        modelMap.put("title", title);
+        modelMap.put("desc", desc);
         return "index";
     }
 

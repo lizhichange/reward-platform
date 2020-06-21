@@ -2,16 +2,16 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta http-equiv="content-type" content="text/html;charset=utf8" />
+    <meta http-equiv="content-type" content="text/html;charset=utf8"/>
     <meta id="viewport" name="viewport"
-        content="width=device-width; initial-scale=1.0; maximum-scale=1; user-scalable=no;" />
+          content="width=device-width; initial-scale=1.0; maximum-scale=1; user-scalable=no;"/>
     <title></title>
 
 
     <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
     <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
 
-    <input type="hidden" th:value="${userid}" name="userid" id="userid" />
+    <input type="hidden" th:value="${userid}" name="userid" id="userid"/>
     <style type="text/css">
         body,
         p,
@@ -195,14 +195,16 @@
             box-sizing: border-box;
             overflow: hidden;
         }
+
     </style>
 </head>
 
 <body>
-    <article class="charge">
+<article class="charge">
 
-    </article>
-
+</article>
+<input type="hidden" th:value="${title}" id="title"/>
+<input type="hidden" th:value="${desc}" id="desc"/>
 </body>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
 <script type="text/javascript" src="/js/zepto.min.js"></script>
@@ -254,8 +256,8 @@
                 wx.ready(function () {
                     //掉用分享给朋友的接口，这里只做分享给朋友，分享到其他地方以此类推
                     wx.onMenuShareAppMessage({
-                        title: '點擊觀看,完整影視', // 分享标题
-                        desc: '今日更新，拉無人免提', // 分享描述
+                        title: $("#title").val(), // 分享标题
+                        desc:  $("#desc").val(), // 分享描述
                         link: data.url, // 分享链接，注意：该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
                         imgUrl: "http://pic.616pic.com/ys_b_img/00/04/24/kjweTwwcFM.jpg", // 分享图标
                         success: function (res) {
@@ -272,6 +274,7 @@
             }
         });
     });
+
 
 
 
