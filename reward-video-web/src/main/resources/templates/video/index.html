@@ -701,11 +701,8 @@
             }
 
             //上拉加载的回调 page = {num:1, size:10}; num:当前页 默认从1开始, size:每页数据条数,默认10
-            function getListDataFromNet(pdType, pageNum, pageSize, successCallback, errorCallback) {
+            function getListDataFromNet(categoryId, pageNum, pageSize, successCallback, errorCallback) {
                 $.showLoading("数据加载中");
-                var pageNum = page.num; // 页码, 默认从1开始 如何修改从0开始 ?
-                var pageSize = page.size; // 页长, 默认每页10条
-                var categoryId = page.categoryId;
                 $.ajax({
                     dataType: 'json',
                     type: 'post',
