@@ -835,12 +835,12 @@
 
             /*初始化菜单*/
             var categoryId;//全部商品0; 奶粉1; 图书2;
-            $(".tags-cloud category").click(function () {
+            $(".category").click(function () {
                 var i = $(this).attr("data");
                 if (categoryId != i) {
                     //更改列表条件
                     categoryId = i;
-                    $(".tags-cloud .category").removeClass("active");
+                    $(".category").removeClass("active");
                     $(this).addClass("active");
                     //重置列表数据
                     mescroll.resetUpScroll();
