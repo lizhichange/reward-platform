@@ -763,12 +763,10 @@
                 //预编译模板
                 var template = Handlebars.compile(tpl);
                 //传入需要填充的数据匹配
-                var html = template(res.rows);
+                var html = template(curPageData.rows);
                 //插入模板到ul中
                 t.append(html);
             }
-
-
         });
 
         $(function () {
