@@ -680,7 +680,7 @@
                         "pageSize": 10,
                     },
                     success: function (data) {
-                        if (res && res.code === 0) {
+                        if (data && data.code === 0) {
                             //联网成功的回调,隐藏下拉刷新的状态;
                             mescroll.endSuccess(); //无参. 注意结束下拉刷新是无参的
                             //设置数据
@@ -707,44 +707,46 @@
                         "pageSize": pageSize,
                     },
                     success: function (data) {
-                        var curPageData = data.rows; // 接口返回的当前页数据列表
-                        var totalPage = data.totalPage; // 接口返回的总页数 (比如列表有26个数据,每页10条,共3页; 则totalPage值为3)
-                        var totalSize = data.total; // 接口返回的总数据量(比如列表有26个数据,每页10条,共3页; 则totalSize值为26)
-                        //var hasNext = data.xxx; // 接口返回的是否有下一页 (true/false)
+                        if (data && data.code === 0) {
+                            var curPageData = data.rows; // 接口返回的当前页数据列表
+                            var totalPage = data.totalPage; // 接口返回的总页数 (比如列表有26个数据,每页10条,共3页; 则totalPage值为3)
+                            var totalSize = data.total; // 接口返回的总数据量(比如列表有26个数据,每页10条,共3页; 则totalSize值为26)
+                            //var hasNext = data.xxx; // 接口返回的是否有下一页 (true/false)
 
-                        mescroll.endBySize(curPageData.length, totalSize);
+                            mescroll.endBySize(curPageData.length, totalSize);
 
-                        //联网成功的回调,隐藏下拉刷新和上拉加载的状态;
-                        //mescroll会根据传的参数,自动判断列表如果无任何数据,则提示空,显示empty配置的内容;
-                        //列表如果无下一页数据,则提示无更多数据,(注意noMoreSize的配置)
+                            //联网成功的回调,隐藏下拉刷新和上拉加载的状态;
+                            //mescroll会根据传的参数,自动判断列表如果无任何数据,则提示空,显示empty配置的内容;
+                            //列表如果无下一页数据,则提示无更多数据,(注意noMoreSize的配置)
 
-                        //方法一(推荐): 后台接口有返回列表的总页数 totalPage
-                        //必传参数(当前页的数据个数, 总页数)
-                        //mescroll.endByPage(curPageData.length, totalPage);
+                            //方法一(推荐): 后台接口有返回列表的总页数 totalPage
+                            //必传参数(当前页的数据个数, 总页数)
+                            //mescroll.endByPage(curPageData.length, totalPage);
 
-                        //方法二(推荐): 后台接口有返回列表的总数据量 totalSize
-                        //必传参数(当前页的数据个数, 总数据量)
-                        //mescroll.endBySize(curPageData.length, totalSize);
+                            //方法二(推荐): 后台接口有返回列表的总数据量 totalSize
+                            //必传参数(当前页的数据个数, 总数据量)
+                            //mescroll.endBySize(curPageData.length, totalSize);
 
-                        //方法三(推荐): 您有其他方式知道是否有下一页 hasNext
-                        //必传参数(当前页的数据个数, 是否有下一页true/false)
-                        //mescroll.endSuccess(curPageData.length, hasNext);
+                            //方法三(推荐): 您有其他方式知道是否有下一页 hasNext
+                            //必传参数(当前页的数据个数, 是否有下一页true/false)
+                            //mescroll.endSuccess(curPageData.length, hasNext);
 
-                        //方法四 (不推荐),会存在一个小问题:比如列表共有20条数据,每页加载10条,共2页.
-                        //如果只根据当前页的数据个数判断,则需翻到第三页才会知道无更多数据
-                        //如果传了hasNext,则翻到第二页即可显示无更多数据.
-                        //mescroll.endSuccess(curPageData.length);
+                            //方法四 (不推荐),会存在一个小问题:比如列表共有20条数据,每页加载10条,共2页.
+                            //如果只根据当前页的数据个数判断,则需翻到第三页才会知道无更多数据
+                            //如果传了hasNext,则翻到第二页即可显示无更多数据.
+                            //mescroll.endSuccess(curPageData.length);
 
-                        //curPageData.length必传的原因:
-                        //1. 使配置的noMoreSize 和 empty生效
-                        //	2. 判断是否有下一页的首要依据: 
-                        //	   当传的值小于page.size时(说明不满页了),则一定会认为无更多数据;
-                        //	   比传入的totalPage, totalSize, hasNext具有更高的判断优先级;
-                        //	3. 当传的值等于page.size时,才会取totalPage, totalSize, hasNext判断是否有下一页
-                        //	传totalPage, totalSize, hasNext目的是避免方法四描述的小问题
+                            //curPageData.length必传的原因:
+                            //1. 使配置的noMoreSize 和 empty生效
+                            //	2. 判断是否有下一页的首要依据: 
+                            //	   当传的值小于page.size时(说明不满页了),则一定会认为无更多数据;
+                            //	   比传入的totalPage, totalSize, hasNext具有更高的判断优先级;
+                            //	3. 当传的值等于page.size时,才会取totalPage, totalSize, hasNext判断是否有下一页
+                            //	传totalPage, totalSize, hasNext目的是避免方法四描述的小问题
 
-                        //设置列表数据
-                        setListData(curPageData);//自行实现 TODO
+                            //设置列表数据
+                            setListData(curPageData);//自行实现 TODO
+                        }
                     },
                     error: function (e) {
                         //联网失败的回调,隐藏下拉刷新和上拉加载的状态
@@ -766,7 +768,7 @@
                 t.append(html);
             }
 
-            
+
         });
 
         $(function () {
