@@ -185,6 +185,7 @@ public class VideoController extends BaseController {
         if (CollectionUtils.isEmpty(list)) {
             TableDataInfo dataTable = getDataTable(list);
             dataTable.setTotal(result.getTotalRows());
+            dataTable.setTotalPage(result.getTotalPage());
             return dataTable;
         }
         //如果查询出来的数据小于
@@ -193,12 +194,14 @@ public class VideoController extends BaseController {
             Collections.shuffle(list);
             TableDataInfo dataTable = getDataTable(list);
             dataTable.setTotal(result.getTotalRows());
+            dataTable.setTotalPage(result.getTotalPage());
             return dataTable;
         }
         Collections.shuffle(list);
         List<ShipinDTO> collect = list.stream().limit(20).collect(Collectors.toList());
         TableDataInfo dataTable = getDataTable(collect);
         dataTable.setTotal(result.getTotalRows());
+        dataTable.setTotalPage(result.getTotalPage());
         return dataTable;
     }
 
@@ -215,6 +218,7 @@ public class VideoController extends BaseController {
         convert(list);
         TableDataInfo dataTable = getDataTable(list);
         dataTable.setTotal(result.getTotalRows());
+        dataTable.setTotalPage(result.getTotalPage());
         return dataTable;
     }
 
