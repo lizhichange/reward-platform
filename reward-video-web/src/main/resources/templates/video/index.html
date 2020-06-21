@@ -647,6 +647,7 @@
                         num: 0, //当前页 默认0,回调之前会加1; 即callback(page)会从1开始
                         size: 10 //每页数据条数,默认10
                     },
+                    htmlNodata: '<p class="upwarp-nodata">-- 暂无相关数据 --</p>',
                     noMoreSize: 5, //如果列表已无数据,可设置列表的总数量要大于5才显示无更多数据;
                     //避免列表数据过少(比如只有一条数据),显示无更多数据会不好看
                     //这就是为什么无更多数据有时候不显示的原因.
@@ -665,7 +666,6 @@
             //下拉刷新的回调
             function downCallback() {
                 $.showLoading("数据加载中");
-
                 $.ajax({
                     dataType: 'json',
                     type: 'post',
@@ -818,7 +818,6 @@
                         $.hideLoading();
                         if (res && res.code === 0) {
                             $("#list_videos_most_recent_videos_items").empty();
-
                             let html = "";
                             $.each(res.rows, function (i, row) {
                                 html += ' <div class="item  ">'
