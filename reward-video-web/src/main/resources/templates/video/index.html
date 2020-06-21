@@ -667,6 +667,8 @@
             });
             //下拉刷新的回调
             function downCallback() {
+                $.showLoading("数据加载中");
+
                 $.ajax({
                     dataType: 'json',
                     type: 'post',
@@ -676,6 +678,7 @@
                         "pageSize": 10,
                     },
                     success: function (data) {
+                        $.hideLoading();
                         if (data && data.code === 0) {
                             //联网成功的回调,隐藏下拉刷新的状态;
                             mescroll.endSuccess(); //无参. 注意结束下拉刷新是无参的
@@ -685,12 +688,16 @@
                     },
                     error: function (data) {
                         //联网失败的回调,隐藏下拉刷新的状态
+                        $.hideLoading();
+
                         mescroll.endErr();
                     }
                 });
             }
             //上拉加载的回调 page = {num:1, size:10}; num:当前页 默认从1开始, size:每页数据条数,默认10
             function upCallback(page) {
+                $.showLoading("数据加载中");
+
                 var pageNum = page.num; // 页码, 默认从1开始 如何修改从0开始 ?
                 var pageSize = page.size; // 页长, 默认每页10条
                 console.log("page.num=" + page.num + ", page.size=" + page.size);
@@ -703,6 +710,8 @@
                         "pageSize": pageSize,
                     },
                     success: function (data) {
+                        $.hideLoading();
+
                         if (data && data.code === 0) {
                             var curPageData = data.rows; // 接口返回的当前页数据列表
                             var totalPage = data.totalPage; // 接口返回的总页数 (比如列表有26个数据,每页10条,共3页; 则totalPage值为3)
@@ -744,6 +753,8 @@
                         }
                     },
                     error: function (e) {
+                        $.hideLoading();
+
                         //联网失败的回调,隐藏下拉刷新和上拉加载的状态
                         mescroll.endErr();
                     }
