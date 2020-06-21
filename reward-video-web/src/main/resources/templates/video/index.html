@@ -678,6 +678,7 @@
             //下拉刷新的回调
             function downCallback() {
                 $.showLoading("数据加载中");
+                console.log("categoryId:"+categoryId);
                 $.ajax({
                     dataType: 'json',
                     type: 'post',
