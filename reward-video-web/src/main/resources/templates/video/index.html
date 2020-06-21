@@ -755,7 +755,7 @@
 
                 var listDom = document.getElementById("list_videos_most_recent_videos_items");
                 for (var i = 0; i < curPageData.length; i++) {
-                    var newObj = curPageData[i];
+                    var row = curPageData[i];
 
                     var str = '<a href="/video/detail?id=' + row.id + '&author=' + row.userid + '" title="' + row.name + '"> '
                         + '    <div class="img">'
