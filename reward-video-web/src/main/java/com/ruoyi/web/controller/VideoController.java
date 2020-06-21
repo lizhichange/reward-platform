@@ -105,7 +105,7 @@ public class VideoController extends BaseController {
                         @RequestParam(value = "categoryId", required = false) String categoryId,
                         ModelMap modelmap) {
         String user = StringUtil.isBlank(userid) ? "" : userid;
-        SysWebMainDTO webMain = new SysWebMainDTO();
+        SysWebMainDTO webMain  = new SysWebMainDTO();
         webMain.setMainStatus(WebMainStatus.OK.getCode());
         List<SysWebMainDTO> list = sysWebMainFacadeClient.selectSysWebMainList(webMain);
         if (!CollectionUtils.isEmpty(list)) {
