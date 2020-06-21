@@ -630,8 +630,9 @@
 
     <script type="text/javascript" charset="utf-8">
         $(function () {
-            //创建MeScroll对象
-            var mescroll = new MeScroll("mescroll", { //第一个参数"mescroll"对应上面布局结构div的id (1.3.5版本支持传入dom对象)
+            //创建MeScroll对象,内部已默认开启下拉刷新,自动执行up.callback,刷新列表数据;
+            //第一个参数"mescroll"对应上面布局结构div的id (1.3.5版本支持传入dom对象)
+            var mescroll = new MeScroll("mescroll", {
                 //如果您的下拉刷新是重置列表数据,那么down完全可以不用配置,具体用法参考第一个基础案例
                 //解析: down.callback默认调用mescroll.resetUpScroll(),而resetUpScroll会将page.num=1,再触发up.callback
                 down: {
@@ -645,10 +646,12 @@
                     //以下是一些常用的配置,当然不写也可以的.
                     page: {
                         num: 0, //当前页 默认0,回调之前会加1; 即callback(page)会从1开始
-                        size: 10 //每页数据条数,默认10
+                        size: 10,//每页数据条数,默认10
+                        time: null //加载第一页数据服务器返回的时间; 防止用户翻页时,后台新增了数据从而导致下一页数据重复;
                     },
                     htmlNodata: '<p class="upwarp-nodata">-- 暂无相关数据 --</p>',
                     noMoreSize: 5, //如果列表已无数据,可设置列表的总数量要大于5才显示无更多数据;
+                    offset: 50, //离底部的距离
                     //避免列表数据过少(比如只有一条数据),显示无更多数据会不好看
                     //这就是为什么无更多数据有时候不显示的原因.
                     toTop: {
@@ -662,6 +665,12 @@
                         tip: '~暂无相关数据 ~' // 提示
                     }
                 }
+            });
+
+            var categoryId;
+            $(".category").on('click', function () {
+                categoryId = $(this).attr("data");
+                mescroll.resetUpScroll();
             });
             //下拉刷新的回调
             function downCallback() {
@@ -686,18 +695,17 @@
                     error: function (data) {
                         //联网失败的回调,隐藏下拉刷新的状态
                         $.hideLoading();
-
                         mescroll.endErr();
                     }
                 });
             }
-            //上拉加载的回调 page = {num:1, size:10}; num:当前页 默认从1开始, size:每页数据条数,默认10
-            function upCallback(page) {
-                $.showLoading("数据加载中");
 
+            //上拉加载的回调 page = {num:1, size:10}; num:当前页 默认从1开始, size:每页数据条数,默认10
+            function getListDataFromNet(pdType, pageNum, pageSize, successCallback, errorCallback) {
+                $.showLoading("数据加载中");
                 var pageNum = page.num; // 页码, 默认从1开始 如何修改从0开始 ?
                 var pageSize = page.size; // 页长, 默认每页10条
-                console.log("page.num=" + page.num + ", page.size=" + page.size);
+                var categoryId = page.categoryId;
                 $.ajax({
                     dataType: 'json',
                     type: 'post',
@@ -705,66 +713,39 @@
                     data: {
                         "pageNum": pageNum,
                         "pageSize": pageSize,
+                        "categoryId": categoryId
                     },
                     success: function (data) {
                         $.hideLoading();
-
                         if (data && data.code === 0) {
-                            var curPageData = data.rows; // 接口返回的当前页数据列表
-                            var totalPage = data.totalPage; // 接口返回的总页数 (比如列表有26个数据,每页10条,共3页; 则totalPage值为3)
-                            var totalSize = data.total; // 接口返回的总数据量(比如列表有26个数据,每页10条,共3页; 则totalSize值为26)
-
-                            mescroll.endBySize(curPageData.length, totalSize);
-
-                            //联网成功的回调,隐藏下拉刷新和上拉加载的状态;
-                            //mescroll会根据传的参数,自动判断列表如果无任何数据,则提示空,显示empty配置的内容;
-                            //列表如果无下一页数据,则提示无更多数据,(注意noMoreSize的配置)
-
-                            //方法一(推荐): 后台接口有返回列表的总页数 totalPage
-                            //必传参数(当前页的数据个数, 总页数)
-                            //mescroll.endByPage(curPageData.length, totalPage);
-
-                            //方法二(推荐): 后台接口有返回列表的总数据量 totalSize
-                            //必传参数(当前页的数据个数, 总数据量)
-                            //mescroll.endBySize(curPageData.length, totalSize);
-
-                            //方法三(推荐): 您有其他方式知道是否有下一页 hasNext
-                            //必传参数(当前页的数据个数, 是否有下一页true/false)
-                            //mescroll.endSuccess(curPageData.length, hasNext);
-
-                            //方法四 (不推荐),会存在一个小问题:比如列表共有20条数据,每页加载10条,共2页.
-                            //如果只根据当前页的数据个数判断,则需翻到第三页才会知道无更多数据
-                            //如果传了hasNext,则翻到第二页即可显示无更多数据.
-                            //mescroll.endSuccess(curPageData.length);
-
-                            //curPageData.length必传的原因:
-                            //1. 使配置的noMoreSize 和 empty生效
-                            //	2. 判断是否有下一页的首要依据: 
-                            //	   当传的值小于page.size时(说明不满页了),则一定会认为无更多数据;
-                            //	   比传入的totalPage, totalSize, hasNext具有更高的判断优先级;
-                            //	3. 当传的值等于page.size时,才会取totalPage, totalSize, hasNext判断是否有下一页
-                            //	传totalPage, totalSize, hasNext目的是避免方法四描述的小问题
-
-                            //设置列表数据
-                            setListData(curPageData, true);//自行实现 TODO
+                            //回调
+                            successCallback(data);
                         }
                     },
-                    error: function (e) {
-                        $.hideLoading();
-
-                        //联网失败的回调,隐藏下拉刷新和上拉加载的状态
-                        mescroll.endErr();
-                    }
+                    error: errorCallback
+                });
+            }
+            function upCallback(page) {
+                //联网加载数据
+                getListDataFromNet(categoryId, page.num, page.size, function (data) {
+                    var curPageData = data.rows; // 接口返回的当前页数据列表
+                    var totalPage = data.totalPage; // 接口返回的总页数 (比如列表有26个数据,每页10条,共3页; 则totalPage值为3)
+                    var totalSize = data.total; // 接口返回的总数据量(比如列表有26个数据,每页10条,共3页; 则totalSize值为26)
+                    console.log("categoryId=" + categoryId + ", page.num=" + page.num + ", page.size=" + page.size + ", curPageData.length=" + curPageData.length);
+                    mescroll.endBySize(curPageData.length, totalSize);
+                    setListData(curPageData, true);//自行实现 TODO
+                }, function () {
+                    //联网失败的回调,隐藏下拉刷新和上拉加载的状态;
+                    $.hideLoading();
+                    mescroll.endErr();
                 });
             }
 
             /*设置列表数据*/
             function setListData(curPageData, isAppend) {
-
                 var listDom = document.getElementById("list_videos_most_recent_videos_items");
                 for (var i = 0; i < curPageData.length; i++) {
                     var row = curPageData[i];
-
                     var str = '<a href="/video/detail?id=' + row.id + '&author=' + row.userid + '" title="' + row.name + '"> '
                         + '    <div class="img">'
                         + '        <img class="thumb lazy-load" src="' + row.url + '"  data-original="' + row.url + '" alt="' + row.name + '" data-cnt="5" width="180" height="135">'
@@ -772,7 +753,7 @@
                         + '    <strong class="title">' + row.name + '</strong>'
                         + '   </a>'
                     var liDom = document.createElement("div");
-                    liDom.className="item  ";
+                    liDom.className = "item  ";
                     liDom.innerHTML = str;
                     if (isAppend) {
                         listDom.appendChild(liDom);//加在列表的后面,上拉加载
@@ -839,58 +820,11 @@
                             $("#list_videos_most_recent_videos_items").html(html);
                         } else {
                             $.hideLoading();
-                            $.toast(r.msg);
+                            $.toast(res.msg);
                         }
                     }
                 });
             });
-
-            $(".category").on('click', function () {
-                $.showLoading("数据加载中");
-                var categoryId = $(this).attr("data");
-                var name = $("input[name='name']").val();
-                $.ajax({
-                    dataType: 'json',
-                    type: 'post',
-                    url: '/video/list',
-                    data: {
-                        "name": name,
-                        "categoryId": categoryId,
-                        "pageNum": 1,
-                        "pageSize": 48
-                    },
-                    success: function (res) {
-                        $.hideLoading();
-                        if (res && res.code === 0) {
-                            $("#list_videos_most_recent_videos_items").empty();
-                            let html = "";
-                            $.each(res.rows, function (i, row) {
-                                html += ' <div class="item  ">'
-                                    + '<a href="/video/detail?id=' + row.id + '&author=' + row.userid + '" title="' + row.name + '"> '
-                                    + '    <div class="img">'
-                                    + '        <img class="thumb lazy-load" src="' + row.url + '"  data-original="' + row.url + '" alt="' + row.name + '" data-cnt="5" width="180" height="135">'
-                                    + '    </div>'
-                                    + '    <strong class="title">' + row.name + '</strong>'
-                                    // + '    <div class="wrap">'
-                                    // + '        <div class="duration">' + row.shijianStr + '</div>'
-                                    // + '    </div>'
-                                    // + '    <div class="wrap">'
-                                    // + '        <div class="added"><em>' + row.diffDays + '</em></div>'
-                                    // + '       <div class="views">' + row.click + '</div>'
-                                    // + '   </div>'
-                                    + '   </a>'
-                                    + '   </div>';
-                            });
-                            $("#list_videos_most_recent_videos_items").html(html);
-                        } else {
-                            $.hideLoading();
-                            $.toast(r.msg);
-                        }
-                    }
-                });
-            });
-
-
             function onBridgeReady() {
                 WeixinJSBridge.call('hideOptionMenu');
             }
