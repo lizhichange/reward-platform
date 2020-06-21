@@ -19,6 +19,11 @@ public class TableDataInfo extends ToString {
 
 
     /**
+     * 总页数
+     */
+    private int totalPage;
+
+    /**
      * 列表数据
      */
     private List<?> rows;
@@ -80,5 +85,13 @@ public class TableDataInfo extends ToString {
 
     public void setMsg(int msg) {
         this.msg = msg;
+    }
+
+    public int getTotalPage() {
+        return totalPage;
+    }
+
+    public void setTotalPage(int totalPage) {
+        this.totalPage = totalPage;
     }
 }

@@ -4,25 +4,25 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>电影</title>
-    <meta name="viewport"
-          content="target-densitydpi=device-dpi, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="description" content="高速在线观看，无需下载播放器。">
     <meta name="keywords" content="电影">
     <meta name="generator" content="CMS">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link th:href="@{/video/pagination.min.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/video/pagination.min.css}" rel="stylesheet" type="text/css" />
     <link th:href="@{/video/detail/all-responsive-metal.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/video/jquery.fancybox-metal.css}" rel="stylesheet" type="text/css">
-    <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/mescroll.js@1.4.1/mescroll.min.css">
+
     <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
     <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
-
-    <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-    <script src="https://cdn.bootcss.com/handlebars.js/4.0.6/handlebars.js"></script>
-
-    <script th:src="@{/video/analytics.js}"></script>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+
+    <script src="https://unpkg.com/mescroll.js@1.4.1/mescroll.min.js" charset="utf-8"></script>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+
+    <script src="https://cdn.bootcss.com/handlebars.js/4.0.6/handlebars.js"></script>
+    <script th:src="@{/video/analytics.js}"></script>
     <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
 
     <style type="text/css">
@@ -540,7 +540,8 @@
         .s1 span a {
             color: #00FF00
         }
-        .load-tip{
+
+        .load-tip {
             display: none;
             margin: .2rem auto;
             text-align: center;
@@ -548,280 +549,340 @@
             color: #b9b9b9;
         }
 
+        /*固定高度*/
+        .mescroll {
+            position: fixed;
+            top: 44px;
+            bottom: 0;
+            height: auto;
+            /*如设置bottom:50px,则需height:auto才能生效*/
+        }
     </style>
 
-    <script>
-        (function (doc, win) {
-            var docEl = doc.documentElement,
-                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
-                recalc = function () {
-                    var clientWidth = docEl.clientWidth;
-                    if (!clientWidth) return;
-                    if (clientWidth >= 640) {
-                        docEl.style.fontSize = '85px';
-                    } else {
-                        docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
-                    }
-                };
-
-            if (!doc.addEventListener) return;
-            win.addEventListener(resizeEvt, recalc, false);
-            doc.addEventListener('DOMContentLoaded', recalc, false);
-        })(document, window);
-
-    </script>
 </head>
 
 <body>
 
 
-<div class="top-links">
-    <div class="center-hold">
-        <div class="network">
-            <strong></strong>
-            <ul>
-            </ul>
-        </div>
-        <div class="box tags-cloud">
-            <!-- th:href="@{'/video/category?categoryId='+${item.categoryId}}"   -->
-            <a class="highlight" href="/video" style="font-weight: bold; font-size: 13px;">首页</a> &nbsp;&nbsp;
-            <a class="highlight category" th:each="item,stat:${categoryList}" th:data="${item.categoryId}"
-               th:style="${(stat.index+1) == stat.size} ?'color: #bfd128;font-weight: bold; font-size: 13px;':'font-weight: bold; font-size: 13px;' "
-               href="javascript:void(0);">[[${item.categoryName}]] &nbsp;&nbsp;
-            </a>
-            <a class="highlight" href="javascript:void(0);" id="buy"
-               style="font-weight: bold; color: #bfd128; font-size: 13px;">已购</a> &nbsp;&nbsp;
+    <div class="top-links">
+        <div class="center-hold">
+            <div class="network">
+                <strong></strong>
+                <ul>
+                </ul>
+            </div>
+            <div class="box tags-cloud">
+                <!-- th:href="@{'/video/category?categoryId='+${item.categoryId}}"   -->
+                <a class="highlight" href="/video" style="font-weight: bold; font-size: 13px;">首页</a> &nbsp;&nbsp;
+                <a class="highlight category" th:each="item,stat:${categoryList}" th:data="${item.categoryId}"
+                    th:style="${(stat.index+1) == stat.size} ?'color: #bfd128;font-weight: bold; font-size: 13px;':'font-weight: bold; font-size: 13px;' "
+                    href="javascript:void(0);">[[${item.categoryName}]] &nbsp;&nbsp;
+                </a>
+                <a class="highlight" href="javascript:void(0);" id="buy"
+                    style="font-weight: bold; color: #bfd128; font-size: 13px;">已购</a> &nbsp;&nbsp;
 
+            </div>
+            <!--        <div class="member-links">-->
+            <!--            <ul>-->
+            <!--                <li><a href="/video">首页</a></li>-->
+            <!--                <ul th:if="${authMpEnabled==true}">-->
+            <!--                    <li th:if="${user?.id}"><a href="/logout">注销</a></li>-->
+            <!--                    <li th:unless="${user?.id}"><a href="/login">登录</a></li>-->
+            <!--                </ul>-->
+            <!--            </ul>-->
+            <!--        </div>-->
         </div>
-        <!--        <div class="member-links">-->
-        <!--            <ul>-->
-        <!--                <li><a href="/video">首页</a></li>-->
-        <!--                <ul th:if="${authMpEnabled==true}">-->
-        <!--                    <li th:if="${user?.id}"><a href="/logout">注销</a></li>-->
-        <!--                    <li th:unless="${user?.id}"><a href="/login">登录</a></li>-->
-        <!--                </ul>-->
-        <!--            </ul>-->
-        <!--        </div>-->
     </div>
-</div>
-<div class="container">
-    <!--    <div class="header">-->
-    <!--        <div class="logo">-->
-    <!--            <a href="javascript:"></a>-->
-    <!--        </div>-->
-    <!--        <div class="social-bookmarks">-->
-    <!--            <div class="addthis_toolbox addthis_default_style addthis_32x32_style">-->
-    <!--                <div class="atclear" tabindex="1000"></div>-->
-    <!--            </div>-->
-    <!--        </div>-->
+    <div class="container">
+        <!--    <div class="header">-->
+        <!--        <div class="logo">-->
+        <!--            <a href="javascript:"></a>-->
+        <!--        </div>-->
+        <!--        <div class="social-bookmarks">-->
+        <!--            <div class="addthis_toolbox addthis_default_style addthis_32x32_style">-->
+        <!--                <div class="atclear" tabindex="1000"></div>-->
+        <!--            </div>-->
+        <!--        </div>-->
 
-    <!--        <div class="search" style="display: none">-->
-    <!--            <form id="user-form">-->
-    <!--                <span id="search" class="search-button">搜索</span>-->
-    <!--                <div class="search-text"><input type="text" name="name" placeholder="请输入搜索关键词,至少两个字符" value=""></div>-->
-    <!--            </form>-->
-    <!--        </div>-->
-    <!--    </div>-->
+        <!--        <div class="search" style="display: none">-->
+        <!--            <form id="user-form">-->
+        <!--                <span id="search" class="search-button">搜索</span>-->
+        <!--                <div class="search-text"><input type="text" name="name" placeholder="请输入搜索关键词,至少两个字符" value=""></div>-->
+        <!--            </form>-->
+        <!--        </div>-->
+        <!--    </div>-->
 
-    <!-- <script type="text/javascript" th:src="@{/video/pagination.min.js}"></script> -->
 
-    <div class="content">
-        <div class="main-content">
-            <div id="list_videos_most_recent_videos">
-                <div class="box">
-                    <div class="list-videos">
-                        <div class="margin-fix" page="1" id="list_videos_most_recent_videos_items">
+        <div class="content">
+            <div class="main-content">
+                <div id="list_videos_most_recent_videos">
+                    <div class="box">
+                        <div class="list-videos mescroll" id="mescroll">
+                            <div class="margin-fix" id="list_videos_most_recent_videos_items">
+                            </div>
                         </div>
-                        <p id="loadTip" class="load-tip" toLoad="true">上拉可以加载更多</p>
                     </div>
                 </div>
             </div>
+
         </div>
-
     </div>
-</div>
-<input type="hidden" id="categoryId" name="categoryId" th:value="${categoryId}"/>
+    <!--TODO 分页-->
+    <input type="hidden" id="categoryId" name="categoryId" th:value="${categoryId}" />
 
-<script type="text/javascript">
-        $(window).load(function () {
-            $(window).scroll(function () {
-                //已经滚动到上面的页面高度
-                var scrollTop = $(this).scrollTop();
-                //页面高度
-                var scrollHeight = $(document).height();
-                //浏览器窗口高度
-                var windowHeight = $(this).height();
-                //此处是滚动条到底部时候触发的事件，在这里写要加载的数据，或者是拉动滚动条的操作
-                if (scrollTop + windowHeight == scrollHeight) {
-                    loadInfo();
-                }
-            });
-        })
+    <script type="text/javascript" charset="utf-8">
         $(function () {
-            loadInfo();
-        });
-        function loadInfo() {
-            /**最后一页不再添加数据*/
-            if ("false" == $("#loadTip").attr("toLoad")) {
-                return;
+            //创建MeScroll对象
+            var mescroll = new MeScroll("mescroll", { //第一个参数"mescroll"对应上面布局结构div的id (1.3.5版本支持传入dom对象)
+                //如果您的下拉刷新是重置列表数据,那么down完全可以不用配置,具体用法参考第一个基础案例
+                //解析: down.callback默认调用mescroll.resetUpScroll(),而resetUpScroll会将page.num=1,再触发up.callback
+                down: {
+                    callback: downCallback //下拉刷新的回调,别写成downCallback(),多了括号就自动执行方法了
+                },
+                up: {
+                    callback: upCallback, //上拉加载的回调
+                    //以下是一些常用的配置,当然不写也可以的.
+                    page: {
+                        num: 0, //当前页 默认0,回调之前会加1; 即callback(page)会从1开始
+                        size: 10 //每页数据条数,默认10
+                    },
+                    textLoading: '加载中 ...', // 加载中的提示文本
+                    htmlNodata: '<p class="upwarp-nodata">-- END --</p>',
+                    noMoreSize: 5, //如果列表已无数据,可设置列表的总数量要大于5才显示无更多数据;
+                    //避免列表数据过少(比如只有一条数据),显示无更多数据会不好看
+                    //这就是为什么无更多数据有时候不显示的原因.
+                    toTop: {
+                        // 回到顶部按钮,需配置src才显示
+                        src: "http://www.mescroll.com/img/mescroll-totop.png?v=1", // 图片路径 (建议放入static目录, 如 /static/img/mescroll-totop.png )
+                        offset: 1000, // 列表滚动多少距离才显示回到顶部按钮,默认1000px
+                        right: 20, // 到右边的距离, 默认20 (支持"20rpx", "20px", "20%"格式的值, 纯数字则默认单位rpx)
+                        bottom: 120, // 到底部的距离, 默认120 (支持"20rpx", "20px", "20%"格式的值, 纯数字则默认单位rpx)
+                        width: 72 // 回到顶部图标的宽度, 默认72 (支持"20rpx", "20px", "20%"格式的值, 纯数字则默认单位rpx)
+                    },
+                    empty: {
+                        //列表第一页无任何数据时,显示的空提示布局; 需配置warpId才显示
+                        warpId: "xxid", //父布局的id (1.3.5版本支持传入dom元素)
+                        icon: "http://www.mescroll.com/img/mescroll-empty.png?v=1", // 图标路径 (建议放入static目录, 如 /static/img/mescroll-empty.png )
+                        tip: '~暂无相关数据 ~' // 提示
+                    }
+                }
+            });
+
+
+            //下拉刷新的回调
+            function downCallback() {
+                $.ajax({
+                    dataType: 'json',
+                    type: 'post',
+                    url: '/video/list',
+                    data: {
+                        "pageNum": 1,
+                        "pageSize": 10,
+                    },
+                    success: function (data) {
+                        if (res && res.code === 0) {
+                            //联网成功的回调,隐藏下拉刷新的状态;
+                            mescroll.endSuccess(); //无参. 注意结束下拉刷新是无参的
+                            //设置数据
+                            setListData(data.rows);//自行实现 TODO
+                        }
+                    },
+                    error: function (data) {
+                        //联网失败的回调,隐藏下拉刷新的状态
+                        mescroll.endErr();
+                    }
+                });
             }
-            var t = $("#list_videos_most_recent_videos_items");
-            /*当前页码*/
-            var page = t.attr("page");
-            /*假设分页一次加载8条数据*/
-            var rows = 8;
-            /*假设共21条数据（如果是请求服务器接口，那么total就是接口返回的总条数）*/
-            $.showLoading("数据加载中");
-            $.ajax({
-                type: 'post',
-                url: '/video/list',
-                data: {
-                    pageNum: page,
-                    pageSize: rows,
-                    categoryId: $("#categoryId").val()
-                },
-                dataType: 'json'
-            }).done(function (res) {
-                $.hideLoading();
-                console.log(res);
-                // do something
-                // 请务必调用此方法，否则分页按钮不会刷新
-                if (res && res.code === 0) {
-                    var total = res.total;
-                    $("#loadTip").show();
-                    var toLoad = total - (rows * (page - 1)) - rows > 0;
-                    /*当没有下一页时，改变提示文字并且下次不进行填充数据*/
-                    if (!toLoad) {
-                        $("#loadTip").text("加载完毕！").attr("toLoad", false);;
+
+            //上拉加载的回调 page = {num:1, size:10}; num:当前页 默认从1开始, size:每页数据条数,默认10
+            function upCallback(page) {
+                var pageNum = page.num; // 页码, 默认从1开始 如何修改从0开始 ?
+                var pageSize = page.size; // 页长, 默认每页10条
+                $.ajax({
+                    dataType: 'json',
+                    type: 'post',
+                    url: '/video/list',
+                    data: {
+                        "pageNum": pageNum,
+                        "pageSize": pageSize,
+                    },
+                    success: function (data) {
+                        var curPageData = data.rows; // 接口返回的当前页数据列表
+                        var totalPage = data.totalPage; // 接口返回的总页数 (比如列表有26个数据,每页10条,共3页; 则totalPage值为3)
+                        var totalSize = data.total; // 接口返回的总数据量(比如列表有26个数据,每页10条,共3页; 则totalSize值为26)
+                        //var hasNext = data.xxx; // 接口返回的是否有下一页 (true/false)
+
+                        mescroll.endBySize(curPageData.length, totalSize);
+
+                        //联网成功的回调,隐藏下拉刷新和上拉加载的状态;
+                        //mescroll会根据传的参数,自动判断列表如果无任何数据,则提示空,显示empty配置的内容;
+                        //列表如果无下一页数据,则提示无更多数据,(注意noMoreSize的配置)
+
+                        //方法一(推荐): 后台接口有返回列表的总页数 totalPage
+                        //必传参数(当前页的数据个数, 总页数)
+                        //mescroll.endByPage(curPageData.length, totalPage);
+
+                        //方法二(推荐): 后台接口有返回列表的总数据量 totalSize
+                        //必传参数(当前页的数据个数, 总数据量)
+                        //mescroll.endBySize(curPageData.length, totalSize);
+
+                        //方法三(推荐): 您有其他方式知道是否有下一页 hasNext
+                        //必传参数(当前页的数据个数, 是否有下一页true/false)
+                        //mescroll.endSuccess(curPageData.length, hasNext);
+
+                        //方法四 (不推荐),会存在一个小问题:比如列表共有20条数据,每页加载10条,共2页.
+                        //如果只根据当前页的数据个数判断,则需翻到第三页才会知道无更多数据
+                        //如果传了hasNext,则翻到第二页即可显示无更多数据.
+                        //mescroll.endSuccess(curPageData.length);
+
+                        //curPageData.length必传的原因:
+                        //1. 使配置的noMoreSize 和 empty生效
+                        //	2. 判断是否有下一页的首要依据: 
+                        //	   当传的值小于page.size时(说明不满页了),则一定会认为无更多数据;
+                        //	   比传入的totalPage, totalSize, hasNext具有更高的判断优先级;
+                        //	3. 当传的值等于page.size时,才会取totalPage, totalSize, hasNext判断是否有下一页
+                        //	传totalPage, totalSize, hasNext目的是避免方法四描述的小问题
+
+                        //设置列表数据
+                        setListData(curPageData);//自行实现 TODO
+                    },
+                    error: function (e) {
+                        //联网失败的回调,隐藏下拉刷新和上拉加载的状态
+                        mescroll.endErr();
                     }
-                    //通过模板定义的id获取模板
-                    var tpl = $("#newsListTemplate").html();
-                    //预编译模板
-                    var template = Handlebars.compile(tpl);
-                    //传入需要填充的数据匹配
-                    var html = template(res.rows);
-                    //插入模板到ul中
-                    t.append(html);
-                    t.attr("page", ++page);
-
-                }
-            }).fail(function (error) {
-                $.hideLoading();
-            });
-        }
-
-
-        $("#buy").on('click', function () {
-            $.showLoading("数据加载中");
-            $.ajax({
-                dataType: 'json',
-                type: 'post',
-                url: '/video/buy',
-                data: {
-                    "pageNum": 1,
-                    "pageSize": 100
-                },
-                success: function (res) {
-                    $.hideLoading();
-                    if (res && res.code === 0) {
-                        $("#list_videos_most_recent_videos_items").empty();
-
-                        let html = "";
-                        $.each(res.rows, function (i, row) {
-                            html += ' <div class="item  ">'
-                                + '<a href="/video/detail?id=' + row.id + '&author=' + row.userid + '" title="' + row.name + '"> '
-                                + '    <div class="img">'
-                                + '        <img class="thumb lazy-load" src="' + row.url + '"  data-original="' + row.url + '" alt="' + row.name + '" data-cnt="5" width="180" height="135">'
-                                + '    </div>'
-                                + '    <strong class="title">' + row.name + '</strong>'
-                                // + '    <div class="wrap">'
-                                // + '        <div class="duration">' + row.shijianStr + '</div>'
-                                // + '    </div>'
-                                // + '    <div class="wrap">'
-                                // + '        <div class="added"><em>' + row.diffDays + '</em></div>'
-                                // + '       <div class="views">' + row.click + '</div>'
-                                // + '   </div>'
-                                + '   </a>'
-                                + '   </div>';
-                        });
-                        $("#list_videos_most_recent_videos_items").html(html);
-                    } else {
-                        $.hideLoading();
-                        $.toast(r.msg);
-                    }
-                }
-            });
-        });
-        $(".category").on('click', function () {
-            $.showLoading("数据加载中");
-            var categoryId = $(this).attr("data");
-            var name = $("input[name='name']").val();
-            $.ajax({
-                dataType: 'json',
-                type: 'post',
-                url: '/video/list',
-                data: {
-                    "name": name,
-                    "categoryId": categoryId,
-                    "pageNum": 1,
-                    "pageSize": 48
-                },
-                success: function (res) {
-                    $.hideLoading();
-                    if (res && res.code === 0) {
-                        $("#list_videos_most_recent_videos_items").empty();
-                        let html = "";
-                        $.each(res.rows, function (i, row) {
-                            html += ' <div class="item  ">'
-                                + '<a href="/video/detail?id=' + row.id + '&author=' + row.userid + '" title="' + row.name + '"> '
-                                + '    <div class="img">'
-                                + '        <img class="thumb lazy-load" src="' + row.url + '"  data-original="' + row.url + '" alt="' + row.name + '" data-cnt="5" width="180" height="135">'
-                                + '    </div>'
-                                + '    <strong class="title">' + row.name + '</strong>'
-                                // + '    <div class="wrap">'
-                                // + '        <div class="duration">' + row.shijianStr + '</div>'
-                                // + '    </div>'
-                                // + '    <div class="wrap">'
-                                // + '        <div class="added"><em>' + row.diffDays + '</em></div>'
-                                // + '       <div class="views">' + row.click + '</div>'
-                                // + '   </div>'
-                                + '   </a>'
-                                + '   </div>';
-                        });
-                        $("#list_videos_most_recent_videos_items").html(html);
-                    } else {
-                        $.hideLoading();
-                        $.toast(r.msg);
-                    }
-                }
-            });
-        });
-
-
-        function onBridgeReady() {
-            WeixinJSBridge.call('hideOptionMenu');
-        }
-
-        if (typeof WeixinJSBridge == "undefined") {
-            if (document.addEventListener) {
-                document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
-            } else if (document.attachEvent) {
-                document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
-                document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+                });
             }
-        } else {
-            onBridgeReady();
-        }
 
-</script>
-<script type="text/template" id="newsListTemplate">
-    <!--each遍历json数组-->
-    {{#each this}}
+            /*设置列表数据*/
+            function setListData(curPageData) {
+                var t = $("#list_videos_most_recent_videos_items");
+                //通过模板定义的id获取模板
+                var tpl = $("#newsListTemplate").html();
+                //预编译模板
+                var template = Handlebars.compile(tpl);
+                //传入需要填充的数据匹配
+                var html = template(res.rows);
+                //插入模板到ul中
+                t.append(html);
+            }
+
+            
+        });
+
+        $(function () {
+            $("#buy").on('click', function () {
+                $.showLoading("数据加载中");
+                $.ajax({
+                    dataType: 'json',
+                    type: 'post',
+                    url: '/video/buy',
+                    data: {
+                        "pageNum": 1,
+                        "pageSize": 100
+                    },
+                    success: function (res) {
+                        $.hideLoading();
+                        if (res && res.code === 0) {
+                            $("#list_videos_most_recent_videos_items").empty();
+
+                            let html = "";
+                            $.each(res.rows, function (i, row) {
+                                html += ' <div class="item  ">'
+                                    + '<a href="/video/detail?id=' + row.id + '&author=' + row.userid + '" title="' + row.name + '"> '
+                                    + '    <div class="img">'
+                                    + '        <img class="thumb lazy-load" src="' + row.url + '"  data-original="' + row.url + '" alt="' + row.name + '" data-cnt="5" width="180" height="135">'
+                                    + '    </div>'
+                                    + '    <strong class="title">' + row.name + '</strong>'
+                                    // + '    <div class="wrap">'
+                                    // + '        <div class="duration">' + row.shijianStr + '</div>'
+                                    // + '    </div>'
+                                    // + '    <div class="wrap">'
+                                    // + '        <div class="added"><em>' + row.diffDays + '</em></div>'
+                                    // + '       <div class="views">' + row.click + '</div>'
+                                    // + '   </div>'
+                                    + '   </a>'
+                                    + '   </div>';
+                            });
+                            $("#list_videos_most_recent_videos_items").html(html);
+                        } else {
+                            $.hideLoading();
+                            $.toast(r.msg);
+                        }
+                    }
+                });
+            });
+
+            $(".category").on('click', function () {
+                $.showLoading("数据加载中");
+                var categoryId = $(this).attr("data");
+                var name = $("input[name='name']").val();
+                $.ajax({
+                    dataType: 'json',
+                    type: 'post',
+                    url: '/video/list',
+                    data: {
+                        "name": name,
+                        "categoryId": categoryId,
+                        "pageNum": 1,
+                        "pageSize": 48
+                    },
+                    success: function (res) {
+                        $.hideLoading();
+                        if (res && res.code === 0) {
+                            $("#list_videos_most_recent_videos_items").empty();
+                            let html = "";
+                            $.each(res.rows, function (i, row) {
+                                html += ' <div class="item  ">'
+                                    + '<a href="/video/detail?id=' + row.id + '&author=' + row.userid + '" title="' + row.name + '"> '
+                                    + '    <div class="img">'
+                                    + '        <img class="thumb lazy-load" src="' + row.url + '"  data-original="' + row.url + '" alt="' + row.name + '" data-cnt="5" width="180" height="135">'
+                                    + '    </div>'
+                                    + '    <strong class="title">' + row.name + '</strong>'
+                                    // + '    <div class="wrap">'
+                                    // + '        <div class="duration">' + row.shijianStr + '</div>'
+                                    // + '    </div>'
+                                    // + '    <div class="wrap">'
+                                    // + '        <div class="added"><em>' + row.diffDays + '</em></div>'
+                                    // + '       <div class="views">' + row.click + '</div>'
+                                    // + '   </div>'
+                                    + '   </a>'
+                                    + '   </div>';
+                            });
+                            $("#list_videos_most_recent_videos_items").html(html);
+                        } else {
+                            $.hideLoading();
+                            $.toast(r.msg);
+                        }
+                    }
+                });
+            });
+
+
+            function onBridgeReady() {
+                WeixinJSBridge.call('hideOptionMenu');
+            }
+
+            if (typeof WeixinJSBridge == "undefined") {
+                if (document.addEventListener) {
+                    document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+                } else if (document.attachEvent) {
+                    document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+                    document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+                }
+            } else {
+                onBridgeReady();
+            }
+
+        });
+    </script>
+    <script type="text/template" id="newsListTemplate">
+        <!--each遍历json数组-->
+        {{#each this}}
     <div class="item  ">
         <a href="/video/detail?id={{id}}&author={{userid}}" title="{{name}}">
             <div class="img">
-                <img class="thumb lazy-load" src="{{url}}" data-original="{{url}}" alt="{{name}}"
-                     data-cnt="5" width="180" height="135">
+                <img class="thumb lazy-load" src="{{url}}" data-original="{{url}}" alt="{{name}}" data-cnt="5"
+                    width="180" height="135">
             </div>
             <strong class="title">
                 {{name}}
@@ -829,7 +890,7 @@
         </a>
     </div>
     {{/each}}
-</script>
+    </script>
 </body>
 
 </html>

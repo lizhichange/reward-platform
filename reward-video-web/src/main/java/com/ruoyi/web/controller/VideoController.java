@@ -242,6 +242,7 @@ public class VideoController extends BaseController {
         convert(list);
         TableDataInfo dataTable = getDataTable(list);
         dataTable.setTotal(result.getTotalRows());
+        dataTable.setTotalPage(result.getTotalPage());
         return dataTable;
     }
 
