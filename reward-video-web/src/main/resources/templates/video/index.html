@@ -494,7 +494,7 @@
                 for (var i = 0; i < curPageData.length; i++) {
                     var row = curPageData[i];
                     // var str = '<a href="/video/detail?id=' + row.id + '&author=' + row.userid + '" title="' + row.name + '"> '
-                        var str = '<a href="javascript:void(0)"' + '   title="' + row.name + '"> '
+                    var str = '<a href="javascript:void(0)"' + 'data-id="' + row.id + '"' + 'title="' + row.name + '" > '
                         + '    <div class="img">'
                         + '        <img class="thumb lazy-load" src="' + row.url + '"  data-original="' + row.url + '" alt="' + row.name + '" data-cnt="5" width="180" height="135">'
                         + '    </div>'
@@ -506,7 +506,7 @@
                     listDom.appendChild(liDom);//加在列表的后面,上拉加载
                     //转jquery
                     var $itemDom = $(liDom);
-                    $itemDom.on('click', function () {
+                    $itemDom.click(function () {
                         $.ajax({
                             type: "post",
                             url: "/video/queryOrder",
