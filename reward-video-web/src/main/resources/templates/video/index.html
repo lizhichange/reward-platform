@@ -557,6 +557,10 @@
 
                                         //设置/返回视频当前播放时间
                                         player.currentTime = 0;
+                                        //是否开始播放
+                                        player.hasStart = true;
+                                        //设置/返回 自动播放属性
+                                        player.autoplay = true;
                                     } else if (rep.status === 1) {
 
                                         player.poster = poster;
@@ -566,7 +570,10 @@
 
                                         //设置/返回视频当前播放时间
                                         player.currentTime = 0;
-
+                                        //是否开始播放
+                                        player.hasStart = true;
+                                        //设置/返回 自动播放属性
+                                        player.autoplay = true;
                                     }
                                 } else if (r.code === 500) {
                                     const text = "<font color='#4F4F4F'> " + r.msg + "</font>";
