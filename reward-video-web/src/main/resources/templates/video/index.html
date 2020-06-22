@@ -201,7 +201,7 @@
                     th:style="${(stat.index+100) == stat.size} ?'color: #bfd128;font-weight: bold; font-size: 13px;':'font-weight: bold; font-size: 13px;' "
                     href="javascript:void(0);">[[${item.categoryName}]] &nbsp;&nbsp;
                 </a>
-                <a class="highlight category" href="javascript:void(0);" data-id="buy"
+                <a class="highlight category" href="javascript:void(0);" data="buy"
                     style="font-weight: bold; color: #bfd128; font-size: 13px;">已购</a> &nbsp;&nbsp;
 
             </div>
@@ -401,27 +401,17 @@
 
             /*初始化菜单*/
             var categoryId;//
-            var buyFlag;//
+
             $(".category").click(function () {
                 var i = $(this).attr("data");
-                var buy = $(this).attr("data-id");
                 if (categoryId != i) {
                     //更改列表条件
                     categoryId = i;
-                    buyFlag = '';
+
                     $(".category").removeClass("active");
                     $(this).addClass("active");
                     //重置列表数据
                     mescroll.resetUpScroll();
-                } else {
-                    if (buy !== null && buy !== undefined && buy !== '') {
-                        buyFlag = buy;
-                        categoryId = '';
-                        $(".category").removeClass("active");
-                        $(this).addClass("active");
-                        //重置列表数据
-                        mescroll.resetUpScroll();
-                    }
                 }
             })
 
@@ -546,7 +536,7 @@
             }
 
             function getListDataFromNet(categoryId, pageNum, pageSize, successCallback, errorCallback) {
-                if (buyFlag !== null && buyFlag !== undefined && buyFlag !== '') {
+                if (categoryId === 'buy') {
                     $.ajax({
                         dataType: 'json',
                         type: 'post',
