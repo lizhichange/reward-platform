@@ -305,8 +305,8 @@
                 "x5-video-orientation": "portraint",
                 "playsinline": true,
                 //图片地址     
-                "poster":  '',
-        
+                "poster": '',
+
                 //视频地址
                 "url": "//s1.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/xgplayer-demo.mp4",
                 "whitelist": [
@@ -497,7 +497,7 @@
                 for (var i = 0; i < curPageData.length; i++) {
                     var row = curPageData[i];
                     // var str = '<a href="/video/detail?id=' + row.id + '&author=' + row.userid + '" title="' + row.name + '"> '
-                    var str = '<a href="javascript:void(0)"' + 'data-id="' + row.id + '"' + 'data-poster="' + row.url + '"'   + 'data-src="' + row.zykey + '"' + 'data-author="' + row.userid + '"' + 'title="' + row.name + '" > '
+                    var str = '<a href="javascript:void(0)"' + 'data-id="' + row.id + '"' + 'data-poster="' + row.url + '"' + 'data-src="' + row.zykey + '"' + 'data-author="' + row.userid + '"' + 'title="' + row.name + '" > '
                         + '    <div class="img">'
                         + '        <img class="thumb lazy-load" src="' + row.url + '"  data-original="' + row.url + '" alt="' + row.name + '" data-cnt="5" width="180" height="135">'
                         + '    </div>'
@@ -549,13 +549,23 @@
 
                                             }
                                         });
-                                   
+
                                         player.poster = poster;
                                         player.src = src;
+                                        //设置/返回视频播放地址
+                                        player.currentSrc = src;
+
+                                        //设置/返回视频当前播放时间
+                                        player.currentTime = 0;
                                     } else if (rep.status === 1) {
-                                    
+
                                         player.poster = poster;
                                         player.src = src;
+                                        //设置/返回视频播放地址
+                                        player.currentSrc = src;
+
+                                        //设置/返回视频当前播放时间
+                                        player.currentTime = 0;
 
                                     }
                                 } else if (r.code === 500) {
