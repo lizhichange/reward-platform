@@ -583,9 +583,7 @@
                                     });
 
                                 } else if (r.code === 301) {
-
-                                    $.toast(r.msg, 2000, "forbidden");
-
+                                    $.toast(r.msg, "forbidden");
                                 }
                             },
                             error: function (jqXHR, textStatus, errorThrown) {
