@@ -88,6 +88,8 @@ public class VideoController extends BaseController {
     public String redirect(@RequestParam(value = "userid", required = false) String userid, @RequestParam(value = "categoryId", required = false) String categoryId,
                            ModelMap modelmap) {
         xxx(userid, categoryId, modelmap);
+        String tradeType = sysConfigFacadeClient.selectConfigByKey("sys.tradeType");
+        modelmap.addAttribute("wxPayUrl", appConfig.getWxPayUrl() + "?tradeType=" + tradeType);
         return prefix + "/index";
     }
 

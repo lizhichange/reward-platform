@@ -191,35 +191,6 @@
             <div class="network">
                 <div id="mse"></div>
                 <script src="//cdn.jsdelivr.net/npm/xgplayer@1.1.4/browser/index.js" charset="utf-8"></script>
-                <script>
-                    let player = new Player({
-                        "id": "mse",
-                        "autoplay": false,
-                        "volume": 0.3,
-                        "fluid": true,
-                       
-                        "preloadTime": 15, // 默认预加载 15 秒
-                        "closeVideoTouch": true,
-                        "closeVideoDblclick": true,
-                        "closeVideoClick": true,
-                        "lang": 'zh-cn',
-                        "videoInit": true,
-                        "keyShortcut": 'on',
-                        "cssFullscreen": false,
-                        'x5-video-player-fullscreen': false,
-                        "x5-video-player-type": "h5",
-                        "x5-video-orientation": "portraint",
-                        "url": "//s1.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/xgplayer-demo.mp4",
-                        "playsinline": true,
-                        "whitelist": [
-                            ""
-                        ],
-                        "execBeforePluginsCall": [() => {
-                            console.log('Execute before plugins call')
-                        }]
-                    });
-
-                </script>
             </div>
             <div class="box tags-cloud">
                 <!-- th:href="@{'/video/category?categoryId='+${item.categoryId}}"   -->
@@ -250,6 +221,8 @@
         </div>
     </div>
     <input type="hidden" id="categoryId" name="categoryId" th:value="${categoryId}" />
+    <input type="hidden" th:value="${wxPayUrl}" id="wxPayUrl" />
+
     <script>
         $(function () {
             $("#buy").on('click', function () {
@@ -313,6 +286,37 @@
 
     <script>
         $(function () {
+
+            let player = new Player({
+                "id": "mse",
+                "autoplay": false,
+                "volume": 0.3,
+                "fluid": true,
+
+                "preloadTime": 15, // 默认预加载 15 秒
+                "closeVideoTouch": true,
+                "closeVideoDblclick": true,
+                "closeVideoClick": true,
+                "lang": 'zh-cn',
+                "videoInit": true,
+                "keyShortcut": 'on',
+                "cssFullscreen": false,
+                'x5-video-player-fullscreen': false,
+                "x5-video-player-type": "h5",
+                "x5-video-orientation": "portraint",
+                "url": "//s1.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/xgplayer-demo.mp4",
+                "playsinline": true,
+                "whitelist": [
+                    ""
+                ],
+                "execBeforePluginsCall": [() => {
+                    console.log('Execute before plugins call')
+                }]
+            });
+            player.on('play', function () {
+
+            });
+
             //是否为PC端,如果是scrollbar端,默认自定义滚动条
             var isPC = typeof window.orientation == 'undefined';
             //创建MeScroll对象,内部已默认开启下拉刷新,自动执行up.callback,刷新列表数据;
@@ -499,6 +503,71 @@
                     liDom.className = "item  ";
                     liDom.innerHTML = str;
                     listDom.appendChild(liDom);//加在列表的后面,上拉加载
+                    //转jquery
+                    var $itemDom = $(liDom);
+                    $itemDom.on('click', function () {
+                        $.ajax({
+                            type: "post",
+                            url: "/video/queryOrder",
+                            data: {
+                                "id": row,
+                                "redirect_uri": window.location.href
+                            },
+                            success: function (r) {
+                            console.log(r);
+                            if (r.code === 0) {
+                                var rep = r.data;
+                                if (rep.status === 0 || rep.status === 2) {
+                                 
+                                    const text = "<font color='#4F4F4F'> 打赏" + rep.moneyStr + "元,永久免费观看此视频 </font>";
+                                    //如果参数过多，建议通过 object 方式传入
+                                    $.confirm({
+                                        title: '标题',
+                                        text: text,
+                                        onOK: function () {
+                                            let value = document.getElementById('wxPayUrl').value;
+                                            let flag = value.indexOf("?") !== -1;
+                                            const callbackUrl = window.location.href;
+                                            if (flag) {
+                                                window.location.href = value + "&orderId=" + rep.orderId + "&callbackUrl=" + encodeURIComponent(callbackUrl);
+                                            } else {
+                                                window.location.href = value + "?orderId=" + rep.orderId + "&callbackUrl=" + encodeURIComponent(callbackUrl);
+                                            }
+                                        },
+                                        onCancel: function () {
+
+                                        }
+                                    });
+
+                                } else if (rep.status === 1) {
+                                    
+                                }
+                            } else if (r.code === 500) {
+                                
+                                const text = "<font color='#4F4F4F'> " + r.msg + "</font>";
+                                const redirect_uri = r.redirect_uri;
+                                //如果参数过多，建议通过 object 方式传入
+                                $.confirm({
+                                    title: '标题',
+                                    text: text,
+                                    onOK: function () {
+                                        window.location.href = "/login.html?redirect_uri=" + redirect_uri;
+                                    },
+                                    onCancel: function () {
+
+                                    }
+                                });
+
+                            } else {
+                                
+                            }
+                        },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                            
+                                console.log(errorThrown);
+                            },
+                        });
+                    });
                 }
             }
 
