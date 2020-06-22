@@ -310,7 +310,7 @@
                 //图片地址     
                 "poster": document.getElementById("url").value ? document.getElementById("url").value : '',
                 //视频地址
-                "url": document.getElementById("zykey").value ? document.getElementById("zykey").value:"//s1.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/xgplayer-demo.mp4",
+                "url": document.getElementById("zykey").value ? document.getElementById("zykey").value : "//s1.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/xgplayer-demo.mp4",
                 "whitelist": [
                     ""
                 ],
@@ -583,7 +583,9 @@
                                     });
 
                                 } else if (r.code === 301) {
-                                    $.toast(r.msg, 2000);
+
+                                    $.toast(r.msg, 2000, "forbidden");
+
                                 }
                             },
                             error: function (jqXHR, textStatus, errorThrown) {
