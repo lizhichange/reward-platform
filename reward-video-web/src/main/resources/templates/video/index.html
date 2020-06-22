@@ -482,16 +482,16 @@
                                 if (r.code === 0) {
                                     var rep = r.data;
                                     if (rep.status === 0 || rep.status === 2) {
-                                        const text = "<font color='#4F4F4F'> 打赏" + rep.moneyStr + "元,永久免费观看此视频 </font>";
+                                        var text = "<font color='#4F4F4F'> 打赏" + rep.moneyStr + "元,永久免费观看此视频 </font>";
                                         //如果参数过多，建议通过 object 方式传入
                                         $.confirm({
                                             title: '标题',
                                             text: text,
                                             onOK: function () {
-                                                let value = document.getElementById('wxPayUrl').value;
-                                                let flag = value.indexOf("?") !== -1;
-                                                const callbackUrl = window.location.href;
-                                                let flagCallbackUrl = callbackUrl.indexOf("?") !== -1;
+                                                var value = document.getElementById('wxPayUrl').value;
+                                                var flag = value.indexOf("?") !== -1;
+                                                var callbackUrl = window.location.href;
+                                                var flagCallbackUrl = callbackUrl.indexOf("?") !== -1;
                                                 if (flagCallbackUrl) {
                                                     callbackUrl = callbackUrl + "&shipinId=" + dataId;
                                                 } else {
@@ -518,8 +518,8 @@
                                         player.autoplay = true;
                                     }
                                 } else if (r.code === 500) {
-                                    const text = "<font color='#4F4F4F'> " + r.msg + "</font>";
-                                    const redirect_uri = r.redirect_uri;
+                                    var text = "<font color='#4F4F4F'> " + r.msg + "</font>";
+                                    var redirect_uri = r.redirect_uri;
                                     //如果参数过多，建议通过 object 方式传入
                                     $.confirm({
                                         title: '标题',
@@ -606,16 +606,16 @@
                                 var rep = r.data;
                                 if (rep.status === 0 || rep.status === 2) {
                                     player.pause();
-                                    const text = "<font color='#4F4F4F'> 打赏" + rep.moneyStr + "元,永久免费观看此视频 </font>";
+                                    var text = "<font color='#4F4F4F'> 打赏" + rep.moneyStr + "元,永久免费观看此视频 </font>";
                                     //如果参数过多，建议通过 object 方式传入
                                     $.confirm({
                                         title: '标题',
                                         text: text,
                                         onOK: function () {
-                                            let value = document.getElementById('wxPayUrl').value;
-                                            let flag = value.indexOf("?") !== -1;
-                                            const callbackUrl = window.location.href;
-                                            let flagCallbackUrl = callbackUrl.indexOf("?") !== -1;
+                                            var value = document.getElementById('wxPayUrl').value;
+                                            var flag = value.indexOf("?") !== -1;
+                                            var callbackUrl = window.location.href;
+                                            var flagCallbackUrl = callbackUrl.indexOf("?") !== -1;
                                             if (flagCallbackUrl) {
                                                 callbackUrl = callbackUrl + "&shipinId=" + dataId;
                                             } else {
@@ -635,8 +635,8 @@
                                     player.play();
                                 }
                             } else if (r.code === 500) {
-                                const text = "<font color='#4F4F4F'> " + r.msg + "</font>";
-                                const redirect_uri = r.redirect_uri;
+                                var text = "<font color='#4F4F4F'> " + r.msg + "</font>";
+                                var redirect_uri = r.redirect_uri;
                                 //如果参数过多，建议通过 object 方式传入
                                 $.confirm({
                                     title: '标题',
