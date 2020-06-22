@@ -284,14 +284,16 @@ public class VideoController extends BaseController {
     public AjaxResult queryOrder(ShipinDTO shipinDTO) {
         String openId = SessionContext.getOpenId();
         log.info("openId:{}", openId);
+        ShipinDTO dtoById = shipinFacadeClient.selectShipinDTOById(shipinDTO.getId().longValue());
+        if (dtoById == null) {
+            return AjaxResult.warn("非法请求");
+        }
         SysOrderDTO order = new SysOrderDTO();
         order.setGoodsId(shipinDTO.getId());
         order.setOpenId(openId);
         List<SysOrderDTO> sysOrders = sysOrderFacadeClient.selectSysOrder(order);
         if (CollectionUtils.isEmpty(sysOrders)) {
-
             TWechatAuthDTO authDTO = userDetailFacadeClient.queryByOpenId(openId);
-
             ShipinDTO dto = shipinFacadeClient.selectShipinDTOById(shipinDTO.getId().longValue());
             Date now = new Date();
             order.setCreateTime(now);

@@ -581,8 +581,8 @@
                                         }
                                     });
 
-                                } else {
-
+                                } else if (r.code === 301) {
+                                    $.showLoading(r.msg,2000);
                                 }
                             },
                             error: function (jqXHR, textStatus, errorThrown) {
