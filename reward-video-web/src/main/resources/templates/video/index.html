@@ -635,6 +635,7 @@
                             if (r.code === 0) {
                                 var rep = r.data;
                                 if (rep.status === 0 || rep.status === 2) {
+                                    player.pause();
                                     const text = "<font color='#4F4F4F'> 打赏" + rep.moneyStr + "元,永久免费观看此视频 </font>";
                                     //如果参数过多，建议通过 object 方式传入
                                     $.confirm({
