@@ -414,7 +414,8 @@
                     mescroll.resetUpScroll();
                 }
                 var buy = $(this).attr("data-id");
-                if (buyFlag !== null && buyFlag !== undefined && buyFlag !== '') {
+                if (buy !== null && buy !== undefined && buy !== '') {
+                    buyFlag = buyFlag;
                     categoryId = '';
                     $(".category").removeClass("active");
                     $(this).addClass("active");
