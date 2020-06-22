@@ -477,6 +477,7 @@
             /*联网加载列表数据  page = {num:1, size:10}; num:当前页 从1开始, size:每页数据条数 */
             function getListData(page) {
                 //联网加载数据
+                $.showLoading("数据加载中");
                 getListDataFromNet(categoryId, page.num, page.size, function (data) {
                     //mescroll会根据传的参数,自动判断列表如果无任何数据,则提示空;列表无下一页数据,则提示无更多数据;
                     var curPageData = data.rows; // 接口返回的当前页数据列表
@@ -586,7 +587,6 @@
                                 }
                             },
                             error: function (jqXHR, textStatus, errorThrown) {
-
                                 console.log(errorThrown);
                             },
                         });
@@ -595,7 +595,6 @@
             }
 
             function getListDataFromNet(categoryId, pageNum, pageSize, successCallback, errorCallback) {
-                $.showLoading("数据加载中");
                 $.ajax({
                     dataType: 'json',
                     type: 'post',
