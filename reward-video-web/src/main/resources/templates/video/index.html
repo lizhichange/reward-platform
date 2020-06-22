@@ -201,7 +201,7 @@
                     th:style="${(stat.index+100) == stat.size} ?'color: #bfd128;font-weight: bold; font-size: 13px;':'font-weight: bold; font-size: 13px;' "
                     href="javascript:void(0);">[[${item.categoryName}]] &nbsp;&nbsp;
                 </a>
-                <a class="highlight" href="javascript:void(0);" id="buy"
+                <a class="highlight category" href="javascript:void(0);" data-id="buy"
                     style="font-weight: bold; color: #bfd128; font-size: 13px;">已购</a> &nbsp;&nbsp;
 
             </div>
@@ -227,67 +227,6 @@
     <input type="hidden" th:value="${shipin?.url}" id="url" />
     <input type="hidden" th:value="${shipin?.zykey}" id="zykey" />
     <input type="hidden" th:value="${shipin?.userid}" id="author" />
-
-    <script>
-        $(function () {
-            $("#buy").on('click', function () {
-                $.showLoading("数据加载中");
-                $.ajax({
-                    dataType: 'json',
-                    type: 'post',
-                    url: '/video/buy',
-                    data: {
-                        "pageNum": 1,
-                        "pageSize": 100
-                    },
-                    success: function (res) {
-                        $.hideLoading();
-                        if (res && res.code === 0) {
-                            $("#list_videos_most_recent_videos_items").empty();
-                            let html = "";
-                            $.each(res.rows, function (i, row) {
-                                html += ' <div class="item  ">'
-                                    + '<a href="/video/detail?id=' + row.id + '&author=' + row.userid + '" title="' + row.name + '"> '
-                                    + '    <div class="img">'
-                                    + '        <img class="thumb lazy-load" src="' + row.url + '"  data-original="' + row.url + '" alt="' + row.name + '" data-cnt="5" width="180" height="135">'
-                                    + '    </div>'
-                                    + '    <strong class="title">' + row.name + '</strong>'
-                                    // + '    <div class="wrap">'
-                                    // + '        <div class="duration">' + row.shijianStr + '</div>'
-                                    // + '    </div>'
-                                    // + '    <div class="wrap">'
-                                    // + '        <div class="added"><em>' + row.diffDays + '</em></div>'
-                                    // + '       <div class="views">' + row.click + '</div>'
-                                    // + '   </div>'
-                                    + '   </a>'
-                                    + '   </div>';
-                            });
-                            $("#list_videos_most_recent_videos_items").html(html);
-                        } else {
-                            $.hideLoading();
-                            $.toast(res.msg);
-                        }
-                    }
-                });
-            });
-
-            function onBridgeReady() {
-                WeixinJSBridge.call('hideOptionMenu');
-            }
-
-            if (typeof WeixinJSBridge == "undefined") {
-                if (document.addEventListener) {
-                    document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
-                } else if (document.attachEvent) {
-                    document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
-                    document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
-                }
-            } else {
-                onBridgeReady();
-            }
-        });
-    </script>
-
 
     <script>
         $(function () {
@@ -462,11 +401,21 @@
 
             /*初始化菜单*/
             var categoryId;//
+            var buyFlag;//
             $(".category").click(function () {
                 var i = $(this).attr("data");
                 if (categoryId != i) {
                     //更改列表条件
                     categoryId = i;
+                    buyFlag = '';
+                    $(".category").removeClass("active");
+                    $(this).addClass("active");
+                    //重置列表数据
+                    mescroll.resetUpScroll();
+                }
+                var buy = $(this).attr("data-id");
+                if (buyFlag !== null && buyFlag !== undefined && buyFlag !== '') {
+                    categoryId = '';
                     $(".category").removeClass("active");
                     $(this).addClass("active");
                     //重置列表数据
@@ -595,24 +544,44 @@
             }
 
             function getListDataFromNet(categoryId, pageNum, pageSize, successCallback, errorCallback) {
-                $.ajax({
-                    dataType: 'json',
-                    type: 'post',
-                    url: '/video/list',
-                    data: {
-                        "categoryId": categoryId,
-                        "pageNum": pageNum,
-                        "pageSize": pageSize
-                    },
-                    success: function (data) {
-                        $.hideLoading();
-                        if (data && data.code === 0) {
-                            //回调
-                            successCallback(data);
-                        }
-                    },
-                    error: errorCallback
-                });
+                if (buyFlag !== null && buyFlag !== undefined && buyFlag !== '') {
+                    $.ajax({
+                        dataType: 'json',
+                        type: 'post',
+                        url: '/video/buy',
+                        data: {
+                            "pageNum": 1,
+                            "pageSize": 100
+                        },
+                        success: function (data) {
+                            $.hideLoading();
+                            if (data && data.code === 0) {
+                                //回调
+                                successCallback(data);
+                            }
+                        },
+                        error: errorCallback
+                    });
+                } else {
+                    $.ajax({
+                        dataType: 'json',
+                        type: 'post',
+                        url: '/video/list',
+                        data: {
+                            "categoryId": categoryId,
+                            "pageNum": pageNum,
+                            "pageSize": pageSize
+                        },
+                        success: function (data) {
+                            $.hideLoading();
+                            if (data && data.code === 0) {
+                                //回调
+                                successCallback(data);
+                            }
+                        },
+                        error: errorCallback
+                    });
+                }
             }
 
 
@@ -695,6 +664,26 @@
         });
     </script>
 
+
+
+    <script>
+        $(function () {
+            function onBridgeReady() {
+                WeixinJSBridge.call('hideOptionMenu');
+            }
+
+            if (typeof WeixinJSBridge == "undefined") {
+                if (document.addEventListener) {
+                    document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+                } else if (document.attachEvent) {
+                    document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+                    document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+                }
+            } else {
+                onBridgeReady();
+            }
+        });
+    </script>
 
 </body>
 
