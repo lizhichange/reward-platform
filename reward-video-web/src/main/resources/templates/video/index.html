@@ -191,18 +191,34 @@
             <div class="network">
                 <div id="mse"></div>
                 <script src="//cdn.jsdelivr.net/npm/xgplayer@1.1.4/browser/index.js" charset="utf-8"></script>
-                  <script>
-                  let player = new Player({
-                    "id": "mse",
-                    "url": "//s1.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/xgplayer-demo.mp4",
-                    "playsinline": true,
-                    "whitelist": [
+                <script>
+                    let player = new Player({
+                        "id": "mse",
+                        "autoplay": false,
+                        "volume": 0.3,
+                        "fluid": true,
+                        "preloadTime": 15, // 默认预加载 15 秒
+                        "closeVideoTouch": true,
+                        "closeVideoDblclick": true,
+                        "closeVideoClick": true,
+                        "lang": 'zh-cn',
+                        "videoInit": true,
+                        "keyShortcut": 'on',
+                        "cssFullscreen": false,
+                        'x5-video-player-fullscreen': false,
+                        "x5-video-player-type": "h5",
+                        "x5-video-orientation": "portraint",
+                        "url": "//s1.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/xgplayer-demo.mp4",
+                        "playsinline": true,
+                        "whitelist": [
                             ""
-                    ],
-                    "fluid": true
-                  });
-                  
-                      </script>
+                        ],
+                        "execBeforePluginsCall": [() => {
+                            console.log('Execute before plugins call')
+                        }]
+                    });
+
+                </script>
             </div>
             <div class="box tags-cloud">
                 <!-- th:href="@{'/video/category?categoryId='+${item.categoryId}}"   -->
