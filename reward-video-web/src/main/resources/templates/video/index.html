@@ -404,6 +404,7 @@
             var buyFlag;//
             $(".category").click(function () {
                 var i = $(this).attr("data");
+                var buy = $(this).attr("data-id");
                 if (categoryId != i) {
                     //更改列表条件
                     categoryId = i;
@@ -412,15 +413,15 @@
                     $(this).addClass("active");
                     //重置列表数据
                     mescroll.resetUpScroll();
-                }
-                var buy = $(this).attr("data-id");
-                if (buy !== null && buy !== undefined && buy !== '') {
-                    buyFlag = buy;
-                    categoryId = '';
-                    $(".category").removeClass("active");
-                    $(this).addClass("active");
-                    //重置列表数据
-                    mescroll.resetUpScroll();
+                } else {
+                    if (buy !== null && buy !== undefined && buy !== '') {
+                        buyFlag = buy;
+                        categoryId = '';
+                        $(".category").removeClass("active");
+                        $(this).addClass("active");
+                        //重置列表数据
+                        mescroll.resetUpScroll();
+                    }
                 }
             })
 
