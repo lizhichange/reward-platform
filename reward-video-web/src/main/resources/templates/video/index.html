@@ -292,7 +292,6 @@
                 "autoplay": false,
                 "volume": 0.3,
                 "fluid": true,
-
                 "preloadTime": 15, // 默认预加载 15 秒
                 "closeVideoTouch": true,
                 "closeVideoDblclick": true,
@@ -304,8 +303,11 @@
                 'x5-video-player-fullscreen': false,
                 "x5-video-player-type": "h5",
                 "x5-video-orientation": "portraint",
-                "url": "//s1.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/xgplayer-demo.mp4",
                 "playsinline": true,
+                //图片地址
+                "poster": '',
+                //视频地址
+                "url": "//s1.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/xgplayer-demo.mp4",
                 "whitelist": [
                     ""
                 ],
@@ -494,7 +496,7 @@
                 for (var i = 0; i < curPageData.length; i++) {
                     var row = curPageData[i];
                     // var str = '<a href="/video/detail?id=' + row.id + '&author=' + row.userid + '" title="' + row.name + '"> '
-                    var str = '<a href="javascript:void(0)"' + 'data-id="' + row.id + '"'  + 'data-author="' + row.userid + '"' + 'title="' + row.name + '" > '
+                    var str = '<a href="javascript:void(0)"' + 'data-id="' + row.id + '"' + '"data.poster="' + row.url  + '"data-src="' + row.zykey + 'data-author="' + row.userid + '"' + 'title="' + row.name + '" > '
                         + '    <div class="img">'
                         + '        <img class="thumb lazy-load" src="' + row.url + '"  data-original="' + row.url + '" alt="' + row.name + '" data-cnt="5" width="180" height="135">'
                         + '    </div>'
@@ -511,7 +513,8 @@
                         var $a = $self.find('a');
                         var dataId = $a.attr("data-id");
                         var author = $a.attr("data-author");
-                     $.ajax({
+                        var src = $a.attr("data-src");
+                        $.ajax({
                             type: "post",
                             url: "/video/queryOrder",
                             data: {
@@ -543,9 +546,11 @@
 
                                             }
                                         });
-
+                                        player.url = "";
+                                        player.poster = '';
                                     } else if (rep.status === 1) {
-                                        //TODO 
+                                        player.url = "";
+                                        player.poster = '';
 
                                     }
                                 } else if (r.code === 500) {
