@@ -305,8 +305,8 @@
                 "x5-video-orientation": "portraint",
                 "playsinline": true,
                 //图片地址     
-                "poster":  'http://admin.grkfcs.cn/profile/upload/2020/06/20/aaf126442878d43b7d2775cff83fcb74.jpg',
-            
+                "poster":  '',
+        
                 //视频地址
                 "url": "//s1.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/xgplayer-demo.mp4",
                 "whitelist": [
@@ -549,15 +549,13 @@
 
                                             }
                                         });
-                                        player.src = src;
+                                   
                                         player.poster = poster;
-                                        var test='http://admin.grkfcs.cn/profile/upload/2020/06/20/aaf126442878d43b7d2775cff83fcb74.jpg';
-                                        player.poster =test;
+                                        player.src = src;
                                     } else if (rep.status === 1) {
-                                        player.src = src;
+                                    
                                         player.poster = poster;
-                                         var test='http://admin.grkfcs.cn/profile/upload/2020/06/20/aaf126442878d43b7d2775cff83fcb74.jpg';
-                                        player.poster =test;
+                                        player.src = src;
 
                                     }
                                 } else if (r.code === 500) {
