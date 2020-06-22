@@ -4,7 +4,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>电影</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name=viewport
+        content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="description" content="高速在线观看，无需下载播放器。">
     <meta name="keywords" content="电影">
@@ -27,215 +28,11 @@
     <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
 
     <style type="text/css">
-        .at-icon-wrapper {
-            display: inline-block;
-            overflow: hidden
-        }
-
-        a .at-icon-wrapper {
-            cursor: pointer
-        }
-
-        .at-rounded,
-        .at-rounded-element .at-icon-wrapper {
-            border-radius: 12%
-        }
-
-        .at-circular,
-        .at-circular-element .at-icon-wrapper {
-            border-radius: 50%
-        }
-
-        .addthis_32x32_style .at-icon {
-            width: 2pc;
-            height: 2pc
-        }
-
-        .addthis_24x24_style .at-icon {
-            width: 24px;
-            height: 24px
-        }
-
-        .addthis_20x20_style .at-icon {
-            width: 20px;
-            height: 20px
-        }
-
-        .addthis_16x16_style .at-icon {
-            width: 1pc;
-            height: 1pc
-        }
-
-        #at16lb {
-            display: none;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1001;
-            background-color: #000;
-            opacity: .001
-        }
-
-        #at_complete,
-        #at_error,
-        #at_share,
-        #at_success {
-            position: static !important
-        }
-
-        .at15dn {
-            display: none
-        }
-
-        #at15s,
-        #at16p,
-        #at16p form input,
-        #at16p label,
-        #at16p textarea,
-        #at_share .at_item {
-            font-family: arial, helvetica, tahoma, verdana, sans-serif !important;
-            font-size: 9pt !important;
-            outline-style: none;
-            outline-width: 0;
-            line-height: 1em
-        }
-
-        * html #at15s.mmborder {
-            position: absolute !important
-        }
-
-        #at15s.mmborder {
-            position: fixed !important;
-            width: 250px !important
-        }
-
         #at15s a,
         #at15s span {
             outline: 0;
             direction: ltr;
             text-transform: none
-        }
-
-        #at15s .at-label {
-            margin-left: 5px
-        }
-
-        #at15s .at-icon-wrapper {
-            width: 1pc;
-            height: 1pc;
-            vertical-align: middle
-        }
-
-        #at15s .at-icon {
-            width: 1pc;
-            height: 1pc
-        }
-
-        .at4-icon {
-            display: inline-block;
-            background-repeat: no-repeat;
-            background-position: top left;
-            margin: 0;
-            overflow: hidden;
-            cursor: pointer
-        }
-
-        .addthis_16x16_style .at4-icon,
-        .addthis_default_style .at4-icon,
-        .at4-icon,
-        .at-16x16 {
-            width: 1pc;
-            height: 1pc;
-            line-height: 1pc;
-            background-size: 1pc !important
-        }
-
-        .addthis_32x32_style .at4-icon,
-        .at-32x32 {
-            width: 2pc;
-            height: 2pc;
-            line-height: 2pc;
-            background-size: 2pc !important
-        }
-
-        .addthis_24x24_style .at4-icon,
-        .at-24x24 {
-            width: 24px;
-            height: 24px;
-            line-height: 24px;
-            background-size: 24px !important
-        }
-
-        .addthis_20x20_style .at4-icon,
-        .at-20x20 {
-            width: 20px;
-            height: 20px;
-            line-height: 20px;
-            background-size: 20px !important
-        }
-
-        .at4-icon.circular,
-        .circular .at4-icon,
-        .circular.aticon {
-            border-radius: 50%
-        }
-
-        .at4-icon.rounded,
-        .rounded .at4-icon {
-            border-radius: 4px
-        }
-
-        .at4-icon-left {
-            float: left
-        }
-
-        #at15s .at4-icon {
-            text-indent: 20px;
-            padding: 0;
-            overflow: visible;
-            white-space: nowrap;
-            background-size: 1pc;
-            width: 1pc;
-            height: 1pc;
-            background-position: top left;
-            display: inline-block;
-            line-height: 1pc
-        }
-
-        .addthis_vertical_style .at4-icon,
-        .at4-follow-container .at4-icon {
-            margin-right: 5px
-        }
-
-        html>body #at15s {
-            width: 250px !important
-        }
-
-        #at15s.atm {
-            background: none !important;
-            padding: 0 !important;
-            width: 10pc !important
-        }
-
-        #at15s_inner {
-            background: #fff;
-            border: 1px solid #fff;
-            margin: 0
-        }
-
-        #at15s_head {
-            position: relative;
-            background: #f2f2f2;
-            padding: 4px;
-            cursor: default;
-            border-bottom: 1px solid #e5e5e5
-        }
-
-        .at15s_head_success {
-            background: #cafd99 !important;
-            border-bottom: 1px solid #a9d582 !important
         }
 
         .at15s_head_success a,
@@ -244,118 +41,9 @@
             text-decoration: none
         }
 
-        #at15s_brand,
-        #at15sptx,
-        #at16_brand {
-            position: absolute
-        }
-
-        #at15s_brand {
-            top: 4px;
-            right: 4px
-        }
-
-        .at15s_brandx {
-            right: 20px !important
-        }
-
-        a#at15sptx {
-            top: 4px;
-            right: 4px;
-            text-decoration: none;
-            color: #4c4c4c;
-            font-weight: 700
-        }
-
-        #at15sptx:hover {
-            text-decoration: underline
-        }
-
-        #at16_brand {
-            top: 5px;
-            right: 30px;
-            cursor: default
-        }
-
-        #at_hover {
-            padding: 4px
-        }
-
-        #at_hover .at_item,
-        #at_share .at_item {
-            background: #fff !important;
-            float: left !important;
-            color: #4c4c4c !important
-        }
-
-        #at_share .at_item .at-icon-wrapper {
-            margin-right: 5px
-        }
-
-        #at_hover .at_bold {
-            font-weight: 700;
-            color: #000 !important
-        }
-
-        #at_hover .at_item {
-            width: 7pc !important;
-            padding: 2px 3px !important;
-            margin: 1px;
-            text-decoration: none !important
-        }
-
-        #at_hover .at_item.athov,
-        #at_hover .at_item:focus,
-        #at_hover .at_item:hover {
-            margin: 0 !important
-        }
-
-        #at_hover .at_item.athov,
-        #at_hover .at_item:focus,
-        #at_hover .at_item:hover,
-        #at_share .at_item.athov,
-        #at_share .at_item:hover {
-            background: #f2f2f2 !important;
-            border: 1px solid #e5e5e5;
-            color: #000 !important;
-            text-decoration: none
-        }
-
-        .ipad #at_hover .at_item:focus {
-            background: #fff !important;
-            border: 1px solid #fff
-        }
-
-        .at15t {
-            display: block !important;
-            height: 1pc !important;
-            line-height: 1pc !important;
-            padding-left: 20px !important;
-            background-position: 0 0;
-            text-align: left
-        }
-
-        .addthis_button,
-        .at15t {
-            cursor: pointer
-        }
-
-        .addthis_toolbox a.at300b,
-        .addthis_toolbox a.at300m {
-            width: auto
-        }
-
         .addthis_toolbox a {
             margin-bottom: 5px;
             line-height: initial
-        }
-
-        .addthis_toolbox.addthis_vertical_style {
-            width: 200px
-        }
-
-        .addthis_button_facebook_like .fb_iframe_widget {
-            line-height: 100%
         }
 
         .addthis_toolbox.addthis_vertical_style a {
@@ -367,11 +55,6 @@
             height: 2pc
         }
 
-        .addthis_toolbox.addthis_vertical_style .at300bs {
-            margin-right: 4px;
-            float: left
-        }
-
         .addthis_toolbox.addthis_20x20_style span {
             line-height: 20px
         }
@@ -380,62 +63,11 @@
             line-height: 2pc
         }
 
-        .addthis_toolbox.addthis_pill_combo_style .addthis_button_compact .at15t_compact,
-        .addthis_toolbox.addthis_pill_combo_style a {
-            float: left
-        }
-
-        .addthis_toolbox.addthis_pill_combo_style a.addthis_button_tweet {
-            margin-top: -2px
-        }
-
-        .addthis_toolbox.addthis_pill_combo_style .addthis_button_compact .at15t_compact {
-            margin-right: 4px
-        }
-
-        .addthis_default_style .addthis_separator {
-            margin: 0 5px;
-            display: inline
-        }
-
-        div.atclear {
-            clear: both
-        }
-
-        .addthis_default_style .addthis_separator,
-        .addthis_default_style .at4-icon,
-        .addthis_default_style .at300b,
-        .addthis_default_style .at300bo,
-        .addthis_default_style .at300bs,
-        .addthis_default_style .at300m {
-            float: left
-        }
-
         .at300b img,
         .at300bo img {
             border: 0
         }
 
-        a.at300b .at4-icon,
-        a.at300m .at4-icon {
-            display: block
-        }
-
-        .addthis_default_style .at300b,
-        .addthis_default_style .at300bo,
-        .addthis_default_style .at300m {
-            padding: 0 2px
-        }
-
-
-        .addthis_20x20_style .at15t,
-        .addthis_20x20_style .at300bs {
-            overflow: hidden;
-            display: block;
-            height: 20px !important;
-            width: 20px !important;
-            line-height: 20px !important
-        }
 
         #at16pt a,
         #at16pt h4 {
@@ -506,11 +138,7 @@
             }
         }
 
-        @media screen and (max-width: 400px) {
-            .at4win {
-                width: 100%
-            }
-        }
+        @media screen and (max-width: 400px) {}
 
         @media screen and (max-height: 700px) and (max-width: 400px) {}
 
@@ -540,14 +168,6 @@
 
         .s1 span a {
             color: #00FF00
-        }
-
-        .load-tip {
-            display: none;
-            margin: .2rem auto;
-            text-align: center;
-            font-size: .24rem;
-            color: #b9b9b9;
         }
 
         /*固定高度*/
@@ -585,37 +205,9 @@
                     style="font-weight: bold; color: #bfd128; font-size: 13px;">已购</a> &nbsp;&nbsp;
 
             </div>
-            <!--        <div class="member-links">-->
-            <!--            <ul>-->
-            <!--                <li><a href="/video">首页</a></li>-->
-            <!--                <ul th:if="${authMpEnabled==true}">-->
-            <!--                    <li th:if="${user?.id}"><a href="/logout">注销</a></li>-->
-            <!--                    <li th:unless="${user?.id}"><a href="/login">登录</a></li>-->
-            <!--                </ul>-->
-            <!--            </ul>-->
-            <!--        </div>-->
         </div>
     </div>
     <div class="container">
-        <!--    <div class="header">-->
-        <!--        <div class="logo">-->
-        <!--            <a href="javascript:"></a>-->
-        <!--        </div>-->
-        <!--        <div class="social-bookmarks">-->
-        <!--            <div class="addthis_toolbox addthis_default_style addthis_32x32_style">-->
-        <!--                <div class="atclear" tabindex="1000"></div>-->
-        <!--            </div>-->
-        <!--        </div>-->
-
-        <!--        <div class="search" style="display: none">-->
-        <!--            <form id="user-form">-->
-        <!--                <span id="search" class="search-button">搜索</span>-->
-        <!--                <div class="search-text"><input type="text" name="name" placeholder="请输入搜索关键词,至少两个字符" value=""></div>-->
-        <!--            </form>-->
-        <!--        </div>-->
-        <!--    </div>-->
-
-
         <div class="content">
             <div class="main-content">
                 <div id="list_videos_most_recent_videos">
@@ -627,10 +219,8 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
-    <!--TODO 分页-->
     <input type="hidden" id="categoryId" name="categoryId" th:value="${categoryId}" />
     <script>
         $(function () {
@@ -674,6 +264,7 @@
                     }
                 });
             });
+
             function onBridgeReady() {
                 WeixinJSBridge.call('hideOptionMenu');
             }
@@ -690,7 +281,6 @@
             }
         });
     </script>
-
 
 
     <script>
@@ -834,7 +424,7 @@
             });
 
             /*初始化菜单*/
-            var categoryId;//全部商品0; 奶粉1; 图书2;
+            var categoryId;//
             $(".category").click(function () {
                 var i = $(this).attr("data");
                 if (categoryId != i) {
@@ -846,6 +436,7 @@
                     mescroll.resetUpScroll();
                 }
             })
+
             /*联网加载列表数据  page = {num:1, size:10}; num:当前页 从1开始, size:每页数据条数 */
             function getListData(page) {
                 //联网加载数据
@@ -882,6 +473,7 @@
                     listDom.appendChild(liDom);//加在列表的后面,上拉加载
                 }
             }
+
             function getListDataFromNet(categoryId, pageNum, pageSize, successCallback, errorCallback) {
                 $.showLoading("数据加载中");
                 $.ajax({

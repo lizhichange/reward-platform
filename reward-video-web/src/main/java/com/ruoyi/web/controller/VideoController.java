@@ -105,7 +105,7 @@ public class VideoController extends BaseController {
                         @RequestParam(value = "categoryId", required = false) String categoryId,
                         ModelMap modelmap) {
         String user = StringUtil.isBlank(userid) ? "" : userid;
-        SysWebMainDTO webMain  = new SysWebMainDTO();
+        SysWebMainDTO webMain = new SysWebMainDTO();
         webMain.setMainStatus(WebMainStatus.OK.getCode());
         List<SysWebMainDTO> list = sysWebMainFacadeClient.selectSysWebMainList(webMain);
         if (!CollectionUtils.isEmpty(list)) {
@@ -368,8 +368,6 @@ public class VideoController extends BaseController {
                     }
                 }
             } else {
-
-
                 //商品价格区间 原价
                 String money = dto.getMoney();
                 String[] split = money.split("-");
@@ -454,7 +452,7 @@ public class VideoController extends BaseController {
     }
 
     @Data
-    public class PriceParam extends ToString {
+    public static class PriceParam extends ToString {
         private String price;
         private String id;
     }
