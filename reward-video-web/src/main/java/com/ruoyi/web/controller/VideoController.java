@@ -70,6 +70,7 @@ public class VideoController extends BaseController {
 
     private void xxx(@RequestParam(value = "userid", required = false) String userid,
                      @RequestParam(value = "categoryId", required = false) String categoryId,
+                     @RequestParam(value = "shipinId", required = false) String shipinId,
                      ModelMap modelmap) {
         log.info("userId:{}", userid);
         ShipinDTO shipinDTO = new ShipinDTO();
@@ -81,13 +82,23 @@ public class VideoController extends BaseController {
         modelmap.addAttribute("list", list);
         getCategory(modelmap);
         modelmap.addAttribute("categoryId", categoryId);
+        if (StringUtil.isNotBlank(shipinId)) {
+            try {
+                ShipinDTO dto = shipinFacadeClient.selectShipinDTOById(Long.parseLong(shipinId));
+                modelmap.addAttribute("shipin", dto);
+            } catch (Exception e) {
+                log.error(e.getMessage(), e);
+            }
+        }
     }
 
     @GetMapping("/redirect")
     @WxPnUserAuth
-    public String redirect(@RequestParam(value = "userid", required = false) String userid, @RequestParam(value = "categoryId", required = false) String categoryId,
+    public String redirect(@RequestParam(value = "userid", required = false) String userid,
+                           @RequestParam(value = "categoryId", required = false) String categoryId,
+                           @RequestParam(value = "shipinId", required = false) String shipinId,
                            ModelMap modelmap) {
-        xxx(userid, categoryId, modelmap);
+        xxx(userid, categoryId, shipinId, modelmap);
         String tradeType = sysConfigFacadeClient.selectConfigByKey("sys.tradeType");
         modelmap.addAttribute("wxPayUrl", appConfig.getWxPayUrl() + "?tradeType=" + tradeType);
         return prefix + "/index";
@@ -97,14 +108,18 @@ public class VideoController extends BaseController {
     @WxPnUserAuth
     public String render(@RequestParam(value = "userid", required = false) String userid,
                          @RequestParam(value = "categoryId", required = false) String categoryId,
+                         @RequestParam(value = "shipinId", required = false) String shipinId,
+
                          ModelMap modelmap) {
-        return index(userid, categoryId, modelmap);
+        return index(userid, categoryId, shipinId, modelmap);
     }
 
     @GetMapping()
     @WxPnUserAuth
     public String index(@RequestParam(value = "userid", required = false) String userid,
                         @RequestParam(value = "categoryId", required = false) String categoryId,
+                        @RequestParam(value = "shipinId", required = false) String shipinId,
+
                         ModelMap modelmap) {
         String user = StringUtil.isBlank(userid) ? "" : userid;
         SysWebMainDTO webMain = new SysWebMainDTO();
@@ -123,7 +138,7 @@ public class VideoController extends BaseController {
             log.info("redirect.url:{}", url);
             return "redirect:" + url;
         }
-        return redirect(userid, categoryId, modelmap);
+        return redirect(userid, categoryId, shipinId, modelmap);
     }
 
     @GetMapping("/category")

@@ -222,6 +222,9 @@
     </div>
     <input type="hidden" id="categoryId" name="categoryId" th:value="${categoryId}" />
     <input type="hidden" th:value="${wxPayUrl}" id="wxPayUrl" />
+    <input type="hidden" th:value="${shipin.id}" id="shipinId" />
+    <input type="hidden" th:value="${shipin.url}" id="url" />
+    <input type="hidden" th:value="${shipin.zykey}" id="zykey" />
 
     <script>
         $(function () {
@@ -305,10 +308,9 @@
                 "x5-video-orientation": "portraint",
                 "playsinline": true,
                 //图片地址     
-                "poster": '',
-
+                "poster": document.getElementById("url").value ? document.getElementById("url").value : '',
                 //视频地址
-                "url": "//s1.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/xgplayer-demo.mp4",
+                "url": document.getElementById("zykey").value ? document.getElementById("zykey").value : "//s1.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/xgplayer-demo.mp4",
                 "whitelist": [
                     ""
                 ],
@@ -538,6 +540,12 @@
                                                 let value = document.getElementById('wxPayUrl').value;
                                                 let flag = value.indexOf("?") !== -1;
                                                 const callbackUrl = window.location.href;
+                                                let flagCallbackUrl = callbackUrl.indexOf("?") !== -1;
+                                                if (flagCallbackUrl) {
+                                                    callbackUrl = callbackUrl + "&shipinId=" + dataId;
+                                                } else {
+                                                    callbackUrl = callbackUrl + "?shipinId=" + dataId;
+                                                }
                                                 if (flag) {
                                                     window.location.href = value + "&orderId=" + rep.orderId + "&callbackUrl=" + encodeURIComponent(callbackUrl);
                                                 } else {
