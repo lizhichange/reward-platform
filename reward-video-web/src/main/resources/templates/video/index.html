@@ -514,6 +514,8 @@
                         var dataId = $a.attr("data-id");
                         var author = $a.attr("data-author");
                         var src = $a.attr("data-src");
+                        var poster = $a.attr("data-poster");
+
                         $.ajax({
                             type: "post",
                             url: "/video/queryOrder",
@@ -546,11 +548,11 @@
 
                                             }
                                         });
-                                        player.url = "";
-                                        player.poster = '';
+                                        player.url = url;
+                                        player.poster =poster;
                                     } else if (rep.status === 1) {
-                                        player.url = "";
-                                        player.poster = '';
+                                        player.url = url;
+                                        player.poster = poster;
 
                                     }
                                 } else if (r.code === 500) {
