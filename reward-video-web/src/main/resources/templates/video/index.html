@@ -191,6 +191,7 @@
             <div class="network">
                 <div id="mse"></div>
                 <script src="//cdn.jsdelivr.net/npm/xgplayer@1.1.4/browser/index.js" charset="utf-8"></script>
+                <script src="//cdn.jsdelivr.net/npm/xgplayer-mp4/browser/index.js" charset="utf-8"></script>
             </div>
             <div class="box tags-cloud">
                 <!-- th:href="@{'/video/category?categoryId='+${item.categoryId}}"   -->
@@ -618,6 +619,7 @@
 
             player.on('play', function () {
                 var dataId = $("#shipinId").val();
+                var author = $("#author").val();
                 console.log("play:" + dataId);
                 if (dataId !== null && dataId !== undefined && dataId !== '') {
                     $.ajax({
