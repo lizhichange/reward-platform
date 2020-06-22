@@ -496,7 +496,7 @@
                 for (var i = 0; i < curPageData.length; i++) {
                     var row = curPageData[i];
                     // var str = '<a href="/video/detail?id=' + row.id + '&author=' + row.userid + '" title="' + row.name + '"> '
-                    var str = '<a href="javascript:void(0)"' + 'data-id="' + row.id + '"' + 'data-author="' + row.userid + '"' + 'title="' + row.name + '" > '
+                    var str = '<a href="javascript:void(0)"' + 'data-id="' + row.id + '"' + 'data-poster="' + row.zykey + '"'   + 'data-src="' + row.url + '"' + 'data-author="' + row.userid + '"' + 'title="' + row.name + '" > '
                         + '    <div class="img">'
                         + '        <img class="thumb lazy-load" src="' + row.url + '"  data-original="' + row.url + '" alt="' + row.name + '" data-cnt="5" width="180" height="135">'
                         + '    </div>'
