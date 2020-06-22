@@ -494,7 +494,7 @@
                 for (var i = 0; i < curPageData.length; i++) {
                     var row = curPageData[i];
                     // var str = '<a href="/video/detail?id=' + row.id + '&author=' + row.userid + '" title="' + row.name + '"> '
-                    var str = '<a href="javascript:void(0)"' + 'data-id="' + row.id + '"' + 'title="' + row.name + '" > '
+                    var str = '<a href="javascript:void(0)"' + 'data-id="' + row.id + '"'  + 'data-author="' + row.userid + '"' + 'title="' + row.name + '" > '
                         + '    <div class="img">'
                         + '        <img class="thumb lazy-load" src="' + row.url + '"  data-original="' + row.url + '" alt="' + row.name + '" data-cnt="5" width="180" height="135">'
                         + '    </div>'
@@ -507,12 +507,16 @@
                     //转jquery
                     var $itemDom = $(liDom);
                     $itemDom.click(function () {
-                        $.ajax({
+                        var $self = $(this);
+                        var $a = $self.find('a');
+                        var dataId = $a.attr("data-id");
+                        var author = $a.attr("data-author");
+                     $.ajax({
                             type: "post",
                             url: "/video/queryOrder",
                             data: {
-                                "id": row.id,
-                                "author": row.userid,
+                                "id": dataId,
+                                "author": author,
                                 "redirect_uri": window.location.href
                             },
                             success: function (r) {
