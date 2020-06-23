@@ -37,6 +37,7 @@ public class CommonController {
     private String title;
 
     @GetMapping("common/test")
+    @ResponseBody
     public String hello() {
         return title;
     }
