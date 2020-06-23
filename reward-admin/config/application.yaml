@@ -25,6 +25,8 @@ user:
 spring:
   profiles:
     active: druid
+  application:
+    name: reward-service
   # 模板引擎
   thymeleaf:
     mode: HTML
@@ -51,9 +53,6 @@ spring:
     restart:
       # 热部署开关
       enabled: true
-  application:
-    name: reward-admin
-
 # MyBatis
 mybatis:
   # 搜索指定包别名
@@ -112,7 +111,6 @@ xss:
   excludes: /system/notice/*
   # 匹配链接
   urlPatterns: /system/*,/monitor/*,/tool/*
-
 
 
 sequence:
