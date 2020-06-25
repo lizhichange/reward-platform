@@ -30,6 +30,8 @@ import org.near.utils.IpUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -48,6 +50,7 @@ import static com.ruoyi.reward.facade.enums.OrderPayType.WE_CHAT_PAY;
 @Controller
 @RequestMapping("/video")
 @WxPnUserAuth
+@CacheConfig(cacheNames = "videos")
 public class VideoController extends BaseController {
 
     private static final Logger log = LoggerFactory.getLogger(VideoController.class);
@@ -225,6 +228,7 @@ public class VideoController extends BaseController {
 
     @PostMapping("/list")
     @ResponseBody
+    @Cacheable(key = "#p0")
     public TableDataInfo list(ShipinDTO shipinDTO, PageForm pageForm) {
         int pageNum = pageForm.getPageNum();
         int pageSize = pageForm.getPageSize();

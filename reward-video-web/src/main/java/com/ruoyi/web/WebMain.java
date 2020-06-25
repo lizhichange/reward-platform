@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @SpringBootApplication
 @EnableScheduling
-@EnableCaching
 @CrossOrigin(methods = {RequestMethod.GET, RequestMethod.DELETE})
 @EnableDiscoveryClient
 @EnableFeignClients
 @EnableEurekaClient
+@EnableCaching
 public class WebMain {
 
     public static void main(String[] args) {
