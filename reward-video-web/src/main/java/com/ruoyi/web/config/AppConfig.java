@@ -13,10 +13,7 @@ public class AppConfig extends ToString {
     /**
      *
      */
-    @Value("${app.wxPayUrl}")
-    private String wxPayUrl;
-    @Value("${app.wxAuthUrl}")
-    private String wxAuthUrl;
+
 
     /**
      * / 验证码开关
@@ -29,21 +26,6 @@ public class AppConfig extends ToString {
     @Value("${app.authMpEnabled}")
     private boolean authMpEnabled;
 
-    public String getWxPayUrl() {
-        return wxPayUrl;
-    }
-
-    public void setWxPayUrl(String wxPayUrl) {
-        this.wxPayUrl = wxPayUrl;
-    }
-
-    public String getWxAuthUrl() {
-        return wxAuthUrl;
-    }
-
-    public void setWxAuthUrl(String wxAuthUrl) {
-        this.wxAuthUrl = wxAuthUrl;
-    }
 
     public boolean isCaptchaEnabled() {
         return captchaEnabled;

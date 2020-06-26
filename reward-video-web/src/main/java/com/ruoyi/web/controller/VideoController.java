@@ -103,7 +103,9 @@ public class VideoController extends BaseController {
                            ModelMap modelmap) {
         xxx(userid, categoryId, shipinId, modelmap);
         String tradeType = sysConfigFacadeClient.selectConfigByKey("sys.tradeType");
-        modelmap.addAttribute("wxPayUrl", appConfig.getWxPayUrl() + "?tradeType=" + tradeType);
+        String wxAuthUrl = sysConfigFacadeClient.selectConfigByKey("wxAuthUrl");
+        String wxPayUrl = wxAuthUrl + "/pay";
+        modelmap.addAttribute("wxPayUrl", wxPayUrl + "?tradeType=" + tradeType);
         return prefix + "/index";
     }
 
@@ -187,7 +189,9 @@ public class VideoController extends BaseController {
         modelmap.addAttribute("list", list);
         getCategory(modelmap);
         String tradeType = sysConfigFacadeClient.selectConfigByKey("sys.tradeType");
-        modelmap.addAttribute("wxPayUrl", appConfig.getWxPayUrl() + "?tradeType=" + tradeType);
+        String wxAuthUrl = sysConfigFacadeClient.selectConfigByKey("wxAuthUrl");
+        String wxPayUrl = wxAuthUrl + "/pay";
+        modelmap.addAttribute("wxPayUrl", wxPayUrl + "?tradeType=" + tradeType);
         return prefix + "/detail";
     }
 

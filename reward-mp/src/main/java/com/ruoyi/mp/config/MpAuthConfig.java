@@ -13,11 +13,7 @@ import org.springframework.stereotype.Component;
 @Data
 public class MpAuthConfig {
 
-    /**
-     * 微信授权回调地址
-     */
-    @Value("${mp.wxPnCallbackUrl}")
-    private String wxPnCallbackUrl;
+
     @Value("${mp.configCode}")
     private String configCode;
     @Value("${mp.mockMoney}")

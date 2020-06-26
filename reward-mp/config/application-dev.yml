@@ -23,8 +23,6 @@ server:
     static-locations: classpath:static/
 
 mp:
-  # 微信预授权回调
-  wxPnCallbackUrl: http://auth.grkfcs.cn/wechat/callback
   configCode: FULIHUI_YOUFULI
   mockMoney: true
   mockWeChatOrderQuery: false

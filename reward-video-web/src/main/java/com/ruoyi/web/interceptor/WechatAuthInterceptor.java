@@ -2,15 +2,13 @@ package com.ruoyi.web.interceptor;
 
 
 import cn.hutool.core.util.URLUtil;
-import com.ruoyi.reward.facade.api.TsFacade;
 import com.ruoyi.reward.facade.dto.TsDTO;
+import com.ruoyi.web.client.SysConfigFacadeClient;
 import com.ruoyi.web.client.TsFacadeClient;
 import com.ruoyi.web.config.AppConfig;
 import com.ruoyi.web.config.RedisUtil;
-import com.ruoyi.web.feign.TsFeign;
 import com.ruoyi.web.model.Users;
 import com.ruoyi.web.security.SecurityUtil;
-import lombok.extern.slf4j.Slf4j;
 import org.near.toolkit.common.DoMainUtil;
 import org.near.toolkit.common.StringUtil;
 import org.near.toolkit.context.SessionContext;
@@ -57,6 +55,9 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
     @Autowired
     TsFacadeClient tsFacadeClient;
 
+    @Lazy
+    @Autowired
+    SysConfigFacadeClient sysConfigFacadeClient;
     @Autowired
     RedisUtil redisUtil;
     @Autowired
@@ -125,8 +126,8 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
                 SessionContext.setOpenId(session, openId);
                 return true;
             }
-
-            String wxAuthUrl = appConfig.getWxAuthUrl();
+            String wxAuthUrl = sysConfigFacadeClient.selectConfigByKey("wxAuthUrl");
+            wxAuthUrl = wxAuthUrl + "/wechat/auth";
             String encode = URIUtil.encodeURIComponent(referer);
             if (wxAuthUrl.contains("?")) {
                 wxAuthUrl += "&callback=" + encode;

@@ -1,6 +1,7 @@
 package com.ruoyi.mp.controller;
 
 
+import com.ruoyi.mp.client.SysConfigFacadeClient;
 import com.ruoyi.mp.config.MpAuthConfig;
 import com.ruoyi.reward.facade.request.UserWechatLoginRequest;
 import me.chanjar.weixin.common.api.WxConsts;
@@ -12,6 +13,7 @@ import me.chanjar.weixin.mp.bean.result.WxMpUser;
 import me.chanjar.weixin.mp.config.WxMpConfigStorage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,6 +44,9 @@ public class WechatController extends BaseController {
         this.mpAuthConfig = mpAuthConfig;
     }
 
+    @Autowired
+    SysConfigFacadeClient sysConfigFacadeClient;
+
 
     @GetMapping("/wxShare")
     public String wxShare(HttpServletRequest request, ModelMap modelMap) throws WxErrorException {
@@ -69,7 +74,8 @@ public class WechatController extends BaseController {
     public String auth(HttpServletRequest request) {
         String callback = request.getParameter("callback");
         //预授权回调地址
-        String url = mpAuthConfig.getWxPnCallbackUrl();
+        String wxAuthUrl = sysConfigFacadeClient.selectConfigByKey("wxAuthUrl");
+        String url = wxAuthUrl + "/wechat/callback";
         LOGGER.info("auth.callback:{}", callback);
         if (url.contains("?")) {
             url += "&callback=" + callback;
