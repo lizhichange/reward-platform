@@ -71,7 +71,6 @@ ruoyi:
   # 获取ip地址开关
 
   addressEnabled: false
-  wxAuthUrl: http://auth.grkfcs.cn/wechat/auth
 
 
 dubbo:

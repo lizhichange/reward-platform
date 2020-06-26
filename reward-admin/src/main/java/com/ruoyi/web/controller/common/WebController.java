@@ -15,12 +15,7 @@ import com.ruoyi.system.domain.SysPost;
 import com.ruoyi.system.domain.SysRole;
 import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.system.domain.Yqm;
-import com.ruoyi.system.service.ISysPostService;
-import com.ruoyi.system.service.ISysRoleService;
-import com.ruoyi.system.service.ISysUserService;
-import com.ruoyi.system.service.IYqmService;
-import lombok.Getter;
-import lombok.Setter;
+import com.ruoyi.system.service.*;
 import lombok.extern.java.Log;
 import org.near.toolkit.common.DoMainUtil;
 import org.near.toolkit.common.StringUtil;
@@ -28,7 +23,6 @@ import org.near.toolkit.model.ToString;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
@@ -59,10 +53,7 @@ public class WebController extends BaseController {
     private final String prefix = "webLogin";
     @Autowired
     RestTemplate restTemplate;
-    @Getter
-    @Setter
-    @Value("${ruoyi.wxAuthUrl}")
-    private String wxAuthUrl;
+
 
     @Autowired
     ISysUserService userService;
@@ -82,6 +73,8 @@ public class WebController extends BaseController {
 
     @Autowired
     ISysPostService postService;
+    @Autowired
+    ISysConfigService sysConfigService;
 
     @GetMapping()
     public String index() {
@@ -170,8 +163,9 @@ public class WebController extends BaseController {
                 SysShort sysShort = new SysShort();
                 sysShort.setShortKey(loginName);
                 sysShort.setShortStatus(ShortStatus.OK.getCode());
+                String wxAuthUrl = sysConfigService.selectConfigByKey("wxAuthUrl");
                 //我的推广链接
-                String doMain = DoMainUtil.getDoMain(this.wxAuthUrl);
+                String doMain = DoMainUtil.getDoMain(wxAuthUrl);
                 String longUrl = "http://" + doMain + "/?userid=" + loginName;
                 sysShort.setLongUrl(longUrl);
                 logger.info("longUrl:{}", longUrl);
