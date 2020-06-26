@@ -1,6 +1,7 @@
 package com.ruoyi.web.controller.common;
 
-import com.ruoyi.BaiduDwz;
+import cn.hutool.core.util.URLUtil;
+import com.google.gson.Gson;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
@@ -24,6 +25,7 @@ import lombok.Setter;
 import lombok.extern.java.Log;
 import org.near.toolkit.common.DoMainUtil;
 import org.near.toolkit.common.StringUtil;
+import org.near.toolkit.model.ToString;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -174,10 +176,8 @@ public class WebController extends BaseController {
                 String longUrl = "http://" + doMain + "/?userid=" + loginName;
                 sysShort.setLongUrl(longUrl);
                 logger.info("longUrl:{}", longUrl);
-                String shortUrl = BaiduDwz.createShortUrl(longUrl, "1-year");
-
+                String shortUrl = getShortUrl(longUrl);
                 if (StringUtil.isNotBlank(shortUrl)) {
-
                     sysShort.setShortUrl(shortUrl);
                     sysShortService.insertSysShort(sysShort);
                 }
@@ -186,6 +186,47 @@ public class WebController extends BaseController {
         return toAjax(i);
     }
 
+    String getShortUrl(String url) {
+        url = URLUtil.encode(url);
+        String key = "5ef5cc72b1b63c076966a527@e6f2365e4b7f60c44415d6db919097cb";
+        String str = "http://suo.im/api.htm?url=" + url + "&key=" + key + "&expireDate=2020-09-31";
+        String shortUrl = restTemplate.getForObject(str, String.class);
+        logger.info("shortUrl:{}", shortUrl);
+        if (StringUtil.isNotBlank(shortUrl)) {
+            MyResponse myResponse = new Gson().fromJson(shortUrl, MyResponse.class);
+            if (myResponse != null) {
+                return myResponse.getUrl();
+            }
+        }
+        return "";
+    }
+
+    static class MyResponse extends ToString {
+
+        /**
+         * url : http://suo.im/abcdef
+         * err :
+         */
+
+        private String url;
+        private String err;
+
+        public String getUrl() {
+            return url;
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
+        }
+
+        public String getErr() {
+            return err;
+        }
+
+        public void setErr(String err) {
+            this.err = err;
+        }
+    }
 
     public static String getPhoneNum() {
         //给予真实的初始号段，号段是在百度上面查找的真实号段
