@@ -126,14 +126,14 @@
     /* 用户管理-停用 */
     function disable(id) {
         $.modal.confirm("确认要停用吗？", function () {
-            $.operate.post(prefix + "/changeStatus", {"id": id, "status": 1});
+            $.operate.post(prefix + "/changeStatus", {"id": id, "shortStatus": 1});
         })
     }
 
     /* 用户管理启用 */
     function enable(userId) {
         $.modal.confirm("确认要启用吗？", function () {
-            $.operate.post(prefix + "/changeStatus", {"id": id, "status": 0});
+            $.operate.post(prefix + "/changeStatus", {"id": id, "shortStatus": 0});
         })
     }
     </script>

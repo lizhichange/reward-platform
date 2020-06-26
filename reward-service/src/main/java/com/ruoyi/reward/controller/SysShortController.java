@@ -101,6 +101,16 @@ public class SysShortController extends BaseController {
         return toAjax(sysShortService.updateSysShort(sysShort));
     }
 
+
+    @RequiresPermissions("system:short:edit")
+    @Log(title = "链接管理", businessType = BusinessType.UPDATE)
+    @PostMapping("/changeStatus")
+    @ResponseBody
+    public AjaxResult changeStatus(SysShort sysShort) {
+        return toAjax(sysShortService.updateSysShort(sysShort));
+    }
+
+
     /**
      * 删除链接管理
      */
