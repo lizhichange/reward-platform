@@ -1,6 +1,5 @@
 package com.ruoyi.web.controller.common;
 
-import cn.hutool.core.util.URLUtil;
 import com.google.gson.Gson;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.core.controller.BaseController;
@@ -187,7 +186,7 @@ public class WebController extends BaseController {
     }
 
     String getShortUrl(String url) {
-        url = URLUtil.encode(url);
+//        url = URLUtil.encode(url);
         String key = "5ef5cc72b1b63c076966a527@e6f2365e4b7f60c44415d6db919097cb";
         String str = "http://suo.im/api.htm?format=json&url=" + url + "&key=" + key + "&expireDate=2020-10-31";
         String shortUrl = restTemplate.getForObject(str, String.class);
