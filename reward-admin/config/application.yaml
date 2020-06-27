@@ -18,7 +18,7 @@ server:
 # Spring配置
 spring:
   profiles:
-    active: dev
+    active: druid
   application:
     name: reward-service
   # 模板引擎
