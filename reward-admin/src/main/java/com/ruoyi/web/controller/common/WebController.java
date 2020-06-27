@@ -238,13 +238,21 @@ public class WebController extends BaseController {
             sysShort.setLongUrl(longUrl);
             String shortUrl = getShortUrl(longUrl);
             sysShort.setShortUrl(shortUrl);
-            return toAjax(sysShortService.insertSysShort(sysShort));
+            int i = sysShortService.insertSysShort(sysShort);
+            if (i > 0) {
+                return AjaxResult.success("success", sysShort);
+            }
+            return AjaxResult.error("系统异常");
         } else {
             SysShort aShort = sysShorts.get(0);
             aShort.setLongUrl(longUrl);
             String shortUrl = getShortUrl(longUrl);
             aShort.setShortUrl(shortUrl);
-            return toAjax(sysShortService.updateSysShort(aShort));
+            int i = sysShortService.updateSysShort(aShort);
+            if (i > 0) {
+                return AjaxResult.success("success", aShort);
+            }
+            return AjaxResult.error("系统异常");
         }
     }
 

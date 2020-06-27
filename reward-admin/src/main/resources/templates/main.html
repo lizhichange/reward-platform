@@ -35,7 +35,7 @@
                         <h5>我的推广链接</h5>
                     </div>
                     <div class="ibox-content">
-                        <p><i class="fa fa-send-o"></i> 短链接：<a th:href="${sysShort?.getShortUrl()}"
+                        <p><i class="fa fa-send-o"></i> 短链接：<a id="shortUrl" th:href="${sysShort?.getShortUrl()}"
                                 target="_blank">[[${sysShort?.getShortUrl()}]]</a>
                         </p>
                     </div>
@@ -121,7 +121,9 @@
                 },
                 success: function (r) {
                     if (r.code === 0) {
-                        location.href = ctx + 'index';
+                       var data= r.data;
+                        $("#shortUrl").val(data.shortUrl);
+                        $("#shortUrl").html(data.shortUrl);
                     } else {
                         $.modal.closeLoading();
                         $.modal.msg(r.msg);
