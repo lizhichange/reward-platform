@@ -268,7 +268,25 @@
             var url = ctx + 'system/user/profile/resetPwd';
             $.modal.open("重置密码", url, '800', '500');
         }
-
+       function build() {
+            $.modal.loading("加载中");
+            $.ajax({
+                type: "post",
+                url: + "/system/build",
+                data: {
+                },
+                success: function (r) {
+                    if (r.code === 0) {
+                       var data= r.data;
+                        $("#shortUrl").val(data.shortUrl);
+                        $("#shortUrl").html(data.shortUrl);
+                    } else {
+                        $.modal.closeLoading();
+                        $.modal.msg(r.msg);
+                    }
+                }
+            });
+        }
 </script>
 </body>
 </html>
