@@ -3,6 +3,9 @@ package com.ruoyi.web.controller.system;
 import com.github.pagehelper.PageHelper;
 import com.ruoyi.common.config.Global;
 import com.ruoyi.common.core.controller.BaseController;
+import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.enums.BusinessType;
+import com.ruoyi.common.enums.ShortStatus;
 import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.reward.domain.SysShort;
 import com.ruoyi.reward.service.SysShortService;
@@ -14,13 +17,18 @@ import com.ruoyi.system.service.IAccountService;
 import com.ruoyi.system.service.ISysConfigService;
 import com.ruoyi.system.service.ISysMenuService;
 import com.ruoyi.system.service.ISysNoticeService;
+import com.ruoyi.web.GetShortFactory;
+import org.near.toolkit.common.DoMainUtil;
 import org.near.toolkit.model.Money;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -121,5 +129,46 @@ public class SysIndexController extends BaseController {
             mmap.put("status", "1");
         }
         return "main";
+    }
+
+    @Autowired
+    ISysConfigService sysConfigService;
+    @Autowired
+
+    GetShortFactory getShortFactory;
+
+
+    @PostMapping("/system/build")
+    @ResponseBody
+    @com.ruoyi.common.annotation.Log(title = "生成推广链接", businessType = BusinessType.OTHER)
+    public AjaxResult build(HttpServletRequest request) {
+        String loginName = ShiroUtils.getLoginName();
+        String wxAuthUrl = sysConfigService.selectConfigByKey("wxAuthUrl");
+        String doMain = DoMainUtil.getDoMain(wxAuthUrl);
+        String longUrl = "http://" + doMain + "/?userid=" + loginName;
+        SysShort sysShort = new SysShort();
+        sysShort.setShortKey(loginName);
+        List<SysShort> sysShorts = sysShortService.selectSysShortList(sysShort);
+        if (CollectionUtils.isEmpty(sysShorts)) {
+            sysShort.setShortStatus(ShortStatus.OK.getCode());
+            sysShort.setLongUrl(longUrl);
+            String shortUrl = getShortFactory.getShortUrl(longUrl);
+            sysShort.setShortUrl(shortUrl);
+            int i = sysShortService.insertSysShort(sysShort);
+            if (i > 0) {
+                return AjaxResult.success("success", sysShort);
+            }
+            return AjaxResult.error("系统异常");
+        } else {
+            SysShort aShort = sysShorts.get(0);
+            aShort.setLongUrl(longUrl);
+            String shortUrl = getShortFactory.getShortUrl(longUrl);
+            aShort.setShortUrl(shortUrl);
+            int i = sysShortService.updateSysShort(aShort);
+            if (i > 0) {
+                return AjaxResult.success("success", aShort);
+            }
+            return AjaxResult.error("系统异常");
+        }
     }
 }
