@@ -1,74 +1,84 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--360浏览器优先以webkit内核解析-->
     <title>若依介绍</title>
     <link rel="shortcut icon" href="favicon.ico">
-    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
-    <link href="../static/css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
-    <link href="../static/css/main/animate.min.css" th:href="@{/css/main/animate.min.css}" rel="stylesheet"/>
-    <link href="../static/css/main/style.min862f.css" th:href="@{/css/main/style.min862f.css}" rel="stylesheet"/>
+    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+    <link href="../static/css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" rel="stylesheet" />
+    <link href="../static/css/main/animate.min.css" th:href="@{/css/main/animate.min.css}" rel="stylesheet" />
+    <link href="../static/css/main/style.min862f.css" th:href="@{/css/main/style.min862f.css}" rel="stylesheet" />
 </head>
 
 <body class="gray-bg">
-<div class="row  border-bottom white-bg dashboard-header">
+    <div class="row  border-bottom white-bg dashboard-header">
 
 
-</div>
-<div class="wrapper wrapper-content">
-    <div class="row">
-        <div class="col-sm-4">
-
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>我的推广链接</h5>
-                </div>
-                <div class="ibox-content">
-                    <p><i class="fa fa-send-o"></i> 短链接：<a th:href="${sysShort?.getShortUrl()}" target="_blank">[[${sysShort?.getShortUrl()}]]</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>我的推广收益</h5>
-                </div>
-                <div class="ibox-content">
-                    <p><i class="fa fa-send-o"></i> 我的余额：[[${account}]] 元
-                    </p>
-                </div>
-            </div>
-        </div>
     </div>
+    <div class="wrapper wrapper-content">
 
-    <div class="row">
-        <div class="col-sm-4">
+        <div class="row">
+            <div class="col-sm-4">
+                <a class="btn btn-success" onclick="build();">
+                    <i class="fa fa-plus"></i> 生成推广链接
+                </a>
+            </div>
+        </div>
 
-            <span style="display:block" id="btn" data-target="#myModal5"
-                  data-toggle="modal">
-            </span>
-            <div class="ibox float-e-margins">
-                <div aria-hidden="true" class="modal inmodal fade" id="myModal5" role="dialog" tabindex="-1">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span><span
-                                        class="sr-only">Close</span>
-                                </button>
-                                <h4 class="modal-title">[[${notice.noticeTitle}]]</h4>
-                                <small class="font-bold">这里可以显示副标题。
-                            </div>
-                            <div class="modal-body">
-                                <p><strong></strong>
-                                    [[${notice.noticeContent}]]
-                                </p>
-                            </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>我的推广链接</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <p><i class="fa fa-send-o"></i> 短链接：<a th:href="${sysShort?.getShortUrl()}"
+                                target="_blank">[[${sysShort?.getShortUrl()}]]</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>我的推广收益</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <p><i class="fa fa-send-o"></i> 我的余额：[[${account}]] 元
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                            <div class="modal-footer">
-                                <button class="btn btn-white" data-dismiss="modal" type="button">关闭</button>
+        <div class="row">
+            <div class="col-sm-4">
+
+                <span style="display:block" id="btn" data-target="#myModal5" data-toggle="modal">
+                </span>
+                <div class="ibox float-e-margins">
+                    <div aria-hidden="true" class="modal inmodal fade" id="myModal5" role="dialog" tabindex="-1">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button class="close" data-dismiss="modal" type="button"><span
+                                            aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                                    </button>
+                                    <h4 class="modal-title">[[${notice.noticeTitle}]]</h4>
+                                    <small class="font-bold">这里可以显示副标题。
+                                </div>
+                                <div class="modal-body">
+                                    <p><strong></strong>
+                                        [[${notice.noticeContent}]]
+                                    </p>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button class="btn btn-white" data-dismiss="modal" type="button">关闭</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -76,44 +86,51 @@
             </div>
         </div>
     </div>
-</div>
 
-</div>
-<script th:src="@{/js/jquery.min.js}"></script>
-<script th:src="@{/js/bootstrap.min.js}"></script>
-<script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
-<script type="text/javascript">
-    $('#pay-qrcode').click(function () {
-        var html = $(this).html();
-        parent.layer.open({
-            title: false,
-            type: 1,
-            closeBtn: false,
-            shadeClose: true,
-            area: ['600px', 'auto'],
-            content: html
+    </div>
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
+    <script type="text/javascript">
+        $('#pay-qrcode').click(function () {
+            var html = $(this).html();
+            parent.layer.open({
+                title: false,
+                type: 1,
+                closeBtn: false,
+                shadeClose: true,
+                area: ['600px', 'auto'],
+                content: html
+            });
         });
-    });
 
 
-$(document).ready(function(){
-    var item="[[${status}]]";
-     if (item==="0"){
-        $('#btn').trigger("click");
-     }
- });
+        $(document).ready(function () {
+            var item = "[[${status}]]";
+            if (item === "0") {
+                $('#btn').trigger("click");
+            }
+        });
 
+        function build() {
+            $.modal.loading();
+            $.ajax({
+                type: "post",
+                url: + "/webLogin/build",
+                data: {
+                },
+                success: function (r) {
+                    if (r.code === 0) {
+                        location.href = ctx + 'index';
+                    } else {
+                        $.modal.closeLoading();
+                        $.modal.msg(r.msg);
+                    }
+                }
+            });
+        }
 
-
-
-
-
-
-
-
-
-
-
-</script>
+    </script>
 </body>
+
 </html>
