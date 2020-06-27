@@ -128,14 +128,19 @@
                 data: {
                 },
                 success: function (r) {
+                    $.modal.closeLoading();
                     if (r.code === 0) {
                        var data= r.data;
                         $("#shortUrl").val(data.shortUrl);
                         $("#shortUrl").html(data.shortUrl);
+                   
+                     
                     } else {
-                        $.modal.closeLoading();
+                      
                         $.modal.msg(r.msg);
                     }
+                },error:function(){
+                    $.modal.closeLoading();
                 }
             });
         }
