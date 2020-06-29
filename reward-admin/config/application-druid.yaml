@@ -103,6 +103,9 @@ logging:
     org.springframework: warn
 
 
+reward-service:
+  ribbon:
+    listOfServers: http://172.16.0.157:6900
 
 eureka:
   client:
