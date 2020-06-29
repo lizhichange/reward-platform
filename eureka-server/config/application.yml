@@ -16,7 +16,3 @@ eureka:
 spring:
   application:
     name: Eureka-Server
-  security:
-    user:
-      name: admin
-      password: admin
