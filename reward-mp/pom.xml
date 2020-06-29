@@ -150,6 +150,11 @@
         </dependency>
 
         <dependency>
+            <groupId>org.near</groupId>
+            <artifactId>near-webmvc-support</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.google.zxing</groupId>
             <artifactId>javase</artifactId>
             <version>3.3.3</version>

@@ -5,6 +5,7 @@ import com.ruoyi.reward.facade.dto.ShipinDTO;
 import org.near.servicesupport.result.TPageResult;
 import org.near.toolkit.common.DateUtils;
 import org.near.toolkit.common.StringUtil;
+import org.near.webmvcsupport.view.PageForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
@@ -15,6 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @author sunflower
+ */
 @Controller
 @RequestMapping("/api")
 public class VideoController {

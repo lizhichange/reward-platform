@@ -354,6 +354,15 @@
                 <version>1.0.2</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.near</groupId>
+                <artifactId>near-webmvc-support</artifactId>
+                <version>1.1.1</version>
+            </dependency>
+
+
+
+
         </dependencies>
     </dependencyManagement>
 
@@ -372,7 +381,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.8</version>
+            <version>1.18.12</version>
             <scope>provided</scope>
         </dependency>
 

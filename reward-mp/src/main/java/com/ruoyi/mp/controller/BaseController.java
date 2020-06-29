@@ -22,21 +22,20 @@ public abstract class BaseController {
     ConfigFactory configFactory;
 
 
-//    @Autowired
-//    AccountFacadeFeign accountFacadeFeign;
-//
-//    @Autowired
-//    SysWebMainFacadeFeign sysWebMainFacadeFeign;
-//
-//    @Autowired
-//    SysConfigFacadeFeign sysConfigFacadeFeign;
-//
-//    @Autowired
-//    SysOrderFacadeFeign sysOrderFacadeFeign;
-//
-//    @Autowired
-//    UserDetailFeign userDetailFeign;
+    @Autowired
+    AccountFacadeFeign accountFacadeFeign;
 
+    @Autowired
+    protected SysWebMainFacadeFeign sysWebMainFacadeFeign;
+
+    @Autowired
+    SysConfigFacadeFeign sysConfigFacadeFeign;
+
+    @Autowired
+    SysOrderFacadeFeign sysOrderFacadeFeign;
+
+    @Autowired
+    UserDetailFeign userDetailFeign;
 
 
     @Autowired
@@ -44,19 +43,18 @@ public abstract class BaseController {
 
 
     @Autowired
-
     SysConfigFacadeClient sysConfigFacadeClient;
-    @Autowired
 
+    @Autowired
     SysOrderFacadeClient sysOrderFacadeClient;
-    @Autowired
 
+    @Autowired
     SysWebMainFacadeClient sysWebMainFacadeClient;
-    @Autowired
 
+    @Autowired
     SysWechatConfigClient sysWechatConfigClient;
-    @Autowired
 
+    @Autowired
     UserDetailClient userDetailClient;
 
 
