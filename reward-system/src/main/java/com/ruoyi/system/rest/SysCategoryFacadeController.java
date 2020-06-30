@@ -18,7 +18,6 @@ import java.util.List;
  */
 @RequestMapping("/rest/category")
 @RestController
-
 @Slf4j
 public class SysCategoryFacadeController {
 

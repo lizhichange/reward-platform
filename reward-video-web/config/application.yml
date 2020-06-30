@@ -1,7 +1,7 @@
 # Spring配置
 spring:
   profiles:
-    active: druid
+    active: dev
   redis:
     database: 0
     host: localhost

@@ -5,7 +5,9 @@ import com.ruoyi.reward.facade.dto.ShipinDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.near.servicesupport.result.TPageResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -91,6 +93,11 @@ public class ShiController {
     int deleteShipinDTOById(@RequestParam("id") Long id) {
         return shipinFacade.deleteShipinDTOById(id);
 
+    }
+
+    @PostMapping(value = "/uploadFile", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public String handleFileUpload(@RequestPart(value = "file") MultipartFile file) {
+        return file.getName();
     }
 
 }

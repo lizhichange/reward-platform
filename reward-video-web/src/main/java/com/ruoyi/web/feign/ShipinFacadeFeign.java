@@ -1,15 +1,25 @@
 package com.ruoyi.web.feign;
 
 import com.ruoyi.reward.facade.dto.ShipinDTO;
+import feign.codec.Encoder;
+import feign.form.spring.SpringFormEncoder;
 import org.near.servicesupport.result.TPageResult;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
-@FeignClient(value = "reward-service", path = "/rest/shi")
+@FeignClient(value = "reward-service", path = "/rest/shi"
+
+        , configuration = ShipinFacadeFeign.MultipartSupportConfig.class
+)
 public interface ShipinFacadeFeign {
     /**
      * 查询公共片库
@@ -65,5 +75,16 @@ public interface ShipinFacadeFeign {
 
     @PostMapping("/deleteShipinDTOById")
     int deleteShipinDTOById(@RequestParam("id") Long id);
+
+    @PostMapping(value = "/uploadFile", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    String handleFileUpload(@RequestPart(value = "file") MultipartFile file);
+
+    @Configuration
+    class MultipartSupportConfig {
+        @Bean
+        public Encoder feignFormEncoder() {
+            return new SpringFormEncoder();
+        }
+    }
 
 }

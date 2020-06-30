@@ -17,7 +17,6 @@
 
     <dependencies>
 
-
         <!-- SpringBoot集成thymeleaf模板 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
