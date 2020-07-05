@@ -2,3 +2,5 @@
 spring:
   profiles:
     active: druid
+  application:
+    name: ruoyi-mp

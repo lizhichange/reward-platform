@@ -31,9 +31,6 @@ mp:
 
 
 spring:
-  application:
-    name: ruoyi-mp
-
   jmx:
     enabled: false
   cache:
