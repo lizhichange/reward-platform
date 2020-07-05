@@ -446,7 +446,7 @@ public class PayController extends BaseController {
         bank.setReturnMsg("<![CDATA[OK]]>");
         bank.setResultCode("<![CDATA[SUCCESS]]>");
         bank.setAppid("<![CDATA[" + wxPayService.getConfig().getAppId() + "]]>");
-        bank.setMchId("![CDATA[10000100]]>");
+        bank.setMchId("<![CDATA[10000100]]>");
         String xml = xstream.toXML(bank);
         modelMap.addAttribute("xml", xml);
     }

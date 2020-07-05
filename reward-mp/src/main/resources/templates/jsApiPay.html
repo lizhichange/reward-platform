@@ -316,11 +316,13 @@
                                 $.confirm({
                                     title: 'mock',
                                     text: 'mock',
+
                                     onOK: function () {
                                         $.ajax({
                                             type: "post",
                                             url: notifyUrl,
                                             data: $("#xml").val(),
+                                            dataType:'xml',
                                             error: function (jqXHR, textStatus, errorThrown) {
                                                 /*错误信息处理*/
                                                 $.toast("系统异常", 3000);
