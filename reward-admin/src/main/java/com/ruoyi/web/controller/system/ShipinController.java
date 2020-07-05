@@ -2,7 +2,6 @@ package com.ruoyi.web.controller.system;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.google.common.base.Predicate;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -57,7 +56,7 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping("/system/shipin")
 public class ShipinController extends BaseController {
-    private String prefix = "system/shipin";
+    private final String prefix = "system/shipin";
 
     @Autowired
     private ShipinFacade shipinFacade;
@@ -127,8 +126,7 @@ public class ShipinController extends BaseController {
                 long count = sysOrderService.countByExample(extSysOrder);
                 item.setCs(String.valueOf(count));
                 if (!CollectionUtils.isEmpty(itemList)) {
-                    List<PriceParam> collect = itemList.stream().filter((Predicate<PriceParam>) param -> {
-                        assert param != null;
+                    List<PriceParam> collect = itemList.stream().filter(param -> {
                         String id = param.getId();
                         return StringUtil.equals(id, item.getId().toString());
                     }).collect(Collectors.toList());
@@ -245,7 +243,7 @@ public class ShipinController extends BaseController {
             List<PriceParam> itemList = convert(array);
             if (!ArrayUtils.isEmpty(ids)) {
                 for (String id : ids) {
-                    List<PriceParam> collect = itemList.stream().filter((Predicate<PriceParam>) it -> it.getId().equals(id)).collect(Collectors.toList());
+                    List<PriceParam> collect = itemList.stream().filter(it -> it.getId().equals(id)).collect(Collectors.toList());
                     //不为空
                     if (!CollectionUtils.isEmpty(collect)) {
                         PriceParam priceParam = collect.get(0);
