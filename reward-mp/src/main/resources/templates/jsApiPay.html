@@ -315,7 +315,7 @@
                                     onOK: function () {
                                         $.ajax({
                                             type: "post",
-                                            url: "/pay/createOrder",
+                                            url: notifyUrl,
                                             data: {
                                                 "orderId": orderId,
                                                 "tradeType": tradeType
