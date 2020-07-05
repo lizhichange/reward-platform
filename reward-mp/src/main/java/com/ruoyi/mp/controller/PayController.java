@@ -22,11 +22,13 @@ import com.ruoyi.mp.util.AjaxResult;
 import com.ruoyi.reward.facade.dto.SysOrderDTO;
 import com.ruoyi.reward.facade.enums.OrderPayType;
 import com.ruoyi.reward.facade.enums.OrderStatusType;
+import com.thoughtworks.xstream.XStream;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import me.chanjar.weixin.common.util.xml.XStreamInitializer;
 import org.near.toolkit.common.DateUtils;
 import org.near.toolkit.common.DoMainUtil;
 import org.near.toolkit.common.StringUtil;
@@ -97,6 +99,7 @@ public class PayController extends BaseController {
             if (!parse.isMobile()) {
                 throw new Exception("系统异常,请使用移动端打开");
             }
+            xml(modelmap);
             return "jsApiPay";
         } else if (StringUtil.equals(WxPayConstants.TradeType.NATIVE, tradeType)) {
             AjaxResult ajaxResult = create(item, request);
@@ -423,6 +426,28 @@ public class PayController extends BaseController {
      */
     public byte[] createScanPayQrcodeMode2(String codeUrl, File logoFile, Integer sideLength) {
         return this.wxPayService.createScanPayQrcodeMode2(codeUrl, logoFile, sideLength);
+    }
+
+    void xml(ModelMap modelMap) {
+        XStream xstream = XStreamInitializer.getInstance();
+        WxPayOrderNotifyResult bank = new WxPayOrderNotifyResult();
+        bank.setOpenid("<![CDATA[oUpF8uMEb4qRXf22hE3X68TekukE]]>");
+        bank.setIsSubscribe("<![CDATA[Y]]>");
+        bank.setTradeType("<![CDATA[JSAPI]]>");
+        bank.setBankType("<![CDATA[CFT]]>");
+        bank.setTotalFee(1);
+        bank.setFeeType("<![CDATA[CNY]]>");
+        bank.setTransactionId("<![CDATA[1004400740201409030005092168]]>");
+        bank.setOutTradeNo("<![CDATA[1409811653]]>");
+        bank.setAttach("<![CDATA[支付测试]]>");
+        bank.setTimeEnd("<![CDATA[20140903131540]]>");
+        bank.setReturnCode("<![CDATA[SUCCESS]]>");
+        bank.setReturnMsg("<![CDATA[OK]]>");
+        bank.setResultCode("<![CDATA[SUCCESS]]>");
+        bank.setAppid("<![CDATA[wx2421b1c4370ec43b]]>");
+        bank.setMchId("![CDATA[10000100]]>");
+        String xml = xstream.toXML(bank);
+        modelMap.addAttribute("xml", xml);
     }
 
 }
