@@ -1,5 +1,6 @@
 package com.ruoyi.mp.controller;
 
+import cn.hutool.core.util.RandomUtil;
 import cn.hutool.http.useragent.UserAgent;
 import cn.hutool.http.useragent.UserAgentUtil;
 import com.alibaba.dubbo.common.URL;
@@ -24,12 +25,14 @@ import com.ruoyi.reward.facade.enums.OrderStatusType;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.near.toolkit.common.DateUtils;
 import org.near.toolkit.common.DoMainUtil;
 import org.near.toolkit.common.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -203,21 +206,47 @@ public class PayController extends BaseController {
     }
 
     private AjaxResult tradeTypeJsApi(HttpServletRequest servletRequest, SysOrderDTO item, WxPayUnifiedOrderRequest request) throws WxPayException {
+
+        boolean mock = false;
         Assert.hasText(item.getOpenId(), "openId is not null");
         request.setOpenid(item.getOpenId());
         request.setTradeType(WxPayConstants.TradeType.JSAPI);
-
         String getRequestUrl = servletRequest.getRequestURL().toString();
         String doMain = DoMainUtil.getDoMain(getRequestUrl);
-        request.setNotifyUrl("http://" + doMain + "/pay/notify/order");
-        WxPayMpOrderResult createOrder = wxPayService.createOrder(request);
-        LOGGER.info("createOrder:{}", createOrder);
-        if (createOrder != null) {
+        String notifyUrl = "http://" + doMain + "/pay/notify/order";
+        request.setNotifyUrl(notifyUrl);
+
+
+        if (mock) {
+            WxPayMpOrderResult createOrder = wxPayService.createOrder(request);
+            LOGGER.info("createOrder:{}", createOrder);
+            if (createOrder != null) {
+                SysOrderDTO newOrder = new SysOrderDTO();
+                newOrder.setId(item.getId());
+                String packageValue = createOrder.getPackageValue();
+                log.info("packageValue:{}", packageValue);
+                Assert.hasText(packageValue, "packageValue is not null");
+                String[] split = packageValue.split("=");
+                newOrder.setPayNo(split[1]);
+                //类型
+                newOrder.setType(Integer.valueOf(OrderPayType.JSAPI.getCode()));
+                //支付中
+                newOrder.setStatus(Integer.valueOf(OrderStatusType.PAY_ING.getCode()));
+                LOGGER.info("newOrder:{}", newOrder);
+                sysOrderFacadeClient.updateSysOrder(newOrder);
+                HashMap<String, Object> map = Maps.newHashMap();
+                map.put("type", WxPayConstants.TradeType.JSAPI);
+                WxPayMpMockOrderResult newOrderResult = new WxPayMpMockOrderResult();
+                BeanUtils.copyProperties(createOrder, newOrderResult);
+                newOrderResult.setMock(Boolean.FALSE);
+                map.put("data", newOrderResult);
+                return AjaxResult.success(map);
+            }
+        } else {
+
+            String packageValue = "package=" + RandomUtil.randomNumber();
             SysOrderDTO newOrder = new SysOrderDTO();
             newOrder.setId(item.getId());
-            String packageValue = createOrder.getPackageValue();
-            log.info("packageValue:{}", packageValue);
-            Assert.hasText(packageValue, "packageValue is not null");
             String[] split = packageValue.split("=");
             newOrder.setPayNo(split[1]);
             //类型
@@ -226,14 +255,27 @@ public class PayController extends BaseController {
             newOrder.setStatus(Integer.valueOf(OrderStatusType.PAY_ING.getCode()));
             LOGGER.info("newOrder:{}", newOrder);
             sysOrderFacadeClient.updateSysOrder(newOrder);
+
+            WxPayMpMockOrderResult newOrderResult = new WxPayMpMockOrderResult();
+            newOrderResult.setPackageValue(packageValue);
+            newOrderResult.setAppId(wxPayService.getConfig().getAppId());
+            newOrderResult.setMock(Boolean.TRUE);
+            newOrderResult.setNotifyUrl(notifyUrl);
+            newOrderResult.setPayNo(split[1]);
             HashMap<String, Object> map = Maps.newHashMap();
             map.put("type", WxPayConstants.TradeType.JSAPI);
-            map.put("data", createOrder);
+            map.put("data", newOrderResult);
             return AjaxResult.success(map);
         }
         return AjaxResult.error();
     }
 
+    @Data
+    class WxPayMpMockOrderResult extends com.github.binarywang.wxpay.bean.order.WxPayMpOrderResult {
+        private boolean mock;
+        private String notifyUrl;
+        private String payNo;
+    }
 
     private AjaxResult tradeTypeNative(HttpServletRequest servletRequest, SysOrderDTO item, WxPayUnifiedOrderRequest request) throws WxPayException {
         request.setTradeType(WxPayConstants.TradeType.NATIVE);
