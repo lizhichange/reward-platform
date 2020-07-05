@@ -309,14 +309,10 @@
                                 var notifyUrl = data.notifyUrl;
                                 var payNo = data.payNo;
                                 //如果参数过多，建议通过 object 方式传入
-                                var text = "<font color='#4F4F4F'> " + r.msg + "</font>";
-                                var redirect_uri = r.redirect_uri;
-                                //如果参数过多，建议通过 object 方式传入
                                 $.confirm({
-                                    title: '标题',
-                                    text: text,
+                                    title: 'mock',
+                                    text: 'mock',
                                     onOK: function () {
-                                        window.location.href = "/login.html?redirect_uri=" + redirect_uri;
                                     },
                                     onCancel: function () {
 

@@ -221,6 +221,30 @@ public class PayController extends BaseController {
         String notifyUrl = "http://" + doMain + "/pay/notify/order";
         request.setNotifyUrl(notifyUrl);
         if (wxPayMock) {
+            String packageValue = "package=" + RandomUtil.randomNumber();
+            SysOrderDTO newOrder = new SysOrderDTO();
+            newOrder.setId(item.getId());
+            String[] split = packageValue.split("=");
+            newOrder.setPayNo(split[1]);
+            //类型
+            newOrder.setType(Integer.valueOf(OrderPayType.JSAPI.getCode()));
+            //支付中
+            newOrder.setStatus(Integer.valueOf(OrderStatusType.PAY_ING.getCode()));
+            LOGGER.info("newOrder:{}", newOrder);
+            sysOrderFacadeClient.updateSysOrder(newOrder);
+
+            WxPayMpMockOrderResult newOrderResult = new WxPayMpMockOrderResult();
+            newOrderResult.setPackageValue(packageValue);
+            newOrderResult.setAppId(wxPayService.getConfig().getAppId());
+            newOrderResult.setMock(Boolean.TRUE);
+            newOrderResult.setNotifyUrl(notifyUrl);
+            newOrderResult.setPayNo(split[1]);
+            HashMap<String, Object> map = Maps.newHashMap();
+            map.put("type", WxPayConstants.TradeType.JSAPI);
+            map.put("data", newOrderResult);
+            return AjaxResult.success(map);
+        } else {
+
             WxPayMpOrderResult createOrder = wxPayService.createOrder(request);
             LOGGER.info("createOrder:{}", createOrder);
             if (createOrder != null) {
@@ -245,30 +269,6 @@ public class PayController extends BaseController {
                 map.put("data", newOrderResult);
                 return AjaxResult.success(map);
             }
-        } else {
-
-            String packageValue = "package=" + RandomUtil.randomNumber();
-            SysOrderDTO newOrder = new SysOrderDTO();
-            newOrder.setId(item.getId());
-            String[] split = packageValue.split("=");
-            newOrder.setPayNo(split[1]);
-            //类型
-            newOrder.setType(Integer.valueOf(OrderPayType.JSAPI.getCode()));
-            //支付中
-            newOrder.setStatus(Integer.valueOf(OrderStatusType.PAY_ING.getCode()));
-            LOGGER.info("newOrder:{}", newOrder);
-            sysOrderFacadeClient.updateSysOrder(newOrder);
-
-            WxPayMpMockOrderResult newOrderResult = new WxPayMpMockOrderResult();
-            newOrderResult.setPackageValue(packageValue);
-            newOrderResult.setAppId(wxPayService.getConfig().getAppId());
-            newOrderResult.setMock(Boolean.TRUE);
-            newOrderResult.setNotifyUrl(notifyUrl);
-            newOrderResult.setPayNo(split[1]);
-            HashMap<String, Object> map = Maps.newHashMap();
-            map.put("type", WxPayConstants.TradeType.JSAPI);
-            map.put("data", newOrderResult);
-            return AjaxResult.success(map);
         }
         return AjaxResult.error();
     }
