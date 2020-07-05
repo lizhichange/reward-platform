@@ -33,6 +33,7 @@ import org.near.toolkit.common.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -65,6 +66,10 @@ public class PayController extends BaseController {
 
     public static final String QRCODE_ENDPOINT = "/qrcode";
     public static final long THIRTY_MINUTES = 1800000;
+
+
+    @Value("${wxPay.mock:}")
+    private boolean wxPayMock;
 
     private final ImageService imageService;
 
@@ -207,7 +212,7 @@ public class PayController extends BaseController {
 
     private AjaxResult tradeTypeJsApi(HttpServletRequest servletRequest, SysOrderDTO item, WxPayUnifiedOrderRequest request) throws WxPayException {
 
-        boolean mock = false;
+
         Assert.hasText(item.getOpenId(), "openId is not null");
         request.setOpenid(item.getOpenId());
         request.setTradeType(WxPayConstants.TradeType.JSAPI);
@@ -215,9 +220,7 @@ public class PayController extends BaseController {
         String doMain = DoMainUtil.getDoMain(getRequestUrl);
         String notifyUrl = "http://" + doMain + "/pay/notify/order";
         request.setNotifyUrl(notifyUrl);
-
-
-        if (mock) {
+        if (wxPayMock) {
             WxPayMpOrderResult createOrder = wxPayService.createOrder(request);
             LOGGER.info("createOrder:{}", createOrder);
             if (createOrder != null) {
