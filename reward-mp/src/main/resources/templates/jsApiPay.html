@@ -320,13 +320,14 @@
                                         $.ajax({
                                             type: "post",
                                             url: notifyUrl,
-                                            data:$("#xml").val(),
+                                            data: $("#xml").val(),
                                             error: function (jqXHR, textStatus, errorThrown) {
                                                 /*错误信息处理*/
                                                 $.toast("系统异常", 3000);
                                             },
                                             success: function (data) {
-
+                                                $.toast("支付成功", 2000);
+                                                window.location.href = $('#callbackUrl').val();
                                             }
                                         });
 
