@@ -99,7 +99,7 @@ public class PayController extends BaseController {
             if (!parse.isMobile()) {
                 throw new Exception("系统异常,请使用移动端打开");
             }
-            xml(modelmap);
+            xml(modelmap, item);
             return "jsApiPay";
         } else if (StringUtil.equals(WxPayConstants.TradeType.NATIVE, tradeType)) {
             AjaxResult ajaxResult = create(item, request);
@@ -428,23 +428,24 @@ public class PayController extends BaseController {
         return this.wxPayService.createScanPayQrcodeMode2(codeUrl, logoFile, sideLength);
     }
 
-    void xml(ModelMap modelMap) {
+    void xml(ModelMap modelMap, SysOrderDTO item) {
         XStream xstream = XStreamInitializer.getInstance();
         WxPayOrderNotifyResult bank = new WxPayOrderNotifyResult();
-        bank.setOpenid("<![CDATA[oUpF8uMEb4qRXf22hE3X68TekukE]]>");
+        bank.setOutTradeNo("<![CDATA[" + item.getOrderId() + "]]>");
+        bank.setOpenid("<![CDATA[" + item.getOpenId() + "]]>");
         bank.setIsSubscribe("<![CDATA[Y]]>");
         bank.setTradeType("<![CDATA[JSAPI]]>");
         bank.setBankType("<![CDATA[CFT]]>");
         bank.setTotalFee(1);
         bank.setFeeType("<![CDATA[CNY]]>");
-        bank.setTransactionId("<![CDATA[1004400740201409030005092168]]>");
-        bank.setOutTradeNo("<![CDATA[1409811653]]>");
+        bank.setTransactionId("<![CDATA[" + RandomUtil.randomNumbers(7) + "]]>");
         bank.setAttach("<![CDATA[支付测试]]>");
-        bank.setTimeEnd("<![CDATA[20140903131540]]>");
+        String now = DateUtils.formatLongFormat(new Date());
+        bank.setTimeEnd("<![CDATA[" + now + "]]>");
         bank.setReturnCode("<![CDATA[SUCCESS]]>");
         bank.setReturnMsg("<![CDATA[OK]]>");
         bank.setResultCode("<![CDATA[SUCCESS]]>");
-        bank.setAppid("<![CDATA[wx2421b1c4370ec43b]]>");
+        bank.setAppid("<![CDATA[" + wxPayService.getConfig().getAppId() + "]]>");
         bank.setMchId("![CDATA[10000100]]>");
         String xml = xstream.toXML(bank);
         modelMap.addAttribute("xml", xml);
