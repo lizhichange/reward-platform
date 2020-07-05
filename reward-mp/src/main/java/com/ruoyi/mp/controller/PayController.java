@@ -63,8 +63,7 @@ public class PayController extends BaseController {
     public static final String QRCODE_ENDPOINT = "/qrcode";
     public static final long THIRTY_MINUTES = 1800000;
 
-    private final
-    ImageService imageService;
+    private final ImageService imageService;
 
 
     public PayController(ImageService imageService) {
@@ -204,29 +203,29 @@ public class PayController extends BaseController {
     }
 
     private AjaxResult tradeTypeJsApi(HttpServletRequest servletRequest, SysOrderDTO item, WxPayUnifiedOrderRequest request) throws WxPayException {
-        request.setTradeType(WxPayConstants.TradeType.JSAPI);
-        Assert.hasText(item.getOpenId()
-                , "openId is not null");
+        Assert.hasText(item.getOpenId(), "openId is not null");
         request.setOpenid(item.getOpenId());
+        request.setTradeType(WxPayConstants.TradeType.JSAPI);
+
         String getRequestUrl = servletRequest.getRequestURL().toString();
         String doMain = DoMainUtil.getDoMain(getRequestUrl);
         request.setNotifyUrl("http://" + doMain + "/pay/notify/order");
-        WxPayMpOrderResult createOrder = this.wxPayService.createOrder(request);
+        WxPayMpOrderResult createOrder = wxPayService.createOrder(request);
         LOGGER.info("createOrder:{}", createOrder);
         if (createOrder != null) {
             SysOrderDTO newOrder = new SysOrderDTO();
             newOrder.setId(item.getId());
             String packageValue = createOrder.getPackageValue();
-            if (StringUtil.isNotBlank(packageValue)) {
-                String[] split = packageValue.split("=");
-                newOrder.setPayNo(split[1]);
-                //类型
-                newOrder.setType(Integer.valueOf(OrderPayType.JSAPI.getCode()));
-                //支付中
-                newOrder.setStatus(Integer.valueOf(OrderStatusType.PAY_ING.getCode()));
-                LOGGER.info("newOrder:{}", newOrder);
-                sysOrderFacadeClient.updateSysOrder(newOrder);
-            }
+            log.info("packageValue:{}", packageValue);
+            Assert.hasText(packageValue, "packageValue is not null");
+            String[] split = packageValue.split("=");
+            newOrder.setPayNo(split[1]);
+            //类型
+            newOrder.setType(Integer.valueOf(OrderPayType.JSAPI.getCode()));
+            //支付中
+            newOrder.setStatus(Integer.valueOf(OrderStatusType.PAY_ING.getCode()));
+            LOGGER.info("newOrder:{}", newOrder);
+            sysOrderFacadeClient.updateSysOrder(newOrder);
             HashMap<String, Object> map = Maps.newHashMap();
             map.put("type", WxPayConstants.TradeType.JSAPI);
             map.put("data", createOrder);
