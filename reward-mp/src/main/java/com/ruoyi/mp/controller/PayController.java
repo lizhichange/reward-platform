@@ -1,6 +1,5 @@
 package com.ruoyi.mp.controller;
 
-import cn.hutool.core.util.RandomUtil;
 import cn.hutool.http.useragent.UserAgent;
 import cn.hutool.http.useragent.UserAgentUtil;
 import com.alibaba.dubbo.common.URL;
@@ -181,22 +180,6 @@ public class PayController extends BaseController {
         return create(dto, servletRequest);
     }
 
-    //对价格给一个后两位的随机减免
-    int getMoney(Integer money) {
-        int randomInt = 0;
-        if (money == null || money == 0) {
-            return randomInt;
-        }
-        //1-9
-        if (money <= 10) {
-            return RandomUtil.randomInt(1, money + 1);
-        }
-        //11-100
-        if (money <= 100) {
-            return RandomUtil.randomInt(money, 100);
-        }
-        return randomInt;
-    }
 
     private AjaxResult create(SysOrderDTO dto, HttpServletRequest servletRequest) throws Exception {
         SysOrderDTO item = getSysOrderDTO(dto.getOrderId());
