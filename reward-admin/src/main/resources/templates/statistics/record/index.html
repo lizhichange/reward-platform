@@ -10,6 +10,18 @@
     <div class="row">
         <div class="col-sm-12 search-collapse">
             <form id="formId">
+                <div class="select-list">
+                    <ul>
+                        <li>
+                            资源名称：<input name="name" type="text"/>
+                        </li>
+                        <li>
+                            <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i
+                                    class="fa fa-search"></i>&nbsp;搜索</a>
+
+                        </li>
+                    </ul>
+                </div>
             </form>
         </div>
         <div class="col-sm-12 select-table table-striped">
@@ -17,6 +29,9 @@
                 <div class="ibox-title">
                     <h5>统计</h5>
                 </div>
+
+
+
                 <div class="ibox-content">
                     <p><i class="fa fa-send-o"></i> 今日订单笔数：[[${dayCount}]] </p></p>
                     <p><i class="fa fa-send-o"></i> 今日订单总金额 ：[[${dayMoney}]] 元</p></p>
@@ -97,6 +112,7 @@
         };
         $.table.init(options);
     });
+
 
 
 
