@@ -351,6 +351,30 @@ public class PayController extends BaseController {
         return WxPayNotifyResponse.fail("FAIL");
     }
 
+    @PostMapping("/notify/mockNotify")
+    @ResponseBody
+    @ApiOperation("mock支付回调通知处理")
+    public String mockNotify(SysOrderDTO dto) throws Exception {
+        SysOrderDTO newOrder = new SysOrderDTO();
+        String orderId = dto.getOrderId();
+        newOrder.setOrderId(orderId);
+        //支付中
+        newOrder.setStatus(Integer.valueOf(OrderStatusType.PAY_ING.getCode()));
+        List<SysOrderDTO> dtoList = sysOrderFacadeClient.selectSysOrderListExt(newOrder);
+        if (CollectionUtils.isEmpty(dtoList)) {
+            return WxPayNotifyResponse.fail("FAIL");
+        }
+        String now = DateUtils.formatLongFormat(new Date());
+        newOrder.setPayTime(DateUtils.parseLongFormat(now));
+        String transactionId = RandomUtil.randomNumbers(8);
+        log.info("回调成功,transactionId:{},outTradeNo:{}", transactionId, orderId);
+        newOrder.setPayNo(transactionId);
+        newOrder.setStatus(Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
+        LOGGER.info("newOrder:{}", newOrder);
+        accountFacadeClient.take(newOrder);
+        return WxPayNotifyResponse.success("SUCCESS");
+    }
+
     /**
      * <pre>
      * 企业付款业务是基于微信支付商户平台的资金管理能力，为了协助商户方便地实现企业向个人付款，针对部分有开发能力的商户，提供通过API完成企业付款的功能。
