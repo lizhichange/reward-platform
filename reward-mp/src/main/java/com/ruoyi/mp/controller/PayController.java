@@ -324,6 +324,7 @@ public class PayController extends BaseController {
      */
     @PostMapping("/notify/order")
     @ResponseBody
+    @ApiOperation("支付回调通知处理")
     public String parseOrderNotifyResult(@RequestBody String xmlData) throws Exception {
         Assert.notNull(xmlData, "xmlData is not null");
         log.info("支付成功回调信息,xmlData:{}", xmlData);
