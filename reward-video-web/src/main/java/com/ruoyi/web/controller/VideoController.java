@@ -290,7 +290,7 @@ public class VideoController extends BaseController {
     @WxPnUserAuth
     public AjaxResult queryOrder(ShipinDTO shipinDTO) {
         String openId = SessionContext.getOpenId();
-        log.info("openId:{}", openId);
+        log.info("openId:{},shipinDTO:{}", openId, shipinDTO);
         ShipinDTO dtoById = shipinFacadeClient.selectShipinDTOById(shipinDTO.getId().longValue());
         if (dtoById == null) {
             return AjaxResult.warn("非法请求");
@@ -299,6 +299,7 @@ public class VideoController extends BaseController {
         order.setGoodsId(shipinDTO.getId());
         order.setOpenId(openId);
         List<SysOrderDTO> sysOrders = sysOrderFacadeClient.selectSysOrder(order);
+        log.info("sysOrders:{}", sysOrders);
         if (CollectionUtils.isEmpty(sysOrders)) {
             TWechatAuthDTO authDTO = userDetailFacadeClient.queryByOpenId(openId);
             ShipinDTO dto = shipinFacadeClient.selectShipinDTOById(shipinDTO.getId().longValue());
