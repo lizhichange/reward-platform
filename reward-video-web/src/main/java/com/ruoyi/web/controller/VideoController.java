@@ -4,7 +4,6 @@ import cn.hutool.core.util.RandomUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.ruoyi.reward.facade.dto.*;
 import com.ruoyi.reward.facade.enums.MultiTypeEnum;
@@ -307,15 +306,15 @@ public class VideoController extends BaseController {
             order.setCreateTime(now);
             order.setUpdateTime(now);
             order.setUserId(authDTO.getUserId());
-            //推广人userId
-            order.setExtensionUserId(SessionContext.getUserId());
             //商品快照信息
             order.setGoodsSnapshot(JSON.toJSONString(dto));
-
             String extensionUserId = SessionContext.getUserId();
             if (StringUtil.isBlank(extensionUserId)) {
                 extensionUserId = "admin";
             }
+            //推广人userId
+            order.setExtensionUserId(extensionUserId);
+
             SysConfigDTO configDTO = sysConfigFacadeClient.queryConfigByKey(extensionUserId);
             if (configDTO != null && StringUtils.isNotBlank(configDTO.getConfigValue())) {
                 String main = null;
@@ -329,11 +328,11 @@ public class VideoController extends BaseController {
                     itemList = convert(array);
                 }
                 if (!CollectionUtils.isEmpty(itemList)) {
-                    List<PriceParam> collect = itemList.stream().filter((Predicate<PriceParam>) param -> {
-                        assert param != null;
+                    List<PriceParam> collect = itemList.stream().filter(param -> {
                         String id = param.getId();
                         return StringUtil.equals(id, shipinDTO.getId().toString());
                     }).collect(Collectors.toList());
+
                     if (!CollectionUtils.isEmpty(collect)) {
                         PriceParam priceParam = collect.get(0);
                         Money m = new Money(priceParam.getPrice());
@@ -432,7 +431,7 @@ public class VideoController extends BaseController {
             return AjaxResult.error("系统异常");
         } else {
             SysOrderDTO sysOrder = sysOrders.get(0);
-            //如果为空
+            //如果原来的推广id 为空 补偿进去
             if (StringUtil.isBlank(sysOrder.getExtensionUserId())) {
                 //异步执行
                 threadPoolTaskExecutor.execute(() -> {
