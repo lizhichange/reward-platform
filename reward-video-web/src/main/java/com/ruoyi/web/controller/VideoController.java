@@ -261,7 +261,8 @@ public class VideoController extends BaseController {
             dataTable.setTotal(0);
             return dataTable;
         }
-        List<Integer> collect = listExt.stream().map(SysOrderDTO::getId).collect(Collectors.toList());
+        //商品信息
+        List<Integer> collect = listExt.stream().map(SysOrderDTO::getGoodsId).collect(Collectors.toList());
         shipinDTO.setIds(collect);
         String orderByClause = " create_time desc ";
         log.info("shipinDTO:{}", shipinDTO);

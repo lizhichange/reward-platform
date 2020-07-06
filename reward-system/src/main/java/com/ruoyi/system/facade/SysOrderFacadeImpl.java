@@ -108,8 +108,7 @@ public class SysOrderFacadeImpl implements SysOrderFacade {
     }
 
     private List<SysOrderDTO> convertOrder(List<ExtSysOrder> list) {
-        return list.stream().map(it ->
-        {
+        return list.stream().map(it -> {
             SysOrderDTO dto = new SysOrderDTO();
             BeanUtils.copyProperties(it, dto);
             return dto;
