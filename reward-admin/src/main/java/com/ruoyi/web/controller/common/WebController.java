@@ -1,5 +1,6 @@
 package com.ruoyi.web.controller.common;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
@@ -184,6 +185,7 @@ public class WebController extends BaseController {
 
     @PostMapping("/build")
     @ResponseBody
+    @SentinelResource(value = "webLogin-build", blockHandler = "exceptionHandler", fallback = "fallback")
     @com.ruoyi.common.annotation.Log(title = "生成推广链接", businessType = BusinessType.OTHER)
     public AjaxResult build(HttpServletRequest request) {
         String loginName = ShiroUtils.getLoginName();

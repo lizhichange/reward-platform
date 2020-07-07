@@ -1,14 +1,12 @@
 package com.ruoyi.web.controller.system;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
-import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.alibaba.csp.sentinel.slots.block.RuleConstant;
 import com.alibaba.csp.sentinel.slots.block.flow.FlowRule;
 import com.alibaba.csp.sentinel.slots.block.flow.FlowRuleManager;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
 import com.ruoyi.common.core.controller.BaseController;
-import com.ruoyi.common.core.domain.AjaxResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,19 +42,6 @@ public class SysCaptchaController extends BaseController {
     private final static String MATH = "math";
     private final static String CHAR_STR = "char";
 
-    /**
-     * Block 异常处理函数，参数最后多一个 BlockException，其余与原函数一致.
-     */
-
-    public String exceptionHandler(long s, BlockException ex) {
-        // Do some log here.
-        ex.printStackTrace();
-        return "Oops, error occurred at " + s;
-    }
-
-    public AjaxResult fallback(HttpServletRequest request, HttpServletResponse response) {
-        return AjaxResult.error();
-    }
 
     @PostConstruct
     void init() {
@@ -70,7 +55,16 @@ public class SysCaptchaController extends BaseController {
         rule.setCount(20);
         rule.setGrade(RuleConstant.FLOW_GRADE_QPS);
         rule.setLimitApp("default");
+
+        FlowRule rule1 = new FlowRule("webLogin-build");
+        // set limit qps to 20
+        rule1.setCount(6);
+        rule1.setGrade(RuleConstant.FLOW_GRADE_QPS);
+        rule1.setLimitApp("default");
+
+
         rules.add(rule);
+        rules.add(rule1);
         FlowRuleManager.loadRules(rules);
     }
 

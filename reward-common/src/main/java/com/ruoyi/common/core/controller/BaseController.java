@@ -1,5 +1,6 @@
 package com.ruoyi.common.core.controller;
 
+import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.ruoyi.common.core.domain.AjaxResult;
@@ -29,6 +30,21 @@ import java.util.List;
  * @author ruoyi
  */
 public class BaseController {
+
+    /**
+     * Block 异常处理函数，参数最后多一个 BlockException，其余与原函数一致.
+     */
+
+    public String exceptionHandler(long s, BlockException ex) {
+        // Do some log here.
+        ex.printStackTrace();
+        return "Oops, error occurred at " + s;
+    }
+
+    public AjaxResult fallback(HttpServletRequest request, HttpServletResponse response) {
+        return AjaxResult.error();
+    }
+
     protected final Logger logger = LoggerFactory.getLogger(BaseController.class);
 
     /**
