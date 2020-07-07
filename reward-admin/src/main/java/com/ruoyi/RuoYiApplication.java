@@ -1,6 +1,6 @@
 package com.ruoyi;
 
-import com.ruoyi.reward.domain.Shipin;
+import com.ruoyi.reward.domain.Video;
 import com.ruoyi.reward.domain.ShipinExample;
 import com.ruoyi.reward.mapper.ShipinMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,10 +34,10 @@ public class RuoYiApplication {
     ShipinMapper shipinMapper;
 
     void testOne() {
-        List<Shipin> list = shipinMapper.selectByExample(new ShipinExample());
-        for (Shipin shipin : list) {
+        List<Video> list = shipinMapper.selectByExample(new ShipinExample());
+        for (Video shipin : list) {
             for (int i = 0; i < 100; i++) {
-                Shipin newShi = new Shipin();
+                Video newShi = new Video();
                 newShi.setMoney(shipin.getMoney());
                 newShi.setSj(shipin.getSj());
                 newShi.setCs(shipin.getCs());

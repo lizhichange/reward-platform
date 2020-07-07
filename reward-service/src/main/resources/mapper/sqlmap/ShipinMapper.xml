@@ -1,432 +1,436 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.reward.mapper.ShipinMapper">
-  <resultMap id="BaseResultMap" type="com.ruoyi.reward.domain.Shipin">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="money" jdbcType="VARCHAR" property="money" />
-    <result column="sj" jdbcType="VARCHAR" property="sj" />
-    <result column="cs" jdbcType="VARCHAR" property="cs" />
-    <result column="url" jdbcType="VARCHAR" property="url" />
-    <result column="user_id" jdbcType="VARCHAR" property="userId" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="zykey" jdbcType="VARCHAR" property="zykey" />
-    <result column="shijian" jdbcType="VARCHAR" property="shijian" />
-    <result column="lx" jdbcType="VARCHAR" property="lx" />
-    <result column="zt" jdbcType="VARCHAR" property="zt" />
-    <result column="logo" jdbcType="VARCHAR" property="logo" />
-    <result column="is_lei" jdbcType="BIT" property="isLei" />
-    <result column="is_allow" jdbcType="BIT" property="isAllow" />
-    <result column="click" jdbcType="INTEGER" property="click" />
-    <result column="is_preview" jdbcType="BIT" property="isPreview" />
-    <result column="shorturl" jdbcType="VARCHAR" property="shorturl" />
-    <result column="category_id" jdbcType="INTEGER" property="categoryId" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+    <resultMap id="BaseResultMap" type="com.ruoyi.reward.domain.Video">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="money" jdbcType="VARCHAR" property="money"/>
+        <result column="sj" jdbcType="VARCHAR" property="sj"/>
+        <result column="cs" jdbcType="VARCHAR" property="cs"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="user_id" jdbcType="VARCHAR" property="userId"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="zykey" jdbcType="VARCHAR" property="zykey"/>
+        <result column="shijian" jdbcType="VARCHAR" property="shijian"/>
+        <result column="lx" jdbcType="VARCHAR" property="lx"/>
+        <result column="zt" jdbcType="VARCHAR" property="zt"/>
+        <result column="logo" jdbcType="VARCHAR" property="logo"/>
+        <result column="is_lei" jdbcType="BIT" property="isLei"/>
+        <result column="is_allow" jdbcType="BIT" property="isAllow"/>
+        <result column="click" jdbcType="INTEGER" property="click"/>
+        <result column="is_preview" jdbcType="BIT" property="isPreview"/>
+        <result column="shorturl" jdbcType="VARCHAR" property="shorturl"/>
+        <result column="category_id" jdbcType="INTEGER" property="categoryId"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        id, money, sj, cs, url, user_id, name, zykey, shijian, lx, zt, logo, is_lei, is_allow,
+        click, is_preview, shorturl, category_id, create_time
+    </sql>
+    <select id="selectByExample" parameterType="com.ruoyi.reward.domain.ShipinExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
         </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
-    id, money, sj, cs, url, user_id, name, zykey, shijian, lx, zt, logo, is_lei, is_allow, 
-    click, is_preview, shorturl, category_id, create_time
-  </sql>
-  <select id="selectByExample" parameterType="com.ruoyi.reward.domain.ShipinExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from shipin
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-    <if test="limit != null">
-      <if test="offset != null">
-        limit ${offset}, ${limit}
-      </if>
-      <if test="offset == null">
-        limit ${limit}
-      </if>
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from shipin
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from shipin
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.ruoyi.reward.domain.ShipinExample">
-    delete from shipin
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.ruoyi.reward.domain.Shipin" useGeneratedKeys="true">
-    insert into shipin (money, sj, cs, 
-      url, user_id, name, 
-      zykey, shijian, lx, 
-      zt, logo, is_lei, is_allow, 
-      click, is_preview, shorturl, 
-      category_id, create_time)
-    values (#{money,jdbcType=VARCHAR}, #{sj,jdbcType=VARCHAR}, #{cs,jdbcType=VARCHAR}, 
-      #{url,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{zykey,jdbcType=VARCHAR}, #{shijian,jdbcType=VARCHAR}, #{lx,jdbcType=VARCHAR}, 
-      #{zt,jdbcType=VARCHAR}, #{logo,jdbcType=VARCHAR}, #{isLei,jdbcType=BIT}, #{isAllow,jdbcType=BIT}, 
-      #{click,jdbcType=INTEGER}, #{isPreview,jdbcType=BIT}, #{shorturl,jdbcType=VARCHAR}, 
-      #{categoryId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.ruoyi.reward.domain.Shipin" useGeneratedKeys="true">
-    insert into shipin
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="money != null">
-        money,
-      </if>
-      <if test="sj != null">
-        sj,
-      </if>
-      <if test="cs != null">
-        cs,
-      </if>
-      <if test="url != null">
-        url,
-      </if>
-      <if test="userId != null">
-        user_id,
-      </if>
-      <if test="name != null">
-        name,
-      </if>
-      <if test="zykey != null">
-        zykey,
-      </if>
-      <if test="shijian != null">
-        shijian,
-      </if>
-      <if test="lx != null">
-        lx,
-      </if>
-      <if test="zt != null">
-        zt,
-      </if>
-      <if test="logo != null">
-        logo,
-      </if>
-      <if test="isLei != null">
-        is_lei,
-      </if>
-      <if test="isAllow != null">
-        is_allow,
-      </if>
-      <if test="click != null">
-        click,
-      </if>
-      <if test="isPreview != null">
-        is_preview,
-      </if>
-      <if test="shorturl != null">
-        shorturl,
-      </if>
-      <if test="categoryId != null">
-        category_id,
-      </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="money != null">
-        #{money,jdbcType=VARCHAR},
-      </if>
-      <if test="sj != null">
-        #{sj,jdbcType=VARCHAR},
-      </if>
-      <if test="cs != null">
-        #{cs,jdbcType=VARCHAR},
-      </if>
-      <if test="url != null">
-        #{url,jdbcType=VARCHAR},
-      </if>
-      <if test="userId != null">
-        #{userId,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="zykey != null">
-        #{zykey,jdbcType=VARCHAR},
-      </if>
-      <if test="shijian != null">
-        #{shijian,jdbcType=VARCHAR},
-      </if>
-      <if test="lx != null">
-        #{lx,jdbcType=VARCHAR},
-      </if>
-      <if test="zt != null">
-        #{zt,jdbcType=VARCHAR},
-      </if>
-      <if test="logo != null">
-        #{logo,jdbcType=VARCHAR},
-      </if>
-      <if test="isLei != null">
-        #{isLei,jdbcType=BIT},
-      </if>
-      <if test="isAllow != null">
-        #{isAllow,jdbcType=BIT},
-      </if>
-      <if test="click != null">
-        #{click,jdbcType=INTEGER},
-      </if>
-      <if test="isPreview != null">
-        #{isPreview,jdbcType=BIT},
-      </if>
-      <if test="shorturl != null">
-        #{shorturl,jdbcType=VARCHAR},
-      </if>
-      <if test="categoryId != null">
-        #{categoryId,jdbcType=INTEGER},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.ruoyi.reward.domain.ShipinExample" resultType="java.lang.Long">
-    select count(*) from shipin
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update shipin
-    <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
-      </if>
-      <if test="record.money != null">
+        <include refid="Base_Column_List"/>
+        from shipin
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+        <if test="limit != null">
+            <if test="offset != null">
+                limit ${offset}, ${limit}
+            </if>
+            <if test="offset == null">
+                limit ${limit}
+            </if>
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from shipin
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from shipin
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.ruoyi.reward.domain.ShipinExample">
+        delete from shipin
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.ruoyi.reward.domain.Video"
+            useGeneratedKeys="true">
+        insert into shipin (money, sj, cs,
+        url, user_id, name,
+        zykey, shijian, lx,
+        zt, logo, is_lei, is_allow,
+        click, is_preview, shorturl,
+        category_id, create_time)
+        values (#{money,jdbcType=VARCHAR}, #{sj,jdbcType=VARCHAR}, #{cs,jdbcType=VARCHAR},
+        #{url,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+        #{zykey,jdbcType=VARCHAR}, #{shijian,jdbcType=VARCHAR}, #{lx,jdbcType=VARCHAR},
+        #{zt,jdbcType=VARCHAR}, #{logo,jdbcType=VARCHAR}, #{isLei,jdbcType=BIT}, #{isAllow,jdbcType=BIT},
+        #{click,jdbcType=INTEGER}, #{isPreview,jdbcType=BIT}, #{shorturl,jdbcType=VARCHAR},
+        #{categoryId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.ruoyi.reward.domain.Video"
+            useGeneratedKeys="true">
+        insert into shipin
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="money != null">
+                money,
+            </if>
+            <if test="sj != null">
+                sj,
+            </if>
+            <if test="cs != null">
+                cs,
+            </if>
+            <if test="url != null">
+                url,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="zykey != null">
+                zykey,
+            </if>
+            <if test="shijian != null">
+                shijian,
+            </if>
+            <if test="lx != null">
+                lx,
+            </if>
+            <if test="zt != null">
+                zt,
+            </if>
+            <if test="logo != null">
+                logo,
+            </if>
+            <if test="isLei != null">
+                is_lei,
+            </if>
+            <if test="isAllow != null">
+                is_allow,
+            </if>
+            <if test="click != null">
+                click,
+            </if>
+            <if test="isPreview != null">
+                is_preview,
+            </if>
+            <if test="shorturl != null">
+                shorturl,
+            </if>
+            <if test="categoryId != null">
+                category_id,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="money != null">
+                #{money,jdbcType=VARCHAR},
+            </if>
+            <if test="sj != null">
+                #{sj,jdbcType=VARCHAR},
+            </if>
+            <if test="cs != null">
+                #{cs,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="zykey != null">
+                #{zykey,jdbcType=VARCHAR},
+            </if>
+            <if test="shijian != null">
+                #{shijian,jdbcType=VARCHAR},
+            </if>
+            <if test="lx != null">
+                #{lx,jdbcType=VARCHAR},
+            </if>
+            <if test="zt != null">
+                #{zt,jdbcType=VARCHAR},
+            </if>
+            <if test="logo != null">
+                #{logo,jdbcType=VARCHAR},
+            </if>
+            <if test="isLei != null">
+                #{isLei,jdbcType=BIT},
+            </if>
+            <if test="isAllow != null">
+                #{isAllow,jdbcType=BIT},
+            </if>
+            <if test="click != null">
+                #{click,jdbcType=INTEGER},
+            </if>
+            <if test="isPreview != null">
+                #{isPreview,jdbcType=BIT},
+            </if>
+            <if test="shorturl != null">
+                #{shorturl,jdbcType=VARCHAR},
+            </if>
+            <if test="categoryId != null">
+                #{categoryId,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.ruoyi.reward.domain.ShipinExample" resultType="java.lang.Long">
+        select count(*) from shipin
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update shipin
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.money != null">
+                money = #{record.money,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sj != null">
+                sj = #{record.sj,jdbcType=VARCHAR},
+            </if>
+            <if test="record.cs != null">
+                cs = #{record.cs,jdbcType=VARCHAR},
+            </if>
+            <if test="record.url != null">
+                url = #{record.url,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userId != null">
+                user_id = #{record.userId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.name != null">
+                name = #{record.name,jdbcType=VARCHAR},
+            </if>
+            <if test="record.zykey != null">
+                zykey = #{record.zykey,jdbcType=VARCHAR},
+            </if>
+            <if test="record.shijian != null">
+                shijian = #{record.shijian,jdbcType=VARCHAR},
+            </if>
+            <if test="record.lx != null">
+                lx = #{record.lx,jdbcType=VARCHAR},
+            </if>
+            <if test="record.zt != null">
+                zt = #{record.zt,jdbcType=VARCHAR},
+            </if>
+            <if test="record.logo != null">
+                logo = #{record.logo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isLei != null">
+                is_lei = #{record.isLei,jdbcType=BIT},
+            </if>
+            <if test="record.isAllow != null">
+                is_allow = #{record.isAllow,jdbcType=BIT},
+            </if>
+            <if test="record.click != null">
+                click = #{record.click,jdbcType=INTEGER},
+            </if>
+            <if test="record.isPreview != null">
+                is_preview = #{record.isPreview,jdbcType=BIT},
+            </if>
+            <if test="record.shorturl != null">
+                shorturl = #{record.shorturl,jdbcType=VARCHAR},
+            </if>
+            <if test="record.categoryId != null">
+                category_id = #{record.categoryId,jdbcType=INTEGER},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update shipin
+        set id = #{record.id,jdbcType=INTEGER},
         money = #{record.money,jdbcType=VARCHAR},
-      </if>
-      <if test="record.sj != null">
         sj = #{record.sj,jdbcType=VARCHAR},
-      </if>
-      <if test="record.cs != null">
         cs = #{record.cs,jdbcType=VARCHAR},
-      </if>
-      <if test="record.url != null">
         url = #{record.url,jdbcType=VARCHAR},
-      </if>
-      <if test="record.userId != null">
         user_id = #{record.userId,jdbcType=VARCHAR},
-      </if>
-      <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
-      </if>
-      <if test="record.zykey != null">
         zykey = #{record.zykey,jdbcType=VARCHAR},
-      </if>
-      <if test="record.shijian != null">
         shijian = #{record.shijian,jdbcType=VARCHAR},
-      </if>
-      <if test="record.lx != null">
         lx = #{record.lx,jdbcType=VARCHAR},
-      </if>
-      <if test="record.zt != null">
         zt = #{record.zt,jdbcType=VARCHAR},
-      </if>
-      <if test="record.logo != null">
         logo = #{record.logo,jdbcType=VARCHAR},
-      </if>
-      <if test="record.isLei != null">
         is_lei = #{record.isLei,jdbcType=BIT},
-      </if>
-      <if test="record.isAllow != null">
         is_allow = #{record.isAllow,jdbcType=BIT},
-      </if>
-      <if test="record.click != null">
         click = #{record.click,jdbcType=INTEGER},
-      </if>
-      <if test="record.isPreview != null">
         is_preview = #{record.isPreview,jdbcType=BIT},
-      </if>
-      <if test="record.shorturl != null">
         shorturl = #{record.shorturl,jdbcType=VARCHAR},
-      </if>
-      <if test="record.categoryId != null">
         category_id = #{record.categoryId,jdbcType=INTEGER},
-      </if>
-      <if test="record.createTime != null">
-        create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update shipin
-    set id = #{record.id,jdbcType=INTEGER},
-      money = #{record.money,jdbcType=VARCHAR},
-      sj = #{record.sj,jdbcType=VARCHAR},
-      cs = #{record.cs,jdbcType=VARCHAR},
-      url = #{record.url,jdbcType=VARCHAR},
-      user_id = #{record.userId,jdbcType=VARCHAR},
-      name = #{record.name,jdbcType=VARCHAR},
-      zykey = #{record.zykey,jdbcType=VARCHAR},
-      shijian = #{record.shijian,jdbcType=VARCHAR},
-      lx = #{record.lx,jdbcType=VARCHAR},
-      zt = #{record.zt,jdbcType=VARCHAR},
-      logo = #{record.logo,jdbcType=VARCHAR},
-      is_lei = #{record.isLei,jdbcType=BIT},
-      is_allow = #{record.isAllow,jdbcType=BIT},
-      click = #{record.click,jdbcType=INTEGER},
-      is_preview = #{record.isPreview,jdbcType=BIT},
-      shorturl = #{record.shorturl,jdbcType=VARCHAR},
-      category_id = #{record.categoryId,jdbcType=INTEGER},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ruoyi.reward.domain.Shipin">
-    update shipin
-    <set>
-      <if test="money != null">
-        money = #{money,jdbcType=VARCHAR},
-      </if>
-      <if test="sj != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ruoyi.reward.domain.Video">
+        update shipin
+        <set>
+            <if test="money != null">
+                money = #{money,jdbcType=VARCHAR},
+            </if>
+            <if test="sj != null">
+                sj = #{sj,jdbcType=VARCHAR},
+            </if>
+            <if test="cs != null">
+                cs = #{cs,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="zykey != null">
+                zykey = #{zykey,jdbcType=VARCHAR},
+            </if>
+            <if test="shijian != null">
+                shijian = #{shijian,jdbcType=VARCHAR},
+            </if>
+            <if test="lx != null">
+                lx = #{lx,jdbcType=VARCHAR},
+            </if>
+            <if test="zt != null">
+                zt = #{zt,jdbcType=VARCHAR},
+            </if>
+            <if test="logo != null">
+                logo = #{logo,jdbcType=VARCHAR},
+            </if>
+            <if test="isLei != null">
+                is_lei = #{isLei,jdbcType=BIT},
+            </if>
+            <if test="isAllow != null">
+                is_allow = #{isAllow,jdbcType=BIT},
+            </if>
+            <if test="click != null">
+                click = #{click,jdbcType=INTEGER},
+            </if>
+            <if test="isPreview != null">
+                is_preview = #{isPreview,jdbcType=BIT},
+            </if>
+            <if test="shorturl != null">
+                shorturl = #{shorturl,jdbcType=VARCHAR},
+            </if>
+            <if test="categoryId != null">
+                category_id = #{categoryId,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ruoyi.reward.domain.Video">
+        update shipin
+        set money = #{money,jdbcType=VARCHAR},
         sj = #{sj,jdbcType=VARCHAR},
-      </if>
-      <if test="cs != null">
         cs = #{cs,jdbcType=VARCHAR},
-      </if>
-      <if test="url != null">
         url = #{url,jdbcType=VARCHAR},
-      </if>
-      <if test="userId != null">
         user_id = #{userId,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="zykey != null">
         zykey = #{zykey,jdbcType=VARCHAR},
-      </if>
-      <if test="shijian != null">
         shijian = #{shijian,jdbcType=VARCHAR},
-      </if>
-      <if test="lx != null">
         lx = #{lx,jdbcType=VARCHAR},
-      </if>
-      <if test="zt != null">
         zt = #{zt,jdbcType=VARCHAR},
-      </if>
-      <if test="logo != null">
         logo = #{logo,jdbcType=VARCHAR},
-      </if>
-      <if test="isLei != null">
         is_lei = #{isLei,jdbcType=BIT},
-      </if>
-      <if test="isAllow != null">
         is_allow = #{isAllow,jdbcType=BIT},
-      </if>
-      <if test="click != null">
         click = #{click,jdbcType=INTEGER},
-      </if>
-      <if test="isPreview != null">
         is_preview = #{isPreview,jdbcType=BIT},
-      </if>
-      <if test="shorturl != null">
         shorturl = #{shorturl,jdbcType=VARCHAR},
-      </if>
-      <if test="categoryId != null">
         category_id = #{categoryId,jdbcType=INTEGER},
-      </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.ruoyi.reward.domain.Shipin">
-    update shipin
-    set money = #{money,jdbcType=VARCHAR},
-      sj = #{sj,jdbcType=VARCHAR},
-      cs = #{cs,jdbcType=VARCHAR},
-      url = #{url,jdbcType=VARCHAR},
-      user_id = #{userId,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
-      zykey = #{zykey,jdbcType=VARCHAR},
-      shijian = #{shijian,jdbcType=VARCHAR},
-      lx = #{lx,jdbcType=VARCHAR},
-      zt = #{zt,jdbcType=VARCHAR},
-      logo = #{logo,jdbcType=VARCHAR},
-      is_lei = #{isLei,jdbcType=BIT},
-      is_allow = #{isAllow,jdbcType=BIT},
-      click = #{click,jdbcType=INTEGER},
-      is_preview = #{isPreview,jdbcType=BIT},
-      shorturl = #{shorturl,jdbcType=VARCHAR},
-      category_id = #{categoryId,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+        create_time = #{createTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>

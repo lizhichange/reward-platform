@@ -2,7 +2,7 @@ package com.ruoyi.reward.service.impl;
 
 import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.common.utils.DateUtils;
-import com.ruoyi.reward.domain.Shipin;
+import com.ruoyi.reward.domain.Video;
 import com.ruoyi.reward.mapper.ExtShipinMapper;
 import com.ruoyi.reward.service.ShipinService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class ShipinServiceImpl implements ShipinService {
      * @return 邀请码管理
      */
     @Override
-    public Shipin selectShipinById(Long id) {
+    public Video selectShipinById(Long id) {
         return extShipinMapper.selectShipinById(id);
     }
 
@@ -36,7 +36,7 @@ public class ShipinServiceImpl implements ShipinService {
      * @return 邀请码管理
      */
     @Override
-    public List<Shipin> selectShipinList(Shipin shipin) {
+    public List<Video> selectShipinList(Video shipin) {
         return extShipinMapper.selectShipinList(shipin);
     }
 
@@ -47,7 +47,7 @@ public class ShipinServiceImpl implements ShipinService {
      * @return 结果
      */
     @Override
-    public int insertShipin(Shipin shipin) {
+    public int insertShipin(Video shipin) {
         shipin.setCreateTime(DateUtils.getNowDate());
         return extShipinMapper.insertShipin(shipin);
     }
@@ -59,7 +59,7 @@ public class ShipinServiceImpl implements ShipinService {
      * @return 结果
      */
     @Override
-    public int updateShipin(Shipin shipin) {
+    public int updateShipin(Video shipin) {
         return extShipinMapper.updateShipin(shipin);
     }
 

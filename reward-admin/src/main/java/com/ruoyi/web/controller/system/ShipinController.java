@@ -13,7 +13,7 @@ import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.util.ShiroUtils;
-import com.ruoyi.reward.domain.Shipin;
+import com.ruoyi.reward.domain.Video;
 import com.ruoyi.reward.domain.SysCategory;
 import com.ruoyi.reward.facade.api.ShipinFacade;
 import com.ruoyi.reward.facade.dto.ShipinDTO;
@@ -94,13 +94,13 @@ public class ShipinController extends BaseController {
     @RequiresPermissions("system:shipin:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(Shipin shipin) {
+    public TableDataInfo list(Video shipin) {
         startPage();
         boolean b = !"admin".equals(ShiroUtils.getLoginName());
         if (b) {
             shipin.setUserIdList(Lists.newArrayList("admin", ShiroUtils.getLoginName()));
         }
-        List<Shipin> list = shipinService.selectShipinList(shipin);
+        List<Video> list = shipinService.selectShipinList(shipin);
         if (!CollectionUtils.isEmpty(list)) {
 
             String main = null;
@@ -116,7 +116,7 @@ public class ShipinController extends BaseController {
                     itemList = convert(array);
                 }
             }
-            for (Shipin item : list) {
+            for (Video item : list) {
                 ExtSysOrder extSysOrder = new ExtSysOrder();
                 extSysOrder.setGoodsId(item.getId());
                 extSysOrder.setStatus(Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
@@ -160,9 +160,9 @@ public class ShipinController extends BaseController {
     @PostMapping("/export")
     @RequiresRoles("admin")
     @ResponseBody
-    public AjaxResult export(Shipin shipin) {
-        List<Shipin> list = shipinService.selectShipinList(shipin);
-        ExcelUtil<Shipin> util = new ExcelUtil<>(Shipin.class);
+    public AjaxResult export(Video shipin) {
+        List<Video> list = shipinService.selectShipinList(shipin);
+        ExcelUtil<Video> util = new ExcelUtil<>(Video.class);
         return util.exportExcel(list, "shipin");
     }
 

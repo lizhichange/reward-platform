@@ -1,6 +1,6 @@
 package com.ruoyi.reward.service;
 
-import com.ruoyi.reward.domain.Shipin;
+import com.ruoyi.reward.domain.Video;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ public interface ShipinService {
      * @param id 邀请码管理ID
      * @return 邀请码管理
      */
-    public Shipin selectShipinById(Long id);
+    public Video selectShipinById(Long id);
 
     /**
      * 查询邀请码管理列表
@@ -19,7 +19,7 @@ public interface ShipinService {
      * @param shipin 邀请码管理
      * @return 邀请码管理集合
      */
-    public List<Shipin> selectShipinList(Shipin shipin);
+    public List<Video> selectShipinList(Video shipin);
 
     /**
      * 新增邀请码管理
@@ -27,7 +27,7 @@ public interface ShipinService {
      * @param shipin 邀请码管理
      * @return 结果
      */
-    public int insertShipin(Shipin shipin);
+    public int insertShipin(Video shipin);
 
     /**
      * 修改邀请码管理
@@ -35,7 +35,7 @@ public interface ShipinService {
      * @param shipin 邀请码管理
      * @return 结果
      */
-    public int updateShipin(Shipin shipin);
+    public int updateShipin(Video shipin);
 
     /**
      * 批量删除邀请码管理

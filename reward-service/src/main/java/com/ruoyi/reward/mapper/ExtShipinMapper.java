@@ -1,6 +1,6 @@
 package com.ruoyi.reward.mapper;
 
-import com.ruoyi.reward.domain.Shipin;
+import com.ruoyi.reward.domain.Video;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ public interface ExtShipinMapper {
      * @param id 公共片库ID
      * @return 公共片库
      */
-    Shipin selectShipinById(Long id);
+    Video selectShipinById(Long id);
 
     /**
      * 查询公共片库列表
@@ -25,7 +25,7 @@ public interface ExtShipinMapper {
      * @param shipin 公共片库
      * @return 公共片库集合
      */
-    List<Shipin> selectShipinList(Shipin shipin);
+    List<Video> selectShipinList(Video shipin);
 
     /**
      * 新增公共片库
@@ -33,7 +33,7 @@ public interface ExtShipinMapper {
      * @param shipin 公共片库
      * @return 结果
      */
-    int insertShipin(Shipin shipin);
+    int insertShipin(Video shipin);
 
     /**
      * 修改公共片库
@@ -41,7 +41,7 @@ public interface ExtShipinMapper {
      * @param shipin 公共片库
      * @return 结果
      */
-    int updateShipin(Shipin shipin);
+    int updateShipin(Video shipin);
 
     /**
      * 删除公共片库

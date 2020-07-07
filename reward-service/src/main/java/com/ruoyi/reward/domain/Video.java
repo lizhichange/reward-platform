@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-public class Shipin implements Serializable {
+public class Video implements Serializable {
     private static final long serialVersionUID = -495973710593943252L;
     /**
      * shipin.id

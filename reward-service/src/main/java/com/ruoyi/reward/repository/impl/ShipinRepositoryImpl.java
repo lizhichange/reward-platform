@@ -2,7 +2,7 @@ package com.ruoyi.reward.repository.impl;
 
 
 import com.ruoyi.reward.convert.ShipinConvert;
-import com.ruoyi.reward.domain.Shipin;
+import com.ruoyi.reward.domain.Video;
 import com.ruoyi.reward.domain.ShipinExample;
 import com.ruoyi.reward.facade.dto.ShipinDTO;
 import com.ruoyi.reward.mapper.ShipinMapper;
@@ -39,7 +39,7 @@ public class ShipinRepositoryImpl implements ShipinRepository {
         if (StringUtil.isNotBlank(orderByClause)) {
             example.setOrderByClause(orderByClause);
         }
-        List<Shipin> list = shipinMapper.selectByExample(example);
+        List<Video> list = shipinMapper.selectByExample(example);
         return list.stream().map(ShipinConvert::convert).collect(Collectors.toList());
 
     }

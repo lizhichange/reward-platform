@@ -19,7 +19,7 @@ package com.ruoyi.reward.facade;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.google.common.collect.Lists;
-import com.ruoyi.reward.domain.Shipin;
+import com.ruoyi.reward.domain.Video;
 import com.ruoyi.reward.domain.ShipinExample;
 import com.ruoyi.reward.facade.api.DemoFacade;
 import com.ruoyi.reward.mapper.ShipinMapper;
@@ -61,10 +61,10 @@ public class DefaultDemoFacadeImpl implements DemoFacade {
 
     @Override
     public void testOne() {
-        List<Shipin> list = shipinMapper.selectByExample(new ShipinExample());
-        for (Shipin shipin : list) {
+        List<Video> list = shipinMapper.selectByExample(new ShipinExample());
+        for (Video shipin : list) {
             for (int i = 0; i < 100; i++) {
-                Shipin newShi = new Shipin();
+                Video newShi = new Video();
                 newShi.setMoney(shipin.getMoney());
                 newShi.setSj(shipin.getSj());
                 newShi.setCs(shipin.getCs());

@@ -7,7 +7,7 @@ import com.ruoyi.reward.convert.ShipinConvert;
 import com.ruoyi.reward.facade.api.ShipinFacade;
 import com.ruoyi.reward.facade.dto.ShipinDTO;
 
-import com.ruoyi.reward.domain.Shipin;
+import com.ruoyi.reward.domain.Video;
 import com.ruoyi.reward.domain.ShipinExample;
 import com.ruoyi.reward.mapper.ExtShipinMapper;
 import com.ruoyi.reward.mapper.ShipinMapper;
@@ -49,7 +49,7 @@ public class ShipinFacadeImpl implements ShipinFacade {
      */
     @Override
     public ShipinDTO selectShipinDTOById(Long id) {
-        Shipin shipin = extShipinMapper.selectShipinById(id);
+        Video shipin = extShipinMapper.selectShipinById(id);
         return ShipinConvert.convert(shipin);
 
     }
@@ -68,9 +68,9 @@ public class ShipinFacadeImpl implements ShipinFacade {
      */
     @Override
     public List<ShipinDTO> selectShipinDTOList(ShipinDTO item) {
-        Shipin it = new Shipin();
+        Video it = new Video();
         BeanUtils.copyProperties(item, it);
-        List<Shipin> list = extShipinMapper.selectShipinList(it);
+        List<Video> list = extShipinMapper.selectShipinList(it);
         return list.stream().map(ShipinConvert::convert).collect(Collectors.toList());
 
     }
@@ -97,7 +97,7 @@ public class ShipinFacadeImpl implements ShipinFacade {
      */
     @Override
     public int insertShipinDTO(ShipinDTO item) {
-        Shipin it = new Shipin();
+        Video it = new Video();
         BeanUtils.copyProperties(item, it);
         return extShipinMapper.insertShipin(it);
     }
@@ -110,7 +110,7 @@ public class ShipinFacadeImpl implements ShipinFacade {
      */
     @Override
     public int updateShipinDTO(ShipinDTO item) {
-        Shipin it = new Shipin();
+        Video it = new Video();
         BeanUtils.copyProperties(item, it);
         return extShipinMapper.updateShipin(it);
     }

@@ -1,6 +1,6 @@
 package com.ruoyi.reward.mapper;
 
-import com.ruoyi.reward.domain.Shipin;
+import com.ruoyi.reward.domain.Video;
 import com.ruoyi.reward.domain.ShipinExample;
 import org.apache.ibatis.annotations.Param;
 
@@ -13,19 +13,19 @@ public interface ShipinMapper {
 
     int deleteByPrimaryKey(Integer id);
 
-    int insert(Shipin record);
+    int insert(Video record);
 
-    int insertSelective(Shipin record);
+    int insertSelective(Video record);
 
-    List<Shipin> selectByExample(ShipinExample example);
+    List<Video> selectByExample(ShipinExample example);
 
-    Shipin selectByPrimaryKey(Integer id);
+    Video selectByPrimaryKey(Integer id);
 
-    int updateByExampleSelective(@Param("record") Shipin record, @Param("example") ShipinExample example);
+    int updateByExampleSelective(@Param("record") Video record, @Param("example") ShipinExample example);
 
-    int updateByExample(@Param("record") Shipin record, @Param("example") ShipinExample example);
+    int updateByExample(@Param("record") Video record, @Param("example") ShipinExample example);
 
-    int updateByPrimaryKeySelective(Shipin record);
+    int updateByPrimaryKeySelective(Video record);
 
-    int updateByPrimaryKey(Shipin record);
+    int updateByPrimaryKey(Video record);
 }
