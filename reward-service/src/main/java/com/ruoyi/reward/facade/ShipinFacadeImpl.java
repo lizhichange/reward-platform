@@ -82,8 +82,8 @@ public class ShipinFacadeImpl implements ShipinFacade {
         if (item.getId() != null) {
             criteria.andIdEqualTo(item.getId());
         }
-        if (StringUtil.isNotBlank(item.getUserid())) {
-            criteria.andUseridEqualTo(item.getUserid());
+        if (StringUtil.isNotBlank(item.getUserId())) {
+            criteria.andUserIdEqualTo(item.getUserId());
         }
         long l = shipinMapper.countByExample(example);
         return (int) l;
