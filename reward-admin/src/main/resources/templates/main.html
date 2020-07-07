@@ -132,11 +132,9 @@
                     $.modal.closeLoading();
                     if (r.code === 0) {
                         var data = r.data;
-                        $("#shortUrl").val(data.shortUrl);
+                        console.log(data);
                         $("#shortUrl").html(data.shortUrl);
                         $("#shortUrl").attr("href", data.shortUrl);
-
-
                     } else {
 
                         $.modal.msg(r.msg);
