@@ -93,7 +93,7 @@ public class Video implements Serializable {
      *
      * @mbg.generated 2020-07-07 11:14:12
      */
-    private String zt;
+    private String status;
 
     /**
      * shipin.logo
@@ -184,7 +184,7 @@ public class Video implements Serializable {
         sb.append(", zykey=").append(zykey);
         sb.append(", duration=").append(duration);
         sb.append(", lx=").append(lx);
-        sb.append(", zt=").append(zt);
+        sb.append(", status=").append(status);
         sb.append(", logo=").append(logo);
         sb.append(", isLei=").append(isLei);
         sb.append(", isAllow=").append(isAllow);
