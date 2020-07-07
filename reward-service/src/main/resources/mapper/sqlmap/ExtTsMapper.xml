@@ -12,14 +12,14 @@
         <result property="shijian" column="shijian"/>
         <result property="typeto" column="typeto"/>
         <result property="sid" column="sid"/>
-        <result property="userid" column="userid"/>
+        <result property="userId" column="user_id"/>
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
         <result property="openId" column="open_id"/>
     </resultMap>
 
     <sql id="selectTsVo">
-        select id, ip, zt, neirong, shijian, typeto, sid, userid, create_time, update_time, open_id from ts
+        select id, ip, zt, neirong, shijian, typeto, sid, user_id, create_time, update_time, open_id from ts
     </sql>
 
     <select id="selectTsList" parameterType="Ts" resultMap="TsResult">
@@ -31,7 +31,7 @@
             <if test="shijian != null  and shijian != ''">and shijian = #{shijian}</if>
             <if test="typeto != null  and typeto != ''">and typeto = #{typeto}</if>
             <if test="sid != null  and sid != ''">and sid = #{sid}</if>
-            <if test="userid != null  and userid != ''">and userid = #{userid}</if>
+            <if test="userId != null  and userId != ''">and user_id = #{userId}</if>
             <if test="openId != null  and openId != ''">and open_id = #{openId}</if>
         </where>
     </select>
@@ -50,7 +50,7 @@
             <if test="shijian != null  and shijian != ''">shijian,</if>
             <if test="typeto != null  and typeto != ''">typeto,</if>
             <if test="sid != null  and sid != ''">sid,</if>
-            <if test="userid != null  and userid != ''">userid,</if>
+            <if test="userId != null  and userId != ''">user_id,</if>
             <if test="createTime != null ">create_time,</if>
             <if test="updateTime != null ">update_time,</if>
             <if test="openId != null  and openId != ''">open_id,</if>
@@ -62,7 +62,7 @@
             <if test="shijian != null  and shijian != ''">#{shijian},</if>
             <if test="typeto != null  and typeto != ''">#{typeto},</if>
             <if test="sid != null  and sid != ''">#{sid},</if>
-            <if test="userid != null  and userid != ''">#{userid},</if>
+            <if test="userId != null  and userId != ''">#{userId},</if>
             <if test="createTime != null ">#{createTime},</if>
             <if test="updateTime != null ">#{updateTime},</if>
             <if test="openId != null  and openId != ''">#{openId},</if>
@@ -78,7 +78,7 @@
             <if test="shijian != null  and shijian != ''">shijian = #{shijian},</if>
             <if test="typeto != null  and typeto != ''">typeto = #{typeto},</if>
             <if test="sid != null  and sid != ''">sid = #{sid},</if>
-            <if test="userid != null  and userid != ''">userid = #{userid},</if>
+            <if test="userId != null  and userId != ''">user_id = #{userId},</if>
             <if test="createTime != null ">create_time = #{createTime},</if>
             <if test="updateTime != null ">update_time = #{updateTime},</if>
             <if test="openId != null  and openId != ''">open_id = #{openId},</if>
