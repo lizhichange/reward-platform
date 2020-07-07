@@ -21,14 +21,14 @@
         <result property="isAllow" column="is_allow"/>
         <result property="click" column="click"/>
         <result property="isPreview" column="is_preview"/>
-        <result property="shorturl" column="shorturl"/>
+        <result property="shortUrl" column="short_url"/>
         <result property="categoryId" column="category_id"/>
         <result property="createTime" column="create_time"/>
     </resultMap>
 
     <sql id="selectVideoVo">
         select id, money, sj, cs, url, user_id, name, zykey, shijian, lx, zt, logo, is_lei, is_allow, click, is_preview,
-        shorturl, category_id, create_time from video
+        short_url, category_id, create_time from video
     </sql>
 
     <select id="selectVideoList" parameterType="Video" resultMap="VideoResult">
@@ -49,7 +49,7 @@
             <if test="isAllow != null ">and is_allow = #{isAllow}</if>
             <if test="click != null ">and click = #{click}</if>
             <if test="isPreview != null ">and is_preview = #{isPreview}</if>
-            <if test="shorturl != null  and shorturl != ''">and shorturl = #{shorturl}</if>
+            <if test="shortUrl != null  and shortUrl != ''">and short_url = #{shortUrl}</if>
             <if test="categoryId != null ">and category_id = #{categoryId}</if>
             <if test="id != null ">and id = #{id}</if>
             <if test="userIdList!= null  and userIdList.size() > 0">
@@ -84,7 +84,7 @@
             <if test="isAllow != null ">is_allow,</if>
             <if test="click != null ">click,</if>
             <if test="isPreview != null ">is_preview,</if>
-            <if test="shorturl != null  and shorturl != ''">shorturl,</if>
+            <if test="shortUrl != null  and shortUrl != ''">short_url,</if>
             <if test="categoryId != null ">category_id,</if>
             <if test="createTime != null ">create_time,</if>
         </trim>
@@ -104,7 +104,7 @@
             <if test="isAllow != null ">#{isAllow},</if>
             <if test="click != null ">#{click},</if>
             <if test="isPreview != null ">#{isPreview},</if>
-            <if test="shorturl != null  and shorturl != ''">#{shorturl},</if>
+            <if test="shortUrl != null  and shortUrl != ''">#{shortUrl},</if>
             <if test="categoryId != null ">#{categoryId},</if>
             <if test="createTime != null ">#{createTime},</if>
         </trim>
@@ -128,7 +128,7 @@
             <if test="isAllow != null ">is_allow = #{isAllow},</if>
             <if test="click != null ">click = #{click},</if>
             <if test="isPreview != null ">is_preview = #{isPreview},</if>
-            <if test="shorturl != null  and shorturl != ''">shorturl = #{shorturl},</if>
+            <if test="shortUrl != null  and shortUrl != ''">short_url = #{shortUrl},</if>
             <if test="categoryId != null ">category_id = #{categoryId},</if>
             <if test="createTime != null ">create_time = #{createTime},</if>
         </trim>
