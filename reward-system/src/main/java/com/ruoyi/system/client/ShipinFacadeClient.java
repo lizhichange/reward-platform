@@ -1,6 +1,6 @@
 package com.ruoyi.system.client;
 
-import com.ruoyi.reward.facade.dto.ShipinDTO;
+import com.ruoyi.reward.facade.dto.VideoDTO;
 
 import java.util.List;
 
@@ -8,6 +8,6 @@ import java.util.List;
  * @author sunflower
  */
 public interface ShipinFacadeClient {
-    List<ShipinDTO> selectShipinDTOList(ShipinDTO item);
+    List<VideoDTO> selectShipinDTOList(VideoDTO item);
 
 }

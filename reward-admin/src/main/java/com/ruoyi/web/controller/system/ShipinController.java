@@ -16,7 +16,7 @@ import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.reward.domain.Video;
 import com.ruoyi.reward.domain.SysCategory;
 import com.ruoyi.reward.facade.api.ShipinFacade;
-import com.ruoyi.reward.facade.dto.ShipinDTO;
+import com.ruoyi.reward.facade.dto.VideoDTO;
 import com.ruoyi.reward.facade.dto.SysCategoryDTO;
 import com.ruoyi.reward.facade.enums.OrderStatusType;
 import com.ruoyi.reward.service.ShipinService;
@@ -187,7 +187,7 @@ public class ShipinController extends BaseController {
     @Log(title = "公共片库", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(ShipinDTO shipin) {
+    public AjaxResult addSave(VideoDTO shipin) {
         String loginName = ShiroUtils.getLoginName();
         shipin.setUserId(loginName);
         shipin.setClick(0);
@@ -327,7 +327,7 @@ public class ShipinController extends BaseController {
     @GetMapping("/edit/{id}")
     @RequiresRoles("admin")
     public String edit(@PathVariable("id") Long id, ModelMap mmap) {
-        ShipinDTO shipin = shipinFacade.selectShipinDTOById(id);
+        VideoDTO shipin = shipinFacade.selectShipinDTOById(id);
         String money = shipin.getMoney();
         String[] split = money.split("-");
         shipin.setStartMoney(split[0]);
@@ -350,7 +350,7 @@ public class ShipinController extends BaseController {
     @Log(title = "公共片库", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(ShipinDTO shipin) {
+    public AjaxResult editSave(VideoDTO shipin) {
         shipin.setMoney(shipin.getStartMoney() + "-" + shipin.getEndMoney());
         return toAjax(shipinFacade.updateShipinDTO(shipin));
     }
@@ -399,7 +399,7 @@ public class ShipinController extends BaseController {
     }
 
     private boolean xxx(String s) {
-        ShipinDTO item = new ShipinDTO();
+        VideoDTO item = new VideoDTO();
         int id = Integer.parseInt(s);
         item.setId(id);
         item.setUserId(ShiroUtils.getLoginName());

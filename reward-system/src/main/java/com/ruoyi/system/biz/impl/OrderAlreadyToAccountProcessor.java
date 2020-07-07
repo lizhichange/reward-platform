@@ -1,6 +1,6 @@
 package com.ruoyi.system.biz.impl;
 
-import com.ruoyi.reward.facade.dto.ShipinDTO;
+import com.ruoyi.reward.facade.dto.VideoDTO;
 import com.ruoyi.reward.facade.dto.SysOrderDTO;
 import com.ruoyi.reward.facade.enums.AccountOptType;
 import com.ruoyi.reward.facade.enums.AccountType;
@@ -127,12 +127,12 @@ public class OrderAlreadyToAccountProcessor extends AbstractOrderStatusProcessor
         log.info("execute.orderInfo:{}", orderInfo);
         Integer goodsId = orderInfo.getGoodsId();
         if (goodsId != null) {
-            ShipinDTO dto = new ShipinDTO();
+            VideoDTO dto = new VideoDTO();
             dto.setId(goodsId);
-            List<ShipinDTO> dtoList = shipinFacadeClient.selectShipinDTOList(dto);
+            List<VideoDTO> dtoList = shipinFacadeClient.selectShipinDTOList(dto);
             if (!CollectionUtils.isEmpty(dtoList)) {
-                Optional<ShipinDTO> first = dtoList.stream().findFirst();
-                ShipinDTO shipinDTO = first.get();
+                Optional<VideoDTO> first = dtoList.stream().findFirst();
+                VideoDTO videoDTO = first.get();
                 //佣金配置 百分比10
                 Integer snapshot = 10;
                 //sys.author.rebate
@@ -145,7 +145,7 @@ public class OrderAlreadyToAccountProcessor extends AbstractOrderStatusProcessor
                 log.info("配置用户百分比:{},订单金额:{}", snapshot, promotionAmount);
                 Long amount = (long) ((promotionAmount * snapshot) / 100);
                 log.info("预计返利视频作者金额:{}", amount);
-                addMoneyToBalance(orderInfo.getOrderId(), amount, shipinDTO.getUserId(), "返利", ORDER_AUTHOR_REBATE.getCode(),
+                addMoneyToBalance(orderInfo.getOrderId(), amount, videoDTO.getUserId(), "返利", ORDER_AUTHOR_REBATE.getCode(),
                         AccountType.PROMOTION_MERCHANT.getCode());
             }
         }

@@ -1,6 +1,6 @@
 package com.ruoyi.reward.repository;
 
-import com.ruoyi.reward.facade.dto.ShipinDTO;
+import com.ruoyi.reward.facade.dto.VideoDTO;
 
 import java.util.List;
 
@@ -9,9 +9,9 @@ import java.util.List;
  */
 public interface ShipinRepository {
 
-    List<ShipinDTO> queryPage(int start, int rows, ShipinDTO shipinDTO , String orderByClause);
+    List<VideoDTO> queryPage(int start, int rows, VideoDTO videoDTO, String orderByClause);
 
-    long count(ShipinDTO shipinDTO);
+    long count(VideoDTO videoDTO);
 
 
 }

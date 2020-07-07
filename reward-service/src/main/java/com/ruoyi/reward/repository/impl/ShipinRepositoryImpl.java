@@ -4,7 +4,7 @@ package com.ruoyi.reward.repository.impl;
 import com.ruoyi.reward.convert.ShipinConvert;
 import com.ruoyi.reward.domain.Video;
 import com.ruoyi.reward.domain.ShipinExample;
-import com.ruoyi.reward.facade.dto.ShipinDTO;
+import com.ruoyi.reward.facade.dto.VideoDTO;
 import com.ruoyi.reward.mapper.ShipinMapper;
 import com.ruoyi.reward.repository.ShipinRepository;
 import org.near.toolkit.common.StringUtil;
@@ -32,8 +32,8 @@ public class ShipinRepositoryImpl implements ShipinRepository {
      */
 
     @Override
-    public List<ShipinDTO> queryPage(int start, int rows, ShipinDTO shipinDTO, String orderByClause) {
-        ShipinExample example = getShipinExample(shipinDTO);
+    public List<VideoDTO> queryPage(int start, int rows, VideoDTO videoDTO, String orderByClause) {
+        ShipinExample example = getShipinExample(videoDTO);
         example.setOffset(start);
         example.setLimit(rows);
         if (StringUtil.isNotBlank(orderByClause)) {
@@ -45,22 +45,22 @@ public class ShipinRepositoryImpl implements ShipinRepository {
     }
 
     @Override
-    public long count(ShipinDTO shipinDTO) {
-        ShipinExample example = getShipinExample(shipinDTO);
+    public long count(VideoDTO videoDTO) {
+        ShipinExample example = getShipinExample(videoDTO);
         return shipinMapper.countByExample(example);
     }
 
-    private ShipinExample getShipinExample(ShipinDTO shipinDTO) {
+    private ShipinExample getShipinExample(VideoDTO videoDTO) {
         ShipinExample example = new ShipinExample();
         ShipinExample.Criteria criteria = example.createCriteria();
-        if (StringUtil.isNotBlank(shipinDTO.getName())) {
-            criteria.andNameLike(shipinDTO.getName());
+        if (StringUtil.isNotBlank(videoDTO.getName())) {
+            criteria.andNameLike(videoDTO.getName());
         }
-        if (shipinDTO.getCategoryId() != null) {
-            criteria.andCategoryIdEqualTo(shipinDTO.getCategoryId());
+        if (videoDTO.getCategoryId() != null) {
+            criteria.andCategoryIdEqualTo(videoDTO.getCategoryId());
         }
-        if (!CollectionUtils.isEmpty(shipinDTO.getIds())) {
-            criteria.andIdIn(shipinDTO.getIds());
+        if (!CollectionUtils.isEmpty(videoDTO.getIds())) {
+            criteria.andIdIn(videoDTO.getIds());
         }
         return example;
     }

@@ -1,9 +1,9 @@
 package com.ruoyi.web.client.impl;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.ruoyi.reward.facade.dto.VideoDTO;
 import com.ruoyi.web.client.ShipinFacadeClient;
 import com.ruoyi.reward.facade.api.ShipinFacade;
-import com.ruoyi.reward.facade.dto.ShipinDTO;
 import org.near.servicesupport.result.TPageResult;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +19,7 @@ public class ShipinFacadeClientImpl implements ShipinFacadeClient {
     ShipinFacade shipinFacade;
 
     @Override
-    public ShipinDTO selectShipinDTOById(Long id) {
+    public VideoDTO selectShipinDTOById(Long id) {
         return shipinFacade.selectShipinDTOById(id);
     }
 
@@ -29,28 +29,28 @@ public class ShipinFacadeClientImpl implements ShipinFacadeClient {
     }
 
     @Override
-    public List<ShipinDTO> selectShipinDTOList(ShipinDTO item) {
+    public List<VideoDTO> selectShipinDTOList(VideoDTO item) {
         return shipinFacade.selectShipinDTOList(item);
     }
 
     @Override
-    public int count(ShipinDTO item) {
+    public int count(VideoDTO item) {
         return shipinFacade.count(item);
     }
 
     @Override
-    public int insertShipinDTO(ShipinDTO item) {
+    public int insertShipinDTO(VideoDTO item) {
         return shipinFacade.insertShipinDTO(item);
     }
 
     @Override
-    public int updateShipinDTO(ShipinDTO item) {
+    public int updateShipinDTO(VideoDTO item) {
         return shipinFacade.updateShipinDTO(item);
     }
 
     @Override
-    public TPageResult<ShipinDTO> queryPage(int start, int rows, ShipinDTO shipinDTO, String orderByClause) {
-        return shipinFacade.queryPage(start, rows, shipinDTO, orderByClause);
+    public TPageResult<VideoDTO> queryPage(int start, int rows, VideoDTO videoDTO, String orderByClause) {
+        return shipinFacade.queryPage(start, rows, videoDTO, orderByClause);
     }
 
 

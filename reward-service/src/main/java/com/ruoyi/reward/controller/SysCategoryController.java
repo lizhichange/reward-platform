@@ -10,7 +10,7 @@ import com.ruoyi.common.utils.StringUtils;
 
 import com.ruoyi.reward.domain.SysCategory;
 import com.ruoyi.reward.facade.api.ShipinFacade;
-import com.ruoyi.reward.facade.dto.ShipinDTO;
+import com.ruoyi.reward.facade.dto.VideoDTO;
 import com.ruoyi.reward.service.SysCategoryService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -112,9 +112,9 @@ public class SysCategoryController extends BaseController {
         if (categoryService.selectDeptCount(deptId) > 0) {
             return AjaxResult.warn("存在下级栏目,不允许删除");
         }
-        ShipinDTO shipinDTO = new ShipinDTO();
-        shipinDTO.setCategoryId(Math.toIntExact(deptId));
-        List<ShipinDTO> list = shipinFacade.selectShipinDTOList(shipinDTO);
+        VideoDTO videoDTO = new VideoDTO();
+        videoDTO.setCategoryId(Math.toIntExact(deptId));
+        List<VideoDTO> list = shipinFacade.selectShipinDTOList(videoDTO);
         if (!CollectionUtils.isEmpty(list)) {
             return AjaxResult.warn("该类目关联了视频,不允许删除");
         }

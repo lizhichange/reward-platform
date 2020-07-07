@@ -1,18 +1,21 @@
 package com.ruoyi.mp.client;
 
-import com.ruoyi.reward.facade.dto.ShipinDTO;
+import com.ruoyi.reward.facade.dto.VideoDTO;
 import org.near.servicesupport.result.TPageResult;
 
 import java.util.List;
 
-public interface ShipinFacadeClient {
+/**
+ * @author sunflower
+ */
+public interface VideoFacadeClient {
     /**
      * 查询公共片库
      *
      * @param id 公共片库ID
      * @return 公共片库
      */
-    ShipinDTO selectShipinDTOById(Long id);
+    VideoDTO selectShipinDTOById(Long id);
 
     int updateClickPlus(Long id);
 
@@ -22,9 +25,9 @@ public interface ShipinFacadeClient {
      * @param item 公共片库
      * @return 公共片库集合
      */
-    List<ShipinDTO> selectShipinDTOList(ShipinDTO item);
+    List<VideoDTO> selectShipinDTOList(VideoDTO item);
 
-    int count(ShipinDTO item);
+    int count(VideoDTO item);
 
     /**
      * 新增公共片库
@@ -32,7 +35,7 @@ public interface ShipinFacadeClient {
      * @param item 公共片库
      * @return 结果
      */
-    int insertShipinDTO(ShipinDTO item);
+    int insertShipinDTO(VideoDTO item);
 
     /**
      * 修改公共片库
@@ -40,8 +43,8 @@ public interface ShipinFacadeClient {
      * @param item 公共片库
      * @return 结果
      */
-    int updateShipinDTO(ShipinDTO item);
+    int updateShipinDTO(VideoDTO item);
 
-    TPageResult<ShipinDTO> queryPage(int start, int rows, ShipinDTO shipinDTO, String orderByClause);
+    TPageResult<VideoDTO> queryPage(int start, int rows, VideoDTO videoDTO, String orderByClause);
 
 }

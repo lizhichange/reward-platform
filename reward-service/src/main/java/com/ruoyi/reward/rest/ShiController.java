@@ -1,7 +1,7 @@
 package com.ruoyi.reward.rest;
 
 import com.ruoyi.reward.facade.api.ShipinFacade;
-import com.ruoyi.reward.facade.dto.ShipinDTO;
+import com.ruoyi.reward.facade.dto.VideoDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.near.servicesupport.result.TPageResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class ShiController {
      * @return 公共片库
      */
     @PostMapping("/selectShipinDTOById")
-    ShipinDTO selectShipinDTOById(@RequestParam("id") Long id) {
+    VideoDTO selectShipinDTOById(@RequestParam("id") Long id) {
         return shipinFacade.selectShipinDTOById(id);
     }
 
@@ -42,18 +42,18 @@ public class ShiController {
      * @return 公共片库集合
      */
     @PostMapping("/selectShipinDTOList")
-    List<ShipinDTO> selectShipinDTOList(@RequestBody ShipinDTO item) {
+    List<VideoDTO> selectShipinDTOList(@RequestBody VideoDTO item) {
         return shipinFacade.selectShipinDTOList(item);
     }
 
     @PostMapping("/count")
-    int count(@RequestBody ShipinDTO item) {
+    int count(@RequestBody VideoDTO item) {
         return shipinFacade.count(item);
 
     }
 
     @PostMapping("/insertShipinDTO")
-    int insertShipinDTO(@RequestBody ShipinDTO item) {
+    int insertShipinDTO(@RequestBody VideoDTO item) {
         return shipinFacade.insertShipinDTO(item);
     }
 
@@ -64,18 +64,18 @@ public class ShiController {
      * @return 结果
      */
     @PostMapping("/updateShipinDTO")
-    int updateShipinDTO(@RequestBody ShipinDTO item) {
+    int updateShipinDTO(@RequestBody VideoDTO item) {
         return shipinFacade.updateShipinDTO(item);
 
     }
 
     @PostMapping("/queryPage")
-    TPageResult<ShipinDTO> queryPage(@RequestParam("start") int start,
-                                     @RequestParam("rows") int rows,
-                                     @RequestBody ShipinDTO shipinDTO,
-                                     @RequestParam("orderByClause")
+    TPageResult<VideoDTO> queryPage(@RequestParam("start") int start,
+                                    @RequestParam("rows") int rows,
+                                    @RequestBody VideoDTO videoDTO,
+                                    @RequestParam("orderByClause")
                                              String orderByClause) {
-        return shipinFacade.queryPage(start, rows, shipinDTO, orderByClause);
+        return shipinFacade.queryPage(start, rows, videoDTO, orderByClause);
     }
 
     /**

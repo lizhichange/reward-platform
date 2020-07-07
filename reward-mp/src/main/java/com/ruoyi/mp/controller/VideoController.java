@@ -1,7 +1,7 @@
 package com.ruoyi.mp.controller;
 
-import com.ruoyi.mp.client.ShipinFacadeClient;
-import com.ruoyi.reward.facade.dto.ShipinDTO;
+import com.ruoyi.mp.client.VideoFacadeClient;
+import com.ruoyi.reward.facade.dto.VideoDTO;
 import org.near.servicesupport.result.TPageResult;
 import org.near.toolkit.common.DateUtils;
 import org.near.toolkit.common.StringUtil;
@@ -31,30 +31,30 @@ public class VideoController {
 
 
     @Autowired
-    ShipinFacadeClient shipinFacadeClient;
+    VideoFacadeClient videoFacadeClient;
 
     @GetMapping("/list")
     @ResponseBody
-    public List<ShipinDTO> list(ShipinDTO shipinDTO, PageForm pageForm) {
+    public List<VideoDTO> list(VideoDTO videoDTO, PageForm pageForm) {
         int pageNum = pageForm.getPageNum();
         int pageSize = pageForm.getPageSize();
         String orderByClause = " create_time desc ";
-        TPageResult<ShipinDTO> result = shipinFacadeClient.queryPage(pageNum, pageSize, shipinDTO, orderByClause);
-        List<ShipinDTO> list = result.getValues();
+        TPageResult<VideoDTO> result = videoFacadeClient.queryPage(pageNum, pageSize, videoDTO, orderByClause);
+        List<VideoDTO> list = result.getValues();
         convert(list);
         return list;
     }
 
-    private void convert(List<ShipinDTO> list) {
+    private void convert(List<VideoDTO> list) {
         if (!CollectionUtils.isEmpty(list)) {
             Date now = new Date();
-            for (ShipinDTO dto : list) {
+            for (VideoDTO dto : list) {
                 convert(now, dto);
             }
         }
     }
 
-    private void convert(Date now, ShipinDTO dto) {
+    private void convert(Date now, VideoDTO dto) {
         Date createTime = dto.getCreateTime();
         if (createTime != null) {
             long diffDays = DateUtils.getDiffDays(now, createTime);

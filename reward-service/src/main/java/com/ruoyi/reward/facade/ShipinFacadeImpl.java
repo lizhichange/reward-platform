@@ -5,7 +5,7 @@ import com.google.common.collect.Lists;
 import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.reward.convert.ShipinConvert;
 import com.ruoyi.reward.facade.api.ShipinFacade;
-import com.ruoyi.reward.facade.dto.ShipinDTO;
+import com.ruoyi.reward.facade.dto.VideoDTO;
 
 import com.ruoyi.reward.domain.Video;
 import com.ruoyi.reward.domain.ShipinExample;
@@ -48,7 +48,7 @@ public class ShipinFacadeImpl implements ShipinFacade {
      * @return 公共片库
      */
     @Override
-    public ShipinDTO selectShipinDTOById(Long id) {
+    public VideoDTO selectShipinDTOById(Long id) {
         Video shipin = extShipinMapper.selectShipinById(id);
         return ShipinConvert.convert(shipin);
 
@@ -67,7 +67,7 @@ public class ShipinFacadeImpl implements ShipinFacade {
      * @return 公共片库
      */
     @Override
-    public List<ShipinDTO> selectShipinDTOList(ShipinDTO item) {
+    public List<VideoDTO> selectShipinDTOList(VideoDTO item) {
         Video it = new Video();
         BeanUtils.copyProperties(item, it);
         List<Video> list = extShipinMapper.selectShipinList(it);
@@ -76,7 +76,7 @@ public class ShipinFacadeImpl implements ShipinFacade {
     }
 
     @Override
-    public int count(ShipinDTO item) {
+    public int count(VideoDTO item) {
         ShipinExample example = new ShipinExample();
         ShipinExample.Criteria criteria = example.createCriteria();
         if (item.getId() != null) {
@@ -96,7 +96,7 @@ public class ShipinFacadeImpl implements ShipinFacade {
      * @return 结果
      */
     @Override
-    public int insertShipinDTO(ShipinDTO item) {
+    public int insertShipinDTO(VideoDTO item) {
         Video it = new Video();
         BeanUtils.copyProperties(item, it);
         return extShipinMapper.insertShipin(it);
@@ -109,20 +109,20 @@ public class ShipinFacadeImpl implements ShipinFacade {
      * @return 结果
      */
     @Override
-    public int updateShipinDTO(ShipinDTO item) {
+    public int updateShipinDTO(VideoDTO item) {
         Video it = new Video();
         BeanUtils.copyProperties(item, it);
         return extShipinMapper.updateShipin(it);
     }
 
     @Override
-    public TPageResult<ShipinDTO> queryPage(int start, int rows, ShipinDTO shipinDTO, String orderByClause) {
+    public TPageResult<VideoDTO> queryPage(int start, int rows, VideoDTO videoDTO, String orderByClause) {
         int i = start > 1 ? (start - 1) * rows : 0;
-        List<ShipinDTO> list = shipinRepository.queryPage(i, rows, shipinDTO, orderByClause);
+        List<VideoDTO> list = shipinRepository.queryPage(i, rows, videoDTO, orderByClause);
         if (CollectionUtils.isEmpty(list)) {
             return ResultBuilder.succTPage(Lists.newArrayList(), start, rows, 0);
         }
-        long count = shipinRepository.count(shipinDTO);
+        long count = shipinRepository.count(videoDTO);
         return ResultBuilder.succTPage(list, start, rows, (int) count);
     }
 

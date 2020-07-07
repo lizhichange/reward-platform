@@ -1,6 +1,6 @@
 package com.ruoyi.web.feign;
 
-import com.ruoyi.reward.facade.dto.ShipinDTO;
+import com.ruoyi.reward.facade.dto.VideoDTO;
 import feign.codec.Encoder;
 import feign.form.spring.SpringFormEncoder;
 import org.near.servicesupport.result.TPageResult;
@@ -28,7 +28,7 @@ public interface ShipinFacadeFeign {
      * @return 公共片库
      */
     @PostMapping("/selectShipinDTOById")
-    ShipinDTO selectShipinDTOById(@RequestParam("id") Long id);
+    VideoDTO selectShipinDTOById(@RequestParam("id") Long id);
 
     @PostMapping("/updateClickPlus")
     int updateClickPlus(@RequestParam("id") Long id);
@@ -40,13 +40,13 @@ public interface ShipinFacadeFeign {
      * @return 公共片库集合
      */
     @PostMapping("/selectShipinDTOList")
-    List<ShipinDTO> selectShipinDTOList(@RequestBody ShipinDTO item);
+    List<VideoDTO> selectShipinDTOList(@RequestBody VideoDTO item);
 
     @PostMapping("/count")
-    int count(@RequestBody ShipinDTO item);
+    int count(@RequestBody VideoDTO item);
 
     @PostMapping("/insertShipinDTO")
-    int insertShipinDTO(@RequestBody ShipinDTO item);
+    int insertShipinDTO(@RequestBody VideoDTO item);
 
     /**
      * 修改公共片库
@@ -55,13 +55,13 @@ public interface ShipinFacadeFeign {
      * @return 结果
      */
     @PostMapping("/updateShipinDTO")
-    int updateShipinDTO(@RequestBody ShipinDTO item);
+    int updateShipinDTO(@RequestBody VideoDTO item);
 
     @PostMapping("/queryPage")
-    TPageResult<ShipinDTO> queryPage(@RequestParam("start") int start,
-                                     @RequestParam("rows") int rows,
-                                     @RequestBody final ShipinDTO shipinDTO,
-                                     @RequestParam("orderByClause")
+    TPageResult<VideoDTO> queryPage(@RequestParam("start") int start,
+                                    @RequestParam("rows") int rows,
+                                    @RequestBody final VideoDTO videoDTO,
+                                    @RequestParam("orderByClause")
                                              String orderByClause);
 
     /**

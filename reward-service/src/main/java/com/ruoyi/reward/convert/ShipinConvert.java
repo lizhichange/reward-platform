@@ -1,7 +1,7 @@
 package com.ruoyi.reward.convert;
 
 import com.ruoyi.reward.domain.Video;
-import com.ruoyi.reward.facade.dto.ShipinDTO;
+import com.ruoyi.reward.facade.dto.VideoDTO;
 import org.springframework.beans.BeanUtils;
 
 /**
@@ -9,11 +9,11 @@ import org.springframework.beans.BeanUtils;
  */
 public class ShipinConvert {
 
-    public static ShipinDTO convert(Video shipin) {
+    public static VideoDTO convert(Video shipin) {
         if (shipin == null) {
             return null;
         }
-        ShipinDTO dto = new ShipinDTO();
+        VideoDTO dto = new VideoDTO();
         BeanUtils.copyProperties(shipin, dto);
         return dto;
     }
