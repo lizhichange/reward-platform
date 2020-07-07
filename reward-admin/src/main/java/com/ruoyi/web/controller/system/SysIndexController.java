@@ -1,5 +1,6 @@
 package com.ruoyi.web.controller.system;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.github.pagehelper.PageHelper;
 import com.ruoyi.common.config.Global;
 import com.ruoyi.common.core.controller.BaseController;
@@ -140,6 +141,7 @@ public class SysIndexController extends BaseController {
 
     @PostMapping("/system/build")
     @ResponseBody
+    @SentinelResource(value = "webLogin-build", blockHandler = "exceptionHandler", fallback = "fallback")
     @com.ruoyi.common.annotation.Log(title = "生成推广链接", businessType = BusinessType.OTHER)
     public AjaxResult build(HttpServletRequest request) {
         String loginName = ShiroUtils.getLoginName();

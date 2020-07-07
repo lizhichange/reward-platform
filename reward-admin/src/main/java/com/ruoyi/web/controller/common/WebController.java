@@ -1,6 +1,5 @@
 package com.ruoyi.web.controller.common;
 
-import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
@@ -183,40 +182,8 @@ public class WebController extends BaseController {
     }
 
 
-    @PostMapping("/build")
-    @ResponseBody
-    @SentinelResource(value = "webLogin-build", blockHandler = "exceptionHandler", fallback = "fallback")
-    @com.ruoyi.common.annotation.Log(title = "生成推广链接", businessType = BusinessType.OTHER)
-    public AjaxResult build(HttpServletRequest request) {
-        String loginName = ShiroUtils.getLoginName();
-        String wxAuthUrl = sysConfigService.selectConfigByKey("wxAuthUrl");
-        String doMain = DoMainUtil.getDoMain(wxAuthUrl);
-        String longUrl = "http://" + doMain + "/?userid=" + loginName;
-        SysShort sysShort = new SysShort();
-        sysShort.setShortKey(loginName);
-        List<SysShort> sysShorts = sysShortService.selectSysShortList(sysShort);
-        if (CollectionUtils.isEmpty(sysShorts)) {
-            sysShort.setShortStatus(ShortStatus.OK.getCode());
-            sysShort.setLongUrl(longUrl);
-            String shortUrl = getShortFactory.getShortUrl(longUrl);
-            sysShort.setShortUrl(shortUrl);
-            int i = sysShortService.insertSysShort(sysShort);
-            if (i > 0) {
-                return AjaxResult.success("success", sysShort);
-            }
-            return AjaxResult.error("系统异常");
-        } else {
-            SysShort aShort = sysShorts.get(0);
-            aShort.setLongUrl(longUrl);
-            String shortUrl = getShortFactory.getShortUrl(longUrl);
-            aShort.setShortUrl(shortUrl);
-            int i = sysShortService.updateSysShort(aShort);
-            if (i > 0) {
-                return AjaxResult.success("success", aShort);
-            }
-            return AjaxResult.error("系统异常");
-        }
-    }
+
+
 
     public static String getPhoneNum() {
         //给予真实的初始号段，号段是在百度上面查找的真实号段
