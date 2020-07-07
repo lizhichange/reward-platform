@@ -13,7 +13,7 @@ public class Ts implements Serializable {
     * ts.id
      * 主键
      *
-     * @mbg.generated 2020-04-06 23:17:02
+     * @mbg.generated 2020-07-07 11:08:17
      */
     private Integer id;
 
@@ -23,7 +23,7 @@ public class Ts implements Serializable {
     * ts.ip
      * ip地址
      *
-     * @mbg.generated 2020-04-06 23:17:02
+     * @mbg.generated 2020-07-07 11:08:17
      */
     private String ip;
 
@@ -33,7 +33,7 @@ public class Ts implements Serializable {
     * ts.zt
      * 状态
      *
-     * @mbg.generated 2020-04-06 23:17:02
+     * @mbg.generated 2020-07-07 11:08:17
      */
     private String zt;
 
@@ -43,7 +43,7 @@ public class Ts implements Serializable {
     * ts.neirong
      * 内容
      *
-     * @mbg.generated 2020-04-06 23:17:02
+     * @mbg.generated 2020-07-07 11:08:17
      */
     private String neirong;
 
@@ -53,7 +53,7 @@ public class Ts implements Serializable {
     * ts.shijian
      * 时间
      *
-     * @mbg.generated 2020-04-06 23:17:02
+     * @mbg.generated 2020-07-07 11:08:17
      */
     private String shijian;
 
@@ -63,7 +63,7 @@ public class Ts implements Serializable {
     * ts.typeto
     
      *
-     * @mbg.generated 2020-04-06 23:17:02
+     * @mbg.generated 2020-07-07 11:08:17
      */
     private String typeto;
 
@@ -73,19 +73,19 @@ public class Ts implements Serializable {
     * ts.sid
     
      *
-     * @mbg.generated 2020-04-06 23:17:02
+     * @mbg.generated 2020-07-07 11:08:17
      */
     private String sid;
 
     /**
     *
     *
-    * ts.userid
+    * ts.user_id
     
      *
-     * @mbg.generated 2020-04-06 23:17:02
+     * @mbg.generated 2020-07-07 11:08:17
      */
-    private String userid;
+    private String userId;
 
     /**
     *
@@ -93,7 +93,7 @@ public class Ts implements Serializable {
     * ts.create_time
      * 创建时间
      *
-     * @mbg.generated 2020-04-06 23:17:02
+     * @mbg.generated 2020-07-07 11:08:17
      */
     private Date createTime;
 
@@ -103,7 +103,7 @@ public class Ts implements Serializable {
     * ts.update_time
      * 修改时间
      *
-     * @mbg.generated 2020-04-06 23:17:02
+     * @mbg.generated 2020-07-07 11:08:17
      */
     private Date updateTime;
 
@@ -113,7 +113,7 @@ public class Ts implements Serializable {
     * ts.open_id
     
      *
-     * @mbg.generated 2020-04-06 23:17:02
+     * @mbg.generated 2020-07-07 11:08:17
      */
     private String openId;
 
@@ -132,7 +132,7 @@ public class Ts implements Serializable {
         sb.append(", shijian=").append(shijian);
         sb.append(", typeto=").append(typeto);
         sb.append(", sid=").append(sid);
-        sb.append(", userid=").append(userid);
+        sb.append(", userId=").append(userId);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", openId=").append(openId);
