@@ -160,7 +160,6 @@ public class SysIndexController extends BaseController {
             if (i > 0) {
                 return AjaxResult.success("success", sysShort);
             }
-            return AjaxResult.error("系统异常");
         } else {
             SysShort aShort = sysShorts.get(0);
             aShort.setLongUrl(longUrl);
@@ -170,7 +169,7 @@ public class SysIndexController extends BaseController {
             if (i > 0) {
                 return AjaxResult.success("success", aShort);
             }
-            return AjaxResult.error("系统异常");
         }
+        return AjaxResult.error("系统异常");
     }
 }

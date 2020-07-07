@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+/**
+ * @author sunflower
+ */
 @Component
 @Slf4j
 public class GetShortFactory {
@@ -16,7 +19,7 @@ public class GetShortFactory {
 
     public String getShortUrl(String url) {
         String key = "5ef5cc72b1b63c076966a527@e6f2365e4b7f60c44415d6db919097cb";
-        String str = "http://suo.im/api.htm?format=json&url=" + url + "&key=" + key + "&expireDate=2020-10-31";
+        String str = "http://suo.im/api.htm?format=json&url=" + url + "&key=" + key + "&expireDate=2020-12-31";
         String shortUrl = restTemplate.getForObject(str, String.class);
         log.info("shortUrl:{}", shortUrl);
         if (StringUtil.isNotBlank(shortUrl)) {
@@ -30,6 +33,7 @@ public class GetShortFactory {
 
     static class MyResponse extends ToString {
 
+        private static final long serialVersionUID = 3882315401921271659L;
         /**
          * url : http://suo.im/abcdef
          * err :
