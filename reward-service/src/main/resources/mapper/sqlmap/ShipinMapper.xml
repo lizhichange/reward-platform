@@ -7,7 +7,7 @@
     <result column="sj" jdbcType="VARCHAR" property="sj" />
     <result column="cs" jdbcType="VARCHAR" property="cs" />
     <result column="url" jdbcType="VARCHAR" property="url" />
-    <result column="userid" jdbcType="VARCHAR" property="userid" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="zykey" jdbcType="VARCHAR" property="zykey" />
     <result column="shijian" jdbcType="VARCHAR" property="shijian" />
@@ -81,7 +81,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, money, sj, cs, url, userid, name, zykey, shijian, lx, zt, logo, is_lei, is_allow, 
+    id, money, sj, cs, url, user_id, name, zykey, shijian, lx, zt, logo, is_lei, is_allow, 
     click, is_preview, shorturl, category_id, create_time
   </sql>
   <select id="selectByExample" parameterType="com.ruoyi.reward.domain.ShipinExample" resultMap="BaseResultMap">
@@ -124,13 +124,13 @@
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.ruoyi.reward.domain.Shipin" useGeneratedKeys="true">
     insert into shipin (money, sj, cs, 
-      url, userid, name, 
+      url, user_id, name, 
       zykey, shijian, lx, 
       zt, logo, is_lei, is_allow, 
       click, is_preview, shorturl, 
       category_id, create_time)
     values (#{money,jdbcType=VARCHAR}, #{sj,jdbcType=VARCHAR}, #{cs,jdbcType=VARCHAR}, 
-      #{url,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{url,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
       #{zykey,jdbcType=VARCHAR}, #{shijian,jdbcType=VARCHAR}, #{lx,jdbcType=VARCHAR}, 
       #{zt,jdbcType=VARCHAR}, #{logo,jdbcType=VARCHAR}, #{isLei,jdbcType=BIT}, #{isAllow,jdbcType=BIT}, 
       #{click,jdbcType=INTEGER}, #{isPreview,jdbcType=BIT}, #{shorturl,jdbcType=VARCHAR}, 
@@ -151,8 +151,8 @@
       <if test="url != null">
         url,
       </if>
-      <if test="userid != null">
-        userid,
+      <if test="userId != null">
+        user_id,
       </if>
       <if test="name != null">
         name,
@@ -207,8 +207,8 @@
       <if test="url != null">
         #{url,jdbcType=VARCHAR},
       </if>
-      <if test="userid != null">
-        #{userid,jdbcType=VARCHAR},
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
       </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
@@ -275,8 +275,8 @@
       <if test="record.url != null">
         url = #{record.url,jdbcType=VARCHAR},
       </if>
-      <if test="record.userid != null">
-        userid = #{record.userid,jdbcType=VARCHAR},
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=VARCHAR},
       </if>
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
@@ -329,7 +329,7 @@
       sj = #{record.sj,jdbcType=VARCHAR},
       cs = #{record.cs,jdbcType=VARCHAR},
       url = #{record.url,jdbcType=VARCHAR},
-      userid = #{record.userid,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
       zykey = #{record.zykey,jdbcType=VARCHAR},
       shijian = #{record.shijian,jdbcType=VARCHAR},
@@ -362,8 +362,8 @@
       <if test="url != null">
         url = #{url,jdbcType=VARCHAR},
       </if>
-      <if test="userid != null">
-        userid = #{userid,jdbcType=VARCHAR},
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
       </if>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
@@ -413,7 +413,7 @@
       sj = #{sj,jdbcType=VARCHAR},
       cs = #{cs,jdbcType=VARCHAR},
       url = #{url,jdbcType=VARCHAR},
-      userid = #{userid,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
       zykey = #{zykey,jdbcType=VARCHAR},
       shijian = #{shijian,jdbcType=VARCHAR},
