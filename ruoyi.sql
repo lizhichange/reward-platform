@@ -1766,7 +1766,7 @@ CREATE TABLE `video` (
   `is_allow` tinyint(1) NOT NULL DEFAULT '1',
   `click` int(11) NOT NULL,
   `is_preview` tinyint(1) NOT NULL DEFAULT '0',
-  `shorturl` varchar(120) COLLATE utf8mb4_bin DEFAULT '' COMMENT '短链',
+  `short_url` varchar(120) COLLATE utf8mb4_bin DEFAULT '' COMMENT '短链',
   `category_id` int(11) NOT NULL COMMENT '类目id',
   `create_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
