@@ -98,7 +98,7 @@ public class ShipinController extends BaseController {
         startPage();
         boolean b = !"admin".equals(ShiroUtils.getLoginName());
         if (b) {
-            shipin.setUseridList(Lists.newArrayList("admin", ShiroUtils.getLoginName()));
+            shipin.setUserIdList(Lists.newArrayList("admin", ShiroUtils.getLoginName()));
         }
         List<Shipin> list = shipinService.selectShipinList(shipin);
         if (!CollectionUtils.isEmpty(list)) {
@@ -189,7 +189,7 @@ public class ShipinController extends BaseController {
     @ResponseBody
     public AjaxResult addSave(ShipinDTO shipin) {
         String loginName = ShiroUtils.getLoginName();
-        shipin.setUserid(loginName);
+        shipin.setUserId(loginName);
         shipin.setClick(0);
         shipin.setCreateTime(new Date());
         shipin.setMoney(shipin.getStartMoney() + "-" + shipin.getEndMoney());
@@ -402,7 +402,7 @@ public class ShipinController extends BaseController {
         ShipinDTO item = new ShipinDTO();
         int id = Integer.parseInt(s);
         item.setId(id);
-        item.setUserid(ShiroUtils.getLoginName());
+        item.setUserId(ShiroUtils.getLoginName());
         int count = shipinFacade.count(item);
         return count == 0;
     }
