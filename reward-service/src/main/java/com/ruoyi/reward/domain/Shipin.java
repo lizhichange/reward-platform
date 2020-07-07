@@ -4,14 +4,14 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 @Data
 public class Shipin implements Serializable {
+    private static final long serialVersionUID = -495973710593943252L;
     /**
      * shipin.id
      *
-     * @mbg.generated 2020-03-19 21:47:04
+     * @mbg.generated 2020-07-07 11:14:12
      */
     private Integer id;
 
@@ -19,7 +19,7 @@ public class Shipin implements Serializable {
      * shipin.money
      * 资源设置的打赏金额
      *
-     * @mbg.generated 2020-03-19 21:47:04
+     * @mbg.generated 2020-07-07 11:14:12
      */
     private String money;
 
@@ -27,7 +27,7 @@ public class Shipin implements Serializable {
      * shipin.sj
      * 选择模式 1为 开启随机金额分配
      *
-     * @mbg.generated 2020-03-19 21:47:04
+     * @mbg.generated 2020-07-07 11:14:12
      */
     private String sj;
 
@@ -35,7 +35,7 @@ public class Shipin implements Serializable {
      * shipin.cs
      * 打赏人数
      *
-     * @mbg.generated 2020-03-19 21:47:04
+     * @mbg.generated 2020-07-07 11:14:12
      */
     private String cs;
 
@@ -43,87 +43,86 @@ public class Shipin implements Serializable {
      * shipin.url
      * 打赏图片
      *
-     * @mbg.generated 2020-03-19 21:47:04
+     * @mbg.generated 2020-07-07 11:14:12
      */
     private String url;
 
     /**
-     * shipin.userid
+     * shipin.user_id
      * 用户ID
      *
-     * @mbg.generated 2020-03-19 21:47:04
+     * @mbg.generated 2020-07-07 11:14:12
      */
-    private String userid;
+    private String userId;
 
     /**
      * shipin.name
      * 资源名称
      *
-     * @mbg.generated 2020-03-19 21:47:04
+     * @mbg.generated 2020-07-07 11:14:12
      */
     private String name;
 
     /**
      * shipin.zykey
      *
-     * @mbg.generated 2020-03-19 21:47:04
+     * @mbg.generated 2020-07-07 11:14:12
      */
     private String zykey;
 
     /**
      * shipin.shijian
      *
-     * @mbg.generated 2020-03-19 21:47:04
+     * @mbg.generated 2020-07-07 11:14:12
      */
     private String shijian;
 
     /**
      * shipin.lx
      *
-     * @mbg.generated 2020-03-19 21:47:04
+     * @mbg.generated 2020-07-07 11:14:12
      */
     private String lx;
 
     /**
      * shipin.zt
      *
-     * @mbg.generated 2020-03-19 21:47:04
+     * @mbg.generated 2020-07-07 11:14:12
      */
     private String zt;
 
     /**
      * shipin.logo
      *
-     * @mbg.generated 2020-03-19 21:47:04
+     * @mbg.generated 2020-07-07 11:14:12
      */
     private String logo;
 
     /**
      * shipin.is_lei
      *
-     * @mbg.generated 2020-03-19 21:47:04
+     * @mbg.generated 2020-07-07 11:14:12
      */
     private Boolean isLei;
 
     /**
      * shipin.is_allow
      *
-     * @mbg.generated 2020-03-19 21:47:04
+     * @mbg.generated 2020-07-07 11:14:12
      */
     private Boolean isAllow;
 
-    private List<String> useridList;
     /**
      * shipin.click
      *
-     * @mbg.generated 2020-03-19 21:47:04
+     * @mbg.generated 2020-07-07 11:14:12
      */
     private Integer click;
 
     /**
      * shipin.is_preview
      *
-     * @mbg.generated 2020-03-19 21:47:04
+     * @mbg.generated 2020-07-07 11:14:12
      */
     private Boolean isPreview;
 
@@ -131,7 +130,7 @@ public class Shipin implements Serializable {
      * shipin.shorturl
      * 短链
      *
-     * @mbg.generated 2020-03-19 21:47:04
+     * @mbg.generated 2020-07-07 11:14:12
      */
     private String shorturl;
 
@@ -139,18 +138,16 @@ public class Shipin implements Serializable {
      * shipin.category_id
      * 类目id
      *
-     * @mbg.generated 2020-03-19 21:47:04
+     * @mbg.generated 2020-07-07 11:14:12
      */
     private Integer categoryId;
 
     /**
      * shipin.create_time
      *
-     * @mbg.generated 2020-03-19 21:47:04
+     * @mbg.generated 2020-07-07 11:14:12
      */
     private Date createTime;
-
-    private static final long serialVersionUID = 1L;
 
 
     // 视图1
@@ -161,7 +158,6 @@ public class Shipin implements Serializable {
     // 视图2 继承视图1
     public interface TwoView extends OneView {
     }
-
 
 
     private String privateMoney;
@@ -177,7 +173,7 @@ public class Shipin implements Serializable {
         sb.append(", sj=").append(sj);
         sb.append(", cs=").append(cs);
         sb.append(", url=").append(url);
-        sb.append(", userid=").append(userid);
+        sb.append(", userId=").append(userId);
         sb.append(", name=").append(name);
         sb.append(", zykey=").append(zykey);
         sb.append(", shijian=").append(shijian);
