@@ -11,6 +11,8 @@ import java.util.List;
  */
 @Data
 public class Video implements Serializable {
+
+
     private static final long serialVersionUID = -495973710593943252L;
     /**
      * shipin.id
@@ -196,5 +198,173 @@ public class Video implements Serializable {
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getMoney() {
+        return money;
+    }
+
+    public void setMoney(String money) {
+        this.money = money;
+    }
+
+    public String getSj() {
+        return sj;
+    }
+
+    public void setSj(String sj) {
+        this.sj = sj;
+    }
+
+    public String getCs() {
+        return cs;
+    }
+
+    public void setCs(String cs) {
+        this.cs = cs;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getZykey() {
+        return zykey;
+    }
+
+    public void setZykey(String zykey) {
+        this.zykey = zykey;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
+    public String getLx() {
+        return lx;
+    }
+
+    public void setLx(String lx) {
+        this.lx = lx;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
+
+    public Boolean getLei() {
+        return isLei;
+    }
+
+    public void setLei(Boolean lei) {
+        isLei = lei;
+    }
+
+    public Boolean getAllow() {
+        return isAllow;
+    }
+
+    public void setAllow(Boolean allow) {
+        isAllow = allow;
+    }
+
+    public Integer getClick() {
+        return click;
+    }
+
+    public void setClick(Integer click) {
+        this.click = click;
+    }
+
+    public Boolean getPreview() {
+        return isPreview;
+    }
+
+    public void setPreview(Boolean preview) {
+        isPreview = preview;
+    }
+
+    public String getShortUrl() {
+        return shortUrl;
+    }
+
+    public void setShortUrl(String shortUrl) {
+        this.shortUrl = shortUrl;
+    }
+
+    public Integer getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getPrivateMoney() {
+        return privateMoney;
+    }
+
+    public void setPrivateMoney(String privateMoney) {
+        this.privateMoney = privateMoney;
+    }
+
+    public List<String> getUserIdList() {
+        return userIdList;
+    }
+
+    public void setUserIdList(List<String> userIdList) {
+        this.userIdList = userIdList;
     }
 }

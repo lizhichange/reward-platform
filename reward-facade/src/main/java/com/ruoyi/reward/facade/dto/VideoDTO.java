@@ -16,7 +16,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-
 public class VideoDTO implements Serializable {
     private static final long serialVersionUID = 6410040127704981572L;
     /**
