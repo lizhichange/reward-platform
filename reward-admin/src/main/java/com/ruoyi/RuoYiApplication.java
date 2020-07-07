@@ -42,7 +42,7 @@ public class RuoYiApplication {
                 newShi.setSj(shipin.getSj());
                 newShi.setCs(shipin.getCs());
                 newShi.setUrl(shipin.getUrl());
-                newShi.setUserid(shipin.getUserid());
+                newShi.setUserId(shipin.getUserId());
                 newShi.setName(shipin.getName());
                 newShi.setZykey(shipin.getZykey());
                 newShi.setShijian(shipin.getShijian());
