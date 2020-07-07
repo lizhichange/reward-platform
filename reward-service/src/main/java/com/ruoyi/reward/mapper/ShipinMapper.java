@@ -2,9 +2,9 @@ package com.ruoyi.reward.mapper;
 
 import com.ruoyi.reward.domain.Shipin;
 import com.ruoyi.reward.domain.ShipinExample;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 public interface ShipinMapper {
     long countByExample(ShipinExample example);
