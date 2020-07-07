@@ -25,7 +25,7 @@ public interface ExtShipinMapper {
      * @param shipin 公共片库
      * @return 公共片库集合
      */
-    public List<Shipin> selectShipinList(Shipin shipin);
+    List<Shipin> selectShipinList(Shipin shipin);
 
     /**
      * 新增公共片库
@@ -33,7 +33,7 @@ public interface ExtShipinMapper {
      * @param shipin 公共片库
      * @return 结果
      */
-    public int insertShipin(Shipin shipin);
+    int insertShipin(Shipin shipin);
 
     /**
      * 修改公共片库
@@ -41,7 +41,7 @@ public interface ExtShipinMapper {
      * @param shipin 公共片库
      * @return 结果
      */
-    public int updateShipin(Shipin shipin);
+    int updateShipin(Shipin shipin);
 
     /**
      * 删除公共片库
@@ -49,7 +49,7 @@ public interface ExtShipinMapper {
      * @param id 公共片库ID
      * @return 结果
      */
-    public int deleteShipinById(Long id);
+    int deleteShipinById(Long id);
 
     int updateClickPlus(Long id);
 
@@ -59,5 +59,5 @@ public interface ExtShipinMapper {
      * @param ids 需要删除的数据ID
      * @return 结果
      */
-    public int deleteShipinByIds(String[] ids);
+    int deleteShipinByIds(String[] ids);
 }
