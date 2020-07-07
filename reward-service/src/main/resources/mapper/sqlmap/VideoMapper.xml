@@ -12,7 +12,7 @@
         <result column="zykey" jdbcType="VARCHAR" property="zykey"/>
         <result column="duration" jdbcType="VARCHAR" property="duration"/>
         <result column="lx" jdbcType="VARCHAR" property="lx"/>
-        <result column="zt" jdbcType="VARCHAR" property="zt"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
         <result column="logo" jdbcType="VARCHAR" property="logo"/>
         <result column="is_lei" jdbcType="BIT" property="isLei"/>
         <result column="is_allow" jdbcType="BIT" property="isAllow"/>
@@ -83,7 +83,7 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-        id, money, sj, cs, url, user_id, name, zykey, duration, lx, zt, logo, is_lei, is_allow,
+        id, money, sj, cs, url, user_id, name, zykey, duration, lx, status, logo, is_lei, is_allow,
         click, is_preview, short_url, category_id, create_time
     </sql>
     <select id="selectByExample" parameterType="com.ruoyi.reward.domain.VideoExample" resultMap="BaseResultMap">
@@ -129,13 +129,13 @@
         insert into video (money, sj, cs,
         url, user_id, name,
         zykey, duration, lx,
-        zt, logo, is_lei, is_allow,
+        status, logo, is_lei, is_allow,
         click, is_preview, short_url,
         category_id, create_time)
         values (#{money,jdbcType=VARCHAR}, #{sj,jdbcType=VARCHAR}, #{cs,jdbcType=VARCHAR},
         #{url,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
         #{zykey,jdbcType=VARCHAR}, #{duration,jdbcType=VARCHAR}, #{lx,jdbcType=VARCHAR},
-        #{zt,jdbcType=VARCHAR}, #{logo,jdbcType=VARCHAR}, #{isLei,jdbcType=BIT}, #{isAllow,jdbcType=BIT},
+        #{status,jdbcType=VARCHAR}, #{logo,jdbcType=VARCHAR}, #{isLei,jdbcType=BIT}, #{isAllow,jdbcType=BIT},
         #{click,jdbcType=INTEGER}, #{isPreview,jdbcType=BIT}, #{shortUrl,jdbcType=VARCHAR},
         #{categoryId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
     </insert>
@@ -170,8 +170,8 @@
             <if test="lx != null">
                 lx,
             </if>
-            <if test="zt != null">
-                zt,
+            <if test="status != null">
+                status,
             </if>
             <if test="logo != null">
                 logo,
@@ -226,8 +226,8 @@
             <if test="lx != null">
                 #{lx,jdbcType=VARCHAR},
             </if>
-            <if test="zt != null">
-                #{zt,jdbcType=VARCHAR},
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
             </if>
             <if test="logo != null">
                 #{logo,jdbcType=VARCHAR},
@@ -294,8 +294,8 @@
             <if test="record.lx != null">
                 lx = #{record.lx,jdbcType=VARCHAR},
             </if>
-            <if test="record.zt != null">
-                zt = #{record.zt,jdbcType=VARCHAR},
+            <if test="record.status != null">
+                status = #{record.status,jdbcType=VARCHAR},
             </if>
             <if test="record.logo != null">
                 logo = #{record.logo,jdbcType=VARCHAR},
@@ -338,7 +338,7 @@
         zykey = #{record.zykey,jdbcType=VARCHAR},
         duration = #{record.duration,jdbcType=VARCHAR},
         lx = #{record.lx,jdbcType=VARCHAR},
-        zt = #{record.zt,jdbcType=VARCHAR},
+        status = #{record.zt,jdbcType=VARCHAR},
         logo = #{record.logo,jdbcType=VARCHAR},
         is_lei = #{record.isLei,jdbcType=BIT},
         is_allow = #{record.isAllow,jdbcType=BIT},

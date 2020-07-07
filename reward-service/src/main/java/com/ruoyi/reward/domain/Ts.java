@@ -5,12 +5,13 @@ import lombok.Data;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * @author sunflower
+ */
 @Data
 public class Ts implements Serializable {
     /**
-    *
-    *
-    * ts.id
+     * ts.id
      * 主键
      *
      * @mbg.generated 2020-07-07 11:08:17
@@ -18,9 +19,7 @@ public class Ts implements Serializable {
     private Integer id;
 
     /**
-    *
-    *
-    * ts.ip
+     * ts.ip
      * ip地址
      *
      * @mbg.generated 2020-07-07 11:08:17
@@ -28,19 +27,15 @@ public class Ts implements Serializable {
     private String ip;
 
     /**
-    *
-    *
-    * ts.zt
+     * ts.status
      * 状态
      *
      * @mbg.generated 2020-07-07 11:08:17
      */
-    private String zt;
+    private String status;
 
     /**
-    *
-    *
-    * ts.content
+     * ts.content
      * 内容
      *
      * @mbg.generated 2020-07-07 11:08:17
@@ -48,9 +43,7 @@ public class Ts implements Serializable {
     private String content;
 
     /**
-    *
-    *
-    * ts.duration
+     * ts.duration
      * 时间
      *
      * @mbg.generated 2020-07-07 11:08:17
@@ -58,39 +51,28 @@ public class Ts implements Serializable {
     private String duration;
 
     /**
-    *
-    *
-    * ts.typeto
-    
+     * ts.typeto
      *
      * @mbg.generated 2020-07-07 11:08:17
      */
     private String typeto;
 
     /**
-    *
-    *
-    * ts.sid
-    
+     * ts.sid
      *
      * @mbg.generated 2020-07-07 11:08:17
      */
     private String sid;
 
     /**
-    *
-    *
-    * ts.user_id
-    
+     * ts.user_id
      *
      * @mbg.generated 2020-07-07 11:08:17
      */
     private String userId;
 
     /**
-    *
-    *
-    * ts.create_time
+     * ts.create_time
      * 创建时间
      *
      * @mbg.generated 2020-07-07 11:08:17
@@ -98,9 +80,7 @@ public class Ts implements Serializable {
     private Date createTime;
 
     /**
-    *
-    *
-    * ts.update_time
+     * ts.update_time
      * 修改时间
      *
      * @mbg.generated 2020-07-07 11:08:17
@@ -108,10 +88,7 @@ public class Ts implements Serializable {
     private Date updateTime;
 
     /**
-    *
-    *
-    * ts.open_id
-    
+     * ts.open_id
      *
      * @mbg.generated 2020-07-07 11:08:17
      */
@@ -119,25 +96,5 @@ public class Ts implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", ip=").append(ip);
-        sb.append(", zt=").append(zt);
-        sb.append(", content=").append(content);
-        sb.append(", duration=").append(duration);
-        sb.append(", typeto=").append(typeto);
-        sb.append(", sid=").append(sid);
-        sb.append(", userId=").append(userId);
-        sb.append(", createTime=").append(createTime);
-        sb.append(", updateTime=").append(updateTime);
-        sb.append(", openId=").append(openId);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
-    }
+
 }

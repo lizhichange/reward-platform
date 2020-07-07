@@ -24,7 +24,7 @@ public class TsDTO extends ToString {
     /**
      * 状态
      */
-    private String zt;
+    private String status;
 
     /**
      * 内容

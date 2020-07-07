@@ -51,7 +51,7 @@ public class Yqm extends BaseEntity {
      * 状态
      */
     @Excel(name = "状态")
-    private String zt;
+    private String status;
 
     private String ztDesc;
 

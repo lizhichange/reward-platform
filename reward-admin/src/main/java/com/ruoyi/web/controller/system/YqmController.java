@@ -67,7 +67,7 @@ public class YqmController extends BaseController {
         }
         List<Yqm> list = yqmService.selectYqmList(yqm);
         for (Yqm item : list) {
-            item.setZtDesc(EnumUtil.queryByCode(item.getZt(), YqmStatusEnum.class).getDesc());
+            item.setZtDesc(EnumUtil.queryByCode(item.getStatus(), YqmStatusEnum.class).getDesc());
         }
         return getDataTable(list);
     }
@@ -114,8 +114,8 @@ public class YqmController extends BaseController {
         if (user == null) {
             return AjaxResult.error("邀请人账号信息不存在");
         }
-        yqm.setZt(YqmStatusEnum.N.getCode());
-        yqm.setShijian(DateUtils.formatNewFormat(new Date()));
+        yqm.setStatus(YqmStatusEnum.N.getCode());
+        yqm.setDuration(DateUtils.formatNewFormat(new Date()));
         return toAjax(yqmService.insertYqm(yqm));
     }
 
@@ -161,7 +161,7 @@ public class YqmController extends BaseController {
                     return error("只能删除自己添加的邀请码");
                 } else {
                     for (Yqm dto : xxx) {
-                        if (dto.getZt().equals(YqmStatusEnum.Y.getCode())) {
+                        if (dto.getStatus().equals(YqmStatusEnum.Y.getCode())) {
                             return error("邀请码已经被其他用户使用不能删除");
                         }
                     }
@@ -176,7 +176,7 @@ public class YqmController extends BaseController {
                 return error("只能删除自己添加的邀请码");
             } else {
                 for (Yqm dto : xxx) {
-                    if (dto.getZt().equals(YqmStatusEnum.Y.getCode())) {
+                    if (dto.getStatus().equals(YqmStatusEnum.Y.getCode())) {
                         return error("邀请码已经被其他用户使用不能删除");
                     }
                 }

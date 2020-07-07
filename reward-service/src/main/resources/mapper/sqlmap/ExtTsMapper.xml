@@ -7,7 +7,7 @@
     <resultMap type="Ts" id="TsResult">
         <result property="id" column="id"/>
         <result property="ip" column="ip"/>
-        <result property="zt" column="zt"/>
+        <result property="status" column="status"/>
         <result property="content" column="content"/>
         <result property="duration" column="duration"/>
         <result property="typeto" column="typeto"/>
@@ -19,14 +19,14 @@
     </resultMap>
 
     <sql id="selectTsVo">
-        select id, ip, zt, content, duration, typeto, sid, user_id, create_time, update_time, open_id from ts
+        select id, ip, status, content, duration, typeto, sid, user_id, create_time, update_time, open_id from ts
     </sql>
 
     <select id="selectTsList" parameterType="Ts" resultMap="TsResult">
         <include refid="selectTsVo"/>
         <where>
             <if test="ip != null  and ip != ''">and ip = #{ip}</if>
-            <if test="zt != null  and zt != ''">and zt = #{zt}</if>
+            <if test="status != null  and status != ''">and status = #{status}</if>
             <if test="content != null  and content != ''">and content = #{content}</if>
             <if test="duration != null  and duration != ''">and duration = #{duration}</if>
             <if test="typeto != null  and typeto != ''">and typeto = #{typeto}</if>
@@ -45,7 +45,7 @@
         insert into ts
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="ip != null  and ip != ''">ip,</if>
-            <if test="zt != null  and zt != ''">zt,</if>
+            <if test="status != null  and status != ''">status,</if>
             <if test="content != null  and content != ''">content,</if>
             <if test="duration != null  and duration != ''">duration,</if>
             <if test="typeto != null  and typeto != ''">typeto,</if>
@@ -57,7 +57,7 @@
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="ip != null  and ip != ''">#{ip},</if>
-            <if test="zt != null  and zt != ''">#{zt},</if>
+            <if test="status != null  and status != ''">#{status},</if>
             <if test="content != null  and content != ''">#{content},</if>
             <if test="duration != null  and duration != ''">#{duration},</if>
             <if test="typeto != null  and typeto != ''">#{typeto},</if>
@@ -73,7 +73,7 @@
         update ts
         <trim prefix="SET" suffixOverrides=",">
             <if test="ip != null  and ip != ''">ip = #{ip},</if>
-            <if test="zt != null  and zt != ''">zt = #{zt},</if>
+            <if test="status != null  and status != ''">status = #{status},</if>
             <if test="content != null  and content != ''">content = #{content},</if>
             <if test="duration != null  and duration != ''">duration = #{duration},</if>
             <if test="typeto != null  and typeto != ''">typeto = #{typeto},</if>

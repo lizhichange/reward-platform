@@ -255,73 +255,73 @@ public class TsExample {
             return (Criteria) this;
         }
 
-        public Criteria andZtIsNull() {
-            addCriterion("zt is null");
+        public Criteria andStatusIsNull() {
+            addCriterion("status is null");
             return (Criteria) this;
         }
 
-        public Criteria andZtIsNotNull() {
-            addCriterion("zt is not null");
+        public Criteria andStatusIsNotNull() {
+            addCriterion("status is not null");
             return (Criteria) this;
         }
 
-        public Criteria andZtEqualTo(String value) {
-            addCriterion("zt =", value, "zt");
+        public Criteria andStatusEqualTo(String value) {
+            addCriterion("status =", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andZtNotEqualTo(String value) {
-            addCriterion("zt <>", value, "zt");
+        public Criteria andStatusNotEqualTo(String value) {
+            addCriterion("status <>", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andZtGreaterThan(String value) {
-            addCriterion("zt >", value, "zt");
+        public Criteria andStatusGreaterThan(String value) {
+            addCriterion("status >", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andZtGreaterThanOrEqualTo(String value) {
-            addCriterion("zt >=", value, "zt");
+        public Criteria andStatusGreaterThanOrEqualTo(String value) {
+            addCriterion("status >=", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andZtLessThan(String value) {
-            addCriterion("zt <", value, "zt");
+        public Criteria andStatusLessThan(String value) {
+            addCriterion("status <", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andZtLessThanOrEqualTo(String value) {
-            addCriterion("zt <=", value, "zt");
+        public Criteria andStatusLessThanOrEqualTo(String value) {
+            addCriterion("status <=", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andZtLike(String value) {
-            addCriterion("zt like", value, "zt");
+        public Criteria andStatusLike(String value) {
+            addCriterion("status like", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andZtNotLike(String value) {
-            addCriterion("zt not like", value, "zt");
+        public Criteria andStatusNotLike(String value) {
+            addCriterion("status not like", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andZtIn(List<String> values) {
-            addCriterion("zt in", values, "zt");
+        public Criteria andStatusIn(List<String> values) {
+            addCriterion("status in", values, "status");
             return (Criteria) this;
         }
 
-        public Criteria andZtNotIn(List<String> values) {
-            addCriterion("zt not in", values, "zt");
+        public Criteria andStatusNotIn(List<String> values) {
+            addCriterion("status not in", values, "status");
             return (Criteria) this;
         }
 
-        public Criteria andZtBetween(String value1, String value2) {
-            addCriterion("zt between", value1, value2, "zt");
+        public Criteria andStatusBetween(String value1, String value2) {
+            addCriterion("status between", value1, value2, "status");
             return (Criteria) this;
         }
 
-        public Criteria andZtNotBetween(String value1, String value2) {
-            addCriterion("zt not between", value1, value2, "zt");
+        public Criteria andStatusNotBetween(String value1, String value2) {
+            addCriterion("status not between", value1, value2, "status");
             return (Criteria) this;
         }
 

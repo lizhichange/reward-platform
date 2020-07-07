@@ -115,7 +115,7 @@ public class WebController extends BaseController {
             return error("'" + yqm + "'邀请码不存在，注册账号失败");
         }
         Yqm dto = list.get(0);
-        if (dto.getZt().equals(YqmStatusEnum.Y.getCode())) {
+        if (dto.getStatus().equals(YqmStatusEnum.Y.getCode())) {
             return error("'" + yqm + "'邀请码已使用，注册账号失败");
         }
 
@@ -155,7 +155,7 @@ public class WebController extends BaseController {
         user.setCreateBy("admin");
         int i = userService.insertUser(user);
         if (i > 0) {
-            dto.setZt(YqmStatusEnum.Y.getCode());
+            dto.setStatus(YqmStatusEnum.Y.getCode());
             dto.setName(loginName);
             yqmService.updateYqm(dto);
             threadPoolTaskExecutor.execute(() -> {
@@ -177,9 +177,6 @@ public class WebController extends BaseController {
         }
         return toAjax(i);
     }
-
-
-
 
 
     public static String getPhoneNum() {

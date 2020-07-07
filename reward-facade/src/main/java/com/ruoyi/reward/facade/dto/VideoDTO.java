@@ -98,11 +98,11 @@ public class VideoDTO implements Serializable {
     private String lx;
 
     /**
-     * shipin.zt
+     * shipin.status
      *
      * @mbg.generated 2020-03-19 21:47:04
      */
-    private String zt;
+    private String status;
 
     /**
      * shipin.logo
@@ -184,7 +184,7 @@ public class VideoDTO implements Serializable {
         sb.append(", zykey=").append(zykey);
         sb.append(", duration=").append(duration);
         sb.append(", lx=").append(lx);
-        sb.append(", zt=").append(zt);
+        sb.append(", status=").append(status);
         sb.append(", logo=").append(logo);
         sb.append(", isLei=").append(isLei);
         sb.append(", isAllow=").append(isAllow);
