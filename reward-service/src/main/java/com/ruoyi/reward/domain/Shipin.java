@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class Shipin implements Serializable {
@@ -161,6 +162,8 @@ public class Shipin implements Serializable {
 
 
     private String privateMoney;
+
+    private List<String> userIdList;
 
     @Override
     public String toString() {
