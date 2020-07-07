@@ -7,7 +7,7 @@ import org.springframework.beans.BeanUtils;
 /**
  * @author sunflower
  */
-public class ShipinConvert {
+public class VideoConvert {
 
     public static VideoDTO convert(Video shipin) {
         if (shipin == null) {

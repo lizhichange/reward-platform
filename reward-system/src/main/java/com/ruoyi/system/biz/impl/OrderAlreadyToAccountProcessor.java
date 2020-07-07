@@ -8,7 +8,7 @@ import com.ruoyi.reward.facade.enums.OrderStatusType;
 import com.ruoyi.reward.facade.request.UserAccountOperatorRequest;
 import com.ruoyi.system.biz.AbstractOrderStatusProcessor;
 import com.ruoyi.system.biz.TakeAccountAmountManager;
-import com.ruoyi.system.client.ShipinFacadeClient;
+import com.ruoyi.system.client.VideoFacadeClient;
 import com.ruoyi.system.domain.AccountDetail;
 import com.ruoyi.system.domain.AccountDetailExample;
 import com.ruoyi.system.mapper.AccountDetailMapper;
@@ -43,7 +43,7 @@ public class OrderAlreadyToAccountProcessor extends AbstractOrderStatusProcessor
             .getLogger(OrderAlreadyToAccountProcessor.class);
 
     @Autowired
-    ShipinFacadeClient shipinFacadeClient;
+    VideoFacadeClient videoFacadeClient;
 
     /**
      * The Take account amount manager.
@@ -129,7 +129,7 @@ public class OrderAlreadyToAccountProcessor extends AbstractOrderStatusProcessor
         if (goodsId != null) {
             VideoDTO dto = new VideoDTO();
             dto.setId(goodsId);
-            List<VideoDTO> dtoList = shipinFacadeClient.selectShipinDTOList(dto);
+            List<VideoDTO> dtoList = videoFacadeClient.selectShipinDTOList(dto);
             if (!CollectionUtils.isEmpty(dtoList)) {
                 Optional<VideoDTO> first = dtoList.stream().findFirst();
                 VideoDTO videoDTO = first.get();

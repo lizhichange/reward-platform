@@ -5,7 +5,7 @@ import org.near.servicesupport.result.TPageResult;
 
 import java.util.List;
 
-public interface ShipinFacadeClient {
+public interface VideoFacadeClient {
     /**
      * 查询公共片库
      *

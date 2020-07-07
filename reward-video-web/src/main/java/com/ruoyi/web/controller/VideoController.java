@@ -62,7 +62,7 @@ public class VideoController extends BaseController {
     @Autowired
     ThreadPoolTaskExecutor threadPoolTaskExecutor;
     @Autowired
-    private ShipinFacadeClient shipinFacadeClient;
+    private VideoFacadeClient videoFacadeClient;
     @Autowired
     private SysCategoryFacadeClient sysCategoryFacadeClient;
     @Autowired
@@ -77,7 +77,7 @@ public class VideoController extends BaseController {
         log.info("userId:{}", userId);
         VideoDTO videoDTO = new VideoDTO();
         String orderByClause = " create_time desc ";
-        TPageResult<VideoDTO> result = shipinFacadeClient.queryPage(1, 12, videoDTO, orderByClause);
+        TPageResult<VideoDTO> result = videoFacadeClient.queryPage(1, 12, videoDTO, orderByClause);
         List<VideoDTO> list = result.getValues();
         convert(list);
         list.sort((o1, o2) -> o2.getCreateTime().compareTo(o1.getCreateTime()));
@@ -86,7 +86,7 @@ public class VideoController extends BaseController {
         modelmap.addAttribute("categoryId", categoryId);
         if (StringUtil.isNotBlank(shipinId)) {
             try {
-                VideoDTO dto = shipinFacadeClient.selectShipinDTOById(Long.parseLong(shipinId));
+                VideoDTO dto = videoFacadeClient.selectShipinDTOById(Long.parseLong(shipinId));
                 modelmap.addAttribute("shipin", dto);
             } catch (Exception e) {
                 log.error(e.getMessage(), e);
@@ -169,7 +169,7 @@ public class VideoController extends BaseController {
                          @RequestParam(value = "author", required = false) String author,
                          ModelMap modelmap) {
         log.info("user:{},id:{},author:{}", userId, id, author);
-        VideoDTO shipin = shipinFacadeClient.selectShipinDTOById(id);
+        VideoDTO shipin = videoFacadeClient.selectShipinDTOById(id);
         if (shipin != null) {
             convert(new Date(), shipin);
             modelmap.put("shipin", shipin);
@@ -178,11 +178,11 @@ public class VideoController extends BaseController {
                 modelmap.put("category", category);
             }
             //异步执行浏览加1
-            threadPoolTaskExecutor.execute(() -> shipinFacadeClient.updateClickPlus(shipin.getId().longValue()));
+            threadPoolTaskExecutor.execute(() -> videoFacadeClient.updateClickPlus(shipin.getId().longValue()));
         }
 
         String orderByClause = " create_time desc ";
-        TPageResult<VideoDTO> result = shipinFacadeClient.queryPage(1, 12, new VideoDTO(), orderByClause);
+        TPageResult<VideoDTO> result = videoFacadeClient.queryPage(1, 12, new VideoDTO(), orderByClause);
         List<VideoDTO> list = result.getValues();
         convert(list);
         modelmap.addAttribute("list", list);
@@ -202,7 +202,7 @@ public class VideoController extends BaseController {
         int pageNum = pageForm.getPageNum();
         int pageSize = pageForm.getPageSize();
         String orderByClause = " create_time desc ";
-        TPageResult<VideoDTO> result = shipinFacadeClient.queryPage(pageNum, pageSize, videoDTO, orderByClause);
+        TPageResult<VideoDTO> result = videoFacadeClient.queryPage(pageNum, pageSize, videoDTO, orderByClause);
         List<VideoDTO> list = result.getValues();
         convert(list);
         if (CollectionUtils.isEmpty(list)) {
@@ -237,7 +237,7 @@ public class VideoController extends BaseController {
         int pageSize = pageForm.getPageSize();
         String orderByClause = " create_time desc ";
         log.info("videoDTO:{}", videoDTO);
-        TPageResult<VideoDTO> result = shipinFacadeClient.queryPage(pageNum, pageSize, videoDTO, orderByClause);
+        TPageResult<VideoDTO> result = videoFacadeClient.queryPage(pageNum, pageSize, videoDTO, orderByClause);
         List<VideoDTO> list = result.getValues();
         convert(list);
         TableDataInfo dataTable = getDataTable(list);
@@ -266,7 +266,7 @@ public class VideoController extends BaseController {
         videoDTO.setIds(collect);
         String orderByClause = " create_time desc ";
         log.info("videoDTO:{}", videoDTO);
-        TPageResult<VideoDTO> result = shipinFacadeClient.queryPage(pageNum, pageSize, videoDTO, orderByClause);
+        TPageResult<VideoDTO> result = videoFacadeClient.queryPage(pageNum, pageSize, videoDTO, orderByClause);
         List<VideoDTO> list = result.getValues();
         convert(list);
         TableDataInfo dataTable = getDataTable(list);
@@ -292,7 +292,7 @@ public class VideoController extends BaseController {
     public AjaxResult queryOrder(VideoDTO videoDTO) {
         String openId = SessionContext.getOpenId();
         log.info("openId:{},videoDTO:{}", openId, videoDTO);
-        VideoDTO dtoById = shipinFacadeClient.selectShipinDTOById(videoDTO.getId().longValue());
+        VideoDTO dtoById = videoFacadeClient.selectShipinDTOById(videoDTO.getId().longValue());
         if (dtoById == null) {
             return AjaxResult.warn("非法请求");
         }
@@ -303,7 +303,7 @@ public class VideoController extends BaseController {
         log.info("sysOrders:{}", sysOrders);
         if (CollectionUtils.isEmpty(sysOrders)) {
             TWechatAuthDTO authDTO = userDetailFacadeClient.queryByOpenId(openId);
-            VideoDTO dto = shipinFacadeClient.selectShipinDTOById(videoDTO.getId().longValue());
+            VideoDTO dto = videoFacadeClient.selectShipinDTOById(videoDTO.getId().longValue());
             Date now = new Date();
             order.setCreateTime(now);
             order.setUpdateTime(now);

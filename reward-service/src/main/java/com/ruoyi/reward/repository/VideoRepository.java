@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * @author sunflower
  */
-public interface ShipinRepository {
+public interface VideoRepository {
 
     List<VideoDTO> queryPage(int start, int rows, VideoDTO videoDTO, String orderByClause);
 

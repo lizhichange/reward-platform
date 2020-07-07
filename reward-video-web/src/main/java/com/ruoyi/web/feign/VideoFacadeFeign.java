@@ -16,11 +16,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
+/**
+ * @author sunflower
+ */
 @FeignClient(value = "reward-service", path = "/rest/shi"
 
-        , configuration = ShipinFacadeFeign.MultipartSupportConfig.class
+        , configuration = VideoFacadeFeign.MultipartSupportConfig.class
 )
-public interface ShipinFacadeFeign {
+public interface VideoFacadeFeign {
     /**
      * 查询公共片库
      *

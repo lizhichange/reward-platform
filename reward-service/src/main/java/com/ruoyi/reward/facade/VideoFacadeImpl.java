@@ -3,7 +3,7 @@ package com.ruoyi.reward.facade;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.google.common.collect.Lists;
 import com.ruoyi.common.core.text.Convert;
-import com.ruoyi.reward.convert.ShipinConvert;
+import com.ruoyi.reward.convert.VideoConvert;
 import com.ruoyi.reward.facade.api.VideoFacade;
 import com.ruoyi.reward.facade.dto.VideoDTO;
 
@@ -11,7 +11,7 @@ import com.ruoyi.reward.domain.Video;
 import com.ruoyi.reward.domain.VideoExample;
 import com.ruoyi.reward.mapper.ExtVideoMapper;
 import com.ruoyi.reward.mapper.VideoMapper;
-import com.ruoyi.reward.repository.ShipinRepository;
+import com.ruoyi.reward.repository.VideoRepository;
 import org.near.servicesupport.result.ResultBuilder;
 import org.near.servicesupport.result.TPageResult;
 import org.near.toolkit.common.StringUtil;
@@ -37,7 +37,7 @@ public class VideoFacadeImpl implements VideoFacade {
     @Autowired
     private VideoMapper videoMapper;
     @Autowired
-    ShipinRepository shipinRepository;
+    VideoRepository videoRepository;
     @Autowired
     private ExtVideoMapper extVideoMapper;
 
@@ -50,7 +50,7 @@ public class VideoFacadeImpl implements VideoFacade {
     @Override
     public VideoDTO selectShipinDTOById(Long id) {
         Video shipin = extVideoMapper.selectShipinById(id);
-        return ShipinConvert.convert(shipin);
+        return VideoConvert.convert(shipin);
 
     }
 
@@ -71,7 +71,7 @@ public class VideoFacadeImpl implements VideoFacade {
         Video it = new Video();
         BeanUtils.copyProperties(item, it);
         List<Video> list = extVideoMapper.selectShipinList(it);
-        return list.stream().map(ShipinConvert::convert).collect(Collectors.toList());
+        return list.stream().map(VideoConvert::convert).collect(Collectors.toList());
 
     }
 
@@ -118,11 +118,11 @@ public class VideoFacadeImpl implements VideoFacade {
     @Override
     public TPageResult<VideoDTO> queryPage(int start, int rows, VideoDTO videoDTO, String orderByClause) {
         int i = start > 1 ? (start - 1) * rows : 0;
-        List<VideoDTO> list = shipinRepository.queryPage(i, rows, videoDTO, orderByClause);
+        List<VideoDTO> list = videoRepository.queryPage(i, rows, videoDTO, orderByClause);
         if (CollectionUtils.isEmpty(list)) {
             return ResultBuilder.succTPage(Lists.newArrayList(), start, rows, 0);
         }
-        long count = shipinRepository.count(videoDTO);
+        long count = videoRepository.count(videoDTO);
         return ResultBuilder.succTPage(list, start, rows, (int) count);
     }
 

@@ -1,6 +1,6 @@
 package com.ruoyi.web;
 
-import com.ruoyi.web.feign.ShipinFacadeFeign;
+import com.ruoyi.web.feign.VideoFacadeFeign;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.fileupload.disk.DiskFileItem;
@@ -26,7 +26,7 @@ import java.io.OutputStream;
 public class UploadTester {
 
     @Autowired
-    private ShipinFacadeFeign shipinFacadeFeign;
+    private VideoFacadeFeign videoFacadeFeign;
 
     @Test
     @SneakyThrows
@@ -44,7 +44,7 @@ public class UploadTester {
 
         MultipartFile multi = new CommonsMultipartFile(fileItem);
 
-        String fileName = shipinFacadeFeign.handleFileUpload(multi);
+        String fileName = videoFacadeFeign.handleFileUpload(multi);
         log.info(fileName);
     }
 }

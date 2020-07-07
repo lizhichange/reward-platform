@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * @author sunflower
  */
-public interface ShipinFacadeClient {
+public interface VideoFacadeClient {
     List<VideoDTO> selectShipinDTOList(VideoDTO item);
 
 }

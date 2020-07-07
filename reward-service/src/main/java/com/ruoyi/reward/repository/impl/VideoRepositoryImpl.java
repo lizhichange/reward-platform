@@ -1,12 +1,12 @@
 package com.ruoyi.reward.repository.impl;
 
 
-import com.ruoyi.reward.convert.ShipinConvert;
+import com.ruoyi.reward.convert.VideoConvert;
 import com.ruoyi.reward.domain.Video;
 import com.ruoyi.reward.domain.VideoExample;
 import com.ruoyi.reward.facade.dto.VideoDTO;
 import com.ruoyi.reward.mapper.VideoMapper;
-import com.ruoyi.reward.repository.ShipinRepository;
+import com.ruoyi.reward.repository.VideoRepository;
 import org.near.toolkit.common.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  * @author sunflower
  */
 @Repository
-public class ShipinRepositoryImpl implements ShipinRepository {
+public class VideoRepositoryImpl implements VideoRepository {
     @Autowired
     VideoMapper videoMapper;
 
@@ -40,7 +40,7 @@ public class ShipinRepositoryImpl implements ShipinRepository {
             example.setOrderByClause(orderByClause);
         }
         List<Video> list = videoMapper.selectByExample(example);
-        return list.stream().map(ShipinConvert::convert).collect(Collectors.toList());
+        return list.stream().map(VideoConvert::convert).collect(Collectors.toList());
 
     }
 

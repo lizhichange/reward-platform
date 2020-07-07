@@ -2,7 +2,7 @@ package com.ruoyi.web.client.impl;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.ruoyi.reward.facade.dto.VideoDTO;
-import com.ruoyi.web.client.ShipinFacadeClient;
+import com.ruoyi.web.client.VideoFacadeClient;
 import com.ruoyi.reward.facade.api.VideoFacade;
 import org.near.servicesupport.result.TPageResult;
 import org.springframework.stereotype.Component;
@@ -13,7 +13,7 @@ import java.util.List;
  * @author sunflower
  */
 @Component
-public class ShipinFacadeClientImpl implements ShipinFacadeClient {
+public class VideoFacadeClientImpl implements VideoFacadeClient {
 
     @Reference(version = "1.0.0", check = false)
     VideoFacade videoFacade;
