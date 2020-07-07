@@ -325,73 +325,73 @@ public class TsExample {
             return (Criteria) this;
         }
 
-        public Criteria andNeirongIsNull() {
-            addCriterion("neirong is null");
+        public Criteria andContentIsNull() {
+            addCriterion("content is null");
             return (Criteria) this;
         }
 
-        public Criteria andNeirongIsNotNull() {
-            addCriterion("neirong is not null");
+        public Criteria andContentIsNotNull() {
+            addCriterion("content is not null");
             return (Criteria) this;
         }
 
-        public Criteria andNeirongEqualTo(String value) {
-            addCriterion("neirong =", value, "neirong");
+        public Criteria andContentEqualTo(String value) {
+            addCriterion("content =", value, "content");
             return (Criteria) this;
         }
 
-        public Criteria andNeirongNotEqualTo(String value) {
-            addCriterion("neirong <>", value, "neirong");
+        public Criteria andContentNotEqualTo(String value) {
+            addCriterion("content <>", value, "content");
             return (Criteria) this;
         }
 
-        public Criteria andNeirongGreaterThan(String value) {
-            addCriterion("neirong >", value, "neirong");
+        public Criteria andContentGreaterThan(String value) {
+            addCriterion("content >", value, "content");
             return (Criteria) this;
         }
 
-        public Criteria andNeirongGreaterThanOrEqualTo(String value) {
-            addCriterion("neirong >=", value, "neirong");
+        public Criteria andContentGreaterThanOrEqualTo(String value) {
+            addCriterion("content >=", value, "content");
             return (Criteria) this;
         }
 
-        public Criteria andNeirongLessThan(String value) {
-            addCriterion("neirong <", value, "neirong");
+        public Criteria andContentLessThan(String value) {
+            addCriterion("content <", value, "content");
             return (Criteria) this;
         }
 
-        public Criteria andNeirongLessThanOrEqualTo(String value) {
-            addCriterion("neirong <=", value, "neirong");
+        public Criteria andContentLessThanOrEqualTo(String value) {
+            addCriterion("content <=", value, "content");
             return (Criteria) this;
         }
 
-        public Criteria andNeirongLike(String value) {
-            addCriterion("neirong like", value, "neirong");
+        public Criteria andContentLike(String value) {
+            addCriterion("content like", value, "content");
             return (Criteria) this;
         }
 
-        public Criteria andNeirongNotLike(String value) {
-            addCriterion("neirong not like", value, "neirong");
+        public Criteria andContentNotLike(String value) {
+            addCriterion("content not like", value, "content");
             return (Criteria) this;
         }
 
-        public Criteria andNeirongIn(List<String> values) {
-            addCriterion("neirong in", values, "neirong");
+        public Criteria andContentIn(List<String> values) {
+            addCriterion("content in", values, "content");
             return (Criteria) this;
         }
 
-        public Criteria andNeirongNotIn(List<String> values) {
-            addCriterion("neirong not in", values, "neirong");
+        public Criteria andContentNotIn(List<String> values) {
+            addCriterion("content not in", values, "content");
             return (Criteria) this;
         }
 
-        public Criteria andNeirongBetween(String value1, String value2) {
-            addCriterion("neirong between", value1, value2, "neirong");
+        public Criteria andContentBetween(String value1, String value2) {
+            addCriterion("content between", value1, value2, "content");
             return (Criteria) this;
         }
 
-        public Criteria andNeirongNotBetween(String value1, String value2) {
-            addCriterion("neirong not between", value1, value2, "neirong");
+        public Criteria andContentNotBetween(String value1, String value2) {
+            addCriterion("content not between", value1, value2, "content");
             return (Criteria) this;
         }
 

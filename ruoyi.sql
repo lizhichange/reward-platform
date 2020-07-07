@@ -233,7 +233,7 @@ INSERT INTO `gen_table_column` VALUES ('148', '11', 'payee_no', '收款账号', 
 INSERT INTO `gen_table_column` VALUES ('149', '12', 'id', '主键', 'int(11)', 'Long', 'id', '1', '1', null, '1', null, null, null, 'EQ', 'input', '', '1', 'admin', '2020-07-07 11:10:41', '', null);
 INSERT INTO `gen_table_column` VALUES ('150', '12', 'ip', 'ip地址', 'varchar(30)', 'String', 'ip', '0', '0', null, '1', '1', '1', '1', 'EQ', 'input', '', '2', 'admin', '2020-07-07 11:10:41', '', null);
 INSERT INTO `gen_table_column` VALUES ('151', '12', 'zt', '状态', 'varchar(10)', 'String', 'zt', '0', '0', null, '1', '1', '1', '1', 'EQ', 'input', '', '3', 'admin', '2020-07-07 11:10:41', '', null);
-INSERT INTO `gen_table_column` VALUES ('152', '12', 'neirong', '内容', 'varchar(120)', 'String', 'neirong', '0', '0', null, '1', '1', '1', '1', 'EQ', 'input', '', '4', 'admin', '2020-07-07 11:10:41', '', null);
+INSERT INTO `gen_table_column` VALUES ('152', '12', 'content', '内容', 'varchar(120)', 'String', 'content', '0', '0', null, '1', '1', '1', '1', 'EQ', 'input', '', '4', 'admin', '2020-07-07 11:10:41', '', null);
 INSERT INTO `gen_table_column` VALUES ('153', '12', 'duration', '时间', 'varchar(30)', 'String', 'duration', '0', '0', null, '1', '1', '1', '1', 'EQ', 'input', '', '5', 'admin', '2020-07-07 11:10:41', '', null);
 INSERT INTO `gen_table_column` VALUES ('154', '12', 'typeto', null, 'varchar(30)', 'String', 'typeto', '0', '0', null, '1', '1', '1', '1', 'EQ', 'input', '', '6', 'admin', '2020-07-07 11:10:41', '', null);
 INSERT INTO `gen_table_column` VALUES ('155', '12', 'sid', null, 'varchar(30)', 'String', 'sid', '0', '0', null, '1', '1', '1', '1', 'EQ', 'input', '', '7', 'admin', '2020-07-07 11:10:41', '', null);
@@ -1623,7 +1623,7 @@ CREATE TABLE `ts` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `ip` varchar(30) COLLATE utf8mb4_bin DEFAULT NULL COMMENT 'ip地址',
   `zt` varchar(10) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '状态',
-  `neirong` varchar(120) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '内容',
+  `content` varchar(120) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '内容',
   `duration` varchar(30) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '时间',
   `typeto` varchar(30) COLLATE utf8mb4_bin DEFAULT NULL,
   `sid` varchar(30) COLLATE utf8mb4_bin DEFAULT NULL,

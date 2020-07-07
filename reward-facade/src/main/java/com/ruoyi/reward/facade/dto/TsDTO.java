@@ -29,7 +29,7 @@ public class TsDTO extends ToString {
     /**
      * 内容
      */
-    private String neirong;
+    private String content;
 
     /**
      * 时间

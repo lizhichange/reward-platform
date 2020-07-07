@@ -40,12 +40,12 @@ public class Ts implements Serializable {
     /**
     *
     *
-    * ts.neirong
+    * ts.content
      * 内容
      *
      * @mbg.generated 2020-07-07 11:08:17
      */
-    private String neirong;
+    private String content;
 
     /**
     *
@@ -128,7 +128,7 @@ public class Ts implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", ip=").append(ip);
         sb.append(", zt=").append(zt);
-        sb.append(", neirong=").append(neirong);
+        sb.append(", content=").append(content);
         sb.append(", duration=").append(duration);
         sb.append(", typeto=").append(typeto);
         sb.append(", sid=").append(sid);
