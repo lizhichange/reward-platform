@@ -675,73 +675,73 @@ public class VideoExample {
             return (Criteria) this;
         }
 
-        public Criteria andShijianIsNull() {
-            addCriterion("shijian is null");
+        public Criteria andDurationIsNull() {
+            addCriterion("duration is null");
             return (Criteria) this;
         }
 
-        public Criteria andShijianIsNotNull() {
-            addCriterion("shijian is not null");
+        public Criteria andDurationIsNotNull() {
+            addCriterion("duration is not null");
             return (Criteria) this;
         }
 
-        public Criteria andShijianEqualTo(String value) {
-            addCriterion("shijian =", value, "shijian");
+        public Criteria andDurationEqualTo(String value) {
+            addCriterion("duration =", value, "duration");
             return (Criteria) this;
         }
 
-        public Criteria andShijianNotEqualTo(String value) {
-            addCriterion("shijian <>", value, "shijian");
+        public Criteria andDurationNotEqualTo(String value) {
+            addCriterion("duration <>", value, "duration");
             return (Criteria) this;
         }
 
-        public Criteria andShijianGreaterThan(String value) {
-            addCriterion("shijian >", value, "shijian");
+        public Criteria andDurationGreaterThan(String value) {
+            addCriterion("duration >", value, "duration");
             return (Criteria) this;
         }
 
-        public Criteria andShijianGreaterThanOrEqualTo(String value) {
-            addCriterion("shijian >=", value, "shijian");
+        public Criteria andDurationGreaterThanOrEqualTo(String value) {
+            addCriterion("duration >=", value, "duration");
             return (Criteria) this;
         }
 
-        public Criteria andShijianLessThan(String value) {
-            addCriterion("shijian <", value, "shijian");
+        public Criteria andDurationLessThan(String value) {
+            addCriterion("duration <", value, "duration");
             return (Criteria) this;
         }
 
-        public Criteria andShijianLessThanOrEqualTo(String value) {
-            addCriterion("shijian <=", value, "shijian");
+        public Criteria andDurationLessThanOrEqualTo(String value) {
+            addCriterion("duration <=", value, "duration");
             return (Criteria) this;
         }
 
-        public Criteria andShijianLike(String value) {
-            addCriterion("shijian like", value, "shijian");
+        public Criteria andDurationLike(String value) {
+            addCriterion("duration like", value, "duration");
             return (Criteria) this;
         }
 
-        public Criteria andShijianNotLike(String value) {
-            addCriterion("shijian not like", value, "shijian");
+        public Criteria andDurationNotLike(String value) {
+            addCriterion("duration not like", value, "duration");
             return (Criteria) this;
         }
 
-        public Criteria andShijianIn(List<String> values) {
-            addCriterion("shijian in", values, "shijian");
+        public Criteria andDurationIn(List<String> values) {
+            addCriterion("duration in", values, "duration");
             return (Criteria) this;
         }
 
-        public Criteria andShijianNotIn(List<String> values) {
-            addCriterion("shijian not in", values, "shijian");
+        public Criteria andDurationNotIn(List<String> values) {
+            addCriterion("duration not in", values, "duration");
             return (Criteria) this;
         }
 
-        public Criteria andShijianBetween(String value1, String value2) {
-            addCriterion("shijian between", value1, value2, "shijian");
+        public Criteria andDurationBetween(String value1, String value2) {
+            addCriterion("duration between", value1, value2, "duration");
             return (Criteria) this;
         }
 
-        public Criteria andShijianNotBetween(String value1, String value2) {
-            addCriterion("shijian not between", value1, value2, "shijian");
+        public Criteria andDurationNotBetween(String value1, String value2) {
+            addCriterion("duration not between", value1, value2, "duration");
             return (Criteria) this;
         }
 

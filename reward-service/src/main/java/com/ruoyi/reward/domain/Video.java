@@ -75,11 +75,11 @@ public class Video implements Serializable {
     private String zykey;
 
     /**
-     * shipin.shijian
+     * shipin.duration
      *
      * @mbg.generated 2020-07-07 11:14:12
      */
-    private String shijian;
+    private String duration;
 
     /**
      * shipin.lx
@@ -182,7 +182,7 @@ public class Video implements Serializable {
         sb.append(", userId=").append(userId);
         sb.append(", name=").append(name);
         sb.append(", zykey=").append(zykey);
-        sb.append(", shijian=").append(shijian);
+        sb.append(", duration=").append(duration);
         sb.append(", lx=").append(lx);
         sb.append(", zt=").append(zt);
         sb.append(", logo=").append(logo);

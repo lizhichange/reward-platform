@@ -47,7 +47,7 @@
             <!--     视频地址-->
             <input name="zykey" type="hidden" id="zykey" value="" th:field="*{zykey}">
             <!--     视频播放时长-->
-            <input name="shijian" type="hidden" id="shijian" th:field="*{shijian}"/>
+            <input name="duration" type="hidden" id="duration" th:field="*{duration}"/>
 
             <div class="col-sm-6">
                 <div class="form-group">
@@ -157,7 +157,7 @@
             } else if (response.code === 0) {
                 $('#shiFileName').val(response.fileName);
                 $('#zykey').val(response.url);
-                $('#shijian').val(response.duration);
+                $('#duration').val(response.duration);
             }
         }
     });

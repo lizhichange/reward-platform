@@ -38,7 +38,7 @@ public class Yqm extends BaseEntity {
      * 时间
      */
     @Excel(name = "时间")
-    private String shijian;
+    private String duration;
 
     /**
      * 使用者
@@ -87,11 +87,11 @@ public class Yqm extends BaseEntity {
     }
 
     public String getShijian() {
-        return shijian;
+        return duration;
     }
 
-    public void setShijian(String shijian) {
-        this.shijian = shijian;
+    public void setShijian(String duration) {
+        this.duration = duration;
     }
 
     public String getName() {

@@ -8,7 +8,7 @@
         <result property="id" column="id"/>
         <result property="userId" column="user_id"/>
         <result property="yqm" column="yqm"/>
-        <result property="shijian" column="shijian"/>
+        <result property="duration" column="duration"/>
         <result property="name" column="name"/>
         <result property="zt" column="zt"/>
         <result property="createTime" column="create_time"/>
@@ -16,7 +16,7 @@
     </resultMap>
 
     <sql id="selectYqmVo">
-        select id, user_id, yqm, shijian, name, zt, create_time, update_time from yqm
+        select id, user_id, yqm, duration, name, zt, create_time, update_time from yqm
     </sql>
 
     <select id="selectYqmList" parameterType="Yqm" resultMap="YqmResult">
@@ -24,7 +24,7 @@
         <where>
             <if test="userId != null  and userId != ''">and user_id = #{userId}</if>
             <if test="yqm != null  and yqm != ''">and yqm = #{yqm}</if>
-            <if test="shijian != null  and shijian != ''">and shijian = #{shijian}</if>
+            <if test="duration != null  and duration != ''">and duration = #{duration}</if>
             <if test="name != null  and name != ''">and name like concat('%', #{name}, '%')</if>
             <if test="zt != null  and zt != ''">and zt = #{zt}</if>
             <if test="userIdList!= null  and userIdList.size() > 0">
@@ -46,7 +46,7 @@
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="userId != null  and userId != ''">user_id,</if>
             <if test="yqm != null  and yqm != ''">yqm,</if>
-            <if test="shijian != null  and shijian != ''">shijian,</if>
+            <if test="duration != null  and duration != ''">duration,</if>
             <if test="name != null  and name != ''">name,</if>
             <if test="zt != null  and zt != ''">zt,</if>
             <if test="createTime != null ">create_time,</if>
@@ -55,7 +55,7 @@
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="userId != null  and userId != ''">#{userId},</if>
             <if test="yqm != null  and yqm != ''">#{yqm},</if>
-            <if test="shijian != null  and shijian != ''">#{shijian},</if>
+            <if test="duration != null  and duration != ''">#{duration},</if>
             <if test="name != null  and name != ''">#{name},</if>
             <if test="zt != null  and zt != ''">#{zt},</if>
             <if test="createTime != null ">#{createTime},</if>
@@ -68,7 +68,7 @@
         <trim prefix="SET" suffixOverrides=",">
             <if test="userId != null  and userId != ''">user_id = #{userId},</if>
             <if test="yqm != null  and yqm != ''">yqm = #{yqm},</if>
-            <if test="shijian != null  and shijian != ''">shijian = #{shijian},</if>
+            <if test="duration != null  and duration != ''">duration = #{duration},</if>
             <if test="name != null  and name != ''">name = #{name},</if>
             <if test="zt != null  and zt != ''">zt = #{zt},</if>
             <if test="createTime != null ">create_time = #{createTime},</if>

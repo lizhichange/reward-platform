@@ -13,7 +13,7 @@
         <result property="userId" column="user_id"/>
         <result property="name" column="name"/>
         <result property="zykey" column="zykey"/>
-        <result property="shijian" column="shijian"/>
+        <result property="duration" column="duration"/>
         <result property="lx" column="lx"/>
         <result property="zt" column="zt"/>
         <result property="logo" column="logo"/>
@@ -27,7 +27,7 @@
     </resultMap>
 
     <sql id="selectVideoVo">
-        select id, money, sj, cs, url, user_id, name, zykey, shijian, lx, zt, logo, is_lei, is_allow, click, is_preview,
+        select id, money, sj, cs, url, user_id, name, zykey, duration, lx, zt, logo, is_lei, is_allow, click, is_preview,
         short_url, category_id, create_time from video
     </sql>
 
@@ -41,7 +41,7 @@
             <if test="userId != null  and userId != ''">and user_id = #{userId}</if>
             <if test="name != null  and name != ''">and name like concat('%', #{name}, '%')</if>
             <if test="zykey != null  and zykey != ''">and zykey = #{zykey}</if>
-            <if test="shijian != null  and shijian != ''">and shijian = #{shijian}</if>
+            <if test="duration != null  and duration != ''">and duration = #{duration}</if>
             <if test="lx != null  and lx != ''">and lx = #{lx}</if>
             <if test="zt != null  and zt != ''">and zt = #{zt}</if>
             <if test="logo != null  and logo != ''">and logo = #{logo}</if>
@@ -76,7 +76,7 @@
             <if test="userId != null  and userId != ''">user_id,</if>
             <if test="name != null  and name != ''">name,</if>
             <if test="zykey != null  and zykey != ''">zykey,</if>
-            <if test="shijian != null  and shijian != ''">shijian,</if>
+            <if test="duration != null  and duration != ''">duration,</if>
             <if test="lx != null  and lx != ''">lx,</if>
             <if test="zt != null  and zt != ''">zt,</if>
             <if test="logo != null  and logo != ''">logo,</if>
@@ -96,7 +96,7 @@
             <if test="userId != null  and userId != ''">#{userId},</if>
             <if test="name != null  and name != ''">#{name},</if>
             <if test="zykey != null  and zykey != ''">#{zykey},</if>
-            <if test="shijian != null  and shijian != ''">#{shijian},</if>
+            <if test="duration != null  and duration != ''">#{duration},</if>
             <if test="lx != null  and lx != ''">#{lx},</if>
             <if test="zt != null  and zt != ''">#{zt},</if>
             <if test="logo != null  and logo != ''">#{logo},</if>
@@ -120,7 +120,7 @@
             <if test="userId != null  and userId != ''">user_id = #{userId},</if>
             <if test="name != null  and name != ''">name = #{name},</if>
             <if test="zykey != null  and zykey != ''">zykey = #{zykey},</if>
-            <if test="shijian != null  and shijian != ''">shijian = #{shijian},</if>
+            <if test="duration != null  and duration != ''">duration = #{duration},</if>
             <if test="lx != null  and lx != ''">lx = #{lx},</if>
             <if test="zt != null  and zt != ''">zt = #{zt},</if>
             <if test="logo != null  and logo != ''">logo = #{logo},</if>

@@ -34,7 +34,7 @@ public class TsDTO extends ToString {
     /**
      * 时间
      */
-    private String shijian;
+    private String duration;
 
     /**
      * $column.columnComment

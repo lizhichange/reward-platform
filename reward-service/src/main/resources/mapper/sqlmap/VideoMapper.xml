@@ -10,7 +10,7 @@
         <result column="user_id" jdbcType="VARCHAR" property="userId"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="zykey" jdbcType="VARCHAR" property="zykey"/>
-        <result column="shijian" jdbcType="VARCHAR" property="shijian"/>
+        <result column="duration" jdbcType="VARCHAR" property="duration"/>
         <result column="lx" jdbcType="VARCHAR" property="lx"/>
         <result column="zt" jdbcType="VARCHAR" property="zt"/>
         <result column="logo" jdbcType="VARCHAR" property="logo"/>
@@ -83,7 +83,7 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-        id, money, sj, cs, url, user_id, name, zykey, shijian, lx, zt, logo, is_lei, is_allow,
+        id, money, sj, cs, url, user_id, name, zykey, duration, lx, zt, logo, is_lei, is_allow,
         click, is_preview, short_url, category_id, create_time
     </sql>
     <select id="selectByExample" parameterType="com.ruoyi.reward.domain.VideoExample" resultMap="BaseResultMap">
@@ -128,13 +128,13 @@
             useGeneratedKeys="true">
         insert into video (money, sj, cs,
         url, user_id, name,
-        zykey, shijian, lx,
+        zykey, duration, lx,
         zt, logo, is_lei, is_allow,
         click, is_preview, short_url,
         category_id, create_time)
         values (#{money,jdbcType=VARCHAR}, #{sj,jdbcType=VARCHAR}, #{cs,jdbcType=VARCHAR},
         #{url,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
-        #{zykey,jdbcType=VARCHAR}, #{shijian,jdbcType=VARCHAR}, #{lx,jdbcType=VARCHAR},
+        #{zykey,jdbcType=VARCHAR}, #{duration,jdbcType=VARCHAR}, #{lx,jdbcType=VARCHAR},
         #{zt,jdbcType=VARCHAR}, #{logo,jdbcType=VARCHAR}, #{isLei,jdbcType=BIT}, #{isAllow,jdbcType=BIT},
         #{click,jdbcType=INTEGER}, #{isPreview,jdbcType=BIT}, #{shortUrl,jdbcType=VARCHAR},
         #{categoryId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
@@ -164,8 +164,8 @@
             <if test="zykey != null">
                 zykey,
             </if>
-            <if test="shijian != null">
-                shijian,
+            <if test="duration != null">
+                duration,
             </if>
             <if test="lx != null">
                 lx,
@@ -220,8 +220,8 @@
             <if test="zykey != null">
                 #{zykey,jdbcType=VARCHAR},
             </if>
-            <if test="shijian != null">
-                #{shijian,jdbcType=VARCHAR},
+            <if test="duration != null">
+                #{duration,jdbcType=VARCHAR},
             </if>
             <if test="lx != null">
                 #{lx,jdbcType=VARCHAR},
@@ -288,8 +288,8 @@
             <if test="record.zykey != null">
                 zykey = #{record.zykey,jdbcType=VARCHAR},
             </if>
-            <if test="record.shijian != null">
-                shijian = #{record.shijian,jdbcType=VARCHAR},
+            <if test="record.duration != null">
+                duration = #{record.duration,jdbcType=VARCHAR},
             </if>
             <if test="record.lx != null">
                 lx = #{record.lx,jdbcType=VARCHAR},
@@ -336,7 +336,7 @@
         user_id = #{record.userId,jdbcType=VARCHAR},
         name = #{record.name,jdbcType=VARCHAR},
         zykey = #{record.zykey,jdbcType=VARCHAR},
-        shijian = #{record.shijian,jdbcType=VARCHAR},
+        duration = #{record.duration,jdbcType=VARCHAR},
         lx = #{record.lx,jdbcType=VARCHAR},
         zt = #{record.zt,jdbcType=VARCHAR},
         logo = #{record.logo,jdbcType=VARCHAR},
@@ -375,8 +375,8 @@
             <if test="zykey != null">
                 zykey = #{zykey,jdbcType=VARCHAR},
             </if>
-            <if test="shijian != null">
-                shijian = #{shijian,jdbcType=VARCHAR},
+            <if test="duration != null">
+                duration = #{duration,jdbcType=VARCHAR},
             </if>
             <if test="lx != null">
                 lx = #{lx,jdbcType=VARCHAR},
@@ -420,7 +420,7 @@
         user_id = #{userId,jdbcType=VARCHAR},
         name = #{name,jdbcType=VARCHAR},
         zykey = #{zykey,jdbcType=VARCHAR},
-        shijian = #{shijian,jdbcType=VARCHAR},
+        duration = #{duration,jdbcType=VARCHAR},
         lx = #{lx,jdbcType=VARCHAR},
         zt = #{zt,jdbcType=VARCHAR},
         logo = #{logo,jdbcType=VARCHAR},

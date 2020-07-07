@@ -234,7 +234,7 @@ INSERT INTO `gen_table_column` VALUES ('149', '12', 'id', '主键', 'int(11)', '
 INSERT INTO `gen_table_column` VALUES ('150', '12', 'ip', 'ip地址', 'varchar(30)', 'String', 'ip', '0', '0', null, '1', '1', '1', '1', 'EQ', 'input', '', '2', 'admin', '2020-07-07 11:10:41', '', null);
 INSERT INTO `gen_table_column` VALUES ('151', '12', 'zt', '状态', 'varchar(10)', 'String', 'zt', '0', '0', null, '1', '1', '1', '1', 'EQ', 'input', '', '3', 'admin', '2020-07-07 11:10:41', '', null);
 INSERT INTO `gen_table_column` VALUES ('152', '12', 'neirong', '内容', 'varchar(120)', 'String', 'neirong', '0', '0', null, '1', '1', '1', '1', 'EQ', 'input', '', '4', 'admin', '2020-07-07 11:10:41', '', null);
-INSERT INTO `gen_table_column` VALUES ('153', '12', 'shijian', '时间', 'varchar(30)', 'String', 'shijian', '0', '0', null, '1', '1', '1', '1', 'EQ', 'input', '', '5', 'admin', '2020-07-07 11:10:41', '', null);
+INSERT INTO `gen_table_column` VALUES ('153', '12', 'duration', '时间', 'varchar(30)', 'String', 'duration', '0', '0', null, '1', '1', '1', '1', 'EQ', 'input', '', '5', 'admin', '2020-07-07 11:10:41', '', null);
 INSERT INTO `gen_table_column` VALUES ('154', '12', 'typeto', null, 'varchar(30)', 'String', 'typeto', '0', '0', null, '1', '1', '1', '1', 'EQ', 'input', '', '6', 'admin', '2020-07-07 11:10:41', '', null);
 INSERT INTO `gen_table_column` VALUES ('155', '12', 'sid', null, 'varchar(30)', 'String', 'sid', '0', '0', null, '1', '1', '1', '1', 'EQ', 'input', '', '7', 'admin', '2020-07-07 11:10:41', '', null);
 INSERT INTO `gen_table_column` VALUES ('156', '12', 'user_id', null, 'varchar(30)', 'String', 'userId', '0', '0', null, '1', '1', '1', '1', 'EQ', 'input', '', '8', 'admin', '2020-07-07 11:10:41', '', null);
@@ -249,7 +249,7 @@ INSERT INTO `gen_table_column` VALUES ('164', '13', 'url', '打赏图片', 'varc
 INSERT INTO `gen_table_column` VALUES ('165', '13', 'user_id', '用户ID', 'varchar(10)', 'String', 'userId', '0', '0', null, '1', '1', '1', '1', 'EQ', 'input', '', '6', 'admin', '2020-07-07 11:16:04', '', null);
 INSERT INTO `gen_table_column` VALUES ('166', '13', 'name', '资源名称', 'varchar(50)', 'String', 'name', '0', '0', null, '1', '1', '1', '1', 'LIKE', 'input', '', '7', 'admin', '2020-07-07 11:16:04', '', null);
 INSERT INTO `gen_table_column` VALUES ('167', '13', 'zykey', null, 'varchar(120)', 'String', 'zykey', '0', '0', null, '1', '1', '1', '1', 'EQ', 'input', '', '8', 'admin', '2020-07-07 11:16:04', '', null);
-INSERT INTO `gen_table_column` VALUES ('168', '13', 'shijian', null, 'varchar(20)', 'String', 'shijian', '0', '0', null, '1', '1', '1', '1', 'EQ', 'input', '', '9', 'admin', '2020-07-07 11:16:04', '', null);
+INSERT INTO `gen_table_column` VALUES ('168', '13', 'duration', null, 'varchar(20)', 'String', 'duration', '0', '0', null, '1', '1', '1', '1', 'EQ', 'input', '', '9', 'admin', '2020-07-07 11:16:04', '', null);
 INSERT INTO `gen_table_column` VALUES ('169', '13', 'lx', null, 'varchar(8)', 'String', 'lx', '0', '0', null, '1', '1', '1', '1', 'EQ', 'input', '', '10', 'admin', '2020-07-07 11:16:04', '', null);
 INSERT INTO `gen_table_column` VALUES ('170', '13', 'zt', null, 'varchar(5)', 'String', 'zt', '0', '0', null, '1', '1', '1', '1', 'EQ', 'input', '', '11', 'admin', '2020-07-07 11:16:04', '', null);
 INSERT INTO `gen_table_column` VALUES ('171', '13', 'logo', null, 'varchar(120)', 'String', 'logo', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', '12', 'admin', '2020-07-07 11:16:04', '', null);
@@ -263,7 +263,7 @@ INSERT INTO `gen_table_column` VALUES ('178', '13', 'create_time', null, 'dateti
 INSERT INTO `gen_table_column` VALUES ('179', '14', 'id', '主键id', 'int(11)', 'Long', 'id', '1', '1', null, '1', null, null, null, 'EQ', 'input', '', '1', 'admin', '2020-07-07 11:27:23', '', null);
 INSERT INTO `gen_table_column` VALUES ('180', '14', 'user_id', '代理id', 'varchar(10)', 'String', 'userId', '0', '0', null, '1', '1', '1', '1', 'EQ', 'input', '', '2', 'admin', '2020-07-07 11:27:23', '', null);
 INSERT INTO `gen_table_column` VALUES ('181', '14', 'yqm', '邀请码', 'varchar(20)', 'String', 'yqm', '0', '0', null, '1', '1', '1', '1', 'EQ', 'input', '', '3', 'admin', '2020-07-07 11:27:23', '', null);
-INSERT INTO `gen_table_column` VALUES ('182', '14', 'shijian', '时间', 'varchar(20)', 'String', 'shijian', '0', '0', null, '1', '1', '1', '1', 'EQ', 'input', '', '4', 'admin', '2020-07-07 11:27:23', '', null);
+INSERT INTO `gen_table_column` VALUES ('182', '14', 'duration', '时间', 'varchar(20)', 'String', 'duration', '0', '0', null, '1', '1', '1', '1', 'EQ', 'input', '', '4', 'admin', '2020-07-07 11:27:23', '', null);
 INSERT INTO `gen_table_column` VALUES ('183', '14', 'name', '使用者', 'varchar(20)', 'String', 'name', '0', '0', null, '1', '1', '1', '1', 'LIKE', 'input', '', '5', 'admin', '2020-07-07 11:27:23', '', null);
 INSERT INTO `gen_table_column` VALUES ('184', '14', 'zt', '状态', 'varchar(3)', 'String', 'zt', '0', '0', null, '1', '1', '1', '1', 'EQ', 'input', '', '6', 'admin', '2020-07-07 11:27:23', '', null);
 INSERT INTO `gen_table_column` VALUES ('185', '14', 'create_time', '创建时间', 'datetime', 'Date', 'createTime', '0', '0', null, '1', null, null, null, 'EQ', 'datetime', '', '7', 'admin', '2020-07-07 11:27:23', '', null);
@@ -1130,7 +1130,7 @@ INSERT INTO `sys_oper_log` VALUES ('40', '栏目管理', '1', 'com.ruoyi.reward.
 INSERT INTO `sys_oper_log` VALUES ('41', '栏目管理', '1', 'com.ruoyi.reward.controller.SysCategoryController.addSave()', 'POST', '1', 'admin', '研发部门', '/system/category/add', '139.227.73.78, 172.16.0.101', '内网IP', '{\n  \"parentId\" : [ \"100\" ],\n  \"categoryName\" : [ \"素人\" ],\n  \"orderNum\" : [ \"2\" ],\n  \"status\" : [ \"0\" ]\n}', '{\n  \"msg\" : \"操作成功\",\n  \"code\" : 0\n}', '0', null, '2020-06-20 18:31:54');
 INSERT INTO `sys_oper_log` VALUES ('42', '栏目管理', '1', 'com.ruoyi.reward.controller.SysCategoryController.addSave()', 'POST', '1', 'admin', '研发部门', '/system/category/add', '139.227.73.78, 172.16.0.101', '内网IP', '{\n  \"parentId\" : [ \"100\" ],\n  \"categoryName\" : [ \"自拍\" ],\n  \"orderNum\" : [ \"3\" ],\n  \"status\" : [ \"0\" ]\n}', '{\n  \"msg\" : \"操作成功\",\n  \"code\" : 0\n}', '0', null, '2020-06-20 18:32:49');
 INSERT INTO `sys_oper_log` VALUES ('43', '栏目管理', '1', 'com.ruoyi.reward.controller.SysCategoryController.addSave()', 'POST', '1', 'admin', '研发部门', '/system/category/add', '139.227.73.78, 172.16.0.101', '内网IP', '{\n  \"parentId\" : [ \"100\" ],\n  \"categoryName\" : [ \"口交\" ],\n  \"orderNum\" : [ \"3\" ],\n  \"status\" : [ \"0\" ]\n}', '{\n  \"msg\" : \"操作成功\",\n  \"code\" : 0\n}', '0', null, '2020-06-20 18:33:23');
-INSERT INTO `sys_oper_log` VALUES ('44', '公共片库', '1', 'com.ruoyi.web.controller.system.ShipinController.addSave()', 'POST', '1', 'admin', '研发部门', '/system/shipin/add', '139.227.73.78, 172.16.0.101', '内网IP', '{\n  \"categoryId\" : [ \"227\" ],\n  \"name\" : [ \"admin\" ],\n  \"categoryName\" : [ \"偷情\" ],\n  \"logo\" : [ \"/profile/upload/2020/06/20/aaf126442878d43b7d2775cff83fcb74.jpg\" ],\n  \"url\" : [ \"http://admin.grkfcs.cn/profile/upload/2020/06/20/aaf126442878d43b7d2775cff83fcb74.jpg\" ],\n  \"shiFileName\" : [ \"/profile/upload/2020/06/20/b8e74a2442c543df6d7ab787486484d5.mp4\" ],\n  \"zykey\" : [ \"http://admin.grkfcs.cn/profile/upload/2020/06/20/b8e74a2442c543df6d7ab787486484d5.mp4\" ],\n  \"shijian\" : [ \"122\" ],\n  \"startMoney\" : [ \"2\" ],\n  \"endMoney\" : [ \"5\" ]\n}', '{\n  \"msg\" : \"操作成功\",\n  \"code\" : 0\n}', '0', null, '2020-06-20 21:52:38');
+INSERT INTO `sys_oper_log` VALUES ('44', '公共片库', '1', 'com.ruoyi.web.controller.system.ShipinController.addSave()', 'POST', '1', 'admin', '研发部门', '/system/shipin/add', '139.227.73.78, 172.16.0.101', '内网IP', '{\n  \"categoryId\" : [ \"227\" ],\n  \"name\" : [ \"admin\" ],\n  \"categoryName\" : [ \"偷情\" ],\n  \"logo\" : [ \"/profile/upload/2020/06/20/aaf126442878d43b7d2775cff83fcb74.jpg\" ],\n  \"url\" : [ \"http://admin.grkfcs.cn/profile/upload/2020/06/20/aaf126442878d43b7d2775cff83fcb74.jpg\" ],\n  \"shiFileName\" : [ \"/profile/upload/2020/06/20/b8e74a2442c543df6d7ab787486484d5.mp4\" ],\n  \"zykey\" : [ \"http://admin.grkfcs.cn/profile/upload/2020/06/20/b8e74a2442c543df6d7ab787486484d5.mp4\" ],\n  \"duration\" : [ \"122\" ],\n  \"startMoney\" : [ \"2\" ],\n  \"endMoney\" : [ \"5\" ]\n}', '{\n  \"msg\" : \"操作成功\",\n  \"code\" : 0\n}', '0', null, '2020-06-20 21:52:38');
 INSERT INTO `sys_oper_log` VALUES ('45', '邀请码管理', '1', 'com.ruoyi.web.controller.system.YqmController.addSave()', 'POST', '1', 'admin', '研发部门', '/system/yqm/add', '139.227.73.78, 172.16.0.101', '内网IP', '{\n  \"userid\" : [ \"admin\" ],\n  \"yqm\" : [ \"QC6JpwMg\" ]\n}', '{\n  \"msg\" : \"操作成功\",\n  \"code\" : 0\n}', '0', null, '2020-06-20 22:15:41');
 INSERT INTO `sys_oper_log` VALUES ('46', '代理商户注册', '0', 'com.ruoyi.web.controller.common.WebController.reg()', 'POST', '1', null, null, '/webLogin/reg', '139.227.73.78, 172.16.0.101', '内网IP', '{\n  \"loginName\" : [ \"QC6JpwMg\" ],\n  \"userName\" : [ \"QC6JpwMg\" ],\n  \"password\" : [ \"QC6JpwMg\" ],\n  \"yqm\" : [ \"QC6JpwMg\" ],\n  \"payee\" : [ \"QC6JpwMg\" ],\n  \"payeeAccount\" : [ \"QC6JpwMg\" ]\n}', '{\n  \"msg\" : \"操作成功\",\n  \"code\" : 0\n}', '0', null, '2020-06-20 22:16:04');
 INSERT INTO `sys_oper_log` VALUES ('47', '角色管理', '2', 'com.ruoyi.web.controller.system.SysRoleController.editSave()', 'POST', '1', 'admin', '研发部门', '/system/role/edit', '139.227.73.78, 172.16.0.101', '内网IP', '{\n  \"roleId\" : [ \"2\" ],\n  \"roleName\" : [ \"普通角色\" ],\n  \"roleKey\" : [ \"common\" ],\n  \"roleSort\" : [ \"2\" ],\n  \"status\" : [ \"0\" ],\n  \"remark\" : [ \"普通角色\" ],\n  \"menuIds\" : [ \"2101,2102,2090,2091,2093,2100,2007,2008,2009,2010,2011\" ]\n}', '{\n  \"msg\" : \"操作成功\",\n  \"code\" : 0\n}', '0', null, '2020-06-20 22:16:47');
@@ -1624,7 +1624,7 @@ CREATE TABLE `ts` (
   `ip` varchar(30) COLLATE utf8mb4_bin DEFAULT NULL COMMENT 'ip地址',
   `zt` varchar(10) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '状态',
   `neirong` varchar(120) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '内容',
-  `shijian` varchar(30) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '时间',
+  `duration` varchar(30) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '时间',
   `typeto` varchar(30) COLLATE utf8mb4_bin DEFAULT NULL,
   `sid` varchar(30) COLLATE utf8mb4_bin DEFAULT NULL,
   `user_id` varchar(30) COLLATE utf8mb4_bin DEFAULT NULL,
@@ -1728,7 +1728,7 @@ CREATE TABLE `user` (
   `qq` varchar(12) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '联系QQ',
   `weixin` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '微信账户',
   `txname` varchar(5) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '收款姓名',
-  `shijian` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '注册时间',
+  `duration` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '注册时间',
   `money` varchar(10) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '账户余额',
   `zt` varchar(5) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '审核状态',
   `tjr` varchar(10) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '推荐人',
@@ -1758,7 +1758,7 @@ CREATE TABLE `video` (
   `user_id` varchar(10) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '用户ID',
   `name` varchar(50) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '资源名称',
   `zykey` varchar(120) COLLATE utf8mb4_bin DEFAULT NULL,
-  `shijian` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
+  `duration` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
   `lx` varchar(8) COLLATE utf8mb4_bin DEFAULT NULL,
   `zt` varchar(5) COLLATE utf8mb4_bin DEFAULT NULL,
   `logo` varchar(120) CHARACTER SET utf8 NOT NULL,
@@ -2048,7 +2048,7 @@ CREATE TABLE `yqm` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键id',
   `user_id` varchar(10) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '代理id',
   `yqm` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '邀请码',
-  `shijian` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '时间',
+  `duration` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '时间',
   `name` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '使用者',
   `zt` varchar(3) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '状态',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',

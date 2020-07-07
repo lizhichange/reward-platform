@@ -6,7 +6,7 @@
     <result column="ip" jdbcType="VARCHAR" property="ip" />
     <result column="zt" jdbcType="VARCHAR" property="zt" />
     <result column="neirong" jdbcType="VARCHAR" property="neirong" />
-    <result column="shijian" jdbcType="VARCHAR" property="shijian" />
+    <result column="duration" jdbcType="VARCHAR" property="duration" />
     <result column="typeto" jdbcType="VARCHAR" property="typeto" />
     <result column="sid" jdbcType="VARCHAR" property="sid" />
     <result column="user_id" jdbcType="VARCHAR" property="userId" />
@@ -73,7 +73,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, ip, zt, neirong, shijian, typeto, sid, user_id, create_time, update_time, open_id
+    id, ip, zt, neirong, duration, typeto, sid, user_id, create_time, update_time, open_id
   </sql>
   <select id="selectByExample" parameterType="com.ruoyi.reward.domain.TsExample" resultMap="BaseResultMap">
     select
@@ -115,11 +115,11 @@
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.ruoyi.reward.domain.Ts" useGeneratedKeys="true">
     insert into ts (ip, zt, neirong, 
-      shijian, typeto, sid, 
+      duration, typeto, sid,
       user_id, create_time, update_time, 
       open_id)
     values (#{ip,jdbcType=VARCHAR}, #{zt,jdbcType=VARCHAR}, #{neirong,jdbcType=VARCHAR}, 
-      #{shijian,jdbcType=VARCHAR}, #{typeto,jdbcType=VARCHAR}, #{sid,jdbcType=VARCHAR}, 
+      #{duration,jdbcType=VARCHAR}, #{typeto,jdbcType=VARCHAR}, #{sid,jdbcType=VARCHAR},
       #{userId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{openId,jdbcType=VARCHAR})
   </insert>
@@ -135,8 +135,8 @@
       <if test="neirong != null">
         neirong,
       </if>
-      <if test="shijian != null">
-        shijian,
+      <if test="duration != null">
+        duration,
       </if>
       <if test="typeto != null">
         typeto,
@@ -167,8 +167,8 @@
       <if test="neirong != null">
         #{neirong,jdbcType=VARCHAR},
       </if>
-      <if test="shijian != null">
-        #{shijian,jdbcType=VARCHAR},
+      <if test="duration != null">
+        #{duration,jdbcType=VARCHAR},
       </if>
       <if test="typeto != null">
         #{typeto,jdbcType=VARCHAR},
@@ -211,8 +211,8 @@
       <if test="record.neirong != null">
         neirong = #{record.neirong,jdbcType=VARCHAR},
       </if>
-      <if test="record.shijian != null">
-        shijian = #{record.shijian,jdbcType=VARCHAR},
+      <if test="record.duration != null">
+        duration = #{record.duration,jdbcType=VARCHAR},
       </if>
       <if test="record.typeto != null">
         typeto = #{record.typeto,jdbcType=VARCHAR},
@@ -243,7 +243,7 @@
       ip = #{record.ip,jdbcType=VARCHAR},
       zt = #{record.zt,jdbcType=VARCHAR},
       neirong = #{record.neirong,jdbcType=VARCHAR},
-      shijian = #{record.shijian,jdbcType=VARCHAR},
+      duration = #{record.duration,jdbcType=VARCHAR},
       typeto = #{record.typeto,jdbcType=VARCHAR},
       sid = #{record.sid,jdbcType=VARCHAR},
       user_id = #{record.userId,jdbcType=VARCHAR},
@@ -266,8 +266,8 @@
       <if test="neirong != null">
         neirong = #{neirong,jdbcType=VARCHAR},
       </if>
-      <if test="shijian != null">
-        shijian = #{shijian,jdbcType=VARCHAR},
+      <if test="duration != null">
+        duration = #{duration,jdbcType=VARCHAR},
       </if>
       <if test="typeto != null">
         typeto = #{typeto,jdbcType=VARCHAR},
@@ -295,7 +295,7 @@
     set ip = #{ip,jdbcType=VARCHAR},
       zt = #{zt,jdbcType=VARCHAR},
       neirong = #{neirong,jdbcType=VARCHAR},
-      shijian = #{shijian,jdbcType=VARCHAR},
+      duration = #{duration,jdbcType=VARCHAR},
       typeto = #{typeto,jdbcType=VARCHAR},
       sid = #{sid,jdbcType=VARCHAR},
       user_id = #{userId,jdbcType=VARCHAR},

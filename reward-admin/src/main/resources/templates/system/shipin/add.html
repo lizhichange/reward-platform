@@ -39,7 +39,7 @@
 
             <input name="shiFileName" type="hidden" id="shiFileName" value="">
             <input name="zykey" type="hidden" id="zykey" value="">
-            <input name="shijian" type="hidden" id="shijian" value="">
+            <input name="duration" type="hidden" id="duration" value="">
 
             <div class="col-sm-6">
                 <div class="form-group">
@@ -145,7 +145,7 @@
             } else if (response.code === 0) {
                 $('#shiFileName').val(response.fileName);
                 $('#zykey').val(response.url);
-                $('#shijian').val(response.duration);
+                $('#duration').val(response.duration);
             }
         }
     });

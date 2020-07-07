@@ -495,8 +495,8 @@ public class VideoController extends BaseController {
                 dto.setDiffDays(diffDays + "天前");
             }
         }
-        if (StringUtil.isNotBlank(dto.getShijian())) {
-            dto.setShijianStr(DateUtils.getTimeString(Integer.parseInt(dto.getShijian())));
+        if (StringUtil.isNotBlank(dto.getDuration())) {
+            dto.setShijianStr(DateUtils.getTimeString(Integer.parseInt(dto.getDuration())));
         }
     }
 

@@ -50,12 +50,12 @@ public class Ts implements Serializable {
     /**
     *
     *
-    * ts.shijian
+    * ts.duration
      * 时间
      *
      * @mbg.generated 2020-07-07 11:08:17
      */
-    private String shijian;
+    private String duration;
 
     /**
     *
@@ -129,7 +129,7 @@ public class Ts implements Serializable {
         sb.append(", ip=").append(ip);
         sb.append(", zt=").append(zt);
         sb.append(", neirong=").append(neirong);
-        sb.append(", shijian=").append(shijian);
+        sb.append(", duration=").append(duration);
         sb.append(", typeto=").append(typeto);
         sb.append(", sid=").append(sid);
         sb.append(", userId=").append(userId);
