@@ -9,7 +9,7 @@
     <result column="shijian" jdbcType="VARCHAR" property="shijian" />
     <result column="typeto" jdbcType="VARCHAR" property="typeto" />
     <result column="sid" jdbcType="VARCHAR" property="sid" />
-    <result column="userid" jdbcType="VARCHAR" property="userid" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="open_id" jdbcType="VARCHAR" property="openId" />
@@ -73,7 +73,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, ip, zt, neirong, shijian, typeto, sid, userid, create_time, update_time, open_id
+    id, ip, zt, neirong, shijian, typeto, sid, user_id, create_time, update_time, open_id
   </sql>
   <select id="selectByExample" parameterType="com.ruoyi.reward.domain.TsExample" resultMap="BaseResultMap">
     select
@@ -116,11 +116,11 @@
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.ruoyi.reward.domain.Ts" useGeneratedKeys="true">
     insert into ts (ip, zt, neirong, 
       shijian, typeto, sid, 
-      userid, create_time, update_time, 
+      user_id, create_time, update_time, 
       open_id)
     values (#{ip,jdbcType=VARCHAR}, #{zt,jdbcType=VARCHAR}, #{neirong,jdbcType=VARCHAR}, 
       #{shijian,jdbcType=VARCHAR}, #{typeto,jdbcType=VARCHAR}, #{sid,jdbcType=VARCHAR}, 
-      #{userid,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{userId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{openId,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.ruoyi.reward.domain.Ts" useGeneratedKeys="true">
@@ -144,8 +144,8 @@
       <if test="sid != null">
         sid,
       </if>
-      <if test="userid != null">
-        userid,
+      <if test="userId != null">
+        user_id,
       </if>
       <if test="createTime != null">
         create_time,
@@ -176,8 +176,8 @@
       <if test="sid != null">
         #{sid,jdbcType=VARCHAR},
       </if>
-      <if test="userid != null">
-        #{userid,jdbcType=VARCHAR},
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -220,8 +220,8 @@
       <if test="record.sid != null">
         sid = #{record.sid,jdbcType=VARCHAR},
       </if>
-      <if test="record.userid != null">
-        userid = #{record.userid,jdbcType=VARCHAR},
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=VARCHAR},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -246,7 +246,7 @@
       shijian = #{record.shijian,jdbcType=VARCHAR},
       typeto = #{record.typeto,jdbcType=VARCHAR},
       sid = #{record.sid,jdbcType=VARCHAR},
-      userid = #{record.userid,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       open_id = #{record.openId,jdbcType=VARCHAR}
@@ -275,8 +275,8 @@
       <if test="sid != null">
         sid = #{sid,jdbcType=VARCHAR},
       </if>
-      <if test="userid != null">
-        userid = #{userid,jdbcType=VARCHAR},
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -298,7 +298,7 @@
       shijian = #{shijian,jdbcType=VARCHAR},
       typeto = #{typeto,jdbcType=VARCHAR},
       sid = #{sid,jdbcType=VARCHAR},
-      userid = #{userid,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       open_id = #{openId,jdbcType=VARCHAR}
