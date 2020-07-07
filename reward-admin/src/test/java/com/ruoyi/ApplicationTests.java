@@ -58,7 +58,7 @@ public class ApplicationTests {
                 newShi.setZykey(shipin.getZykey());
                 newShi.setDuration(shipin.getDuration());
                 newShi.setLx(shipin.getLx());
-                newShi.setZt(shipin.getZt());
+                newShi.setStatus(shipin.getStatus());
                 newShi.setLogo(shipin.getLogo());
                 newShi.setIsLei(shipin.getIsLei());
                 newShi.setIsAllow(shipin.getIsAllow());
