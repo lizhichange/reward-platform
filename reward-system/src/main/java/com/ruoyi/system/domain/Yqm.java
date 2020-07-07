@@ -2,8 +2,7 @@ package com.ruoyi.system.domain;
 
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import lombok.Data;
 
 import java.util.List;
 
@@ -13,6 +12,7 @@ import java.util.List;
  * @author ruoyi
  * @date 2020-03-26
  */
+@Data
 public class Yqm extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
@@ -63,13 +63,6 @@ public class Yqm extends BaseEntity {
         return id;
     }
 
-    public void setUserid(String userId) {
-        this.userId = userId;
-    }
-
-    public String getUserid() {
-        return userId;
-    }
 
     public void setYqm(String yqm) {
         this.yqm = yqm;
@@ -103,19 +96,6 @@ public class Yqm extends BaseEntity {
         return zt;
     }
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
-                .append("id", getId())
-                .append("userId", getUserid())
-                .append("yqm", getYqm())
-                .append("shijian", getShijian())
-                .append("name", getName())
-                .append("zt", getZt())
-                .append("createTime", getCreateTime())
-                .append("updateTime", getUpdateTime())
-                .toString();
-    }
 
     public String getZtDesc() {
         return ztDesc;
