@@ -30,8 +30,8 @@ public interface VideoFacadeFeign {
      * @param id 公共片库ID
      * @return 公共片库
      */
-    @PostMapping("/selectShipinDTOById")
-    VideoDTO selectShipinDTOById(@RequestParam("id") Long id);
+    @PostMapping("/selectVideoDTOById")
+    VideoDTO selectVideoDTOById(@RequestParam("id") Long id);
 
     @PostMapping("/updateClickPlus")
     int updateClickPlus(@RequestParam("id") Long id);
@@ -42,14 +42,14 @@ public interface VideoFacadeFeign {
      * @param item 公共片库
      * @return 公共片库集合
      */
-    @PostMapping("/selectShipinDTOList")
-    List<VideoDTO> selectShipinDTOList(@RequestBody VideoDTO item);
+    @PostMapping("/selectVideoDTOList")
+    List<VideoDTO> selectVideoDTOList(@RequestBody VideoDTO item);
 
     @PostMapping("/count")
     int count(@RequestBody VideoDTO item);
 
-    @PostMapping("/insertShipinDTO")
-    int insertShipinDTO(@RequestBody VideoDTO item);
+    @PostMapping("/insertVideoDTO")
+    int insertVideoDTO(@RequestBody VideoDTO item);
 
     /**
      * 修改公共片库
@@ -57,15 +57,15 @@ public interface VideoFacadeFeign {
      * @param item 公共片库
      * @return 结果
      */
-    @PostMapping("/updateShipinDTO")
-    int updateShipinDTO(@RequestBody VideoDTO item);
+    @PostMapping("/updateVideoDTO")
+    int updateVideoDTO(@RequestBody VideoDTO item);
 
     @PostMapping("/queryPage")
     TPageResult<VideoDTO> queryPage(@RequestParam("start") int start,
                                     @RequestParam("rows") int rows,
                                     @RequestBody final VideoDTO videoDTO,
                                     @RequestParam("orderByClause")
-                                             String orderByClause);
+                                            String orderByClause);
 
     /**
      * 批量删除公共片库
@@ -73,11 +73,11 @@ public interface VideoFacadeFeign {
      * @param ids 需要删除的数据ID
      * @return 结果
      */
-    @PostMapping("/deleteShipinDTOByIds")
-    int deleteShipinDTOByIds(@RequestParam("ids") String ids);
+    @PostMapping("/deleteVideoDTOByIds")
+    int deleteVideoDTOByIds(@RequestParam("ids") String ids);
 
-    @PostMapping("/deleteShipinDTOById")
-    int deleteShipinDTOById(@RequestParam("id") Long id);
+    @PostMapping("/deleteVideoDTOById")
+    int deleteVideoDTOById(@RequestParam("id") Long id);
 
     @PostMapping(value = "/uploadFile", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     String handleFileUpload(@RequestPart(value = "file") MultipartFile file);

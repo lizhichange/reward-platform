@@ -48,8 +48,8 @@ public class VideoFacadeImpl implements VideoFacade {
      * @return 公共片库
      */
     @Override
-    public VideoDTO selectShipinDTOById(Long id) {
-        Video shipin = extVideoMapper.selectShipinById(id);
+    public VideoDTO selectVideoDTOById(Long id) {
+        Video shipin = extVideoMapper.selectVideoById(id);
         return VideoConvert.convert(shipin);
 
     }
@@ -67,10 +67,10 @@ public class VideoFacadeImpl implements VideoFacade {
      * @return 公共片库
      */
     @Override
-    public List<VideoDTO> selectShipinDTOList(VideoDTO item) {
+    public List<VideoDTO> selectVideoDTOList(VideoDTO item) {
         Video it = new Video();
         BeanUtils.copyProperties(item, it);
-        List<Video> list = extVideoMapper.selectShipinList(it);
+        List<Video> list = extVideoMapper.selectVideoList(it);
         return list.stream().map(VideoConvert::convert).collect(Collectors.toList());
 
     }
@@ -96,10 +96,10 @@ public class VideoFacadeImpl implements VideoFacade {
      * @return 结果
      */
     @Override
-    public int insertShipinDTO(VideoDTO item) {
+    public int insertVideoDTO(VideoDTO item) {
         Video it = new Video();
         BeanUtils.copyProperties(item, it);
-        return extVideoMapper.insertShipin(it);
+        return extVideoMapper.insertVideo(it);
     }
 
     /**
@@ -109,10 +109,10 @@ public class VideoFacadeImpl implements VideoFacade {
      * @return 结果
      */
     @Override
-    public int updateShipinDTO(VideoDTO item) {
+    public int updateVideoDTO(VideoDTO item) {
         Video it = new Video();
         BeanUtils.copyProperties(item, it);
-        return extVideoMapper.updateShipin(it);
+        return extVideoMapper.updateVideo(it);
     }
 
     @Override
@@ -133,8 +133,8 @@ public class VideoFacadeImpl implements VideoFacade {
      * @return 结果
      */
     @Override
-    public int deleteShipinDTOByIds(String ids) {
-        return extVideoMapper.deleteShipinByIds(Convert.toStrArray(ids));
+    public int deleteVideoDTOByIds(String ids) {
+        return extVideoMapper.deleteVideoByIds(Convert.toStrArray(ids));
     }
 
     /**
@@ -144,7 +144,7 @@ public class VideoFacadeImpl implements VideoFacade {
      * @return 结果
      */
     @Override
-    public int deleteShipinDTOById(Long id) {
-        return extVideoMapper.deleteShipinById(id);
+    public int deleteVideoDTOById(Long id) {
+        return extVideoMapper.deleteVideoById(id);
     }
 }

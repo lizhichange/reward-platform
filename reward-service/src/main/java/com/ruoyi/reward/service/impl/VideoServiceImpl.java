@@ -25,8 +25,8 @@ public class VideoServiceImpl implements VideoService {
      * @return 邀请码管理
      */
     @Override
-    public Video selectShipinById(Long id) {
-        return extVideoMapper.selectShipinById(id);
+    public Video selectVideoById(Long id) {
+        return extVideoMapper.selectVideoById(id);
     }
 
     /**
@@ -36,8 +36,8 @@ public class VideoServiceImpl implements VideoService {
      * @return 邀请码管理
      */
     @Override
-    public List<Video> selectShipinList(Video shipin) {
-        return extVideoMapper.selectShipinList(shipin);
+    public List<Video> selectVideoList(Video shipin) {
+        return extVideoMapper.selectVideoList(shipin);
     }
 
     /**
@@ -47,9 +47,9 @@ public class VideoServiceImpl implements VideoService {
      * @return 结果
      */
     @Override
-    public int insertShipin(Video shipin) {
+    public int insertVideo(Video shipin) {
         shipin.setCreateTime(DateUtils.getNowDate());
-        return extVideoMapper.insertShipin(shipin);
+        return extVideoMapper.insertVideo(shipin);
     }
 
     /**
@@ -59,8 +59,8 @@ public class VideoServiceImpl implements VideoService {
      * @return 结果
      */
     @Override
-    public int updateShipin(Video shipin) {
-        return extVideoMapper.updateShipin(shipin);
+    public int updateVideo(Video shipin) {
+        return extVideoMapper.updateVideo(shipin);
     }
 
     /**
@@ -70,8 +70,8 @@ public class VideoServiceImpl implements VideoService {
      * @return 结果
      */
     @Override
-    public int deleteShipinByIds(String ids) {
-        return extVideoMapper.deleteShipinByIds(Convert.toStrArray(ids));
+    public int deleteVideoByIds(String ids) {
+        return extVideoMapper.deleteVideoByIds(Convert.toStrArray(ids));
     }
 
     /**
@@ -81,7 +81,7 @@ public class VideoServiceImpl implements VideoService {
      * @return 结果
      */
     @Override
-    public int deleteShipinById(Long id) {
-        return extVideoMapper.deleteShipinById(id);
+    public int deleteVideoById(Long id) {
+        return extVideoMapper.deleteVideoById(id);
     }
 }

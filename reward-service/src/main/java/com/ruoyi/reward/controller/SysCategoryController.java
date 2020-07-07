@@ -114,7 +114,7 @@ public class SysCategoryController extends BaseController {
         }
         VideoDTO videoDTO = new VideoDTO();
         videoDTO.setCategoryId(Math.toIntExact(deptId));
-        List<VideoDTO> list = videoFacade.selectShipinDTOList(videoDTO);
+        List<VideoDTO> list = videoFacade.selectVideoDTOList(videoDTO);
         if (!CollectionUtils.isEmpty(list)) {
             return AjaxResult.warn("该类目关联了视频,不允许删除");
         }

@@ -17,8 +17,8 @@ public class VideoFacadeClientImpl implements VideoFacadeClient {
     VideoFacade videoFacade;
 
     @Override
-    public List<VideoDTO> selectShipinDTOList(VideoDTO item) {
-        return videoFacade.selectShipinDTOList(item);
+    public List<VideoDTO> selectVideoDTOList(VideoDTO item) {
+        return videoFacade.selectVideoDTOList(item);
     }
 
 }

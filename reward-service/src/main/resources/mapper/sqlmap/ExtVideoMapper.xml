@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.reward.mapper.ExtVideoMapper">
 
-    <resultMap type="Shipin" id="ShipinResult">
+    <resultMap type="Video" id="VideoResult">
         <result property="id" column="id"/>
         <result property="money" column="money"/>
         <result property="sj" column="sj"/>
@@ -26,13 +26,13 @@
         <result property="createTime" column="create_time"/>
     </resultMap>
 
-    <sql id="selectShipinVo">
+    <sql id="selectVideoVo">
         select id, money, sj, cs, url, user_id, name, zykey, shijian, lx, zt, logo, is_lei, is_allow, click, is_preview,
         shorturl, category_id, create_time from video
     </sql>
 
-    <select id="selectShipinList" parameterType="Shipin" resultMap="ShipinResult">
-        <include refid="selectShipinVo"/>
+    <select id="selectVideoList" parameterType="Video" resultMap="VideoResult">
+        <include refid="selectVideoVo"/>
         <where>
             <if test="money != null  and money != ''">and money = #{money}</if>
             <if test="sj != null  and sj != ''">and sj = #{sj}</if>
@@ -61,12 +61,12 @@
         </where>
     </select>
 
-    <select id="selectShipinById" parameterType="Long" resultMap="ShipinResult">
-        <include refid="selectShipinVo"/>
+    <select id="selectVideoById" parameterType="Long" resultMap="VideoResult">
+        <include refid="selectVideoVo"/>
         where id = #{id}
     </select>
 
-    <insert id="insertShipin" parameterType="Shipin" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertVideo" parameterType="Video" useGeneratedKeys="true" keyProperty="id">
         insert into video
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="money != null  and money != ''">money,</if>
@@ -110,7 +110,7 @@
         </trim>
     </insert>
 
-    <update id="updateShipin" parameterType="Shipin">
+    <update id="updateVideo" parameterType="Video">
         update video
         <trim prefix="SET" suffixOverrides=",">
             <if test="money != null  and money != ''">money = #{money},</if>
@@ -135,11 +135,11 @@
         where id = #{id}
     </update>
 
-    <delete id="deleteShipinById" parameterType="Long">
+    <delete id="deleteVideoById" parameterType="Long">
         delete from video where id = #{id}
     </delete>
 
-    <delete id="deleteShipinByIds" parameterType="String">
+    <delete id="deleteVideoByIds" parameterType="String">
         delete from video where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}

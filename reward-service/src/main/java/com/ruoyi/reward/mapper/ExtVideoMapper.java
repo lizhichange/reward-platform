@@ -17,15 +17,14 @@ public interface ExtVideoMapper {
      * @param id 公共片库ID
      * @return 公共片库
      */
-    Video selectShipinById(Long id);
+    Video selectVideoById(Long id);
 
     /**
      * 查询公共片库列表
      *
-     * @param shipin 公共片库
      * @return 公共片库集合
      */
-    List<Video> selectShipinList(Video shipin);
+    List<Video> selectVideoList(Video shipin);
 
     /**
      * 新增公共片库
@@ -33,7 +32,7 @@ public interface ExtVideoMapper {
      * @param shipin 公共片库
      * @return 结果
      */
-    int insertShipin(Video shipin);
+    int insertVideo(Video shipin);
 
     /**
      * 修改公共片库
@@ -41,7 +40,7 @@ public interface ExtVideoMapper {
      * @param shipin 公共片库
      * @return 结果
      */
-    int updateShipin(Video shipin);
+    int updateVideo(Video shipin);
 
     /**
      * 删除公共片库
@@ -49,7 +48,7 @@ public interface ExtVideoMapper {
      * @param id 公共片库ID
      * @return 结果
      */
-    int deleteShipinById(Long id);
+    int deleteVideoById(Long id);
 
     int updateClickPlus(Long id);
 
@@ -59,5 +58,5 @@ public interface ExtVideoMapper {
      * @param ids 需要删除的数据ID
      * @return 结果
      */
-    int deleteShipinByIds(String[] ids);
+    int deleteVideoByIds(String[] ids);
 }

@@ -11,6 +11,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
+/**
+ * @author sunflower
+ */
 @RequestMapping("/rest/shi")
 @RestController
 @Slf4j
@@ -24,9 +27,9 @@ public class ShiController {
      * @param id 公共片库ID
      * @return 公共片库
      */
-    @PostMapping("/selectShipinDTOById")
-    VideoDTO selectShipinDTOById(@RequestParam("id") Long id) {
-        return videoFacade.selectShipinDTOById(id);
+    @PostMapping("/selectVideoDTOById")
+    VideoDTO selectVideoDTOById(@RequestParam("id") Long id) {
+        return videoFacade.selectVideoDTOById(id);
     }
 
     @PostMapping("/updateClickPlus")
@@ -41,9 +44,9 @@ public class ShiController {
      * @param item 公共片库
      * @return 公共片库集合
      */
-    @PostMapping("/selectShipinDTOList")
-    List<VideoDTO> selectShipinDTOList(@RequestBody VideoDTO item) {
-        return videoFacade.selectShipinDTOList(item);
+    @PostMapping("/selectVideoDTOList")
+    List<VideoDTO> selectVideoDTOList(@RequestBody VideoDTO item) {
+        return videoFacade.selectVideoDTOList(item);
     }
 
     @PostMapping("/count")
@@ -52,9 +55,9 @@ public class ShiController {
 
     }
 
-    @PostMapping("/insertShipinDTO")
-    int insertShipinDTO(@RequestBody VideoDTO item) {
-        return videoFacade.insertShipinDTO(item);
+    @PostMapping("/insertVideoDTO")
+    int insertVideoDTO(@RequestBody VideoDTO item) {
+        return videoFacade.insertVideoDTO(item);
     }
 
     /**
@@ -63,9 +66,9 @@ public class ShiController {
      * @param item 公共片库
      * @return 结果
      */
-    @PostMapping("/updateShipinDTO")
-    int updateShipinDTO(@RequestBody VideoDTO item) {
-        return videoFacade.updateShipinDTO(item);
+    @PostMapping("/updateVideoDTO")
+    int updateVideoDTO(@RequestBody VideoDTO item) {
+        return videoFacade.updateVideoDTO(item);
 
     }
 
@@ -74,7 +77,7 @@ public class ShiController {
                                     @RequestParam("rows") int rows,
                                     @RequestBody VideoDTO videoDTO,
                                     @RequestParam("orderByClause")
-                                             String orderByClause) {
+                                            String orderByClause) {
         return videoFacade.queryPage(start, rows, videoDTO, orderByClause);
     }
 
@@ -84,14 +87,14 @@ public class ShiController {
      * @param ids 需要删除的数据ID
      * @return 结果
      */
-    @PostMapping("/deleteShipinDTOByIds")
-    int deleteShipinDTOByIds(@RequestParam("ids") String ids) {
-        return videoFacade.deleteShipinDTOByIds(ids);
+    @PostMapping("/deleteVideoDTOByIds")
+    int deleteVideoDTOByIds(@RequestParam("ids") String ids) {
+        return videoFacade.deleteVideoDTOByIds(ids);
     }
 
-    @PostMapping("/deleteShipinDTOById")
-    int deleteShipinDTOById(@RequestParam("id") Long id) {
-        return videoFacade.deleteShipinDTOById(id);
+    @PostMapping("/deleteVideoDTOById")
+    int deleteVideoDTOById(@RequestParam("id") Long id) {
+        return videoFacade.deleteVideoDTOById(id);
 
     }
 

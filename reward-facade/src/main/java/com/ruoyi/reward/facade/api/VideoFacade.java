@@ -19,7 +19,7 @@ public interface VideoFacade {
      * @param id 公共片库ID
      * @return 公共片库
      */
-    VideoDTO selectShipinDTOById(Long id);
+    VideoDTO selectVideoDTOById(Long id);
 
     int updateClickPlus(Long id);
 
@@ -29,7 +29,7 @@ public interface VideoFacade {
      * @param item 公共片库
      * @return 公共片库集合
      */
-    List<VideoDTO> selectShipinDTOList(VideoDTO item);
+    List<VideoDTO> selectVideoDTOList(VideoDTO item);
 
     int count(VideoDTO item);
 
@@ -39,7 +39,7 @@ public interface VideoFacade {
      * @param item 公共片库
      * @return 结果
      */
-    int insertShipinDTO(VideoDTO item);
+    int insertVideoDTO(VideoDTO item);
 
     /**
      * 修改公共片库
@@ -47,7 +47,7 @@ public interface VideoFacade {
      * @param item 公共片库
      * @return 结果
      */
-    int updateShipinDTO(VideoDTO item);
+    int updateVideoDTO(VideoDTO item);
 
     TPageResult<VideoDTO> queryPage(int start, int rows, VideoDTO videoDTO, String orderByClause);
 
@@ -57,7 +57,7 @@ public interface VideoFacade {
      * @param ids 需要删除的数据ID
      * @return 结果
      */
-    int deleteShipinDTOByIds(String ids);
+    int deleteVideoDTOByIds(String ids);
 
     /**
      * 删除公共片库信息
@@ -65,5 +65,5 @@ public interface VideoFacade {
      * @param id 公共片库ID
      * @return 结果
      */
-    int deleteShipinDTOById(Long id);
+    int deleteVideoDTOById(Long id);
 }

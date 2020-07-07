@@ -129,7 +129,7 @@ public class OrderAlreadyToAccountProcessor extends AbstractOrderStatusProcessor
         if (goodsId != null) {
             VideoDTO dto = new VideoDTO();
             dto.setId(goodsId);
-            List<VideoDTO> dtoList = videoFacadeClient.selectShipinDTOList(dto);
+            List<VideoDTO> dtoList = videoFacadeClient.selectVideoDTOList(dto);
             if (!CollectionUtils.isEmpty(dtoList)) {
                 Optional<VideoDTO> first = dtoList.stream().findFirst();
                 VideoDTO videoDTO = first.get();

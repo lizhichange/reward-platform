@@ -19,8 +19,8 @@ public class VideoFacadeClientImpl implements VideoFacadeClient {
     VideoFacade videoFacade;
 
     @Override
-    public VideoDTO selectShipinDTOById(Long id) {
-        return videoFacade.selectShipinDTOById(id);
+    public VideoDTO selectVideoDTOById(Long id) {
+        return videoFacade.selectVideoDTOById(id);
     }
 
     @Override
@@ -29,8 +29,8 @@ public class VideoFacadeClientImpl implements VideoFacadeClient {
     }
 
     @Override
-    public List<VideoDTO> selectShipinDTOList(VideoDTO item) {
-        return videoFacade.selectShipinDTOList(item);
+    public List<VideoDTO> selectVideoDTOList(VideoDTO item) {
+        return videoFacade.selectVideoDTOList(item);
     }
 
     @Override
@@ -39,13 +39,13 @@ public class VideoFacadeClientImpl implements VideoFacadeClient {
     }
 
     @Override
-    public int insertShipinDTO(VideoDTO item) {
-        return videoFacade.insertShipinDTO(item);
+    public int insertVideoDTO(VideoDTO item) {
+        return videoFacade.insertVideoDTO(item);
     }
 
     @Override
-    public int updateShipinDTO(VideoDTO item) {
-        return videoFacade.updateShipinDTO(item);
+    public int updateVideoDTO(VideoDTO item) {
+        return videoFacade.updateVideoDTO(item);
     }
 
     @Override

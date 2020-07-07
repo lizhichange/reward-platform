@@ -99,7 +99,7 @@ public class VideoController extends BaseController {
         if (b) {
             shipin.setUserIdList(Lists.newArrayList("admin", ShiroUtils.getLoginName()));
         }
-        List<Video> list = videoService.selectShipinList(shipin);
+        List<Video> list = videoService.selectVideoList(shipin);
         if (!CollectionUtils.isEmpty(list)) {
 
             String main = null;
@@ -160,7 +160,7 @@ public class VideoController extends BaseController {
     @RequiresRoles("admin")
     @ResponseBody
     public AjaxResult export(Video shipin) {
-        List<Video> list = videoService.selectShipinList(shipin);
+        List<Video> list = videoService.selectVideoList(shipin);
         ExcelUtil<Video> util = new ExcelUtil<>(Video.class);
         return util.exportExcel(list, "shipin");
     }
@@ -192,7 +192,7 @@ public class VideoController extends BaseController {
         shipin.setClick(0);
         shipin.setCreateTime(new Date());
         shipin.setMoney(shipin.getStartMoney() + "-" + shipin.getEndMoney());
-        return toAjax(videoFacade.insertShipinDTO(shipin));
+        return toAjax(videoFacade.insertVideoDTO(shipin));
     }
 
     @Autowired
@@ -324,7 +324,7 @@ public class VideoController extends BaseController {
     @GetMapping("/edit/{id}")
     @RequiresRoles("admin")
     public String edit(@PathVariable("id") Long id, ModelMap mmap) {
-        VideoDTO shipin = videoFacade.selectShipinDTOById(id);
+        VideoDTO shipin = videoFacade.selectVideoDTOById(id);
         String money = shipin.getMoney();
         String[] split = money.split("-");
         shipin.setStartMoney(split[0]);
@@ -349,7 +349,7 @@ public class VideoController extends BaseController {
     @ResponseBody
     public AjaxResult editSave(VideoDTO shipin) {
         shipin.setMoney(shipin.getStartMoney() + "-" + shipin.getEndMoney());
-        return toAjax(videoFacade.updateShipinDTO(shipin));
+        return toAjax(videoFacade.updateVideoDTO(shipin));
     }
 
 
@@ -369,7 +369,7 @@ public class VideoController extends BaseController {
         SysRole sysRole = roles.get(0);
         //如果是管理员。直接删除
         if ("admin".equals(sysRole.getRoleKey())) {
-            return toAjax(videoFacade.deleteShipinDTOByIds(ids));
+            return toAjax(videoFacade.deleteVideoDTOByIds(ids));
         }
 
         if (ids.contains(",")) {
@@ -392,7 +392,7 @@ public class VideoController extends BaseController {
                 return error("发布的视频已关联订单");
             }
         }
-        return toAjax(videoFacade.deleteShipinDTOByIds(ids));
+        return toAjax(videoFacade.deleteVideoDTOByIds(ids));
     }
 
     private boolean xxx(String s) {

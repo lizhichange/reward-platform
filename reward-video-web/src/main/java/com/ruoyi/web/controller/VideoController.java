@@ -86,7 +86,7 @@ public class VideoController extends BaseController {
         modelmap.addAttribute("categoryId", categoryId);
         if (StringUtil.isNotBlank(shipinId)) {
             try {
-                VideoDTO dto = videoFacadeClient.selectShipinDTOById(Long.parseLong(shipinId));
+                VideoDTO dto = videoFacadeClient.selectVideoDTOById(Long.parseLong(shipinId));
                 modelmap.addAttribute("shipin", dto);
             } catch (Exception e) {
                 log.error(e.getMessage(), e);
@@ -169,7 +169,7 @@ public class VideoController extends BaseController {
                          @RequestParam(value = "author", required = false) String author,
                          ModelMap modelmap) {
         log.info("user:{},id:{},author:{}", userId, id, author);
-        VideoDTO shipin = videoFacadeClient.selectShipinDTOById(id);
+        VideoDTO shipin = videoFacadeClient.selectVideoDTOById(id);
         if (shipin != null) {
             convert(new Date(), shipin);
             modelmap.put("shipin", shipin);
@@ -292,7 +292,7 @@ public class VideoController extends BaseController {
     public AjaxResult queryOrder(VideoDTO videoDTO) {
         String openId = SessionContext.getOpenId();
         log.info("openId:{},videoDTO:{}", openId, videoDTO);
-        VideoDTO dtoById = videoFacadeClient.selectShipinDTOById(videoDTO.getId().longValue());
+        VideoDTO dtoById = videoFacadeClient.selectVideoDTOById(videoDTO.getId().longValue());
         if (dtoById == null) {
             return AjaxResult.warn("非法请求");
         }
@@ -303,7 +303,7 @@ public class VideoController extends BaseController {
         log.info("sysOrders:{}", sysOrders);
         if (CollectionUtils.isEmpty(sysOrders)) {
             TWechatAuthDTO authDTO = userDetailFacadeClient.queryByOpenId(openId);
-            VideoDTO dto = videoFacadeClient.selectShipinDTOById(videoDTO.getId().longValue());
+            VideoDTO dto = videoFacadeClient.selectVideoDTOById(videoDTO.getId().longValue());
             Date now = new Date();
             order.setCreateTime(now);
             order.setUpdateTime(now);

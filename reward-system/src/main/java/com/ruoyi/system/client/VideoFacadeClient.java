@@ -8,6 +8,6 @@ import java.util.List;
  * @author sunflower
  */
 public interface VideoFacadeClient {
-    List<VideoDTO> selectShipinDTOList(VideoDTO item);
+    List<VideoDTO> selectVideoDTOList(VideoDTO item);
 
 }

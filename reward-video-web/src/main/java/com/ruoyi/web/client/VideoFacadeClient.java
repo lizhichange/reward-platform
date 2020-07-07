@@ -5,6 +5,9 @@ import org.near.servicesupport.result.TPageResult;
 
 import java.util.List;
 
+/**
+ * @author sunflower
+ */
 public interface VideoFacadeClient {
     /**
      * 查询公共片库
@@ -12,7 +15,7 @@ public interface VideoFacadeClient {
      * @param id 公共片库ID
      * @return 公共片库
      */
-    VideoDTO selectShipinDTOById(Long id);
+    VideoDTO selectVideoDTOById(Long id);
 
     int updateClickPlus(Long id);
 
@@ -22,7 +25,7 @@ public interface VideoFacadeClient {
      * @param item 公共片库
      * @return 公共片库集合
      */
-    List<VideoDTO> selectShipinDTOList(VideoDTO item);
+    List<VideoDTO> selectVideoDTOList(VideoDTO item);
 
     int count(VideoDTO item);
 
@@ -32,7 +35,7 @@ public interface VideoFacadeClient {
      * @param item 公共片库
      * @return 结果
      */
-    int insertShipinDTO(VideoDTO item);
+    int insertVideoDTO(VideoDTO item);
 
     /**
      * 修改公共片库
@@ -40,7 +43,7 @@ public interface VideoFacadeClient {
      * @param item 公共片库
      * @return 结果
      */
-    int updateShipinDTO(VideoDTO item);
+    int updateVideoDTO(VideoDTO item);
 
     TPageResult<VideoDTO> queryPage(int start, int rows, VideoDTO videoDTO, String orderByClause);
 
