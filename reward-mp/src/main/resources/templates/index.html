@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
     <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
 
-    <input type="hidden" th:value="${userid}" name="userid" id="userid"/>
+    <input type="hidden" th:value="${userId}" name="userId" id="userId"/>
     <style type="text/css">
         body,
         p,
@@ -264,13 +264,13 @@
                             console.log('分享成功')
                         }
                     });
-                    window.location.href = "/index?userid=" + $("#userid").val();
+                    window.location.href = "/index?userId=" + $("#userId").val();
                 });
-                window.location.href = "/index?userid=" + $("#userid").val();
+                window.location.href = "/index?userId=" + $("#userId").val();
             },
             error: function () {
                 console.log("二次分享错误！");
-                window.location.href = "/index?userid=" + $("#userid").val();
+                window.location.href = "/index?userId=" + $("#userId").val();
             }
         });
     });

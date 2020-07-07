@@ -25,9 +25,9 @@ public class Yqm extends BaseEntity {
      * 代理id
      */
     @Excel(name = "代理id")
-    private String userid;
+    private String userId;
 
-    private List<String> useridList;
+    private List<String> userIdList;
 
     /**
      * 邀请码
@@ -63,12 +63,12 @@ public class Yqm extends BaseEntity {
         return id;
     }
 
-    public void setUserid(String userid) {
-        this.userid = userid;
+    public void setUserid(String userId) {
+        this.userId = userId;
     }
 
     public String getUserid() {
-        return userid;
+        return userId;
     }
 
     public void setYqm(String yqm) {
@@ -107,7 +107,7 @@ public class Yqm extends BaseEntity {
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
                 .append("id", getId())
-                .append("userid", getUserid())
+                .append("userId", getUserid())
                 .append("yqm", getYqm())
                 .append("shijian", getShijian())
                 .append("name", getName())
@@ -125,11 +125,12 @@ public class Yqm extends BaseEntity {
         this.ztDesc = ztDesc;
     }
 
-    public List<String> getUseridList() {
-        return useridList;
+
+    public List<String> getUserIdList() {
+        return userIdList;
     }
 
-    public void setUseridList(List<String> useridList) {
-        this.useridList = useridList;
+    public void setUserIdList(List<String> userIdList) {
+        this.userIdList = userIdList;
     }
 }

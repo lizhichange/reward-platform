@@ -10,7 +10,7 @@
         <result property="sj" column="sj"/>
         <result property="cs" column="cs"/>
         <result property="url" column="url"/>
-        <result property="userid" column="userid"/>
+        <result property="userId" column="user_id"/>
         <result property="name" column="name"/>
         <result property="zykey" column="zykey"/>
         <result property="shijian" column="shijian"/>
@@ -27,72 +27,34 @@
     </resultMap>
 
     <sql id="selectShipinVo">
-        select id, money, sj, cs, url, userid, name, zykey, shijian, lx, zt, logo, is_lei, is_allow, click, is_preview,
+        select id, money, sj, cs, url, user_id, name, zykey, shijian, lx, zt, logo, is_lei, is_allow, click, is_preview,
         shorturl, category_id, create_time from shipin
     </sql>
 
     <select id="selectShipinList" parameterType="Shipin" resultMap="ShipinResult">
         <include refid="selectShipinVo"/>
         <where>
-            <if test="money != null  and money != ''">
-                and money = #{money}
-            </if>
-            <if test="sj != null  and sj != ''">
-                and sj = #{sj}
-            </if>
-            <if test="cs != null  and cs != ''">
-                and cs = #{cs}
-            </if>
-            <if test="url != null  and url != ''">
-                and url = #{url}
-            </if>
-            <if test="userid != null  and userid != ''">
-                and userid = #{userid}
-            </if>
-            <if test="name != null  and name != ''">
-                and name like concat('%', #{name}, '%')
-            </if>
-            <if test="zykey != null  and zykey != ''">
-                and zykey = #{zykey}
-            </if>
-            <if test="shijian != null  and shijian != ''">
-                and shijian = #{shijian}
-            </if>
-            <if test="lx != null  and lx != ''">
-                and lx = #{lx}
-            </if>
-            <if test="zt != null  and zt != ''">
-                and zt = #{zt}
-            </if>
-            <if test="logo != null  and logo != ''">
-                and logo = #{logo}
-            </if>
-            <if test="isLei != null ">
-                and is_lei = #{isLei}
-            </if>
-            <if test="isAllow != null ">
-                and is_allow = #{isAllow}
-            </if>
-            <if test="click != null ">
-                and click = #{click}
-            </if>
-            <if test="isPreview != null ">
-                and is_preview = #{isPreview}
-            </if>
-            <if test="shorturl != null  and shorturl != ''">
-                and shorturl = #{shorturl}
-            </if>
-            <if test="categoryId != null ">
-                and category_id = #{categoryId}
-            </if>
-            <if test="id != null ">
-                and id = #{id}
-            </if>
-
-
-            <if test="useridList!= null  and useridList.size() > 0">
-                and userid in
-                <foreach item="item" collection="useridList" open="(" separator="," close=")">
+            <if test="money != null  and money != ''">and money = #{money}</if>
+            <if test="sj != null  and sj != ''">and sj = #{sj}</if>
+            <if test="cs != null  and cs != ''">and cs = #{cs}</if>
+            <if test="url != null  and url != ''">and url = #{url}</if>
+            <if test="userId != null  and userId != ''">and user_id = #{userId}</if>
+            <if test="name != null  and name != ''">and name like concat('%', #{name}, '%')</if>
+            <if test="zykey != null  and zykey != ''">and zykey = #{zykey}</if>
+            <if test="shijian != null  and shijian != ''">and shijian = #{shijian}</if>
+            <if test="lx != null  and lx != ''">and lx = #{lx}</if>
+            <if test="zt != null  and zt != ''">and zt = #{zt}</if>
+            <if test="logo != null  and logo != ''">and logo = #{logo}</if>
+            <if test="isLei != null ">and is_lei = #{isLei}</if>
+            <if test="isAllow != null ">and is_allow = #{isAllow}</if>
+            <if test="click != null ">and click = #{click}</if>
+            <if test="isPreview != null ">and is_preview = #{isPreview}</if>
+            <if test="shorturl != null  and shorturl != ''">and shorturl = #{shorturl}</if>
+            <if test="categoryId != null ">and category_id = #{categoryId}</if>
+            <if test="id != null ">and id = #{id}</if>
+            <if test="userIdList!= null  and userIdList.size() > 0">
+                and user_id in
+                <foreach item="item" collection="userIdList" open="(" separator="," close=")">
                     #{item}
                 </foreach>
             </if>
@@ -104,126 +66,71 @@
         where id = #{id}
     </select>
 
-    <insert id="insertShipin" parameterType="Shipin" useGeneratedKeys="true"
-            keyProperty="id">
+    <insert id="insertShipin" parameterType="Shipin" useGeneratedKeys="true" keyProperty="id">
         insert into shipin
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="money != null  and money != ''">money,
-            </if>
-            <if test="sj != null  and sj != ''">sj,
-            </if>
-            <if test="cs != null  and cs != ''">cs,
-            </if>
-            <if test="url != null  and url != ''">url,
-            </if>
-            <if test="userid != null  and userid != ''">userid,
-            </if>
-            <if test="name != null  and name != ''">name,
-            </if>
-            <if test="zykey != null  and zykey != ''">zykey,
-            </if>
-            <if test="shijian != null  and shijian != ''">shijian,
-            </if>
-            <if test="lx != null  and lx != ''">lx,
-            </if>
-            <if test="zt != null  and zt != ''">zt,
-            </if>
-            <if test="logo != null  and logo != ''">logo,
-            </if>
-            <if test="isLei != null ">is_lei,
-            </if>
-            <if test="isAllow != null ">is_allow,
-            </if>
-            <if test="click != null ">click,
-            </if>
-            <if test="isPreview != null ">is_preview,
-            </if>
-            <if test="shorturl != null  and shorturl != ''">shorturl,
-            </if>
-            <if test="categoryId != null ">category_id,
-            </if>
-            <if test="createTime != null ">create_time,
-            </if>
+            <if test="money != null  and money != ''">money,</if>
+            <if test="sj != null  and sj != ''">sj,</if>
+            <if test="cs != null  and cs != ''">cs,</if>
+            <if test="url != null  and url != ''">url,</if>
+            <if test="userId != null  and userId != ''">user_id,</if>
+            <if test="name != null  and name != ''">name,</if>
+            <if test="zykey != null  and zykey != ''">zykey,</if>
+            <if test="shijian != null  and shijian != ''">shijian,</if>
+            <if test="lx != null  and lx != ''">lx,</if>
+            <if test="zt != null  and zt != ''">zt,</if>
+            <if test="logo != null  and logo != ''">logo,</if>
+            <if test="isLei != null ">is_lei,</if>
+            <if test="isAllow != null ">is_allow,</if>
+            <if test="click != null ">click,</if>
+            <if test="isPreview != null ">is_preview,</if>
+            <if test="shorturl != null  and shorturl != ''">shorturl,</if>
+            <if test="categoryId != null ">category_id,</if>
+            <if test="createTime != null ">create_time,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="money != null  and money != ''">#{money},
-            </if>
-            <if test="sj != null  and sj != ''">#{sj},
-            </if>
-            <if test="cs != null  and cs != ''">#{cs},
-            </if>
-            <if test="url != null  and url != ''">#{url},
-            </if>
-            <if test="userid != null  and userid != ''">#{userid},
-            </if>
-            <if test="name != null  and name != ''">#{name},
-            </if>
-            <if test="zykey != null  and zykey != ''">#{zykey},
-            </if>
-            <if test="shijian != null  and shijian != ''">#{shijian},
-            </if>
-            <if test="lx != null  and lx != ''">#{lx},
-            </if>
-            <if test="zt != null  and zt != ''">#{zt},
-            </if>
-            <if test="logo != null  and logo != ''">#{logo},
-            </if>
-            <if test="isLei != null ">#{isLei},
-            </if>
-            <if test="isAllow != null ">#{isAllow},
-            </if>
-            <if test="click != null ">#{click},
-            </if>
-            <if test="isPreview != null ">#{isPreview},
-            </if>
-            <if test="shorturl != null  and shorturl != ''">#{shorturl},
-            </if>
-            <if test="categoryId != null ">#{categoryId},
-            </if>
-            <if test="createTime != null ">#{createTime},
-            </if>
+            <if test="money != null  and money != ''">#{money},</if>
+            <if test="sj != null  and sj != ''">#{sj},</if>
+            <if test="cs != null  and cs != ''">#{cs},</if>
+            <if test="url != null  and url != ''">#{url},</if>
+            <if test="userId != null  and userId != ''">#{userId},</if>
+            <if test="name != null  and name != ''">#{name},</if>
+            <if test="zykey != null  and zykey != ''">#{zykey},</if>
+            <if test="shijian != null  and shijian != ''">#{shijian},</if>
+            <if test="lx != null  and lx != ''">#{lx},</if>
+            <if test="zt != null  and zt != ''">#{zt},</if>
+            <if test="logo != null  and logo != ''">#{logo},</if>
+            <if test="isLei != null ">#{isLei},</if>
+            <if test="isAllow != null ">#{isAllow},</if>
+            <if test="click != null ">#{click},</if>
+            <if test="isPreview != null ">#{isPreview},</if>
+            <if test="shorturl != null  and shorturl != ''">#{shorturl},</if>
+            <if test="categoryId != null ">#{categoryId},</if>
+            <if test="createTime != null ">#{createTime},</if>
         </trim>
     </insert>
 
     <update id="updateShipin" parameterType="Shipin">
         update shipin
         <trim prefix="SET" suffixOverrides=",">
-            <if test="money != null  and money != ''">money = #{money},
-            </if>
-            <if test="sj != null  and sj != ''">sj = #{sj},
-            </if>
-            <if test="cs != null  and cs != ''">cs = #{cs},
-            </if>
-            <if test="url != null  and url != ''">url = #{url},
-            </if>
-            <if test="userid != null  and userid != ''">userid = #{userid},
-            </if>
-            <if test="name != null  and name != ''">name = #{name},
-            </if>
-            <if test="zykey != null  and zykey != ''">zykey = #{zykey},
-            </if>
-            <if test="shijian != null  and shijian != ''">shijian = #{shijian},
-            </if>
-            <if test="lx != null  and lx != ''">lx = #{lx},
-            </if>
-            <if test="zt != null  and zt != ''">zt = #{zt},
-            </if>
-            <if test="logo != null  and logo != ''">logo = #{logo},
-            </if>
-            <if test="isLei != null ">is_lei = #{isLei},
-            </if>
-            <if test="isAllow != null ">is_allow = #{isAllow},
-            </if>
-            <if test="click != null ">click = #{click},
-            </if>
-            <if test="isPreview != null ">is_preview = #{isPreview},
-            </if>
-            <if test="shorturl != null  and shorturl != ''">shorturl = #{shorturl},
-            </if>
-            <if test="categoryId != null ">category_id = #{categoryId},
-            </if>
-            <if test="createTime != null ">create_time = #{createTime},
-            </if>
+            <if test="money != null  and money != ''">money = #{money},</if>
+            <if test="sj != null  and sj != ''">sj = #{sj},</if>
+            <if test="cs != null  and cs != ''">cs = #{cs},</if>
+            <if test="url != null  and url != ''">url = #{url},</if>
+            <if test="userId != null  and userId != ''">user_id = #{userId},</if>
+            <if test="name != null  and name != ''">name = #{name},</if>
+            <if test="zykey != null  and zykey != ''">zykey = #{zykey},</if>
+            <if test="shijian != null  and shijian != ''">shijian = #{shijian},</if>
+            <if test="lx != null  and lx != ''">lx = #{lx},</if>
+            <if test="zt != null  and zt != ''">zt = #{zt},</if>
+            <if test="logo != null  and logo != ''">logo = #{logo},</if>
+            <if test="isLei != null ">is_lei = #{isLei},</if>
+            <if test="isAllow != null ">is_allow = #{isAllow},</if>
+            <if test="click != null ">click = #{click},</if>
+            <if test="isPreview != null ">is_preview = #{isPreview},</if>
+            <if test="shorturl != null  and shorturl != ''">shorturl = #{shorturl},</if>
+            <if test="categoryId != null ">category_id = #{categoryId},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
         </trim>
         where id = #{id}
     </update>
@@ -238,7 +145,6 @@
             #{id}
         </foreach>
     </delete>
-
 
     <update id="updateClickPlus" parameterType="Long">
         update shipin set click=click+1 where id = #{id}

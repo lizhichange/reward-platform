@@ -1,19 +1,14 @@
 package com.ruoyi.web.controller;
 
 import com.google.common.collect.Lists;
-import com.ruoyi.reward.facade.dto.ShipinDTO;
-import com.ruoyi.web.model.PageForm;
-import com.ruoyi.web.result.TableDataInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.SetOperations;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.Set;
@@ -25,7 +20,7 @@ import java.util.Set;
 public class IndexController extends BaseController {
 
     @GetMapping("/index")
-    public String index(@RequestParam(value = "userid", required = false) String userid, ModelMap modelmap) {
+    public String index(@RequestParam(value = "userId", required = false) String userId, ModelMap modelmap) {
         return "redirect:/video";
     }
 

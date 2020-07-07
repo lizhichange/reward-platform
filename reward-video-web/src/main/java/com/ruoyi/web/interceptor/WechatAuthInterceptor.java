@@ -91,7 +91,7 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
         HttpSession session = request.getSession();
         String doMain = DoMainUtil.getDoMain(requestUrl.toString());
         //推广人的userid
-        String userId = request.getParameter("userid");
+        String userId = request.getParameter("userId");
         if (StringUtil.isNotBlank(userId)) {
             write(userId, COOKIE_USER_KEY, doMain, response);
             SessionContext.setUserId(session, userId);

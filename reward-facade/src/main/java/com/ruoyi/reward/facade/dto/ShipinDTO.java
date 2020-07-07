@@ -9,12 +9,16 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @author sunflower
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 
 public class ShipinDTO implements Serializable {
+    private static final long serialVersionUID = 6410040127704981572L;
     /**
      * shipin.id
      *
@@ -56,12 +60,12 @@ public class ShipinDTO implements Serializable {
     private String url;
 
     /**
-     * shipin.userid
+     * shipin.userId
      * 用户ID
      *
      * @mbg.generated 2020-03-19 21:47:04
      */
-    private String userid;
+    private String userId;
 
     /**
      * shipin.name
@@ -156,17 +160,13 @@ public class ShipinDTO implements Serializable {
     private Integer categoryId;
 
     private SysCategoryDTO category;
-    /**
-     * shipin.create_time
-     *
-     * @mbg.generated 2020-03-19 21:47:04
-     */
+
     private Date createTime;
 
     private String shiUrl;
 
     private String diffDays;
-    private static final long serialVersionUID = 1L;
+
 
     @Override
     public String toString() {
@@ -179,7 +179,7 @@ public class ShipinDTO implements Serializable {
         sb.append(", sj=").append(sj);
         sb.append(", cs=").append(cs);
         sb.append(", url=").append(url);
-        sb.append(", userid=").append(userid);
+        sb.append(", userId=").append(userId);
         sb.append(", name=").append(name);
         sb.append(", zykey=").append(zykey);
         sb.append(", shijian=").append(shijian);
@@ -193,7 +193,6 @@ public class ShipinDTO implements Serializable {
         sb.append(", shorturl=").append(shorturl);
         sb.append(", categoryId=").append(categoryId);
         sb.append(", createTime=").append(createTime);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }

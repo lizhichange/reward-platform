@@ -23,11 +23,11 @@ public class IndexController extends BaseController {
     private final static Logger LOGGER = LoggerFactory.getLogger(IndexController.class);
 
     @GetMapping("/")
-    public String index(@RequestParam(value = "userid", required = false) String userid,
+    public String index(@RequestParam(value = "userId", required = false) String userId,
                         HttpServletRequest request, ModelMap modelMap) {
         String url = request.getScheme() + "://" + request.getServerName() + request.getRequestURI();
         modelMap.put("url", url);
-        modelMap.put("userid", userid);
+        modelMap.put("userId", userId);
         String desc = sysConfigFacadeClient.selectConfigByKey("share.desc");
         if (StringUtil.isBlank(desc)) {
             desc = "今日更新，拉無人免提";
@@ -42,8 +42,8 @@ public class IndexController extends BaseController {
     }
 
     @GetMapping("/index")
-    public String render(@RequestParam(value = "userid", required = false) String userid) {
-        String user = StringUtil.isBlank(userid) ? "" : userid;
+    public String render(@RequestParam(value = "userId", required = false) String userId) {
+        String user = StringUtil.isBlank(userId) ? "" : userId;
         SysWebMainDTO webMain = new SysWebMainDTO();
         webMain.setMainStatus(WebMainStatus.OK.getCode());
         List<SysWebMainDTO> list = sysWebMainFacadeClient.selectSysWebMainList(webMain);
@@ -56,7 +56,7 @@ public class IndexController extends BaseController {
                 int i = RandomUtil.randomInt(0, size - 1);
                 item = list.get(i);
             }
-            String url = item.getMainUrl() + "/video/redirect?userid=" + user;
+            String url = item.getMainUrl() + "/video/redirect?userId=" + user;
             LOGGER.info("redirect.url:{}", url);
             return "redirect:" + url;
         }

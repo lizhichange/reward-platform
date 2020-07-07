@@ -147,7 +147,7 @@ public class SysIndexController extends BaseController {
         String loginName = ShiroUtils.getLoginName();
         String wxAuthUrl = sysConfigService.selectConfigByKey("wxAuthUrl");
         String doMain = DoMainUtil.getDoMain(wxAuthUrl);
-        String longUrl = "http://" + doMain + "/?userid=" + loginName;
+        String longUrl = "http://" + doMain + "/?userId=" + loginName;
         SysShort sysShort = new SysShort();
         sysShort.setShortKey(loginName);
         List<SysShort> sysShorts = sysShortService.selectSysShortList(sysShort);

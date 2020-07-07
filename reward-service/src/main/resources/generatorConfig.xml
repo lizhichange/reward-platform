@@ -75,7 +75,7 @@
         </javaClientGenerator>
 
 
-        <table tableName="t_user_detail" mapperName="">
+        <table tableName="shipin" mapperName="">
             <generatedKey column="id" sqlStatement="JDBC"/>
         </table>
 
