@@ -2,7 +2,6 @@ package com.ruoyi.system.domain;
 
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
-import lombok.Data;
 
 import java.util.List;
 
@@ -12,7 +11,7 @@ import java.util.List;
  * @author ruoyi
  * @date 2020-03-26
  */
-@Data
+
 public class Yqm extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
@@ -55,56 +54,21 @@ public class Yqm extends BaseEntity {
 
     private String ztDesc;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public Long getId() {
         return id;
     }
 
-
-    public void setYqm(String yqm) {
-        this.yqm = yqm;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getYqm() {
-        return yqm;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setShijian(String shijian) {
-        this.shijian = shijian;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
-
-    public String getShijian() {
-        return shijian;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setZt(String zt) {
-        this.zt = zt;
-    }
-
-    public String getZt() {
-        return zt;
-    }
-
-
-    public String getZtDesc() {
-        return ztDesc;
-    }
-
-    public void setZtDesc(String ztDesc) {
-        this.ztDesc = ztDesc;
-    }
-
 
     public List<String> getUserIdList() {
         return userIdList;
@@ -112,5 +76,45 @@ public class Yqm extends BaseEntity {
 
     public void setUserIdList(List<String> userIdList) {
         this.userIdList = userIdList;
+    }
+
+    public String getYqm() {
+        return yqm;
+    }
+
+    public void setYqm(String yqm) {
+        this.yqm = yqm;
+    }
+
+    public String getShijian() {
+        return shijian;
+    }
+
+    public void setShijian(String shijian) {
+        this.shijian = shijian;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getZt() {
+        return zt;
+    }
+
+    public void setZt(String zt) {
+        this.zt = zt;
+    }
+
+    public String getZtDesc() {
+        return ztDesc;
+    }
+
+    public void setZtDesc(String ztDesc) {
+        this.ztDesc = ztDesc;
     }
 }
