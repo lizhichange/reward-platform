@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.reward.mapper.ShipinMapper">
+<mapper namespace="com.ruoyi.reward.mapper.VideoMapper">
     <resultMap id="BaseResultMap" type="com.ruoyi.reward.domain.Video">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="money" jdbcType="VARCHAR" property="money"/>
@@ -86,13 +86,13 @@
         id, money, sj, cs, url, user_id, name, zykey, shijian, lx, zt, logo, is_lei, is_allow,
         click, is_preview, shorturl, category_id, create_time
     </sql>
-    <select id="selectByExample" parameterType="com.ruoyi.reward.domain.ShipinExample" resultMap="BaseResultMap">
+    <select id="selectByExample" parameterType="com.ruoyi.reward.domain.VideoExample" resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
         </if>
         <include refid="Base_Column_List"/>
-        from shipin
+        from video
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
@@ -111,22 +111,22 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from shipin
+        from video
         where id = #{id,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-        delete from shipin
+        delete from video
         where id = #{id,jdbcType=INTEGER}
     </delete>
-    <delete id="deleteByExample" parameterType="com.ruoyi.reward.domain.ShipinExample">
-        delete from shipin
+    <delete id="deleteByExample" parameterType="com.ruoyi.reward.domain.VideoExample">
+        delete from video
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </delete>
     <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.ruoyi.reward.domain.Video"
             useGeneratedKeys="true">
-        insert into shipin (money, sj, cs,
+        insert into video (money, sj, cs,
         url, user_id, name,
         zykey, shijian, lx,
         zt, logo, is_lei, is_allow,
@@ -141,7 +141,7 @@
     </insert>
     <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.ruoyi.reward.domain.Video"
             useGeneratedKeys="true">
-        insert into shipin
+        insert into video
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="money != null">
                 money,
@@ -255,14 +255,14 @@
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.ruoyi.reward.domain.ShipinExample" resultType="java.lang.Long">
-        select count(*) from shipin
+    <select id="countByExample" parameterType="com.ruoyi.reward.domain.VideoExample" resultType="java.lang.Long">
+        select count(*) from video
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </select>
     <update id="updateByExampleSelective" parameterType="map">
-        update shipin
+        update video
         <set>
             <if test="record.id != null">
                 id = #{record.id,jdbcType=INTEGER},
@@ -327,7 +327,7 @@
         </if>
     </update>
     <update id="updateByExample" parameterType="map">
-        update shipin
+        update video
         set id = #{record.id,jdbcType=INTEGER},
         money = #{record.money,jdbcType=VARCHAR},
         sj = #{record.sj,jdbcType=VARCHAR},
@@ -352,7 +352,7 @@
         </if>
     </update>
     <update id="updateByPrimaryKeySelective" parameterType="com.ruoyi.reward.domain.Video">
-        update shipin
+        update video
         <set>
             <if test="money != null">
                 money = #{money,jdbcType=VARCHAR},
@@ -412,7 +412,7 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.ruoyi.reward.domain.Video">
-        update shipin
+        update video
         set money = #{money,jdbcType=VARCHAR},
         sj = #{sj,jdbcType=VARCHAR},
         cs = #{cs,jdbcType=VARCHAR},

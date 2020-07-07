@@ -3,7 +3,7 @@ package com.ruoyi.reward.service.impl;
 import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.reward.domain.Video;
-import com.ruoyi.reward.mapper.ExtShipinMapper;
+import com.ruoyi.reward.mapper.ExtVideoMapper;
 import com.ruoyi.reward.service.ShipinService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ import java.util.List;
 @Service
 public class ShipinServiceImpl implements ShipinService {
     @Autowired
-    private ExtShipinMapper extShipinMapper;
+    private ExtVideoMapper extVideoMapper;
 
     /**
      * 查询邀请码管理
@@ -26,7 +26,7 @@ public class ShipinServiceImpl implements ShipinService {
      */
     @Override
     public Video selectShipinById(Long id) {
-        return extShipinMapper.selectShipinById(id);
+        return extVideoMapper.selectShipinById(id);
     }
 
     /**
@@ -37,7 +37,7 @@ public class ShipinServiceImpl implements ShipinService {
      */
     @Override
     public List<Video> selectShipinList(Video shipin) {
-        return extShipinMapper.selectShipinList(shipin);
+        return extVideoMapper.selectShipinList(shipin);
     }
 
     /**
@@ -49,7 +49,7 @@ public class ShipinServiceImpl implements ShipinService {
     @Override
     public int insertShipin(Video shipin) {
         shipin.setCreateTime(DateUtils.getNowDate());
-        return extShipinMapper.insertShipin(shipin);
+        return extVideoMapper.insertShipin(shipin);
     }
 
     /**
@@ -60,7 +60,7 @@ public class ShipinServiceImpl implements ShipinService {
      */
     @Override
     public int updateShipin(Video shipin) {
-        return extShipinMapper.updateShipin(shipin);
+        return extVideoMapper.updateShipin(shipin);
     }
 
     /**
@@ -71,7 +71,7 @@ public class ShipinServiceImpl implements ShipinService {
      */
     @Override
     public int deleteShipinByIds(String ids) {
-        return extShipinMapper.deleteShipinByIds(Convert.toStrArray(ids));
+        return extVideoMapper.deleteShipinByIds(Convert.toStrArray(ids));
     }
 
     /**
@@ -82,6 +82,6 @@ public class ShipinServiceImpl implements ShipinService {
      */
     @Override
     public int deleteShipinById(Long id) {
-        return extShipinMapper.deleteShipinById(id);
+        return extVideoMapper.deleteShipinById(id);
     }
 }

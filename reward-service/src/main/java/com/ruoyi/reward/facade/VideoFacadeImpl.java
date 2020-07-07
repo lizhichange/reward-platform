@@ -4,13 +4,13 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.google.common.collect.Lists;
 import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.reward.convert.ShipinConvert;
-import com.ruoyi.reward.facade.api.ShipinFacade;
+import com.ruoyi.reward.facade.api.VideoFacade;
 import com.ruoyi.reward.facade.dto.VideoDTO;
 
 import com.ruoyi.reward.domain.Video;
-import com.ruoyi.reward.domain.ShipinExample;
-import com.ruoyi.reward.mapper.ExtShipinMapper;
-import com.ruoyi.reward.mapper.ShipinMapper;
+import com.ruoyi.reward.domain.VideoExample;
+import com.ruoyi.reward.mapper.ExtVideoMapper;
+import com.ruoyi.reward.mapper.VideoMapper;
 import com.ruoyi.reward.repository.ShipinRepository;
 import org.near.servicesupport.result.ResultBuilder;
 import org.near.servicesupport.result.TPageResult;
@@ -33,13 +33,13 @@ import java.util.stream.Collectors;
         version = "1.0.0",
         timeout = 15000
 )
-public class ShipinFacadeImpl implements ShipinFacade {
+public class VideoFacadeImpl implements VideoFacade {
     @Autowired
-    private ShipinMapper shipinMapper;
+    private VideoMapper videoMapper;
     @Autowired
     ShipinRepository shipinRepository;
     @Autowired
-    private ExtShipinMapper extShipinMapper;
+    private ExtVideoMapper extVideoMapper;
 
     /**
      * 查询公共片库
@@ -49,14 +49,14 @@ public class ShipinFacadeImpl implements ShipinFacade {
      */
     @Override
     public VideoDTO selectShipinDTOById(Long id) {
-        Video shipin = extShipinMapper.selectShipinById(id);
+        Video shipin = extVideoMapper.selectShipinById(id);
         return ShipinConvert.convert(shipin);
 
     }
 
     @Override
     public int updateClickPlus(Long id) {
-        return extShipinMapper.updateClickPlus(id);
+        return extVideoMapper.updateClickPlus(id);
     }
 
 
@@ -70,22 +70,22 @@ public class ShipinFacadeImpl implements ShipinFacade {
     public List<VideoDTO> selectShipinDTOList(VideoDTO item) {
         Video it = new Video();
         BeanUtils.copyProperties(item, it);
-        List<Video> list = extShipinMapper.selectShipinList(it);
+        List<Video> list = extVideoMapper.selectShipinList(it);
         return list.stream().map(ShipinConvert::convert).collect(Collectors.toList());
 
     }
 
     @Override
     public int count(VideoDTO item) {
-        ShipinExample example = new ShipinExample();
-        ShipinExample.Criteria criteria = example.createCriteria();
+        VideoExample example = new VideoExample();
+        VideoExample.Criteria criteria = example.createCriteria();
         if (item.getId() != null) {
             criteria.andIdEqualTo(item.getId());
         }
         if (StringUtil.isNotBlank(item.getUserId())) {
             criteria.andUserIdEqualTo(item.getUserId());
         }
-        long l = shipinMapper.countByExample(example);
+        long l = videoMapper.countByExample(example);
         return (int) l;
     }
 
@@ -99,7 +99,7 @@ public class ShipinFacadeImpl implements ShipinFacade {
     public int insertShipinDTO(VideoDTO item) {
         Video it = new Video();
         BeanUtils.copyProperties(item, it);
-        return extShipinMapper.insertShipin(it);
+        return extVideoMapper.insertShipin(it);
     }
 
     /**
@@ -112,7 +112,7 @@ public class ShipinFacadeImpl implements ShipinFacade {
     public int updateShipinDTO(VideoDTO item) {
         Video it = new Video();
         BeanUtils.copyProperties(item, it);
-        return extShipinMapper.updateShipin(it);
+        return extVideoMapper.updateShipin(it);
     }
 
     @Override
@@ -134,7 +134,7 @@ public class ShipinFacadeImpl implements ShipinFacade {
      */
     @Override
     public int deleteShipinDTOByIds(String ids) {
-        return extShipinMapper.deleteShipinByIds(Convert.toStrArray(ids));
+        return extVideoMapper.deleteShipinByIds(Convert.toStrArray(ids));
     }
 
     /**
@@ -145,6 +145,6 @@ public class ShipinFacadeImpl implements ShipinFacade {
      */
     @Override
     public int deleteShipinDTOById(Long id) {
-        return extShipinMapper.deleteShipinById(id);
+        return extVideoMapper.deleteShipinById(id);
     }
 }

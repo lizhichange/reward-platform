@@ -20,9 +20,9 @@ package com.ruoyi.reward.facade;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.google.common.collect.Lists;
 import com.ruoyi.reward.domain.Video;
-import com.ruoyi.reward.domain.ShipinExample;
+import com.ruoyi.reward.domain.VideoExample;
 import com.ruoyi.reward.facade.api.DemoFacade;
-import com.ruoyi.reward.mapper.ShipinMapper;
+import com.ruoyi.reward.mapper.VideoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
@@ -56,12 +56,12 @@ public class DefaultDemoFacadeImpl implements DemoFacade {
     }
 
     @Autowired
-    ShipinMapper
-            shipinMapper;
+    VideoMapper
+            videoMapper;
 
     @Override
     public void testOne() {
-        List<Video> list = shipinMapper.selectByExample(new ShipinExample());
+        List<Video> list = videoMapper.selectByExample(new VideoExample());
         for (Video shipin : list) {
             for (int i = 0; i < 100; i++) {
                 Video newShi = new Video();
@@ -83,7 +83,7 @@ public class DefaultDemoFacadeImpl implements DemoFacade {
                 newShi.setShorturl(shipin.getShorturl());
                 newShi.setCategoryId(shipin.getCategoryId());
                 newShi.setCreateTime(new Date());
-                shipinMapper.insertSelective(newShi);
+                videoMapper.insertSelective(newShi);
             }
         }
 

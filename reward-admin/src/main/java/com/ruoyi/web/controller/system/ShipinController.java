@@ -15,7 +15,7 @@ import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.reward.domain.Video;
 import com.ruoyi.reward.domain.SysCategory;
-import com.ruoyi.reward.facade.api.ShipinFacade;
+import com.ruoyi.reward.facade.api.VideoFacade;
 import com.ruoyi.reward.facade.dto.VideoDTO;
 import com.ruoyi.reward.facade.dto.SysCategoryDTO;
 import com.ruoyi.reward.facade.enums.OrderStatusType;
@@ -59,7 +59,7 @@ public class ShipinController extends BaseController {
     private final String prefix = "system/shipin";
 
     @Autowired
-    private ShipinFacade shipinFacade;
+    private VideoFacade videoFacade;
     @Autowired
 
     ShipinService shipinService;
@@ -193,7 +193,7 @@ public class ShipinController extends BaseController {
         shipin.setClick(0);
         shipin.setCreateTime(new Date());
         shipin.setMoney(shipin.getStartMoney() + "-" + shipin.getEndMoney());
-        return toAjax(shipinFacade.insertShipinDTO(shipin));
+        return toAjax(videoFacade.insertShipinDTO(shipin));
     }
 
     @Autowired
@@ -327,7 +327,7 @@ public class ShipinController extends BaseController {
     @GetMapping("/edit/{id}")
     @RequiresRoles("admin")
     public String edit(@PathVariable("id") Long id, ModelMap mmap) {
-        VideoDTO shipin = shipinFacade.selectShipinDTOById(id);
+        VideoDTO shipin = videoFacade.selectShipinDTOById(id);
         String money = shipin.getMoney();
         String[] split = money.split("-");
         shipin.setStartMoney(split[0]);
@@ -352,7 +352,7 @@ public class ShipinController extends BaseController {
     @ResponseBody
     public AjaxResult editSave(VideoDTO shipin) {
         shipin.setMoney(shipin.getStartMoney() + "-" + shipin.getEndMoney());
-        return toAjax(shipinFacade.updateShipinDTO(shipin));
+        return toAjax(videoFacade.updateShipinDTO(shipin));
     }
 
 
@@ -372,7 +372,7 @@ public class ShipinController extends BaseController {
         SysRole sysRole = roles.get(0);
         //如果是管理员。直接删除
         if ("admin".equals(sysRole.getRoleKey())) {
-            return toAjax(shipinFacade.deleteShipinDTOByIds(ids));
+            return toAjax(videoFacade.deleteShipinDTOByIds(ids));
         }
 
         if (ids.contains(",")) {
@@ -395,7 +395,7 @@ public class ShipinController extends BaseController {
                 return error("发布的视频已关联订单");
             }
         }
-        return toAjax(shipinFacade.deleteShipinDTOByIds(ids));
+        return toAjax(videoFacade.deleteShipinDTOByIds(ids));
     }
 
     private boolean xxx(String s) {
@@ -403,7 +403,7 @@ public class ShipinController extends BaseController {
         int id = Integer.parseInt(s);
         item.setId(id);
         item.setUserId(ShiroUtils.getLoginName());
-        int count = shipinFacade.count(item);
+        int count = videoFacade.count(item);
         return count == 0;
     }
 

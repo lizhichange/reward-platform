@@ -3,9 +3,9 @@ package com.ruoyi.reward.repository.impl;
 
 import com.ruoyi.reward.convert.ShipinConvert;
 import com.ruoyi.reward.domain.Video;
-import com.ruoyi.reward.domain.ShipinExample;
+import com.ruoyi.reward.domain.VideoExample;
 import com.ruoyi.reward.facade.dto.VideoDTO;
-import com.ruoyi.reward.mapper.ShipinMapper;
+import com.ruoyi.reward.mapper.VideoMapper;
 import com.ruoyi.reward.repository.ShipinRepository;
 import org.near.toolkit.common.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 @Repository
 public class ShipinRepositoryImpl implements ShipinRepository {
     @Autowired
-    ShipinMapper shipinMapper;
+    VideoMapper videoMapper;
 
     /**
      * public int start4Mysql() {     return page > 1 ? (page - 1) * rows : 0; }
@@ -33,26 +33,26 @@ public class ShipinRepositoryImpl implements ShipinRepository {
 
     @Override
     public List<VideoDTO> queryPage(int start, int rows, VideoDTO videoDTO, String orderByClause) {
-        ShipinExample example = getShipinExample(videoDTO);
+        VideoExample example = getShipinExample(videoDTO);
         example.setOffset(start);
         example.setLimit(rows);
         if (StringUtil.isNotBlank(orderByClause)) {
             example.setOrderByClause(orderByClause);
         }
-        List<Video> list = shipinMapper.selectByExample(example);
+        List<Video> list = videoMapper.selectByExample(example);
         return list.stream().map(ShipinConvert::convert).collect(Collectors.toList());
 
     }
 
     @Override
     public long count(VideoDTO videoDTO) {
-        ShipinExample example = getShipinExample(videoDTO);
-        return shipinMapper.countByExample(example);
+        VideoExample example = getShipinExample(videoDTO);
+        return videoMapper.countByExample(example);
     }
 
-    private ShipinExample getShipinExample(VideoDTO videoDTO) {
-        ShipinExample example = new ShipinExample();
-        ShipinExample.Criteria criteria = example.createCriteria();
+    private VideoExample getShipinExample(VideoDTO videoDTO) {
+        VideoExample example = new VideoExample();
+        VideoExample.Criteria criteria = example.createCriteria();
         if (StringUtil.isNotBlank(videoDTO.getName())) {
             criteria.andNameLike(videoDTO.getName());
         }

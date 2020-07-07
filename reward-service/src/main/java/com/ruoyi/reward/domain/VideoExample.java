@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class ShipinExample {
+public class VideoExample {
     protected String orderByClause;
 
     protected boolean distinct;
@@ -15,7 +15,7 @@ public class ShipinExample {
 
     private Integer offset;
 
-    public ShipinExample() {
+    public VideoExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 

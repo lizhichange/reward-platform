@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.reward.mapper.ExtShipinMapper">
+<mapper namespace="com.ruoyi.reward.mapper.ExtVideoMapper">
 
     <resultMap type="Shipin" id="ShipinResult">
         <result property="id" column="id"/>
@@ -28,7 +28,7 @@
 
     <sql id="selectShipinVo">
         select id, money, sj, cs, url, user_id, name, zykey, shijian, lx, zt, logo, is_lei, is_allow, click, is_preview,
-        shorturl, category_id, create_time from shipin
+        shorturl, category_id, create_time from video
     </sql>
 
     <select id="selectShipinList" parameterType="Shipin" resultMap="ShipinResult">
@@ -67,7 +67,7 @@
     </select>
 
     <insert id="insertShipin" parameterType="Shipin" useGeneratedKeys="true" keyProperty="id">
-        insert into shipin
+        insert into video
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="money != null  and money != ''">money,</if>
             <if test="sj != null  and sj != ''">sj,</if>
@@ -111,7 +111,7 @@
     </insert>
 
     <update id="updateShipin" parameterType="Shipin">
-        update shipin
+        update video
         <trim prefix="SET" suffixOverrides=",">
             <if test="money != null  and money != ''">money = #{money},</if>
             <if test="sj != null  and sj != ''">sj = #{sj},</if>
@@ -136,17 +136,17 @@
     </update>
 
     <delete id="deleteShipinById" parameterType="Long">
-        delete from shipin where id = #{id}
+        delete from video where id = #{id}
     </delete>
 
     <delete id="deleteShipinByIds" parameterType="String">
-        delete from shipin where id in
+        delete from video where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
     </delete>
 
     <update id="updateClickPlus" parameterType="Long">
-        update shipin set click=click+1 where id = #{id}
+        update video set click=click+1 where id = #{id}
     </update>
 </mapper>

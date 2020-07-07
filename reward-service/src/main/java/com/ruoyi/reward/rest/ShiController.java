@@ -1,6 +1,6 @@
 package com.ruoyi.reward.rest;
 
-import com.ruoyi.reward.facade.api.ShipinFacade;
+import com.ruoyi.reward.facade.api.VideoFacade;
 import com.ruoyi.reward.facade.dto.VideoDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.near.servicesupport.result.TPageResult;
@@ -16,7 +16,7 @@ import java.util.List;
 @Slf4j
 public class ShiController {
     @Autowired
-    ShipinFacade shipinFacade;
+    VideoFacade videoFacade;
 
     /**
      * 查询公共片库
@@ -26,12 +26,12 @@ public class ShiController {
      */
     @PostMapping("/selectShipinDTOById")
     VideoDTO selectShipinDTOById(@RequestParam("id") Long id) {
-        return shipinFacade.selectShipinDTOById(id);
+        return videoFacade.selectShipinDTOById(id);
     }
 
     @PostMapping("/updateClickPlus")
     int updateClickPlus(@RequestParam("id") Long id) {
-        return shipinFacade.updateClickPlus(id);
+        return videoFacade.updateClickPlus(id);
 
     }
 
@@ -43,18 +43,18 @@ public class ShiController {
      */
     @PostMapping("/selectShipinDTOList")
     List<VideoDTO> selectShipinDTOList(@RequestBody VideoDTO item) {
-        return shipinFacade.selectShipinDTOList(item);
+        return videoFacade.selectShipinDTOList(item);
     }
 
     @PostMapping("/count")
     int count(@RequestBody VideoDTO item) {
-        return shipinFacade.count(item);
+        return videoFacade.count(item);
 
     }
 
     @PostMapping("/insertShipinDTO")
     int insertShipinDTO(@RequestBody VideoDTO item) {
-        return shipinFacade.insertShipinDTO(item);
+        return videoFacade.insertShipinDTO(item);
     }
 
     /**
@@ -65,7 +65,7 @@ public class ShiController {
      */
     @PostMapping("/updateShipinDTO")
     int updateShipinDTO(@RequestBody VideoDTO item) {
-        return shipinFacade.updateShipinDTO(item);
+        return videoFacade.updateShipinDTO(item);
 
     }
 
@@ -75,7 +75,7 @@ public class ShiController {
                                     @RequestBody VideoDTO videoDTO,
                                     @RequestParam("orderByClause")
                                              String orderByClause) {
-        return shipinFacade.queryPage(start, rows, videoDTO, orderByClause);
+        return videoFacade.queryPage(start, rows, videoDTO, orderByClause);
     }
 
     /**
@@ -86,12 +86,12 @@ public class ShiController {
      */
     @PostMapping("/deleteShipinDTOByIds")
     int deleteShipinDTOByIds(@RequestParam("ids") String ids) {
-        return shipinFacade.deleteShipinDTOByIds(ids);
+        return videoFacade.deleteShipinDTOByIds(ids);
     }
 
     @PostMapping("/deleteShipinDTOById")
     int deleteShipinDTOById(@RequestParam("id") Long id) {
-        return shipinFacade.deleteShipinDTOById(id);
+        return videoFacade.deleteShipinDTOById(id);
 
     }
 

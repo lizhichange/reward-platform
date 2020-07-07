@@ -1,9 +1,9 @@
 package com.ruoyi;
 
 import com.ruoyi.reward.domain.Video;
-import com.ruoyi.reward.domain.ShipinExample;
+import com.ruoyi.reward.domain.VideoExample;
 import com.ruoyi.reward.facade.dto.UserDTO;
-import com.ruoyi.reward.mapper.ShipinMapper;
+import com.ruoyi.reward.mapper.VideoMapper;
 import com.ruoyi.reward.repository.UserDetailRepository;
 import com.ruoyi.system.domain.Account;
 import com.ruoyi.system.mapper.AccountMapper;
@@ -20,7 +20,7 @@ import java.util.List;
 @SpringBootTest(classes = {RuoYiApplication.class})// 指定启动类
 public class ApplicationTests {
     @Autowired
-    ShipinMapper shipinMapper;
+    VideoMapper videoMapper;
     @Autowired
     AccountMapper accountMapper;
     @Autowired
@@ -45,7 +45,7 @@ public class ApplicationTests {
 
     @Test
     public void testOne() {
-        List<Video> list = shipinMapper.selectByExample(new ShipinExample());
+        List<Video> list = videoMapper.selectByExample(new VideoExample());
         for (Video shipin : list) {
             for (int i = 0; i < 1000; i++) {
                 Video newShi = new Video();
@@ -67,7 +67,7 @@ public class ApplicationTests {
                 newShi.setShorturl(shipin.getShorturl());
                 newShi.setCategoryId(shipin.getCategoryId());
                 newShi.setCreateTime(new Date());
-                shipinMapper.insertSelective(newShi);
+                videoMapper.insertSelective(newShi);
             }
         }
 

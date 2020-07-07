@@ -10,7 +10,7 @@ import java.util.List;
  * @author ruoyi
  * @date 2020-03-17
  */
-public interface ExtShipinMapper {
+public interface ExtVideoMapper {
     /**
      * 查询公共片库
      *
