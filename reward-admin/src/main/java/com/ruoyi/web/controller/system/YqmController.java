@@ -109,7 +109,7 @@ public class YqmController extends BaseController {
         if (!CollectionUtils.isEmpty(list)) {
             return AjaxResult.error("邀请码邀请码已存在");
         }
-        String username = yqm.getUserid();
+        String username = yqm.getUserId();
         SysUser user = iSysUserService.selectUserByLoginName(username);
         if (user == null) {
             return AjaxResult.error("邀请人账号信息不存在");
@@ -155,7 +155,7 @@ public class YqmController extends BaseController {
             for (String str : split) {
                 Yqm item = new Yqm();
                 item.setId(Long.parseLong(str));
-                item.setUserid(ShiroUtils.getLoginName());
+                item.setUserId(ShiroUtils.getLoginName());
                 List<Yqm> xxx = yqmService.selectYqmList(item);
                 if (xxx.size() == 0) {
                     return error("只能删除自己添加的邀请码");
@@ -170,7 +170,7 @@ public class YqmController extends BaseController {
         } else {
             Yqm item = new Yqm();
             item.setId(Long.parseLong(ids));
-            item.setUserid(ShiroUtils.getLoginName());
+            item.setUserId(ShiroUtils.getLoginName());
             List<Yqm> xxx = yqmService.selectYqmList(item);
             if (xxx.size() == 0) {
                 return error("只能删除自己添加的邀请码");
