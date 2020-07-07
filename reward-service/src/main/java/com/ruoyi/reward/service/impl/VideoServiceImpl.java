@@ -4,7 +4,7 @@ import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.reward.domain.Video;
 import com.ruoyi.reward.mapper.ExtVideoMapper;
-import com.ruoyi.reward.service.ShipinService;
+import com.ruoyi.reward.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ import java.util.List;
  * @author sunflower
  */
 @Service
-public class ShipinServiceImpl implements ShipinService {
+public class VideoServiceImpl implements VideoService {
     @Autowired
     private ExtVideoMapper extVideoMapper;
 

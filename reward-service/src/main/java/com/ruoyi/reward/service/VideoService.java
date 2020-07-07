@@ -4,7 +4,10 @@ import com.ruoyi.reward.domain.Video;
 
 import java.util.List;
 
-public interface ShipinService {
+/**
+ * @author sunflower
+ */
+public interface VideoService {
     /**
      * 查询邀请码管理
      *

@@ -19,7 +19,7 @@ import com.ruoyi.reward.facade.api.VideoFacade;
 import com.ruoyi.reward.facade.dto.VideoDTO;
 import com.ruoyi.reward.facade.dto.SysCategoryDTO;
 import com.ruoyi.reward.facade.enums.OrderStatusType;
-import com.ruoyi.reward.service.ShipinService;
+import com.ruoyi.reward.service.VideoService;
 import com.ruoyi.reward.service.SysCategoryService;
 import com.ruoyi.system.domain.ExtSysOrder;
 import com.ruoyi.system.domain.SysConfig;
@@ -55,14 +55,13 @@ import java.util.stream.Collectors;
  */
 @Controller
 @RequestMapping("/system/shipin")
-public class ShipinController extends BaseController {
+public class VideoController extends BaseController {
     private final String prefix = "system/shipin";
 
     @Autowired
-    private VideoFacade videoFacade;
+    VideoFacade videoFacade;
     @Autowired
-
-    ShipinService shipinService;
+    VideoService videoService;
 
 
     @Autowired
@@ -100,7 +99,7 @@ public class ShipinController extends BaseController {
         if (b) {
             shipin.setUserIdList(Lists.newArrayList("admin", ShiroUtils.getLoginName()));
         }
-        List<Video> list = shipinService.selectShipinList(shipin);
+        List<Video> list = videoService.selectShipinList(shipin);
         if (!CollectionUtils.isEmpty(list)) {
 
             String main = null;
@@ -161,7 +160,7 @@ public class ShipinController extends BaseController {
     @RequiresRoles("admin")
     @ResponseBody
     public AjaxResult export(Video shipin) {
-        List<Video> list = shipinService.selectShipinList(shipin);
+        List<Video> list = videoService.selectShipinList(shipin);
         ExcelUtil<Video> util = new ExcelUtil<>(Video.class);
         return util.exportExcel(list, "shipin");
     }
@@ -301,9 +300,7 @@ public class ShipinController extends BaseController {
             Map<String, Object> map = Maps.newHashMap();
             map.put("main", param.getPrice());
 
-//          String string = getString(map, item.getConfigValue());
             config.setConfigValue(JSONArray.toJSONString(map));
-
             config.setUpdateTime(new Date());
             return toAjax(sysConfigService.updateConfig(config));
         }
