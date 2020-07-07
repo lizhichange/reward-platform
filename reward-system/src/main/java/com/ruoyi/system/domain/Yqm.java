@@ -2,6 +2,7 @@ package com.ruoyi.system.domain;
 
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
+import lombok.Data;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
  * @author ruoyi
  * @date 2020-03-26
  */
-
+@Data
 public class Yqm extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
@@ -54,67 +55,4 @@ public class Yqm extends BaseEntity {
 
     private String ztDesc;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public List<String> getUserIdList() {
-        return userIdList;
-    }
-
-    public void setUserIdList(List<String> userIdList) {
-        this.userIdList = userIdList;
-    }
-
-    public String getYqm() {
-        return yqm;
-    }
-
-    public void setYqm(String yqm) {
-        this.yqm = yqm;
-    }
-
-    public String getShijian() {
-        return duration;
-    }
-
-    public void setShijian(String duration) {
-        this.duration = duration;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getZt() {
-        return zt;
-    }
-
-    public void setZt(String zt) {
-        this.zt = zt;
-    }
-
-    public String getZtDesc() {
-        return ztDesc;
-    }
-
-    public void setZtDesc(String ztDesc) {
-        this.ztDesc = ztDesc;
-    }
 }
