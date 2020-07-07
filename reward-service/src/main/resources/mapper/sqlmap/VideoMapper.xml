@@ -338,7 +338,7 @@
         zykey = #{record.zykey,jdbcType=VARCHAR},
         duration = #{record.duration,jdbcType=VARCHAR},
         lx = #{record.lx,jdbcType=VARCHAR},
-        status = #{record.zt,jdbcType=VARCHAR},
+        status = #{record.status,jdbcType=VARCHAR},
         logo = #{record.logo,jdbcType=VARCHAR},
         is_lei = #{record.isLei,jdbcType=BIT},
         is_allow = #{record.isAllow,jdbcType=BIT},
@@ -381,8 +381,8 @@
             <if test="lx != null">
                 lx = #{lx,jdbcType=VARCHAR},
             </if>
-            <if test="zt != null">
-                zt = #{zt,jdbcType=VARCHAR},
+            <if test="status != null">
+                status = #{status,jdbcType=VARCHAR},
             </if>
             <if test="logo != null">
                 logo = #{logo,jdbcType=VARCHAR},
@@ -422,7 +422,7 @@
         zykey = #{zykey,jdbcType=VARCHAR},
         duration = #{duration,jdbcType=VARCHAR},
         lx = #{lx,jdbcType=VARCHAR},
-        zt = #{zt,jdbcType=VARCHAR},
+        status = #{status,jdbcType=VARCHAR},
         logo = #{logo,jdbcType=VARCHAR},
         is_lei = #{isLei,jdbcType=BIT},
         is_allow = #{isAllow,jdbcType=BIT},
