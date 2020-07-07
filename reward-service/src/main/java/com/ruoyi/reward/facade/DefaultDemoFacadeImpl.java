@@ -80,7 +80,7 @@ public class DefaultDemoFacadeImpl implements DemoFacade {
                 newShi.setIsAllow(shipin.getIsAllow());
                 newShi.setClick(shipin.getClick());
                 newShi.setIsPreview(shipin.getIsPreview());
-                newShi.setShorturl(shipin.getShorturl());
+                newShi.setShortUrl(shipin.getShortUrl());
                 newShi.setCategoryId(shipin.getCategoryId());
                 newShi.setCreateTime(new Date());
                 videoMapper.insertSelective(newShi);

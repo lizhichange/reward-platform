@@ -6,6 +6,9 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @author sunflower
+ */
 @Data
 public class Video implements Serializable {
     private static final long serialVersionUID = -495973710593943252L;
@@ -133,7 +136,7 @@ public class Video implements Serializable {
      *
      * @mbg.generated 2020-07-07 11:14:12
      */
-    private String shorturl;
+    private String shortUrl;
 
     /**
      * shipin.category_id
@@ -187,7 +190,7 @@ public class Video implements Serializable {
         sb.append(", isAllow=").append(isAllow);
         sb.append(", click=").append(click);
         sb.append(", isPreview=").append(isPreview);
-        sb.append(", shorturl=").append(shorturl);
+        sb.append(", shortUrl=").append(shortUrl);
         sb.append(", categoryId=").append(categoryId);
         sb.append(", createTime=").append(createTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);

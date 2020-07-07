@@ -145,7 +145,7 @@ public class VideoDTO implements Serializable {
      *
      * @mbg.generated 2020-03-19 21:47:04
      */
-    private String shorturl;
+    private String shortUrl;
 
 
     private String startMoney;
@@ -190,7 +190,7 @@ public class VideoDTO implements Serializable {
         sb.append(", isAllow=").append(isAllow);
         sb.append(", click=").append(click);
         sb.append(", isPreview=").append(isPreview);
-        sb.append(", shorturl=").append(shorturl);
+        sb.append(", shortUrl=").append(shortUrl);
         sb.append(", categoryId=").append(categoryId);
         sb.append(", createTime=").append(createTime);
         sb.append("]");

@@ -1195,73 +1195,73 @@ public class VideoExample {
             return (Criteria) this;
         }
 
-        public Criteria andShorturlIsNull() {
-            addCriterion("shorturl is null");
+        public Criteria andShortUrlIsNull() {
+            addCriterion("short_url is null");
             return (Criteria) this;
         }
 
-        public Criteria andShorturlIsNotNull() {
-            addCriterion("shorturl is not null");
+        public Criteria andShortUrlIsNotNull() {
+            addCriterion("short_url is not null");
             return (Criteria) this;
         }
 
-        public Criteria andShorturlEqualTo(String value) {
-            addCriterion("shorturl =", value, "shorturl");
+        public Criteria andShortUrlEqualTo(String value) {
+            addCriterion("short_url =", value, "shortUrl");
             return (Criteria) this;
         }
 
-        public Criteria andShorturlNotEqualTo(String value) {
-            addCriterion("shorturl <>", value, "shorturl");
+        public Criteria andShortUrlNotEqualTo(String value) {
+            addCriterion("short_url <>", value, "shortUrl");
             return (Criteria) this;
         }
 
-        public Criteria andShorturlGreaterThan(String value) {
-            addCriterion("shorturl >", value, "shorturl");
+        public Criteria andShortUrlGreaterThan(String value) {
+            addCriterion("short_url >", value, "shortUrl");
             return (Criteria) this;
         }
 
-        public Criteria andShorturlGreaterThanOrEqualTo(String value) {
-            addCriterion("shorturl >=", value, "shorturl");
+        public Criteria andShortUrlGreaterThanOrEqualTo(String value) {
+            addCriterion("short_url >=", value, "shortUrl");
             return (Criteria) this;
         }
 
-        public Criteria andShorturlLessThan(String value) {
-            addCriterion("shorturl <", value, "shorturl");
+        public Criteria andShortUrlLessThan(String value) {
+            addCriterion("short_url <", value, "shortUrl");
             return (Criteria) this;
         }
 
-        public Criteria andShorturlLessThanOrEqualTo(String value) {
-            addCriterion("shorturl <=", value, "shorturl");
+        public Criteria andShortUrlLessThanOrEqualTo(String value) {
+            addCriterion("short_url <=", value, "shortUrl");
             return (Criteria) this;
         }
 
-        public Criteria andShorturlLike(String value) {
-            addCriterion("shorturl like", value, "shorturl");
+        public Criteria andShortUrlLike(String value) {
+            addCriterion("short_url like", value, "shortUrl");
             return (Criteria) this;
         }
 
-        public Criteria andShorturlNotLike(String value) {
-            addCriterion("shorturl not like", value, "shorturl");
+        public Criteria andShortUrlNotLike(String value) {
+            addCriterion("short_url not like", value, "shortUrl");
             return (Criteria) this;
         }
 
-        public Criteria andShorturlIn(List<String> values) {
-            addCriterion("shorturl in", values, "shorturl");
+        public Criteria andShortUrlIn(List<String> values) {
+            addCriterion("short_url in", values, "shortUrl");
             return (Criteria) this;
         }
 
-        public Criteria andShorturlNotIn(List<String> values) {
-            addCriterion("shorturl not in", values, "shorturl");
+        public Criteria andShortUrlNotIn(List<String> values) {
+            addCriterion("short_url not in", values, "shortUrl");
             return (Criteria) this;
         }
 
-        public Criteria andShorturlBetween(String value1, String value2) {
-            addCriterion("shorturl between", value1, value2, "shorturl");
+        public Criteria andShortUrlBetween(String value1, String value2) {
+            addCriterion("short_url between", value1, value2, "shortUrl");
             return (Criteria) this;
         }
 
-        public Criteria andShorturlNotBetween(String value1, String value2) {
-            addCriterion("shorturl not between", value1, value2, "shorturl");
+        public Criteria andShortUrlNotBetween(String value1, String value2) {
+            addCriterion("short_url not between", value1, value2, "shortUrl");
             return (Criteria) this;
         }
 

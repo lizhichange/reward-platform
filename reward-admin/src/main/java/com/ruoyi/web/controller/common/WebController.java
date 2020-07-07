@@ -29,7 +29,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -50,8 +49,6 @@ public class WebController extends BaseController {
     private static final Logger LOGGER = LoggerFactory.getLogger(WebController.class);
 
     private final String prefix = "webLogin";
-    @Autowired
-    RestTemplate restTemplate;
 
 
     @Autowired
