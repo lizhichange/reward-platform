@@ -89,7 +89,7 @@ public class Video implements Serializable {
     private String lx;
 
     /**
-     * shipin.zt
+     * shipin.status
      *
      * @mbg.generated 2020-07-07 11:14:12
      */
