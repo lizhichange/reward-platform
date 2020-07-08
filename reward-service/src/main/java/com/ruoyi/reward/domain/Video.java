@@ -70,11 +70,11 @@ public class Video implements Serializable {
     private String name;
 
     /**
-     * shipin.zykey
+     * shipin.videoUrl
      *
      * @mbg.generated 2020-07-07 11:14:12
      */
-    private String zykey;
+    private String videoUrl;
 
     /**
      * shipin.duration
@@ -183,7 +183,7 @@ public class Video implements Serializable {
         sb.append(", url=").append(url);
         sb.append(", userId=").append(userId);
         sb.append(", name=").append(name);
-        sb.append(", zykey=").append(zykey);
+        sb.append(", videoUrl=").append(videoUrl);
         sb.append(", duration=").append(duration);
         sb.append(", lx=").append(lx);
         sb.append(", status=").append(status);
@@ -257,11 +257,11 @@ public class Video implements Serializable {
     }
 
     public String getZykey() {
-        return zykey;
+        return videoUrl;
     }
 
-    public void setZykey(String zykey) {
-        this.zykey = zykey;
+    public void setZykey(String videoUrl) {
+        this.videoUrl = videoUrl;
     }
 
     public String getDuration() {

@@ -38,7 +38,7 @@
             <input name="url" type="hidden" id="url" value="">
 
             <input name="shiFileName" type="hidden" id="shiFileName" value="">
-            <input name="zykey" type="hidden" id="zykey" value="">
+            <input name="videoUrl" type="hidden" id="videoUrl" value="">
             <input name="duration" type="hidden" id="duration" value="">
 
             <div class="col-sm-6">
@@ -144,7 +144,7 @@
                 $.modal.msg(response.msg);
             } else if (response.code === 0) {
                 $('#shiFileName').val(response.fileName);
-                $('#zykey').val(response.url);
+                $('#videoUrl').val(response.url);
                 $('#duration').val(response.duration);
             }
         }
@@ -162,12 +162,12 @@
         if ($.validate.form()) {
 
             let url = $('#url').val();
-            let zykey = $('#zykey').val();
+            let videoUrl = $('#videoUrl').val();
             if (url == null || url === '') {
                 $.modal.msg('请先上传视频logo图片');
                 return;
             }
-            if (zykey == null || zykey === '') {
+            if (videoUrl == null || videoUrl === '') {
                 $.modal.msg('请先上传视频');
                 return;
             }

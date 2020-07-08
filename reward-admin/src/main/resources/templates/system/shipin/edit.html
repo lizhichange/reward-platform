@@ -45,7 +45,7 @@
 
             <input name="shiFileName" type="hidden" id="shiFileName" value="">
             <!--     视频地址-->
-            <input name="zykey" type="hidden" id="zykey" value="" th:field="*{zykey}">
+            <input name="videoUrl" type="hidden" id="videoUrl" value="" th:field="*{videoUrl}">
             <!--     视频播放时长-->
             <input name="duration" type="hidden" id="duration" th:field="*{duration}"/>
 
@@ -136,7 +136,7 @@
 
 
     $(document).ready(function () {
-        var zykey=$('#zykey').val();
+        var videoUrl=$('#videoUrl').val();
         $("#fileinput-demo-2").fileinput({
             'theme': 'explorer-fas',
             'uploadUrl': ctx + "common/uploadFileName",
@@ -144,7 +144,7 @@
             initialPreviewAsData: true,
             allowedFileExtensions: ['avi', 'mp4'],//接收的文件后缀
             initialPreview: [
-                zykey
+                videoUrl
             ]
         });
     });
@@ -156,7 +156,7 @@
                 $.modal.msg(response.msg);
             } else if (response.code === 0) {
                 $('#shiFileName').val(response.fileName);
-                $('#zykey').val(response.url);
+                $('#videoUrl').val(response.url);
                 $('#duration').val(response.duration);
             }
         }
@@ -171,12 +171,12 @@
     function submitHandler() {
         if ($.validate.form()) {
             let url = $('#url').val();
-            let zykey = $('#zykey').val();
+            let videoUrl = $('#videoUrl').val();
             if (url == null || url === '') {
                 $.modal.msg('请先上传视频logo图片');
                 return;
             }
-            if (zykey == null || zykey === '') {
+            if (videoUrl == null || videoUrl === '') {
                 $.modal.msg('请先上传视频');
                 return;
             }

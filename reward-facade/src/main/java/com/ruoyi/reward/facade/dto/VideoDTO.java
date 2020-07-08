@@ -79,7 +79,7 @@ public class VideoDTO implements Serializable {
      *
      * @mbg.generated 2020-03-19 21:47:04
      */
-    private String zykey;
+    private String videoUrl;
 
     /**
      * shipin.duration
@@ -180,7 +180,7 @@ public class VideoDTO implements Serializable {
         sb.append(", url=").append(url);
         sb.append(", userId=").append(userId);
         sb.append(", name=").append(name);
-        sb.append(", zykey=").append(zykey);
+        sb.append(", videoUrl=").append(videoUrl);
         sb.append(", duration=").append(duration);
         sb.append(", lx=").append(lx);
         sb.append(", status=").append(status);

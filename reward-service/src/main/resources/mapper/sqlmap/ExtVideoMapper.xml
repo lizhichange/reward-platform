@@ -12,7 +12,7 @@
         <result property="url" column="url"/>
         <result property="userId" column="user_id"/>
         <result property="name" column="name"/>
-        <result property="zykey" column="zykey"/>
+        <result property="videoUrl" column="video_url"/>
         <result property="duration" column="duration"/>
         <result property="lx" column="lx"/>
         <result property="status" column="status"/>
@@ -27,7 +27,7 @@
     </resultMap>
 
     <sql id="selectVideoVo">
-        select id, money, sj, cs, url, user_id, name, zykey, duration, lx, status, logo, is_lei, is_allow, click, is_preview,
+        select id, money, sj, cs, url, user_id, name, video_url, duration, lx, status, logo, is_lei, is_allow, click, is_preview,
         short_url, category_id, create_time from video
     </sql>
 
@@ -40,7 +40,7 @@
             <if test="url != null  and url != ''">and url = #{url}</if>
             <if test="userId != null  and userId != ''">and user_id = #{userId}</if>
             <if test="name != null  and name != ''">and name like concat('%', #{name}, '%')</if>
-            <if test="zykey != null  and zykey != ''">and zykey = #{zykey}</if>
+            <if test="videoUrl != null  and videoUrl != ''">and video_url = #{videoUrl}</if>
             <if test="duration != null  and duration != ''">and duration = #{duration}</if>
             <if test="lx != null  and lx != ''">and lx = #{lx}</if>
             <if test="status != null  and status != ''">and status = #{status}</if>
@@ -75,7 +75,7 @@
             <if test="url != null  and url != ''">url,</if>
             <if test="userId != null  and userId != ''">user_id,</if>
             <if test="name != null  and name != ''">name,</if>
-            <if test="zykey != null  and zykey != ''">zykey,</if>
+            <if test="videoUrl != null  and videoUrl != ''">video_url,</if>
             <if test="duration != null  and duration != ''">duration,</if>
             <if test="lx != null  and lx != ''">lx,</if>
             <if test="status != null  and status != ''">status,</if>
@@ -95,7 +95,7 @@
             <if test="url != null  and url != ''">#{url},</if>
             <if test="userId != null  and userId != ''">#{userId},</if>
             <if test="name != null  and name != ''">#{name},</if>
-            <if test="zykey != null  and zykey != ''">#{zykey},</if>
+            <if test="videoUrl != null  and videoUrl != ''">#{videoUrl},</if>
             <if test="duration != null  and duration != ''">#{duration},</if>
             <if test="lx != null  and lx != ''">#{lx},</if>
             <if test="status != null  and status != ''">#{status},</if>
@@ -119,7 +119,7 @@
             <if test="url != null  and url != ''">url = #{url},</if>
             <if test="userId != null  and userId != ''">user_id = #{userId},</if>
             <if test="name != null  and name != ''">name = #{name},</if>
-            <if test="zykey != null  and zykey != ''">zykey = #{zykey},</if>
+            <if test="videoUrl != null  and videoUrl != ''">video_url = #{videoUrl},</if>
             <if test="duration != null  and duration != ''">duration = #{duration},</if>
             <if test="lx != null  and lx != ''">lx = #{lx},</if>
             <if test="status != null  and status != ''">status = #{status},</if>

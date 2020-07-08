@@ -225,7 +225,7 @@
     <input type="hidden" th:value="${wxPayUrl}" id="wxPayUrl" />
     <input type="hidden" th:value="${shipin?.id}" id="shipinId" />
     <input type="hidden" th:value="${shipin?.url}" id="url" />
-    <input type="hidden" th:value="${shipin?.zykey}" id="zykey" />
+    <input type="hidden" th:value="${shipin?.videoUrl}" id="videoUrl" />
     <input type="hidden" th:value="${shipin?.userId}" id="author" />
 
     <script>
@@ -259,7 +259,7 @@
                 //图片地址     
                 "poster": document.getElementById("url").value ? document.getElementById("url").value : '',
                 //视频地址
-                "url": document.getElementById("zykey").value ? document.getElementById("zykey").value : "//s1.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/xgplayer-demo.mp4",
+                "url": document.getElementById("videoUrl").value ? document.getElementById("videoUrl").value : "//s1.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/xgplayer-demo.mp4",
                 "whitelist": [
                     ""
                 ],
@@ -450,7 +450,7 @@
                 for (var i = 0; i < curPageData.length; i++) {
                     var row = curPageData[i];
                     // var str = '<a href="/video/detail?id=' + row.id + '&author=' + row.userId + '" title="' + row.name + '"> '
-                    var str = '<a href="javascript:void(0)"' + 'data-id="' + row.id + '"' + 'data-poster="' + row.url + '"' + 'data-src="' + row.zykey + '"' + 'data-author="' + row.userId + '"' + 'title="' + row.name + '" > '
+                    var str = '<a href="javascript:void(0)"' + 'data-id="' + row.id + '"' + 'data-poster="' + row.url + '"' + 'data-src="' + row.videoUrl + '"' + 'data-author="' + row.userId + '"' + 'title="' + row.name + '" > '
                         + '    <div class="img">'
                         + '        <img class="thumb lazy-load" src="' + row.url + '"  data-original="' + row.url + '" alt="' + row.name + '" data-cnt="5" width="180" height="135">'
                         + '    </div>'
@@ -529,6 +529,12 @@
                                             }
                                         });
                                     } else if (rep.status === 1) {
+
+
+                                        $("#shipinId").val(dataId);
+                                        $("#url").val(poster);
+                                        $("#videoUrl").val(src);
+
                                         player.poster = poster;
                                         player.src = src;
                                         //设置/返回视频当前播放时间

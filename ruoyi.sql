@@ -248,7 +248,6 @@ INSERT INTO `gen_table_column` VALUES ('163', '13', 'cs', '打赏人数', 'varch
 INSERT INTO `gen_table_column` VALUES ('164', '13', 'url', '打赏图片', 'varchar(120)', 'String', 'url', '0', '0', null, '1', '1', '1', '1', 'EQ', 'input', '', '5', 'admin', '2020-07-07 11:16:04', '', null);
 INSERT INTO `gen_table_column` VALUES ('165', '13', 'user_id', '用户ID', 'varchar(10)', 'String', 'userId', '0', '0', null, '1', '1', '1', '1', 'EQ', 'input', '', '6', 'admin', '2020-07-07 11:16:04', '', null);
 INSERT INTO `gen_table_column` VALUES ('166', '13', 'name', '资源名称', 'varchar(50)', 'String', 'name', '0', '0', null, '1', '1', '1', '1', 'LIKE', 'input', '', '7', 'admin', '2020-07-07 11:16:04', '', null);
-INSERT INTO `gen_table_column` VALUES ('167', '13', 'zykey', null, 'varchar(120)', 'String', 'zykey', '0', '0', null, '1', '1', '1', '1', 'EQ', 'input', '', '8', 'admin', '2020-07-07 11:16:04', '', null);
 INSERT INTO `gen_table_column` VALUES ('168', '13', 'shijian', null, 'varchar(20)', 'String', 'shijian', '0', '0', null, '1', '1', '1', '1', 'EQ', 'input', '', '9', 'admin', '2020-07-07 11:16:04', '', null);
 INSERT INTO `gen_table_column` VALUES ('169', '13', 'lx', null, 'varchar(8)', 'String', 'lx', '0', '0', null, '1', '1', '1', '1', 'EQ', 'input', '', '10', 'admin', '2020-07-07 11:16:04', '', null);
 INSERT INTO `gen_table_column` VALUES ('170', '13', 'zt', null, 'varchar(5)', 'String', 'zt', '0', '0', null, '1', '1', '1', '1', 'EQ', 'input', '', '11', 'admin', '2020-07-07 11:16:04', '', null);
