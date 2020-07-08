@@ -475,7 +475,6 @@
                     var $itemDom = $(liDom);
                     $itemDom.click(function (event) {
                         console.log("flagClick");
-                        flagClick=true;
                         var $self = $(this);
                         var $a = $self.find('a');
                         var dataId = $a.attr("data-id");
@@ -533,14 +532,13 @@
                                             }
                                         });
                                     } else if (rep.status === 1) {
-
-
+                                        
+                                        flagClick=true;
                                         $("#shipinId").val(dataId);
                                         //图片
                                         $("#url").val(poster);
                                         //视频
                                         $("#videoUrl").val(src);
-
                                         //图片地址
                                         player.poster = poster;
                                         //视频地址
@@ -631,6 +629,10 @@
                 var author = $("#author").val();
                 console.log("play:" + dataId);
                 if (dataId !== null && dataId !== undefined && dataId !== '') {
+
+                    if(flagClick){
+                        return
+                    }
                     $.ajax({
                         type: "post",
                         url: "/video/queryOrder",
