@@ -478,7 +478,9 @@
                         var $a = $self.find('a');
                         var dataId = $a.attr("data-id");
                         var author = $a.attr("data-author");
+                        //视频地址
                         var src = $a.attr("data-src");
+                        //poster 图片地址
                         var poster = $a.attr("data-poster");
                         $.ajax({
                             type: "post",
@@ -532,11 +534,16 @@
 
 
                                         $("#shipinId").val(dataId);
+                                        //图片
                                         $("#url").val(poster);
+                                        //视频
                                         $("#videoUrl").val(src);
 
+                                        //图片地址
                                         player.poster = poster;
+                                        //视频地址
                                         player.src = src;
+
                                         //设置/返回视频当前播放时间
                                         player.currentTime = 0;
                                         //是否开始播放
