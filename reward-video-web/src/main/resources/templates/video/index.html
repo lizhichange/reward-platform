@@ -445,6 +445,7 @@
 
             /*设置列表数据*/
             function setListData(curPageData) {
+                console.log("init-setListData");
                 var listDom = document.getElementById("list_videos_most_recent_videos_items");
                 for (var i = 0; i < curPageData.length; i++) {
                     var row = curPageData[i];
@@ -610,6 +611,7 @@
 
 
             player.on('play', function () {
+                console.log("play");
                 var dataId = $("#shipinId").val();
                 var author = $("#author").val();
                 console.log("play:" + dataId);
