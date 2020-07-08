@@ -605,72 +605,72 @@ public class VideoExample {
             return (Criteria) this;
         }
 
-        public Criteria andZykeyIsNull() {
+        public Criteria andVideoUrlIsNull() {
             addCriterion("video_url is null");
             return (Criteria) this;
         }
 
-        public Criteria andZykeyIsNotNull() {
+        public Criteria andVideoUrlIsNotNull() {
             addCriterion("video_url is not null");
             return (Criteria) this;
         }
 
-        public Criteria andZykeyEqualTo(String value) {
+        public Criteria andVideoUrlEqualTo(String value) {
             addCriterion("video_url =", value, "videoUrl");
             return (Criteria) this;
         }
 
-        public Criteria andZykeyNotEqualTo(String value) {
+        public Criteria andVideoUrlNotEqualTo(String value) {
             addCriterion("video_url <>", value, "videoUrl");
             return (Criteria) this;
         }
 
-        public Criteria andZykeyGreaterThan(String value) {
+        public Criteria andVideoUrlGreaterThan(String value) {
             addCriterion("video_url >", value, "videoUrl");
             return (Criteria) this;
         }
 
-        public Criteria andZykeyGreaterThanOrEqualTo(String value) {
+        public Criteria andVideoUrlGreaterThanOrEqualTo(String value) {
             addCriterion("video_url >=", value, "videoUrl");
             return (Criteria) this;
         }
 
-        public Criteria andZykeyLessThan(String value) {
+        public Criteria andVideoUrlLessThan(String value) {
             addCriterion("video_url <", value, "videoUrl");
             return (Criteria) this;
         }
 
-        public Criteria andZykeyLessThanOrEqualTo(String value) {
+        public Criteria andVideoUrlLessThanOrEqualTo(String value) {
             addCriterion("video_url <=", value, "videoUrl");
             return (Criteria) this;
         }
 
-        public Criteria andZykeyLike(String value) {
+        public Criteria andVideoUrlLike(String value) {
             addCriterion("video_url like", value, "videoUrl");
             return (Criteria) this;
         }
 
-        public Criteria andZykeyNotLike(String value) {
+        public Criteria andVideoUrlNotLike(String value) {
             addCriterion("video_url not like", value, "videoUrl");
             return (Criteria) this;
         }
 
-        public Criteria andZykeyIn(List<String> values) {
+        public Criteria andVideoUrlIn(List<String> values) {
             addCriterion("video_url in", values, "videoUrl");
             return (Criteria) this;
         }
 
-        public Criteria andZykeyNotIn(List<String> values) {
+        public Criteria andVideoUrlNotIn(List<String> values) {
             addCriterion("video_url not in", values, "videoUrl");
             return (Criteria) this;
         }
 
-        public Criteria andZykeyBetween(String value1, String value2) {
+        public Criteria andVideoUrlBetween(String value1, String value2) {
             addCriterion("video_url between", value1, value2, "videoUrl");
             return (Criteria) this;
         }
 
-        public Criteria andZykeyNotBetween(String value1, String value2) {
+        public Criteria andVideoUrlNotBetween(String value1, String value2) {
             addCriterion("video_url not between", value1, value2, "videoUrl");
             return (Criteria) this;
         }

@@ -44,7 +44,7 @@ public class RuoYiApplication {
                 newShi.setUrl(shipin.getUrl());
                 newShi.setUserId(shipin.getUserId());
                 newShi.setName(shipin.getName());
-                newShi.setZykey(shipin.getZykey());
+                newShi.setVideoUrl(shipin.getVideoUrl());
                 newShi.setDuration(shipin.getDuration());
                 newShi.setLx(shipin.getLx());
                 newShi.setStatus(shipin.getStatus());
