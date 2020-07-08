@@ -481,6 +481,7 @@ public class VideoController extends BaseController {
 
     @Data
     public static class PriceParam extends ToString {
+        private static final long serialVersionUID = -7646396057780726563L;
         private String price;
         private String id;
     }

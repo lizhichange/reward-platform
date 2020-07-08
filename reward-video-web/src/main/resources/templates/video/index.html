@@ -636,11 +636,22 @@
                                             var flag = value.indexOf("?") !== -1;
                                             var callbackUrl = window.location.href;
                                             var flagCallbackUrl = callbackUrl.indexOf("?") !== -1;
-                                            if (flagCallbackUrl) {
-                                                callbackUrl = callbackUrl + "&shipinId=" + dataId;
+
+
+                                            var flagShipinIdCallbackUrl = callbackUrl.indexOf("shipinId") !== -1;
+                                            //如果有这个参数值
+                                            if (flagShipinIdCallbackUrl) {
+                                                callbackUrl = changeUrlArg(callbackUrl, 'shipinId', dataId);
+                                                console.log("callbackUrl=" + callbackUrl);
                                             } else {
-                                                callbackUrl = callbackUrl + "?shipinId=" + dataId;
+                                                if (flagCallbackUrl) {
+                                                    callbackUrl = callbackUrl + "&shipinId=" + dataId;
+                                                } else {
+                                                    callbackUrl = callbackUrl + "?shipinId=" + dataId;
+                                                }
                                             }
+
+
                                             if (flag) {
                                                 window.location.href = value + "&orderId=" + rep.orderId + "&callbackUrl=" + encodeURIComponent(callbackUrl);
                                             } else {
