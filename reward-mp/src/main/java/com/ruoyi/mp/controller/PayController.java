@@ -223,6 +223,7 @@ public class PayController extends BaseController {
         String doMain = DoMainUtil.getDoMain(getRequestUrl);
         String notifyUrl = "http://" + doMain + "/pay/notify/order";
         request.setNotifyUrl(notifyUrl);
+        log.info("wxPayMock:{}",wxPayMock);
         if (wxPayMock) {
             String packageValue = "package=" + RandomUtil.randomNumber();
             SysOrderDTO newOrder = new SysOrderDTO();
