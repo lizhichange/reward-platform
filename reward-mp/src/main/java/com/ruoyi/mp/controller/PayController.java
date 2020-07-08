@@ -36,6 +36,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -62,6 +63,7 @@ import java.util.concurrent.TimeUnit;
 @Controller
 @RequestMapping("/pay")
 @Slf4j
+@RefreshScope
 @Api("支付")
 public class PayController extends BaseController {
     private final static Logger LOGGER = LoggerFactory.getLogger(PayController.class);
