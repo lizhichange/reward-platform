@@ -472,7 +472,7 @@
                     listDom.appendChild(liDom);//加在列表的后面,上拉加载
                     //转jquery
                     var $itemDom = $(liDom);
-                    $itemDom.click(function () {
+                    $itemDom.click(function (event) {
                         var $self = $(this);
                         var $a = $self.find('a');
                         var dataId = $a.attr("data-id");
@@ -560,6 +560,8 @@
                                 console.log(errorThrown);
                             },
                         });
+
+                        event.stopPropagation();    //  阻止事件冒泡
                     });
                 }
             }
