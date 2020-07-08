@@ -409,7 +409,7 @@
 
             /*初始化菜单*/
             var categoryId;//
-
+            var flagClick;
             $(".category").click(function () {
                 var i = $(this).attr("data");
                 if (categoryId != i) {
@@ -474,6 +474,8 @@
                     //转jquery
                     var $itemDom = $(liDom);
                     $itemDom.click(function (event) {
+                        console.log("flagClick");
+                        flagClick=true;
                         var $self = $(this);
                         var $a = $self.find('a');
                         var dataId = $a.attr("data-id");
