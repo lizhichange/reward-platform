@@ -103,20 +103,12 @@ logging:
     org.springframework: warn
 
 
-
 reward-service:
   ribbon:
-    listOfServers: http://admin:admin@127.0.0.1
+    listOfServers: http://172.16.0.157:6900
 
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://admin:admin@127.0.0.1:8761/eureka/
+      defaultZone: http://172.16.0.157:6900/eureka/
     fetchRegistry: true
-  instance:
-    preferIpAddress: true
-    ipAddress: 127.0.0.1
-    nonSecurePort: 8761
-    lease-renewal-interval-in-seconds: 10
-    lease-expiration-duration-in-seconds: 90
-    instance-id: ${eureka.client.ipAddress}:${spring.application.name}:${eureka.instance.nonSecurePort}
