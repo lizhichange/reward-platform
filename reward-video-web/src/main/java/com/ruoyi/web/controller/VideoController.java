@@ -254,6 +254,7 @@ public class VideoController extends BaseController {
         SysOrderDTO sysOrderDTO = new SysOrderDTO();
         sysOrderDTO.setOpenId(openId);
         sysOrderDTO.setStatus(Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
+        log.info("sysOrderDTO:{}", sysOrderDTO);
         List<SysOrderDTO> listExt = sysOrderFacadeClient.selectSysOrderListExt(sysOrderDTO);
         log.info("listExt:{}", listExt);
         if (CollectionUtils.isEmpty(listExt)) {
