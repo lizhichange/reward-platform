@@ -192,7 +192,7 @@ public class PayController extends BaseController {
         return create(dto, servletRequest);
     }
 
-    @Value("mp.totalFee")
+    @Value("mp.totalFee:0")
     private Integer totalFee;
 
     private AjaxResult create(SysOrderDTO dto, HttpServletRequest servletRequest) throws Exception {
