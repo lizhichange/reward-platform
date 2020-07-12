@@ -192,6 +192,8 @@ public class PayController extends BaseController {
         return create(dto, servletRequest);
     }
 
+    @Value("mp.totalFee")
+    private Integer totalFee;
 
     private AjaxResult create(SysOrderDTO dto, HttpServletRequest servletRequest) throws Exception {
         SysOrderDTO item = getSysOrderDTO(dto.getOrderId());
@@ -203,7 +205,11 @@ public class PayController extends BaseController {
         if (mpAuthConfig.isMockMoney()) {
             request.setTotalFee(1);
         } else {
-            request.setTotalFee(item.getMoney());
+            if (totalFee > 0) {
+                request.setTotalFee(totalFee);
+            } else {
+                request.setTotalFee(item.getMoney());
+            }
         }
         request.setBody("支付测试");
         request.setMchId(configFactory.getSysWechatConfig().getMchId());
@@ -225,7 +231,7 @@ public class PayController extends BaseController {
         String doMain = DoMainUtil.getDoMain(getRequestUrl);
         String notifyUrl = "http://" + doMain + "/pay/notify/order";
         request.setNotifyUrl(notifyUrl);
-        log.info("wxPayMock:{}",wxPayMock);
+        log.info("wxPayMock:{}", wxPayMock);
         if (wxPayMock) {
             String packageValue = "package=" + RandomUtil.randomNumber();
             SysOrderDTO newOrder = new SysOrderDTO();
