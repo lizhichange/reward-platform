@@ -14,14 +14,7 @@
                             <label>微信配置标识：</label>
                             <input type="text" name="configCode"/>
                         </li>
-                        <li>
-                            <label>环境类型：</label>
-                            <select name="envType" th:with="type=${@dict.getType('')}">
-                                <option value="">所有</option>
-                                <option th:each="dict : ${type}" th:text="${dict.dictLabel}"
-                                        th:value="${dict.dictValue}"></option>
-                            </select>
-                        </li>
+
                         <li>
                             <label>微信appid：</label>
                             <input type="text" name="appId"/>
