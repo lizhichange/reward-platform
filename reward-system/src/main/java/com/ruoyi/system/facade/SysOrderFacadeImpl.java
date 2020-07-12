@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -88,7 +89,7 @@ public class SysOrderFacadeImpl implements SysOrderFacade {
             example.setLimit(sysOrder.getLimit());
         }
         ExtSysOrderExample.Criteria criteria = example.createCriteria();
-        if (null != sysOrder.getStatus()) {
+        if (Objects.nonNull(sysOrder.getStatus())) {
             criteria.andStatusEqualTo(sysOrder.getStatus());
         }
 
