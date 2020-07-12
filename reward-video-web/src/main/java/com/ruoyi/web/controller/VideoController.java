@@ -231,6 +231,8 @@ public class VideoController extends BaseController {
     @PostMapping("/list")
     @ResponseBody
 //    @Cacheable(key = "#p0")
+    @WxPnUserAuth
+
     public TableDataInfo list(VideoDTO videoDTO, PageForm pageForm) {
         int pageNum = pageForm.getPageNum();
         int pageSize = pageForm.getPageSize();
@@ -247,8 +249,10 @@ public class VideoController extends BaseController {
 
     @PostMapping("/buy")
     @ResponseBody
+    @WxPnUserAuth
     public TableDataInfo buy(VideoDTO videoDTO, PageForm pageForm) {
         String openId = SessionContext.getOpenId();
+
         int pageNum = pageForm.getPageNum();
         int pageSize = pageForm.getPageSize();
         SysOrderDTO sysOrderDTO = new SysOrderDTO();
