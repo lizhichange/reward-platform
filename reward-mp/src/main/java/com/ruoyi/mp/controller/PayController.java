@@ -193,7 +193,7 @@ public class PayController extends BaseController {
     }
 
     @Value("mp.totalFee:0")
-    private Integer totalFee;
+    private String totalFee;
 
     private AjaxResult create(SysOrderDTO dto, HttpServletRequest servletRequest) throws Exception {
         SysOrderDTO item = getSysOrderDTO(dto.getOrderId());
@@ -205,8 +205,8 @@ public class PayController extends BaseController {
         if (mpAuthConfig.isMockMoney()) {
             request.setTotalFee(1);
         } else {
-            if (totalFee > 0) {
-                request.setTotalFee(totalFee);
+            if (Integer.parseInt(totalFee) > 0) {
+                request.setTotalFee(Integer.parseInt(totalFee));
             } else {
                 request.setTotalFee(item.getMoney());
             }
