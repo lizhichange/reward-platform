@@ -148,6 +148,8 @@ public class Video implements Serializable {
      */
     private Integer categoryId;
 
+    private String categoryName;
+
     /**
      * shipin.create_time
      *

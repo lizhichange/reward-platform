@@ -116,6 +116,13 @@ public class VideoController extends BaseController {
                 }
             }
             for (Video item : list) {
+
+                SysCategory sysCategory = sysCategoryService.selectDeptById(item.getCategoryId().longValue());
+                if (sysCategory != null) {
+                    item.setCategoryName(sysCategory.getCategoryName());
+                }
+
+
                 ExtSysOrder extSysOrder = new ExtSysOrder();
                 extSysOrder.setGoodsId(item.getId());
                 extSysOrder.setStatus(Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
