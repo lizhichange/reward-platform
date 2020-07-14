@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro" xmlns:th="http://www.thymeleaf.org">
+<meta name=viewport
+    content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui">
+<meta name="apple-mobile-web-app-capable" content="yes">
 
 <head>
     <th:block th:include="include :: header('片库列表')" />
@@ -8,95 +11,87 @@
 </head>
 
 <body class="gray-bg">
-<div class="ui-layout-west">
-    <div class="box box-main">
-        <div class="box-header">
-        </div>
-        <div class="ui-layout-content">
-            <div class="ztree" id="tree"></div>
+    <div class="ui-layout-west">
+        <div class="box box-main">
+            <div class="box-header">
+            </div>
+            <div class="ui-layout-content">
+                <div class="ztree" id="tree"></div>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="ui-layout-center">
-    <div class="container-div">
-        <div class="row">
-            <div class="col-sm-12 search-collapse">
-                <form id="user-form">
-                    <input id="categoryId" name="categoryId" type="hidden">
-                    <input id="parentId" name="parentId" type="hidden">
+    <div class="ui-layout-center">
+        <div class="container-div">
+            <div class="row">
+                <div class="col-sm-12 search-collapse">
+                    <form id="user-form">
+                        <input id="categoryId" name="categoryId" type="hidden">
+                        <input id="parentId" name="parentId" type="hidden">
 
-                    <div class="select-list">
-                        <ul>
-                            <li>
-                                资源名称：<input name="name" type="text" />
-                            </li>
-                            <li>
-                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i
-                                        class="fa fa-search"></i>&nbsp;搜索</a>
-                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i
-                                        class="fa fa-refresh"></i>&nbsp;重置</a>
-                            </li>
-                        </ul>
+                        <div class="select-list">
+                            <ul>
+                                <li>
+                                    资源名称：<input name="name" type="text" />
+                                </li>
+                                <li>
+                                    <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i
+                                            class="fa fa-search"></i>&nbsp;搜索</a>
+                                    <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i
+                                            class="fa fa-refresh"></i>&nbsp;重置</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="btn-group-sm" id="toolbar" role="group">
+                    <a class="btn btn-success" onclick="$.operate.addTab()" shiro:hasPermission="system:shipin:add">
+                        <i class="fa fa-plus"></i> 新增
+                    </a>
+                    <a class="btn btn-primary single disabled" onclick="$.operate.editTab()"
+                        shiro:hasPermission="system:shipin:edit">
+                        <i class="fa fa-edit"></i> 修改
+                    </a>
+                    <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()"
+                        shiro:hasPermission="system:shipin:remove">
+                        <i class="fa fa-remove"></i> 删除
+                    </a>
+                </div>
+
+                <div class="col-sm-12 select-table table-striped">
+                    <table data-mobile-responsive="true" id="bootstrap-table"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="ibox-content">
+        <button class="btn btn-primary" type="button" id="btnModal">模态窗体</button>
+        <div aria-hidden="true" class="modal inmodal" id="myModal4" role="dialog" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content animated fadeIn">
+                    <div class="modal-header">
+                        <button class="close" data-dismiss="modal" type="button"><span
+                                aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                        </button>
                     </div>
-                </form>
-            </div>
-
-            <div class="btn-group-sm" id="toolbar" role="group">
-                <a class="btn btn-success" onclick="$.operate.addTab()" shiro:hasPermission="system:shipin:add">
-                    <i class="fa fa-plus"></i> 新增
-                </a>
-                <a class="btn btn-primary single disabled" onclick="$.operate.editTab()"
-                   shiro:hasPermission="system:shipin:edit">
-                    <i class="fa fa-edit"></i> 修改
-                </a>
-                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()"
-                   shiro:hasPermission="system:shipin:remove">
-                    <i class="fa fa-remove"></i> 删除
-                </a>
-            </div>
-
-            <div class="col-sm-12 select-table table-striped">
-                <table data-mobile-responsive="true" id="bootstrap-table"></table>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="ibox-content">
-
-
-
-
-    <!-- <button class="btn btn-primary" type="button" id="btnModal">模态窗体</button> -->
-
-
-    <div aria-hidden="true" class="modal inmodal" id="myModal4" role="dialog" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content animated fadeIn">
-                <div class="modal-header">
-                    <button class="close" data-dismiss="modal" type="button"><span
-                            aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <video src="" id="controls" controls="controls"></video>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-white" data-dismiss="modal" type="button">关闭</button>
+                    <div class="modal-body">
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-white" data-dismiss="modal" type="button">关闭</button>
+                    </div>
                 </div>
             </div>
         </div>
-
     </div>
-</div>
 
 
-<th:block th:include="include :: footer" />
-<th:block th:include="include :: layout-latest-js" />
-<th:block th:include="include :: ztree-js" />
-<script th:inline="javascript">
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: layout-latest-js" />
+    <th:block th:include="include :: ztree-js" />
+    <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('system:shipin:edit') }]];
         var resetPwdFlag = [[${@permission.hasPermi('system:user:resetPwd') }]];
         var removeFlag = [[${@permission.hasPermi('system:shipin:remove') }]];
@@ -172,7 +167,7 @@
                         var actions = [];
                         actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.editTab(\'' + row.id + '\')"><i class="fa fa-edit"></i>编辑</a> ');
                         actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.id + '\')"><i class="fa fa-remove"></i>删除</a> ');
-                        actions.push('<a class="btn btn-info btn-xs ' + resetPwdFlag + '" href="javascript:void(0)" onclick="resetPwd(\'' + row.videoUrl + '\')"><i class="fa fa-key"></i>预览</a>');
+                        actions.push('<a class="btn btn-info btn-xs ' + resetPwdFlag + '" href="javascript:void(0)" onclick="myOpen(\'' + row.id + '\')"><i class="fa fa-key"></i>预览</a>');
                         return actions.join('');
                     }
                 }]
@@ -180,10 +175,18 @@
             $.table.init(options);
         }
 
+        function myOpen(id) {
+            var url = prefix + '/preview/' + id;
+            $.modal.open("预览视频", url, '500', '400');
+        }
+
         function resetPwd(videoUrl) {
-            $("#controls").attr("src",videoUrl);
             $("#myModal4").modal("toggle");
         }
+        $('#myModal4').on('hide.bs.modal', function (e) {
+            console.log(e);
+        });
+
 
         $('#btnExpand').click(function () {
             $._tree.expandAll(true);

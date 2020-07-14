@@ -86,6 +86,12 @@ public class VideoController extends BaseController {
         return prefix + "/pshipin";
     }
 
+    @Log(title = "预览视频", businessType = BusinessType.UPDATE)
+    @GetMapping("/preview/{id}")
+    public String resetPwd(@PathVariable("id") Long id, ModelMap mmap) {
+        mmap.put("video", videoService.selectVideoById(id));
+        return prefix + "/preview";
+    }
 
     /**
      * 查询公共片库列表
