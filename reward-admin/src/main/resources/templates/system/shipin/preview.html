@@ -3,19 +3,32 @@
 
 <head>
     <th:block th:include="include :: header('预览视频')" />
+    <meta charset="utf-8">
+    <meta name=viewport
+          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui">
+    <meta name="referrer" content="no-referrer">
+    <style type="text/css">
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            margin: auto;
+            overflow: hidden;
+        }
+    </style>
 </head>
 
 <body class="white-bg">
-    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
-        <div id="mse"></div>
-        <script src="//cdn.jsdelivr.net/npm/xgplayer@1.1.4/browser/index.js" charset="utf-8"></script>
-    </div>
-    <input type="hidden" th:value="${video.videoUrl}" id="videoUrl" />
-    <input type="hidden" th:value="${video.url}" id="url" />
+<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+    <div id="mse"></div>
+    <script src="//cdn.jsdelivr.net/npm/xgplayer@1.1.4/browser/index.js" charset="utf-8"></script>
+</div>
+<input type="hidden" th:value="${video.videoUrl}" id="videoUrl" />
+<input type="hidden" th:value="${video.url}" id="url" />
 
-    <th:block th:include="include :: footer" />
+<th:block th:include="include :: footer" />
 
-    <script>
+<script>
         $(function () {
             let player = new Player({
                 "volume": 0.0,
@@ -26,7 +39,8 @@
                 "whitelist": [
                     ""
                 ],
-                "fluid": true
+                "autoplay": false,
+                "fluid": true,
             });
         });
     </script>
