@@ -27,6 +27,8 @@ import com.ruoyi.system.domain.SysRole;
 import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.system.service.ISysConfigService;
 import com.ruoyi.system.service.ISysOrderService;
+import com.ruoyi.web.model.JiaLiApiResult;
+import com.ruoyi.web.model.JiaLiDetailApiResult;
 import com.ruoyi.web.param.PriceParam;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

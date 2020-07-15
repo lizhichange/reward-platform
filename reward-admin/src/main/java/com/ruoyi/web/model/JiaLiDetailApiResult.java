@@ -1,4 +1,4 @@
-package com.ruoyi.web.controller.system;
+package com.ruoyi.web.model;
 
 import org.near.toolkit.model.ToString;
 
