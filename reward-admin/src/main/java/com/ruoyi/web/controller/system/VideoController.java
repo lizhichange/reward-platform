@@ -272,7 +272,13 @@ public class VideoController extends BaseController {
                             video.setUserId("admin");
                             video.setLogo(vodPic);
                             video.setName(vodName);
-                            video.setVideoUrl(vodPlayUrl);
+                            boolean check = vodPlayUrl.contains("$");
+                            if (check) {
+                                String[] split = vodPlayUrl.split("\\$");
+                                video.setVideoUrl(split[1]);
+                            } else {
+                                video.setVideoUrl(vodPlayUrl);
+                            }
                             video.setClick(0);
                             video.setCategoryId(pk);
                             video.setCreateTime(new Date());
