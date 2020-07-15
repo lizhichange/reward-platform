@@ -65,6 +65,11 @@
         <include refid="selectDeptVo"/>
         where category_name=#{categoryName} and parent_id = #{parentId}
     </select>
+    <select id="selectByCategoryName" resultMap="SysCategoryResult">
+        <include refid="selectDeptVo"/>
+        where category_name=#{categoryName}
+    </select>
+
 
     <select id="selectDeptById" parameterType="Long" resultMap="SysCategoryResult">
         select d.category_id, d.parent_id, d.ancestors, d.category_name, d.order_num, d.status,

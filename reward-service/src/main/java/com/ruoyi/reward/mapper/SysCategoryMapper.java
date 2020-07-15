@@ -85,6 +85,8 @@ public interface SysCategoryMapper {
      */
     public SysCategory checkDeptNameUnique(@Param("categoryName") String categoryName, @Param("parentId") Long parentId);
 
+    public SysCategory selectByCategoryName(@Param("categoryName") String categoryName);
+
     /**
      * 根据角色ID查询部门
      *

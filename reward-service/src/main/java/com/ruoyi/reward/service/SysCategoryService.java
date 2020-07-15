@@ -19,6 +19,8 @@ public interface SysCategoryService {
      */
     List<SysCategory> selectDeptList(SysCategory dept);
 
+    SysCategory selectByCategoryName(String categoryName);
+
     /**
      * 查询部门管理树
      *

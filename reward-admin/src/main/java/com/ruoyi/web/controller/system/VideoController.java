@@ -6,7 +6,6 @@ import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.ruoyi.common.annotation.Log;
-import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.page.TableDataInfo;
@@ -241,12 +240,10 @@ public class VideoController extends BaseController {
                     String vodPic = listBean.getVod_pic();
                     String vodName = listBean.getVod_name();
                     int vodId = listBean.getVod_id();
-                    SysCategory category = new SysCategory();
-                    category.setCategoryName(typeName);
-                    String nameUnique = sysCategoryService.checkDeptNameUnique(category);
+                    SysCategory nameUnique = sysCategoryService.selectByCategoryName(typeName);
                     //如果存在
                     int pk = 0;
-                    if (!UserConstants.DEPT_NAME_NOT_UNIQUE.equals(nameUnique)) {
+                    if (nameUnique==null) {
                         SysCategory sysCategory = new SysCategory();
                         sysCategory.setParentId(100L);
                         sysCategory.setAncestors("0,100");

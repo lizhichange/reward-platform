@@ -37,6 +37,11 @@ public class SysCategoryServiceImpl implements SysCategoryService {
         return sysCategoryMapper.selectDeptList(dept);
     }
 
+    @Override
+    public SysCategory selectByCategoryName(String categoryName) {
+        return sysCategoryMapper.selectByCategoryName(categoryName);
+    }
+
     /**
      * 查询部门管理树
      *
