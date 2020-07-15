@@ -281,6 +281,7 @@ public class VideoController extends BaseController {
                             }
                             video.setClick(0);
                             video.setCategoryId(pk);
+                            video.setDuration("752");
                             video.setCreateTime(new Date());
                             videoService.insertVideo(video);
                         }
