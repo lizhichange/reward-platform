@@ -37,7 +37,6 @@ import org.near.toolkit.common.StringUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.CollectionUtils;
@@ -212,7 +211,6 @@ public class VideoController extends BaseController {
         return toAjax(videoFacade.insertVideoDTO(shipin));
     }
 
-    @Scheduled(cron = "0 0/20 * * * ?")
     @ApiOperation("拉取视频")
     @ResponseBody
     @PostMapping("/fetch")
