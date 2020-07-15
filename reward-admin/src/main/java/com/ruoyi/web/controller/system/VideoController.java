@@ -37,12 +37,20 @@ import org.near.toolkit.common.StringUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+import java.net.HttpURLConnection;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -215,13 +223,52 @@ public class VideoController extends BaseController {
     @ResponseBody
     @PostMapping("/fetch")
     public AjaxResult fetchVideo(ModelMap modelMap) {
-        ResponseEntity<String> forEntity = restTemplate.getForEntity("https://jialiapi.com/api.php/provide/vod/?ac=list", String.class);
+        RestTemplate client = new RestTemplate(new HttpsClientRequestFactory());
+        ResponseEntity<String> forEntity = client.getForEntity("https://jialiapi.com/api.php/provide/vod/?ac=list", String.class);
         String body = forEntity.getBody();
         JiaLiApiResult parse = JSONObject.parseObject(body, JiaLiApiResult.class);
         logger.info("parse:{}", parse);
         return AjaxResult.success(AjaxResult.Type.SUCCESS.name(), parse);
     }
 
+    public static class HttpsClientRequestFactory extends SimpleClientHttpRequestFactory {
+        @Override
+        protected void prepareConnection(HttpURLConnection connection, String httpMethod) {
+            try {
+                if (!(connection instanceof HttpsURLConnection)) {// http协议
+                    //throw new RuntimeException("An instance of HttpsURLConnection is expected");
+                    super.prepareConnection(connection, httpMethod);
+                }
+                if (connection instanceof HttpsURLConnection) {// https协议，修改协议版本
+                    SSLContext ctx = SSLContext.getInstance("TLSv1.2");
+                    X509TrustManager tm = new X509TrustManager() {
+                        @Override
+                        public void checkClientTrusted(X509Certificate[] chain,
+                                                       String authType) throws CertificateException {
+                        }
+
+                        @Override
+                        public void checkServerTrusted(X509Certificate[] chain,
+                                                       String authType) throws CertificateException {
+                        }
+
+                        @Override
+                        public X509Certificate[] getAcceptedIssuers() {
+                            return null;
+                        }
+                    };
+                    ctx.init(null, new TrustManager[]{tm}, null);
+                    org.apache.http.conn.ssl.SSLSocketFactory ssf = new org.apache.http.conn.ssl.SSLSocketFactory(ctx, org.apache.http.conn.ssl.SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+                    ((HttpsURLConnection) connection).setSSLSocketFactory(ctx.getSocketFactory());
+                    HttpsURLConnection httpsConnection = (HttpsURLConnection) connection;
+
+                    super.prepareConnection(httpsConnection, httpMethod);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     @Autowired
     ISysConfigService sysConfigService;
