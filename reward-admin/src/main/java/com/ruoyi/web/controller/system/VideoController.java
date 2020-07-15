@@ -242,8 +242,8 @@ public class VideoController extends BaseController {
                     int vodId = listBean.getVod_id();
                     SysCategory nameUnique = sysCategoryService.selectByCategoryName(typeName);
                     //如果存在
-                    int pk = 0;
-                    if (nameUnique==null) {
+                    int pk;
+                    if (nameUnique == null) {
                         SysCategory sysCategory = new SysCategory();
                         sysCategory.setParentId(100L);
                         sysCategory.setAncestors("0,100");
@@ -256,6 +256,8 @@ public class VideoController extends BaseController {
                         sysCategory.setUpdateBy("admin");
                         sysCategory.setUpdateTime(new Date());
                         pk = sysCategoryService.insertDept(sysCategory);
+                    } else {
+                        pk = nameUnique.getCategoryId().intValue();
                     }
                     //如果添加成功
                     if (pk > 0) {
