@@ -61,6 +61,7 @@ public class BaseController {
     protected void getCategory(ModelMap modelmap) {
         SysCategoryDTO sysCategory = new SysCategoryDTO();
         sysCategory.setParentId(100L);
+        sysCategory.setStatus("0");
         List<SysCategoryDTO> categoryList = sysCategoryFacadeClient.selectDeptList(sysCategory);
         modelmap.addAttribute("categoryList", categoryList);
     }
@@ -76,7 +77,6 @@ public class BaseController {
 
     @Reference(version = "1.0.0", check = false)
     com.ruoyi.reward.facade.api.DemoFacade demoFacade;
-
 
     void init() {
         new Thread(() -> demoFacade.testOne()).start();

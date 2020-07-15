@@ -20,17 +20,18 @@
     </resultMap>
 
     <sql id="selectDeptVo">
-        select d.category_id, d.parent_id, d.ancestors, d.category_name, d.order_num,   d.status, d.del_flag, d.create_by, d.create_time
+        select d.category_id, d.parent_id, d.ancestors, d.category_name, d.order_num, d.status, d.del_flag, d.create_by,
+        d.create_time
         from sys_category d
     </sql>
 
     <select id="selectRoleDeptTree" parameterType="Long" resultType="String">
-		select concat(d.category_id, d.category_name) as category_name
-		from sys_category d
-			left join sys_role_dept rd on d.category_id = rd.category_id
-		where d.del_flag = '0' and rd.role_id = #{roleId}
-		order by d.parent_id, d.order_num
-	</select>
+        select concat(d.category_id, d.category_name) as category_name
+        from sys_category d
+        left join sys_role_dept rd on d.category_id = rd.category_id
+        where d.del_flag = '0' and rd.role_id = #{roleId}
+        order by d.parent_id, d.order_num
+    </select>
 
     <select id="selectDeptList" parameterType="SysCategory" resultMap="SysCategoryResult">
         <include refid="selectDeptVo"/>
@@ -50,8 +51,8 @@
     </select>
 
     <select id="checkDeptExistUser" parameterType="Long" resultType="int">
-		select count(1) from sys_category where category_id = #{categoryId} and del_flag = '0'
-	</select>
+        select count(1) from sys_category where category_id = #{categoryId} and del_flag = '0'
+    </select>
 
     <select id="selectDeptCount" parameterType="SysCategory" resultType="int">
         select count(1) from sys_category
@@ -66,17 +67,19 @@
     </select>
 
     <select id="selectDeptById" parameterType="Long" resultMap="SysCategoryResult">
-		select d.category_id, d.parent_id, d.ancestors, d.category_name, d.order_num,  d.status,
-			(select category_name from sys_category where category_id = d.parent_id) parent_name
-		from sys_category d
-		where d.category_id = #{categoryId}
-	</select>
+        select d.category_id, d.parent_id, d.ancestors, d.category_name, d.order_num, d.status,
+        (select category_name from sys_category where category_id = d.parent_id) parent_name
+        from sys_category d
+        where d.category_id = #{categoryId}
+    </select>
 
     <select id="selectChildrenDeptById" parameterType="Long" resultMap="SysCategoryResult">
-		select * from sys_category where find_in_set(#{categoryId}, ancestors)
-	</select>
+        select * from sys_category where find_in_set(#{categoryId}, ancestors)
+    </select>
 
-    <insert id="insertDept" parameterType="SysCategory">
+    <insert id="insertDept" parameterType="SysCategory"
+            keyColumn="category_id" keyProperty="categoryId"
+            useGeneratedKeys="true">
         insert into sys_category(
         <if test="categoryId != null and categoryId != 0">category_id,</if>
         <if test="parentId != null and parentId != 0">parent_id,</if>
@@ -126,8 +129,8 @@
     </update>
 
     <delete id="deleteDeptById" parameterType="Long">
-		update sys_category set del_flag = '2' where category_id = #{categoryId}
-	</delete>
+        update sys_category set del_flag = '2' where category_id = #{categoryId}
+    </delete>
 
     <update id="updateDeptStatus" parameterType="SysCategory">
         update sys_category

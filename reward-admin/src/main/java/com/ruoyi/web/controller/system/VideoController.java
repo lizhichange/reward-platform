@@ -6,6 +6,7 @@ import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.ruoyi.common.annotation.Log;
+import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.page.TableDataInfo;
@@ -230,6 +231,59 @@ public class VideoController extends BaseController {
         String body = forEntity.getBody();
         JiaLiDetailApiResult parse = JSONObject.parseObject(body, JiaLiDetailApiResult.class);
         logger.info("parse:{}", parse);
+        if (parse != null) {
+            List<JiaLiDetailApiResult.ListBean> list = parse.getList();
+            if (!CollectionUtils.isEmpty(list)) {
+                for (JiaLiDetailApiResult.ListBean listBean : list) {
+                    //类目
+                    String typeName = listBean.getVod_class();
+                    String vodPlayUrl = listBean.getVod_play_url();
+                    String vodPic = listBean.getVod_pic();
+                    String vodName = listBean.getVod_name();
+                    int vodId = listBean.getVod_id();
+                    SysCategory category = new SysCategory();
+                    category.setCategoryName(typeName);
+                    String nameUnique = sysCategoryService.checkDeptNameUnique(category);
+                    //如果存在
+                    int pk = 0;
+                    if (!UserConstants.DEPT_NAME_NOT_UNIQUE.equals(nameUnique)) {
+                        SysCategory sysCategory = new SysCategory();
+                        sysCategory.setParentId(100L);
+                        sysCategory.setAncestors("0,100");
+                        sysCategory.setCategoryName(typeName);
+                        sysCategory.setOrderNum("1");
+                        sysCategory.setStatus("0");
+                        sysCategory.setDelFlag("0");
+                        sysCategory.setCreateBy("admin");
+                        sysCategory.setCreateTime(new Date());
+                        sysCategory.setUpdateBy("admin");
+                        sysCategory.setUpdateTime(new Date());
+                        pk = sysCategoryService.insertDept(sysCategory);
+                    }
+                    //如果添加成功
+                    if (pk > 0) {
+                        Video query = new Video();
+                        query.setCs(String.valueOf(vodId));
+                        List<Video> videoList = videoService.selectVideoList(query);
+                        if (CollectionUtils.isEmpty(videoList)) {
+                            Video video = new Video();
+                            video.setMoney("2-5");
+                            video.setCs(String.valueOf(vodId));
+                            video.setUrl(vodPic);
+                            video.setUserId("admin");
+                            video.setName(vodName);
+                            video.setVideoUrl(vodPlayUrl);
+                            video.setClick(0);
+                            video.setCategoryId(pk);
+                            video.setCreateTime(new Date());
+                            videoService.insertVideo(video);
+                        }
+                    }
+                }
+            }
+        }
+
+
         return AjaxResult.success(AjaxResult.Type.SUCCESS.name(), parse);
     }
 
