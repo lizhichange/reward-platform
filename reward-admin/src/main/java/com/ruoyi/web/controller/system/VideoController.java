@@ -271,6 +271,7 @@ public class VideoController extends BaseController {
                             video.setCs(String.valueOf(vodId));
                             video.setUrl(vodPic);
                             video.setUserId("admin");
+                            video.setLogo(vodPic);
                             video.setName(vodName);
                             video.setVideoUrl(vodPlayUrl);
                             video.setClick(0);
