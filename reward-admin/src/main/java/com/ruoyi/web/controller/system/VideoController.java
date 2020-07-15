@@ -219,6 +219,18 @@ public class VideoController extends BaseController {
         return toAjax(videoFacade.insertVideoDTO(shipin));
     }
 
+    @ApiOperation("拉取视频detail")
+    @ResponseBody
+    @PostMapping("/fetchDetail")
+    public AjaxResult fetchDetail(ModelMap modelMap) {
+        RestTemplate client = new RestTemplate(new HttpsClientRequestFactory());
+        ResponseEntity<String> forEntity = client.getForEntity("https://jialiapi.com/api.php/provide/vod/?ac=detail", String.class);
+        String body = forEntity.getBody();
+        JiaLiDetailApiResult parse = JSONObject.parseObject(body, JiaLiDetailApiResult.class);
+        logger.info("parse:{}", parse);
+        return AjaxResult.success(AjaxResult.Type.SUCCESS.name(), parse);
+    }
+
     @ApiOperation("拉取视频")
     @ResponseBody
     @PostMapping("/fetch")
