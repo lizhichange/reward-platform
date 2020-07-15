@@ -137,7 +137,9 @@ public class SysCategoryServiceImpl implements SysCategoryService {
             throw new BusinessException("部门停用，不允许新增");
         }
         dept.setAncestors(info.getAncestors() + "," + dept.getParentId());
-        return sysCategoryMapper.insertDept(dept);
+        sysCategoryMapper.insertDept(dept);
+        Long categoryId = dept.getCategoryId();
+        return categoryId.intValue();
     }
 
     /**
