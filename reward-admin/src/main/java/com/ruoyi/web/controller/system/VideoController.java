@@ -13,14 +13,14 @@ import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.util.ShiroUtils;
-import com.ruoyi.reward.domain.Video;
 import com.ruoyi.reward.domain.SysCategory;
+import com.ruoyi.reward.domain.Video;
 import com.ruoyi.reward.facade.api.VideoFacade;
-import com.ruoyi.reward.facade.dto.VideoDTO;
 import com.ruoyi.reward.facade.dto.SysCategoryDTO;
+import com.ruoyi.reward.facade.dto.VideoDTO;
 import com.ruoyi.reward.facade.enums.OrderStatusType;
-import com.ruoyi.reward.service.VideoService;
 import com.ruoyi.reward.service.SysCategoryService;
+import com.ruoyi.reward.service.VideoService;
 import com.ruoyi.system.domain.ExtSysOrder;
 import com.ruoyi.system.domain.SysConfig;
 import com.ruoyi.system.domain.SysRole;
@@ -28,6 +28,8 @@ import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.system.service.ISysConfigService;
 import com.ruoyi.system.service.ISysOrderService;
 import com.ruoyi.web.param.PriceParam;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
@@ -56,6 +58,7 @@ import java.util.stream.Collectors;
  * @date 2020-03-17
  */
 @Controller
+@Api("视频信息管理")
 @RequestMapping("/system/shipin")
 public class VideoController extends BaseController {
     private final String prefix = "system/shipin";
@@ -210,14 +213,15 @@ public class VideoController extends BaseController {
     }
 
     @Scheduled(cron = "0 0/20 * * * ?")
-    public void fetchVideo() {
+    @ApiOperation("拉取视频")
+    @ResponseBody
+    @PostMapping("/fetch")
+    public AjaxResult fetchVideo(ModelMap modelMap) {
         ResponseEntity<String> forEntity = restTemplate.getForEntity("https://jialiapi.com/api.php/provide/vod/?ac=list", String.class);
         String body = forEntity.getBody();
         JiaLiApiResult parse = JSONObject.parseObject(body, JiaLiApiResult.class);
         logger.info("parse:{}", parse);
-        if (parse != null) {
-
-        }
+        return AjaxResult.success(AjaxResult.Type.SUCCESS.name(), parse);
     }
 
 

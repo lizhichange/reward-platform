@@ -10,6 +10,7 @@ import lombok.Data;
 public class RegParam extends BaseEntity {
 
 
+    private static final long serialVersionUID = 4138700137950266581L;
     /**
      * 登录名称
      */
