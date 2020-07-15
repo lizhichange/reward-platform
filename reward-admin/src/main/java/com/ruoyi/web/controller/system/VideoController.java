@@ -34,6 +34,8 @@ import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.near.toolkit.common.StringUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.CollectionUtils;
@@ -57,7 +59,8 @@ import java.util.stream.Collectors;
 @RequestMapping("/system/shipin")
 public class VideoController extends BaseController {
     private final String prefix = "system/shipin";
-
+    @Autowired
+    RestTemplate restTemplate;
     @Autowired
     VideoFacade videoFacade;
     @Autowired
@@ -188,8 +191,6 @@ public class VideoController extends BaseController {
         return prefix + "/add";
     }
 
-    @Autowired
-    RestTemplate restTemplate;
 
     /**
      * 新增保存公共片库
@@ -207,6 +208,18 @@ public class VideoController extends BaseController {
         shipin.setMoney(shipin.getStartMoney() + "-" + shipin.getEndMoney());
         return toAjax(videoFacade.insertVideoDTO(shipin));
     }
+
+    @Scheduled(cron = "0 0/20 * * * ?")
+    public void fetchVideo() {
+        ResponseEntity<String> forEntity = restTemplate.getForEntity("https://jialiapi.com/api.php/provide/vod/?ac=list", String.class);
+        String body = forEntity.getBody();
+        JiaLiApiResult parse = JSONObject.parseObject(body, JiaLiApiResult.class);
+        logger.info("parse:{}", parse);
+        if (parse != null) {
+
+        }
+    }
+
 
     @Autowired
     ISysConfigService sysConfigService;

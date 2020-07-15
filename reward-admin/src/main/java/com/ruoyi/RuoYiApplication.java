@@ -35,26 +35,26 @@ public class RuoYiApplication {
 
     void testOne() {
         List<Video> list = videoMapper.selectByExample(new VideoExample());
-        for (Video shipin : list) {
+        for (Video video : list) {
             for (int i = 0; i < 100; i++) {
                 Video newShi = new Video();
-                newShi.setMoney(shipin.getMoney());
-                newShi.setSj(shipin.getSj());
-                newShi.setCs(shipin.getCs());
-                newShi.setUrl(shipin.getUrl());
-                newShi.setUserId(shipin.getUserId());
-                newShi.setName(shipin.getName());
-                newShi.setVideoUrl(shipin.getVideoUrl());
-                newShi.setDuration(shipin.getDuration());
-                newShi.setLx(shipin.getLx());
-                newShi.setStatus(shipin.getStatus());
-                newShi.setLogo(shipin.getLogo());
-                newShi.setIsLei(shipin.getIsLei());
-                newShi.setIsAllow(shipin.getIsAllow());
-                newShi.setClick(shipin.getClick());
-                newShi.setIsPreview(shipin.getIsPreview());
-                newShi.setShortUrl(shipin.getShortUrl());
-                newShi.setCategoryId(shipin.getCategoryId());
+                newShi.setMoney(video.getMoney());
+                newShi.setSj(video.getSj());
+                newShi.setCs(video.getCs());
+                newShi.setUrl(video.getUrl());
+                newShi.setUserId(video.getUserId());
+                newShi.setName(video.getName());
+                newShi.setVideoUrl(video.getVideoUrl());
+                newShi.setDuration(video.getDuration());
+                newShi.setLx(video.getLx());
+                newShi.setStatus(video.getStatus());
+                newShi.setLogo(video.getLogo());
+                newShi.setIsLei(video.getIsLei());
+                newShi.setIsAllow(video.getIsAllow());
+                newShi.setClick(video.getClick());
+                newShi.setIsPreview(video.getIsPreview());
+                newShi.setShortUrl(video.getShortUrl());
+                newShi.setCategoryId(video.getCategoryId());
                 newShi.setCreateTime(new Date());
                 videoMapper.insertSelective(newShi);
             }
