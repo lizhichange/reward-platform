@@ -95,7 +95,8 @@ public class JiaLiApiResult extends ToString {
         this.classX = classX;
     }
 
-    public static class ListBean {
+    public static class ListBean extends ToString {
+        private static final long serialVersionUID = -8053415859499136711L;
         /**
          * vod_id : 37280
          * vod_name : 致命的引诱

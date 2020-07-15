@@ -84,7 +84,8 @@ public class JiaLiDetailApiResult extends ToString {
         this.list = list;
     }
 
-    public static class ListBean {
+    public static class ListBean extends ToString {
+        private static final long serialVersionUID = 3192463644274697354L;
         /**
          * vod_id : 37280
          * type_id : 31
