@@ -27,7 +27,7 @@ import java.security.cert.X509Certificate;
 public class RestTemplateConfig {
 
     @Bean
-    public RestTemplate getRestTemplate() throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
+    public RestTemplate restTemplate() throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
         SSLContext sslContext = new SSLContextBuilder().loadTrustMaterial(null, new TrustStrategy() {
             @Override
             public boolean isTrusted(X509Certificate[] arg0, String arg1) throws CertificateException {
