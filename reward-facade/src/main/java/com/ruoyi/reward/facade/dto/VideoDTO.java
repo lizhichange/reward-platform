@@ -165,7 +165,7 @@ public class VideoDTO implements Serializable {
     private String shiUrl;
 
     private String diffDays;
-
+    private String mockNum;
 
     @Override
     public String toString() {

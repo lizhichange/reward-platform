@@ -480,8 +480,17 @@ public class VideoController extends BaseController {
             Date now = new Date();
             for (VideoDTO dto : list) {
                 convert(now, dto);
+                dto.setMockNum(mock() + "人付款");
             }
         }
+    }
+
+    public String mock() {
+        String s = RandomUtil.randomNumbers(4);
+        if (s.contains("0")) {
+            s = s.replaceAll("0", "");
+        }
+        return s;
     }
 
     @Data
