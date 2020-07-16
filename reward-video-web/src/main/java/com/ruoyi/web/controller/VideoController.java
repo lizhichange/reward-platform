@@ -321,8 +321,8 @@ public class VideoController extends BaseController {
             }
             //推广人userId
             order.setExtensionUserId(extensionUserId);
-
             SysConfigDTO configDTO = sysConfigFacadeClient.queryConfigByKey(extensionUserId);
+
             if (configDTO != null && StringUtils.isNotBlank(configDTO.getConfigValue())) {
                 String main = null;
                 List<PriceParam> itemList = null;
@@ -479,6 +479,16 @@ public class VideoController extends BaseController {
         if (!CollectionUtils.isEmpty(list)) {
             Date now = new Date();
             for (VideoDTO dto : list) {
+                SysConfigDTO configDTO = sysConfigFacadeClient.queryConfigByKey("admin");
+                if (configDTO != null && StringUtils.isNotBlank(configDTO.getConfigValue())) {
+                    String main;
+                    Map valueMap = JSONObject.parseObject(configDTO.getConfigValue(), Map.class);
+                    if (valueMap.containsKey("main")) {
+                        main = valueMap.get("main").toString();
+                        Money m = new Money(main);
+                        dto.setMoney("价格￥" + m.toString() + "元");
+                    }
+                }
                 convert(now, dto);
                 dto.setMockNum(mock() + "人付款");
             }
