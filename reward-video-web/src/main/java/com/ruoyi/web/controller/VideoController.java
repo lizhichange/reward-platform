@@ -486,7 +486,7 @@ public class VideoController extends BaseController {
                     if (valueMap.containsKey("main")) {
                         main = valueMap.get("main").toString();
                         Money m = new Money(main);
-                        dto.setMoney("价格￥" + m.toString() + "元");
+                        dto.setMoney("￥" + m.toString() + "元");
                     }
                 }
                 convert(now, dto);
