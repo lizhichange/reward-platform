@@ -37,7 +37,7 @@ public class GetShortFactory {
     public String getShortUrlForMark(String url) {
         RestTemplate client = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+        headers.setContentType(MediaType.APPLICATION_JSON);
         String str = "https://api.xiaomark.com/v1/link/create";
         String key = "d4efdd8311bff5f4456dd8ea14765168";
         HttpMethod method = HttpMethod.POST;
