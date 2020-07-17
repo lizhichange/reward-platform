@@ -33,7 +33,7 @@ public class VideoRepositoryImpl implements VideoRepository {
 
     @Override
     public List<VideoDTO> queryPage(int start, int rows, VideoDTO videoDTO, String orderByClause) {
-        VideoExample example = getShipinExample(videoDTO);
+        VideoExample example = getVideoExample(videoDTO);
         example.setOffset(start);
         example.setLimit(rows);
         if (StringUtil.isNotBlank(orderByClause)) {
@@ -46,16 +46,21 @@ public class VideoRepositoryImpl implements VideoRepository {
 
     @Override
     public long count(VideoDTO videoDTO) {
-        VideoExample example = getShipinExample(videoDTO);
+        VideoExample example = getVideoExample(videoDTO);
         return videoMapper.countByExample(example);
     }
 
-    private VideoExample getShipinExample(VideoDTO videoDTO) {
+    private VideoExample getVideoExample(VideoDTO videoDTO) {
         VideoExample example = new VideoExample();
         VideoExample.Criteria criteria = example.createCriteria();
         if (StringUtil.isNotBlank(videoDTO.getName())) {
             criteria.andNameLike(videoDTO.getName());
         }
+        if (StringUtil.isNotBlank(videoDTO.getStatus())) {
+            criteria.andStatusEqualTo(videoDTO.getStatus());
+        }
+
+
         if (videoDTO.getCategoryId() != null) {
             criteria.andCategoryIdEqualTo(videoDTO.getCategoryId());
         }

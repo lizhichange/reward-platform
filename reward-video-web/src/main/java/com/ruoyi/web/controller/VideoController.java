@@ -168,16 +168,16 @@ public class VideoController extends BaseController {
                          @RequestParam(value = "author", required = false) String author,
                          ModelMap modelmap) {
         log.info("user:{},id:{},author:{}", userId, id, author);
-        VideoDTO shipin = videoFacadeClient.selectVideoDTOById(id);
-        if (shipin != null) {
-            convert(new Date(), shipin);
-            modelmap.put("shipin", shipin);
-            SysCategoryDTO category = sysCategoryFacadeClient.selectDeptById(shipin.getCategoryId().longValue());
+        VideoDTO video = videoFacadeClient.selectVideoDTOById(id);
+        if (video != null) {
+            convert(new Date(), video);
+            modelmap.put("shipin", video);
+            SysCategoryDTO category = sysCategoryFacadeClient.selectDeptById(video.getCategoryId().longValue());
             if (category != null) {
                 modelmap.put("category", category);
             }
             //异步执行浏览加1
-            threadPoolTaskExecutor.execute(() -> videoFacadeClient.updateClickPlus(shipin.getId().longValue()));
+            threadPoolTaskExecutor.execute(() -> videoFacadeClient.updateClickPlus(video.getId().longValue()));
         }
 
         String orderByClause = " create_time desc ";
@@ -238,6 +238,7 @@ public class VideoController extends BaseController {
         int pageSize = pageForm.getPageSize();
         String orderByClause = " create_time desc ";
         log.info("videoDTO:{}", videoDTO);
+        videoDTO.setStatus("0");
         TPageResult<VideoDTO> result = videoFacadeClient.queryPage(pageNum, pageSize, videoDTO, orderByClause);
         List<VideoDTO> list = result.getValues();
         convert(list);

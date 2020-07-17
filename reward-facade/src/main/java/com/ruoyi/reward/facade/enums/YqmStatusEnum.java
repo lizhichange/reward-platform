@@ -12,9 +12,13 @@ import org.near.toolkit.model.BaseEnum;
 public enum YqmStatusEnum implements BaseEnum {
 
     /**
-     * 推广商户
+     * 已使用
      */
     Y("1", "已使用"),
+
+    /**
+     * 未使用
+     */
     N("0", "未使用"),
     ;
 
