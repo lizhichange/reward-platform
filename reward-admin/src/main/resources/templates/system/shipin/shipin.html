@@ -95,7 +95,7 @@
         var editFlag = [[${@permission.hasPermi('system:shipin:edit') }]];
         var resetPwdFlag = [[${@permission.hasPermi('system:user:resetPwd') }]];
         var removeFlag = [[${@permission.hasPermi('system:shipin:remove') }]];
-        var datas = [[${@dict.getType('sys_normal_disable')}]];
+        var datas = [[${@dict.getType('sys_normal_disable') }]];
 
         var prefix = ctx + "system/shipin";
         console.log(ctx);
@@ -160,8 +160,7 @@
                 },
 
                 {
-                    visible: editFlag === 'hidden',
-                    title: '用户状态',
+                    title: '操作',
                     align: 'center',
                     formatter: function (value, row, index) {
                         return statusTools(row);
@@ -241,6 +240,30 @@
                 newStr = str;
             }
             return newStr;
+        }
+
+
+        /* 用户状态显示 */
+        function statusTools(row) {
+            if (row.status == 1) {
+                return '<i class=\"fa fa-toggle-off text-info fa-2x\" onclick="enable(\'' + row.id + '\')"></i> ';
+            } else {
+                return '<i class=\"fa fa-toggle-on text-info fa-2x\" onclick="disable(\'' + row.id + '\')"></i> ';
+            }
+        }
+
+        /* 用户管理-停用 */
+        function disable(id) {
+            $.modal.confirm("确认要停用吗？", function () {
+                $.operate.post(prefix + "/changeStatus", { "id": id, "status": 1 });
+            })
+        }
+
+        /* 用户管理启用 */
+        function enable(id) {
+            $.modal.confirm("确认要启用吗？", function () {
+                $.operate.post(prefix + "/changeStatus", { "id": id, "status": 0 });
+            })
         }
 
     </script>

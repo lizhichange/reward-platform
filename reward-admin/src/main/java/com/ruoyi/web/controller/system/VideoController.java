@@ -505,6 +505,18 @@ public class VideoController extends BaseController {
 
 
     /**
+     * 用户状态修改
+     */
+    @Log(title = "公共片库", businessType = BusinessType.UPDATE)
+    @RequiresPermissions("system:shipin:edit")
+    @PostMapping("/changeStatus")
+    @RequiresRoles("admin")
+    @ResponseBody
+    public AjaxResult changeStatus(Video video) {
+        return toAjax(videoService.updateVideo(video));
+    }
+
+    /**
      * 删除公共片库
      */
     @RequiresPermissions("system:shipin:remove")
@@ -577,5 +589,6 @@ public class VideoController extends BaseController {
         }
         return objects;
     }
+
 
 }
