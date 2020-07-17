@@ -238,6 +238,7 @@ public class VideoController extends BaseController {
         int pageSize = pageForm.getPageSize();
         String orderByClause = " create_time desc ";
         log.info("videoDTO:{}", videoDTO);
+        //启用
         videoDTO.setStatus("0");
         TPageResult<VideoDTO> result = videoFacadeClient.queryPage(pageNum, pageSize, videoDTO, orderByClause);
         List<VideoDTO> list = result.getValues();
