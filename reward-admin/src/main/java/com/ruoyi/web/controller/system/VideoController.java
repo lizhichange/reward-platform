@@ -217,6 +217,7 @@ public class VideoController extends BaseController {
         shipin.setUserId(loginName);
         shipin.setClick(0);
         shipin.setCreateTime(new Date());
+        shipin.setStatus("0");
         shipin.setMoney(shipin.getStartMoney() + "-" + shipin.getEndMoney());
         return toAjax(videoFacade.insertVideoDTO(shipin));
     }
