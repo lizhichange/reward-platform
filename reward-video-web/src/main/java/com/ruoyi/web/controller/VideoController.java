@@ -496,7 +496,7 @@ public class VideoController extends BaseController {
     }
 
     public String mock() {
-        String s = RandomUtil.randomNumbers(4);
+        String s = RandomUtil.randomNumbers(3);
         if (s.contains("0")) {
             s = s.replaceAll("0", "");
         }
