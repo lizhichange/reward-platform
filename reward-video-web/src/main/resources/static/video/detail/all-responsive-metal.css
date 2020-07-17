@@ -706,7 +706,7 @@ form .progressbar .progress {
 	border-bottom: 1px solid #292929;
 	padding: 3px 0 6px;
 	font-size: 11px;
-	line-height: 28px;
+	/* line-height: 28px; */
 }
 .center-hold {
 	max-width: 1235px;
