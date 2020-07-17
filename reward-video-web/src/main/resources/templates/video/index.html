@@ -206,8 +206,7 @@
 
             </div>
         </div>
-        <button src="http://www.mescroll.com/img/mescroll-totop.png?v=1" class="mescroll-totop mescroll-fade-in"
-            style="animation-duration: 0.5s;">投诉</button>
+
     </div>
     <div class="container">
         <div class="content">
@@ -230,6 +229,20 @@
     <input type="hidden" th:value="${shipin?.videoUrl}" id="videoUrl" />
     <input type="hidden" th:value="${shipin?.userId}" id="author" />
 
+    <style>
+        .button-totop {
+            z-index: 9990;
+            position: fixed;
+            bottom: 80px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            opacity: 0;
+        }
+    </style>
+    <button src="http://www.mescroll.com/img/mescroll-totop.png?v=1" class="button-totop mescroll-fade-in"
+        style="animation-duration: 0.5s;">投诉</button>
+
     <script>
 
         function changeUrlArg(url, arg, val) {
@@ -240,6 +253,12 @@
 
 
         $(function () {
+            //投诉
+            $(".button-totop").on('click', function () {
+                let obj = $(this);
+                obj.prop('href', '/video/tswq?type=');
+            });
+
 
             let player = new Player({
                 "id": "mse",
@@ -730,6 +749,8 @@
             }
         });
     </script>
+
+
 
 </body>
 
