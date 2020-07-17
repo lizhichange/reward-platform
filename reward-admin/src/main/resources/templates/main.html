@@ -7,58 +7,68 @@
     <!--360浏览器优先以webkit内核解析-->
     <title>若依介绍</title>
     <link rel="shortcut icon" href="favicon.ico">
-    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
-    <link href="../static/css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" rel="stylesheet" />
-    <link href="../static/css/main/animate.min.css" th:href="@{/css/main/animate.min.css}" rel="stylesheet" />
-    <link href="../static/css/main/style.min862f.css" th:href="@{/css/main/style.min862f.css}" rel="stylesheet" />
+    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link href="../static/css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
+    <link href="../static/css/main/animate.min.css" th:href="@{/css/main/animate.min.css}" rel="stylesheet"/>
+    <link href="../static/css/main/style.min862f.css" th:href="@{/css/main/style.min862f.css}" rel="stylesheet"/>
 </head>
 
 <body class="gray-bg">
-    <div class="row  border-bottom white-bg dashboard-header">
+<div class="row  border-bottom white-bg dashboard-header">
 
 
+</div>
+<div class="wrapper wrapper-content">
+
+    <div class="row">
+        <div class="col-sm-4">
+            <a class="btn btn-success" onclick="build();">
+                <i class="fa fa-plus"></i> 生成推广链接
+            </a>
+        </div>
     </div>
-    <div class="wrapper wrapper-content">
 
-        <div class="row">
-            <div class="col-sm-4">
-                <a class="btn btn-success" onclick="build();">
-                    <i class="fa fa-plus"></i> 生成推广链接
-                </a>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>我的推广链接</h5>
+                </div>
+                <div class="ibox-content">
+                    <p><i class="fa fa-send-o"></i> 短链接：<a id="shortUrl" th:href="${sysShort?.getShortUrl()}"
+                                                           target="_blank">[[${sysShort?.getShortUrl()}]]</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>我的推广收益</h5>
+                </div>
+                <div class="ibox-content">
+                    <p><i class="fa fa-send-o"></i> 我的余额：[[${account}]] 元
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>我的推广二维码</h5>
+                </div>
+                <br>
+                <img th:src="@{'http://qr.liantu.com/api.php?text='+${sysShort?.getShortUrl()} }"  width="100%" style="max-width:264px;">
+                <br>
             </div>
         </div>
 
         <div class="row">
             <div class="col-sm-4">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>我的推广链接</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <p><i class="fa fa-send-o"></i> 短链接：<a id="shortUrl" th:href="${sysShort?.getShortUrl()}"
-                                target="_blank">[[${sysShort?.getShortUrl()}]]</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>我的推广收益</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <p><i class="fa fa-send-o"></i> 我的余额：[[${account}]] 元
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-sm-4">
-
-                <span style="display:block" id="btn" data-target="#myModal5" data-toggle="modal">
-                </span>
+                    <span style="display:block" id="btn" data-target="#myModal5" data-toggle="modal">
+                    </span>
                 <div class="ibox float-e-margins">
                     <div aria-hidden="true" class="modal inmodal fade" id="myModal5" role="dialog" tabindex="-1">
                         <div class="modal-dialog modal-lg">
@@ -87,20 +97,20 @@
         </div>
     </div>
 
-    </div>
-    <script th:src="@{/js/jquery.min.js}"></script>
-    <script th:src="@{/js/bootstrap.min.js}"></script>
-    <script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
-    <script src="../static/ajax/libs/validate/jquery.validate.min.js"
+</div>
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
+<script src="../static/ajax/libs/validate/jquery.validate.min.js"
         th:src="@{/ajax/libs/validate/jquery.validate.min.js}"></script>
-    <script src="../static/ajax/libs/validate/messages_zh.min.js"
+<script src="../static/ajax/libs/validate/messages_zh.min.js"
         th:src="@{/ajax/libs/validate/messages_zh.min.js}"></script>
-    <script src="../static/ajax/libs/layer/layer.min.js" th:src="@{/ajax/libs/layer/layer.min.js}"></script>
-    <script src="../static/ajax/libs/blockUI/jquery.blockUI.js"
+<script src="../static/ajax/libs/layer/layer.min.js" th:src="@{/ajax/libs/layer/layer.min.js}"></script>
+<script src="../static/ajax/libs/blockUI/jquery.blockUI.js"
         th:src="@{/ajax/libs/blockUI/jquery.blockUI.js}"></script>
-    <script src="../static/ruoyi/js/ry-ui.js" th:src="@{/ruoyi/js/ry-ui.js?v=4.0.0}"></script>
+<script src="../static/ruoyi/js/ry-ui.js" th:src="@{/ruoyi/js/ry-ui.js?v=4.0.0}"></script>
 
-    <script type="text/javascript">
+<script type="text/javascript">
         $('#pay-qrcode').click(function () {
             var html = $(this).html();
             parent.layer.open({
@@ -147,7 +157,9 @@
 
 
 
-    </script>
+
+
+</script>
 </body>
 
 </html>
