@@ -245,6 +245,11 @@
         style="animation-duration: 0.5s; bottom: 120px;background-color: #f1f1f1;right: 10px;">投诉</button>
     <button id="button-buy" class="category button-totop mescroll-fade-in" data="buy"
         style="animation-duration: 0.5s; bottom: 160px;background-color: #f1f1f1;right: 10px;">已购</button>
+
+
+    <button class="weui-btn button-totop weui-btn_primary"
+        style="animation-duration: 0.5s; bottom: 120px;right: 10px;">回到顶部</button>
+
     <script>
 
         function changeUrlArg(url, arg, val) {
@@ -425,7 +430,7 @@
                         console.log("up --> onScroll 列表当前滚动的距离 y = " + y + ", 是否向上滑动 isUp = " + isUp);
                     },
                     scrollbar: {
-                      
+                        use: isPC, //默认只在PC端自定义滚动条样式
                         barClass: "mescroll-bar"
                     }
                 }
@@ -771,8 +776,6 @@
         });
     </script>
 
-
-    <a href="#pos" class="weui-btn weui-btn_primary">回到顶部</a>
 
     <div class="js_dialog" id="iosDialog1" style="display: none;">
         <div class="weui-mask"></div>
