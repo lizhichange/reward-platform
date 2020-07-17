@@ -119,10 +119,10 @@
                     title: 'id'
                 },
                 {
-                   
+
                     title: '资源名称',
                     formatter: function (value, row, index) {
-                        return subString(row.name,10);
+                        return subString(row.name, 10);
                     }
                 },
 
@@ -135,7 +135,14 @@
                     field: 'cs',
                     title: '打赏人数',
                 },
-
+                {
+                    field: 'status',
+                    title: '状态',
+                    align: "left",
+                    formatter: function (value, item, index) {
+                        return $.table.selectDictLabel(datas, item.status);
+                    }
+                },
                 {
                     field: 'categoryName',
                     title: '类目',
