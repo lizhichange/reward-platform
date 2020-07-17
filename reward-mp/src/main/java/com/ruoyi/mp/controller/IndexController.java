@@ -3,9 +3,13 @@ package com.ruoyi.mp.controller;
 import cn.hutool.core.util.RandomUtil;
 import com.ruoyi.reward.facade.dto.SysWebMainDTO;
 import com.ruoyi.reward.facade.enums.WebMainStatus;
+import lombok.Getter;
+import lombok.Setter;
 import org.near.toolkit.common.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.CollectionUtils;
@@ -19,8 +23,14 @@ import java.util.List;
  * @author sunflower
  */
 @Controller
+@RefreshScope
 public class IndexController extends BaseController {
     private final static Logger LOGGER = LoggerFactory.getLogger(IndexController.class);
+    @Value("${share.time:0}")
+    @Getter
+    @Setter
+    private Integer shareTime;
+
 
     @GetMapping("/")
     public String index(@RequestParam(value = "userId", required = false) String userId,
@@ -38,6 +48,7 @@ public class IndexController extends BaseController {
         }
         modelMap.put("title", title);
         modelMap.put("desc", desc);
+        modelMap.put("shareTime", shareTime);
         return "index";
     }
 
