@@ -5,9 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.near.toolkit.common.StringUtil;
 import org.near.toolkit.model.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -37,6 +35,9 @@ public class GetShortFactory {
     }
 
     public String getShortUrlForMark(String url) {
+        RestTemplate client = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
         String str = "https://api.xiaomark.com/v1/link/create";
         String key = "d4efdd8311bff5f4456dd8ea14765168";
         HttpMethod method = HttpMethod.POST;
@@ -44,9 +45,9 @@ public class GetShortFactory {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("apikey", key);
         params.add("origin_url", url);
-        HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(params);
+        HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(params, headers);
         //执行HTTP请求，将返回的结构使用ResultVO类格式化
-        ResponseEntity<String> response = restTemplate.exchange(str, method, requestEntity, String.class);
+        ResponseEntity<String> response = client.exchange(str, method, requestEntity, String.class);
         String body = response.getBody();
         log.info("body:{}", body);
         if (StringUtil.isNotBlank(body)) {
