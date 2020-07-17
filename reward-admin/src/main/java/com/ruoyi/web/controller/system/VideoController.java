@@ -226,6 +226,7 @@ public class VideoController extends BaseController {
     @ResponseBody
     @PostMapping("/fetchDetail")
     public AjaxResult fetchDetail(ModelMap modelMap) {
+        //
         RestTemplate client = new RestTemplate(new HttpsClientRequestFactory());
         ResponseEntity<String> forEntity = client.getForEntity("https://jialiapi.com/api.php/provide/vod/?ac=detail", String.class);
         String body = forEntity.getBody();
