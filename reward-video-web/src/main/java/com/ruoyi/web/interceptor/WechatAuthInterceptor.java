@@ -71,9 +71,6 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
         request.setAttribute("user", currentUser);
         threadPoolTaskExecutor.execute(() -> redisUtil.set("user", currentUser));
         request.setAttribute("authMpEnabled", appConfig.isAuthMpEnabled());
-
-
-        LOGGER.debug("====用户进入拦截器===WechatAuthInterceptor===");
         StringBuffer requestUrl = request.getRequestURL();
         LOGGER.debug("requestURL:{}", requestUrl);
         Map<String, String[]> parameterMap = request.getParameterMap();
@@ -90,7 +87,7 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
         String referer = requestUrl.toString() + "?" + str;
         HttpSession session = request.getSession();
         String doMain = DoMainUtil.getDoMain(requestUrl.toString());
-        //推广人的userid
+        //推广人的userId
         String userId = request.getParameter("userId");
         if (StringUtil.isNotBlank(userId)) {
             write(userId, COOKIE_USER_KEY, doMain, response);
