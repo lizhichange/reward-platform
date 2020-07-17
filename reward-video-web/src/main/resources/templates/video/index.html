@@ -517,7 +517,7 @@
                                         var text = "<font color='#4F4F4F'> 打赏" + rep.moneyStr + "元,永久免费观看此视频 </font>";
                                         var title = "<font color='#4F4F4F'>提示</font>";
                                         //如果参数过多，建议通过 object 方式传入
-                                        $.confirm({
+                                   /*     $.confirm({
                                             title: title,
                                             text: text,
                                             onOK: function () {
@@ -547,31 +547,31 @@
                                             onCancel: function () {
 
                                             }
+                                        }); */
+
+
+
+                                        $.modal({
+                                            title: "标题",
+                                            text: ' <a href="javascript:" class="weui-btn weui-btn_primary">页面主操作</a>',
+                                            buttons: [
+                                                {
+                                                    text: "支付宝", onClick: function () {
+                                                        console.log(1)
+                                                    }
+                                                },
+                                                {
+                                                    text: "微信支付", onClick: function () {
+                                                        console.log(2)
+                                                    }
+                                                },
+                                                {
+                                                    text: "我在想想", className: "default", onClick: function () {
+                                                        console.log(3)
+                                                    }
+                                                },
+                                            ]
                                         });
-
-
-
-                                        // $.modal({
-                                        //     title: "标题",
-                                        //     text: "我是自定义的modal",
-                                        //     buttons: [
-                                        //         {
-                                        //             text: "支付宝", onClick: function () {
-                                        //                 console.log(1)
-                                        //             }
-                                        //         },
-                                        //         {
-                                        //             text: "微信支付", onClick: function () {
-                                        //                 console.log(2)
-                                        //             }
-                                        //         },
-                                        //         {
-                                        //             text: "我在想想", className: "default", onClick: function () {
-                                        //                 console.log(3)
-                                        //             }
-                                        //         },
-                                        //     ]
-                                        // });
 
 
                                     } else if (rep.status === 1) {
@@ -775,8 +775,8 @@
             }
         });
     </script>
-  
-    <a href="javascript:" class="weui-btn weui-btn_default" id="showIOSDialog1">iOS Dialog样式一</a>
+
+    <!-- <a href="javascript:" class="weui-btn weui-btn_default" id="showIOSDialog1">iOS Dialog样式一</a> -->
     <!--BEGIN dialog1-->
     <div class="js_dialog" id="iosDialog1" style="display: none;">
         <div class="weui-mask"></div>
