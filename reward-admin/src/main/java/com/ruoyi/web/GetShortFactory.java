@@ -1,14 +1,15 @@
 package com.ruoyi.web;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.near.toolkit.common.StringUtil;
 import org.near.toolkit.model.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -34,20 +35,27 @@ public class GetShortFactory {
         return "";
     }
 
+    public static void main(String[] args) {
+        MyMarkReq params = new MyMarkReq();
+        params.setApikey("key");
+        params.setOrigin_url("origin_url");
+        String s = JSON.toJSONString(params);
+        System.out.println(s);
+    }
+
     public String getShortUrlForMark(String url) {
         RestTemplate client = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         String str = "https://api.xiaomark.com/v1/link/create";
         String key = "d4efdd8311bff5f4456dd8ea14765168";
-        HttpMethod method = HttpMethod.POST;
         //将请求头部和参数合成一个请求
-        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        params.add("apikey", key);
-        params.add("origin_url", url);
-        HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(params, headers);
+        MyMarkReq params = new MyMarkReq();
+        params.setApikey(key);
+        params.setOrigin_url(url);
+        HttpEntity<String> request = new HttpEntity<>(JSONObject.toJSONString(params), headers);
         //执行HTTP请求，将返回的结构使用ResultVO类格式化
-        ResponseEntity<String> response = client.exchange(str, method, requestEntity, String.class);
+        ResponseEntity<String> response = client.postForEntity(str, request, String.class);
         String body = response.getBody();
         log.info("body:{}", body);
         if (StringUtil.isNotBlank(body)) {
@@ -57,6 +65,12 @@ public class GetShortFactory {
             }
         }
         return "";
+    }
+
+    @Data
+    static class MyMarkReq extends ToString {
+        private String apikey;
+        private String origin_url;
     }
 
     static class MyMark extends ToString {
