@@ -95,6 +95,8 @@
         var editFlag = [[${@permission.hasPermi('system:shipin:edit') }]];
         var resetPwdFlag = [[${@permission.hasPermi('system:user:resetPwd') }]];
         var removeFlag = [[${@permission.hasPermi('system:shipin:remove') }]];
+        var datas = [[${@dict.getType('sys_normal_disable')}]];
+
         var prefix = ctx + "system/shipin";
         console.log(ctx);
         $(function () {
