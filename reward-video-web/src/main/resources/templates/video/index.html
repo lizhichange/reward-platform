@@ -475,7 +475,7 @@
                     var row = curPageData[i];
                     // var str = '<a href="/video/detail?id=' + row.id + '&author=' + row.userId + '" title="' + row.name + '"> '
                     var str = '<a href="javascript:void(0)"' + 'data-id="' + row.id + '"' + 'data-poster="' + row.url + '"' + 'data-src="' + row.videoUrl + '"' + 'data-author="' + row.userId + '"' + 'title="' + row.name + '" > '
-                        + '    <div class="img">'
+                        + '    <div class="img" style="width: 170px;">'
                         + '        <img class="thumb lazy-load" src="' + row.url + '"  data-original="' + row.url + '" alt="' + row.name + '" data-cnt="5" width="180" height="135">'
                         + '    </div>'
                         + '    <strong class="title">' + row.name + '</strong>'

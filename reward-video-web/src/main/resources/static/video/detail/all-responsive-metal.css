@@ -4183,7 +4183,7 @@ div.blockOverlay {
 	.list-albums .item,
 	.list-videos .item {
 		margin: 10px 0 0 0;
-		width: 140px;
+		width: 170px;
 	}
 	.list-subscriptions .item,
 	.list-videos-screenshots .item,
@@ -4205,7 +4205,7 @@ div.blockOverlay {
 	}
 	.list-videos .img,
 	.list-playlists .img {
-		width: 140px;
+		width: 170px;
 		height: 105px;
 	}
 	.list-members .img {
