@@ -135,7 +135,6 @@ public class SysIndexController extends BaseController {
     @Autowired
     ISysConfigService sysConfigService;
     @Autowired
-
     GetShortFactory getShortFactory;
 
 
@@ -154,7 +153,7 @@ public class SysIndexController extends BaseController {
         if (CollectionUtils.isEmpty(sysShorts)) {
             sysShort.setShortStatus(ShortStatus.OK.getCode());
             sysShort.setLongUrl(longUrl);
-            String shortUrl = getShortFactory.getShortUrl(longUrl);
+            String shortUrl = getShortFactory.getShortUrlForMark(longUrl);
             sysShort.setShortUrl(shortUrl);
             int i = sysShortService.insertSysShort(sysShort);
             if (i > 0) {
@@ -163,7 +162,7 @@ public class SysIndexController extends BaseController {
         } else {
             SysShort aShort = sysShorts.get(0);
             aShort.setLongUrl(longUrl);
-            String shortUrl = getShortFactory.getShortUrl(longUrl);
+            String shortUrl = getShortFactory.getShortUrlForMark(longUrl);
             aShort.setShortUrl(shortUrl);
             int i = sysShortService.updateSysShort(aShort);
             if (i > 0) {

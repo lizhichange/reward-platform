@@ -168,7 +168,7 @@ public class WebController extends BaseController {
                 String longUrl = "http://" + doMain + "/?userId=" + loginName;
                 sysShort.setLongUrl(longUrl);
                 logger.info("longUrl:{}", longUrl);
-                String shortUrl = getShortFactory.getShortUrl(longUrl);
+                String shortUrl = getShortFactory.getShortUrlForMark(longUrl);
                 if (StringUtil.isNotBlank(shortUrl)) {
                     sysShort.setShortUrl(shortUrl);
                     sysShortService.insertSysShort(sysShort);
