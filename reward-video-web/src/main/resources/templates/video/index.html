@@ -245,8 +245,8 @@
         style="animation-duration: 0.5s; bottom: 120px;background-color: #f1f1f1;right: 10px;">投诉</button>
     <button id="button-buy" class="category button-totop mescroll-fade-in" data="buy"
         style="animation-duration: 0.5s; bottom: 160px;background-color: #f1f1f1;right: 10px;">已购</button>
-    <button class="weui-btn weui-btn_primary mescroll-fade-in"
-        style="animation-duration: 0.5s; bottom: 0px;position: fixed">回到顶部</button>
+    <button class="weui-btn weui-btn_primary mescroll-fade-in" id="return"
+        style="animation-duration: 0.5s; bottom: 0px;position: fixed;font-size: 12px;width: 30%;">回到顶部</button>
 
     <script>
 
@@ -258,6 +258,11 @@
 
 
         $(function () {
+
+            $("#return").click(function () {
+                $("html,body").animate({ scrollTop: 0 }, 500);
+
+            });
             //投诉
             $("#button-totop").on('click', function () {
                 console.log("xxx----button");
