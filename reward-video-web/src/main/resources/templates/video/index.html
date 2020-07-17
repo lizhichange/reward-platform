@@ -238,9 +238,10 @@
             height: 36px;
             border-radius: 50%;
             opacity: 0;
+            border: 0
         }
     </style>
-    <button src="http://www.mescroll.com/img/mescroll-totop.png?v=1" class="button-totop mescroll-fade-in"
+    <button src="http://www.mescroll.com/img/mescroll-totop.png?v=1" id="button-totop" class="button-totop mescroll-fade-in"
         style="animation-duration: 0.5s;">投诉</button>
 
     <script>
@@ -254,7 +255,8 @@
 
         $(function () {
             //投诉
-            $(".button-totop").on('click', function () {
+            $("#button-totop").on('click', function () {
+                console.log("xxx----button");
                 let obj = $(this);
                 obj.prop('href', '/video/tswq?type=');
             });
