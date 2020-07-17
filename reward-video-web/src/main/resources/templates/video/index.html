@@ -173,6 +173,8 @@
         /*固定高度*/
         .mescroll {
             height: 500px;
+            bottom: 50px;
+            height: auto;
             /*如设置bottom:50px,则需height:auto才能生效*/
         }
 
@@ -240,10 +242,6 @@
             border: 0
         }
     </style>
-
-
-    <a href="#pos" class="button-totop mescroll-fade-in"
-        style="animation-duration: 0.5s; bottom: 180px;background-color: #f1f1f1;right: 10px;">回到顶部</a>
 
     <button id="button-totop" class="button-totop mescroll-fade-in"
         style="animation-duration: 0.5s; bottom: 120px;background-color: #f1f1f1;right: 10px;">投诉</button>
@@ -775,8 +773,9 @@
         });
     </script>
 
-    <!-- <a href="javascript:" class="weui-btn weui-btn_default" id="showIOSDialog1">iOS Dialog样式一</a> -->
-    <!--BEGIN dialog1-->
+
+    <a href="#pos" class="weui-btn weui-btn_primary">回到顶部</a>
+
     <div class="js_dialog" id="iosDialog1" style="display: none;">
         <div class="weui-mask"></div>
         <div class="weui-dialog">
