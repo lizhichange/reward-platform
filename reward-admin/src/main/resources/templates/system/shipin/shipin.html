@@ -119,10 +119,10 @@
                     title: 'id'
                 },
                 {
-
+                   
                     title: '资源名称',
                     formatter: function (value, row, index) {
-                        return statusTools(row);
+                        return subString(row.name,5);
                     }
                 },
 
@@ -155,7 +155,7 @@
                     title: '用户状态',
                     align: 'center',
                     formatter: function (value, row, index) {
-                        return subString(row.name,5);
+                        return statusTools(row);
                     }
                 },
                 {
