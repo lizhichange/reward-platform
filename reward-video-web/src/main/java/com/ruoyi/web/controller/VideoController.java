@@ -551,6 +551,7 @@ public class VideoController extends BaseController {
     }
 
     @GetMapping("/sub")
+    @WxPnUserAuth
     public String success(@RequestParam(value = "userId", required = false) String userId,
                           HttpServletRequest request,
                           ModelMap modelmap) {

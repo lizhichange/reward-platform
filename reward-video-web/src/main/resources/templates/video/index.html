@@ -241,9 +241,8 @@
             border: 0
         }
     </style>
-    <button src="http://www.mescroll.com/img/mescroll-totop.png?v=1" id="button-totop" class="button-totop mescroll-fade-in"
-        style="animation-duration: 0.5s;">投诉</button>
-
+    <button id="button-totop" class="button-totop mescroll-fade-in"
+        style="animation-duration: 0.5s;background-color: #f1f1f1;">投诉</button>
     <script>
 
         function changeUrlArg(url, arg, val) {
@@ -258,7 +257,7 @@
             $("#button-totop").on('click', function () {
                 console.log("xxx----button");
                 let obj = $(this);
-                $(window).attr('location',"/video/tswq?type=");
+                $(window).attr('location', "/video/tswq?type=");
             });
 
 
