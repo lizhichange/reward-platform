@@ -4,3 +4,4 @@ spring:
     active: druid
   application:
     name: ruoyi-mp
+debug: true

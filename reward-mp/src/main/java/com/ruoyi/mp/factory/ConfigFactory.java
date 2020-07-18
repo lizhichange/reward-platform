@@ -75,7 +75,7 @@ public class ConfigFactory {
 
     @Resource
     HttpClient httpClient;
-    @Autowired
+    @Resource
     WxMpShortUrlFacade wxMpShortUrlFacade;
 
 
