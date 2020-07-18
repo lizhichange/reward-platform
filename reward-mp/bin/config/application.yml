@@ -1,6 +1,0 @@
-# Spring配置
-spring:
-  profiles:
-    active: druid
-  application:
-    name: ruoyi-mp
