@@ -10,4 +10,6 @@ public interface WxMpShortUrlFacade {
      */
     String shortUrl(String longUrl);
 
+    String check(String url);
+
 }
