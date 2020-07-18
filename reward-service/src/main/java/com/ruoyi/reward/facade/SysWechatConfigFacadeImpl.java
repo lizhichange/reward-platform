@@ -40,4 +40,6 @@ public class SysWechatConfigFacadeImpl implements SysWechatConfigFacade {
             return dto;
         }).collect(Collectors.toList());
     }
+
+
 }

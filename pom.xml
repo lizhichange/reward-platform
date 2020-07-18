@@ -23,6 +23,7 @@
         <module>reward-qrcode-admin-ui</module>
         <module>reward-video-web</module>
         <module>eureka-server</module>
+        <module>wx_url_check</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -260,11 +261,20 @@
                 <version>${reward.version</version>
             </dependency>
 
+
+
             <dependency>
                 <groupId>com.reward</groupId>
                 <artifactId>reward-mp</artifactId>
                 <version>${reward.version</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.reward</groupId>
+                <artifactId>wx_url_check</artifactId>
+                <version>${reward.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>com.alibaba.boot</groupId>
                 <artifactId>dubbo-spring-boot-starter</artifactId>

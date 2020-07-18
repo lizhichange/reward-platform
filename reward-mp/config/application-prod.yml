@@ -44,7 +44,6 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
 
 
-
 dubbo:
   registry:
     address: 127.0.0.1:2181
@@ -53,9 +52,15 @@ dubbo:
   protocol:
     port: 12345
     name: dubbo
+    lazy: true
+    status: server
+    serialization: hessian2
+    threads: 2000
   application:
     name: ruoyi-mp
     id: ruoyi-mp
     qosEnable: true
     qosPort: 33333
     qosAcceptForeignIp: false
+  scan:
+    basePackages: com.ruoyi.mp.facade

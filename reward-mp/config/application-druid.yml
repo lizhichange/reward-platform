@@ -51,12 +51,19 @@ dubbo:
   protocol:
     port: 12345
     name: dubbo
+    lazy: true
+    status: server
+    serialization: hessian2
+    threads: 2000
   application:
     name: ruoyi-mp
     id: ruoyi-mp
     qosEnable: true
     qosPort: 33333
     qosAcceptForeignIp: false
+  scan:
+    basePackages: com.ruoyi.mp.facade
+
 
 eureka:
   client:

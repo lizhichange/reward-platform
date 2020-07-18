@@ -1,0 +1,36 @@
+# spring配置
+spring:
+  application:
+    name: wx_url_check
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+
+# Tomcat server配置
+server:
+  servlet:
+    context-path: /wx_url_check
+  tomcat:
+    threads:
+      max: 100
+    remoteip:
+      protocol-header-https-value: https
+      remote-ip-header: X-Forwarded-For
+      protocol-header: X-Forwarded-Proto
+  port: 8080
+
+# logback日志配置
+logging:
+  file:
+    path: logs
+    max-size: 50MB
+  pattern:
+    console: "%d [%t] %-5level [%c:%M@%L] - %msg%xEx%n"
+    file: "%d [%t] %-5level [%c] - %msg%xEx%n"
+  level:
+    root: INFO
+    org:
+      springframework: ERROR
+#微信appid、密钥
+wx:
+  appid: wx590af156c3a3eae9 #此处替换为自己的appid
+  secret: 8af481db51cd509f26c857a75712c9ce #此处替换为自己的secret

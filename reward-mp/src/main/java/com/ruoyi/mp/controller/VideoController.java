@@ -1,6 +1,7 @@
 package com.ruoyi.mp.controller;
 
 import com.ruoyi.mp.client.VideoFacadeClient;
+import com.ruoyi.mp.factory.ConfigFactory;
 import com.ruoyi.reward.facade.dto.VideoDTO;
 import org.near.servicesupport.result.TPageResult;
 import org.near.toolkit.common.DateUtils;
@@ -29,6 +30,14 @@ public class VideoController {
         return rspData;
     }
 
+    @Autowired
+    ConfigFactory configFactory;
+
+    @ResponseBody
+    @RequestMapping("/check")
+    public Object userList(String url) {
+        return configFactory.check(url);
+    }
 
     @Autowired
     VideoFacadeClient videoFacadeClient;
