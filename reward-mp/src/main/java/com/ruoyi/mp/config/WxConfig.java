@@ -8,6 +8,7 @@ import com.ruoyi.mp.handler.*;
 import com.ruoyi.reward.facade.dto.SysWechatConfigDTO;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.mp.api.WxMpMessageRouter;
 import me.chanjar.weixin.mp.api.WxMpQrcodeService;
@@ -36,6 +37,7 @@ import static me.chanjar.weixin.mp.constant.WxMpEventConstants.POI_CHECK_NOTIFY;
  */
 @Configuration
 @AllArgsConstructor
+@Slf4j
 public class WxConfig {
 
     @Autowired
@@ -99,6 +101,7 @@ public class WxConfig {
     @Bean
     @Scheduled(cron = "0 0/30 * * * ?")
     public WxMpService wxMpService() {
+        log.info("WxMpService..Scheduled..init");
         SysWechatConfigDTO weChatConfig = configFactory.getConfigDTOList().get(0);
         if (weChatConfig != null) {
             WxMpProperties wxMpProperties = new WxMpProperties();

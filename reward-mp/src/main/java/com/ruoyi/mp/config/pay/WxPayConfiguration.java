@@ -28,6 +28,7 @@ public class WxPayConfiguration {
     @Bean
     @Scheduled(cron = "0 0/30 * * * ?")
     public WxPayService wxPayService() {
+        log.info("wxPayService..Scheduled..init");
         WxPayService wxPayService = new WxPayServiceImpl();
         try {
             WxPayProperties properties = new WxPayProperties();
