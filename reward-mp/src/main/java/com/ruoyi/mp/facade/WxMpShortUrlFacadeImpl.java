@@ -54,14 +54,17 @@ public class WxMpShortUrlFacadeImpl implements WxMpShortUrlFacade {
         Map<String, String> res = Maps.newHashMap();
         try {
             String shortUrl = shortUrl(url);
+            log.info("shortUrl:{}", shortUrl);
             HttpContext httpContext = new BasicHttpContext();
             HttpResponse response = httpClient.execute(new HttpGet(shortUrl), httpContext);
             HttpHost targetHost = (HttpHost) httpContext.getAttribute("http.target_host");
             String hostName = targetHost.toString();
+            log.info("url:{},hostName:{}", url, hostName);
             if (StringUtils.startsWithIgnoreCase(url, hostName)) {
                 res.put("code", "00");
                 res.put("msg", "访问正常");
             } else {
+
                 String html = IoUtil.read(response.getEntity().getContent(), "UTF-8");
                 JSONObject json = html(html);
                 String title = (String) json.getOrDefault("title", "访问被拦截");
