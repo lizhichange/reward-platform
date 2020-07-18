@@ -77,6 +77,7 @@ public class SysWechatConfigDTO implements Serializable {
      * 更新日期
      */
     private Date gmtModified;
+    private String state;
 
     public void setId(Long id) {
         this.id = id;

@@ -19,10 +19,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="gmtModified"    column="gmt_modified"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
+        <result column="state"   property="state" />
+
     </resultMap>
 
     <sql id="selectSysWechatConfigVo">
-        select id, config_code, env_type, app_id, appsecret, mch_id, sign_key, cert_file, token, encoding_aes_key, gmt_create, gmt_modified, create_time, update_time from sys_wechat_config
+        select id, config_code, env_type, app_id, appsecret, mch_id, sign_key, cert_file, token, encoding_aes_key, gmt_create, gmt_modified, create_time, update_time ,state from sys_wechat_config
     </sql>
 
     <select id="selectSysWechatConfigList" parameterType="SysWechatConfig" resultMap="SysWechatConfigResult">
@@ -39,6 +41,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="encodingAesKey != null  and encodingAesKey != ''"> and encoding_aes_key = #{encodingAesKey}</if>
             <if test="gmtCreate != null "> and gmt_create = #{gmtCreate}</if>
             <if test="gmtModified != null "> and gmt_modified = #{gmtModified}</if>
+            <if test="state != null "> and state = #{state}</if>
+
+
         </where>
     </select>
     
@@ -63,6 +68,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="gmtModified != null ">gmt_modified,</if>
             <if test="createTime != null ">create_time,</if>
             <if test="updateTime != null ">update_time,</if>
+            <if test="state != null ">state,</if>
+
+
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="configCode != null  and configCode != ''">#{configCode},</if>
@@ -78,6 +86,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="gmtModified != null ">#{gmtModified},</if>
             <if test="createTime != null ">#{createTime},</if>
             <if test="updateTime != null ">#{updateTime},</if>
+            <if test="state != null ">#{state},</if>
+
          </trim>
     </insert>
 
@@ -97,6 +107,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="gmtModified != null ">gmt_modified = #{gmtModified},</if>
             <if test="createTime != null ">create_time = #{createTime},</if>
             <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="state != null ">update_time = #{state},</if>
         </trim>
         where id = #{id}
     </update>

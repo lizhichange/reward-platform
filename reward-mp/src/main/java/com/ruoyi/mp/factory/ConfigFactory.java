@@ -15,6 +15,7 @@ import org.springframework.util.CollectionUtils;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author wahaha
@@ -28,7 +29,7 @@ public class ConfigFactory {
     ConfigurableEnvironment env;
 
     @Getter
-    SysWechatConfigDTO sysWechatConfig;
+    List<SysWechatConfigDTO> configDTOList;
     @Autowired
     SysWechatConfigClient sysWechatConfigClient;
 
@@ -43,12 +44,13 @@ public class ConfigFactory {
             String profile = env.getActiveProfiles()[0];
             SysWechatConfigDTO item = new SysWechatConfigDTO();
             item.setEnvType(profile);
-            item.setConfigCode(mpAuthConfig.getConfigCode());
+            item.setState("0");
+            String configCode = mpAuthConfig.getConfigCode();
             List<SysWechatConfigDTO> list = sysWechatConfigClient.selectSysWechatConfigList(item);
             if (!CollectionUtils.isEmpty(list)) {
-                sysWechatConfig = list.get(0);
+                configDTOList = list.stream().filter(it -> it.getConfigCode().equals(configCode)).collect(Collectors.toList());
             }
-            log.info("weChatConfig:{}", sysWechatConfig);
+            log.info("configDTOList:{}", configDTOList);
         } catch (Exception e) {
             log.info(e.getMessage(), e);
         }

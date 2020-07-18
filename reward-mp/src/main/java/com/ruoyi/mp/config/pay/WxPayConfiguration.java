@@ -6,16 +6,19 @@ import com.github.binarywang.wxpay.service.impl.WxPayServiceImpl;
 import com.ruoyi.mp.factory.ConfigFactory;
 import com.ruoyi.reward.facade.dto.SysWechatConfigDTO;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.Scheduled;
 
 /**
  * @author Binary Wang
  */
 @Configuration
 @AllArgsConstructor
+@Slf4j
 public class WxPayConfiguration {
 
 
@@ -23,12 +26,12 @@ public class WxPayConfiguration {
     ConfigFactory configFactory;
 
     @Bean
+    @Scheduled(cron = "0 0/30 * * * ?")
     public WxPayService wxPayService() {
         WxPayService wxPayService = new WxPayServiceImpl();
         try {
-
             WxPayProperties properties = new WxPayProperties();
-            SysWechatConfigDTO weChatConfig = configFactory.getSysWechatConfig();
+            SysWechatConfigDTO weChatConfig = configFactory.getConfigDTOList().get(0);
             properties.setAppId(weChatConfig.getAppId());
             properties.setMchId(weChatConfig.getMchId());
             properties.setKeyPath(weChatConfig.getCertFile());
@@ -42,7 +45,7 @@ public class WxPayConfiguration {
             payConfig.setUseSandboxEnv(false);
             wxPayService.setConfig(payConfig);
         } catch (Exception e) {
-
+            log.error(e.getMessage(), e);
         }
 
         return wxPayService;

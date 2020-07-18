@@ -62,6 +62,8 @@ public class SysWechatConfig extends BaseEntity
     /** 更新日期 */
     @Excel(name = "更新日期", width = 30, dateFormat = "yyyy-MM-dd")
     private Date gmtModified;
+    private String state;
+
 
     public void setId(Long id) 
     {
@@ -190,5 +192,13 @@ public class SysWechatConfig extends BaseEntity
             .append("createTime", getCreateTime())
             .append("updateTime", getUpdateTime())
             .toString();
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 }

@@ -96,11 +96,10 @@ public class WxConfig {
         return newRouter;
     }
 
-
     @Bean
-    @Scheduled(cron = "0 0/50 * * * ?")
+    @Scheduled(cron = "0 0/30 * * * ?")
     public WxMpService wxMpService() {
-        SysWechatConfigDTO weChatConfig = configFactory.getSysWechatConfig();
+        SysWechatConfigDTO weChatConfig = configFactory.getConfigDTOList().get(0);
         if (weChatConfig != null) {
             WxMpProperties wxMpProperties = new WxMpProperties();
             WxMpProperties.MpConfig mpConfig = new WxMpProperties.MpConfig();

@@ -7,15 +7,14 @@ import java.util.List;
 
 /**
  * 公众号配置信息Service接口
- * 
+ *
  * @author ruoyi
  * @date 2020-03-24
  */
-public interface SysWechatConfigService
-{
+public interface SysWechatConfigService {
     /**
      * 查询公众号配置信息
-     * 
+     *
      * @param id 公众号配置信息ID
      * @return 公众号配置信息
      */
@@ -23,7 +22,7 @@ public interface SysWechatConfigService
 
     /**
      * 查询公众号配置信息列表
-     * 
+     *
      * @param sysWechatConfig 公众号配置信息
      * @return 公众号配置信息集合
      */
@@ -31,7 +30,7 @@ public interface SysWechatConfigService
 
     /**
      * 新增公众号配置信息
-     * 
+     *
      * @param sysWechatConfig 公众号配置信息
      * @return 结果
      */
@@ -39,7 +38,7 @@ public interface SysWechatConfigService
 
     /**
      * 修改公众号配置信息
-     * 
+     *
      * @param sysWechatConfig 公众号配置信息
      * @return 结果
      */
@@ -47,7 +46,7 @@ public interface SysWechatConfigService
 
     /**
      * 批量删除公众号配置信息
-     * 
+     *
      * @param ids 需要删除的数据ID
      * @return 结果
      */
@@ -55,7 +54,7 @@ public interface SysWechatConfigService
 
     /**
      * 删除公众号配置信息信息
-     * 
+     *
      * @param id 公众号配置信息ID
      * @return 结果
      */

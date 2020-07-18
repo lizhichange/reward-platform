@@ -26,7 +26,6 @@ server:
 app:
   # 验证码开关
   captchaEnabled: false
-
   # 微信授权开关
   authMpEnabled: false
 

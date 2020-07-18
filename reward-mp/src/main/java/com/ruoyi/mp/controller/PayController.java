@@ -212,7 +212,7 @@ public class PayController extends BaseController {
             }
         }
         request.setBody("支付测试");
-        request.setMchId(configFactory.getSysWechatConfig().getMchId());
+        request.setMchId(configFactory.getConfigDTOList().get(0).getMchId());
         InetAddress netAddress = InetAddress.getLocalHost();
         request.setSpbillCreateIp(netAddress.getHostAddress());
         if (StringUtil.equals(dto.getTradeType(), WxPayConstants.TradeType.JSAPI)) {
