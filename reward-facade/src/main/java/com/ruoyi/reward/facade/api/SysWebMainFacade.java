@@ -11,4 +11,6 @@ public interface SysWebMainFacade {
 
     List<SysWebMainDTO> selectSysWebMainList(SysWebMainDTO sysWebMain);
 
+    int updateSysWebMain(SysWebMainDTO sysWebMain);
+
 }

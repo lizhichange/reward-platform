@@ -8,6 +8,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * @author sunflower
+ */
 @Component
 public class SysWebMainFacadeClientImpl implements SysWebMainFacadeClient {
     @Reference(version = "1.0.0", check = false)
@@ -16,5 +19,10 @@ public class SysWebMainFacadeClientImpl implements SysWebMainFacadeClient {
     @Override
     public List<SysWebMainDTO> selectSysWebMainList(SysWebMainDTO sysWebMain) {
         return sysWebMainFacade.selectSysWebMainList(sysWebMain);
+    }
+
+    @Override
+    public int updateSysWebMain(SysWebMainDTO sysWebMain) {
+        return sysWebMainFacade.updateSysWebMain(sysWebMain);
     }
 }

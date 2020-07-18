@@ -41,4 +41,11 @@ public class SysWebMainFacadeImpl implements SysWebMainFacade {
         }).collect(Collectors.toList());
 
     }
+
+    @Override
+    public int updateSysWebMain(SysWebMainDTO sysWebMain) {
+        SysWebMain item = new SysWebMain();
+        BeanUtils.copyProperties(sysWebMain, item);
+        return sysWebMainService.updateSysWebMain(item);
+    }
 }
