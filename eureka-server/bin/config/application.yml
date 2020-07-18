@@ -1,0 +1,18 @@
+server:
+  port: 8761
+eureka:
+  instance:
+    ip-address: 127.0.0.1 #决定Eureka服务显示host
+    hostname: ${eureka.instance.ip-address} #决定服务跳转host，必须指定
+    prefer-ip-address: true
+    non-secure-port: ${server.port}
+    instance-id: ${eureka.instance.ip-address}:${spring.application.name}:${eureka.instance.non-secure-port}
+  client:
+    service-url:
+      defaultZone: http://${eureka.instance.ip-address}:8761/eureka/
+    register-with-eureka: false
+    fetch-registry: false
+
+spring:
+  application:
+    name: Eureka-Server

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta id="viewport" name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+    <title>投诉</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/weui.min.css}">
+    <link rel="stylesheet" th:href="@{/css/0361fffae382d0e25a2429290f7be5cf.css}">
+    <script th:src="@{/js/jquery.min.js}"></script>
+
+    <style type="text/css">
+        body {
+            background-color: var(--weui-BG-0);
+            color: var(--weui-FG-0)
+        }
+
+        .wx-sh {
+            display: none;
+        }
+
+
+
+
+    </style>
+</head>
+
+<body ontouchstart="">
+<div class="body">
+    <div class="weui-cells__title">你可以:</div>
+
+    <div class="weui-cells">
+        <a class="weui-cell weui-cell_access wx-submit">
+            <div class="weui-cell__bd">提交给微信团队审核</div>
+            <div class="weui-cell__ft"></div>
+        </a>
+        <div class="weui-cell" href="javascript:">
+            <div class="weui-cell__bd "><br/></div>
+        </div>
+        <div class="weui-cell" href="javascript:">
+            <div class="weui-cell__bd "><br/></div>
+        </div>
+        <div class="weui-cell" href="javascript:">
+            <div class="weui-cell__bd "><br/></div>
+        </div>
+        <div class="weui-cell" href="javascript:">
+            <div class="weui-cell__bd "><br/></div>
+        </div>
+        <div class="weui-cell" href="javascript:">
+            <div class="weui-cell__bd "><br/></div>
+        </div>
+        <div class="weui-cell" href="javascript:">
+            <div class="weui-cell__bd "><br/></div>
+        </div>
+        <div class="weui-cell" href="javascript:">
+            <div class="weui-cell__bd "><br/></div>
+        </div>
+
+    </div>
+
+
+    <p class="link">
+        <a href="https://kf.qq.com/touch/scene_product.html?scene_id=kf186">投诉须知</a>
+    </p>
+</div>
+
+
+<script>
+    !function (e) {
+        function i(s) {
+            if (l[s]) return l[s].exports;
+            var c = l[s] = {exports: {}, id: s, loaded: !1};
+            return e[s].call(c.exports, c, c.exports, i), c.loaded = !0, c.exports
+        }
+
+        var l = {};
+        return i.m = e, i.c = l, i.p = "//res.wx.qq.com/a/wx_fed/wx110/res/", i(0)
+    }([function (e, i) {
+        e.exports = ""
+    }]);/* vhtml-webpack-plugin version: 0.2.2 */
+
+
+
+
+
+</script>
+
+<script type="text/javascript" class="home js_show">
+    $(function () {
+        $(".wx-submit").on('click', function () {
+            window.location.href = "/video/sub";
+        });
+    });
+
+</script>
+</body>
+</html>

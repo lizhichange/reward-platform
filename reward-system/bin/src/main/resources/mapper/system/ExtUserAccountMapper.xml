@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2017.  Willard Hu. All rights reserved.
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.ExtUserAccountMapper">
+
+    <update id="updateBalance">
+        update `account`
+        <set>
+            balance = balance + #{balance},
+            gmt_modified = now(),
+            modified_by = #{operator}
+        </set>
+        <where>
+            account_id = #{accountId}
+            <!-- 负值时判断不能将现有余额减成负数 -->
+            <if test="balance &lt; 0">
+                and balance >= -#{balance}
+            </if>
+        </where>
+    </update>
+
+
+
+
+    <select id="querySum" resultType="java.lang.Long">
+        SELECT
+        COALESCE(SUM(amount),0)
+        FROM `account_detail`
+        where 1=1
+        <if test="accountId != null">
+            AND account_id = #{accountId}
+        </if>
+
+        <if test="bizCodes != null and bizCodes.size() >0 ">
+            AND biz_code in
+            <foreach item="item" collection="bizCodes" separator="," open="(" close=")" index="">
+                #{item}
+            </foreach>
+        </if>
+
+        <if test="optType != null">
+            AND opt_type = #{optType}
+        </if>
+
+
+    </select>
+
+
+</mapper>

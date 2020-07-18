@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="include :: header('申请提现')"/>
+    <th:block th:include="include :: select2-css"/>
+    <th:block th:include="include :: bootstrap-select-css"/>
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+
+    <div class="row">
+        <div class="col-sm-11">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>
+                        <small>申请提现</small>
+                    </h5>
+                    <div class="ibox-tools">
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form class="form-horizontal m" id="form-applyWithdrawal-add">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">单笔最小提款金额：</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" disabled="" placeholder="500元" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">每天可提款总金额：</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" disabled="" placeholder="100000元" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">今日已申请提款总金额：</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" disabled="" placeholder="0元" type="text">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">提现单笔最高金额：</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" disabled="" placeholder="20000元" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">可用余额：</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" readonly th:value="${balance}+'元'" disabled="" type="text">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">提现金额：</label>
+                            <div class="col-sm-10">
+                                <input name="amountStr" class="form-control" placeholder="请输入提现金额" type="text" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">密码：</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" name="password" value="admin123" placeholder="输入密码"
+                                       type="password" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-xs-2 control-label">收款账号类型：</label>
+                            <div class="col-sm-10">
+                                <select class="form-control noselect2 selectpicker" id="payeeType" name="payeeType">
+                                    <option th:each="post:${types}"
+                                            th:text="${post.desc}"
+                                            th:value="${post.code}"></option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group" id="form-group-payeeBank">
+                            <label class="col-sm-2 control-label">收款银行：</label>
+                            <div class="col-sm-10">
+                                <input name="remark" id="remark" class="form-control" placeholder="请输入收款银行" type="text"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">收款人：</label>
+                            <div class="col-sm-10">
+                                <input name="payee" class="form-control" placeholder="请输入收款人" type="text" required>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">收款账号：</label>
+                            <div class="col-sm-10">
+                                <input name="payeeNo" class="form-control" placeholder="请输入收款账号" type="text" required>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn btn-sm btn-primary" onclick="submitHandler()" type="button"><i
+                                        class="fa fa-check"></i>保 存
+                                </button>&nbsp;
+                                <button class="btn btn-sm btn-danger" onclick="closeItem()" type="button"><i
+                                        class="fa fa-reply-all"></i>关 闭
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block th:include="include :: footer"/>
+<th:block th:include="include :: select2-js"/>
+<th:block th:include="include :: bootstrap-select-js"/>
+<script type="text/javascript">
+        var prefix = ctx + "statistics/withdrawal";
+        $("#form-applyWithdrawal-add").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.saveTab(prefix + "/add", $('#form-applyWithdrawal-add').serialize());
+            }
+        }
+
+        $('#payeeType').on('change', function() {
+            //如果是支付宝
+           if(this.value==='alipay'){
+            $("#form-group-payeeBank").css("display","none");
+            $("#remark").prop('disabled', true);
+            $("#remark").val('');
+           } else {
+            $("#form-group-payeeBank").css("display","block");
+            $("#remark").prop('disabled', false);
+           }
+        });
+
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('订单列表列表')"/>
+</head>
+<body class="gray-bg">
+
+<div class="container-div">
+
+    <div class="row">
+        <div class="col-sm-12 search-collapse">
+            <form id="formId">
+                <div class="select-list">
+                    <ul>
+                        <li>
+<!--                            资源名称：<input name="name" type="text"/>-->
+                        </li>
+                        <li>
+<!--                            onclick="$.table.search()"-->
+                            <a class="btn btn-primary btn-rounded btn-sm" href="#"><i
+                                    class="fa fa-search"></i>&nbsp;刷新</a>
+
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-12 select-table table-striped">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>统计</h5>
+                </div>
+
+
+
+                <div class="ibox-content">
+                    <p><i class="fa fa-send-o"></i> 今日订单笔数：[[${dayCount}]] </p></p>
+                    <p><i class="fa fa-send-o"></i> 今日订单总金额 ：[[${dayMoney}]] 元</p></p>
+                    <p><i class="fa fa-send-o"></i> 昨日订单笔数：[[${yesterdayCount}]] </p></p>
+                    <p><i class="fa fa-send-o"></i> 昨日订单总金额：[[${yesterdayMoney}]] 元</p></p>
+                    <p><i class="fa fa-send-o"></i> 历史总笔数：[[${historyCount}]] </p></p>
+                    <p><i class="fa fa-send-o"></i> 历史总金额：[[${historyMoney}]] 元</p>
+                </div>
+
+            </div>
+            <table id="bootstrap-table">
+            </table>
+        </div>
+    </div>
+</div>
+<th:block th:include="include :: footer"/>
+<script th:inline="javascript">
+    var prefix = ctx + "statistics/record";
+
+    $(function () {
+        var options = {
+            url: prefix + "/list",
+            modalName: "订单列表",
+            sortName: "createTime",
+            sortOrder: "desc",
+            columns: [{
+                checkbox: true
+            },
+                {
+                    field: 'id',
+                    title: '主键',
+                    visible: false
+                },
+                {
+                    field: 'orderId',
+                    title: '订单ID'
+                },
+                {
+                    field: 'moneyStr',
+                    title: '实际金额'
+                },
+                {
+                    field: 'priceStr',
+                    title: '原价'
+                },
+                // {
+                //     field: 'typeStr',
+                //     title: '支付方式'
+                // },
+                {
+                    field: 'payNo',
+                    title: '流水号'
+                },
+
+                {
+                    field: 'payTime',
+                    title: '付款时间'
+                },
+                {
+                    field: 'userId',
+                    title: '用户id'
+                },
+                {
+                    field: 'statusStr',
+                    title: '订单状态'
+                },
+                {
+                    field: 'goodsId',
+                    title: '商品信息'
+                },
+
+
+                {
+                    field: 'extensionUserId',
+                    title: '推广人的id'
+                }
+                ]
+        };
+        $.table.init(options);
+    });
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
