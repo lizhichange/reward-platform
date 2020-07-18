@@ -10,6 +10,7 @@ import com.ruoyi.reward.domain.SysWechatConfig;
 import com.ruoyi.reward.service.SysWechatConfigService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -65,7 +66,9 @@ public class SysWechatConfigController extends BaseController {
      * 新增公众号配置信息
      */
     @GetMapping("/add")
-    public String add() {
+    public String add(ModelMap mmap) {
+        String[] activeProfiles = env.getActiveProfiles();
+        mmap.put("activeProfiles", activeProfiles);
         return prefix + "/add";
     }
 
@@ -81,6 +84,9 @@ public class SysWechatConfigController extends BaseController {
         return toAjax(sysWechatConfigService.insertSysWechatConfig(sysWechatConfig));
     }
 
+    @Autowired
+    ConfigurableEnvironment env;
+
     /**
      * 修改公众号配置信息
      */
@@ -88,6 +94,8 @@ public class SysWechatConfigController extends BaseController {
     public String edit(@PathVariable("id") Long id, ModelMap mmap) {
         SysWechatConfig sysWechatConfig = sysWechatConfigService.selectSysWechatConfigById(id);
         mmap.put("sysWechatConfig", sysWechatConfig);
+        String[] activeProfiles = env.getActiveProfiles();
+        mmap.put("activeProfiles", activeProfiles);
         return prefix + "/edit";
     }
 
