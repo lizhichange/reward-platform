@@ -110,6 +110,7 @@ public class SysWechatConfigController extends BaseController {
     @PostMapping("/changeStatus")
     @ResponseBody
     public AjaxResult changeStatus(SysWechatConfig sysWechatConfig) {
+        
         return toAjax(sysWechatConfigService.updateSysWechatConfig(sysWechatConfig));
     }
 
