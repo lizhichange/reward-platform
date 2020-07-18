@@ -101,6 +101,18 @@ public class SysWechatConfigController extends BaseController {
         return toAjax(sysWechatConfigService.updateSysWechatConfig(sysWechatConfig));
     }
 
+
+    /**
+     * 状态修改
+     */
+    @Log(title = "公众号配置信息", businessType = BusinessType.UPDATE)
+    @RequiresPermissions("system:wechatConfig:edit")
+    @PostMapping("/changeStatus")
+    @ResponseBody
+    public AjaxResult changeStatus(SysWechatConfig sysWechatConfig) {
+        return toAjax(sysWechatConfigService.updateSysWechatConfig(sysWechatConfig));
+    }
+
     /**
      * 删除公众号配置信息
      */

@@ -506,7 +506,7 @@ public class VideoController extends BaseController {
 
 
     /**
-     * 用户状态修改
+     * 状态修改
      */
     @Log(title = "公共片库", businessType = BusinessType.UPDATE)
     @RequiresPermissions("system:shipin:edit")

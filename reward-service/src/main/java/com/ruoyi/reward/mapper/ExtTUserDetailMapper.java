@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface ExtTUserDetailMapper {
     /**
-     * 查询平台用户
+     * 查询平台用户EE
      *
      * @param id 平台用户ID
      * @return 平台用户
