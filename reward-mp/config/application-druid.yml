@@ -49,7 +49,7 @@ dubbo:
     protocol: zookeeper
     timeout: 15000
   protocol:
-    port: 12345
+    port: -1
     name: dubbo
     lazy: true
     status: server
