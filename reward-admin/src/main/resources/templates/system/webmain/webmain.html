@@ -81,6 +81,10 @@
                     field: 'mainUrl',
                     title: '链接地址'
                 },
+                   {
+                    field: 'shortUrl',
+                    title: '短链接'
+                },
 
                 {
                     visible: editFlag === 'hidden' ? false : true,
@@ -128,6 +132,7 @@
             $.operate.post(prefix + "/changeStatus", {"id": id, "mainStatus": 0});
         });
     }
+
 
 </script>
 </body>
