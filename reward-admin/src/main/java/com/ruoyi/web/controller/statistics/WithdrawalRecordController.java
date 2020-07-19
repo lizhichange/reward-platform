@@ -109,14 +109,15 @@ public class WithdrawalRecordController extends BaseController {
 
         TradeExample example = getTradeExample();
         List<Trade> tradeList = tradeMapper.selectByExample(example);
+        logger.info("tradeList:{}", tradeList);
         //提现总金额 //单位分
         long sum = 0;
-        if (CollectionUtils.isEmpty(tradeList)) {
+        if (!CollectionUtils.isEmpty(tradeList)) {
             sum = tradeList.stream().mapToLong(Trade::getAmount).sum();
         }
         Money money = new Money();
         money.setCent(sum);
-        modelMap.addAttribute("money", money.toString());
+        modelMap.addAttribute("money", money.getAmount().toString());
         return prefix + "/withdrawalRecord";
     }
 
@@ -186,6 +187,7 @@ public class WithdrawalRecordController extends BaseController {
 
         TradeExample example = getTradeExample();
         List<Trade> tradeList = tradeMapper.selectByExample(example);
+        logger.info("tradeList:{}", tradeList);
         long sum = 0;
         if (!CollectionUtils.isEmpty(tradeList)) {
             //提现总金额 //单位分
