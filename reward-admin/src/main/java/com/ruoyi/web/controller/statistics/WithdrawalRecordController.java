@@ -6,15 +6,18 @@ import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
+import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.framework.shiro.service.SysPasswordService;
 import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.reward.domain.Trade;
+import com.ruoyi.reward.domain.TradeExample;
 import com.ruoyi.reward.facade.api.AccountFacade;
 import com.ruoyi.reward.facade.enums.AccountBizCode;
 import com.ruoyi.reward.facade.enums.AccountOptType;
 import com.ruoyi.reward.facade.enums.PayeeTypeEnum;
 import com.ruoyi.reward.facade.enums.TradeStateEnum;
 import com.ruoyi.reward.facade.request.UserAccountOperatorRequest;
+import com.ruoyi.reward.mapper.TradeMapper;
 import com.ruoyi.reward.service.ITradeService;
 import com.ruoyi.system.domain.Account;
 import com.ruoyi.system.service.IAccountService;
@@ -30,8 +33,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
+
+import static com.ruoyi.common.utils.DateUtils.YYYY_MM_DD;
 
 /**
  * 打赏记录
@@ -49,6 +55,8 @@ public class WithdrawalRecordController extends BaseController {
     IAccountService accountService;
     @Autowired
     ISysUserService userService;
+    @Autowired
+    TradeMapper tradeMapper;
 
     @Autowired
     private SysPasswordService passwordService;
@@ -86,7 +94,7 @@ public class WithdrawalRecordController extends BaseController {
 
 
     @GetMapping("/withdrawalRecord")
-    public String withdrawalRecord(ModelMap modelMap) {
+    public String withdrawalRecord(ModelMap modelMap) throws ParseException {
 
 
         List<SelectOptionVO> states = Lists.newArrayList();
@@ -98,16 +106,28 @@ public class WithdrawalRecordController extends BaseController {
         }
         modelMap.addAttribute("states", states);
 
-        Trade query = new Trade();
-        query.setPayee(ShiroUtils.getLoginName());
-        query.setCreateTime(new Date());
-        List<Trade> tradeList = tradeService.selectTradeList(query);
+
+        TradeExample example = getTradeExample();
+        List<Trade> tradeList = tradeMapper.selectByExample(example);
         //提现总金额 //单位分
         long sum = tradeList.stream().mapToLong(Trade::getAmount).sum();
         Money money = new Money();
         money.setCent(sum);
         modelMap.addAttribute("money", money.toString());
         return prefix + "/withdrawalRecord";
+    }
+
+    private TradeExample getTradeExample() throws ParseException {
+        TradeExample example = new TradeExample();
+        TradeExample.Criteria criteria = example.createCriteria();
+        criteria.andPayeeEqualTo(ShiroUtils.getLoginName());
+        Date date = new Date();
+        String start = DateUtils.parseDateToStr(YYYY_MM_DD, date) + " 00:00:00";
+        String end = DateUtils.parseDateToStr(YYYY_MM_DD, date) + " 23:59:59";
+        Date startDate = org.near.toolkit.common.DateUtils.parseNewFormat(start);
+        Date endDate = org.near.toolkit.common.DateUtils.parseNewFormat(end);
+        criteria.andCreateTimeBetween(startDate, endDate);
+        return example;
     }
 
     /**
@@ -138,7 +158,7 @@ public class WithdrawalRecordController extends BaseController {
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult addSave(Trade trade,
-                              String password) {
+                              String password) throws ParseException {
         //check  用户提交申请的是元的单位
         Money money = new Money(trade.getAmountStr());
         //账户余额
@@ -160,10 +180,9 @@ public class WithdrawalRecordController extends BaseController {
         if (money.getCent() > 2000000) {
             return AjaxResult.error("提现单笔最高金额不能超过20000元");
         }
-        Trade query = new Trade();
-        query.setPayee(ShiroUtils.getLoginName());
-        query.setCreateTime(new Date());
-        List<Trade> tradeList = tradeService.selectTradeList(query);
+
+        TradeExample example = getTradeExample();
+        List<Trade> tradeList = tradeMapper.selectByExample(example);
         long sum;
         if (!CollectionUtils.isEmpty(tradeList)) {
             //提现总金额 //单位分
@@ -174,7 +193,6 @@ public class WithdrawalRecordController extends BaseController {
                 return AjaxResult.error("每天可提款总金额已经超过10万元");
             }
         }
-
 
         //转换分
         trade.setAmount(money.getCent());

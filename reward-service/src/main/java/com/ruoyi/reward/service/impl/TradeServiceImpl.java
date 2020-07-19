@@ -4,7 +4,7 @@ import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.common.sequence.ConcurrentSequence;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.reward.domain.Trade;
-import com.ruoyi.reward.mapper.TradeMapper;
+import com.ruoyi.reward.mapper.ExtTradeMapper;
 import com.ruoyi.reward.service.ITradeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ import java.util.List;
 @Service
 public class TradeServiceImpl implements ITradeService {
     @Autowired
-    private TradeMapper tradeMapper;
+    private ExtTradeMapper extTradeMapper;
     @Autowired
     ConcurrentSequence concurrentSequence;
 
@@ -33,7 +33,7 @@ public class TradeServiceImpl implements ITradeService {
      */
     @Override
     public Trade selectTradeById(String tradeNo) {
-        return tradeMapper.selectTradeById(tradeNo);
+        return extTradeMapper.selectTradeById(tradeNo);
     }
 
     /**
@@ -44,7 +44,7 @@ public class TradeServiceImpl implements ITradeService {
      */
     @Override
     public List<Trade> selectTradeList(Trade trade) {
-        return tradeMapper.selectTradeList(trade);
+        return extTradeMapper.selectTradeList(trade);
     }
 
     /**
@@ -61,7 +61,7 @@ public class TradeServiceImpl implements ITradeService {
         trade.setCreateTime(nowDate);
         trade.setGmtCreate(nowDate);
         trade.setGmtModified(nowDate);
-        tradeMapper.insertTrade(trade);
+        extTradeMapper.insertTrade(trade);
         return tradeNo;
     }
 
@@ -73,7 +73,7 @@ public class TradeServiceImpl implements ITradeService {
      */
     @Override
     public int updateTrade(Trade trade) {
-        return tradeMapper.updateTrade(trade);
+        return extTradeMapper.updateTrade(trade);
     }
 
     /**
@@ -84,7 +84,7 @@ public class TradeServiceImpl implements ITradeService {
      */
     @Override
     public int deleteTradeByIds(String ids) {
-        return tradeMapper.deleteTradeByIds(Convert.toStrArray(ids));
+        return extTradeMapper.deleteTradeByIds(Convert.toStrArray(ids));
     }
 
     /**
@@ -95,6 +95,6 @@ public class TradeServiceImpl implements ITradeService {
      */
     @Override
     public int deleteTradeById(String tradeNo) {
-        return tradeMapper.deleteTradeById(tradeNo);
+        return extTradeMapper.deleteTradeById(tradeNo);
     }
 }
