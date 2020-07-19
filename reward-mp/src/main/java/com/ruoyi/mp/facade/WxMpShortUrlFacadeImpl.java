@@ -64,6 +64,7 @@ public class WxMpShortUrlFacadeImpl implements WxMpShortUrlFacade {
             SysWebMainDTO sysWebMain = new SysWebMainDTO();
             sysWebMain.setMainUrl(url);
             List<SysWebMainDTO> list = sysWebMainFacadeClient.selectSysWebMainList(sysWebMain);
+            log.info("check.list:{}", list);
             if (CollectionUtils.isEmpty(list)) {
                 return JSONUtil.toJsonStr(res);
             }
