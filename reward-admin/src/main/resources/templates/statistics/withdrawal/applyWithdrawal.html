@@ -39,7 +39,9 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">今日已申请提款总金额：</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" disabled="" name="dayAmountWithdrawal" placeholder="0元"
+                                    <input class="form-control" disabled="" name="dayAmountWithdrawal" 
+                                    th:value="${money}+'元'"
+                                    placeholder="0元"
                                         type="text">
                                 </div>
                             </div>

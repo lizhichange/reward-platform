@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -86,6 +87,8 @@ public class WithdrawalRecordController extends BaseController {
 
     @GetMapping("/withdrawalRecord")
     public String withdrawalRecord(ModelMap modelMap) {
+
+
         List<SelectOptionVO> states = Lists.newArrayList();
         for (TradeStateEnum value : TradeStateEnum.values()) {
             SelectOptionVO option = new SelectOptionVO();
@@ -95,6 +98,15 @@ public class WithdrawalRecordController extends BaseController {
         }
         modelMap.addAttribute("states", states);
 
+        Trade query = new Trade();
+        query.setPayee(ShiroUtils.getLoginName());
+        query.setCreateTime(new Date());
+        List<Trade> tradeList = tradeService.selectTradeList(query);
+        //提现总金额 //单位分
+        long sum = tradeList.stream().mapToLong(Trade::getAmount).sum();
+        Money money = new Money();
+        money.setCent(sum);
+        modelMap.addAttribute("money", money.toString());
         return prefix + "/withdrawalRecord";
     }
 
@@ -147,6 +159,20 @@ public class WithdrawalRecordController extends BaseController {
         //提现单笔最高金额
         if (money.getCent() > 2000000) {
             return AjaxResult.error("提现单笔最高金额不能超过20000元");
+        }
+        Trade query = new Trade();
+        query.setPayee(ShiroUtils.getLoginName());
+        query.setCreateTime(new Date());
+        List<Trade> tradeList = tradeService.selectTradeList(query);
+        long sum;
+        if (!CollectionUtils.isEmpty(tradeList)) {
+            //提现总金额 //单位分
+            sum = tradeList.stream().mapToLong(Trade::getAmount).sum();
+            long l = sum + money.getCent();
+            //如果今日大于10万
+            if (l > 10000000) {
+                return AjaxResult.error("每天可提款总金额已经超过10万元");
+            }
         }
 
 
