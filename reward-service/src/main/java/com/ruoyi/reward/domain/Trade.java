@@ -265,4 +265,9 @@ public class Trade extends BaseEntity {
     public Date getCreateTime() {
         return createTime;
     }
+
+    @Override
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 }
