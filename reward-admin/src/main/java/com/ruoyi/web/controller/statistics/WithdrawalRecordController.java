@@ -125,7 +125,11 @@ public class WithdrawalRecordController extends BaseController {
     @Log(title = "申请提现", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(Trade trade, String password) {
+    public AjaxResult addSave(Trade trade, String singleWithdrawal, //单笔最小提款金额：
+                              String totalAmountWithdrawal, //每天可提款总金额：
+                              String dayAmountWithdrawal, //今日已申请提款总金额：
+                              String daySingleWithdrawal, //提现单笔最高金额：
+                              String password) {
         //check  用户提交申请的是元的单位
 
         Money money = new Money(trade.getAmountStr());
