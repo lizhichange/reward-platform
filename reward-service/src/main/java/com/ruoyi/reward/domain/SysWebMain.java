@@ -31,6 +31,8 @@ public class SysWebMain extends BaseEntity {
     @Excel(name = "状态")
     private String mainStatus;
 
+    private String shortUrl;
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -64,5 +66,13 @@ public class SysWebMain extends BaseEntity {
                 .append("createTime", getCreateTime())
                 .append("updateTime", getUpdateTime())
                 .toString();
+    }
+
+    public String getShortUrl() {
+        return shortUrl;
+    }
+
+    public void setShortUrl(String shortUrl) {
+        this.shortUrl = shortUrl;
     }
 }
