@@ -21,6 +21,7 @@ import com.ruoyi.reward.mapper.TradeMapper;
 import com.ruoyi.reward.service.ITradeService;
 import com.ruoyi.system.domain.Account;
 import com.ruoyi.system.service.IAccountService;
+import lombok.extern.slf4j.Slf4j;
 import org.near.toolkit.model.Money;
 import org.near.toolkit.model.SelectOptionVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,7 @@ import static com.ruoyi.common.utils.DateUtils.YYYY_MM_DD;
  */
 @Controller
 @RequestMapping("/statistics/withdrawal")
+@Slf4j
 public class WithdrawalRecordController extends BaseController {
 
     private final String prefix = "statistics/withdrawal";
@@ -113,7 +115,7 @@ public class WithdrawalRecordController extends BaseController {
         Money money = new Money();
         money.setCent(sum);
 
-        logger.info("tradeList:{},money:{}", tradeList, money);
+        log.info("tradeList:{},money:{}", tradeList, money);
         modelMap.addAttribute("money", money);
         return prefix + "/withdrawalRecord";
     }
@@ -138,7 +140,7 @@ public class WithdrawalRecordController extends BaseController {
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(Trade trade) {
-        logger.info("trade:{}", trade);
+        log.info("trade:{}", trade);
         startPage();
         trade.setCreateBy(ShiroUtils.getLoginName());
         List<Trade> list = tradeService.selectTradeList(trade);
@@ -185,7 +187,7 @@ public class WithdrawalRecordController extends BaseController {
 
         TradeExample example = getTradeExample();
         List<Trade> tradeList = tradeMapper.selectByExample(example);
-        logger.info("tradeList:{}", tradeList);
+        log.info("tradeList:{}", tradeList);
         long sum = 0;
         if (!CollectionUtils.isEmpty(tradeList)) {
             //提现总金额 //单位分
