@@ -91,7 +91,7 @@ public class VideoController {
     SysWebMainFacadeClient sysWebMainFacadeClient;
 
 
-    @Scheduled(cron = "1 1 * * * ?")
+    @Scheduled(cron = "0 0/5 * * * ?")
     void sync() {
         log.info("微信域名检测,sync:{}", DateUtils.formatNewFormat(new Date()));
         SysWebMainDTO sysWebMainDTO = new SysWebMainDTO();
