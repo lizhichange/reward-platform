@@ -124,7 +124,7 @@ public class WithdrawalRecordController extends BaseController {
     private TradeExample getTradeExample() throws ParseException {
         TradeExample example = new TradeExample();
         TradeExample.Criteria criteria = example.createCriteria();
-        criteria.andPayeeEqualTo(ShiroUtils.getLoginName());
+        criteria.andCreateByEqualTo(ShiroUtils.getLoginName());
         Date date = new Date();
         String start = DateUtils.parseDateToStr(YYYY_MM_DD, date) + " 00:00:00";
         String end = DateUtils.parseDateToStr(YYYY_MM_DD, date) + " 23:59:59";
