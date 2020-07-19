@@ -21,7 +21,6 @@ import com.ruoyi.reward.mapper.TradeMapper;
 import com.ruoyi.reward.service.ITradeService;
 import com.ruoyi.system.domain.Account;
 import com.ruoyi.system.service.IAccountService;
-import com.ruoyi.system.service.ISysUserService;
 import org.near.toolkit.model.Money;
 import org.near.toolkit.model.SelectOptionVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,12 +53,9 @@ public class WithdrawalRecordController extends BaseController {
     @Autowired
     IAccountService accountService;
     @Autowired
-    ISysUserService userService;
-    @Autowired
     TradeMapper tradeMapper;
-
     @Autowired
-    private SysPasswordService passwordService;
+    SysPasswordService passwordService;
 
     @GetMapping("/applyWithdrawal")
     public String applyWithdrawal(ModelMap modelMap) {
@@ -109,7 +105,6 @@ public class WithdrawalRecordController extends BaseController {
 
         TradeExample example = getTradeExample();
         List<Trade> tradeList = tradeMapper.selectByExample(example);
-        logger.info("tradeList:{}", tradeList);
         //提现总金额 //单位分
         long sum = 0;
         if (!CollectionUtils.isEmpty(tradeList)) {
@@ -117,9 +112,12 @@ public class WithdrawalRecordController extends BaseController {
         }
         Money money = new Money();
         money.setCent(sum);
-        modelMap.addAttribute("money", money.getAmount().toString());
+
+        logger.info("tradeList:{},money:{}", tradeList, money);
+        modelMap.addAttribute("money", money);
         return prefix + "/withdrawalRecord";
     }
+
 
     private TradeExample getTradeExample() throws ParseException {
         TradeExample example = new TradeExample();
