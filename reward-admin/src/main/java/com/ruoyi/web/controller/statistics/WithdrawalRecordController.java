@@ -110,7 +110,10 @@ public class WithdrawalRecordController extends BaseController {
         TradeExample example = getTradeExample();
         List<Trade> tradeList = tradeMapper.selectByExample(example);
         //提现总金额 //单位分
-        long sum = tradeList.stream().mapToLong(Trade::getAmount).sum();
+        long sum = 0;
+        if (CollectionUtils.isEmpty(tradeList)) {
+            sum = tradeList.stream().mapToLong(Trade::getAmount).sum();
+        }
         Money money = new Money();
         money.setCent(sum);
         modelMap.addAttribute("money", money.toString());
@@ -183,7 +186,7 @@ public class WithdrawalRecordController extends BaseController {
 
         TradeExample example = getTradeExample();
         List<Trade> tradeList = tradeMapper.selectByExample(example);
-        long sum;
+        long sum = 0;
         if (!CollectionUtils.isEmpty(tradeList)) {
             //提现总金额 //单位分
             sum = tradeList.stream().mapToLong(Trade::getAmount).sum();
@@ -193,7 +196,6 @@ public class WithdrawalRecordController extends BaseController {
                 return AjaxResult.error("每天可提款总金额已经超过10万元");
             }
         }
-
         //转换分
         trade.setAmount(money.getCent());
         trade.setPayer("system");
