@@ -60,7 +60,7 @@ public class WithdrawalRecordController extends BaseController {
     SysPasswordService passwordService;
 
     @GetMapping("/applyWithdrawal")
-    public String applyWithdrawal(ModelMap modelMap) {
+    public String applyWithdrawal(ModelMap modelMap) throws ParseException {
         long balance = getBalance(ShiroUtils.getLoginName());
         Money money = new Money();
         money.setCent(balance);
@@ -76,6 +76,18 @@ public class WithdrawalRecordController extends BaseController {
         }
         modelMap.addAttribute("types", types);
 
+
+        TradeExample example = getTradeExample();
+        List<Trade> tradeList = tradeMapper.selectByExample(example);
+        //提现总金额 //单位分
+        long sum = 0;
+        if (!CollectionUtils.isEmpty(tradeList)) {
+            sum = tradeList.stream().mapToLong(Trade::getAmount).sum();
+        }
+        Money sumMoney = new Money();
+        sumMoney.setCent(sum);
+        log.info("tradeList:{},sumMoney:{}", tradeList, sumMoney);
+        modelMap.addAttribute("money", sumMoney);
         return prefix + "/applyWithdrawal";
     }
 
@@ -104,19 +116,6 @@ public class WithdrawalRecordController extends BaseController {
         }
         modelMap.addAttribute("states", states);
 
-
-        TradeExample example = getTradeExample();
-        List<Trade> tradeList = tradeMapper.selectByExample(example);
-        //提现总金额 //单位分
-        long sum = 0;
-        if (!CollectionUtils.isEmpty(tradeList)) {
-            sum = tradeList.stream().mapToLong(Trade::getAmount).sum();
-        }
-        Money money = new Money();
-        money.setCent(sum);
-
-        log.info("tradeList:{},money:{}", tradeList, money);
-        modelMap.addAttribute("money", money);
         return prefix + "/withdrawalRecord";
     }
 
@@ -140,7 +139,6 @@ public class WithdrawalRecordController extends BaseController {
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(Trade trade) {
-        log.info("trade:{}", trade);
         startPage();
         trade.setCreateBy(ShiroUtils.getLoginName());
         List<Trade> list = tradeService.selectTradeList(trade);
