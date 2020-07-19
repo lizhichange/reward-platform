@@ -16,7 +16,7 @@
     </resultMap>
 
     <sql id="selectSysWebMainVo">
-        select id, main_url, main_status, create_time, update_time from sys_web_main
+        select id, main_url, main_status, create_time, update_time,short_url from sys_web_main
     </sql>
 
     <select id="selectSysWebMainList" parameterType="SysWebMain" resultMap="SysWebMainResult">
