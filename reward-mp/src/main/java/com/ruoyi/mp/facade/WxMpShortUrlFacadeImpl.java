@@ -5,7 +5,10 @@ import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.google.common.collect.Maps;
+import com.ruoyi.mp.client.SysWebMainFacadeClient;
+import com.ruoyi.reward.facade.api.SysWebMainFacade;
 import com.ruoyi.reward.facade.api.WxMpShortUrlFacade;
+import com.ruoyi.reward.facade.dto.SysWebMainDTO;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
@@ -20,8 +23,11 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.near.toolkit.common.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -48,12 +54,29 @@ public class WxMpShortUrlFacadeImpl implements WxMpShortUrlFacade {
 
     @Autowired
     HttpClient httpClient;
+    @Autowired
+    SysWebMainFacadeClient sysWebMainFacadeClient;
 
     @Override
     public String check(String url) {
         Map<String, String> res = Maps.newHashMap();
         try {
-            String shortUrl = shortUrl(url);
+            SysWebMainDTO sysWebMain = new SysWebMainDTO();
+            sysWebMain.setMainUrl(url);
+            List<SysWebMainDTO> list = sysWebMainFacadeClient.selectSysWebMainList(sysWebMain);
+            if (CollectionUtils.isEmpty(list)) {
+                return JSONUtil.toJsonStr(res);
+            }
+            SysWebMainDTO mainDTO = list.get(0);
+            String shortUrl;
+            if (StringUtil.isBlank(mainDTO.getShortUrl())) {
+                shortUrl = shortUrl(url);
+                sysWebMain.setShortUrl(shortUrl);
+                sysWebMainFacadeClient.updateSysWebMain(sysWebMain);
+            } else {
+                shortUrl = mainDTO.getShortUrl();
+            }
+
             log.info("shortUrl:{}", shortUrl);
             HttpContext httpContext = new BasicHttpContext();
             HttpResponse response = httpClient.execute(new HttpGet(shortUrl), httpContext);
