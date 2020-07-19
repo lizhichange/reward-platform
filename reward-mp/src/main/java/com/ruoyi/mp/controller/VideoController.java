@@ -8,6 +8,7 @@ import com.ruoyi.reward.facade.dto.SysWebMainDTO;
 import com.ruoyi.reward.facade.dto.VideoDTO;
 import com.ruoyi.reward.facade.enums.WebMainStatus;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.near.servicesupport.result.TPageResult;
 import org.near.toolkit.common.DateUtils;
 import org.near.toolkit.common.StringUtil;
@@ -29,6 +30,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/api")
+@Slf4j
 public class VideoController {
     protected TableDataInfo getDataTable(List<?> list) {
         TableDataInfo rspData = new TableDataInfo();
@@ -91,6 +93,7 @@ public class VideoController {
 
     @Scheduled(cron = "1 1 * * * ?")
     void sync() {
+        log.info("微信域名检测,sync:{}", DateUtils.formatNewFormat(new Date()));
         SysWebMainDTO sysWebMainDTO = new SysWebMainDTO();
         sysWebMainDTO.setMainStatus(WebMainStatus.OK.getCode());
         List<SysWebMainDTO> list = sysWebMainFacadeClient.selectSysWebMainList(sysWebMainDTO);
