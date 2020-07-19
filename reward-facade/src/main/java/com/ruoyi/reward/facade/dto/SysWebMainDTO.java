@@ -30,8 +30,7 @@ public class SysWebMainDTO extends ToString {
      */
 
     private String mainUrl;
-    private String
-            shortUrl;
+    private String shortUrl;
 
     /**
      * 状态

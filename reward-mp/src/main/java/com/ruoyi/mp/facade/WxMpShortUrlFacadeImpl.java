@@ -72,8 +72,10 @@ public class WxMpShortUrlFacadeImpl implements WxMpShortUrlFacade {
             String shortUrl;
             if (StringUtil.isBlank(mainDTO.getShortUrl())) {
                 shortUrl = shortUrl(url);
-                sysWebMain.setShortUrl(shortUrl);
-                sysWebMainFacadeClient.updateSysWebMain(sysWebMain);
+                SysWebMainDTO newMain = new SysWebMainDTO();
+                newMain.setShortUrl(shortUrl);
+                newMain.setId(mainDTO.getId());
+                sysWebMainFacadeClient.updateSysWebMain(newMain);
             } else {
                 shortUrl = mainDTO.getShortUrl();
             }
