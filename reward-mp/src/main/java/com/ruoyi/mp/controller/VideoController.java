@@ -92,7 +92,7 @@ public class VideoController {
 
 
     @Scheduled(cron = "0 0/5 * * * ?")
-    void sync() {
+    public void sync() {
         log.info("微信域名检测,sync:{}", DateUtils.formatNewFormat(new Date()));
         SysWebMainDTO sysWebMainDTO = new SysWebMainDTO();
         sysWebMainDTO.setMainStatus(WebMainStatus.OK.getCode());
