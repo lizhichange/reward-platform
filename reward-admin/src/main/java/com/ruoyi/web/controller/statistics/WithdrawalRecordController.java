@@ -104,7 +104,7 @@ public class WithdrawalRecordController extends BaseController {
 
 
     @GetMapping("/withdrawalRecord")
-    public String withdrawalRecord(ModelMap modelMap) throws ParseException {
+    public String withdrawalRecord(ModelMap modelMap) {
 
 
         List<SelectOptionVO> states = Lists.newArrayList();
@@ -202,9 +202,7 @@ public class WithdrawalRecordController extends BaseController {
         trade.setPayerType("system");
         trade.setPayType("system");
         trade.setCreateBy(ShiroUtils.getLoginName());
-
         String tradeNo = tradeService.insertTrade(trade);
-
         UserAccountOperatorRequest request = new UserAccountOperatorRequest();
         request.setUserId(ShiroUtils.getLoginName());
         request.setSourceCode(tradeNo);
