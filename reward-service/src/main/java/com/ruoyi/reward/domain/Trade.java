@@ -103,9 +103,13 @@ public class Trade extends BaseEntity {
     @Excel(name = "修改人")
     private String modifiedBy;
 
-    /** 收款账号 */
+    /**
+     * 收款账号
+     */
     @Excel(name = "收款账号")
     private String payeeNo;
+
+    private Date createTime;
 
     public void setTradeNo(String tradeNo) {
         this.tradeNo = tradeNo;
@@ -255,5 +259,10 @@ public class Trade extends BaseEntity {
 
     public void setAmountStr(String amountStr) {
         this.amountStr = amountStr;
+    }
+
+    @Override
+    public Date getCreateTime() {
+        return createTime;
     }
 }
