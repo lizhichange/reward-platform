@@ -12,6 +12,7 @@ import com.ruoyi.reward.facade.enums.WebMainStatus;
 import lombok.Data;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import org.near.toolkit.common.DateUtils;
 import org.near.toolkit.model.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.ConfigurableEnvironment;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.PostConstruct;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,8 +46,9 @@ public class ConfigFactory {
 
 
     @PostConstruct
-    @Scheduled(cron = "0 0/50 * * * ?")
+    @Scheduled(cron = "0 0/3 * * * ?")
     void init() {
+        log.info("微信配置信息查询,Scheduled:{}", DateUtils.formatNewFormat(new Date()));
         try {
             String profile = env.getActiveProfiles()[0];
             SysWechatConfigDTO item = new SysWechatConfigDTO();

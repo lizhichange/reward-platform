@@ -99,7 +99,7 @@ public class WxConfig {
     }
 
     @Bean
-    @Scheduled(cron = "0 0/30 * * * ?")
+    @Scheduled(cron = "0 0/3 * * * ?")
     public WxMpService wxMpService() {
         log.info("WxMpService..Scheduled..init");
         SysWechatConfigDTO weChatConfig = configFactory.getConfigDTOList().get(0);
