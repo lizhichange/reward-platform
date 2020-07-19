@@ -11,12 +11,10 @@
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
         <result property="shortUrl" column="short_url"/>
-
-
     </resultMap>
 
     <sql id="selectSysWebMainVo">
-        select id, main_url, main_status, create_time, update_time,short_url from sys_web_main
+        select id, main_url, main_status, create_time, update_time, short_url from sys_web_main
     </sql>
 
     <select id="selectSysWebMainList" parameterType="SysWebMain" resultMap="SysWebMainResult">
@@ -25,7 +23,6 @@
             <if test="mainUrl != null  and mainUrl != ''">and main_url = #{mainUrl}</if>
             <if test="mainStatus != null  and mainStatus != ''">and main_status = #{mainStatus}</if>
             <if test="shortUrl != null  and shortUrl != ''">and short_url = #{shortUrl}</if>
-
         </where>
     </select>
 
@@ -41,16 +38,14 @@
             <if test="mainStatus != null  and mainStatus != ''">main_status,</if>
             <if test="createTime != null ">create_time,</if>
             <if test="updateTime != null ">update_time,</if>
-            <if test="shortUrl != null ">short_url,</if>
-
+            <if test="shortUrl != null  and shortUrl != ''">short_url,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="mainUrl != null  and mainUrl != ''">#{mainUrl},</if>
             <if test="mainStatus != null  and mainStatus != ''">#{mainStatus},</if>
             <if test="createTime != null ">#{createTime},</if>
             <if test="updateTime != null ">#{updateTime},</if>
-            <if test="shortUrl != null ">#{shortUrl},</if>
-
+            <if test="shortUrl != null  and shortUrl != ''">#{shortUrl},</if>
         </trim>
     </insert>
 
@@ -61,7 +56,7 @@
             <if test="mainStatus != null  and mainStatus != ''">main_status = #{mainStatus},</if>
             <if test="createTime != null ">create_time = #{createTime},</if>
             <if test="updateTime != null ">update_time = #{updateTime},</if>
-            <if test="shortUrl != null ">short_url = #{shortUrl},</if>
+            <if test="shortUrl != null  and shortUrl != ''">short_url = #{shortUrl},</if>
         </trim>
         where id = #{id}
     </update>
