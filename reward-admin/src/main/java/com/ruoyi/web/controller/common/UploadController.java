@@ -20,7 +20,7 @@ import java.util.concurrent.*;
  */
 @Controller
 @RequestMapping("/system/upload")
-public class UploadController extends BaseController {
+public class  UploadController extends BaseController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UploadController.class);
 

@@ -106,9 +106,17 @@ public class WechatController extends BaseController {
             userWechatLoginRequest.setHeadImg(wxMpUser.getHeadImgUrl());
             userDetailClient.wechatLogin(userWechatLoginRequest);
             if (callback.contains("?")) {
-                callback += "&op=" + wxMpUser.getOpenId();
+                callback += "&op=" + wxMpUser.getOpenId()
+                        + "&appId=" + appId
+                        + "&nickname=" + wxMpUser.getNickname()
+                        + "&headImgUrl=" + wxMpUser.getHeadImgUrl()
+                ;
             } else {
-                callback += "?op=" + wxMpUser.getOpenId();
+                callback += "?op=" + wxMpUser.getOpenId()
+                        + "&appId=" + appId
+                        + "&nickname=" + wxMpUser.getNickname()
+                        + "&headImgUrl=" + wxMpUser.getHeadImgUrl()
+                ;
             }
             LOGGER.info("callback.redirect:{}", callback);
             return "redirect:" + callback;
