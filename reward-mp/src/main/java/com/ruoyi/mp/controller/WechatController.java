@@ -11,6 +11,8 @@ import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.result.WxMpOAuth2AccessToken;
 import me.chanjar.weixin.mp.bean.result.WxMpUser;
 import me.chanjar.weixin.mp.config.WxMpConfigStorage;
+import org.apache.commons.codec.binary.Base64;
+import org.near.toolkit.common.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -108,13 +110,15 @@ public class WechatController extends BaseController {
             if (callback.contains("?")) {
                 callback += "&op=" + wxMpUser.getOpenId()
                         + "&appId=" + appId
-                        + "&nickname=" + wxMpUser.getNickname()
+                        + "&nickname=" + Base64.encodeBase64String(wxMpUser.getNickname().getBytes())
                         + "&headImgUrl=" + wxMpUser.getHeadImgUrl()
                 ;
             } else {
+
+
                 callback += "?op=" + wxMpUser.getOpenId()
                         + "&appId=" + appId
-                        + "&nickname=" + wxMpUser.getNickname()
+                        + "&nickname=" + Base64.encodeBase64String(wxMpUser.getNickname().getBytes())
                         + "&headImgUrl=" + wxMpUser.getHeadImgUrl()
                 ;
             }
