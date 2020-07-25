@@ -73,4 +73,11 @@ public class IndexController extends BaseController {
         }
         return "404";
     }
+
+    @GetMapping("/404")
+
+    public String noFound() {
+        return "404";
+    }
+
 }
