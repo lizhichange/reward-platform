@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 @Controller
 class PromoController {
     @RequestMapping("promo")
-    def render() {
+    String render() {
         return "promo"
     }
 }
