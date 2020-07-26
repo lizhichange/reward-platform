@@ -1,5 +1,5 @@
 server:
-  port: 8761
+  port: 6900
 eureka:
   instance:
     ip-address: 127.0.0.1 #决定Eureka服务显示host
@@ -9,7 +9,7 @@ eureka:
     instance-id: ${eureka.instance.ip-address}:${spring.application.name}:${eureka.instance.non-secure-port}
   client:
     service-url:
-      defaultZone: http://${eureka.instance.ip-address}:8761/eureka/
+      defaultZone: http://${eureka.instance.ip-address}:6900/eureka/
     register-with-eureka: false
     fetch-registry: false
 

@@ -119,8 +119,7 @@ public class WxMpShortUrlFacadeImpl implements WxMpShortUrlFacade {
                 if (StringUtils.isBlank(src)) {
                     String jsData = element.html();
                     String json = StringUtils.substringAfter(jsData, "=");
-                    JSONObject jsonObject = JSONUtil.parseObj(json);
-                    return jsonObject;
+                    return JSONUtil.parseObj(json);
                 }
             }
         } catch (Exception e) {
