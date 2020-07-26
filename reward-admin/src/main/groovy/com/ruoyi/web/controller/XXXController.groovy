@@ -1,4 +1,4 @@
 package com.ruoyi.web.controller
 
-class TestController {
+class XXXController {
 }
