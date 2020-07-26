@@ -1,13 +1,12 @@
-package com.ruoyi.web.controller
-
+package com.ruoyi.mp.controller
 
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.RequestMapping
 
 @Controller
-class XXXController {
-    @RequestMapping(value = "xxx")
-    def xxx() {
-        return "";
+class PromoController {
+    @RequestMapping("promo")
+    def render() {
+        return "promo"
     }
 }
