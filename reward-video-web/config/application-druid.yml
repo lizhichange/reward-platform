@@ -63,5 +63,5 @@ dubbo:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://172.16.0.157:6900/eureka/
+      defaultZone: http://127.0.0.1:6900/eureka/
     fetchRegistry: true
