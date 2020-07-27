@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping
 
 @Controller
 class PoController {
-    @GetMapping("/promo")
+    @GetMapping("/po")
     String render(ModelMap modelMap) {
         "promo"
     }
