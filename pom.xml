@@ -20,7 +20,6 @@
         <module>reward-service</module>
         <module>reward-facade</module>
         <module>reward-mp</module>
-        <module>reward-qrcode-admin-ui</module>
         <module>reward-video-web</module>
         <module>eureka-server</module>
         <module>wx_url_check</module>

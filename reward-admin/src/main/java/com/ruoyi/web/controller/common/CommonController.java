@@ -34,10 +34,11 @@ public class CommonController {
     private static final Logger log = LoggerFactory.getLogger(CommonController.class);
 
     @Autowired
-    private ServerConfig serverConfig;
+    ServerConfig serverConfig;
 
     @Value("${didispace.title:}")
     private String title;
+
 
     @GetMapping("common/test")
     @ResponseBody
