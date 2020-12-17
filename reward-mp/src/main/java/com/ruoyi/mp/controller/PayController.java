@@ -72,7 +72,7 @@ public class PayController extends BaseController {
     public static final long THIRTY_MINUTES = 1800000;
 
 
-    @Value("${wxPay.mock:}")
+    @Value("${wxPay.mock:false}")
     private boolean wxPayMock;
 
     private final ImageService imageService;
