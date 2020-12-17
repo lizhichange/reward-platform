@@ -9,7 +9,7 @@ server:
     # 禁用缓存
     cache: false
 
-  port: 8182
+  port: 8082
   tomcat:
     # tomcat的URI编码
     uri-encoding: UTF-8
