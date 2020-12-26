@@ -6,15 +6,14 @@ import java.util.List;
 
 /**
  * 链接管理Service接口
- * 
+ *
  * @author ruoyi
  * @date 2020-03-23
  */
-public interface SysShortService
-{
+public interface SysShortService {
     /**
      * 查询链接管理
-     * 
+     *
      * @param id 链接管理ID
      * @return 链接管理
      */
@@ -22,7 +21,7 @@ public interface SysShortService
 
     /**
      * 查询链接管理列表
-     * 
+     *
      * @param sysShort 链接管理
      * @return 链接管理集合
      */
@@ -30,7 +29,7 @@ public interface SysShortService
 
     /**
      * 新增链接管理
-     * 
+     *
      * @param sysShort 链接管理
      * @return 结果
      */
@@ -38,7 +37,7 @@ public interface SysShortService
 
     /**
      * 修改链接管理
-     * 
+     *
      * @param sysShort 链接管理
      * @return 结果
      */
@@ -46,7 +45,7 @@ public interface SysShortService
 
     /**
      * 批量删除链接管理
-     * 
+     *
      * @param ids 需要删除的数据ID
      * @return 结果
      */
@@ -54,7 +53,7 @@ public interface SysShortService
 
     /**
      * 删除链接管理信息
-     * 
+     *
      * @param id 链接管理ID
      * @return 结果
      */

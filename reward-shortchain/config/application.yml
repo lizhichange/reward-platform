@@ -3,6 +3,7 @@ spring:
   application:
     name: shortchain
   jackson:
+    time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
 
 # Tomcat server配置
@@ -34,3 +35,20 @@ logging:
 wx:
   appid: wx590af156c3a3eae9 #此处替换为自己的appid
   secret: 8af481db51cd509f26c857a75712c9ce #此处替换为自己的secret
+
+
+dubbo:
+  registry:
+    address: 127.0.0.1:2181
+    protocol: zookeeper
+    timeout: 15000
+  protocol:
+    port: 20345
+    name: dubbo
+    lazy: true
+  application:
+    name: reward-shortchain
+    id: reward-shortchain
+    qosEnable: true
+    qosPort: 44144
+    qosAcceptForeignIp: false
