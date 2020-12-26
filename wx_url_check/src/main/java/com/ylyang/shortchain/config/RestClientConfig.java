@@ -1,4 +1,4 @@
-package com.ylyang.wx_url_check.config;
+package com.ylyang.shortchain.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.client.HttpClient;

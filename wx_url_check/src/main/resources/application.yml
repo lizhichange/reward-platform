@@ -1,14 +1,14 @@
 # spring配置
 spring:
   application:
-    name: wx_url_check
+    name: shortchain
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
 
 # Tomcat server配置
 server:
   servlet:
-    context-path: /wx_url_check
+    context-path: /shortchain
   tomcat:
     threads:
       max: 100

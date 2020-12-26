@@ -1,4 +1,4 @@
-package com.ylyang.wx_url_check.service;
+package com.ylyang.shortchain.service;
 
 import cn.hutool.cache.CacheUtil;
 import cn.hutool.cache.impl.TimedCache;
