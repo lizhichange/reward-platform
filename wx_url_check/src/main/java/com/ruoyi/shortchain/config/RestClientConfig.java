@@ -1,4 +1,4 @@
-package com.ylyang.shortchain.config;
+package com.ruoyi.shortchain.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.client.HttpClient;

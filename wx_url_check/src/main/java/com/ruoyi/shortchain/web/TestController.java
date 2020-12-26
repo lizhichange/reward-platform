@@ -1,6 +1,6 @@
-package com.ylyang.shortchain.web;
+package com.ruoyi.shortchain.web;
 
-import com.ylyang.shortchain.service.CheckUrlService;
+import com.ruoyi.shortchain.service.CheckUrlService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

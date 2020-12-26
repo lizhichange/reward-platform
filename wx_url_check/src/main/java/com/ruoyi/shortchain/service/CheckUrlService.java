@@ -1,4 +1,4 @@
-package com.ylyang.shortchain.service;
+package com.ruoyi.shortchain.service;
 
 import cn.hutool.cache.CacheUtil;
 import cn.hutool.cache.impl.TimedCache;
