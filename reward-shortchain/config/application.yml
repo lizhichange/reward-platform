@@ -16,7 +16,7 @@ server:
       protocol-header-https-value: https
       remote-ip-header: X-Forwarded-For
       protocol-header: X-Forwarded-Proto
-  port: 8080
+  port: 8181
 
 # logback日志配置
 logging:
