@@ -8,7 +8,7 @@ import com.ruoyi.reward.service.SysShortService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
-
+import com.ruoyi.reward.domain.SysShort;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
