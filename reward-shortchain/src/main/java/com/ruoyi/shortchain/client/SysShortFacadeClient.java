@@ -1,4 +1,4 @@
-package com.ruoyi.reward.facade.api;
+package com.ruoyi.shortchain.client;
 
 
 import com.ruoyi.reward.facade.dto.SysShortDTO;
@@ -6,12 +6,9 @@ import com.ruoyi.reward.facade.dto.SysShortDTO;
 import java.util.List;
 
 /**
- * 链接管理Service接口
- *
- * @author ruoyi
- * @date 2020-03-23
+ * @author wahaha
  */
-public interface SysShortFacade {
+public interface SysShortFacadeClient {
     /**
      * 查询链接管理
      *
@@ -35,6 +32,5 @@ public interface SysShortFacade {
      * @return 结果
      */
     public int insertSysShort(SysShortDTO dto);
-
 
 }
