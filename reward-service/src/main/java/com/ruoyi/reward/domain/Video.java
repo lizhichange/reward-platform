@@ -157,17 +157,6 @@ public class Video implements Serializable {
      */
     private Date createTime;
 
-
-    // 视图1
-    public interface OneView {
-    }
-
-
-    // 视图2 继承视图1
-    public interface TwoView extends OneView {
-    }
-
-
     private String privateMoney;
 
     private List<String> userIdList;
