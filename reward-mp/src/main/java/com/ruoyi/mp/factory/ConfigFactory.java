@@ -1,19 +1,11 @@
 package com.ruoyi.mp.factory;
 
 
-import com.alibaba.fastjson.JSONObject;
-import com.ruoyi.mp.client.SysWebMainFacadeClient;
 import com.ruoyi.mp.client.SysWechatConfigClient;
 import com.ruoyi.mp.config.MpAuthConfig;
-import com.ruoyi.reward.facade.api.WxMpShortUrlFacade;
-import com.ruoyi.reward.facade.dto.SysWebMainDTO;
 import com.ruoyi.reward.facade.dto.SysWechatConfigDTO;
-import com.ruoyi.reward.facade.enums.WebMainStatus;
-import lombok.Data;
-import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.near.toolkit.common.DateUtils;
-import org.near.toolkit.model.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -36,8 +28,15 @@ public class ConfigFactory {
     @Autowired
     ConfigurableEnvironment env;
 
-    @Getter
-    List<SysWechatConfigDTO> configDTOList;
+    public void setConfigDTOList(List<SysWechatConfigDTO> configDTOList) {
+        this.configDTOList = configDTOList;
+    }
+
+    public List<SysWechatConfigDTO> getConfigDTOList() {
+        return this.configDTOList;
+    }
+
+    private List<SysWechatConfigDTO> configDTOList;
     @Autowired
     SysWechatConfigClient sysWechatConfigClient;
 

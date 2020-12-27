@@ -1,6 +1,5 @@
 package com.ruoyi.shortchain.config;
 
-import lombok.extern.slf4j.Slf4j;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.config.Registry;
@@ -33,7 +32,6 @@ import java.security.cert.X509Certificate;
  * @since JDK 1.8
  */
 @Configuration
-@Slf4j
 public class RestClientConfig {
 
 	@Value("${httpclient.read-timeout:30000}")
@@ -89,7 +87,7 @@ public class RestClientConfig {
 			sslContext.init(null, new TrustManager[]{x509TrustManager()}, new SecureRandom());
 
 		} catch (Exception e) {
-			log.debug(e.getMessage());
+
 		}
 		return sslContext;
 	}

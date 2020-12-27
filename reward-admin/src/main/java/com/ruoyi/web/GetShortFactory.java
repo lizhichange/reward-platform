@@ -1,6 +1,5 @@
 package com.ruoyi.web;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
 import lombok.Data;
@@ -8,7 +7,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.near.toolkit.common.StringUtil;
 import org.near.toolkit.model.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -39,8 +41,8 @@ public class GetShortFactory {
         log.info("body:{}", body);
         if (StringUtil.isNotBlank(body)) {
             MyMark myMark = new Gson().fromJson(body, MyMark.class);
-            if (myMark != null && myMark.getData() != null && myMark.getData().getLink() != null) {
-                return myMark.getData().getLink().getUrl();
+            if (myMark != null && myMark.getData() != null) {
+                return myMark.getData().toString();
             }
         }
         return "";
@@ -51,7 +53,7 @@ public class GetShortFactory {
         private String apikey;
         private String url;
     }
-
+    @Data
     static class MyMark extends ToString {
 
         /**
@@ -59,159 +61,9 @@ public class GetShortFactory {
          * data : {"group":{"name":"分组1","sid":"w7ho5te8"},"link":{"name":"短链接HOHzsG","origin_url":"https://xiaomark.com/","url":"https://sourl.cn/HOHzsG"},"n_links_today":13}
          * message : 请求成功
          */
-
         private int code;
-        private DataBean data;
-        private String message;
-
-        public int getCode() {
-            return code;
-        }
-
-        public void setCode(int code) {
-            this.code = code;
-        }
-
-        public DataBean getData() {
-            return data;
-        }
-
-        public void setData(DataBean data) {
-            this.data = data;
-        }
-
-        public String getMessage() {
-            return message;
-        }
-
-        public void setMessage(String message) {
-            this.message = message;
-        }
-
-        public static class DataBean {
-            /**
-             * group : {"name":"分组1","sid":"w7ho5te8"}
-             * link : {"name":"短链接HOHzsG","origin_url":"https://xiaomark.com/","url":"https://sourl.cn/HOHzsG"}
-             * n_links_today : 13
-             */
-
-            private GroupBean group;
-            private LinkBean link;
-            private int n_links_today;
-
-            public GroupBean getGroup() {
-                return group;
-            }
-
-            public void setGroup(GroupBean group) {
-                this.group = group;
-            }
-
-            public LinkBean getLink() {
-                return link;
-            }
-
-            public void setLink(LinkBean link) {
-                this.link = link;
-            }
-
-            public int getN_links_today() {
-                return n_links_today;
-            }
-
-            public void setN_links_today(int n_links_today) {
-                this.n_links_today = n_links_today;
-            }
-
-            public static class GroupBean {
-                /**
-                 * name : 分组1
-                 * sid : w7ho5te8
-                 */
-
-                private String name;
-                private String sid;
-
-                public String getName() {
-                    return name;
-                }
-
-                public void setName(String name) {
-                    this.name = name;
-                }
-
-                public String getSid() {
-                    return sid;
-                }
-
-                public void setSid(String sid) {
-                    this.sid = sid;
-                }
-            }
-
-            public static class LinkBean {
-                /**
-                 * name : 短链接HOHzsG
-                 * origin_url : https://xiaomark.com/
-                 * url : https://sourl.cn/HOHzsG
-                 */
-
-                private String name;
-                private String origin_url;
-                private String url;
-
-                public String getName() {
-                    return name;
-                }
-
-                public void setName(String name) {
-                    this.name = name;
-                }
-
-                public String getOrigin_url() {
-                    return origin_url;
-                }
-
-                public void setOrigin_url(String origin_url) {
-                    this.origin_url = origin_url;
-                }
-
-                public String getUrl() {
-                    return url;
-                }
-
-                public void setUrl(String url) {
-                    this.url = url;
-                }
-            }
-        }
+        private String msg;
+        private Object data;
     }
 
-    static class MyResponse extends ToString {
-
-        private static final long serialVersionUID = 3882315401921271659L;
-        /**
-         * url : http://suo.im/abcdef
-         * err :
-         */
-
-        private String url;
-        private String err;
-
-        public String getUrl() {
-            return url;
-        }
-
-        public void setUrl(String url) {
-            this.url = url;
-        }
-
-        public String getErr() {
-            return err;
-        }
-
-        public void setErr(String err) {
-            this.err = err;
-        }
-    }
 }

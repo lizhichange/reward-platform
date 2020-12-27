@@ -5,8 +5,6 @@ import com.github.binarywang.wxpay.service.WxPayService;
 import com.github.binarywang.wxpay.service.impl.WxPayServiceImpl;
 import com.ruoyi.mp.factory.ConfigFactory;
 import com.ruoyi.reward.facade.dto.SysWechatConfigDTO;
-import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -17,8 +15,6 @@ import org.springframework.scheduling.annotation.Scheduled;
  * @author Binary Wang
  */
 @Configuration
-@AllArgsConstructor
-@Slf4j
 public class WxPayConfiguration {
 
 
@@ -28,7 +24,7 @@ public class WxPayConfiguration {
     @Bean
     @Scheduled(cron = "0 0/3 * * * ?")
     public WxPayService wxPayService() {
-        log.info("wxPayService..Scheduled..init");
+
         WxPayService wxPayService = new WxPayServiceImpl();
         try {
             WxPayProperties properties = new WxPayProperties();
@@ -46,7 +42,7 @@ public class WxPayConfiguration {
             payConfig.setUseSandboxEnv(false);
             wxPayService.setConfig(payConfig);
         } catch (Exception e) {
-            log.error(e.getMessage(), e);
+
         }
 
         return wxPayService;

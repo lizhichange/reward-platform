@@ -6,7 +6,6 @@ import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
@@ -35,7 +34,6 @@ import java.util.Map;
  * @since JDK 1.8
  */
 @Component
-@Slf4j
 public class CheckUrlService {
 
     public static final String SHORT_URL = "https://api.weixin.qq.com/cgi-bin/shorturl?access_token={}";
@@ -82,7 +80,7 @@ public class CheckUrlService {
             }
 
         } catch (Exception e) {
-            log.error(e.getMessage(), e);
+
             res.put("code", "99");
             res.put("msg", e.getMessage());
         }
@@ -157,7 +155,7 @@ public class CheckUrlService {
                 }
             }
         } catch (Exception e) {
-            log.error("解析微信拦截提示信息出错：", e);
+
         }
 
         return new JSONObject();

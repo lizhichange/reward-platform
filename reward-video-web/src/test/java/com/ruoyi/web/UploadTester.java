@@ -2,7 +2,6 @@ package com.ruoyi.web;
 
 import com.ruoyi.web.feign.VideoFacadeFeign;
 import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.io.IOUtils;
@@ -20,7 +19,6 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-@Slf4j
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 public class UploadTester {
@@ -45,6 +43,6 @@ public class UploadTester {
         MultipartFile multi = new CommonsMultipartFile(fileItem);
 
         String fileName = videoFacadeFeign.handleFileUpload(multi);
-        log.info(fileName);
+
     }
 }
