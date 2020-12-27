@@ -9,7 +9,7 @@ spring:
 # Tomcat server配置
 server:
   servlet:
-    context-path: /shortchain
+    context-path: /
   tomcat:
     threads:
       max: 100
