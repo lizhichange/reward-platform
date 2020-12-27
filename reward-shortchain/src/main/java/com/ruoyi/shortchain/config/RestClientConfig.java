@@ -34,83 +34,83 @@ import java.security.cert.X509Certificate;
 @Configuration
 public class RestClientConfig {
 
-	@Value("${httpclient.read-timeout:30000}")
-	private int readTimeout;
+    @Value("${httpclient.read-timeout:30000}")
+    private int readTimeout;
 
-	@Value("${httpclient.connect-timeout:30000}")
-	private int connectTimeout;
+    @Value("${httpclient.connect-timeout:30000}")
+    private int connectTimeout;
 
-	@Value("${httpclient.default-charset:UTF-8}")
-	private String defaultCharset;
+    @Value("${httpclient.default-charset:UTF-8}")
+    private String defaultCharset;
 
-	@Bean
-	public RestTemplate httpClientTemplate() {
+    @Bean
+    public RestTemplate httpClientTemplate() {
 
-		RestTemplate restTemplate = new RestTemplate(new HttpComponentsClientHttpRequestFactory(httpClient()));
-		for (HttpMessageConverter<?> messageConverter : restTemplate.getMessageConverters()) {
-			if (messageConverter instanceof StringHttpMessageConverter) {
-				((StringHttpMessageConverter) messageConverter).setDefaultCharset(Charset.forName(defaultCharset));
-				break;
-			}
-		}
-		return restTemplate;
-	}
+        RestTemplate restTemplate = new RestTemplate(new HttpComponentsClientHttpRequestFactory(httpClient()));
+        for (HttpMessageConverter<?> messageConverter : restTemplate.getMessageConverters()) {
+            if (messageConverter instanceof StringHttpMessageConverter) {
+                ((StringHttpMessageConverter) messageConverter).setDefaultCharset(Charset.forName(defaultCharset));
+                break;
+            }
+        }
+        return restTemplate;
+    }
 
-	@Bean
-	public HttpClient httpClient() {
+    @Bean
+    public HttpClient httpClient() {
 
-		Registry<ConnectionSocketFactory> registry = RegistryBuilder.<ConnectionSocketFactory> create()
-				.register("http", PlainConnectionSocketFactory.getSocketFactory())
-				.register("https", new SSLConnectionSocketFactory(sslContext(), (s, sslSession) -> true))
-				.build();
-		PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager(registry);
-		connectionManager.setMaxTotal(200);
-		connectionManager.setDefaultMaxPerRoute(100);
-		RequestConfig requestConfig = RequestConfig.custom()
-				//服务器返回数据的时间，超过抛出read timeout
-				.setSocketTimeout(readTimeout)
-				//连接上服务器的时间，超出抛出connect timeout
-				.setConnectTimeout(connectTimeout)
-				.build();
-		return HttpClientBuilder.create()
-				.setDefaultRequestConfig(requestConfig)
-				.setConnectionManager(connectionManager)
-				.build();
-	}
+        Registry<ConnectionSocketFactory> registry = RegistryBuilder.<ConnectionSocketFactory>create()
+                .register("http", PlainConnectionSocketFactory.getSocketFactory())
+                .register("https", new SSLConnectionSocketFactory(sslContext(), (s, sslSession) -> true))
+                .build();
+        PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager(registry);
+        connectionManager.setMaxTotal(200);
+        connectionManager.setDefaultMaxPerRoute(100);
+        RequestConfig requestConfig = RequestConfig.custom()
+                //服务器返回数据的时间，超过抛出read timeout
+                .setSocketTimeout(readTimeout)
+                //连接上服务器的时间，超出抛出connect timeout
+                .setConnectTimeout(connectTimeout)
+                .build();
+        return HttpClientBuilder.create()
+                .setDefaultRequestConfig(requestConfig)
+                .setConnectionManager(connectionManager)
+                .build();
+    }
 
-	private SSLContext sslContext() {
+    private SSLContext sslContext() {
 
-		SSLContext sslContext = null;
-		try {
+        SSLContext sslContext = null;
+        try {
 
-			sslContext = SSLContext.getInstance("TLS");
-			sslContext.init(null, new TrustManager[]{x509TrustManager()}, new SecureRandom());
+            sslContext = SSLContext.getInstance("TLS");
+            sslContext.init(null, new TrustManager[]{x509TrustManager()}, new SecureRandom());
 
-		} catch (Exception e) {
+        } catch (Exception e) {
 
-		}
-		return sslContext;
-	}
+        }
+        return sslContext;
+    }
 
-	private X509TrustManager x509TrustManager() {
+    private X509TrustManager x509TrustManager() {
 
-		return new X509TrustManager() {
+        return new X509TrustManager() {
 
-			@Override
-			public void checkClientTrusted(X509Certificate[] x509Certificates, String s) {
+            @Override
+            public void checkClientTrusted(X509Certificate[] x509Certificates, String s) {
 
-			}
+            }
 
-			@Override
-			public void checkServerTrusted(X509Certificate[] x509Certificates, String s) {
+            @Override
+            public void checkServerTrusted(X509Certificate[] x509Certificates, String s) {
 
-			}
+            }
 
-			@Override
-			public X509Certificate[] getAcceptedIssuers() {
+            @Override
+            public X509Certificate[] getAcceptedIssuers() {
 
-				return new X509Certificate[0];
-			}
-		};
-	}
+                return new X509Certificate[0];
+            }
+        };
+    }
 }
