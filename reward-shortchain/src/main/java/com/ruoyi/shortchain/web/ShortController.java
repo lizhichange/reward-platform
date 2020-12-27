@@ -8,7 +8,12 @@ import com.ruoyi.shortchain.param.GenerateShortParam;
 import lombok.extern.slf4j.Slf4j;
 import org.near.toolkit.model.AjaxResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Random;
 
 
 /**
@@ -28,9 +33,9 @@ public class ShortController {
         log.info("param:{}", param);
         SysShortDTO dto = new SysShortDTO();
 
-        int shortKey = RandomUtil.randomNumber();
-        dto.setShortKey(String.valueOf(shortKey));
-        String shortUrl = SHORT_URL + shortKey;
+        Random random = RandomUtil.getRandom(true);
+        dto.setShortKey(random.toString());
+        String shortUrl = SHORT_URL + random.toString();
 
         dto.setShortUrl(shortUrl);
         dto.setLongUrl(param.getUrl());
