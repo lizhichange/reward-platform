@@ -1,4 +1,4 @@
-package com.ruoyi.system.biz;
+package com.ruoyi.system.biz.processor;
 
 import com.google.common.collect.Maps;
 import com.ruoyi.reward.facade.enums.OrderStatusType;

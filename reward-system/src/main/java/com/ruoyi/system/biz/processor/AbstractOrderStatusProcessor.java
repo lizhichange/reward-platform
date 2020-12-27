@@ -2,7 +2,7 @@
  * The MIT License
  * Copyright (c) 2014-2016 Ilkka Seppälä
  */
-package com.ruoyi.system.biz;
+package com.ruoyi.system.biz.processor;
 
 import com.ruoyi.reward.facade.dto.SysOrderDTO;
 import com.ruoyi.system.service.ISysConfigService;

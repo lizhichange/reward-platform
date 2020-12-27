@@ -1,4 +1,4 @@
-package com.ruoyi.system.biz;
+package com.ruoyi.system.biz.processor;
 
 
 import com.ruoyi.reward.facade.dto.SysOrderDTO;

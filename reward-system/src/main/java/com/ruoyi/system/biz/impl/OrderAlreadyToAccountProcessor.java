@@ -6,7 +6,7 @@ import com.ruoyi.reward.facade.enums.AccountOptType;
 import com.ruoyi.reward.facade.enums.AccountType;
 import com.ruoyi.reward.facade.enums.OrderStatusType;
 import com.ruoyi.reward.facade.request.UserAccountOperatorRequest;
-import com.ruoyi.system.biz.AbstractOrderStatusProcessor;
+import com.ruoyi.system.biz.processor.AbstractOrderStatusProcessor;
 import com.ruoyi.system.biz.TakeAccountAmountManager;
 import com.ruoyi.system.client.VideoFacadeClient;
 import com.ruoyi.system.domain.AccountDetail;
