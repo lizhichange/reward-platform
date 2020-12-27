@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.near.toolkit.model.ToString;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -195,5 +194,221 @@ public class VideoDTO extends ToString {
         sb.append(", createTime=").append(createTime);
         sb.append("]");
         return sb.toString();
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public List<Integer> getIds() {
+        return ids;
+    }
+
+    public void setIds(List<Integer> ids) {
+        this.ids = ids;
+    }
+
+    public String getMoney() {
+        return money;
+    }
+
+    public void setMoney(String money) {
+        this.money = money;
+    }
+
+    public String getSj() {
+        return sj;
+    }
+
+    public void setSj(String sj) {
+        this.sj = sj;
+    }
+
+    public String getCs() {
+        return cs;
+    }
+
+    public void setCs(String cs) {
+        this.cs = cs;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getVideoUrl() {
+        return videoUrl;
+    }
+
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
+    public String getShijianStr() {
+        return shijianStr;
+    }
+
+    public void setShijianStr(String shijianStr) {
+        this.shijianStr = shijianStr;
+    }
+
+    public String getLx() {
+        return lx;
+    }
+
+    public void setLx(String lx) {
+        this.lx = lx;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
+
+    public Boolean getLei() {
+        return isLei;
+    }
+
+    public void setLei(Boolean lei) {
+        isLei = lei;
+    }
+
+    public Boolean getAllow() {
+        return isAllow;
+    }
+
+    public void setAllow(Boolean allow) {
+        isAllow = allow;
+    }
+
+    public Integer getClick() {
+        return click;
+    }
+
+    public void setClick(Integer click) {
+        this.click = click;
+    }
+
+    public Boolean getPreview() {
+        return isPreview;
+    }
+
+    public void setPreview(Boolean preview) {
+        isPreview = preview;
+    }
+
+    public String getShortUrl() {
+        return shortUrl;
+    }
+
+    public void setShortUrl(String shortUrl) {
+        this.shortUrl = shortUrl;
+    }
+
+    public String getStartMoney() {
+        return startMoney;
+    }
+
+    public void setStartMoney(String startMoney) {
+        this.startMoney = startMoney;
+    }
+
+    public String getEndMoney() {
+        return endMoney;
+    }
+
+    public void setEndMoney(String endMoney) {
+        this.endMoney = endMoney;
+    }
+
+    public Integer getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public SysCategoryDTO getCategory() {
+        return category;
+    }
+
+    public void setCategory(SysCategoryDTO category) {
+        this.category = category;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getShiUrl() {
+        return shiUrl;
+    }
+
+    public void setShiUrl(String shiUrl) {
+        this.shiUrl = shiUrl;
+    }
+
+    public String getDiffDays() {
+        return diffDays;
+    }
+
+    public void setDiffDays(String diffDays) {
+        this.diffDays = diffDays;
+    }
+
+    public String getMockNum() {
+        return mockNum;
+    }
+
+    public void setMockNum(String mockNum) {
+        this.mockNum = mockNum;
     }
 }

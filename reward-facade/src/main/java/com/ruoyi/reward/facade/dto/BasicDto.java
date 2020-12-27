@@ -84,4 +84,12 @@ public abstract class BasicDto extends ToString {
     public Long getGmtModifiedTime() {
         return gmtModifiedTime;
     }
+
+    public void setGmtCreateTime(Long gmtCreateTime) {
+        this.gmtCreateTime = gmtCreateTime;
+    }
+
+    public void setGmtModifiedTime(Long gmtModifiedTime) {
+        this.gmtModifiedTime = gmtModifiedTime;
+    }
 }

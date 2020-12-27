@@ -39,4 +39,39 @@ public class SysWebMainDTO extends ToString {
     private String mainStatus;
 
 
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getMainUrl() {
+        return mainUrl;
+    }
+
+    public void setMainUrl(String mainUrl) {
+        this.mainUrl = mainUrl;
+    }
+
+    public String getShortUrl() {
+        return shortUrl;
+    }
+
+    public void setShortUrl(String shortUrl) {
+        this.shortUrl = shortUrl;
+    }
+
+    public String getMainStatus() {
+        return mainStatus;
+    }
+
+    public void setMainStatus(String mainStatus) {
+        this.mainStatus = mainStatus;
+    }
 }
