@@ -27,7 +27,7 @@ public class GetShortFactory {
         RestTemplate client = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        String str = "https://api.xiaomark.com/short/generate";
+        String str = "http://hailunjianzhi.cn/short/generate";
         String key = "d4efdd8311bff5f4456dd8ea14765168";
         //将请求头部和参数合成一个请求
         MyMarkReq params = new MyMarkReq();
@@ -53,6 +53,7 @@ public class GetShortFactory {
         private String apikey;
         private String url;
     }
+
     @Data
     static class MyMark extends ToString {
 

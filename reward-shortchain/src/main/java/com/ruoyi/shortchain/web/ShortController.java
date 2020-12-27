@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/short")
 public class ShortController {
 
-    private final static String SHORT_URL = "http://";
+    private final static String SHORT_URL = "http://hailunjianzhi.cn/";
     @Autowired
     SysShortFacadeClient sysShortFacadeClient;
 
