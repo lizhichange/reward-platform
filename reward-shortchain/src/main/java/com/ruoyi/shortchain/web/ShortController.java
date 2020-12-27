@@ -8,10 +8,7 @@ import com.ruoyi.shortchain.param.GenerateShortParam;
 import lombok.extern.slf4j.Slf4j;
 import org.near.toolkit.model.AjaxResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 /**
@@ -27,7 +24,7 @@ public class ShortController {
     SysShortFacadeClient sysShortFacadeClient;
 
     @PostMapping("/generate")
-    public AjaxResult generate(@RequestParam GenerateShortParam param) {
+    public AjaxResult generate(@RequestBody GenerateShortParam param) {
         log.info("param:{}", param);
         SysShortDTO dto = new SysShortDTO();
         dto.setLongUrl(param.getUrl());
