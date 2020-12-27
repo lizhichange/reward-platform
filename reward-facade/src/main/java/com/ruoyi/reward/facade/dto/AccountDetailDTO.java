@@ -97,27 +97,7 @@ public class AccountDetailDTO implements Serializable {
      */
     private String operator;
 
-    private static final long serialVersionUID = 1L;
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", accountId=").append(accountId);
-        sb.append(", amount=").append(amount);
-        sb.append(", optType=").append(optType);
-        sb.append(", remark=").append(remark);
-        sb.append(", outTradeNo=").append(outTradeNo);
-        sb.append(", bizCode=").append(bizCode);
-        sb.append(", sourceCode=").append(sourceCode);
-        sb.append(", gmtCreate=").append(gmtCreate);
-        sb.append(", gmtModified=").append(gmtModified);
-        sb.append(", operator=").append(operator);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
-    }
+
+
 }

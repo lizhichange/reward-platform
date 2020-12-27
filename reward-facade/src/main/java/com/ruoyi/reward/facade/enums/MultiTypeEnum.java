@@ -13,7 +13,6 @@ import java.util.List;
 /**
  * @author sunflower
  */
-
 @Getter
 public enum MultiTypeEnum implements BaseEnum {
 
@@ -84,6 +83,16 @@ public enum MultiTypeEnum implements BaseEnum {
         this.code = code;
         this.desc = desc;
         this.list = list;
+    }
+
+    @Override
+    public String getCode() {
+        return code;
+    }
+
+    @Override
+    public String getDesc() {
+        return desc;
     }
 
     @Data

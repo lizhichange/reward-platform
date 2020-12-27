@@ -4,7 +4,6 @@
 
 package com.ruoyi.reward.facade.enums;
 
-import lombok.Getter;
 import org.near.toolkit.model.BaseEnum;
 
 /**
@@ -12,7 +11,6 @@ import org.near.toolkit.model.BaseEnum;
  *
  * @author Willard.Hu on 2017/10/31.
  */
-@Getter
 public enum PrincipalTypeEnum implements BaseEnum {
     /**
      * 普通用户
@@ -36,4 +34,13 @@ public enum PrincipalTypeEnum implements BaseEnum {
     }
 
 
+    @Override
+    public String getCode() {
+        return code;
+    }
+
+    @Override
+    public String getDesc() {
+        return desc;
+    }
 }

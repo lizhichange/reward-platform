@@ -2,12 +2,13 @@ package com.ruoyi.reward.facade.dto;
 
 import com.ruoyi.reward.facade.enums.PrincipalTypeEnum;
 import lombok.Data;
+import org.near.toolkit.model.ToString;
 
 import java.io.Serializable;
 import java.util.Date;
 
 @Data
-public class TWechatAuthDTO implements Serializable {
+public class TWechatAuthDTO extends ToString {
     /**
     *
     *

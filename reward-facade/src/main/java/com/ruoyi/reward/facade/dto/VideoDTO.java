@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.near.toolkit.model.ToString;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -16,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class VideoDTO implements Serializable {
+public class VideoDTO extends ToString {
     private static final long serialVersionUID = 6410040127704981572L;
     /**
      * shipin.id

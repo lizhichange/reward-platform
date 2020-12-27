@@ -1,6 +1,7 @@
 package com.ruoyi.reward.facade.dto;
 
 import lombok.Data;
+import org.near.toolkit.model.ToString;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -9,7 +10,7 @@ import java.util.Date;
  * @author sunflower
  */
 @Data
-public class AccountDTO implements Serializable {
+public class AccountDTO extends ToString {
     /**
      * account.id
      *

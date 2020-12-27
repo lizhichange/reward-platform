@@ -19,41 +19,20 @@ import org.springframework.web.client.RestTemplate;
 @Slf4j
 public class GetShortFactory {
     @Autowired
-    RestTemplate restTemplate;
-
-    public String getShortUrl(String url) {
-        String key = "5ef5cc72b1b63c076966a527@e6f2365e4b7f60c44415d6db919097cb";
-        String str = "http://suo.im/api.htm?format=json&url=" + url + "&key=" + key + "&expireDate=2020-12-31";
-        String shortUrl = restTemplate.getForObject(str, String.class);
-        log.info("shortUrl:{}", shortUrl);
-        if (StringUtil.isNotBlank(shortUrl)) {
-            MyResponse myResponse = new Gson().fromJson(shortUrl, MyResponse.class);
-            if (myResponse != null) {
-                return myResponse.getUrl();
-            }
-        }
-        return "";
-    }
-
-    public static void main(String[] args) {
-        MyMarkReq params = new MyMarkReq();
-        params.setApikey("key");
-        params.setOrigin_url("origin_url");
-        String s = JSON.toJSONString(params);
-        System.out.println(s);
-    }
+    private RestTemplate restTemplate;
 
     public String getShortUrlForMark(String url) {
         RestTemplate client = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        String str = "https://api.xiaomark.com/v1/link/create";
+        String str = "https://api.xiaomark.com/short/generate";
         String key = "d4efdd8311bff5f4456dd8ea14765168";
         //将请求头部和参数合成一个请求
         MyMarkReq params = new MyMarkReq();
         params.setApikey(key);
-        params.setOrigin_url(url);
+        params.setUrl(url);
         HttpEntity<String> request = new HttpEntity<>(JSONObject.toJSONString(params), headers);
+
         //执行HTTP请求，将返回的结构使用ResultVO类格式化
         ResponseEntity<String> response = client.postForEntity(str, request, String.class);
         String body = response.getBody();
@@ -70,7 +49,7 @@ public class GetShortFactory {
     @Data
     static class MyMarkReq extends ToString {
         private String apikey;
-        private String origin_url;
+        private String url;
     }
 
     static class MyMark extends ToString {

@@ -4,6 +4,7 @@ package com.ruoyi.reward.facade.dto;
 import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.near.toolkit.model.ToString;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -15,7 +16,7 @@ import java.util.Date;
  * @date 2020-03-24
  */
 @Data
-public class SysWechatConfigDTO implements Serializable {
+public class SysWechatConfigDTO extends ToString {
     private static final long serialVersionUID = 1L;
 
     /**
@@ -79,26 +80,5 @@ public class SysWechatConfigDTO implements Serializable {
     private Date gmtModified;
     private String state;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
-                .append("id", getId())
-                .append("configCode", getConfigCode())
-                .append("envType", getEnvType())
-                .append("appId", getAppId())
-                .append("appsecret", getAppsecret())
-                .append("mchId", getMchId())
-                .append("signKey", getSignKey())
-                .append("certFile", getCertFile())
-                .append("token", getToken())
-                .append("encodingAesKey", getEncodingAesKey())
-                .append("gmtCreate", getGmtCreate())
-                .append("gmtModified", getGmtModified())
-                .toString();
-    }
 }

@@ -1,8 +1,7 @@
 package com.ruoyi.web.controller;
 
 import com.ruoyi.reward.facade.dto.UserDTO;
-import com.ruoyi.web.model.AjaxResult;
-import lombok.extern.slf4j.Slf4j;
+import org.near.toolkit.model.AjaxResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
