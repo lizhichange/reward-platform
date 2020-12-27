@@ -15,7 +15,7 @@ public interface SysShortFacadeClient {
      * @param id 链接管理ID
      * @return 链接管理
      */
-    public SysShortDTO selectSysShortById(Long id);
+    SysShortDTO selectSysShortById(Long id);
 
     /**
      * 查询链接管理列表
@@ -23,7 +23,7 @@ public interface SysShortFacadeClient {
      * @param dto 链接管理
      * @return 链接管理集合
      */
-    public List<SysShortDTO> selectSysShortList(SysShortDTO dto);
+    List<SysShortDTO> selectSysShortList(SysShortDTO dto);
 
     /**
      * 新增链接管理
@@ -31,6 +31,6 @@ public interface SysShortFacadeClient {
      * @param dto 链接管理
      * @return 结果
      */
-    public int insertSysShort(SysShortDTO dto);
+    int insertSysShort(SysShortDTO dto);
 
 }
