@@ -19,11 +19,6 @@
             <groupId>org.near</groupId>
             <artifactId>near-toolkit</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <scope>provided</scope>
-        </dependency>
     </dependencies>
 
 
