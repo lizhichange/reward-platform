@@ -19,6 +19,7 @@ import com.ruoyi.system.service.ISysConfigService;
 import com.ruoyi.system.service.ISysMenuService;
 import com.ruoyi.system.service.ISysNoticeService;
 import com.ruoyi.web.GetShortFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.near.toolkit.common.DoMainUtil;
 import org.near.toolkit.model.Money;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,7 @@ import java.util.List;
  * @author ruoyi
  */
 @Controller
+@Slf4j
 public class SysIndexController extends BaseController {
     final
     ISysMenuService menuService;
@@ -146,7 +148,8 @@ public class SysIndexController extends BaseController {
         String loginName = ShiroUtils.getLoginName();
         String wxAuthUrl = sysConfigService.selectConfigByKey("wxAuthUrl");
         String doMain = DoMainUtil.getDoMain(wxAuthUrl);
-        String longUrl = "http://" + doMain + "/?userId=" + loginName;
+        log.info("doMain:{}", doMain);
+        String longUrl = wxAuthUrl + "/?userId=" + loginName;
         SysShort sysShort = new SysShort();
         sysShort.setShortKey(loginName);
         List<SysShort> sysShorts = sysShortService.selectSysShortList(sysShort);
