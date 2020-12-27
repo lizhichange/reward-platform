@@ -139,6 +139,12 @@ public class SysIndexController extends BaseController {
     @Autowired
     GetShortFactory getShortFactory;
 
+    public List<SysShort> getShortList(String shortKey) {
+        SysShort sysShort = new SysShort();
+        sysShort.setShortKey(shortKey);
+        return sysShortService.selectSysShortList(sysShort);
+    }
+
 
     @PostMapping("/system/build")
     @ResponseBody
@@ -150,12 +156,12 @@ public class SysIndexController extends BaseController {
         String doMain = DoMainUtil.getDoMain(wxAuthUrl);
         log.info("doMain:{}", doMain);
         String longUrl = wxAuthUrl + "/?userId=" + loginName;
+        List<SysShort> sysShorts = getShortList(loginName);
         SysShort sysShort = new SysShort();
-        sysShort.setShortKey(loginName);
-        List<SysShort> sysShorts = sysShortService.selectSysShortList(sysShort);
         if (CollectionUtils.isEmpty(sysShorts)) {
             sysShort.setShortStatus(ShortStatus.OK.getCode());
             sysShort.setLongUrl(longUrl);
+            sysShort.setShortKey(loginName);
             String shortUrl = getShortFactory.getShortUrlForMark(longUrl);
             sysShort.setShortUrl(shortUrl);
             int i = sysShortService.insertSysShort(sysShort);
