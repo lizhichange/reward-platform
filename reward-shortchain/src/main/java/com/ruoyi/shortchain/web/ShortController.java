@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Random;
-
 
 /**
  * @author wahaha
@@ -32,10 +30,9 @@ public class ShortController {
     public AjaxResult generate(@RequestBody GenerateShortParam param) {
         log.info("param:{}", param);
         SysShortDTO dto = new SysShortDTO();
-
-        Random random = RandomUtil.getRandom(true);
-        dto.setShortKey(random.toString());
-        String shortUrl = SHORT_URL + random.toString();
+        char c = RandomUtil.randomChar();
+        dto.setShortKey(String.valueOf(c));
+        String shortUrl = SHORT_URL + c;
 
         dto.setShortUrl(shortUrl);
         dto.setLongUrl(param.getUrl());
