@@ -1,7 +1,5 @@
 package com.ruoyi.shortchain.web;
 
-import cn.hutool.core.util.RandomUtil;
-import com.alibaba.fastjson.JSON;
 import com.ruoyi.reward.facade.dto.SysShortDTO;
 import com.ruoyi.shortchain.client.SysShortFacadeClient;
 import com.ruoyi.shortchain.param.GenerateShortParam;
@@ -12,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Random;
 
 
 /**
@@ -30,14 +30,12 @@ public class ShortController {
     public AjaxResult generate(@RequestBody GenerateShortParam param) {
         log.info("param:{}", param);
         SysShortDTO dto = new SysShortDTO();
-        char c = RandomUtil.randomChar();
-        dto.setShortKey(String.valueOf(c));
-        String shortUrl = SHORT_URL + c;
-
+        String randomString = getRandomString(10);
+        dto.setShortKey(randomString);
+        String shortUrl = SHORT_URL + randomString;
         dto.setShortUrl(shortUrl);
         dto.setLongUrl(param.getUrl());
         dto.setShortStatus("0");
-
         int i = sysShortFacadeClient.insertSysShort(dto);
         if (i > 0) {
             return AjaxResult.success(shortUrl);
@@ -45,9 +43,14 @@ public class ShortController {
         return AjaxResult.error();
     }
 
-    public static void main(String[] args) {
-        AjaxResult success = AjaxResult.success("shortUrl");
-        System.out.println(JSON.toJSON(success));
+    public static String getRandomString(int length) {
+        String str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        Random random = new Random();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < length; i++) {
+            int number = random.nextInt(62);
+            sb.append(str.charAt(number));
+        }
+        return sb.toString();
     }
-
 }
