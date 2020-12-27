@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSON;
 import com.ruoyi.reward.facade.dto.SysShortDTO;
 import com.ruoyi.shortchain.client.SysShortFacadeClient;
 import com.ruoyi.shortchain.param.GenerateShortParam;
+import lombok.extern.slf4j.Slf4j;
 import org.near.toolkit.model.AjaxResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping(value = "/short")
+@Slf4j
 public class ShortController {
 
     private final static String SHORT_URL = "http://hailunjianzhi.cn/";
@@ -26,6 +28,7 @@ public class ShortController {
 
     @PostMapping("/generate")
     public AjaxResult generate(@RequestParam GenerateShortParam param) {
+        log.info("param:{}", param);
         SysShortDTO dto = new SysShortDTO();
         dto.setLongUrl(param.getUrl());
         int shortKey = RandomUtil.randomNumber();

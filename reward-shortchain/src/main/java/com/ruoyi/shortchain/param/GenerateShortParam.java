@@ -1,9 +1,10 @@
 package com.ruoyi.shortchain.param;
 
 import lombok.Data;
+import org.near.toolkit.model.ToString;
 
 @Data
-public class GenerateShortParam {
+public class GenerateShortParam extends ToString {
 
     private String apikey;
     private String url;
