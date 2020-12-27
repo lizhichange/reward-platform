@@ -27,11 +27,15 @@ public class ShortController {
     public AjaxResult generate(@RequestBody GenerateShortParam param) {
         log.info("param:{}", param);
         SysShortDTO dto = new SysShortDTO();
-        dto.setLongUrl(param.getUrl());
+
         int shortKey = RandomUtil.randomNumber();
         dto.setShortKey(String.valueOf(shortKey));
         String shortUrl = SHORT_URL + shortKey;
+
         dto.setShortUrl(shortUrl);
+        dto.setLongUrl(param.getUrl());
+        dto.setShortStatus("0");
+
         int i = sysShortFacadeClient.insertSysShort(dto);
         if (i > 0) {
             return AjaxResult.success(shortUrl);
