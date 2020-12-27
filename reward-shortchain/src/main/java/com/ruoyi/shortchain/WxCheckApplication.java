@@ -7,11 +7,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author sunflower
  */
 @SpringBootApplication
-public class WxUrlCheckApplication {
+public class WxCheckApplication {
 
 	public static void main(String[] args) {
 
-		SpringApplication.run(WxUrlCheckApplication.class, args);
+		SpringApplication.run(WxCheckApplication.class, args);
 	}
 
 }
