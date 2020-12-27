@@ -5,6 +5,7 @@ import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.reward.domain.SysWebMain;
 import com.ruoyi.reward.mapper.SysWebMainMapper;
 import com.ruoyi.reward.service.SysWebMainService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,7 @@ import java.util.List;
  * @date 2020-03-23
  */
 @Service
+@Slf4j
 public class SysWebMainServiceImpl implements SysWebMainService {
     @Autowired
     private SysWebMainMapper sysWebMainMapper;
@@ -42,6 +44,7 @@ public class SysWebMainServiceImpl implements SysWebMainService {
      */
     @Override
     public List<SysWebMain> selectSysWebMainList(SysWebMain sysWebMain) {
+        log.info("sysWebMain:{}",sysWebMain);
         return sysWebMainMapper.selectSysWebMainList(sysWebMain);
     }
 
@@ -54,6 +57,8 @@ public class SysWebMainServiceImpl implements SysWebMainService {
     @Override
     public int insertSysWebMain(SysWebMain sysWebMain) {
         sysWebMain.setCreateTime(DateUtils.getNowDate());
+        log.info("sysWebMain:{}",sysWebMain);
+
         return sysWebMainMapper.insertSysWebMain(sysWebMain);
     }
 
@@ -66,6 +71,8 @@ public class SysWebMainServiceImpl implements SysWebMainService {
     @Override
     public int updateSysWebMain(SysWebMain sysWebMain) {
         sysWebMain.setUpdateTime(DateUtils.getNowDate());
+        log.info("sysWebMain:{}",sysWebMain);
+
         return sysWebMainMapper.updateSysWebMain(sysWebMain);
     }
 
