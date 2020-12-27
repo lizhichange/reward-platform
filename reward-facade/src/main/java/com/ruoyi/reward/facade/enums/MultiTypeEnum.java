@@ -97,14 +97,32 @@ public enum MultiTypeEnum implements BaseEnum {
     }
 
 
-    @EqualsAndHashCode(callSuper = true)
-    @Data
-    @AllArgsConstructor
-    @NoArgsConstructor
     public static
     class ItemContent extends ToString {
         private Integer id;
         private String name;
+
+        public ItemContent() {
+        }
+        public ItemContent(Integer id, String name) {
+            this.id=id;
+            this.name=name;
+        }
+        public Integer getId() {
+            return id;
+        }
+
+        public void setId(Integer id) {
+            this.id = id;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
     }
 
 }

@@ -1,7 +1,7 @@
 package com.ruoyi.web.exception;
 
 
-import com.ruoyi.web.model.AjaxResult;
+import org.near.toolkit.model.AjaxResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.validation.BindException;

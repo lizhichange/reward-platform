@@ -39,5 +39,14 @@ public enum AccountBizCode implements BaseEnum {
     AccountBizCode(String code, String desc) {
         this.code = code;
         this.desc = desc;
+    }  @Override
+    public String getCode() {
+        return code;
     }
+
+    @Override
+    public String getDesc() {
+        return desc;
+    }
+
 }

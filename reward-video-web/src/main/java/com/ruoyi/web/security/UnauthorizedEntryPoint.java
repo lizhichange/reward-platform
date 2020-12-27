@@ -1,16 +1,12 @@
 package com.ruoyi.web.security;
 
 import com.google.gson.Gson;
-import com.ruoyi.web.controller.BaseController;
 import com.ruoyi.web.interceptor.URIUtil;
-import com.ruoyi.web.model.AjaxResult;
+import org.near.toolkit.model.AjaxResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
-import org.springframework.security.web.savedrequest.DefaultSavedRequest;
-import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
-import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.ServletRequestUtils;
 
