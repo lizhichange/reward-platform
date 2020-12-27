@@ -23,7 +23,7 @@ public class GetShortFactory {
     @Autowired
     private RestTemplate restTemplate;
 
-    public String getShortUrlForMark(String url) {
+    public String getShortUrlForMark(String longUrl) {
         RestTemplate client = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -32,7 +32,7 @@ public class GetShortFactory {
         //将请求头部和参数合成一个请求
         MyMarkReq params = new MyMarkReq();
         params.setApikey(key);
-        params.setUrl(url);
+        params.setUrl(longUrl);
         HttpEntity<String> request = new HttpEntity<>(JSONObject.toJSONString(params), headers);
 
         //执行HTTP请求，将返回的结构使用ResultVO类格式化
