@@ -7,18 +7,16 @@ import org.near.toolkit.model.AjaxResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Random;
 
 /**
  * @author wahaha
  */
 @RestController
-
 public class ShortController {
 
+    private final static String SHORT_URL = "http://";
     @Autowired
     SysShortFacadeClient sysShortFacadeClient;
 
@@ -29,11 +27,12 @@ public class ShortController {
 
     @PostMapping("/generate")
     public AjaxResult generate(String url) {
-        SysShortDTO sysShortDTO = new SysShortDTO();
-        sysShortDTO.setLongUrl(url);
-        sysShortDTO.setShortKey(String.valueOf(RandomUtil.randomNumber()));
-
-        sysShortFacadeClient.insertSysShort(sysShortDTO);
+        SysShortDTO dto = new SysShortDTO();
+        dto.setLongUrl(url);
+        int shortKey = RandomUtil.randomNumber();
+        dto.setShortKey(String.valueOf(shortKey));
+        dto.setShortUrl(SHORT_URL + shortKey);
+        sysShortFacadeClient.insertSysShort(dto);
         return AjaxResult.success();
     }
 
