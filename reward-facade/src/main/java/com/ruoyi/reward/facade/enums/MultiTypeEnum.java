@@ -1,10 +1,7 @@
 package com.ruoyi.reward.facade.enums;
 
 import com.google.common.collect.Lists;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.near.toolkit.model.BaseEnum;
 import org.near.toolkit.model.ToString;
 
@@ -70,9 +67,9 @@ public enum MultiTypeEnum implements BaseEnum {
     ),
     ;
 
-    String code;
-    String desc;
-    List<ItemContent> list;
+    private String code;
+    private String desc;
+    private List<ItemContent> list;
 
     MultiTypeEnum(String code, String desc) {
         this.code = code;
@@ -95,6 +92,12 @@ public enum MultiTypeEnum implements BaseEnum {
         return desc;
     }
 
+    public List<ItemContent> getList() {
+        return list;
+    }
+
+
+    @EqualsAndHashCode(callSuper = true)
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
