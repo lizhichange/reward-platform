@@ -179,7 +179,7 @@ public class WeChatOrderStatusCheckScheduled {
     @Autowired
     WxMpShortUrlFacade wxMpShortUrlFacade;
 
-    @Scheduled(cron = "0 0/3 * * * ?")
+//    @Scheduled(cron = "0 0/3 * * * ?")
     public void sync() {
         log.info("微信域名检测,sync:{}", DateUtils.formatNewFormat(new Date()));
         SysWebMainDTO sysWebMainDTO = new SysWebMainDTO();

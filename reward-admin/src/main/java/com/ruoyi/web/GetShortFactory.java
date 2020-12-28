@@ -41,8 +41,10 @@ public class GetShortFactory {
         log.info("body:{}", body);
         if (StringUtil.isNotBlank(body)) {
             MyMark myMark = new Gson().fromJson(body, MyMark.class);
-            if (myMark != null && myMark.getData() != null) {
-                return myMark.getData().toString();
+            if (myMark != null) {
+                if (StringUtil.isNotBlank(myMark.getMsg())) {
+                    return myMark.getMsg();
+                }
             }
         }
         return "";
@@ -64,7 +66,7 @@ public class GetShortFactory {
          */
         private int code;
         private String msg;
-        private Object data;
+
     }
 
 }

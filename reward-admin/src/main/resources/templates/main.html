@@ -60,7 +60,8 @@
                     <h5>我的推广二维码</h5>
                 </div>
                 <br>
-                <img th:src="@{'http://qr.liantu.com/api.php?text='+${sysShort?.getShortUrl()} }"  width="100%" style="max-width:264px;">
+                <div id="qrcodeCanvas" width="100%" style="max-width:264px;"></div>
+                <input type="hidden" id="qrcodeCanvasUrl" th:value="${sysShort?.getShortUrl()}">
                 <br>
             </div>
         </div>
@@ -78,7 +79,7 @@
                                             aria-hidden="true">&times;</span><span class="sr-only">Close</span>
                                     </button>
                                     <h4 class="modal-title">[[${notice.noticeTitle}]]</h4>
-                                    <small class="font-bold">这里可以显示副标题。
+                                    <small class="font-bold">这里可以显示副标题。</small>
                                 </div>
                                 <div class="modal-body">
                                     <p><strong></strong>
@@ -99,6 +100,7 @@
 
 </div>
 <script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/jquery.qrcode.min.js}"></script>
 <script th:src="@{/js/bootstrap.min.js}"></script>
 <script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
 <script src="../static/ajax/libs/validate/jquery.validate.min.js"
@@ -111,7 +113,12 @@
 <script src="../static/ruoyi/js/ry-ui.js" th:src="@{/ruoyi/js/ry-ui.js?v=4.0.0}"></script>
 
 <script type="text/javascript">
-        $('#pay-qrcode').click(function () {
+
+    jQuery('#qrcodeCanvas').qrcode({
+        text	: $("#qrcodeCanvasUrl").val()
+    });
+
+    $('#pay-qrcode').click(function () {
             var html = $(this).html();
             parent.layer.open({
                 title: false,
@@ -122,7 +129,6 @@
                 content: html
             });
         });
-
 
         $(document).ready(function () {
             var item = "[[${status}]]";
@@ -141,12 +147,14 @@
                 success: function (r) {
                     $.modal.closeLoading();
                     if (r.code === 0) {
-                        var data = r.data;
+                        const data = r.data;
                         console.log(data);
                         $("#shortUrl").html(data.shortUrl);
                         $("#shortUrl").attr("href", data.shortUrl);
+                        jQuery('#qrcodeCanvas').qrcode({
+                            text	: data.shortUrl
+                        });
                     } else {
-
                         $.modal.msg(r.msg);
                     }
                 }, error: function () {
