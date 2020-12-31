@@ -7,6 +7,7 @@ import org.springframework.data.redis.core.SetOperations;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -17,10 +18,16 @@ import java.util.Set;
  * @author sunflower
  */
 @Controller
+@RequestMapping
 public class IndexController extends BaseController {
 
-    @GetMapping("/index")
+    @GetMapping("/")
     public String index(@RequestParam(value = "userId", required = false) String userId, ModelMap modelmap) {
+        return "index";
+    }
+
+    @GetMapping("/index")
+    public String render(@RequestParam(value = "userId", required = false) String userId, ModelMap modelmap) {
         return "redirect:/video";
     }
 
