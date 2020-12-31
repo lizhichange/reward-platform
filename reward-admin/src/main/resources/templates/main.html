@@ -100,7 +100,7 @@
 
 </div>
 <script th:src="@{/js/jquery.min.js}"></script>
-<script th:src="@{/js/jquery.qrcode.min.js}"></script>
+<script type="text/javascript" src="//static.runoob.com/assets/qrcode/qrcode.min.js"></script>
 <script th:src="@{/js/bootstrap.min.js}"></script>
 <script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
 <script src="../static/ajax/libs/validate/jquery.validate.min.js"
@@ -114,9 +114,19 @@
 
 <script type="text/javascript">
 
-    jQuery('#qrcodeCanvas').qrcode({
-        text	: $("#qrcodeCanvasUrl").val()
-    });
+   var qrcode = new QRCode(document.getElementById("qrcode"), {
+});
+
+function makeCode () {
+    var elText = document.getElementById("qrcodeCanvasUrl");
+    if (!elText.value) {
+        return;
+    }
+    qrcode.makeCode(elText.value);
+}
+
+makeCode();
+
 
     $('#pay-qrcode').click(function () {
             var html = $(this).html();
@@ -151,9 +161,8 @@
                         console.log(data);
                         $("#shortUrl").html(data.shortUrl);
                         $("#shortUrl").attr("href", data.shortUrl);
-                        jQuery('#qrcodeCanvas').qrcode({
-                            text	: data.shortUrl
-                        });
+
+                        qrcode.makeCode(data.shortUrl);
                     } else {
                         $.modal.msg(r.msg);
                     }
