@@ -72,15 +72,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				</div>
 				<div class="content-grids mescroll" id="mescroll">
 					<div id="list_videos_most_recent_videos_items">
-						
-						<div class="content-grid last-grid">
-							<a href="singlepage.html"><img src="./images/gridallbum2.png" title="allbum-name" /></a>
-							<h3>elit.</h3>
-							<ul>
-								<li><a href="#"><img src="./images/likes.png" title="image-name" /></a></li>
-							</ul>
-							<a class="button" href="singlepage.html">Watch now</a>
-						</div>
+
 					</div>
 					<div class="clear"> </div>
 					<!---start-pagenation----->
@@ -150,8 +142,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			"playsinline": true,
 			//图片地址
 			"poster": document.getElementById("url").value ? document.getElementById("url").value : '',
-			//视频地址 https://video.jializyw.com:8800/20200706/LdyE4Wil/index.m3u8
-			"url": document.getElementById("videoUrl").value ? document.getElementById("videoUrl").value : "https://video.jializyw.com:8800/20200706/LdyE4Wil/index.m3u8",
+			"url": document.getElementById("videoUrl").value ? document.getElementById("videoUrl").value : "//sf1-hscdn-tos.pstatp.com/obj/media-fe/xgplayer_doc_video/mp4/xgplayer-demo-360p.mp4",
 			"whitelist": [
 				""
 			],
@@ -339,7 +330,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			var listDom = document.getElementById("list_videos_most_recent_videos_items");
 			for (var i = 0; i < curPageData.length; i++) {
 				var row = curPageData[i];
-				var str = '<div class="content-grid">'
+				// last-grid
+				var grid = (i & 1) != 1 ? '<div class="content-grid last-grid">' : '<div class="content-grid">';
+				var str =grid
 					+ '<a href="javascript:void(0)">'
 					+ '<img src="' + row.url + '" title="allbum-name" /></a>'
 					+ '<h3>' + row.name + '</h3>'
