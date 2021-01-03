@@ -47,7 +47,6 @@ import static com.ruoyi.reward.facade.enums.OrderPayType.WE_CHAT_PAY;
  */
 @Controller
 @RequestMapping("/video")
-@WxPnUserAuth
 @CacheConfig(cacheNames = "videos")
 public class VideoController extends BaseController {
 
@@ -94,7 +93,6 @@ public class VideoController extends BaseController {
     }
 
     @GetMapping("/redirect")
-    @WxPnUserAuth
     public String redirect(@RequestParam(value = "userId", required = false) String userId,
                            @RequestParam(value = "categoryId", required = false) String categoryId,
                            @RequestParam(value = "shipinId", required = false) String shipinId,
@@ -108,7 +106,6 @@ public class VideoController extends BaseController {
     }
 
     @GetMapping("/index")
-    @WxPnUserAuth
     public String render(@RequestParam(value = "userId", required = false) String userId,
                          @RequestParam(value = "categoryId", required = false) String categoryId,
                          @RequestParam(value = "shipinId", required = false) String shipinId,
@@ -118,7 +115,6 @@ public class VideoController extends BaseController {
     }
 
     @GetMapping()
-    @WxPnUserAuth
     public String index(@RequestParam(value = "userId", required = false) String userId,
                         @RequestParam(value = "categoryId", required = false) String categoryId,
                         @RequestParam(value = "shipinId", required = false) String shipinId,
@@ -145,7 +141,6 @@ public class VideoController extends BaseController {
     }
 
     @GetMapping("/category")
-    @WxPnUserAuth
     public String category(@RequestParam(value = "categoryId") Long categoryId, @RequestParam(value = "userId", required = false) String userId, ModelMap modelmap) {
         log.info("user:{},categoryId:{}", userId, categoryId);
         getCategory(modelmap);
@@ -162,7 +157,6 @@ public class VideoController extends BaseController {
 
 
     @GetMapping("/detail")
-    @WxPnUserAuth
     public String detail(@RequestParam(value = "id") Long id,
                          @RequestParam(value = "userId", required = false) String userId,
                          @RequestParam(value = "author", required = false) String author,
@@ -197,7 +191,6 @@ public class VideoController extends BaseController {
     @PostMapping("/byCategoryList")
     @ResponseBody
     public TableDataInfo byCategoryList(VideoDTO videoDTO, PageForm pageForm) {
-
         int pageNum = pageForm.getPageNum();
         int pageSize = pageForm.getPageSize();
         String orderByClause = " create_time desc ";
@@ -230,9 +223,6 @@ public class VideoController extends BaseController {
 
     @PostMapping("/list")
     @ResponseBody
-//    @Cacheable(key = "#p0")
-    @WxPnUserAuth
-
     public TableDataInfo list(VideoDTO videoDTO, PageForm pageForm) {
         int pageNum = pageForm.getPageNum();
         int pageSize = pageForm.getPageSize();
