@@ -1,6 +1,7 @@
 package com.ruoyi.web.controller;
 
 import com.google.common.collect.Lists;
+import com.ruoyi.reward.facade.dto.SysCategoryDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.SetOperations;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -23,7 +25,16 @@ public class IndexController extends BaseController {
 
     @GetMapping("/")
     public String index(@RequestParam(value = "userId", required = false) String userId, ModelMap modelmap) {
+        getCategory(modelmap);
         return "index";
+    }
+
+    protected void getCategory(ModelMap modelmap) {
+        SysCategoryDTO sysCategory = new SysCategoryDTO();
+        sysCategory.setParentId(100L);
+        sysCategory.setStatus("0");
+        List<SysCategoryDTO> categoryList = sysCategoryFacadeClient.selectDeptList(sysCategory);
+        modelmap.addAttribute("categoryList", categoryList);
     }
 
     @GetMapping("/index")

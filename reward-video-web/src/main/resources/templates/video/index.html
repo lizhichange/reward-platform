@@ -447,13 +447,12 @@
                 if (categoryId != i) {
                     //更改列表条件
                     categoryId = i;
-
                     $(".category").removeClass("active");
                     $(this).addClass("active");
                     //重置列表数据
                     mescroll.resetUpScroll();
                 }
-            })
+            });
 
             /*联网加载列表数据  page = {num:1, size:10}; num:当前页 从1开始, size:每页数据条数 */
             function getListData(page) {
