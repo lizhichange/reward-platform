@@ -13,15 +13,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<link href="/css/style.css" rel="stylesheet" type="text/css" media="all" />
 	<link href="/css/mescroll.min.css" rel="stylesheet" type="text/css" media="all" />
-	<link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
-
 	<meta name="keywords" content="Videos iphone web template" />
 	<script src="https://unpkg.com/mescroll.js@1.4.1/mescroll.min.js" charset="utf-8"></script>
 	<script src="/js/jquery.min.js"></script>
 	<script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
 	<script src="//cdn.jsdelivr.net/npm/xgplayer@1.1.4/browser/index.js" charset="utf-8"></script>
 	<script src="//cdn.jsdelivr.net/npm/xgplayer-mp4/browser/index.js" charset="utf-8"></script>
-	<script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
 	<style>
 		* {
 			margin: 0;
@@ -106,8 +103,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			</div>
 		</div>
 	</div>
-
-
 	<div class="clear"> </div>
 	<!---End-content---->
 	<!---start-copy-right---->
@@ -324,7 +319,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		/*联网加载列表数据  page = {num:1, size:10}; num:当前页 从1开始, size:每页数据条数 */
 		function getListData(page) {
 			//联网加载数据
-			$.showLoading("数据加载中");
 			getListDataFromNet(categoryId, page.num, page.size, function (data) {
 				//mescroll会根据传的参数,自动判断列表如果无任何数据,则提示空;列表无下一页数据,则提示无更多数据;
 				var curPageData = data.rows; // 接口返回的当前页数据列表
@@ -336,7 +330,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				setListData(curPageData);
 			}, function () {
 				//联网失败的回调,隐藏下拉刷新和上拉加载的状态;
-				$.hideLoading();
 				mescroll.endErr();
 			});
 		}
