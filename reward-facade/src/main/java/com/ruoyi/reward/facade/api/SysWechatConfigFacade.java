@@ -12,5 +12,4 @@ public interface SysWechatConfigFacade {
     List<SysWechatConfigDTO> selectSysWechatConfigList(SysWechatConfigDTO sysWechatConfig);
 
 
-
 }

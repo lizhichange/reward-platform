@@ -4,11 +4,10 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.google.common.collect.Lists;
 import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.reward.convert.VideoConvert;
-import com.ruoyi.reward.facade.api.VideoFacade;
-import com.ruoyi.reward.facade.dto.VideoDTO;
-
 import com.ruoyi.reward.domain.Video;
 import com.ruoyi.reward.domain.VideoExample;
+import com.ruoyi.reward.facade.api.VideoFacade;
+import com.ruoyi.reward.facade.dto.VideoDTO;
 import com.ruoyi.reward.mapper.ExtVideoMapper;
 import com.ruoyi.reward.mapper.VideoMapper;
 import com.ruoyi.reward.repository.VideoRepository;

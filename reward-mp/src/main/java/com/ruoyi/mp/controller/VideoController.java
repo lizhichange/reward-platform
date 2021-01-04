@@ -1,21 +1,14 @@
 package com.ruoyi.mp.controller;
 
-import com.alibaba.fastjson.JSONObject;
-import com.ruoyi.mp.client.SysWebMainFacadeClient;
 import com.ruoyi.mp.client.VideoFacadeClient;
 import com.ruoyi.reward.facade.api.WxMpShortUrlFacade;
-import com.ruoyi.reward.facade.dto.SysWebMainDTO;
 import com.ruoyi.reward.facade.dto.VideoDTO;
-import com.ruoyi.reward.facade.enums.WebMainStatus;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.near.servicesupport.result.TPageResult;
 import org.near.toolkit.common.DateUtils;
 import org.near.toolkit.common.StringUtil;
-import org.near.toolkit.model.ToString;
 import org.near.webmvcsupport.view.PageForm;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;

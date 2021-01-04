@@ -3,7 +3,6 @@ package com.ruoyi.reward.facade.dto;
 import lombok.Data;
 import org.near.toolkit.model.ToString;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**

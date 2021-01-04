@@ -2,8 +2,9 @@ package com.ruoyi.reward.mapper;
 
 import com.ruoyi.reward.domain.TWechatAuth;
 import com.ruoyi.reward.domain.TWechatAuthExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface TWechatAuthMapper {
     long countByExample(TWechatAuthExample example);

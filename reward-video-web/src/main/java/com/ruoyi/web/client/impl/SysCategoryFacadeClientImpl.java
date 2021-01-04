@@ -1,9 +1,9 @@
 package com.ruoyi.web.client.impl;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.ruoyi.web.client.SysCategoryFacadeClient;
 import com.ruoyi.reward.facade.api.SysCategoryFacade;
 import com.ruoyi.reward.facade.dto.SysCategoryDTO;
+import com.ruoyi.web.client.SysCategoryFacadeClient;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

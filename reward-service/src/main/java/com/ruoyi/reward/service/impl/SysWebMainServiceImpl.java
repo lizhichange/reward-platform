@@ -44,7 +44,7 @@ public class SysWebMainServiceImpl implements SysWebMainService {
      */
     @Override
     public List<SysWebMain> selectSysWebMainList(SysWebMain sysWebMain) {
-        log.info("sysWebMain:{}",sysWebMain);
+        log.info("sysWebMain:{}", sysWebMain);
         return sysWebMainMapper.selectSysWebMainList(sysWebMain);
     }
 
@@ -57,7 +57,7 @@ public class SysWebMainServiceImpl implements SysWebMainService {
     @Override
     public int insertSysWebMain(SysWebMain sysWebMain) {
         sysWebMain.setCreateTime(DateUtils.getNowDate());
-        log.info("sysWebMain:{}",sysWebMain);
+        log.info("sysWebMain:{}", sysWebMain);
 
         return sysWebMainMapper.insertSysWebMain(sysWebMain);
     }
@@ -71,7 +71,7 @@ public class SysWebMainServiceImpl implements SysWebMainService {
     @Override
     public int updateSysWebMain(SysWebMain sysWebMain) {
         sysWebMain.setUpdateTime(DateUtils.getNowDate());
-        log.info("sysWebMain:{}",sysWebMain);
+        log.info("sysWebMain:{}", sysWebMain);
 
         return sysWebMainMapper.updateSysWebMain(sysWebMain);
     }

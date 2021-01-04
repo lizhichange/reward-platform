@@ -1,9 +1,9 @@
 package com.ruoyi.web.client.impl;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.ruoyi.reward.facade.api.VideoFacade;
 import com.ruoyi.reward.facade.dto.VideoDTO;
 import com.ruoyi.web.client.VideoFacadeClient;
-import com.ruoyi.reward.facade.api.VideoFacade;
 import org.near.servicesupport.result.TPageResult;
 import org.springframework.stereotype.Component;
 

@@ -6,7 +6,6 @@ package com.ruoyi.reward.repository;
 
 
 import com.ruoyi.reward.domain.TWechatAuth;
-
 import com.ruoyi.reward.facade.dto.TWechatAuthDTO;
 import com.ruoyi.reward.facade.enums.PrincipalTypeEnum;
 

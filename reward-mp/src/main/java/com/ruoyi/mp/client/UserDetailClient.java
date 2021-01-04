@@ -11,7 +11,6 @@ import com.ruoyi.reward.facade.request.UserWechatLoginRequest;
 
 
 /**
- *
  * @author sunflower
  */
 public interface UserDetailClient {

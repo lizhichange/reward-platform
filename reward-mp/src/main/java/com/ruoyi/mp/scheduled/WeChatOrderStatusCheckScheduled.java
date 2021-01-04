@@ -8,8 +8,6 @@ import com.ruoyi.mp.client.AccountFacadeClient;
 import com.ruoyi.mp.client.SysOrderFacadeClient;
 import com.ruoyi.mp.client.SysWebMainFacadeClient;
 import com.ruoyi.mp.config.MpAuthConfig;
-
-
 import com.ruoyi.reward.facade.api.WxMpShortUrlFacade;
 import com.ruoyi.reward.facade.dto.SysOrderDTO;
 import com.ruoyi.reward.facade.dto.SysWebMainDTO;
@@ -22,7 +20,6 @@ import org.near.toolkit.common.DateUtils;
 import org.near.toolkit.common.EnumUtil;
 import org.near.toolkit.common.StringUtil;
 import org.near.toolkit.model.BaseEnum;
-
 import org.near.toolkit.model.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -179,7 +176,7 @@ public class WeChatOrderStatusCheckScheduled {
     @Autowired
     WxMpShortUrlFacade wxMpShortUrlFacade;
 
-//    @Scheduled(cron = "0 0/3 * * * ?")
+    //    @Scheduled(cron = "0 0/3 * * * ?")
     public void sync() {
         log.info("微信域名检测,sync:{}", DateUtils.formatNewFormat(new Date()));
         SysWebMainDTO sysWebMainDTO = new SysWebMainDTO();

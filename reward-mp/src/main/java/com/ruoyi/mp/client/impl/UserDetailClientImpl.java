@@ -16,6 +16,7 @@ public class UserDetailClientImpl implements UserDetailClient {
 
     @Reference(version = "1.0.0", check = false)
     UserDetailFacade userDetailFacade;
+
     @Override
     public UserDTO wechatLogin(UserWechatLoginRequest request) {
         return userDetailFacade.wechatLogin(request);

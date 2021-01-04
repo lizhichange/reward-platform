@@ -1,7 +1,6 @@
 package com.ruoyi.mp.handler;
 
 
-
 import com.ruoyi.mp.builder.JsonUtils;
 import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.mp.api.WxMpService;

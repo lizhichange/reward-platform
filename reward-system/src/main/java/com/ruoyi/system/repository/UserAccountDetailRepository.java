@@ -17,7 +17,7 @@ import java.util.List;
  */
 public interface UserAccountDetailRepository {
 
-    void insert(AccountDetail record );
+    void insert(AccountDetail record);
 
     List<AccountDetailDTO> query(AccountDetailExample example);
 

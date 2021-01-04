@@ -14,6 +14,6 @@ public interface AccountFacade {
 
     void take(SysOrderDTO dto) throws Exception;
 
-    AccountDTO minusBalance(UserAccountOperatorRequest request)  ;
+    AccountDTO minusBalance(UserAccountOperatorRequest request);
 
 }

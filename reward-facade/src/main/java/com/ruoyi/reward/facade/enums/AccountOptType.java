@@ -27,6 +27,7 @@ public enum AccountOptType implements BaseEnum {
         this.code = code;
         this.desc = desc;
     }
+
     @Override
     public String getCode() {
         return code;

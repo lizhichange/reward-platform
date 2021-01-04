@@ -98,9 +98,9 @@ public class SysUserController extends BaseController {
     @GetMapping("/add")
     public String add(ModelMap mmap) {
         List<SysRole> sysRoles = roleService.selectRoleAll();
-        mmap.put("roles",sysRoles);
+        mmap.put("roles", sysRoles);
         List<SysPost> sysPosts = postService.selectPostAll();
-        mmap.put("posts",sysPosts );
+        mmap.put("posts", sysPosts);
         return prefix + "/add";
     }
 
@@ -131,7 +131,7 @@ public class SysUserController extends BaseController {
     @GetMapping("/edit/{userId}")
     public String edit(@PathVariable("userId") Long userId, ModelMap mmap) {
         SysUser sysUser = userService.selectUserById(userId);
-        mmap.put("user",sysUser );
+        mmap.put("user", sysUser);
         mmap.put("roles", roleService.selectRolesByUserId(userId));
         mmap.put("posts", postService.selectPostsByUserId(userId));
         return prefix + "/edit";

@@ -32,7 +32,6 @@ public class TableDataInfoTest {
         a2.setC(3);
 
 
-
         B b = new B();
         b.setA(1);
         b.setB("1");
@@ -44,7 +43,7 @@ public class TableDataInfoTest {
 
 
         ArrayList<B> bs = Lists.newArrayList(b, b1);
-        ArrayList<A> as = Lists.newArrayList(a, a1,a2);
+        ArrayList<A> as = Lists.newArrayList(a, a1, a2);
 
         ImmutableMap<String, A> stringAImmutableMap = Maps.uniqueIndex(as, new Function<A, String>() {
             @Nullable
@@ -54,7 +53,6 @@ public class TableDataInfoTest {
             }
         });
         stringAImmutableMap.asMultimap();
-
 
 
         Assert.assertTrue(true);

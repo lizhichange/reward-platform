@@ -12,7 +12,8 @@ public interface SysOrderFacadeClient {
     List<SysOrderDTO> selectSysOrderList(SysOrderDTO sysOrder);
 
     int updateSysOrder(SysOrderDTO newOrder);
-    int  updateSysOrderByOrderId(SysOrderDTO newOrder);
+
+    int updateSysOrderByOrderId(SysOrderDTO newOrder);
 
     int insertSysOrder(SysOrderDTO sysOrderDTO);
 

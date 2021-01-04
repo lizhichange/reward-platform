@@ -17,6 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class SysIndexControllerTest {
     @Autowired
     SysIndexController sysIndexController;
+
     @Test
     public void testMain() {
 

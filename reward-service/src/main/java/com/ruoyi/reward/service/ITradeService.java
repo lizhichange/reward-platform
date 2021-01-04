@@ -6,15 +6,14 @@ import java.util.List;
 
 /**
  * 交易信息Service接口
- * 
+ *
  * @author s
  * @date 2020-06-05
  */
-public interface ITradeService 
-{
+public interface ITradeService {
     /**
      * 查询交易信息
-     * 
+     *
      * @param tradeNo 交易信息ID
      * @return 交易信息
      */
@@ -22,7 +21,7 @@ public interface ITradeService
 
     /**
      * 查询交易信息列表
-     * 
+     *
      * @param trade 交易信息
      * @return 交易信息集合
      */
@@ -30,7 +29,7 @@ public interface ITradeService
 
     /**
      * 新增交易信息
-     * 
+     *
      * @param trade 交易信息
      * @return 结果
      */
@@ -38,7 +37,7 @@ public interface ITradeService
 
     /**
      * 修改交易信息
-     * 
+     *
      * @param trade 交易信息
      * @return 结果
      */
@@ -46,7 +45,7 @@ public interface ITradeService
 
     /**
      * 批量删除交易信息
-     * 
+     *
      * @param ids 需要删除的数据ID
      * @return 结果
      */
@@ -54,7 +53,7 @@ public interface ITradeService
 
     /**
      * 删除交易信息信息
-     * 
+     *
      * @param tradeNo 交易信息ID
      * @return 结果
      */

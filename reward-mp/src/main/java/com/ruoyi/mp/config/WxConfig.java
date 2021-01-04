@@ -2,11 +2,9 @@ package com.ruoyi.mp.config;
 
 
 import com.google.common.collect.Lists;
-
 import com.ruoyi.mp.factory.ConfigFactory;
 import com.ruoyi.mp.handler.*;
 import com.ruoyi.reward.facade.dto.SysWechatConfigDTO;
-
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.api.WxConsts;
@@ -20,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.Scheduled;
-
 
 import java.util.List;
 import java.util.stream.Collectors;

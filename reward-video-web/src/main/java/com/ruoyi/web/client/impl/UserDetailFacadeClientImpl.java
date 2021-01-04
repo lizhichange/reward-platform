@@ -1,7 +1,6 @@
 package com.ruoyi.web.client.impl;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.ruoyi.reward.facade.api.TsFacade;
 import com.ruoyi.reward.facade.api.UserDetailFacade;
 import com.ruoyi.reward.facade.dto.TWechatAuthDTO;
 import com.ruoyi.reward.facade.dto.UserDTO;

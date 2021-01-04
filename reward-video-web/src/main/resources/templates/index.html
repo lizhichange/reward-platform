@@ -10,8 +10,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <head>
 	<title>Videos website for high end mobiles</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<link href="./css/style.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="./css/mescroll.min.css" rel="stylesheet" type="text/css" media="all" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<link href="/css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="/css/mescroll.min.css" rel="stylesheet" type="text/css" media="all" />
 	<link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
 
 	<meta name="keywords" content="Videos iphone web template" />
@@ -22,82 +23,97 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<script src="//cdn.jsdelivr.net/npm/xgplayer-mp4/browser/index.js" charset="utf-8"></script>
 	<script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
 	<style>
-		/*列表*/
-		.mescroll {
-			top: 44px;
-			bottom: 0;
-			height: auto;
+		* {
+			margin: 0;
+			padding: 0;
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-webkit-tap-highlight-color: transparent;
 		}
+
+		/*模拟的标题,底部*/
+
+
+		/*列表*/
+		.mescroll {}
+
+		/*回到顶部按钮*/
+		.mescroll-totop {}
 	</style>
 </head>
 
 <body>
-	<div id="mse"></div>
-	<!---start-wrap---->
-	<!---start-header---->
-	<div class="header">
-		<div class="wrap">
-			<!---start-logo---->
-			<div class="logo">
-			</div>
-			<!---End-logo---->
-			<!---start-top-menu-search---->
-			<div class="top-menu">
-				<div class="top-nav">
-					<ul>
-						<li class="category" th:each="item,stat:${categoryList}" th:data="${item.categoryId}"><a
-								th:data="${item.categoryId}" href="javascript:void(0);">[[${item.categoryName}]]</a>
-						</li>
-					</ul>
-				</div>
-				<div class="search">
-					<form>
-						<input type="text" class="textbox" value="Search:" onfocus="this.value = '';"
-							onblur="if (this.value == '') {this.value = 'Search';}">
-						<input type="submit" value=" " />
-					</form>
-				</div>
 
-				<div class="clear"> </div>
-			</div>
-			<div class="clear"> </div>
-			<!---End-top-menu-search---->
-		</div>
-		<!---End-header---->
-	</div>
-	<div class="clear"> </div>
-	<!---start-content---->
-	<div class="main-content">
-		<div class="wrap">
+	<div class="mescroll" id="mescroll" >
 
-			<div class="right-content">
-				<div class="right-content-heading">
-					<div class="right-content-heading-left">
-						<h3>Latest Colletcions of videos</h3>
-					</div>
-					<div class="clear"> </div>
+		<div id="mse" class="mse"></div>
+		<!---start-wrap---->
+		<!---start-header---->
+		<div class="header">
+			<div class="wrap">
+				<!---start-logo---->
+				<div class="logo">
 				</div>
-				<div class="content-grids mescroll" id="mescroll">
-					<div id="list_videos_most_recent_videos_items">
-
-					</div>
-					<div class="clear"> </div>
-					<!---start-pagenation----->
-					<div class="pagenation">
+				<!---End-logo---->
+				<!---start-top-menu-search---->
+				<div class="top-menu">
+					<div class="top-nav">
 						<ul>
-							<li><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">Next</a></li>
+							<li class="category" th:each="item,stat:${categoryList}" th:data="${item.categoryId}"><a
+									th:data="${item.categoryId}" href="javascript:void(0);">[[${item.categoryName}]]</a>
+							</li>
 						</ul>
 					</div>
+					<div class="search">
+						<form>
+							<input type="text" class="textbox" value="Search:" onfocus="this.value = '';"
+								onblur="if (this.value == '') {this.value = 'Search';}">
+							<input type="submit" value=" " />
+						</form>
+					</div>
+
 					<div class="clear"> </div>
-					<!---End-pagenation----->
 				</div>
+				<div class="clear"> </div>
+				<!---End-top-menu-search---->
 			</div>
-			<div class="clear"> </div>
+			<!---End-header---->
+		</div>
+		<div class="clear"> </div>
+		<!---start-content---->
+		<div class="main-content">
+			<div class="wrap">
+
+				<div class="right-content">
+					<div class="right-content-heading">
+						<div class="right-content-heading-left">
+							<h3>Latest Colletcions of videos</h3>
+						</div>
+						<div class="clear"> </div>
+					</div>
+					<div class="content-grids">
+						<div id="list_videos_most_recent_videos_items">
+						</div>
+						<div class="clear"> </div>
+						<!---start-pagenation----->
+						<div class="pagenation">
+							<ul>
+								<li><a href="#">1</a></li>
+								<li><a href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#">Next</a></li>
+							</ul>
+						</div>
+						<div class="clear"> </div>
+						<!---End-pagenation----->
+					</div>
+				</div>
+				<div class="clear"> </div>
+			</div>
 		</div>
 	</div>
+
+
 	<div class="clear"> </div>
 	<!---End-content---->
 	<!---start-copy-right---->
@@ -339,7 +355,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				var row = curPageData[i];
 				// last-grid
 				var grid = (i & 1) != 0 ? '<div class="content-grid last-grid">' : '<div class="content-grid">';
-				var str =grid
+				var str = grid
 					+ '<a href="javascript:void(0)">'
 					+ '<img src="' + row.url + '" title="allbum-name" /></a>'
 					+ '<h3>' + row.name + '</h3>'

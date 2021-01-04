@@ -2,8 +2,9 @@ package com.ruoyi.reward.mapper;
 
 import com.ruoyi.reward.domain.TUserDetail;
 import com.ruoyi.reward.domain.TUserDetailExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface TUserDetailMapper {
     long countByExample(TUserDetailExample example);

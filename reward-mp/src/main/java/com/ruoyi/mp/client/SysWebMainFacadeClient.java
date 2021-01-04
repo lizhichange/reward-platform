@@ -10,6 +10,7 @@ import java.util.List;
 public interface SysWebMainFacadeClient {
 
     List<SysWebMainDTO> selectSysWebMainList(SysWebMainDTO sysWebMain);
+
     int updateSysWebMain(SysWebMainDTO sysWebMain);
 
 }

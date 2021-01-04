@@ -2,8 +2,9 @@ package com.ruoyi.reward.mapper;
 
 import com.ruoyi.reward.domain.Trade;
 import com.ruoyi.reward.domain.TradeExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface TradeMapper {
     long countByExample(TradeExample example);

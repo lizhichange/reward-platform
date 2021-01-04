@@ -13,7 +13,8 @@ public abstract class AbstractBuilder {
     protected final Logger logger = LoggerFactory.getLogger(getClass());
 
     /**
-     *xxx
+     * xxx
+     *
      * @param content
      * @param wxMessage
      * @param service

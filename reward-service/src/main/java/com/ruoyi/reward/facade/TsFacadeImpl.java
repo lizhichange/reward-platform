@@ -3,12 +3,12 @@ package com.ruoyi.reward.facade;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.ruoyi.common.core.text.Convert;
+import com.ruoyi.reward.domain.Ts;
+import com.ruoyi.reward.domain.TsExample;
 import com.ruoyi.reward.facade.api.TsFacade;
 import com.ruoyi.reward.facade.dto.TsDTO;
 import com.ruoyi.reward.mapper.ExtTsMapper;
 import com.ruoyi.reward.mapper.TsMapper;
-import com.ruoyi.reward.domain.Ts;
-import com.ruoyi.reward.domain.TsExample;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 

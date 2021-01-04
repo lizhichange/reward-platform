@@ -37,15 +37,15 @@ public interface ExtSysOrderMapper {
             @Param("status") Integer status);
 
     int countStatus(@Param("startTime") String startTime,
-                     @Param("endTime") String endTime,
-                     @Param("extensionUserId") String extensionUserId,
-                     @Param("status") Integer status);
+                    @Param("endTime") String endTime,
+                    @Param("extensionUserId") String extensionUserId,
+                    @Param("status") Integer status);
 
 
     int countMoney(@Param("startTime") String startTime,
-                     @Param("endTime") String endTime,
-                     @Param("extensionUserId") String extensionUserId,
-                     @Param("status") Integer status);
+                   @Param("endTime") String endTime,
+                   @Param("extensionUserId") String extensionUserId,
+                   @Param("status") Integer status);
 
 
     int updateByExample(@Param("record") ExtSysOrder record, @Param("example") ExtSysOrderExample example);

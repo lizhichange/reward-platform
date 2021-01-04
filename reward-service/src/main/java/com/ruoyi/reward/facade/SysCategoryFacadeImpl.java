@@ -21,7 +21,8 @@ import java.util.stream.Collectors;
 @Service(
         version = "1.0.0",
         timeout = 15000
-)public class SysCategoryFacadeImpl implements SysCategoryFacade {
+)
+public class SysCategoryFacadeImpl implements SysCategoryFacade {
 
 
     @Autowired

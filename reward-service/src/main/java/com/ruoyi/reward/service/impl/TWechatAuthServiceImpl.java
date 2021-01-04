@@ -3,7 +3,6 @@ package com.ruoyi.reward.service.impl;
 import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.reward.domain.TWechatAuth;
 import com.ruoyi.reward.mapper.ExtTWechatAuthMapper;
-
 import com.ruoyi.reward.service.TWechatAuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

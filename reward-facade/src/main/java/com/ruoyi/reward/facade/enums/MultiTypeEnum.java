@@ -1,7 +1,7 @@
 package com.ruoyi.reward.facade.enums;
 
 import com.google.common.collect.Lists;
-import lombok.*;
+import lombok.Getter;
 import org.near.toolkit.model.BaseEnum;
 import org.near.toolkit.model.ToString;
 
@@ -104,10 +104,12 @@ public enum MultiTypeEnum implements BaseEnum {
 
         public ItemContent() {
         }
+
         public ItemContent(Integer id, String name) {
-            this.id=id;
-            this.name=name;
+            this.id = id;
+            this.name = name;
         }
+
         public Integer getId() {
             return id;
         }

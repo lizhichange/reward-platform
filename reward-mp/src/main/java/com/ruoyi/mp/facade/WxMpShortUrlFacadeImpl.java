@@ -6,7 +6,6 @@ import cn.hutool.json.JSONUtil;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.google.common.collect.Maps;
 import com.ruoyi.mp.client.SysWebMainFacadeClient;
-import com.ruoyi.reward.facade.api.SysWebMainFacade;
 import com.ruoyi.reward.facade.api.WxMpShortUrlFacade;
 import com.ruoyi.reward.facade.dto.SysWebMainDTO;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +22,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.near.toolkit.common.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 

@@ -1,7 +1,6 @@
 package com.ruoyi.mp.client.impl;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-
 import com.ruoyi.mp.client.SysConfigFacadeClient;
 import com.ruoyi.reward.facade.api.SysConfigFacade;
 import org.springframework.stereotype.Component;

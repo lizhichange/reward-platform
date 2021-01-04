@@ -4,15 +4,12 @@ import com.ruoyi.reward.facade.enums.PrincipalTypeEnum;
 import lombok.Data;
 import org.near.toolkit.model.ToString;
 
-import java.io.Serializable;
 import java.util.Date;
 
 @Data
 public class TWechatAuthDTO extends ToString {
     /**
-    *
-    *
-    * t_wechat_auth.id
+     * t_wechat_auth.id
      * 主键
      *
      * @mbg.generated 2020-04-11 13:00:34
@@ -20,9 +17,7 @@ public class TWechatAuthDTO extends ToString {
     private Integer id;
 
     /**
-    *
-    *
-    * t_wechat_auth.open_id
+     * t_wechat_auth.open_id
      * open_id
      *
      * @mbg.generated 2020-04-11 13:00:34
@@ -30,9 +25,7 @@ public class TWechatAuthDTO extends ToString {
     private String openId;
 
     /**
-    *
-    *
-    * t_wechat_auth.user_id
+     * t_wechat_auth.user_id
      * 主体唯一标识
      *
      * @mbg.generated 2020-04-11 13:00:34
@@ -40,9 +33,7 @@ public class TWechatAuthDTO extends ToString {
     private String userId;
 
     /**
-    *
-    *
-    * t_wechat_auth.user_type
+     * t_wechat_auth.user_type
      * 主体类型
      *
      * @mbg.generated 2020-04-11 13:00:34
@@ -50,9 +41,7 @@ public class TWechatAuthDTO extends ToString {
     private PrincipalTypeEnum userType;
 
     /**
-    *
-    *
-    * t_wechat_auth.appid
+     * t_wechat_auth.appid
      * appid
      *
      * @mbg.generated 2020-04-11 13:00:34
@@ -60,9 +49,7 @@ public class TWechatAuthDTO extends ToString {
     private String appid;
 
     /**
-    *
-    *
-    * t_wechat_auth.unionid
+     * t_wechat_auth.unionid
      * unionid
      *
      * @mbg.generated 2020-04-11 13:00:34
@@ -70,9 +57,7 @@ public class TWechatAuthDTO extends ToString {
     private String unionid;
 
     /**
-    *
-    *
-    * t_wechat_auth.subscribe
+     * t_wechat_auth.subscribe
      * 是否关注
      *
      * @mbg.generated 2020-04-11 13:00:34
@@ -80,29 +65,21 @@ public class TWechatAuthDTO extends ToString {
     private String subscribe;
 
     /**
-    *
-    *
-    * t_wechat_auth.gmt_create
-    
+     * t_wechat_auth.gmt_create
      *
      * @mbg.generated 2020-04-11 13:00:34
      */
     private Date gmtCreate;
 
     /**
-    *
-    *
-    * t_wechat_auth.create_by
-    
+     * t_wechat_auth.create_by
      *
      * @mbg.generated 2020-04-11 13:00:34
      */
     private String createBy;
 
     /**
-    *
-    *
-    * t_wechat_auth.gmt_modified
+     * t_wechat_auth.gmt_modified
      * 修改时间
      *
      * @mbg.generated 2020-04-11 13:00:34
@@ -110,10 +87,7 @@ public class TWechatAuthDTO extends ToString {
     private Date gmtModified;
 
     /**
-    *
-    *
-    * t_wechat_auth.modified_by
-    
+     * t_wechat_auth.modified_by
      *
      * @mbg.generated 2020-04-11 13:00:34
      */

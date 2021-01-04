@@ -33,7 +33,7 @@ public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHa
             if (login) {
                 redirect_uri = "/video";
             }
-        }else {
+        } else {
             redirect_uri = "/video";
         }
         response.setContentType("application/json;charset=utf-8");

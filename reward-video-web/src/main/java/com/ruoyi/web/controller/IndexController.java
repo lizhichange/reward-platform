@@ -1,7 +1,6 @@
 package com.ruoyi.web.controller;
 
 import com.google.common.collect.Lists;
-import com.ruoyi.reward.facade.dto.SysCategoryDTO;
 import com.ruoyi.web.client.SysConfigFacadeClient;
 import com.ruoyi.web.client.VideoFacadeClient;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -39,13 +37,12 @@ public class IndexController extends BaseController {
         return "index";
     }
 
-    protected void getCategory(ModelMap modelmap) {
-        SysCategoryDTO sysCategory = new SysCategoryDTO();
-        sysCategory.setParentId(100L);
-        sysCategory.setStatus("0");
-        List<SysCategoryDTO> categoryList = sysCategoryFacadeClient.selectDeptList(sysCategory);
-        modelmap.addAttribute("categoryList", categoryList);
+    @GetMapping("/zhihu")
+    public String zhihu(@RequestParam(value = "userId", required = false) String userId, ModelMap modelmap) {
+        getCategory(modelmap);
+        return "zhihu";
     }
+
 
     @GetMapping("/index")
     public String render(@RequestParam(value = "userId", required = false) String userId, ModelMap modelmap) {

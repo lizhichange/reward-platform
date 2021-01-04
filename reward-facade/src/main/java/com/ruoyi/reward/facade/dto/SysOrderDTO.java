@@ -1,8 +1,9 @@
 package com.ruoyi.reward.facade.dto;
 
-import com.ruoyi.reward.facade.enums.OrderStatusType;
 import com.ruoyi.reward.facade.enums.OrderPayType;
-import lombok.*;
+import com.ruoyi.reward.facade.enums.OrderStatusType;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.near.toolkit.common.EnumUtil;
 import org.near.toolkit.model.Money;
 import org.near.toolkit.model.ToString;

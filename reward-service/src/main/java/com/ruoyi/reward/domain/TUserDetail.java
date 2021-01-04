@@ -1,13 +1,12 @@
 package com.ruoyi.reward.domain;
 
 
-import java.util.Date;
-
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
-
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
+
+import java.util.Date;
 
 /**
  * @author sunflower

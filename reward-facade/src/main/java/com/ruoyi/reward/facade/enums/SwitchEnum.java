@@ -5,9 +5,8 @@
 package com.ruoyi.reward.facade.enums;
 
 
-import org.near.toolkit.model.BaseEnum;
-
 import lombok.Getter;
+import org.near.toolkit.model.BaseEnum;
 
 
 /**

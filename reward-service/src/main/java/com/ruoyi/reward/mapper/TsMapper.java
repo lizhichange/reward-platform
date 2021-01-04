@@ -2,8 +2,9 @@ package com.ruoyi.reward.mapper;
 
 import com.ruoyi.reward.domain.Ts;
 import com.ruoyi.reward.domain.TsExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface TsMapper {
     long countByExample(TsExample example);

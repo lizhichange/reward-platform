@@ -1,6 +1,5 @@
 package com.ruoyi.web.model;
 
-import lombok.Data;
 import org.near.toolkit.model.ToString;
 
 /**

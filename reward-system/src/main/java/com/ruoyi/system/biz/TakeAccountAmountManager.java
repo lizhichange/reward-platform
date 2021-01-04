@@ -19,7 +19,7 @@ public interface TakeAccountAmountManager {
      * @param request the request
      * @return the user account dto
      */
-    AccountDTO addBalance(UserAccountOperatorRequest request)  ;
+    AccountDTO addBalance(UserAccountOperatorRequest request);
 
     /**
      * Minus balance user account dto.
@@ -27,7 +27,7 @@ public interface TakeAccountAmountManager {
      * @param request the request
      * @return the user account dto
      */
-    AccountDTO minusBalance(UserAccountOperatorRequest request)  ;
+    AccountDTO minusBalance(UserAccountOperatorRequest request);
 
     /**
      * Create.创建用户账户信息

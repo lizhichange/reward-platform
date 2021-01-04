@@ -9,25 +9,36 @@ import org.near.toolkit.model.ToString;
 import java.util.Date;
 
 
-
 /**
  * @author Willard.Hu on 2017/9/29.
  */
 public abstract class BasicDto extends ToString {
     private static final long serialVersionUID = 3163181664635333242L;
 
-    /** 创建人 */
+    /**
+     * 创建人
+     */
     protected String createBy;
-    /** 创建时间 */
-    protected Date   gmtCreate;
-    /** 创建时间 Unix 时间戳 */
-    protected Long   gmtCreateTime;
-    /** 修改人 */
+    /**
+     * 创建时间
+     */
+    protected Date gmtCreate;
+    /**
+     * 创建时间 Unix 时间戳
+     */
+    protected Long gmtCreateTime;
+    /**
+     * 修改人
+     */
     protected String modifiedBy;
-    /** 修改时间 */
-    protected Date   gmtModified;
-    /** 修改时间 Unix 时间戳 */
-    protected Long   gmtModifiedTime;
+    /**
+     * 修改时间
+     */
+    protected Date gmtModified;
+    /**
+     * 修改时间 Unix 时间戳
+     */
+    protected Long gmtModifiedTime;
 
     /* ========== Setter ========== */
 

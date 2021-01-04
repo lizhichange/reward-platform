@@ -19,7 +19,6 @@ public interface SysCategoryFacade {
     List<SysCategoryDTO> selectDeptList(SysCategoryDTO dept);
 
 
-
     int selectDeptCount(Long parentId);
 
 
@@ -29,4 +28,4 @@ public interface SysCategoryFacade {
     SysCategoryDTO selectDeptById(Long deptId);
 
 
- }
+}
