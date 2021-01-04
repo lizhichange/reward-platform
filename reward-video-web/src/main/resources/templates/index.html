@@ -372,7 +372,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						"pageSize": 100
 					},
 					success: function (data) {
-						$.hideLoading();
 						if (data && data.code === 0) {
 							//回调
 							successCallback(data);
@@ -391,7 +390,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						"pageSize": pageSize
 					},
 					success: function (data) {
-						$.hideLoading();
 						if (data && data.code === 0) {
 							//回调
 							successCallback(data);
