@@ -38,11 +38,13 @@ import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.near.toolkit.common.StringUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -220,6 +222,38 @@ public class VideoController extends BaseController {
         shipin.setStatus("0");
         shipin.setMoney(shipin.getStartMoney() + "-" + shipin.getEndMoney());
         return toAjax(videoFacade.insertVideoDTO(shipin));
+    }
+
+
+    @ApiOperation("拉取视频detail")
+    @ResponseBody
+    @PostMapping("/fetchDetailExt")
+    public AjaxResult fetchDetailExt(ModelMap modelMap) {
+        RestTemplate client = new RestTemplate(new HttpsClientRequestFactory());
+        HttpHeaders headers = new HttpHeaders();
+        HttpMethod post = HttpMethod.POST;
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
+        map.add("u_id", "143AB09EDCCFE5C20F18F051C056788A1598881547");
+        map.add("category_id", "false");
+
+        map.add("o_user", "61.152.208.146");
+
+        map.add("page", "2");
+
+        map.add("limit", "10");
+
+        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map);
+        ResponseEntity<String> forEntity = client.getForEntity("http://hj.jiazaihetian.com/api/siyou/apilist.html", String.class, request);
+        String body = forEntity.getBody();
+        ResultData parse = JSONObject.parseObject(body, ResultData.class);
+        if (parse != null) {
+            List<ResultData.DataBean> data = parse.getData();
+            for (ResultData.DataBean datum : data) {
+
+            }
+        }
+        return null;
     }
 
     @ApiOperation("拉取视频detail")
