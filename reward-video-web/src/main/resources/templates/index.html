@@ -345,7 +345,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				var str = grid
 					+ '<a href="javascript:void(0)">'
 					+ '<img  src="' + row.url + '" title="allbum-name" /></a>'
-					+ '<h3>' + beautySub(row.name,28) + '</h3>'
+					+ '<h3>' + beautySub(row.name,25) + '</h3>'
 					+ '<ul>'
 					+ '<li><a href="javascript:void(0)">' + row.mockNum + '</a></li>'
 					+ '	<li><a href="javascript:void(0)">' + row.money + '</a></li>'
@@ -367,9 +367,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			 * @returns {string}
 			 */
 			function beautySub(str, len) {
-				var reg = /[\u4e00-\u9fa5]/g,    //专业匹配中文
-				var slice = str.substring(0, len),
-				var	chineseCharNum = (~~(slice.match(reg) && slice.match(reg).length)),
+				var reg = /[\u4e00-\u9fa5]/g,   //专业匹配中文
+				  slice = str.substring(0, len),
+				 	chineseCharNum = (~~(slice.match(reg) && slice.match(reg).length)),
 				var	realen = slice.length * 2 - chineseCharNum;
 				return str.substr(0, realen) + (realen < str.length ? "..." : "");
 			}
