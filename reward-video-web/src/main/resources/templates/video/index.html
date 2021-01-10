@@ -167,7 +167,11 @@
             color: #00FF00
         }
 
-
+        /*固定高度*/
+        .mescroll {
+            height: 500px;
+            /*如设置bottom:50px,则需height:auto才能生效*/
+        }
 
         .active {
             color: #f56c08;
@@ -176,7 +180,7 @@
 
 </head>
 
-<body class="list-videos mescroll" id="mescroll">
+<body>
 
     <div id="pos"></div>
     <div class="top-links">
@@ -206,7 +210,7 @@
             <div class="main-content">
                 <div id="list_videos_most_recent_videos">
                     <div class="box">
-                        <div>
+                        <div class="list-videos mescroll" id="mescroll">
                             <div class="margin-fix" id="list_videos_most_recent_videos_items">
                             </div>
                         </div>
