@@ -369,8 +369,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			function beautySub(str, len) {
 				var reg = /[\u4e00-\u9fa5]/g,   //专业匹配中文
 				  slice = str.substring(0, len),
-				 	chineseCharNum = (~~(slice.match(reg) && slice.match(reg).length)),
-				var	realen = slice.length * 2 - chineseCharNum;
+				  chineseCharNum = (~~(slice.match(reg) && slice.match(reg).length)),
+				  realen = slice.length * 2 - chineseCharNum;
 				return str.substr(0, realen) + (realen < str.length ? "..." : "");
 			}
 
