@@ -104,6 +104,21 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		</div>
 	</div>
 	<div class="clear"> </div>
+
+	<div id="mModal">
+		<div class="mheader">
+			<label id="myLabel" class="right" style=" overflow: hidden;width: 90%;line-height: 24px; overflow: hidden;text-overflow: ellipsis;white-space: nowrap; font-size: 12px;">预览</label>
+	
+		</div>
+		<div class="mbody">
+			<img src=""  onerror=""  class="mimg" id="mimg" style="transform: translateY(0%);"  >
+		</div>
+		<div class="mfooter">
+			<button class="btn  btn-sm btn-success pull-right zhifu ">支付观看</button>
+					<button type="button" class="btn btn-primary  btn-sm mclose " >我再想想</button>
+			<p>注:付款后自动跳转播放，若未播放，可以点击“已购”</p>
+		</div>
+	</div>
 	<!---End-content---->
 	<!---start-copy-right---->
 	<div class="copy-right">
@@ -357,6 +372,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				listDom.appendChild(liDom);//加在列表的后面,上拉加载
 				//转jquery
 				var $itemDom = $(liDom);
+
+				$('#mModal').slideDown();
+				// $('#mModal').slideUp();
+
 			}
 		}
 
@@ -412,6 +431,16 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					error: errorCallback
 				});
 			}
+		}
+
+		$('.mclose').click(function () {
+        closeint();
+    	});
+		function closeint() {
+			img.style.transform = "translateX(0%)";
+			window.clearInterval(interval);
+			$('#mModal').slideUp();
+			$('.popover-mask').hide();
 		}
 	});
 </script>
