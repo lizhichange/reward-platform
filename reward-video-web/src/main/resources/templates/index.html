@@ -376,8 +376,20 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				$itemDom.click(function (event) {
 				var $self = $(this);
 				var $a = $self.find('a');
-
-
+       			//视频地址
+				var src = $a.attr("data-src");
+				//poster 图片地址
+				var poster = $a.attr("data-poster");
+				//图片地址
+				player.poster = poster;
+				//视频地址
+				player.src = src;
+				//设置/返回视频当前播放时间
+				player.currentTime = 0;
+				//是否开始播放
+				player.hasStart = true;
+				//设置/返回 自动播放属性
+				player.autoplay = true;
 				});
 
 				// $('#mModal').slideDown();
