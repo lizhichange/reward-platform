@@ -358,7 +358,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				// last-grid
 				var grid = (i & 1) != 0 ? '<div class="content-grid last-grid">' : '<div class="content-grid">';
 				var str = grid
-					+ '<a href="javascript:void(0)">'
+					+ '<a href="javascript:void(0)" data-poster='+row.url+' data-src='+ row.videoUrl+' >'
 					+ '<img  src="' + row.url + '" title="allbum-name" /></a>'
 					+ '<h3>' + beautySub(row.name,10) + '</h3>'
 					+ '<ul>'
@@ -373,8 +373,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				//转jquery
 				var $itemDom = $(liDom);
 
-				$('#mModal').slideDown();
-				// $('#mModal').slideUp();
+				$itemDom.click(function (event) {
+				var $self = $(this);
+				var $a = $self.find('a');
+
+
+				});
+
+				// $('#mModal').slideDown();
+				$('#mModal').slideUp();
+
+
 
 			}
 		}
