@@ -43,89 +43,89 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 <body>
 
-	<div class="mescroll" id="mescroll">
+<div class="mescroll" id="mescroll">
 
-		<div id="mse" class="mse"></div>
-		<!---start-wrap---->
-		<!---start-header---->
-		<div class="header">
-			<div class="wrap">
-				<!---start-logo---->
-				<div class="logo">
-				</div>
-				<!---End-logo---->
-				<!---start-top-menu-search---->
-				<div class="top-menu">
-					<div class="top-nav">
-						<ul>
-							<li class="category" th:each="item,stat:${categoryList}" th:data="${item.categoryId}"><a
-									th:data="${item.categoryId}" href="javascript:void(0);">[[${item.categoryName}]]</a>
-							</li>
-						</ul>
-					</div>
-					<div class="search">
-						<form>
-							<input type="text" class="textbox" value="Search:" onfocus="this.value = '';"
-								onblur="if (this.value == '') {this.value = 'Search';}">
-							<input type="submit" value=" " />
-						</form>
-					</div>
-
-					<div class="clear"> </div>
-				</div>
-				<div class="clear"> </div>
-				<!---End-top-menu-search---->
+	<div id="mse" class="mse"></div>
+	<!---start-wrap---->
+	<!---start-header---->
+	<div class="header">
+		<div class="wrap">
+			<!---start-logo---->
+			<div class="logo">
 			</div>
-			<!---End-header---->
-		</div>
-		<div class="clear"> </div>
-		<!---start-content---->
-		<div class="main-content">
-			<div class="wrap">
-
-				<div class="right-content">
-					<div class="right-content-heading">
-						<div class="right-content-heading-left">
-							<h3>Latest Colletcions of videos</h3>
-						</div>
-						<div class="clear"> </div>
-					</div>
-					<div class="content-grids">
-						<div id="list_videos_most_recent_videos_items">
-						</div>
-						<div class="clear"> </div>
-						<!---start-pagenation----->
-						<div class="clear"> </div>
-						<!---End-pagenation----->
-					</div>
+			<!---End-logo---->
+			<!---start-top-menu-search---->
+			<div class="top-menu">
+				<div class="top-nav">
+					<ul>
+						<li class="category" th:each="item,stat:${categoryList}" th:data="${item.categoryId}"><a
+								th:data="${item.categoryId}" href="javascript:void(0);">[[${item.categoryName}]]</a>
+						</li>
+					</ul>
 				</div>
+				<div class="search">
+					<form>
+						<input type="text" class="textbox" value="Search:" onfocus="this.value = '';"
+							   onblur="if (this.value == '') {this.value = 'Search';}">
+						<input type="submit" value=" " />
+					</form>
+				</div>
+
 				<div class="clear"> </div>
 			</div>
+			<div class="clear"> </div>
+			<!---End-top-menu-search---->
 		</div>
+		<!---End-header---->
 	</div>
 	<div class="clear"> </div>
+	<!---start-content---->
+	<div class="main-content">
+		<div class="wrap">
 
-	<div id="mModal">
-		<div class="mheader">
-			<label id="myLabel" class="right" style=" overflow: hidden;width: 90%;line-height: 24px; overflow: hidden;text-overflow: ellipsis;white-space: nowrap; font-size: 12px;">预览</label>
-	
-		</div>
-		<div class="mbody">
-			<img src=""  onerror=""  class="mimg" id="mimg" style="transform: translateY(0%);"  >
-		</div>
-		<div class="mfooter">
-			<button class="btn  btn-sm btn-success pull-right zhifu ">支付观看</button>
-					<button type="button" class="btn btn-primary  btn-sm mclose " >我再想想</button>
-			<p>注:付款后自动跳转播放，若未播放，可以点击“已购”</p>
+			<div class="right-content">
+				<div class="right-content-heading">
+					<div class="right-content-heading-left">
+						<h3>Latest Colletcions of videos</h3>
+					</div>
+					<div class="clear"> </div>
+				</div>
+				<div class="content-grids">
+					<div id="list_videos_most_recent_videos_items">
+					</div>
+					<div class="clear"> </div>
+					<!---start-pagenation----->
+					<div class="clear"> </div>
+					<!---End-pagenation----->
+				</div>
+			</div>
+			<div class="clear"> </div>
 		</div>
 	</div>
-	<!---End-content---->
-	<!---start-copy-right---->
-	<div class="copy-right">
-		<p>Design by <a href="http://w3layouts.com/">W3layouts</a></p>
+</div>
+<div class="clear"> </div>
+
+<div id="mModal">
+	<div class="mheader">
+		<label id="myLabel" class="right" style=" overflow: hidden;width: 90%;line-height: 24px; overflow: hidden;text-overflow: ellipsis;white-space: nowrap; font-size: 12px;">预览</label>
+
 	</div>
-	<!---End-copy-right---->
-	<!---End-wrap---->
+	<div class="mbody">
+		<img src=""  onerror=""  class="mimg" id="mimg" style="transform: translateY(0%);"  >
+	</div>
+	<div class="mfooter">
+		<button class="btn  btn-sm btn-success pull-right zhifu ">支付观看</button>
+		<button type="button" class="btn btn-primary  btn-sm mclose " >我再想想</button>
+		<p>注:付款后自动跳转播放，若未播放，可以点击“已购”</p>
+	</div>
+</div>
+<!---End-content---->
+<!---start-copy-right---->
+<div class="copy-right">
+	<p>Design by <a href="http://w3layouts.com/">W3layouts</a></p>
+</div>
+<!---End-copy-right---->
+<!---End-wrap---->
 </body>
 
 <input type="hidden" id="url" />
@@ -358,7 +358,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				// last-grid
 				var grid = (i & 1) != 0 ? '<div class="content-grid last-grid">' : '<div class="content-grid">';
 				var str = grid
-				var str = '<a href="javascript:void(0)">' 
+					+ '<a href="javascript:void(0)">'
+					+ '<img  src="' + row.url + '" title="allbum-name" /></a>'
 					+ '<h3>' + beautySub(row.name,10) + '</h3>'
 					+ '<ul>'
 					+ '<li><a href="javascript:void(0)">' + row.mockNum + '</a></li>'
@@ -372,29 +373,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				//转jquery
 				var $itemDom = $(liDom);
 
-				// $('#mModal').slideDown();
+				$('#mModal').slideDown();
 				// $('#mModal').slideUp();
-
-				$itemDom.click(function (event) {
-					var $self = $(this);
-     				//视频地址
-	 				var src = $a.attr("data-src");
-                    //poster 图片地址
-					var poster = $a.attr("data-poster");
-					 //图片地址
-					 player.poster = poster;
-					//视频地址
-					player.src = src;
-					//设置/返回视频当前播放时间
-					player.currentTime = 0;
-					//是否开始播放
-					player.hasStart = true;
-					//设置/返回 自动播放属性
-					player.autoplay = true;
-				});
-				player.on('play', function () {
-
-				});
 
 			}
 		}
