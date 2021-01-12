@@ -32,6 +32,7 @@ import com.ruoyi.web.model.JiaLiDetailApiResult;
 import com.ruoyi.web.param.PriceParam;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
@@ -55,10 +56,7 @@ import javax.net.ssl.X509TrustManager;
 import java.net.HttpURLConnection;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -224,6 +222,63 @@ public class VideoController extends BaseController {
         return toAjax(videoFacade.insertVideoDTO(shipin));
     }
 
+
+    @ApiOperation("createOrder")
+    @ResponseBody
+    @PostMapping("/createOrder")
+    public AjaxResult createOrder(ModelMap modelMap) {
+        String url = "http://139.224.226.17:8000/order/payment/create";
+
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        Map<String, String> map = Maps.newHashMap();
+        String merchantKey = "";
+        PayParam param = new PayParam();
+        param.setMerchantCode("");
+
+        PayParam.BodyBean bodyBean = new PayParam.BodyBean();
+        bodyBean.setAmount("100");
+        bodyBean.setChannelType("");
+        bodyBean.setMerchantOrderCode("");
+        bodyBean.setNoticeUrl("");
+        bodyBean.setReturnUrl("");
+        param.setBody(bodyBean);
+
+        map.put("amount", param.getBody().getAmount());
+        map.put("channelType", param.getBody().getChannelType());
+        map.put("merchantOrderCode", param.getMerchantCode());
+        map.put("noticeUrl", param.getBody().getNoticeUrl());
+        map.put("returnUrl", param.getBody().getReturnUrl());
+
+        String sign = sign(map, merchantKey, false);
+
+        param.setSign(sign);
+        String content = JSONObject.toJSONString(param);
+        HttpEntity<String> request = new HttpEntity<>(content, headers);
+        ResponseEntity<String> postForEntity = restTemplate.postForEntity(url, request, String.class);
+        String body = postForEntity.getBody();
+        PayResult parse = JSONObject.parseObject(body, PayResult.class);
+        logger.info("parse:{}", parse);
+        return null;
+    }
+
+    String sign(Map<String, String> params, String signKey, Boolean is) {
+        SortedMap<String, String> sortedMap = new TreeMap<>(params);
+        StringBuilder toSign = new StringBuilder();
+        for (String key : sortedMap.keySet()) {
+            String value = params.get(key);
+            toSign.append(key).append("=").append(value);
+            if (is) {
+                toSign.append("&");
+            }
+        }
+        toSign.append("key=").append(signKey);
+        logger.info("toSign:{}", toSign);
+        return DigestUtils.md5Hex(toSign.toString()).toUpperCase();
+
+    }
 
     @ApiOperation("拉取视频detail")
     @ResponseBody
