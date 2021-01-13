@@ -77,6 +77,22 @@ img{max-width:100%;}
 .search input[type="submit"]:hover{
 	color:#888;
 }
+
+.search input[type="button"]{
+	background: url(../images/search-icon.png) no-repeat 46% 46% #000;
+	padding: 5px 10px;
+	width: 50px;
+	cursor: pointer;
+	border: none;
+	color: #FFF;
+	outline: none;
+	font-family: Arial, Helvetica, sans-serif;
+	text-transform: uppercase;
+}
+.search input[type="button"]:hover{
+	color:#888;
+}
+
 /*---album-rating-----*/
 .rate, .rate b, .rate a {
 	 width: 80%;

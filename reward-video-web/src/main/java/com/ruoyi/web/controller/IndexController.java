@@ -42,7 +42,11 @@ public class IndexController extends BaseController {
         getCategory(modelmap);
         return "zhihu";
     }
-
+    @GetMapping("/search")
+    public String search(@RequestParam(value = "userId", required = false) String userId, ModelMap modelmap) {
+        getCategory(modelmap);
+        return "mescroll-search";
+    }
 
     @GetMapping("/index")
     public String render(@RequestParam(value = "userId", required = false) String userId, ModelMap modelmap) {

@@ -45,31 +45,31 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 <div class="mescroll" id="mescroll">
 
-	<div id="mse" class="mse"></div>
-	<!---start-wrap---->
-	<!---start-header---->
-	<div class="header">
-		<div class="wrap">
-			<!---start-logo---->
-			<div class="logo">
-			</div>
-			<!---End-logo---->
-			<!---start-top-menu-search---->
-			<div class="top-menu">
-				<div class="top-nav">
-					<ul>
-						<li class="category" th:each="item,stat:${categoryList}" th:data="${item.categoryId}"><a
-								th:data="${item.categoryId}" href="javascript:void(0);">[[${item.categoryName}]]</a>
-						</li>
-					</ul>
+		<div id="mse" class="mse"></div>
+		<!---start-wrap---->
+		<!---start-header---->
+		<div class="header">
+			<div class="wrap">
+				<!---start-logo---->
+				<div class="logo">
 				</div>
-				<div class="search">
-					<form>
-						<input type="text" class="textbox" value="Search:" onfocus="this.value = '';"
-							   onblur="if (this.value == '') {this.value = 'Search';}">
-						<input type="submit" value=" " />
-					</form>
-				</div>
+				<!---End-logo---->
+				<!---start-top-menu-search---->
+				<div class="top-menu">
+					<div class="top-nav">
+						<ul>
+							<li class="category" th:each="item,stat:${categoryList}" th:data="${item.categoryId}"><a
+									th:data="${item.categoryId}" href="javascript:void(0);">[[${item.categoryName}]]</a>
+							</li>
+						</ul>
+					</div>
+					<div class="search">
+						<form>
+							<input type="text" id="keyword" class="textbox" value="Search:" onfocus="this.value = '';"
+								onblur="if (this.value == '') {this.value = 'Search';}">
+							<input type="button" id="search" value=" " />
+						</form>
+					</div>
 
 				<div class="clear"> </div>
 			</div>
@@ -83,49 +83,34 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<div class="main-content">
 		<div class="wrap">
 
-			<div class="right-content">
-				<div class="right-content-heading">
-					<div class="right-content-heading-left">
-						<h3>Latest Colletcions of videos</h3>
+				<div class="right-content">
+					<div class="right-content-heading">
+						<div class="right-content-heading-left">
+							<h3>Latest Colletcions of videos</h3>
+						</div>
+						<div class="clear"> </div>
 					</div>
-					<div class="clear"> </div>
-				</div>
-				<div class="content-grids">
-					<div id="list_videos_most_recent_videos_items">
+					<div class="content-grids">
+						<div id="list_videos_most_recent_videos_items">
+						</div>
+						<div class="clear"> </div>
+						<!---start-pagenation----->
+						<div class="clear"> </div>
+						<!---End-pagenation----->
 					</div>
-					<div class="clear"> </div>
-					<!---start-pagenation----->
-					<div class="clear"> </div>
-					<!---End-pagenation----->
 				</div>
+				<div class="clear"> </div>
 			</div>
-			<div class="clear"> </div>
 		</div>
 	</div>
-</div>
-<div class="clear"> </div>
-
-<div id="mModal">
-	<div class="mheader">
-		<label id="myLabel" class="right" style=" overflow: hidden;width: 90%;line-height: 24px; overflow: hidden;text-overflow: ellipsis;white-space: nowrap; font-size: 12px;">预览</label>
-
+	<div class="clear"> </div>
+	<!---End-content---->
+	<!---start-copy-right---->
+	<div class="copy-right">
+		<p>Design by <a href="http://w3layouts.com/">W3layouts</a></p>
 	</div>
-	<div class="mbody">
-		<img src=""  onerror=""  class="mimg" id="mimg" style="transform: translateY(0%);"  >
-	</div>
-	<div class="mfooter">
-		<button class="btn  btn-sm btn-success pull-right zhifu ">支付观看</button>
-		<button type="button" class="btn btn-primary  btn-sm mclose " >我再想想</button>
-		<p>注:付款后自动跳转播放，若未播放，可以点击“已购”</p>
-	</div>
-</div>
-<!---End-content---->
-<!---start-copy-right---->
-<div class="copy-right">
-	<p>Design by <a href="http://w3layouts.com/">W3layouts</a></p>
-</div>
-<!---End-copy-right---->
-<!---End-wrap---->
+	<!---End-copy-right---->
+	<!---End-wrap---->
 </body>
 
 <input type="hidden" id="url" />
@@ -315,6 +300,16 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				}
 			}
 		});
+		//当前关键词
+		var curWord = null;
+		//搜索按钮
+		$("#search").click(function () {
+		var word = $("#keyword").val();
+		if (word) {
+			curWord = word; //更新关键词
+			mescroll.resetUpScroll(); //重新搜索,重置列表数据
+	  	}
+		});
 
 		/*初始化菜单*/
 		var categoryId;//
@@ -334,7 +329,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		/*联网加载列表数据  page = {num:1, size:10}; num:当前页 从1开始, size:每页数据条数 */
 		function getListData(page) {
 			//联网加载数据
-			getListDataFromNet(categoryId, page.num, page.size, function (data) {
+			getListDataFromNet(categoryId,curWord, page.num, page.size, function (data) {
 				//mescroll会根据传的参数,自动判断列表如果无任何数据,则提示空;列表无下一页数据,则提示无更多数据;
 				var curPageData = data.rows; // 接口返回的当前页数据列表
 				var totalPage = data.totalPage; // 接口返回的总页数 (比如列表有26个数据,每页10条,共3页; 则totalPage值为3)
@@ -391,18 +386,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				//设置/返回 自动播放属性
 				player.autoplay = true;
 				});
-
-				// $('#mModal').slideDown();
-				$('#mModal').slideUp();
-
-
-
 			}
 		}
 
 		player.on('play', function () {
 
-			
+
 		});
 			/**
 			 *  js中字符串超长作固定长度加省略号（...）处理
@@ -419,7 +408,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			}
 
 
-		function getListDataFromNet(categoryId, pageNum, pageSize, successCallback, errorCallback) {
+		function getListDataFromNet(categoryId,curWord, pageNum, pageSize, successCallback, errorCallback) {
 			if (categoryId === 'buy') {
 				$.ajax({
 					dataType: 'json',
@@ -445,7 +434,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					data: {
 						"categoryId": categoryId,
 						"pageNum": pageNum,
-						"pageSize": pageSize
+						"pageSize": pageSize,
+						"curWord":curWord
 					},
 					success: function (data) {
 						if (data && data.code === 0) {
@@ -456,16 +446,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					error: errorCallback
 				});
 			}
-		}
-
-		$('.mclose').click(function () {
-        closeint();
-    	});
-		function closeint() {
-			img.style.transform = "translateX(0%)";
-			window.clearInterval(interval);
-			$('#mModal').slideUp();
-			$('.popover-mask').hide();
 		}
 	});
 </script>
