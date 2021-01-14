@@ -37,6 +37,12 @@ public class IndexController extends BaseController {
         return "index";
     }
 
+    @GetMapping("/h5")
+    public String h5(@RequestParam(value = "userId", required = false) String userId, ModelMap modelmap) {
+        getCategory(modelmap);
+        return "h5";
+    }
+
     @GetMapping("/zhihu")
     public String zhihu(@RequestParam(value = "userId", required = false) String userId, ModelMap modelmap) {
         getCategory(modelmap);
