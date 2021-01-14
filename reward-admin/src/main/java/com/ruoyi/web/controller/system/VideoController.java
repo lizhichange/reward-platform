@@ -240,8 +240,6 @@ public class VideoController extends BaseController {
         String attach = "123";
         String accKey = "JA27049295015825";//收款账号
         Map<String, String> map = Maps.newHashMap();
-        map.put("payUrl", payUrl);
-        map.put("checkUrl", checkUrl);
         map.put("mchId", mchId);
         map.put("billNo", String.valueOf(billNo));
         map.put("totalAmount", String.valueOf(totalAmount));
