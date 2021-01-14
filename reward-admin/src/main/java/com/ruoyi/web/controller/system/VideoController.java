@@ -234,9 +234,9 @@ public class VideoController extends BaseController {
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         Map<String, String> map = Maps.newHashMap();
-        String merchantKey = "";
+        String merchantKey = "93a381342bafedb1964beda6ca4d1bb15e1750b6e2a65719ad1b8b038b1c6a11";
         PayParam param = new PayParam();
-        param.setMerchantCode("");
+        param.setMerchantCode("600500064");
 
         PayParam.BodyBean bodyBean = new PayParam.BodyBean();
         bodyBean.setAmount("100");
