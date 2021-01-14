@@ -222,6 +222,47 @@ public class VideoController extends BaseController {
         return toAjax(videoFacade.insertVideoDTO(shipin));
     }
 
+    @ApiOperation("pay")
+    @ResponseBody
+    @PostMapping("/pay")
+    public AjaxResult pay() {
+
+        String payUrl = "http://$payurl/game/unifiedorder"; //请求订单地址
+        String checkUrl = "http://$payurl/pay/checkTradeNo"; //主动查单地址
+        String mchId = "600500064"; //商户ID，后台提取
+        Long billNo = System.currentTimeMillis(); //商户订单号
+        int totalAmount = 5 * 100; //金额
+        String billDesc = "在线充值"; //商品名称
+        String way = "wap";//支付模式
+        String payment = " wechat"; //微信支付
+        String notifyUrl = "$dirname/notify.php"; //回调地址
+        String returnUrl = " $dirname/ok.php"; //同步跳转
+        String attach = "";
+        String accKey = "JA27049295015825";//收款账号
+        Map<String, String> map = Maps.newHashMap();
+        map.put("payUrl", payUrl);
+        map.put("checkUrl", checkUrl);
+        map.put("mchId", mchId);
+        map.put("billNo", String.valueOf(billNo));
+        map.put("totalAmount", String.valueOf(totalAmount));
+        map.put("billDesc", billDesc);
+        map.put("way", way);
+        map.put("payment", payment);
+        map.put("notifyUrl", notifyUrl);
+        map.put("returnUrl", returnUrl);
+        map.put("attach", attach);
+        map.put("accKey", accKey);
+        String merchantKey = "93a381342bafedb1964beda6ca4d1bb15e1750b6e2a65719ad1b8b038b1c6a11";
+        String sign = sign(map, merchantKey, true);
+        map.put("sign", sign);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        String content = JSONObject.toJSONString(map);
+        HttpEntity<String> request = new HttpEntity<>(content, headers);
+        ResponseEntity<String> postForEntity = restTemplate.postForEntity(payUrl, request, String.class);
+
+        return AjaxResult.success();
+    }
 
     @ApiOperation("createOrder")
     @ResponseBody
