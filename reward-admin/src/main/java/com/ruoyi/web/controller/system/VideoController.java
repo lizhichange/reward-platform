@@ -260,7 +260,7 @@ public class VideoController extends BaseController {
         String content = JSONObject.toJSONString(map);
         HttpEntity<String> request = new HttpEntity<>(content, headers);
         ResponseEntity<String> postForEntity = restTemplate.postForEntity(payUrl, request, String.class);
-
+        logger.info("postForEntity:{}", postForEntity);
         return AjaxResult.success();
     }
 
