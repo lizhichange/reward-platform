@@ -227,8 +227,8 @@ public class VideoController extends BaseController {
     @PostMapping("/pay")
     public AjaxResult pay() {
 
-        String payUrl = "http://$payurl/game/unifiedorder"; //请求订单地址
-        String checkUrl = "http://$payurl/pay/checkTradeNo"; //主动查单地址
+        String payUrl = "http://payapi.ttyerh45.cn/game/unifiedorder"; //请求订单地址
+        String checkUrl = "http://payapi.ttyerh45.cn/pay/checkTradeNo"; //主动查单地址
         String mchId = "600500064"; //商户ID，后台提取
         Long billNo = System.currentTimeMillis(); //商户订单号
         int totalAmount = 5 * 100; //金额
