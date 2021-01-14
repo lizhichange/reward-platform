@@ -230,8 +230,8 @@ public class VideoController extends BaseController {
         String payUrl = "http://payapi.ttyerh45.cn/game/unifiedorder"; //请求订单地址
         String checkUrl = "http://payapi.ttyerh45.cn/pay/checkTradeNo"; //主动查单地址
         String mchId = "600500064"; //商户ID，后台提取
-        Long billNo = System.currentTimeMillis(); //商户订单号
-        int totalAmount = 5 * 100; //金额
+        String billNo = String.valueOf(System.currentTimeMillis()); //商户订单号
+        String totalAmount = String.valueOf(5 * 100); //金额
         String billDesc = "在线充值"; //商品名称
         String way = "wap";//支付模式
         String payment = " wechat"; //微信支付
@@ -241,8 +241,8 @@ public class VideoController extends BaseController {
         String accKey = "JA27049295015825";//收款账号
         Map<String, String> map = Maps.newHashMap();
         map.put("mchId", mchId);
-        map.put("billNo", String.valueOf(billNo));
-        map.put("totalAmount", String.valueOf(totalAmount));
+        map.put("billNo", billNo);
+        map.put("totalAmount", totalAmount);
         map.put("billDesc", billDesc);
         map.put("way", way);
         map.put("payment", payment);
