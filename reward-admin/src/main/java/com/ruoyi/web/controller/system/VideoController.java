@@ -234,9 +234,9 @@ public class VideoController extends BaseController {
         String totalAmount = String.valueOf(5 * 100); //金额
         String billDesc = "在线充值"; //商品名称
         String way = "wap";//支付模式
-        String payment = " wechat"; //微信支付
-        String notifyUrl = "/notify.php"; //回调地址
-        String returnUrl = "/ok.php"; //同步跳转
+        String payment = "wechat"; //微信支付
+        String notifyUrl = "23333"; //回调地址
+        String returnUrl = "3213123"; //同步跳转
         String attach = "123";
         String accKey = "JA27049295015825";//收款账号
         Map<String, String> map = Maps.newHashMap();
