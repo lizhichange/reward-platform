@@ -238,7 +238,7 @@ public class VideoController extends BaseController {
         String notifyUrl = "23333"; //回调地址
         String returnUrl = "3213123"; //同步跳转
         String attach = "123";
-        String accKey = "JA27049295015825";//收款账号
+        String accKey = "zhiliao555";//收款账号
         Map<String, String> map = Maps.newHashMap();
         map.put("mchId", mchId);
         map.put("billNo", billNo);
