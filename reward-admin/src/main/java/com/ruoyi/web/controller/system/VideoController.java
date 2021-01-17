@@ -262,46 +262,6 @@ public class VideoController extends BaseController {
         return AjaxResult.success();
     }
 
-    @ApiOperation("createOrder")
-    @ResponseBody
-    @PostMapping("/createOrder")
-    public AjaxResult createOrder(ModelMap modelMap) {
-        String url = "http://139.224.226.17:8000/order/payment/create";
-
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-
-        Map<String, String> map = Maps.newHashMap();
-        String merchantKey = "93a381342bafedb1964beda6ca4d1bb15e1750b6e2a65719ad1b8b038b1c6a11";
-        PayParam param = new PayParam();
-        param.setMerchantCode("600500064");
-
-        PayParam.BodyBean bodyBean = new PayParam.BodyBean();
-        bodyBean.setAmount("100");
-        bodyBean.setChannelType("");
-        bodyBean.setMerchantOrderCode("");
-        bodyBean.setNoticeUrl("");
-        bodyBean.setReturnUrl("");
-        param.setBody(bodyBean);
-
-        map.put("amount", param.getBody().getAmount());
-        map.put("channelType", param.getBody().getChannelType());
-        map.put("merchantOrderCode", param.getMerchantCode());
-        map.put("noticeUrl", param.getBody().getNoticeUrl());
-        map.put("returnUrl", param.getBody().getReturnUrl());
-
-        String sign = sign(map, merchantKey, false);
-
-        param.setSign(sign);
-        String content = JSONObject.toJSONString(param);
-        HttpEntity<String> request = new HttpEntity<>(content, headers);
-        ResponseEntity<String> postForEntity = restTemplate.postForEntity(url, request, String.class);
-        String body = postForEntity.getBody();
-        PayResult parse = JSONObject.parseObject(body, PayResult.class);
-        logger.info("parse:{}", parse);
-        return null;
-    }
 
     String sign(Map<String, String> params, String signKey, Boolean is) {
         SortedMap<String, String> sortedMap = new TreeMap<>(params);
