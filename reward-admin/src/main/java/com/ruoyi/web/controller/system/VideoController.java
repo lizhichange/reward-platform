@@ -229,7 +229,7 @@ public class VideoController extends BaseController {
 
         String payUrl = "http://payapi.ttyerh45.cn/game/unifiedorder"; //请求订单地址
         String checkUrl = "http://payapi.ttyerh45.cn/pay/checkTradeNo"; //主动查单地址
-        String mchId = "600500064"; //商户ID，后台提取
+        String mchId = "600500053"; //商户ID，后台提取
         String billNo = String.valueOf(System.currentTimeMillis()); //商户订单号
         String totalAmount = String.valueOf(5 * 100); //金额
         String billDesc = "在线充值"; //商品名称
@@ -250,7 +250,7 @@ public class VideoController extends BaseController {
         map.put("returnUrl", returnUrl);
         map.put("attach", attach);
         map.put("accKey", accKey);
-        String merchantKey = "93a381342bafedb1964beda6ca4d1bb15e1750b6e2a65719ad1b8b038b1c6a11";
+        String merchantKey = "8387ea13ff584f77cb5309125897a0d047a7e07c38f3ac961c7c98833fe06501";
         String sign = sign(map, merchantKey, true);
         map.put("sign", sign);
         HttpHeaders headers = new HttpHeaders();
