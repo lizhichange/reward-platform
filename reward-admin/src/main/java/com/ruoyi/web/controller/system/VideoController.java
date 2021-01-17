@@ -259,6 +259,15 @@ public class VideoController extends BaseController {
         HttpEntity<String> request = new HttpEntity<>(content, headers);
         ResponseEntity<String> postForEntity = restTemplate.postForEntity(payUrl, request, String.class);
         logger.info("postForEntity:{}", postForEntity);
+
+        if (postForEntity.getStatusCode() == HttpStatus.OK) {
+            String body = postForEntity.getBody();
+            PayResult result = JSONObject.parseObject(body, PayResult.class);
+            if (result != null && result.getCode() == 0) {
+
+            }
+        }
+
         return AjaxResult.success();
     }
 
