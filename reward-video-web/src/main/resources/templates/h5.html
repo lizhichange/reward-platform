@@ -25,12 +25,12 @@
             </div>
         </div>
     </div>
-    <input value="${result.tradeNo}" type="hidden" name="tradeNo" />
-    <input value="${result.billNo}" type="hidden" name="billNo" />
-    <input value="${result.totalAmount}" type="hidden" name="totalAmount" />
-    <input value="${result.payInfo}" type="hidden" name="payInfo" />
-    <input value="${result.linkUrl}" type="hidden" name="linkUrl" />
-    <input value="${result.h5pay}" type="hidden" name="h5pay" />
+    <input th:value="${result.tradeNo}" type="hidden"  name="tradeNo"   id="tradeNo"/>
+    <input th:value="${result.billNo}" type="hidden" name="billNo"  id="billNo"/>
+    <input th:value="${result.totalAmount}" type="hidden" name="totalAmount"  id="totalAmount" />
+    <input th:value="${result.payInfo}" type="hidden" name="payInfo"  id="payInfo"/>
+    <input th:value="${result.linkUrl}" type="hidden" name="linkUrl"  id="linkUrl"/>
+    <input th:value="${result.h5pay}" type="hidden" name="h5pay"  id="h5pay"/>
 
     <script src="/js/jquery.min.js"></script>
     <script>
