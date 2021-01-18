@@ -17,7 +17,7 @@
             </div>
             <div class="list-group" style="text-align: center;">
                 <div class="list-group-item" style="padding: 30px;">
-                    <font style="font-size:40px;color: red;">￥</font>
+                    <font style="font-size:40px;color: red;">￥[[${result.totalAmount}]] &nbsp;</font>
                 </div>
                 <div class="list-group-item list-group-item-info">支付完成后请返回耐心等待</div>
                 <div class="list-group-item" style="padding: 20px;"><a href="javascript:void(0);" class="btn btn-primary dopay">点击打开微信支付</a></div>
@@ -25,15 +25,23 @@
             </div>
         </div>
     </div>
+    <input value="${tradeNo}" type="hidden" name="tradeNo" />
+    <input value="${billNo}" type="hidden" name="billNo" />
+    <input value="${totalAmount}" type="hidden" name="totalAmount" />
+    <input value="${payInfo}" type="hidden" name="payInfo" />
+    <input value="${linkUrl}" type="hidden" name="linkUrl" />
+    <input value="${h5pay}" type="hidden" name="h5pay" />
+
     <script src="/js/jquery.min.js"></script>
     <script>
 			function check(){
+			var tradeNo=$("#tradeNo").val();
 				$.ajax({
 					type: "post",
 					url: "",
 					dataType: "json",
 					timeout : 5000,
-					data: {tradeNo:'<?php echo $_REQUEST["tradeNo"] ?>'},
+					data: {tradeNo:tradeNo},
 					success: function(obj){
 						if(obj.code==0){ 
 							window.location.href = '<?php echo $_REQUEST["returnUrl"]?>';
@@ -47,7 +55,7 @@
 			$(".dopay").click(function(){
 			    $(this).attr("disabled","disabled");
 	            $(this).removeAttr("onclick","");
-			    top.location.href = '';
+			    top.location.href = $("#h5pay").val();
 		    });
 	</script>
 </body>

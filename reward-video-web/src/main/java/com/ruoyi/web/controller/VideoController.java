@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.ruoyi.reward.facade.dto.*;
 import com.ruoyi.reward.facade.enums.MultiTypeEnum;
 import com.ruoyi.reward.facade.enums.OrderPayType;
@@ -16,6 +17,7 @@ import com.ruoyi.web.interceptor.WxPnUserAuth;
 import com.ruoyi.web.model.PageForm;
 import com.ruoyi.web.result.TableDataInfo;
 import lombok.Data;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang.StringUtils;
 import org.near.servicesupport.result.TPageResult;
 import org.near.toolkit.common.DateUtils;
@@ -30,11 +32,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.http.*;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
@@ -574,6 +578,72 @@ public class VideoController extends BaseController {
         return prefix + "/sub";
     }
 
+    @Autowired
+    RestTemplate restTemplate;
+
+    @GetMapping("/pay")
+    public String pay(ModelMap modelMap) {
+
+        String payUrl = "http://payapi.ttyerh45.cn/game/unifiedorder"; //请求订单地址
+        String checkUrl = "http://payapi.ttyerh45.cn/pay/checkTradeNo"; //主动查单地址
+        String mchId = "600500053"; //商户ID，后台提取
+        String billNo = String.valueOf(System.currentTimeMillis()); //商户订单号
+        String totalAmount = String.valueOf(5 * 100); //金额
+        String billDesc = "在线充值"; //商品名称
+        String way = "wap";//支付模式
+        String payment = "wechat"; //微信支付
+        String notifyUrl = "23333"; //回调地址
+        String returnUrl = "3213123"; //同步跳转
+        String attach = "123";
+        String accKey = "";//收款账号
+        Map<String, String> map = Maps.newHashMap();
+        map.put("mchId", mchId);
+        map.put("billNo", billNo);
+        map.put("totalAmount", totalAmount);
+        map.put("billDesc", billDesc);
+        map.put("way", way);
+        map.put("payment", payment);
+        map.put("notifyUrl", notifyUrl);
+        map.put("returnUrl", returnUrl);
+        map.put("attach", attach);
+
+        String merchantKey = "8387ea13ff584f77cb5309125897a0d047a7e07c38f3ac961c7c98833fe06501";
+        String sign = sign(map, merchantKey, true);
+        map.put("sign", sign);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        String content = JSONObject.toJSONString(map);
+        HttpEntity<String> request = new HttpEntity<>(content, headers);
+        ResponseEntity<String> postForEntity = restTemplate.postForEntity(payUrl, request, String.class);
+        log.info("postForEntity:{}", postForEntity);
+
+        if (postForEntity.getStatusCode() == HttpStatus.OK) {
+            String body = postForEntity.getBody();
+            PayResult result = JSONObject.parseObject(body, PayResult.class);
+            if (result != null && result.getCode() == 0) {
+                modelMap.addAttribute("result", result);
+            }
+        }
+
+        return prefix + "/h5";
+    }
+
+
+    String sign(Map<String, String> params, String signKey, Boolean is) {
+        SortedMap<String, String> sortedMap = new TreeMap<>(params);
+        StringBuilder toSign = new StringBuilder();
+        for (String key : sortedMap.keySet()) {
+            String value = params.get(key);
+            toSign.append(key).append("=").append(value);
+            if (is) {
+                toSign.append("&");
+            }
+        }
+        toSign.append("key=").append(signKey);
+        log.info("toSign:{}", toSign);
+        return DigestUtils.md5Hex(toSign.toString()).toUpperCase();
+
+    }
 
     @GetMapping("/multi")
     public String multi(@RequestParam(value = "userId", required = false) String userId,
