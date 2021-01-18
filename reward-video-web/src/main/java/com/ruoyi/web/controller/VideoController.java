@@ -628,7 +628,7 @@ public class VideoController extends BaseController {
                 bean.setLinkUrl(URIUtil.encodeURIComponent(bean.getLinkUrl()));
                 modelMap.addAttribute("result", result.getResult());
 
-                return "redirect:" + URIUtil.encodeURIComponent(bean.getLinkUrl());
+                return "redirect:" + bean.getLinkUrl();
             }
         }
 
