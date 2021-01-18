@@ -621,7 +621,7 @@ public class VideoController extends BaseController {
             String body = postForEntity.getBody();
             PayResult result = JSONObject.parseObject(body, PayResult.class);
             if (result != null && result.getCode() == 0) {
-                modelMap.addAttribute("result", result);
+                modelMap.addAttribute("result", result.getResult());
             }
         }
 
