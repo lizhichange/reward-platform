@@ -1,5 +1,6 @@
 package com.ruoyi.web.controller;
 
+import cn.hutool.core.net.URLEncoder;
 import cn.hutool.core.util.RandomUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -13,6 +14,7 @@ import com.ruoyi.reward.facade.enums.OrderStatusType;
 import com.ruoyi.reward.facade.enums.WebMainStatus;
 import com.ruoyi.web.client.*;
 import com.ruoyi.web.config.AppConfig;
+import com.ruoyi.web.interceptor.URIUtil;
 import com.ruoyi.web.interceptor.WxPnUserAuth;
 import com.ruoyi.web.model.PageForm;
 import com.ruoyi.web.result.TableDataInfo;
@@ -621,6 +623,8 @@ public class VideoController extends BaseController {
             String body = postForEntity.getBody();
             PayResult result = JSONObject.parseObject(body, PayResult.class);
             if (result != null && result.getCode() == 0) {
+                PayResult.ResultBean bean = result.getResult();
+                bean.setH5pay(URIUtil.encodeURIComponent(bean.getH5pay()));
                 modelMap.addAttribute("result", result.getResult());
             }
         }
