@@ -625,7 +625,7 @@ public class VideoController extends BaseController {
             }
         }
 
-        return prefix + "/h5";
+        return "/h5";
     }
 
 
