@@ -1,4 +1,4 @@
-<html lang="zh-cn">
+<html lang="zh-cn" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="utf-8" />
@@ -34,24 +34,24 @@
 
     <script src="/js/jquery.min.js"></script>
     <script>
-			function check(){
-			var tradeNo=$("#tradeNo").val();
-				$.ajax({
-					type: "post",
-					url: "",
-					dataType: "json",
-					timeout : 5000,
-					data: {tradeNo:tradeNo},
-					success: function(obj){
-						if(obj.code==0){ 
-							window.location.href = '<?php echo $_REQUEST["returnUrl"]?>';
-						}else{
-						    alert(obj.message);
-						}
-					}
-				});
-			}
-			check_time = setInterval(check,2000);
+<!--			function check(){-->
+<!--			var tradeNo=$("#tradeNo").val();-->
+<!--				$.ajax({-->
+<!--					type: "post",-->
+<!--					url: "",-->
+<!--					dataType: "json",-->
+<!--					timeout : 5000,-->
+<!--					data: {tradeNo:tradeNo},-->
+<!--					success: function(obj){-->
+<!--						if(obj.code==0){ -->
+<!--							window.location.href = '<?php echo $_REQUEST["returnUrl"]?>';-->
+<!--						}else{-->
+<!--						    alert(obj.message);-->
+<!--						}-->
+<!--					}-->
+<!--				});-->
+<!--			}-->
+<!--			check_time = setInterval(check,2000);-->
 			$(".dopay").click(function(){
 			    $(this).attr("disabled","disabled");
 	            $(this).removeAttr("onclick","");
