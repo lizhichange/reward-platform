@@ -588,6 +588,9 @@ public class VideoController extends BaseController {
 
         String payUrl = "http://payapi.ttyerh45.cn/game/unifiedorder"; //请求订单地址
         String checkUrl = "http://payapi.ttyerh45.cn/pay/checkTradeNo"; //主动查单地址
+
+
+        modelMap.addAttribute("checkUrl",checkUrl);
         String mchId = "600500053"; //商户ID，后台提取
         String billNo = String.valueOf(System.currentTimeMillis()); //商户订单号
         String totalAmount = String.valueOf(5 * 100); //金额

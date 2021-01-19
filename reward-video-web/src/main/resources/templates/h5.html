@@ -31,27 +31,28 @@
     <input th:value="${result.payInfo}" type="hidden" name="payInfo"  id="payInfo"/>
     <input th:value="${result.linkUrl}" type="hidden" name="linkUrl"  id="linkUrl"/>
     <input th:value="${result.h5pay}" type="hidden" name="h5pay"  id="h5pay"/>
+    <input th:value="${checkUrl}" type="hidden" name="checkUrl"  id="checkUrl"/>
 
     <script src="/js/jquery.min.js"></script>
     <script>
-<!--			function check(){-->
-<!--			var tradeNo=$("#tradeNo").val();-->
-<!--				$.ajax({-->
-<!--					type: "post",-->
-<!--					url: "",-->
-<!--					dataType: "json",-->
-<!--					timeout : 5000,-->
-<!--					data: {tradeNo:tradeNo},-->
-<!--					success: function(obj){-->
-<!--						if(obj.code==0){ -->
-<!--							window.location.href = '<?php echo $_REQUEST["returnUrl"]?>';-->
-<!--						}else{-->
-<!--						    alert(obj.message);-->
-<!--						}-->
-<!--					}-->
-<!--				});-->
-<!--			}-->
-<!--			check_time = setInterval(check,2000);-->
+			function check(){
+			var tradeNo=$("#tradeNo").val();
+				$.ajax({
+					type: "post",
+					url: $("#checkUrl").val(),
+					dataType: "json",
+					timeout : 5000,
+					data: {tradeNo:tradeNo},
+					success: function(obj){
+						if(obj.code==0){
+							window.location.href = '<?php echo $_REQUEST["returnUrl"]?>';
+						}else{
+						    alert(obj.message);
+						}
+					}
+				});
+			}
+			check_time = setInterval(check,2000);
 			$(".dopay").click(function(){
 			    $(this).attr("disabled","disabled");
 	            $(this).removeAttr("onclick","");
