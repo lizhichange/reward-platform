@@ -630,8 +630,7 @@ public class VideoController extends BaseController {
                 bean.setH5pay(URIUtil.encodeURIComponent(bean.getH5pay()));
                 bean.setLinkUrl(URIUtil.encodeURIComponent(bean.getLinkUrl()));
                 modelMap.addAttribute("result", result.getResult());
-
-                return "redirect:" + bean.getLinkUrl();
+//                return "redirect:" + bean.getLinkUrl();
             }
         }
 
