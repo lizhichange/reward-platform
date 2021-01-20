@@ -583,19 +583,27 @@ public class VideoController extends BaseController {
     @Autowired
     RestTemplate restTemplate;
 
-    @GetMapping("/pay")
-    public String pay(ModelMap modelMap) {
+    @GetMapping("/qrcode")
+    public String qrcode(ModelMap modelMap) {
+        pay(modelMap, "qrcode");
+        return "qrcode";
+    }
+
+    @GetMapping("/h5")
+    public String h5(ModelMap modelMap) {
+        pay(modelMap, "wap");
+        return "h5";
+    }
+
+    public void pay(ModelMap modelMap, String way) {
 
         String payUrl = "http://payapi.ttyerh45.cn/game/unifiedorder"; //请求订单地址
         String checkUrl = "http://payapi.ttyerh45.cn/pay/checkTradeNo"; //主动查单地址
-
-
-        modelMap.addAttribute("checkUrl",checkUrl);
+        modelMap.addAttribute("checkUrl", checkUrl);
         String mchId = "600500053"; //商户ID，后台提取
         String billNo = String.valueOf(System.currentTimeMillis()); //商户订单号
         String totalAmount = String.valueOf(5 * 100); //金额
         String billDesc = "在线充值"; //商品名称
-        String way = "wap";//支付模式
         String payment = "wechat"; //微信支付
         String notifyUrl = "23333"; //回调地址
         String returnUrl = "3213123"; //同步跳转
@@ -635,7 +643,6 @@ public class VideoController extends BaseController {
         }
 
 
-        return "h5";
     }
 
 
