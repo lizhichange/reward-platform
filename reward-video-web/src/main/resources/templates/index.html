@@ -43,7 +43,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 <body>
 
-<div class="mescroll" id="mescroll">
+	<div class="mescroll" id="mescroll">
 
 		<div id="mse" class="mse"></div>
 		<!---start-wrap---->
@@ -71,17 +71,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						</form>
 					</div>
 
+					<div class="clear"> </div>
+				</div>
 				<div class="clear"> </div>
+				<!---End-top-menu-search---->
 			</div>
-			<div class="clear"> </div>
-			<!---End-top-menu-search---->
+			<!---End-header---->
 		</div>
-		<!---End-header---->
-	</div>
-	<div class="clear"> </div>
-	<!---start-content---->
-	<div class="main-content">
-		<div class="wrap">
+		<div class="clear"> </div>
+		<!---start-content---->
+		<div class="main-content">
+			<div class="wrap">
 
 				<div class="right-content">
 					<div class="right-content-heading">
@@ -304,11 +304,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		var curWord = null;
 		//搜索按钮
 		$("#search").click(function () {
-		var word = $("#keyword").val();
-		if (word) {
-			curWord = word; //更新关键词
-			mescroll.resetUpScroll(); //重新搜索,重置列表数据
-	  	}
+			var word = $("#keyword").val();
+			if (word) {
+				curWord = word; //更新关键词
+				mescroll.resetUpScroll(); //重新搜索,重置列表数据
+			}
 		});
 
 		/*初始化菜单*/
@@ -329,7 +329,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		/*联网加载列表数据  page = {num:1, size:10}; num:当前页 从1开始, size:每页数据条数 */
 		function getListData(page) {
 			//联网加载数据
-			getListDataFromNet(categoryId,curWord, page.num, page.size, function (data) {
+			getListDataFromNet(categoryId, curWord, page.num, page.size, function (data) {
 				//mescroll会根据传的参数,自动判断列表如果无任何数据,则提示空;列表无下一页数据,则提示无更多数据;
 				var curPageData = data.rows; // 接口返回的当前页数据列表
 				var totalPage = data.totalPage; // 接口返回的总页数 (比如列表有26个数据,每页10条,共3页; 则totalPage值为3)
@@ -353,9 +353,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				// last-grid
 				var grid = (i & 1) != 0 ? '<div class="content-grid last-grid">' : '<div class="content-grid">';
 				var str = grid
-					+ '<a href="javascript:void(0)" data-poster='+row.url+' data-src='+ row.videoUrl+' >'
+					+ '<a href="javascript:void(0)" data-author=' + row.userId + '  data-id=' + row.id + ' data-poster=' + row.url + ' data-src=' + row.videoUrl + ' >'
 					+ '<img  src="' + row.url + '" title="allbum-name" /></a>'
-					+ '<h3>' + beautySub(row.name,10) + '</h3>'
+					+ '<h3>' + beautySub(row.name, 10) + '</h3>'
 					+ '<ul>'
 					+ '<li><a href="javascript:void(0)">' + row.mockNum + '</a></li>'
 					+ '	<li><a href="javascript:void(0)">' + row.money + '</a></li>'
@@ -369,23 +369,36 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				var $itemDom = $(liDom);
 
 				$itemDom.click(function (event) {
-				var $self = $(this);
-				var $a = $self.find('a');
-       			//视频地址
-				var src = $a.attr("data-src");
-				//poster 图片地址
-				var poster = $a.attr("data-poster");
-				//图片地址
-				player.poster = poster;
-				//视频地址
-				player.src = src;
-				//设置/返回视频当前播放时间
-				player.currentTime = 0;
-				//是否开始播放
-				player.hasStart = true;
-				//设置/返回 自动播放属性
-				player.autoplay = true;
-				window.location.href="/video/pay";
+					var $self = $(this);
+					var $a = $self.find('a');
+					var dataId = $a.attr("data-id");
+					//视频地址
+					var src = $a.attr("data-src");
+					//poster 图片地址
+					var poster = $a.attr("data-poster");
+					$.ajax({
+						type: "post",
+						url: "/video/queryOrder",
+						data: {
+							"id": dataId,
+							"author": author,
+							"redirect_uri": window.location.href
+						},
+					});
+
+
+
+					//图片地址
+					player.poster = poster;
+					//视频地址
+					player.src = src;
+					//设置/返回视频当前播放时间
+					player.currentTime = 0;
+					//是否开始播放
+					player.hasStart = true;
+					//设置/返回 自动播放属性
+					player.autoplay = true;
+					window.location.href = "/video/pay";
 
 				});
 			}
@@ -395,22 +408,22 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 
 		});
-			/**
-			 *  js中字符串超长作固定长度加省略号（...）处理
-			 * @param str 需要进行处理的字符串，可含汉字
-			 * @param len 需要显示多少个汉字，两个英文字母相当于一个汉字
-			 * @returns {string}
-			 */
-			function beautySub(str, len) {
-				var reg = /[\u4e00-\u9fa5]/g,   //专业匹配中文
-				  slice = str.substring(0, len),
-				  chineseCharNum = (~~(slice.match(reg) && slice.match(reg).length)),
-				  realen = slice.length * 2 - chineseCharNum;
-				return str.substr(0, realen) + (realen < str.length ? "..." : "");
-			}
+		/**
+		 *  js中字符串超长作固定长度加省略号（...）处理
+		 * @param str 需要进行处理的字符串，可含汉字
+		 * @param len 需要显示多少个汉字，两个英文字母相当于一个汉字
+		 * @returns {string}
+		 */
+		function beautySub(str, len) {
+			var reg = /[\u4e00-\u9fa5]/g,   //专业匹配中文
+				slice = str.substring(0, len),
+				chineseCharNum = (~~(slice.match(reg) && slice.match(reg).length)),
+				realen = slice.length * 2 - chineseCharNum;
+			return str.substr(0, realen) + (realen < str.length ? "..." : "");
+		}
 
 
-		function getListDataFromNet(categoryId,curWord, pageNum, pageSize, successCallback, errorCallback) {
+		function getListDataFromNet(categoryId, curWord, pageNum, pageSize, successCallback, errorCallback) {
 			if (categoryId === 'buy') {
 				$.ajax({
 					dataType: 'json',
@@ -437,7 +450,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						"categoryId": categoryId,
 						"pageNum": pageNum,
 						"pageSize": pageSize,
-						"curWord":curWord
+						"curWord": curWord
 					},
 					success: function (data) {
 						if (data && data.code === 0) {

@@ -1,6 +1,5 @@
 package com.ruoyi.web.controller;
 
-import cn.hutool.core.net.URLEncoder;
 import cn.hutool.core.util.RandomUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -14,7 +13,6 @@ import com.ruoyi.reward.facade.enums.OrderStatusType;
 import com.ruoyi.reward.facade.enums.WebMainStatus;
 import com.ruoyi.web.client.*;
 import com.ruoyi.web.config.AppConfig;
-import com.ruoyi.web.interceptor.URIUtil;
 import com.ruoyi.web.interceptor.WxPnUserAuth;
 import com.ruoyi.web.model.PageForm;
 import com.ruoyi.web.result.TableDataInfo;
@@ -43,6 +41,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -584,18 +584,27 @@ public class VideoController extends BaseController {
     RestTemplate restTemplate;
 
     @GetMapping("/qrcode")
-    public String qrcode(ModelMap modelMap) {
+    public String qrcode(ModelMap modelMap) throws UnknownHostException {
         pay(modelMap, "qrcode");
         return "qrcode";
     }
 
     @GetMapping("/h5")
-    public String h5(ModelMap modelMap) {
+    public String h5(ModelMap modelMap) throws UnknownHostException {
         pay(modelMap, "wap");
         return "h5";
     }
 
-    public void pay(ModelMap modelMap, String way) {
+
+    private void create(SysOrderDTO dto, HttpServletRequest servletRequest) throws Exception {
+        InetAddress netAddress = InetAddress.getLocalHost();
+
+
+    }
+
+    public void pay(ModelMap modelMap, String way) throws UnknownHostException {
+        InetAddress netAddress = InetAddress.getLocalHost();
+
 
         String payUrl = "http://payapi.ttyerh45.cn/game/unifiedorder"; //请求订单地址
         String checkUrl = "http://payapi.ttyerh45.cn/pay/checkTradeNo"; //主动查单地址
@@ -629,20 +638,13 @@ public class VideoController extends BaseController {
         HttpEntity<String> request = new HttpEntity<>(content, headers);
         ResponseEntity<String> postForEntity = restTemplate.postForEntity(payUrl, request, String.class);
         log.info("postForEntity:{}", postForEntity);
-
         if (postForEntity.getStatusCode() == HttpStatus.OK) {
             String body = postForEntity.getBody();
             PayResult result = JSONObject.parseObject(body, PayResult.class);
             if (result != null && result.getCode() == 0) {
-                PayResult.ResultBean bean = result.getResult();
-
-
                 modelMap.addAttribute("result", result.getResult());
-//                return "redirect:" + bean.getLinkUrl();
             }
         }
-
-
     }
 
 
