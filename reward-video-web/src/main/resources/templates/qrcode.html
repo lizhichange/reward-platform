@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="Content-Language" content="zh-cn">
@@ -32,9 +32,7 @@
         </div>
         <div class="amount" id="timeOut" style="font-size:18px;color: red;display: none;"><p>订单已过期，请您返回网站重新发起支付</p><br></div>
         <div id="orderbody">
-            <div class="amount" id="moneyLab" style="font-size:18px;color: #ec3813;"><span id="copy_money_lab">长按二维码识别支付后自动播放</span></div>
-
-
+            <div class="amount" id="money" style="font-size:18px;color: #ec3813;"><span id="copy_money">长按二维码识别支付后自动播放</span></div>
             <div class="amount" id="money">￥<span id="copy_money">[[${result.totalAmount}]]</span></div>
             <div class="qrcode-img-wrapper" data-role="qrPayImgWrapper">
                 <div data-role="qrPayImg" class="qrcode-img-area">
