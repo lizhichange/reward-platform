@@ -624,7 +624,7 @@ public class VideoController extends BaseController {
         String billDesc = "在线充值"; //商品名称
         String payment = "wechat"; //微信支付
         String notifyUrl = "23333"; //回调地址
-        String returnUrl = callbackUrl; //同步跳转
+        String returnUrl = "callbackUrl"; //同步跳转
         String attach = "123";
         String accKey = "";//收款账号
         Map<String, String> map = Maps.newHashMap();
