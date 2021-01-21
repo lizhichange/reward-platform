@@ -584,7 +584,13 @@ public class VideoController extends BaseController {
     RestTemplate restTemplate;
 
     @GetMapping("/qrcode")
-    public String qrcode(ModelMap modelMap) throws UnknownHostException {
+    public String qrcode(ModelMap modelMap,
+
+                         @RequestParam(value = "orderId") String orderId,
+                         @RequestParam(value = "tradeType") String tradeType,
+                         @RequestParam(value = "callbackUrl") String callbackUrl,
+                         HttpServletRequest request
+    ) throws UnknownHostException {
         pay(modelMap, "qrcode");
         return "qrcode";
     }
@@ -602,7 +608,13 @@ public class VideoController extends BaseController {
 
     }
 
-    public void pay(ModelMap modelMap, String way) throws UnknownHostException {
+    public void pay(ModelMap modelMap, String way,
+
+
+                         String orderId,
+                    String tradeType,
+                    String callbackUrl
+    ) throws UnknownHostException {
         InetAddress netAddress = InetAddress.getLocalHost();
 
 

@@ -384,6 +384,47 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							"author": author,
 							"redirect_uri": window.location.href
 						},
+						error: function (jqXHR, textStatus, errorThrown) {
+							console.log(errorThrown);
+						},
+						success: function (r) {
+
+							console.log(r);
+							if (r.code === 0) {
+								var rep = r.data;
+								if (rep.status === 0 || rep.status === 2) {
+									var value = document.getElementById('wxPayUrl').value;
+                                                var flag = value.indexOf("?") !== -1;
+                                                var callbackUrl = window.location.href;
+                                                var flagCallbackUrl = callbackUrl.indexOf("?") !== -1;
+                                                var flagShipinIdCallbackUrl = callbackUrl.indexOf("shipinId") !== -1;
+                                                //如果有这个参数值
+                                                if (flagShipinIdCallbackUrl) {
+                                                    callbackUrl = changeUrlArg(callbackUrl, 'shipinId', dataId);
+                                                    console.log("callbackUrl=" + callbackUrl);
+                                                } else {
+                                                    if (flagCallbackUrl) {
+                                                        callbackUrl = callbackUrl + "&shipinId=" + dataId;
+                                                    } else {
+                                                        callbackUrl = callbackUrl + "?shipinId=" + dataId;
+                                                    }
+                                                }
+                                                if (flag) {
+                                                    window.location.href = value + "&orderId=" + rep.orderId + "&callbackUrl=" + encodeURIComponent(callbackUrl);
+                                                } else {
+                                                    window.location.href = value + "?orderId=" + rep.orderId + "&callbackUrl=" + encodeURIComponent(callbackUrl);
+                                                }
+								} else if (rep.status === 1) {
+									flagClick = true;
+									$("#shipinId").val(dataId);
+									//图片
+									$("#url").val(poster);
+									//视频
+									$("#videoUrl").val(src);
+								}
+
+							}
+						}
 					});
 
 
