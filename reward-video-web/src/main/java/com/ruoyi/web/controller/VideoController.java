@@ -599,7 +599,7 @@ public class VideoController extends BaseController {
     public String h5(ModelMap modelMap,
                      @RequestParam(value = "orderId") String orderId,
                      @RequestParam(value = "tradeType") String tradeType,
-                     @RequestParam(value = "callbackUrl") String callbackUrl,) throws UnknownHostException {
+                     @RequestParam(value = "callbackUrl") String callbackUrl) throws UnknownHostException {
         pay(modelMap, "wap",orderId,tradeType,callbackUrl);
         return "h5";
     }
