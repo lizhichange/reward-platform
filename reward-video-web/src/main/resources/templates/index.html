@@ -379,6 +379,9 @@ wxPayUrl
 					var src = $a.attr("data-src");
 					//poster 图片地址
 					var poster = $a.attr("data-poster");
+					
+					var author = $a.attr("data-author");
+
 					$.ajax({
 						type: "post",
 						url: "/video/queryOrder",
