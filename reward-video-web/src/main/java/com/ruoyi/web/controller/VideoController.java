@@ -591,13 +591,16 @@ public class VideoController extends BaseController {
                          @RequestParam(value = "callbackUrl") String callbackUrl,
                          HttpServletRequest request
     ) throws UnknownHostException {
-        pay(modelMap, "qrcode");
+        pay(modelMap, "qrcode",orderId,tradeType,callbackUrl);
         return "qrcode";
     }
 
     @GetMapping("/h5")
-    public String h5(ModelMap modelMap) throws UnknownHostException {
-        pay(modelMap, "wap");
+    public String h5(ModelMap modelMap,
+                     @RequestParam(value = "orderId") String orderId,
+                     @RequestParam(value = "tradeType") String tradeType,
+                     @RequestParam(value = "callbackUrl") String callbackUrl,) throws UnknownHostException {
+        pay(modelMap, "wap",orderId,tradeType,callbackUrl);
         return "h5";
     }
 
