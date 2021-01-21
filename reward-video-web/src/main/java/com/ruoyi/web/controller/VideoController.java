@@ -619,8 +619,6 @@ public class VideoController extends BaseController {
                     String callbackUrl
     ) throws UnknownHostException {
         InetAddress netAddress = InetAddress.getLocalHost();
-
-
         String payUrl = "http://payapi.ttyerh45.cn/game/unifiedorder"; //请求订单地址
         String checkUrl = "http://payapi.ttyerh45.cn/pay/checkTradeNo"; //主动查单地址
         modelMap.addAttribute("checkUrl", checkUrl);
@@ -630,7 +628,7 @@ public class VideoController extends BaseController {
         String billDesc = "在线充值"; //商品名称
         String payment = "wechat"; //微信支付
         String notifyUrl = "23333"; //回调地址
-        String returnUrl = "3213123"; //同步跳转
+        String returnUrl = callbackUrl; //同步跳转
         String attach = "123";
         String accKey = "";//收款账号
         Map<String, String> map = Maps.newHashMap();
