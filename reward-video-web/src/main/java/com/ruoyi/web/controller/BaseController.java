@@ -1,7 +1,5 @@
 package com.ruoyi.web.controller;
 
-import com.alibaba.dubbo.config.annotation.Reference;
-import com.google.common.collect.Maps;
 import com.ruoyi.reward.facade.dto.SysCategoryDTO;
 import com.ruoyi.web.client.SysCategoryFacadeClient;
 import com.ruoyi.web.client.TsFacadeClient;
@@ -17,7 +15,6 @@ import org.springframework.ui.ModelMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 
 
@@ -64,21 +61,5 @@ public class BaseController {
         sysCategory.setStatus("0");
         List<SysCategoryDTO> categoryList = sysCategoryFacadeClient.selectDeptList(sysCategory);
         modelmap.addAttribute("categoryList", categoryList);
-    }
-
-    public static void main(String[] args) {
-        HashMap<Integer, Integer> objectObjectHashMap = Maps.newHashMap();
-        for (int i = 0; i < 100; ++i) {
-            objectObjectHashMap.put(i, Integer.valueOf(i + ""));
-            objectObjectHashMap.remove(i - 1);
-        }
-        System.out.println(objectObjectHashMap.size());
-    }
-
-    @Reference(version = "1.0.0", check = false)
-    com.ruoyi.reward.facade.api.DemoFacade demoFacade;
-
-    void init() {
-        new Thread(() -> demoFacade.testOne()).start();
     }
 }
