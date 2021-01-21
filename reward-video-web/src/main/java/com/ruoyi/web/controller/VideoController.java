@@ -293,24 +293,24 @@ public class VideoController extends BaseController {
     @ResponseBody
     @WxPnUserAuth
     public AjaxResult queryOrder(VideoDTO videoDTO) {
-        String openId = SessionContext.getOpenId();
-        log.info("openId:{},videoDTO:{}", openId, videoDTO);
+
+
         VideoDTO dtoById = videoFacadeClient.selectVideoDTOById(videoDTO.getId().longValue());
         if (dtoById == null) {
             return AjaxResult.warn("非法请求");
         }
         SysOrderDTO order = new SysOrderDTO();
         order.setGoodsId(videoDTO.getId());
-        order.setOpenId(openId);
+        order.setOpenId("openId");
         List<SysOrderDTO> sysOrders = sysOrderFacadeClient.selectSysOrder(order);
         log.info("sysOrders:{}", sysOrders);
         if (CollectionUtils.isEmpty(sysOrders)) {
-            TWechatAuthDTO authDTO = userDetailFacadeClient.queryByOpenId(openId);
+
             VideoDTO dto = videoFacadeClient.selectVideoDTOById(videoDTO.getId().longValue());
             Date now = new Date();
             order.setCreateTime(now);
             order.setUpdateTime(now);
-            order.setUserId(authDTO.getUserId());
+            order.setUserId("openId");
             //商品快照信息
             order.setGoodsSnapshot(JSON.toJSONString(dto));
             String extensionUserId = SessionContext.getUserId();
@@ -334,8 +334,7 @@ public class VideoController extends BaseController {
                 }
                 if (!CollectionUtils.isEmpty(itemList)) {
                     List<PriceParam> collect = itemList.stream().filter(param -> {
-                        String id = param.getId();
-                        return StringUtil.equals(id, videoDTO.getId().toString());
+                        return StringUtil.equals(param.getId(), videoDTO.getId().toString());
                     }).collect(Collectors.toList());
 
                     if (!CollectionUtils.isEmpty(collect)) {
@@ -417,7 +416,7 @@ public class VideoController extends BaseController {
                 order.setPayTag(m.toString());
             }
 
-            order.setOpenId(openId);
+            order.setOpenId("openId");
             //支付类型
             order.setType(Integer.valueOf(WE_CHAT_PAY.getCode()));
             order.setTypeStr(WE_CHAT_PAY.getDesc());
@@ -428,7 +427,8 @@ public class VideoController extends BaseController {
 
             SysOrderDTO newOrder = new SysOrderDTO();
             newOrder.setGoodsId(videoDTO.getId());
-            newOrder.setOpenId(openId);
+            newOrder.setOpenId("openId");
+
             List<SysOrderDTO> newOrderDTO = sysOrderFacadeClient.selectSysOrder(newOrder);
             if (!CollectionUtils.isEmpty(newOrderDTO)) {
                 return AjaxResult.success(newOrderDTO.get(0));
