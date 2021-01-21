@@ -64,7 +64,7 @@ public class VideoController extends BaseController {
     private AppConfig appConfig;
 
     @Autowired
-    ThreadPoolTaskExecutor threadPoolTaskExecutor;
+    private ThreadPoolTaskExecutor threadPoolTaskExecutor;
     @Autowired
     private VideoFacadeClient videoFacadeClient;
     @Autowired
@@ -591,7 +591,7 @@ public class VideoController extends BaseController {
                          @RequestParam(value = "callbackUrl") String callbackUrl,
                          HttpServletRequest request
     ) throws UnknownHostException {
-        pay(modelMap, "qrcode",orderId,tradeType,callbackUrl);
+        pay(modelMap, "qrcode", orderId, tradeType, callbackUrl);
         return "qrcode";
     }
 
@@ -600,7 +600,7 @@ public class VideoController extends BaseController {
                      @RequestParam(value = "orderId") String orderId,
                      @RequestParam(value = "tradeType") String tradeType,
                      @RequestParam(value = "callbackUrl") String callbackUrl) throws UnknownHostException {
-        pay(modelMap, "wap",orderId,tradeType,callbackUrl);
+        pay(modelMap, "wap", orderId, tradeType, callbackUrl);
         return "h5";
     }
 
@@ -614,7 +614,7 @@ public class VideoController extends BaseController {
     public void pay(ModelMap modelMap, String way,
 
 
-                         String orderId,
+                    String orderId,
                     String tradeType,
                     String callbackUrl
     ) throws UnknownHostException {
