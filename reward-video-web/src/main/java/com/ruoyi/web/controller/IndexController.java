@@ -25,7 +25,7 @@ public class IndexController extends BaseController {
     @Autowired
     RedisTemplate<String, Object> redisTemplate;
 
-    @GetMapping("")
+    @GetMapping
     public String index(@RequestParam(value = "userId", required = false) String userId, ModelMap modelmap) {
         getCategory(modelmap);
         modelmap.addAttribute("wxPayUrl", "http://www.1xii1.cn/video/qrcode");
