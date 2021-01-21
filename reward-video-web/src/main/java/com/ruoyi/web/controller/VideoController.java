@@ -584,11 +584,10 @@ public class VideoController extends BaseController {
     public String qrcode(ModelMap modelMap,
 
                          @RequestParam(value = "orderId") String orderId,
-                         @RequestParam(value = "tradeType") String tradeType,
                          @RequestParam(value = "callbackUrl") String callbackUrl,
                          HttpServletRequest request
     ) throws UnknownHostException {
-        pay(modelMap, "qrcode", orderId, tradeType, callbackUrl);
+        pay(modelMap, "qrcode", orderId, "tradeType", callbackUrl);
         return "qrcode";
     }
 
