@@ -291,10 +291,7 @@ public class VideoController extends BaseController {
 
     @PostMapping("/queryOrder")
     @ResponseBody
-    @WxPnUserAuth
     public AjaxResult queryOrder(VideoDTO videoDTO) {
-
-
         VideoDTO dtoById = videoFacadeClient.selectVideoDTOById(videoDTO.getId().longValue());
         if (dtoById == null) {
             return AjaxResult.warn("非法请求");
