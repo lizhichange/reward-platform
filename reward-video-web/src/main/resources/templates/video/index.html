@@ -221,10 +221,10 @@
     </div>
     <input type="hidden" id="categoryId" name="categoryId" th:value="${categoryId}" />
     <input type="hidden" th:value="${wxPayUrl}" id="wxPayUrl" />
-    <input type="hidden" th:value="${shipin?.id}" id="shipinId" />
-    <input type="hidden" th:value="${shipin?.url}" id="url" />
-    <input type="hidden" th:value="${shipin?.videoUrl}" id="videoUrl" />
-    <input type="hidden" th:value="${shipin?.userId}" id="author" />
+    <input type="hidden" th:value="${video?.id}" id="videoId" />
+    <input type="hidden" th:value="${video?.url}" id="url" />
+    <input type="hidden" th:value="${video?.videoUrl}" id="videoUrl" />
+    <input type="hidden" th:value="${video?.userId}" id="author" />
 
     <style>
         .button-totop {
@@ -530,16 +530,16 @@
                                                 var flag = value.indexOf("?") !== -1;
                                                 var callbackUrl = window.location.href;
                                                 var flagCallbackUrl = callbackUrl.indexOf("?") !== -1;
-                                                var flagShipinIdCallbackUrl = callbackUrl.indexOf("shipinId") !== -1;
+                                                var flagShipinIdCallbackUrl = callbackUrl.indexOf("videoId") !== -1;
                                                 //如果有这个参数值
                                                 if (flagShipinIdCallbackUrl) {
-                                                    callbackUrl = changeUrlArg(callbackUrl, 'shipinId', dataId);
+                                                    callbackUrl = changeUrlArg(callbackUrl, 'videoId', dataId);
                                                     console.log("callbackUrl=" + callbackUrl);
                                                 } else {
                                                     if (flagCallbackUrl) {
-                                                        callbackUrl = callbackUrl + "&shipinId=" + dataId;
+                                                        callbackUrl = callbackUrl + "&videoId=" + dataId;
                                                     } else {
-                                                        callbackUrl = callbackUrl + "?shipinId=" + dataId;
+                                                        callbackUrl = callbackUrl + "?videoId=" + dataId;
                                                     }
                                                 }
                                                 if (flag) {
@@ -574,7 +574,7 @@
 
                                     } else if (rep.status === 1) {
                                         flagClick = true;
-                                        $("#shipinId").val(dataId);
+                                        $("#videoId").val(dataId);
                                         //图片
                                         $("#url").val(poster);
                                         //视频
@@ -665,7 +665,7 @@
 
             player.on('play', function () {
                 console.log("play");
-                var dataId = $("#shipinId").val();
+                var dataId = $("#videoId").val();
                 var author = $("#author").val();
                 console.log("play:" + dataId);
                 if (dataId !== null && dataId !== undefined && dataId !== '') {
@@ -698,16 +698,16 @@
                                             var flag = value.indexOf("?") !== -1;
                                             var callbackUrl = window.location.href;
                                             var flagCallbackUrl = callbackUrl.indexOf("?") !== -1;
-                                            var flagShipinIdCallbackUrl = callbackUrl.indexOf("shipinId") !== -1;
+                                            var flagShipinIdCallbackUrl = callbackUrl.indexOf("videoId") !== -1;
                                             //如果有这个参数值
                                             if (flagShipinIdCallbackUrl) {
-                                                callbackUrl = changeUrlArg(callbackUrl, 'shipinId', dataId);
+                                                callbackUrl = changeUrlArg(callbackUrl, 'videoId', dataId);
                                                 console.log("callbackUrl=" + callbackUrl);
                                             } else {
                                                 if (flagCallbackUrl) {
-                                                    callbackUrl = callbackUrl + "&shipinId=" + dataId;
+                                                    callbackUrl = callbackUrl + "&videoId=" + dataId;
                                                 } else {
-                                                    callbackUrl = callbackUrl + "?shipinId=" + dataId;
+                                                    callbackUrl = callbackUrl + "?videoId=" + dataId;
                                                 }
                                             }
                                             if (flag) {

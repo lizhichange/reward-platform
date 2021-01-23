@@ -77,7 +77,7 @@ public class VideoController extends BaseController {
 
     private void xxx(@RequestParam(value = "userId", required = false) String userId,
                      @RequestParam(value = "categoryId", required = false) String categoryId,
-                     @RequestParam(value = "shipinId", required = false) String shipinId,
+                     @RequestParam(value = "videoId", required = false) String videoId,
                      ModelMap modelmap) {
         log.info("userId:{}", userId);
         VideoDTO videoDTO = new VideoDTO();
@@ -89,10 +89,10 @@ public class VideoController extends BaseController {
         modelmap.addAttribute("list", list);
         getCategory(modelmap);
         modelmap.addAttribute("categoryId", categoryId);
-        if (StringUtil.isNotBlank(shipinId)) {
+        if (StringUtil.isNotBlank(videoId)) {
             try {
-                VideoDTO dto = videoFacadeClient.selectVideoDTOById(Long.parseLong(shipinId));
-                modelmap.addAttribute("shipin", dto);
+                VideoDTO dto = videoFacadeClient.selectVideoDTOById(Long.parseLong(videoId));
+                modelmap.addAttribute("video", dto);
             } catch (Exception e) {
                 log.error(e.getMessage(), e);
             }
@@ -102,9 +102,9 @@ public class VideoController extends BaseController {
     @GetMapping("/redirect")
     public String redirect(@RequestParam(value = "userId", required = false) String userId,
                            @RequestParam(value = "categoryId", required = false) String categoryId,
-                           @RequestParam(value = "shipinId", required = false) String shipinId,
+                           @RequestParam(value = "videoId", required = false) String videoId,
                            ModelMap modelmap) {
-        xxx(userId, categoryId, shipinId, modelmap);
+        xxx(userId, categoryId, videoId, modelmap);
         String tradeType = sysConfigFacadeClient.selectConfigByKey("sys.tradeType");
         String wxAuthUrl = sysConfigFacadeClient.selectConfigByKey("wxAuthUrl");
         String wxPayUrl = wxAuthUrl + "/pay";
@@ -115,16 +115,16 @@ public class VideoController extends BaseController {
     @GetMapping("/index")
     public String render(@RequestParam(value = "userId", required = false) String userId,
                          @RequestParam(value = "categoryId", required = false) String categoryId,
-                         @RequestParam(value = "shipinId", required = false) String shipinId,
+                         @RequestParam(value = "videoId", required = false) String videoId,
 
                          ModelMap modelmap) {
-        return index(userId, categoryId, shipinId, modelmap);
+        return index(userId, categoryId, videoId, modelmap);
     }
 
     @GetMapping()
     public String index(@RequestParam(value = "userId", required = false) String userId,
                         @RequestParam(value = "categoryId", required = false) String categoryId,
-                        @RequestParam(value = "shipinId", required = false) String shipinId,
+                        @RequestParam(value = "videoId", required = false) String videoId,
 
                         ModelMap modelmap) {
         String user = StringUtil.isBlank(userId) ? "" : userId;
@@ -144,7 +144,7 @@ public class VideoController extends BaseController {
             log.info("redirect.url:{}", url);
             return "redirect:" + url;
         }
-        return redirect(userId, categoryId, shipinId, modelmap);
+        return redirect(userId, categoryId, videoId, modelmap);
     }
 
     @GetMapping("/category")
@@ -172,7 +172,7 @@ public class VideoController extends BaseController {
         VideoDTO video = videoFacadeClient.selectVideoDTOById(id);
         if (video != null) {
             convert(new Date(), video);
-            modelmap.put("shipin", video);
+            modelmap.put("video", video);
             SysCategoryDTO category = sysCategoryFacadeClient.selectDeptById(video.getCategoryId().longValue());
             if (category != null) {
                 modelmap.put("category", category);
