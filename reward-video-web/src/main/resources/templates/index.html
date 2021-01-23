@@ -106,13 +106,14 @@
 	<!---End-copy-right---->
 	<!---End-wrap---->
 </body>
-
-<input type="hidden" id="imgUrl" />
-<input type="hidden" id="videoUrl" />
 <input type="hidden" id="categoryId" name="categoryId" th:value="${categoryId}" />
 <input type="hidden" id="wxPayUrl" name="wxPayUrl" th:value="${wxPayUrl}" />
+<input type="hidden" th:value="${video?.id}" id="videoId" />
+<input type="hidden" id="imgUrl" th:value="${video?.imgUrl}" />
+<input type="hidden" id="videoUrl" th:value="${video?.videoUrl}" />
+<input type="hidden" th:value="${video?.userId}" id="author" />
 
-wxPayUrl
+
 
 <script>
 	$(function () {
@@ -439,7 +440,65 @@ wxPayUrl
 		}
 
 		player.on('play', function () {
+			console.log("play");
+			var dataId = $("#videoId").val();
+			var author = $("#author").val();
+			if (dataId === null || dataId === undefined || dataId == '') {
+				return;
+			}
+			if (flagClick) {
+				return;
+			}
 
+			$.ajax({
+				type: "post",
+				url: "/video/queryOrder",
+				data: {
+					"id": dataId,
+					"author": author,
+					"redirect_uri": window.location.href
+				},
+				error: function (jqXHR, textStatus, errorThrown) {
+					console.log(errorThrown);
+				},
+				success: function (r) {
+					if (r.code === 301) {
+						player.pause();
+						return;
+					}
+					if (r.code === 0) {
+						var rep = r.data;
+						if (rep.status === 0 || rep.status === 2) {
+							player.pause();
+
+							var value = document.getElementById('wxPayUrl').value;
+							var flag = value.indexOf("?") !== -1;
+							var callbackUrl = window.location.href;
+							var flagCallbackUrl = callbackUrl.indexOf("?") !== -1;
+							var flagVideoIdCallbackUrl = callbackUrl.indexOf("videoId") !== -1;
+							//如果有这个参数值
+							if (flagVideoIdCallbackUrl) {
+								callbackUrl = changeUrlArg(callbackUrl, 'videoId', dataId);
+								console.log("callbackUrl=" + callbackUrl);
+							} else {
+								if (flagCallbackUrl) {
+									callbackUrl = callbackUrl + "&videoId=" + dataId;
+								} else {
+									callbackUrl = callbackUrl + "?videoId=" + dataId;
+								}
+							}
+							if (flag) {
+								window.location.href = value + "&orderId=" + rep.orderId + "&callbackUrl=" + encodeURIComponent(callbackUrl);
+							} else {
+								window.location.href = value + "?orderId=" + rep.orderId + "&callbackUrl=" + encodeURIComponent(callbackUrl);
+							}
+						}
+						if (rep.status === 1) {
+							player.play();
+						}
+					}
+				}
+			});
 
 		});
 		/**
