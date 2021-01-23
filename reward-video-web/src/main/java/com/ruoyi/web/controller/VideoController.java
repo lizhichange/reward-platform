@@ -6,8 +6,10 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.ruoyi.reward.facade.dto.*;
-import com.ruoyi.reward.facade.enums.MultiTypeEnum;
+import com.ruoyi.reward.facade.dto.SysConfigDTO;
+import com.ruoyi.reward.facade.dto.SysOrderDTO;
+import com.ruoyi.reward.facade.dto.SysWebMainDTO;
+import com.ruoyi.reward.facade.dto.VideoDTO;
 import com.ruoyi.reward.facade.enums.OrderPayType;
 import com.ruoyi.reward.facade.enums.OrderStatusType;
 import com.ruoyi.reward.facade.enums.WebMainStatus;
@@ -28,7 +30,6 @@ import org.near.toolkit.context.SessionContext;
 import org.near.toolkit.model.AjaxResult;
 import org.near.toolkit.model.Money;
 import org.near.toolkit.model.ToString;
-import org.near.utils.IpUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -505,32 +506,6 @@ public class VideoController extends BaseController {
         return objects;
     }
 
-    @GetMapping("/tips")
-
-    public String tips(@RequestParam(value = "userId", required = false) String userId, ModelMap modelmap) {
-        return prefix + "/tips";
-    }
-
-    @GetMapping("/audit")
-    public String audit(@RequestParam(value = "userId", required = false) String userId, ModelMap modelmap) {
-        return prefix + "/audit";
-    }
-
-    @GetMapping("/sub")
-    @WxPnUserAuth
-    public String success(@RequestParam(value = "userId", required = false) String userId,
-                          HttpServletRequest request,
-                          ModelMap modelmap) {
-
-        threadPoolTaskExecutor.execute(() -> {
-            ComplaintDTO complaintDTO = new ComplaintDTO();
-            complaintDTO.setOpenId(SessionContext.getOpenId());
-            complaintDTO.setUserId(SessionContext.getUserId());
-            complaintDTO.setIp(IpUtils.getIpAddr(request));
-            complaintFacadeClient.insertComplaint(complaintDTO);
-        });
-        return prefix + "/sub";
-    }
 
     @Autowired
     RestTemplate restTemplate;
@@ -633,24 +608,5 @@ public class VideoController extends BaseController {
 
     }
 
-    @GetMapping("/multi")
-    public String multi(@RequestParam(value = "userId", required = false) String userId,
-                        @RequestParam(value = "type") String type,
-                        ModelMap modelmap) {
-        MultiTypeEnum multiTypeEnum = EnumUtil.queryByCode(type, MultiTypeEnum.class);
-        List<MultiTypeEnum.ItemContent> list = multiTypeEnum.getList();
-        modelmap.addAttribute("list", list);
-        return prefix + "/multi";
-    }
-
-    @GetMapping("/tswq")
-    public String renderComplaint(@RequestParam(value = "userId", required = false) String userId, ModelMap modelmap) {
-        return prefix + "/tswq";
-    }
-
-    @GetMapping("/demo")
-    public String demo(@RequestParam(value = "userId", required = false) String userId, ModelMap modelmap) {
-        return prefix + "/demo";
-    }
 
 }
