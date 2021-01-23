@@ -5,6 +5,7 @@ import com.google.common.collect.Maps;
 import com.ruoyi.mp.client.SysOrderFacadeClient;
 import com.ruoyi.mp.model.PayResult;
 import com.ruoyi.reward.facade.dto.SysOrderDTO;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
@@ -63,6 +62,12 @@ public class QrCodePayController {
             throw new RuntimeException("系统异常");
         }
         return list.get(0);
+    }
+    @PostMapping("/notify/order")
+    @ResponseBody
+    @ApiOperation("支付回调通知处理")
+    public String parseOrderNotifyResult(@RequestBody String xmlData) throws Exception {
+        return "";
     }
 
     public void pay(ModelMap modelMap, String way,

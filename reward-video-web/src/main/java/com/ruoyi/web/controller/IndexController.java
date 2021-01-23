@@ -32,26 +32,8 @@ public class IndexController extends BaseController {
         return "index";
     }
 
-    @GetMapping("/h5")
-    public String h5(@RequestParam(value = "userId", required = false) String userId, ModelMap modelmap) {
-        getCategory(modelmap);
-        return "h5";
-    }
-
-    @GetMapping("/zhihu")
-    public String zhihu(@RequestParam(value = "userId", required = false) String userId, ModelMap modelmap) {
-        getCategory(modelmap);
-        return "zhihu";
-    }
-
-    @GetMapping("/search")
-    public String search(@RequestParam(value = "userId", required = false) String userId, ModelMap modelmap) {
-        getCategory(modelmap);
-        return "mescroll-search";
-    }
-
     @GetMapping("/index")
     public String render(@RequestParam(value = "userId", required = false) String userId, ModelMap modelmap) {
-        return "redirect:/video";
+        return "index";
     }
 }
