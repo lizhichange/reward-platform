@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * @author sunflower
  */
-@RequestMapping("/rest/ts")
+@RequestMapping("/rest/complaint")
 @RestController
 @Slf4j
 public class ComplaintRestController {
