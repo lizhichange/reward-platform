@@ -27,7 +27,7 @@ import com.ruoyi.system.domain.SysRole;
 import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.system.service.ISysConfigService;
 import com.ruoyi.system.service.ISysOrderService;
-import com.ruoyi.web.model.JiaLiApiResult;
+
 import com.ruoyi.web.param.PriceParam;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -286,9 +286,6 @@ public class VideoController extends BaseController {
     }
 
 
-
-
-
     @ApiOperation("拉取视频")
     @ResponseBody
     @PostMapping("/fetch")
@@ -296,9 +293,7 @@ public class VideoController extends BaseController {
         RestTemplate client = new RestTemplate(new HttpsClientRequestFactory());
         ResponseEntity<String> forEntity = client.getForEntity("https://jialiapi.com/api.php/provide/vod/?ac=list", String.class);
         String body = forEntity.getBody();
-        JiaLiApiResult parse = JSONObject.parseObject(body, JiaLiApiResult.class);
-        logger.info("parse:{}", parse);
-        return AjaxResult.success(AjaxResult.Type.SUCCESS.name(), parse);
+        return AjaxResult.success(AjaxResult.Type.SUCCESS.name(), new Object());
     }
 
     public static class HttpsClientRequestFactory extends SimpleClientHttpRequestFactory {
