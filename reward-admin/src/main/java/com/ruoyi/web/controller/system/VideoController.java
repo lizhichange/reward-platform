@@ -148,7 +148,7 @@ public class VideoController extends BaseController {
                     extSysOrder.setExtensionUserId(ShiroUtils.getLoginName());
                 }
                 long count = sysOrderService.countByExample(extSysOrder);
-                item.setCs(String.valueOf(count));
+                item.setSucCount((int) count);
                 if (!CollectionUtils.isEmpty(itemList)) {
                     List<PriceParam> collect = itemList.stream().filter(param -> {
                         String id = param.getId();
@@ -503,7 +503,7 @@ public class VideoController extends BaseController {
     @RequiresRoles("admin")
     @ResponseBody
     public AjaxResult changeStatus(Video video) {
-        logger.info("video:{}",video);
+        logger.info("video:{}", video);
         return toAjax(videoService.updateVideo(video));
     }
 
