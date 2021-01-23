@@ -5,8 +5,8 @@ import com.ruoyi.web.client.SysCategoryFacadeClient;
 import com.ruoyi.web.client.TsFacadeClient;
 import com.ruoyi.web.client.UserDetailFacadeClient;
 import com.ruoyi.web.feign.UserDetailFacadeFeign;
-import com.ruoyi.web.model.Users;
-import com.ruoyi.web.security.SecurityUtil;
+ 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,10 +32,6 @@ public class BaseController {
     UserDetailFacadeFeign userDetailFacadeFeign;
     @Autowired
     UserDetailFacadeClient userDetailFacadeClient;
-
-    public static Users getCurrentUser() {
-        return SecurityUtil.getCurrentUser();
-    }
 
 
     public static String renderString(HttpServletResponse response, String string) {

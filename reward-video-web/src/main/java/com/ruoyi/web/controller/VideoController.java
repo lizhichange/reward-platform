@@ -147,53 +147,6 @@ public class VideoController extends BaseController {
         return redirect(userId, categoryId, videoId, modelmap);
     }
 
-    @GetMapping("/category")
-    public String category(@RequestParam(value = "categoryId") Long categoryId, @RequestParam(value = "userId", required = false) String userId, ModelMap modelmap) {
-        log.info("user:{},categoryId:{}", userId, categoryId);
-        getCategory(modelmap);
-        Object currentUser = getCurrentUser();
-        log.info("currentUser:{}", currentUser);
-        SysCategoryDTO sysCategory = sysCategoryFacadeClient.selectDeptById(categoryId);
-        if (sysCategory == null) {
-            modelmap.addAttribute("category", new SysCategoryDTO());
-        } else {
-            modelmap.addAttribute("category", sysCategory);
-        }
-        return prefix + "/category";
-    }
-
-
-    @GetMapping("/detail")
-    public String detail(@RequestParam(value = "id") Long id,
-                         @RequestParam(value = "userId", required = false) String userId,
-                         @RequestParam(value = "author", required = false) String author,
-                         ModelMap modelmap) {
-        log.info("user:{},id:{},author:{}", userId, id, author);
-        VideoDTO video = videoFacadeClient.selectVideoDTOById(id);
-        if (video != null) {
-            convert(new Date(), video);
-            modelmap.put("video", video);
-            SysCategoryDTO category = sysCategoryFacadeClient.selectDeptById(video.getCategoryId().longValue());
-            if (category != null) {
-                modelmap.put("category", category);
-            }
-            //异步执行浏览加1
-            threadPoolTaskExecutor.execute(() -> videoFacadeClient.updateClickPlus(video.getId().longValue()));
-        }
-
-        String orderByClause = " create_time desc ";
-        TPageResult<VideoDTO> result = videoFacadeClient.queryPage(1, 12, new VideoDTO(), orderByClause);
-        List<VideoDTO> list = result.getValues();
-        convert(list);
-        modelmap.addAttribute("list", list);
-        getCategory(modelmap);
-        String tradeType = sysConfigFacadeClient.selectConfigByKey("sys.tradeType");
-        String wxAuthUrl = sysConfigFacadeClient.selectConfigByKey("wxAuthUrl");
-        String wxPayUrl = wxAuthUrl + "/pay";
-        modelmap.addAttribute("wxPayUrl", wxPayUrl + "?tradeType=" + tradeType);
-        return prefix + "/detail";
-    }
-
 
     @PostMapping("/byCategoryList")
     @ResponseBody
@@ -600,9 +553,10 @@ public class VideoController extends BaseController {
         pay(modelMap, "wap", orderId, tradeType, callbackUrl);
         return "h5";
     }
+
     private SysOrderDTO getSysOrderDTO(String orderId) throws Exception {
         Assert.notNull(orderId, "orderId is not null");
-        SysOrderDTO   selectSysOrder=new SysOrderDTO();
+        SysOrderDTO selectSysOrder = new SysOrderDTO();
         selectSysOrder.setOrderId(orderId);
         List<SysOrderDTO> list = sysOrderFacadeClient.selectSysOrder(selectSysOrder);
         if (CollectionUtils.isEmpty(list)) {

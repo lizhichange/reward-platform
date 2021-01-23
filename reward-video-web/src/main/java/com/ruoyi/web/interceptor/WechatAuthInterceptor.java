@@ -8,7 +8,8 @@ import com.ruoyi.web.client.TsFacadeClient;
 import com.ruoyi.web.config.AppConfig;
 import com.ruoyi.web.config.RedisUtil;
 import com.ruoyi.web.model.Users;
-import com.ruoyi.web.security.SecurityUtil;
+
+import org.apache.catalina.security.SecurityUtil;
 import org.near.toolkit.common.DoMainUtil;
 import org.near.toolkit.common.StringUtil;
 import org.near.toolkit.context.SessionContext;
@@ -67,9 +68,7 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        Users currentUser = SecurityUtil.getCurrentUser();
-        request.setAttribute("user", currentUser);
-        threadPoolTaskExecutor.execute(() -> redisUtil.set("user", currentUser));
+
         request.setAttribute("authMpEnabled", appConfig.isAuthMpEnabled());
         StringBuffer requestUrl = request.getRequestURL();
         LOGGER.debug("requestURL:{}", requestUrl);
