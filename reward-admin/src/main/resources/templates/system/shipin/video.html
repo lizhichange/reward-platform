@@ -46,15 +46,15 @@
                 </div>
 
                 <div class="btn-group-sm" id="toolbar" role="group">
-                    <a class="btn btn-success" onclick="$.operate.addTab()" shiro:hasPermission="system:shipin:add">
+                    <a class="btn btn-success" onclick="$.operate.addTab()" shiro:hasPermission="system:video:add">
                         <i class="fa fa-plus"></i> 新增
                     </a>
                     <a class="btn btn-primary single disabled" onclick="$.operate.editTab()"
-                        shiro:hasPermission="system:shipin:edit">
+                        shiro:hasPermission="system:video:edit">
                         <i class="fa fa-edit"></i> 修改
                     </a>
                     <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()"
-                        shiro:hasPermission="system:shipin:remove">
+                        shiro:hasPermission="system:video:remove">
                         <i class="fa fa-remove"></i> 删除
                     </a>
                 </div>
@@ -92,12 +92,12 @@
     <th:block th:include="include :: layout-latest-js" />
     <th:block th:include="include :: ztree-js" />
     <script th:inline="javascript">
-        var editFlag = [[${@permission.hasPermi('system:shipin:edit') }]];
+        var editFlag = [[${@permission.hasPermi('system:video:edit') }]];
         var resetPwdFlag = [[${@permission.hasPermi('system:user:resetPwd') }]];
-        var removeFlag = [[${@permission.hasPermi('system:shipin:remove') }]];
+        var removeFlag = [[${@permission.hasPermi('system:video:remove') }]];
         var datas = [[${@dict.getType('sys_normal_disable') }]];
 
-        var prefix = ctx + "system/shipin";
+        var prefix = ctx + "system/video";
         console.log(ctx);
         $(function () {
             queryUserList();
