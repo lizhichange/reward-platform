@@ -289,6 +289,7 @@ public class VideoController extends BaseController {
     @ApiOperation("拉取视频")
     @ResponseBody
     @PostMapping("/fetch")
+    @Deprecated
     public AjaxResult fetchVideo(ModelMap modelMap) {
         RestTemplate client = new RestTemplate(new HttpsClientRequestFactory());
         ResponseEntity<String> forEntity = client.getForEntity("https://jialiapi.com/api.php/provide/vod/?ac=list", String.class);
