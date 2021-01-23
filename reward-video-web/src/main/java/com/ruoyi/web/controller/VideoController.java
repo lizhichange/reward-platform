@@ -77,6 +77,8 @@ public class VideoController extends BaseController {
     @Autowired
     SysWebMainFacadeClient sysWebMainFacadeClient;
 
+    @Autowired
+    RestTemplate restTemplate;
 
     @Autowired
     SysConfigFacadeClient sysConfigFacadeClient;
@@ -506,9 +508,6 @@ public class VideoController extends BaseController {
         return objects;
     }
 
-
-    @Autowired
-    RestTemplate restTemplate;
 
     @GetMapping("/qrcode")
     public String qrcode(ModelMap modelMap,
