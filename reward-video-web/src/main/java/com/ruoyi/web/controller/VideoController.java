@@ -241,7 +241,7 @@ public class VideoController extends BaseController {
             Date now = new Date();
             order.setCreateTime(now);
             order.setUpdateTime(now);
-            order.setUserId("openId");
+            order.setUserId(SessionContext.getOpenId());
             //商品快照信息
             order.setGoodsSnapshot(JSON.toJSONString(dto));
             String extensionUserId = SessionContext.getUserId();
@@ -427,7 +427,6 @@ public class VideoController extends BaseController {
             this.id = id;
         }
     }
-
 
 
     List<PriceParam> convert(JSONArray array) {
