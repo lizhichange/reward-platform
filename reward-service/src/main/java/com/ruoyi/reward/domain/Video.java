@@ -2,6 +2,7 @@ package com.ruoyi.reward.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 import org.near.toolkit.model.ToString;
@@ -146,5 +147,9 @@ public class Video extends ToString {
      * @mbg.generated 2021-01-23 18:35:04
      */
     private Date createTime;
+
+    private String privateMoney;
+
+    private List<String> userIdList;
 
 }
