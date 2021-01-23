@@ -27,9 +27,9 @@ import java.io.IOException;
  */
 @Controller
 @RequestMapping("/captcha")
-public class SysCaptchaController extends BaseController {
+public class CaptchaController extends BaseController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(SysCaptchaController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CaptchaController.class);
     @Resource(name = "captchaProducer")
     private Producer captchaProducer;
 
