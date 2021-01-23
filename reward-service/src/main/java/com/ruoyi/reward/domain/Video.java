@@ -30,7 +30,7 @@ public class Video extends ToString {
      *
      * @mbg.generated 2021-01-23 18:35:04
      */
-    private String cs;
+    private String sucCount;
 
     /**
      * video.img_url
@@ -96,19 +96,9 @@ public class Video extends ToString {
      */
     private String logo;
 
-    /**
-     * video.is_lei
-     *
-     * @mbg.generated 2021-01-23 18:35:04
-     */
-    private Boolean isLei;
+  
 
-    /**
-     * video.is_allow
-     *
-     * @mbg.generated 2021-01-23 18:35:04
-     */
-    private Boolean isAllow;
+  
 
     /**
      * video.click
@@ -117,12 +107,7 @@ public class Video extends ToString {
      */
     private Integer click;
 
-    /**
-     * video.is_preview
-     *
-     * @mbg.generated 2021-01-23 18:35:04
-     */
-    private Boolean isPreview;
+ 
 
     /**
      * video.short_url

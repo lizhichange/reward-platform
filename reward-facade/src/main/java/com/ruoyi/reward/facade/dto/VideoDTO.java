@@ -35,14 +35,13 @@ public class VideoDTO extends ToString {
     private String money;
 
 
-
     /**
      * video.cs
      * 打赏人数
      *
      * @mbg.generated 2020-03-19 21:47:04
      */
-    private String cs;
+    private String sucCount;
 
     /**
      * video.url
@@ -104,19 +103,6 @@ public class VideoDTO extends ToString {
      */
     private String logo;
 
-    /**
-     * video.is_lei
-     *
-     * @mbg.generated 2020-03-19 21:47:04
-     */
-    private Boolean isLei;
-
-    /**
-     * video.is_allow
-     *
-     * @mbg.generated 2020-03-19 21:47:04
-     */
-    private Boolean isAllow;
 
     /**
      * video.click
@@ -125,12 +111,6 @@ public class VideoDTO extends ToString {
      */
     private Integer click;
 
-    /**
-     * video.is_preview
-     *
-     * @mbg.generated 2020-03-19 21:47:04
-     */
-    private Boolean isPreview;
 
     /**
      * video.shorturl
@@ -155,7 +135,9 @@ public class VideoDTO extends ToString {
     private SysCategoryDTO category;
 
     private Date createTime;
+
     private String diffDays;
+
     private String mockNum;
 
 
