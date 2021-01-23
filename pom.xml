@@ -54,7 +54,9 @@
         <zookeeper.version>[3.4.14,)</zookeeper.version>
         <curator-framework.version>2.12.0</curator-framework.version>
         <nacos-config-spring-boot.version>0.2.1</nacos-config-spring-boot.version>
-
+        <near.version>1.0.0</near.version>
+        <hutool.version>5.2.4</hutool.version>
+        <weixin-java.version>3.8.0</weixin-java.version>
 
     </properties>
 
@@ -332,44 +334,39 @@
             <dependency>
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
-                <version>5.2.4</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.google.code.gson</groupId>
-                <artifactId>gson</artifactId>
-                <version>2.8.6</version>
+                <version>${hutool.version}</version>
             </dependency>
 
 
-            <!--        公众号（包括订阅号和服务号）-->
+            <!--    公众号（包括订阅号和服务号）-->
             <dependency>
                 <groupId>com.github.binarywang</groupId>
                 <artifactId>weixin-java-mp</artifactId>
-                <version>3.8.0</version>
+                <version>${weixin-java.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.github.binarywang</groupId>
                 <artifactId>weixin-java-pay</artifactId>
-                <version>3.8.0</version>
+                <version>${weixin-java.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.near</groupId>
                 <artifactId>near-toolkit</artifactId>
-                <version>1.0.0</version>
+                <version>${near.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>org.near</groupId>
                 <artifactId>near-webmvc-support</artifactId>
-                <version>1.0.0</version>
+                <version>${near.version}</version>
             </dependency>
+
+
             <dependency>
-                <groupId>cglib</groupId>
-                <artifactId>cglib</artifactId>
-                <version>3.3.0</version>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>2.8.6</version>
             </dependency>
 
         </dependencies>
@@ -394,9 +391,6 @@
             <version>1.18.4</version>
             <scope>provided</scope>
         </dependency>
-
-
-
 
     </dependencies>
 
