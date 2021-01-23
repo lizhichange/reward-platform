@@ -25,7 +25,7 @@ import java.util.List;
  * @date 2020-03-16
  */
 @Controller
-@RequestMapping("/system/ts")
+@RequestMapping("/system/complaint")
 public class ComplaintController extends BaseController {
     private String prefix = "system/complaint";
 
