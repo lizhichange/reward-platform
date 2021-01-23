@@ -4,9 +4,10 @@ import java.io.Serializable;
 import java.util.Date;
 
 import lombok.Data;
+import org.near.toolkit.model.ToString;
 
 @Data
-public class Video implements Serializable {
+public class Video extends ToString {
     /**
      * video.id
      *
