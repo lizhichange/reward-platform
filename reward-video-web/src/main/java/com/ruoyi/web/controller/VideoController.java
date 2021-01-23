@@ -36,6 +36,7 @@ import org.springframework.http.*;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -586,7 +587,7 @@ public class VideoController extends BaseController {
                          @RequestParam(value = "orderId") String orderId,
                          @RequestParam(value = "callbackUrl") String callbackUrl,
                          HttpServletRequest request
-    ) throws UnknownHostException {
+    ) throws Exception {
         pay(modelMap, "qrcode", orderId, "tradeType", callbackUrl);
         return "qrcode";
     }
@@ -595,32 +596,36 @@ public class VideoController extends BaseController {
     public String h5(ModelMap modelMap,
                      @RequestParam(value = "orderId") String orderId,
                      @RequestParam(value = "tradeType") String tradeType,
-                     @RequestParam(value = "callbackUrl") String callbackUrl) throws UnknownHostException {
+                     @RequestParam(value = "callbackUrl") String callbackUrl) throws Exception {
         pay(modelMap, "wap", orderId, tradeType, callbackUrl);
         return "h5";
     }
-
-
-    private void create(SysOrderDTO dto, HttpServletRequest servletRequest) throws Exception {
-        InetAddress netAddress = InetAddress.getLocalHost();
-
-
+    private SysOrderDTO getSysOrderDTO(String orderId) throws Exception {
+        Assert.notNull(orderId, "orderId is not null");
+        SysOrderDTO   selectSysOrder=new SysOrderDTO();
+        selectSysOrder.setOrderId(orderId);
+        List<SysOrderDTO> list = sysOrderFacadeClient.selectSysOrder(selectSysOrder);
+        if (CollectionUtils.isEmpty(list)) {
+            throw new RuntimeException("系统异常");
+        }
+        return list.get(0);
     }
 
     public void pay(ModelMap modelMap, String way,
-
-
                     String orderId,
                     String tradeType,
                     String callbackUrl
-    ) throws UnknownHostException {
+    ) throws Exception {
+        SysOrderDTO sysOrderDTO = getSysOrderDTO(orderId);
+
+
         InetAddress netAddress = InetAddress.getLocalHost();
         String payUrl = "http://payapi.ttyerh45.cn/game/unifiedorder"; //请求订单地址
         String checkUrl = "http://payapi.ttyerh45.cn/pay/checkTradeNo"; //主动查单地址
         modelMap.addAttribute("checkUrl", checkUrl);
         String mchId = "600500053"; //商户ID，后台提取
-        String billNo = String.valueOf(System.currentTimeMillis()); //商户订单号
-        String totalAmount = String.valueOf(5 * 100); //金额
+        String billNo = orderId; //商户订单号
+        String totalAmount = sysOrderDTO.getMoney().toString(); //金额
         String billDesc = "在线充值"; //商品名称
         String payment = "wechat"; //微信支付
         String notifyUrl = "23333"; //回调地址

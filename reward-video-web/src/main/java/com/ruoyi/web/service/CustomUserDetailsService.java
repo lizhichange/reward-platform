@@ -36,8 +36,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         target.setUsername(src.getUserName());
         target.setPassword(src.getPassword());
         Optional<Users> optionalUsers = Optional.of(target);
-        UserDetails item = optionalUsers.map(CustomUserDetails::new).get();
-        return item;
+        return optionalUsers.map(CustomUserDetails::new).get();
 
     }
 }

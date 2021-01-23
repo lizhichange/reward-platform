@@ -2,6 +2,9 @@ package com.ruoyi.web.controller;
 
 import org.near.toolkit.model.ToString;
 
+/**
+ * @author sunflower
+ */
 public class PayResult extends ToString {
 
     /**
