@@ -5,7 +5,7 @@ import org.near.toolkit.model.ToString;
 /**
  * @author sunflower
  */
-public class TsDTO extends ToString {
+public class ComplaintDTO extends ToString {
 
     private static final long serialVersionUID = 1L;
 

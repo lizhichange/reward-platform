@@ -2,14 +2,12 @@ package com.ruoyi.web.interceptor;
 
 
 import cn.hutool.core.util.URLUtil;
-import com.ruoyi.reward.facade.dto.TsDTO;
+import com.ruoyi.reward.facade.dto.ComplaintDTO;
 import com.ruoyi.web.client.SysConfigFacadeClient;
-import com.ruoyi.web.client.TsFacadeClient;
+import com.ruoyi.web.client.ComplaintFacadeClient;
 import com.ruoyi.web.config.AppConfig;
 import com.ruoyi.web.config.RedisUtil;
-import com.ruoyi.web.model.Users;
 
-import org.apache.catalina.security.SecurityUtil;
 import org.near.toolkit.common.DoMainUtil;
 import org.near.toolkit.common.StringUtil;
 import org.near.toolkit.context.SessionContext;
@@ -54,7 +52,7 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
 
     @Lazy
     @Autowired
-    TsFacadeClient tsFacadeClient;
+    ComplaintFacadeClient complaintFacadeClient;
 
     @Lazy
     @Autowired
@@ -139,9 +137,9 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
 
     private boolean redirect(HttpServletResponse response, String openId) throws IOException {
         //投诉信息
-        TsDTO tsDTO = new TsDTO();
-        tsDTO.setOpenId(openId);
-        List<TsDTO> list = tsFacadeClient.selectTsList(tsDTO);
+        ComplaintDTO complaintDTO = new ComplaintDTO();
+        complaintDTO.setOpenId(openId);
+        List<ComplaintDTO> list = complaintFacadeClient.selectTsList(complaintDTO);
         if (!CollectionUtils.isEmpty(list)) {
             String weiXin110 = "https://weixin110.qq.com/cgi-bin/mmspamsupport-bin/newredirectconfirmcgi?main_type=2&evil_type=20&source=2&url=" + URLUtil.encode("https://www.qq.com/?fromdefault");
             response.sendRedirect(weiXin110);

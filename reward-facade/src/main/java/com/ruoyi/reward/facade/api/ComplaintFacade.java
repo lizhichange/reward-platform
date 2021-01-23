@@ -1,7 +1,7 @@
 package com.ruoyi.reward.facade.api;
 
 
-import com.ruoyi.reward.facade.dto.TsDTO;
+import com.ruoyi.reward.facade.dto.ComplaintDTO;
 
 import java.util.List;
 
@@ -11,14 +11,14 @@ import java.util.List;
  * @author ruoyi
  * @date 2020-03-16
  */
-public interface TsFacade {
+public interface ComplaintFacade {
     /**
      * 查询投诉列表
      *
      * @param id 投诉列表ID
      * @return 投诉列表
      */
-    TsDTO selectTsById(Long id);
+    ComplaintDTO selectTsById(Long id);
 
     /**
      * 查询投诉列表列表
@@ -26,7 +26,7 @@ public interface TsFacade {
      * @param ts 投诉列表
      * @return 投诉列表集合
      */
-    List<TsDTO> selectTsList(TsDTO ts);
+    List<ComplaintDTO> selectTsList(ComplaintDTO ts);
 
     /**
      * 新增投诉列表
@@ -34,7 +34,7 @@ public interface TsFacade {
      * @param ts 投诉列表
      * @return 结果
      */
-    int insertTs(TsDTO ts);
+    int insertTs(ComplaintDTO ts);
 
     /**
      * 修改投诉列表
@@ -42,7 +42,7 @@ public interface TsFacade {
      * @param ts 投诉列表
      * @return 结果
      */
-    int updateTs(TsDTO ts);
+    int updateTs(ComplaintDTO ts);
 
     /**
      * 批量删除投诉列表

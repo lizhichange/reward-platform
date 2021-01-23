@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class TsExample {
+public class ComplaintExample {
     protected String orderByClause;
 
     protected boolean distinct;
@@ -15,7 +15,7 @@ public class TsExample {
 
     private Integer offset;
 
-    public TsExample() {
+    public ComplaintExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 

@@ -43,7 +43,6 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -522,11 +521,11 @@ public class VideoController extends BaseController {
                           ModelMap modelmap) {
 
         threadPoolTaskExecutor.execute(() -> {
-            TsDTO tsDTO = new TsDTO();
-            tsDTO.setOpenId(SessionContext.getOpenId());
-            tsDTO.setUserId(SessionContext.getUserId());
-            tsDTO.setIp(IpUtils.getIpAddr(request));
-            tsFacadeClient.insertTs(tsDTO);
+            ComplaintDTO complaintDTO = new ComplaintDTO();
+            complaintDTO.setOpenId(SessionContext.getOpenId());
+            complaintDTO.setUserId(SessionContext.getUserId());
+            complaintDTO.setIp(IpUtils.getIpAddr(request));
+            complaintFacadeClient.insertTs(complaintDTO);
         });
         return prefix + "/sub";
     }

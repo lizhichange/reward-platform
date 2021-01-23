@@ -3,12 +3,12 @@ package com.ruoyi.reward.facade;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.ruoyi.common.core.text.Convert;
-import com.ruoyi.reward.domain.Ts;
-import com.ruoyi.reward.domain.TsExample;
-import com.ruoyi.reward.facade.api.TsFacade;
-import com.ruoyi.reward.facade.dto.TsDTO;
+import com.ruoyi.reward.domain.Complaint;
+import com.ruoyi.reward.domain.ComplaintExample;
+import com.ruoyi.reward.facade.api.ComplaintFacade;
+import com.ruoyi.reward.facade.dto.ComplaintDTO;
 import com.ruoyi.reward.mapper.ExtTsMapper;
-import com.ruoyi.reward.mapper.TsMapper;
+import com.ruoyi.reward.mapper.ComplaintMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -26,13 +26,13 @@ import java.util.stream.Collectors;
         version = "1.0.0",
         timeout = 15000
 )
-public class TsFacadeImpl implements TsFacade {
+public class ComplaintFacadeImpl implements ComplaintFacade {
     @Autowired
     private ExtTsMapper extTsMapper;
 
 
     @Autowired
-    private TsMapper tsMapper;
+    private ComplaintMapper complaintMapper;
 
     /**
      * 查询投诉列表
@@ -41,17 +41,17 @@ public class TsFacadeImpl implements TsFacade {
      * @return 投诉列表
      */
     @Override
-    public TsDTO selectTsById(Long id) {
+    public ComplaintDTO selectTsById(Long id) {
 
 
         return convert(extTsMapper.selectTsById(id));
     }
 
-    private TsDTO convert(Ts item) {
+    private ComplaintDTO convert(Complaint item) {
         if (item == null) {
             return null;
         }
-        TsDTO dto = new TsDTO();
+        ComplaintDTO dto = new ComplaintDTO();
         BeanUtils.copyProperties(item, dto);
         return dto;
     }
@@ -64,10 +64,10 @@ public class TsFacadeImpl implements TsFacade {
      * @return 投诉列表
      */
     @Override
-    public List<TsDTO> selectTsList(TsDTO ts) {
-        Ts item = new Ts();
+    public List<ComplaintDTO> selectTsList(ComplaintDTO ts) {
+        Complaint item = new Complaint();
         BeanUtils.copyProperties(ts, item);
-        List<Ts> list = extTsMapper.selectTsList(item);
+        List<Complaint> list = extTsMapper.selectTsList(item);
         return list.stream().map(this::convert).collect(Collectors.toList());
     }
 
@@ -78,8 +78,8 @@ public class TsFacadeImpl implements TsFacade {
      * @return 结果
      */
     @Override
-    public int insertTs(TsDTO ts) {
-        Ts item = new Ts();
+    public int insertTs(ComplaintDTO ts) {
+        Complaint item = new Complaint();
         BeanUtils.copyProperties(ts, item);
         return extTsMapper.insertTs(item);
     }
@@ -91,8 +91,8 @@ public class TsFacadeImpl implements TsFacade {
      * @return 结果
      */
     @Override
-    public int updateTs(TsDTO ts) {
-        Ts item = new Ts();
+    public int updateTs(ComplaintDTO ts) {
+        Complaint item = new Complaint();
         BeanUtils.copyProperties(ts, item);
         return extTsMapper.updateTs(item);
     }
@@ -110,7 +110,7 @@ public class TsFacadeImpl implements TsFacade {
 
     @Override
     public int count() {
-        return (int) tsMapper.countByExample(new TsExample());
+        return (int) complaintMapper.countByExample(new ComplaintExample());
     }
 
     /**

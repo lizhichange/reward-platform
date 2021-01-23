@@ -2,10 +2,10 @@ package com.ruoyi.web.controller;
 
 import com.ruoyi.reward.facade.dto.SysCategoryDTO;
 import com.ruoyi.web.client.SysCategoryFacadeClient;
-import com.ruoyi.web.client.TsFacadeClient;
+import com.ruoyi.web.client.ComplaintFacadeClient;
 import com.ruoyi.web.client.UserDetailFacadeClient;
 import com.ruoyi.web.feign.UserDetailFacadeFeign;
- 
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +27,7 @@ public class BaseController {
     @Autowired
     SysCategoryFacadeClient sysCategoryFacadeClient;
     @Autowired
-    TsFacadeClient tsFacadeClient;
+    ComplaintFacadeClient complaintFacadeClient;
     @Autowired
     UserDetailFacadeFeign userDetailFacadeFeign;
     @Autowired

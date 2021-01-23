@@ -1,7 +1,7 @@
 package com.ruoyi.reward.rest;
 
-import com.ruoyi.reward.facade.api.TsFacade;
-import com.ruoyi.reward.facade.dto.TsDTO;
+import com.ruoyi.reward.facade.api.ComplaintFacade;
+import com.ruoyi.reward.facade.dto.ComplaintDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +16,7 @@ import java.util.List;
 @Slf4j
 public class TsRestController {
     @Autowired
-    private TsFacade tsFacade;
+    private ComplaintFacade complaintFacade;
 
     /**
      * 查询投诉列表
@@ -26,8 +26,8 @@ public class TsRestController {
      */
     @PostMapping("/selectTsById")
 
-    public TsDTO selectTsById(@RequestParam("id") Long id) {
-        return tsFacade.selectTsById(id);
+    public ComplaintDTO selectTsById(@RequestParam("id") Long id) {
+        return complaintFacade.selectTsById(id);
     }
 
     /**
@@ -38,8 +38,8 @@ public class TsRestController {
      */
     @PostMapping("/selectTsList")
 
-    public List<TsDTO> selectTsList(@RequestBody TsDTO ts) {
-        return tsFacade.selectTsList(ts);
+    public List<ComplaintDTO> selectTsList(@RequestBody ComplaintDTO ts) {
+        return complaintFacade.selectTsList(ts);
     }
 
     /**
@@ -50,8 +50,8 @@ public class TsRestController {
      */
     @PostMapping("/insertTs")
 
-    public int insertTs(@RequestBody TsDTO ts) {
-        return tsFacade.insertTs(ts);
+    public int insertTs(@RequestBody ComplaintDTO ts) {
+        return complaintFacade.insertTs(ts);
     }
 
     /**
@@ -62,8 +62,8 @@ public class TsRestController {
      */
     @PostMapping("/updateTs")
 
-    public int updateTs(@RequestBody TsDTO ts) {
-        return tsFacade.updateTs(ts);
+    public int updateTs(@RequestBody ComplaintDTO ts) {
+        return complaintFacade.updateTs(ts);
     }
 
     /**
@@ -74,7 +74,7 @@ public class TsRestController {
      */
     @PostMapping("/deleteTsByIds")
     public int deleteTsByIds(@RequestParam("ids") String ids) {
-        return tsFacade.deleteTsByIds(ids);
+        return complaintFacade.deleteTsByIds(ids);
     }
 
     /**
@@ -85,6 +85,6 @@ public class TsRestController {
      */
     @PostMapping("/deleteTsById")
     public int deleteTsById(@RequestParam("id") Long id) {
-        return tsFacade.deleteTsById(id);
+        return complaintFacade.deleteTsById(id);
     }
 }

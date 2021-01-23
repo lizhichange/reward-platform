@@ -1,6 +1,6 @@
 package com.ruoyi.web.feign;
 
-import com.ruoyi.reward.facade.dto.TsDTO;
+import com.ruoyi.reward.facade.dto.ComplaintDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,7 +22,7 @@ public interface TsFeign {
      * @return 投诉列表
      */
     @PostMapping("/selectTsById")
-    TsDTO selectTsById(@RequestParam("id") Long id);
+    ComplaintDTO selectTsById(@RequestParam("id") Long id);
 
     /**
      * 查询投诉列表列表
@@ -31,7 +31,7 @@ public interface TsFeign {
      * @return 投诉列表
      */
     @PostMapping("/selectTsList")
-    List<TsDTO> selectTsList(@RequestBody TsDTO ts);
+    List<ComplaintDTO> selectTsList(@RequestBody ComplaintDTO ts);
 
     /**
      * 新增投诉列表
@@ -40,7 +40,7 @@ public interface TsFeign {
      * @return 结果
      */
     @PostMapping("/insertTs")
-    int insertTs(@RequestBody TsDTO ts);
+    int insertTs(@RequestBody ComplaintDTO ts);
 
     /**
      * 修改投诉列表
@@ -49,7 +49,7 @@ public interface TsFeign {
      * @return 结果
      */
     @PostMapping("/updateTs")
-    int updateTs(@RequestBody TsDTO ts);
+    int updateTs(@RequestBody ComplaintDTO ts);
 
 
     /**

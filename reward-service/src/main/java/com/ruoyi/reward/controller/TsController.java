@@ -7,8 +7,8 @@ import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
-import com.ruoyi.reward.domain.Ts;
-import com.ruoyi.reward.facade.api.TsFacade;
+import com.ruoyi.reward.domain.Complaint;
+import com.ruoyi.reward.facade.api.ComplaintFacade;
 import com.ruoyi.reward.service.TsService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,14 +30,14 @@ public class TsController extends BaseController {
     private String prefix = "system/ts";
 
     @Autowired
-    TsFacade tsFacade;
+    ComplaintFacade complaintFacade;
     @Autowired
     TsService tsService;
 
     @RequiresPermissions("system:ts:view")
     @GetMapping()
     public String ts(ModelMap modelMap) {
-        int count = tsFacade.count();
+        int count = complaintFacade.count();
         modelMap.addAttribute("count", count);
         return prefix + "/ts";
     }
@@ -45,25 +45,25 @@ public class TsController extends BaseController {
     /**
      * 查询投诉列表列表
      */
-    @RequiresPermissions("system:ts:list")
+    @RequiresPermissions("system:complaint:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(Ts ts) {
+    public TableDataInfo list(Complaint complaint) {
         startPage();
-        List<Ts> list = tsService.selectTsList(ts);
+        List<Complaint> list = tsService.selectTsList(complaint);
         return getDataTable(list);
     }
 
     /**
      * 导出投诉列表列表
      */
-    @RequiresPermissions("system:ts:export")
+    @RequiresPermissions("system:complaint:export")
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(Ts ts) {
-        List<Ts> list = tsService.selectTsList(ts);
-        ExcelUtil<Ts> util = new ExcelUtil<>(Ts.class);
-        return util.exportExcel(list, "ts");
+    public AjaxResult export(Complaint complaint) {
+        List<Complaint> list = tsService.selectTsList(complaint);
+        ExcelUtil<Complaint> util = new ExcelUtil<>(Complaint.class);
+        return util.exportExcel(list, "complaint");
     }
 
     /**
@@ -77,12 +77,12 @@ public class TsController extends BaseController {
     /**
      * 新增保存投诉列表
      */
-    @RequiresPermissions("system:ts:add")
+    @RequiresPermissions("system:complaint:add")
     @Log(title = "投诉列表", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(Ts ts) {
-        return toAjax(tsService.insertTs(ts));
+    public AjaxResult addSave(Complaint complaint) {
+        return toAjax(tsService.insertTs(complaint));
     }
 
     /**
@@ -90,20 +90,20 @@ public class TsController extends BaseController {
      */
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") Long id, ModelMap mmap) {
-        Ts ts = tsService.selectTsById(id);
-        mmap.put("ts", ts);
+        Complaint complaint = tsService.selectTsById(id);
+        mmap.put("complaint", complaint);
         return prefix + "/edit";
     }
 
     /**
      * 修改保存投诉列表
      */
-    @RequiresPermissions("system:ts:edit")
+    @RequiresPermissions("system:complaint:edit")
     @Log(title = "投诉列表", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(Ts ts) {
-        return toAjax(tsService.updateTs(ts));
+    public AjaxResult editSave(Complaint complaint) {
+        return toAjax(tsService.updateTs(complaint));
     }
 
     /**

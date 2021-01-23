@@ -974,11 +974,11 @@ INSERT INTO `sys_menu` (`menu_id`, `menu_name`, `parent_id`, `order_num`, `url`,
 (1058, '生成删除', 114, 3, '#', '', 'F', '0', 'tool:gen:remove', '#', 'admin', '2018-03-16 11:33:00', 'ry', '2018-03-16 11:33:00', ''),
 (1059, '预览代码', 114, 4, '#', '', 'F', '0', 'tool:gen:preview', '#', 'admin', '2018-03-16 11:33:00', 'ry', '2018-03-16 11:33:00', ''),
 (1060, '生成代码', 114, 5, '#', '', 'F', '0', 'tool:gen:code', '#', 'admin', '2018-03-16 11:33:00', 'ry', '2018-03-16 11:33:00', ''),
-(2002, '投诉列表', 2082, 1, '/system/ts', 'menuItem', 'C', '0', 'system:ts:view', '#', 'admin', '2018-03-01 00:00:00', 'admin', '2020-06-20 15:48:45', '【请填写功能名称】菜单'),
-(2003, '【请填写功能名称】查询', 2002, 1, '#', '', 'F', '0', 'system:ts:list', '#', 'admin', '2018-03-01 00:00:00', 'ry', '2018-03-01 00:00:00', ''),
-(2004, '【请填写功能名称】新增', 2002, 2, '#', '', 'F', '0', 'system:ts:add', '#', 'admin', '2018-03-01 00:00:00', 'ry', '2018-03-01 00:00:00', ''),
-(2005, '【请填写功能名称】修改', 2002, 3, '#', '', 'F', '0', 'system:ts:edit', '#', 'admin', '2018-03-01 00:00:00', 'ry', '2018-03-01 00:00:00', ''),
-(2006, '【请填写功能名称】删除', 2002, 4, '#', '', 'F', '0', 'system:ts:remove', '#', 'admin', '2018-03-01 00:00:00', 'ry', '2018-03-01 00:00:00', ''),
+(2002, '投诉列表', 2082, 1, '/system/complaint', 'menuItem', 'C', '0', 'system:complaint:view', '#', 'admin', '2018-03-01 00:00:00', 'admin', '2020-06-20 15:48:45', '【请填写功能名称】菜单'),
+(2003, '【请填写功能名称】查询', 2002, 1, '#', '', 'F', '0', 'system:complaint:list', '#', 'admin', '2018-03-01 00:00:00', 'ry', '2018-03-01 00:00:00', ''),
+(2004, '【请填写功能名称】新增', 2002, 2, '#', '', 'F', '0', 'system:complaint:add', '#', 'admin', '2018-03-01 00:00:00', 'ry', '2018-03-01 00:00:00', ''),
+(2005, '【请填写功能名称】修改', 2002, 3, '#', '', 'F', '0', 'system:complaint:edit', '#', 'admin', '2018-03-01 00:00:00', 'ry', '2018-03-01 00:00:00', ''),
+(2006, '【请填写功能名称】删除', 2002, 4, '#', '', 'F', '0', 'system:complaint:remove', '#', 'admin', '2018-03-01 00:00:00', 'ry', '2018-03-01 00:00:00', ''),
 (2007, '公共片库', 2101, 1, '/system/shipin', 'menuItem', 'C', '0', 'system:shipin:view', '#', 'admin', '2018-03-01 00:00:00', 'admin', '2020-06-20 15:47:20', '公共片库菜单'),
 (2008, '公共片库查询', 2007, 1, '#', '', 'F', '0', 'system:shipin:list', '#', 'admin', '2018-03-01 00:00:00', 'ry', '2018-03-01 00:00:00', ''),
 (2009, '公共片库新增', 2007, 2, '#', '', 'F', '0', 'system:shipin:add', '#', 'admin', '2018-03-01 00:00:00', 'ry', '2018-03-01 00:00:00', ''),
@@ -1624,10 +1624,10 @@ INSERT INTO `trade` (`trade_no`, `payer_type`, `payer`, `payee_type`, `payee`, `
 -- --------------------------------------------------------
 
 --
--- 表的结构 `ts`
+-- 表的结构 `complaint`
 --
 
-CREATE TABLE IF NOT EXISTS `ts` (
+CREATE TABLE IF NOT EXISTS `complaint` (
   `id` int(11) NOT NULL COMMENT '主键',
   `ip` varchar(30) COLLATE utf8mb4_bin DEFAULT NULL COMMENT 'ip地址',
   `status` varchar(10) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '状态',
@@ -1642,10 +1642,10 @@ CREATE TABLE IF NOT EXISTS `ts` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=DYNAMIC;
 
 --
--- 转存表中的数据 `ts`
+-- 转存表中的数据 `complaint`
 --
 
-INSERT INTO `ts` (`id`, `ip`, `status`, `content`, `duration`, `typeto`, `sid`, `user_id`, `create_time`, `update_time`, `open_id`) VALUES
+INSERT INTO `complaint` (`id`, `ip`, `status`, `content`, `duration`, `typeto`, `sid`, `user_id`, `create_time`, `update_time`, `open_id`) VALUES
 (1, '118.78.249.178', NULL, NULL, NULL, NULL, NULL, 'admin', NULL, NULL, NULL),
 (2, '118.78.249.178', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
@@ -2233,9 +2233,9 @@ ALTER TABLE `trade`
   ADD PRIMARY KEY (`trade_no`);
 
 --
--- Indexes for table `ts`
+-- Indexes for table `complaint`
 --
-ALTER TABLE `ts`
+ALTER TABLE `complaint`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -2398,9 +2398,9 @@ ALTER TABLE `sys_wechat_config`
 ALTER TABLE `sys_wechat_token`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=38;
 --
--- AUTO_INCREMENT for table `ts`
+-- AUTO_INCREMENT for table `complaint`
 --
-ALTER TABLE `ts`
+ALTER TABLE `complaint`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `t_user_detail`

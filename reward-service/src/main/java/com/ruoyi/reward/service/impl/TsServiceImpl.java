@@ -2,7 +2,7 @@ package com.ruoyi.reward.service.impl;
 
 import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.common.utils.DateUtils;
-import com.ruoyi.reward.domain.Ts;
+import com.ruoyi.reward.domain.Complaint;
 import com.ruoyi.reward.mapper.ExtTsMapper;
 import com.ruoyi.reward.service.TsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,43 +22,43 @@ public class TsServiceImpl implements TsService {
      * @return 投诉列表
      */
     @Override
-    public Ts selectTsById(Long id) {
+    public Complaint selectTsById(Long id) {
         return extTsMapper.selectTsById(id);
     }
 
     /**
      * 查询投诉列表列表
      *
-     * @param ts 投诉列表
+     * @param complaint 投诉列表
      * @return 投诉列表
      */
     @Override
-    public List<Ts> selectTsList(Ts ts) {
-        return extTsMapper.selectTsList(ts);
+    public List<Complaint> selectTsList(Complaint complaint) {
+        return extTsMapper.selectTsList(complaint);
     }
 
     /**
      * 新增投诉列表
      *
-     * @param ts 投诉列表
+     * @param complaint 投诉列表
      * @return 结果
      */
     @Override
-    public int insertTs(Ts ts) {
-        ts.setCreateTime(DateUtils.getNowDate());
-        return extTsMapper.insertTs(ts);
+    public int insertTs(Complaint complaint) {
+        complaint.setCreateTime(DateUtils.getNowDate());
+        return extTsMapper.insertTs(complaint);
     }
 
     /**
      * 修改投诉列表
      *
-     * @param ts 投诉列表
+     * @param complaint 投诉列表
      * @return 结果
      */
     @Override
-    public int updateTs(Ts ts) {
-        ts.setUpdateTime(DateUtils.getNowDate());
-        return extTsMapper.updateTs(ts);
+    public int updateTs(Complaint complaint) {
+        complaint.setUpdateTime(DateUtils.getNowDate());
+        return extTsMapper.updateTs(complaint);
     }
 
     /**

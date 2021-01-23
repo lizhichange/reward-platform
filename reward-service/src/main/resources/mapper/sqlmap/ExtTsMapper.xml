@@ -19,7 +19,7 @@
     </resultMap>
 
     <sql id="selectTsVo">
-        select id, ip, status, content, duration, typeto, sid, user_id, create_time, update_time, open_id from ts
+        select id, ip, status, content, duration, typeto, sid, user_id, create_time, update_time, open_id from complaint
     </sql>
 
     <select id="selectTsList" parameterType="Ts" resultMap="TsResult">
@@ -42,7 +42,7 @@
     </select>
 
     <insert id="insertTs" parameterType="Ts" useGeneratedKeys="true" keyProperty="id">
-        insert into ts
+        insert into complaint
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="ip != null  and ip != ''">ip,</if>
             <if test="status != null  and status != ''">status,</if>
@@ -70,7 +70,7 @@
     </insert>
 
     <update id="updateTs" parameterType="Ts">
-        update ts
+        update complaint
         <trim prefix="SET" suffixOverrides=",">
             <if test="ip != null  and ip != ''">ip = #{ip},</if>
             <if test="status != null  and status != ''">status = #{status},</if>
@@ -87,11 +87,11 @@
     </update>
 
     <delete id="deleteTsById" parameterType="Long">
-        delete from ts where id = #{id}
+        delete from complaint where id = #{id}
     </delete>
 
     <delete id="deleteTsByIds" parameterType="String">
-        delete from ts where id in
+        delete from complaint where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

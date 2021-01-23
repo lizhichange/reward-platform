@@ -9,7 +9,7 @@ import java.util.Date;
  * @author sunflower
  */
 @Data
-public class Ts implements Serializable {
+public class Complaint implements Serializable {
     /**
      * ts.id
      * 主键
