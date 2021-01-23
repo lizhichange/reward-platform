@@ -28,7 +28,6 @@ import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.system.service.ISysConfigService;
 import com.ruoyi.system.service.ISysOrderService;
 import com.ruoyi.web.model.JiaLiApiResult;
-import com.ruoyi.web.model.JiaLiDetailApiResult;
 import com.ruoyi.web.param.PriceParam;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -44,8 +43,6 @@ import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.CollectionUtils;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -288,110 +285,9 @@ public class VideoController extends BaseController {
 
     }
 
-    @ApiOperation("拉取视频detail")
-    @ResponseBody
-    @PostMapping("/fetchDetailExt")
-    public AjaxResult fetchDetailExt(ModelMap modelMap) {
-        RestTemplate client = new RestTemplate(new HttpsClientRequestFactory());
-        HttpHeaders headers = new HttpHeaders();
-        HttpMethod post = HttpMethod.POST;
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
-        map.add("u_id", "143AB09EDCCFE5C20F18F051C056788A1598881547");
-        map.add("category_id", "false");
-
-        map.add("o_user", "61.152.208.146");
-
-        map.add("page", "2");
-
-        map.add("limit", "10");
-
-        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map);
-        ResponseEntity<String> forEntity = client.getForEntity("http://hj.jiazaihetian.com/api/siyou/apilist.html", String.class, request);
-        String body = forEntity.getBody();
-        ResultData parse = JSONObject.parseObject(body, ResultData.class);
-        if (parse != null) {
-            List<ResultData.DataBean> data = parse.getData();
-            for (ResultData.DataBean datum : data) {
-
-            }
-        }
-        return null;
-    }
-
-    @ApiOperation("拉取视频detail")
-    @ResponseBody
-    @PostMapping("/fetchDetail")
-    public AjaxResult fetchDetail(ModelMap modelMap) {
-        //
-        RestTemplate client = new RestTemplate(new HttpsClientRequestFactory());
-        ResponseEntity<String> forEntity = client.getForEntity("https://jialiapi.com/api.php/provide/vod/?ac=detail", String.class);
-        String body = forEntity.getBody();
-        JiaLiDetailApiResult parse = JSONObject.parseObject(body, JiaLiDetailApiResult.class);
-        logger.info("parse:{}", parse);
-        if (parse != null) {
-            List<JiaLiDetailApiResult.ListBean> list = parse.getList();
-            if (!CollectionUtils.isEmpty(list)) {
-                for (JiaLiDetailApiResult.ListBean listBean : list) {
-                    //类目
-                    String typeName = listBean.getVod_class();
-                    String vodPlayUrl = listBean.getVod_play_url();
-                    String vodPic = listBean.getVod_pic();
-                    String vodName = listBean.getVod_name();
-                    int vodId = listBean.getVod_id();
-                    SysCategory nameUnique = sysCategoryService.selectByCategoryName(typeName);
-                    //如果存在
-                    int pk;
-                    if (nameUnique == null) {
-                        SysCategory sysCategory = new SysCategory();
-                        sysCategory.setParentId(100L);
-                        sysCategory.setAncestors("0,100");
-                        sysCategory.setCategoryName(typeName);
-                        sysCategory.setOrderNum("1");
-                        sysCategory.setStatus("0");
-                        sysCategory.setDelFlag("0");
-                        sysCategory.setCreateBy("admin");
-                        sysCategory.setCreateTime(new Date());
-                        sysCategory.setUpdateBy("admin");
-                        sysCategory.setUpdateTime(new Date());
-                        pk = sysCategoryService.insertDept(sysCategory);
-                    } else {
-                        pk = nameUnique.getCategoryId().intValue();
-                    }
-                    //如果添加成功
-                    if (pk > 0) {
-                        Video query = new Video();
-                        query.setCs(String.valueOf(vodId));
-                        List<Video> videoList = videoService.selectVideoList(query);
-                        if (CollectionUtils.isEmpty(videoList)) {
-                            Video video = new Video();
-                            video.setMoney("2-5");
-                            video.setCs(String.valueOf(vodId));
-                            video.setUrl(vodPic);
-                            video.setUserId("admin");
-                            video.setLogo(vodPic);
-                            video.setName(vodName);
-                            boolean check = vodPlayUrl.contains("$");
-                            if (check) {
-                                String[] split = vodPlayUrl.split("\\$");
-                                video.setVideoUrl(split[1]);
-                            } else {
-                                video.setVideoUrl(vodPlayUrl);
-                            }
-                            video.setClick(0);
-                            video.setCategoryId(pk);
-                            video.setDuration("752");
-                            video.setCreateTime(new Date());
-                            videoService.insertVideo(video);
-                        }
-                    }
-                }
-            }
-        }
 
 
-        return AjaxResult.success(AjaxResult.Type.SUCCESS.name(), parse);
-    }
+
 
     @ApiOperation("拉取视频")
     @ResponseBody
