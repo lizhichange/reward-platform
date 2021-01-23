@@ -10,7 +10,7 @@ import java.util.List;
  * @author ruoyi
  * @date 2020-03-26
  */
-public interface IYqmService {
+public interface InvitationService {
     /**
      * 查询邀请码管理
      *

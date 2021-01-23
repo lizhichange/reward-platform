@@ -4,7 +4,7 @@ import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.system.domain.Yqm;
 import com.ruoyi.system.mapper.YqmMapper;
-import com.ruoyi.system.service.IYqmService;
+import com.ruoyi.system.service.InvitationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,7 @@ import java.util.List;
  * @date 2020-03-26
  */
 @Service
-public class YqmServiceImpl implements IYqmService {
+public class InvitationServiceImpl implements InvitationService {
     @Autowired
     private YqmMapper yqmMapper;
 

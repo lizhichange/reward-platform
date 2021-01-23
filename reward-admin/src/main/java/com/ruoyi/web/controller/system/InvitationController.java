@@ -13,7 +13,7 @@ import com.ruoyi.reward.facade.enums.YqmStatusEnum;
 import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.system.domain.Yqm;
 import com.ruoyi.system.service.ISysUserService;
-import com.ruoyi.system.service.IYqmService;
+import com.ruoyi.system.service.InvitationService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.near.toolkit.common.DateUtils;
 import org.near.toolkit.common.EnumUtil;
@@ -40,7 +40,7 @@ public class InvitationController extends BaseController {
     private String prefix = "system/invitation";
 
     @Autowired
-    private IYqmService yqmService;
+    private InvitationService yqmService;
 
 
     @Autowired

@@ -61,7 +61,7 @@ public class WebController extends BaseController {
     ISysRoleService roleService;
 
     @Autowired
-    IYqmService yqmService;
+    InvitationService yqmService;
 
     @Autowired
     SysShortService sysShortService;
