@@ -51,7 +51,6 @@ public class RequestAuthInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-
         request.setAttribute("authMpEnabled", appConfig.isAuthMpEnabled());
         StringBuffer requestUrl = request.getRequestURL();
         LOGGER.debug("requestURL:{}", requestUrl);
