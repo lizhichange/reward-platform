@@ -30,7 +30,7 @@ public class Video extends ToString {
      *
      * @mbg.generated 2021-01-23 18:35:04
      */
-    private String sucCount;
+    private Integer sucCount;
 
     /**
      * video.img_url
