@@ -109,9 +109,9 @@
             let id = $(this).data('id');
             let weui = $(".weui-cells");
             if (id === 'button' || id === 'msg' || id === 'toast' || id === 'tips') {
-                obj.prop('href', '/video/audit');
+                obj.prop('href', '/error/audit');
             } else if (id === 'dialog' || id === 'picker' || id === 'top' || id === 'navbar') {
-                obj.prop('href', '/video/multi?type=' + id);
+                obj.prop('href', '/error/multi?type=' + id);
             }
         });
     });

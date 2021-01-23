@@ -27,7 +27,7 @@
     <div class="weui-cells__title">请选择哪一类违法内容:</div>
 
     <div class="weui-cells">
-        <a class="weui-cell weui-cell_access" th:each="dict : ${list}" href="/video/audit">
+        <a class="weui-cell weui-cell_access" th:each="dict : ${list}" href="/error/audit">
             <div class="weui-cell__bd wx-submit">[[${dict.name}]]</div>
             <div class="weui-cell__ft"></div>
         </a>
