@@ -49,7 +49,9 @@ import java.util.stream.Collectors;
 
 import static com.ruoyi.reward.facade.enums.OrderPayType.WE_CHAT_PAY;
 
-/**¬
+/**
+ * ¬
+ *
  * @author sunflower
  */
 @Controller
@@ -62,23 +64,26 @@ public class VideoController extends BaseController {
     private static final String prefix = "video";
 
     @Autowired
-    private AppConfig appConfig;
+    AppConfig appConfig;
+    @Autowired
+    ThreadPoolTaskExecutor threadPoolTaskExecutor;
+    @Autowired
+    VideoFacadeClient videoFacadeClient;
+    @Autowired
+    SysCategoryFacadeClient sysCategoryFacadeClient;
+    @Autowired
+    SysOrderFacadeClient sysOrderFacadeClient;
+    @Autowired
+    SysWebMainFacadeClient sysWebMainFacadeClient;
+
 
     @Autowired
-    private ThreadPoolTaskExecutor threadPoolTaskExecutor;
-    @Autowired
-    private VideoFacadeClient videoFacadeClient;
-    @Autowired
-    private SysCategoryFacadeClient sysCategoryFacadeClient;
-    @Autowired
-    private SysOrderFacadeClient sysOrderFacadeClient;
-    @Autowired
-    private SysWebMainFacadeClient sysWebMainFacadeClient;
+    SysConfigFacadeClient sysConfigFacadeClient;
 
-    private void xxx(@RequestParam(value = "userId", required = false) String userId,
-                     @RequestParam(value = "categoryId", required = false) String categoryId,
-                     @RequestParam(value = "videoId", required = false) String videoId,
-                     ModelMap modelmap) {
+    void xxx(@RequestParam(value = "userId", required = false) String userId,
+             @RequestParam(value = "categoryId", required = false) String categoryId,
+             @RequestParam(value = "videoId", required = false) String videoId,
+             ModelMap modelmap) {
         log.info("userId:{}", userId);
         VideoDTO videoDTO = new VideoDTO();
         String orderByClause = " create_time desc ";
@@ -116,7 +121,6 @@ public class VideoController extends BaseController {
     public String render(@RequestParam(value = "userId", required = false) String userId,
                          @RequestParam(value = "categoryId", required = false) String categoryId,
                          @RequestParam(value = "videoId", required = false) String videoId,
-
                          ModelMap modelmap) {
         return index(userId, categoryId, videoId, modelmap);
     }
@@ -204,7 +208,6 @@ public class VideoController extends BaseController {
     @WxPnUserAuth
     public TableDataInfo buy(VideoDTO videoDTO, PageForm pageForm) {
         String openId = SessionContext.getOpenId();
-
         int pageNum = pageForm.getPageNum();
         int pageSize = pageForm.getPageSize();
         SysOrderDTO sysOrderDTO = new SysOrderDTO();
@@ -240,8 +243,6 @@ public class VideoController extends BaseController {
         return rspData;
     }
 
-    @Autowired
-    SysConfigFacadeClient sysConfigFacadeClient;
 
     @PostMapping("/queryOrder")
     @ResponseBody
@@ -424,7 +425,7 @@ public class VideoController extends BaseController {
         }
     }
 
-    private void convert(List<VideoDTO> list) {
+    void convert(List<VideoDTO> list) {
         if (!CollectionUtils.isEmpty(list)) {
             Date now = new Date();
             for (VideoDTO dto : list) {
