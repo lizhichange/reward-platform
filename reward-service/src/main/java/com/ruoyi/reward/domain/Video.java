@@ -81,7 +81,7 @@ public class Video extends ToString {
      *
      * @mbg.generated 2020-07-07 11:14:12
      */
-    private String lx;
+    private String videoType;
 
     /**
      * video.status

@@ -94,7 +94,7 @@ public class VideoDTO extends ToString {
      *
      * @mbg.generated 2020-03-19 21:47:04
      */
-    private String lx;
+    private String videoType;
 
     /**
      * video.status

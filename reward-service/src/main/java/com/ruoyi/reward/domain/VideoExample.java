@@ -396,17 +396,17 @@ public class VideoExample {
         }
 
         public Criteria andUrlIsNull() {
-            addCriterion("url is null");
+            addCriterion("img_url is null");
             return (Criteria) this;
         }
 
         public Criteria andUrlIsNotNull() {
-            addCriterion("url is not null");
+            addCriterion("img_url is not null");
             return (Criteria) this;
         }
 
         public Criteria andUrlEqualTo(String value) {
-            addCriterion("url =", value, "url");
+            addCriterion("img_url =", value, "url");
             return (Criteria) this;
         }
 
