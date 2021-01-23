@@ -20,7 +20,6 @@ import java.util.List;
  * @author sunflower
  */
 @FeignClient(value = "reward-service", path = "/rest/video"
-
         , configuration = VideoFacadeFeign.MultipartSupportConfig.class
 )
 public interface VideoFacadeFeign {
