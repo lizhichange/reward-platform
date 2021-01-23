@@ -11,7 +11,7 @@
 <body>
 <div class="main-content">
 
-    <form class="form-horizontal m" id="form-shipin-edit" th:object="${shipin}">
+    <form class="form-horizontal m" id="form-video-edit" th:object="${video}">
         <input name="id" th:field="*{id}" type="hidden">
         <input id="treeId" name="categoryId" th:field="*{categoryId}" type="hidden" />
         <h4 class="form-header h4">基本信息</h4>
@@ -117,7 +117,7 @@
 <th:block th:include="include :: select2-js" />
 <th:block th:include="include :: bootstrap-fileinput-js" />
 <script>
-        var prefix = ctx + "system/shipin";
+        var prefix = ctx + "system/video";
         $(document).ready(function () {
             var url = $('#url').val();
             $("#fileinput-demo-1").fileinput({
@@ -171,7 +171,7 @@
                 }
             }
         });
-        $("#form-shipin-edit").validate({
+        $("#form-video-edit").validate({
             onkeyup: false,
             rules: {},
             messages: {},
@@ -190,7 +190,7 @@
                     $.modal.msg('请先上传视频');
                     return;
                 }
-                var data = $("#form-shipin-edit").serializeArray();
+                var data = $("#form-video-edit").serializeArray();
                 $.operate.saveTab(prefix + "/edit", data);
             }
         }

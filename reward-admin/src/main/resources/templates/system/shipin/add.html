@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="main-content">
-    <form class="form-horizontal" id="form-shipin-add">
+    <form class="form-horizontal" id="form-video-add">
         <input id="treeId" name="categoryId" type="hidden"/>
         <h4 class="form-header h4">基本信息</h4>
         <div class="row">
@@ -113,7 +113,7 @@
 <th:block th:include="include :: bootstrap-fileinput-js"/>
 
 <script>
-    var prefix = ctx + "system/shipin";
+    var prefix = ctx + "system/video";
 
 
     let fileinput = $("#fileinput-demo-1").fileinput({
@@ -167,7 +167,7 @@
     });
 
 
-    $("#form-shipin-add").validate({
+    $("#form-video-add").validate({
         onkeyup: false,
         rules: {},
         messages: {},
@@ -187,7 +187,7 @@
                 $.modal.msg('请先上传视频');
                 return;
             }
-            var data = $("#form-shipin-add").serializeArray();
+            var data = $("#form-video-add").serializeArray();
             $.operate.saveTab(prefix + "/add", data);
         }
     }
