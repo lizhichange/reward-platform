@@ -17,7 +17,7 @@ public interface ExtComplaintMapper {
      * @param id 投诉列表ID
      * @return 投诉列表
      */
-    Complaint selectTsById(Long id);
+    Complaint selectComplaintById(Long id);
 
     /**
      * 查询投诉列表列表
@@ -25,7 +25,7 @@ public interface ExtComplaintMapper {
      * @param complaint 投诉列表
      * @return 投诉列表集合
      */
-    public List<Complaint> selectTsList(Complaint complaint);
+    public List<Complaint> selectComplaintList(Complaint complaint);
 
     /**
      * 新增投诉列表
@@ -33,7 +33,7 @@ public interface ExtComplaintMapper {
      * @param complaint 投诉列表
      * @return 结果
      */
-    public int insertTs(Complaint complaint);
+    public int insertComplaint(Complaint complaint);
 
     /**
      * 修改投诉列表
@@ -41,7 +41,7 @@ public interface ExtComplaintMapper {
      * @param complaint 投诉列表
      * @return 结果
      */
-    public int updateTs(Complaint complaint);
+    public int updateComplaint(Complaint complaint);
 
     /**
      * 删除投诉列表
@@ -49,7 +49,7 @@ public interface ExtComplaintMapper {
      * @param id 投诉列表ID
      * @return 结果
      */
-    public int deleteTsById(Long id);
+    public int deleteComplaintById(Long id);
 
     /**
      * 批量删除投诉列表
@@ -57,5 +57,5 @@ public interface ExtComplaintMapper {
      * @param ids 需要删除的数据ID
      * @return 结果
      */
-    public int deleteTsByIds(String[] ids);
+    public int deleteComplaintByIds(String[] ids);
 }

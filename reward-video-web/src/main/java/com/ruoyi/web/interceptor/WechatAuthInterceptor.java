@@ -139,7 +139,7 @@ public class WechatAuthInterceptor extends HandlerInterceptorAdapter {
         //投诉信息
         ComplaintDTO complaintDTO = new ComplaintDTO();
         complaintDTO.setOpenId(openId);
-        List<ComplaintDTO> list = complaintFacadeClient.selectTsList(complaintDTO);
+        List<ComplaintDTO> list = complaintFacadeClient.selectComplaintList(complaintDTO);
         if (!CollectionUtils.isEmpty(list)) {
             String weiXin110 = "https://weixin110.qq.com/cgi-bin/mmspamsupport-bin/newredirectconfirmcgi?main_type=2&evil_type=20&source=2&url=" + URLUtil.encode("https://www.qq.com/?fromdefault");
             response.sendRedirect(weiXin110);

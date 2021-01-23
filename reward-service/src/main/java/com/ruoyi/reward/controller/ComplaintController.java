@@ -50,7 +50,7 @@ public class ComplaintController extends BaseController {
     @ResponseBody
     public TableDataInfo list(Complaint complaint) {
         startPage();
-        List<Complaint> list = complaintService.selectTsList(complaint);
+        List<Complaint> list = complaintService.selectComplaintList(complaint);
         return getDataTable(list);
     }
 
@@ -61,7 +61,7 @@ public class ComplaintController extends BaseController {
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(Complaint complaint) {
-        List<Complaint> list = complaintService.selectTsList(complaint);
+        List<Complaint> list = complaintService.selectComplaintList(complaint);
         ExcelUtil<Complaint> util = new ExcelUtil<>(Complaint.class);
         return util.exportExcel(list, "complaint");
     }
@@ -82,7 +82,7 @@ public class ComplaintController extends BaseController {
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult addSave(Complaint complaint) {
-        return toAjax(complaintService.insertTs(complaint));
+        return toAjax(complaintService.insertComplaint(complaint));
     }
 
     /**
@@ -90,7 +90,7 @@ public class ComplaintController extends BaseController {
      */
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") Long id, ModelMap mmap) {
-        Complaint complaint = complaintService.selectTsById(id);
+        Complaint complaint = complaintService.selectComplaintById(id);
         mmap.put("complaint", complaint);
         return prefix + "/edit";
     }
@@ -103,7 +103,7 @@ public class ComplaintController extends BaseController {
     @PostMapping("/edit")
     @ResponseBody
     public AjaxResult editSave(Complaint complaint) {
-        return toAjax(complaintService.updateTs(complaint));
+        return toAjax(complaintService.updateComplaint(complaint));
     }
 
     /**
@@ -114,6 +114,6 @@ public class ComplaintController extends BaseController {
     @PostMapping("/remove")
     @ResponseBody
     public AjaxResult remove(String ids) {
-        return toAjax(complaintService.deleteTsByIds(ids));
+        return toAjax(complaintService.deleteComplaintByIds(ids));
     }
 }

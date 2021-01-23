@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/rest/ts")
 @RestController
 @Slf4j
-public class TsRestController {
+public class ComplaintRestController {
     @Autowired
     private ComplaintFacade complaintFacade;
 
@@ -24,10 +24,10 @@ public class TsRestController {
      * @param id 投诉列表ID
      * @return 投诉列表
      */
-    @PostMapping("/selectTsById")
+    @PostMapping("/selectComplaintById")
 
-    public ComplaintDTO selectTsById(@RequestParam("id") Long id) {
-        return complaintFacade.selectTsById(id);
+    public ComplaintDTO selectComplaintById(@RequestParam("id") Long id) {
+        return complaintFacade.selectComplaintById(id);
     }
 
     /**
@@ -36,10 +36,10 @@ public class TsRestController {
      * @param ts 投诉列表
      * @return 投诉列表
      */
-    @PostMapping("/selectTsList")
+    @PostMapping("/selectComplaintList")
 
-    public List<ComplaintDTO> selectTsList(@RequestBody ComplaintDTO ts) {
-        return complaintFacade.selectTsList(ts);
+    public List<ComplaintDTO> selectComplaintList(@RequestBody ComplaintDTO ts) {
+        return complaintFacade.selectComplaintList(ts);
     }
 
     /**
@@ -48,10 +48,10 @@ public class TsRestController {
      * @param ts 投诉列表
      * @return 结果
      */
-    @PostMapping("/insertTs")
+    @PostMapping("/insertComplaint")
 
-    public int insertTs(@RequestBody ComplaintDTO ts) {
-        return complaintFacade.insertTs(ts);
+    public int insertComplaint(@RequestBody ComplaintDTO ts) {
+        return complaintFacade.insertComplaint(ts);
     }
 
     /**
@@ -60,10 +60,10 @@ public class TsRestController {
      * @param ts 投诉列表
      * @return 结果
      */
-    @PostMapping("/updateTs")
+    @PostMapping("/updateComplaint")
 
-    public int updateTs(@RequestBody ComplaintDTO ts) {
-        return complaintFacade.updateTs(ts);
+    public int updateComplaint(@RequestBody ComplaintDTO ts) {
+        return complaintFacade.updateComplaint(ts);
     }
 
     /**
@@ -72,9 +72,9 @@ public class TsRestController {
      * @param ids 需要删除的数据ID
      * @return 结果
      */
-    @PostMapping("/deleteTsByIds")
-    public int deleteTsByIds(@RequestParam("ids") String ids) {
-        return complaintFacade.deleteTsByIds(ids);
+    @PostMapping("/deleteComplaintByIds")
+    public int deleteComplaintByIds(@RequestParam("ids") String ids) {
+        return complaintFacade.deleteComplaintByIds(ids);
     }
 
     /**
@@ -83,8 +83,8 @@ public class TsRestController {
      * @param id 投诉列表ID
      * @return 结果
      */
-    @PostMapping("/deleteTsById")
-    public int deleteTsById(@RequestParam("id") Long id) {
-        return complaintFacade.deleteTsById(id);
+    @PostMapping("/deleteComplaintById")
+    public int deleteComplaintById(@RequestParam("id") Long id) {
+        return complaintFacade.deleteComplaintById(id);
     }
 }

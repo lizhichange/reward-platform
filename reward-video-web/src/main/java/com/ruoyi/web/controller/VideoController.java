@@ -525,7 +525,7 @@ public class VideoController extends BaseController {
             complaintDTO.setOpenId(SessionContext.getOpenId());
             complaintDTO.setUserId(SessionContext.getUserId());
             complaintDTO.setIp(IpUtils.getIpAddr(request));
-            complaintFacadeClient.insertTs(complaintDTO);
+            complaintFacadeClient.insertComplaint(complaintDTO);
         });
         return prefix + "/sub";
     }
@@ -642,7 +642,7 @@ public class VideoController extends BaseController {
     }
 
     @GetMapping("/tswq")
-    public String renderTs(@RequestParam(value = "userId", required = false) String userId, ModelMap modelmap) {
+    public String renderComplaint(@RequestParam(value = "userId", required = false) String userId, ModelMap modelmap) {
         return prefix + "/tswq";
     }
 

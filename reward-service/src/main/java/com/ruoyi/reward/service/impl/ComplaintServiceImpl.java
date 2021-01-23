@@ -22,8 +22,8 @@ public class ComplaintServiceImpl implements ComplaintService {
      * @return 投诉列表
      */
     @Override
-    public Complaint selectTsById(Long id) {
-        return extComplaintMapper.selectTsById(id);
+    public Complaint selectComplaintById(Long id) {
+        return extComplaintMapper.selectComplaintById(id);
     }
 
     /**
@@ -33,8 +33,8 @@ public class ComplaintServiceImpl implements ComplaintService {
      * @return 投诉列表
      */
     @Override
-    public List<Complaint> selectTsList(Complaint complaint) {
-        return extComplaintMapper.selectTsList(complaint);
+    public List<Complaint> selectComplaintList(Complaint complaint) {
+        return extComplaintMapper.selectComplaintList(complaint);
     }
 
     /**
@@ -44,9 +44,9 @@ public class ComplaintServiceImpl implements ComplaintService {
      * @return 结果
      */
     @Override
-    public int insertTs(Complaint complaint) {
+    public int insertComplaint(Complaint complaint) {
         complaint.setCreateTime(DateUtils.getNowDate());
-        return extComplaintMapper.insertTs(complaint);
+        return extComplaintMapper.insertComplaint(complaint);
     }
 
     /**
@@ -56,9 +56,9 @@ public class ComplaintServiceImpl implements ComplaintService {
      * @return 结果
      */
     @Override
-    public int updateTs(Complaint complaint) {
+    public int updateComplaint(Complaint complaint) {
         complaint.setUpdateTime(DateUtils.getNowDate());
-        return extComplaintMapper.updateTs(complaint);
+        return extComplaintMapper.updateComplaint(complaint);
     }
 
     /**
@@ -68,8 +68,8 @@ public class ComplaintServiceImpl implements ComplaintService {
      * @return 结果
      */
     @Override
-    public int deleteTsByIds(String ids) {
-        return extComplaintMapper.deleteTsByIds(Convert.toStrArray(ids));
+    public int deleteComplaintByIds(String ids) {
+        return extComplaintMapper.deleteComplaintByIds(Convert.toStrArray(ids));
     }
 
     /**
@@ -79,7 +79,7 @@ public class ComplaintServiceImpl implements ComplaintService {
      * @return 结果
      */
     @Override
-    public int deleteTsById(Long id) {
-        return extComplaintMapper.deleteTsById(id);
+    public int deleteComplaintById(Long id) {
+        return extComplaintMapper.deleteComplaintById(id);
     }
 }

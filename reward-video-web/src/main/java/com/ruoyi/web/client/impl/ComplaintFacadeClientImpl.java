@@ -18,23 +18,23 @@ public class ComplaintFacadeClientImpl implements ComplaintFacadeClient {
     ComplaintFacade complaintFacade;
 
     @Override
-    public ComplaintDTO selectTsById(Long id) {
-        return complaintFacade.selectTsById(id);
+    public ComplaintDTO selectComplaintById(Long id) {
+        return complaintFacade.selectComplaintById(id);
     }
 
     @Override
-    public List<ComplaintDTO> selectTsList(ComplaintDTO ts) {
-        return complaintFacade.selectTsList(ts);
+    public List<ComplaintDTO> selectComplaintList(ComplaintDTO ts) {
+        return complaintFacade.selectComplaintList(ts);
     }
 
     @Override
-    public int insertTs(ComplaintDTO ts) {
-        return complaintFacade.insertTs(ts);
+    public int insertComplaint(ComplaintDTO ts) {
+        return complaintFacade.insertComplaint(ts);
     }
 
     @Override
-    public int updateTs(ComplaintDTO ts) {
-        return complaintFacade.updateTs(ts);
+    public int updateComplaint(ComplaintDTO ts) {
+        return complaintFacade.updateComplaint(ts);
     }
 
 

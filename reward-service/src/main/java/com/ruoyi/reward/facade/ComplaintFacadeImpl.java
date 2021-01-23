@@ -41,10 +41,10 @@ public class ComplaintFacadeImpl implements ComplaintFacade {
      * @return 投诉列表
      */
     @Override
-    public ComplaintDTO selectTsById(Long id) {
+    public ComplaintDTO selectComplaintById(Long id) {
 
 
-        return convert(extComplaintMapper.selectTsById(id));
+        return convert(extComplaintMapper.selectComplaintById(id));
     }
 
     private ComplaintDTO convert(Complaint item) {
@@ -64,10 +64,10 @@ public class ComplaintFacadeImpl implements ComplaintFacade {
      * @return 投诉列表
      */
     @Override
-    public List<ComplaintDTO> selectTsList(ComplaintDTO ts) {
+    public List<ComplaintDTO> selectComplaintList(ComplaintDTO ts) {
         Complaint item = new Complaint();
         BeanUtils.copyProperties(ts, item);
-        List<Complaint> list = extComplaintMapper.selectTsList(item);
+        List<Complaint> list = extComplaintMapper.selectComplaintList(item);
         return list.stream().map(this::convert).collect(Collectors.toList());
     }
 
@@ -78,10 +78,10 @@ public class ComplaintFacadeImpl implements ComplaintFacade {
      * @return 结果
      */
     @Override
-    public int insertTs(ComplaintDTO ts) {
+    public int insertComplaint(ComplaintDTO ts) {
         Complaint item = new Complaint();
         BeanUtils.copyProperties(ts, item);
-        return extComplaintMapper.insertTs(item);
+        return extComplaintMapper.insertComplaint(item);
     }
 
     /**
@@ -91,10 +91,10 @@ public class ComplaintFacadeImpl implements ComplaintFacade {
      * @return 结果
      */
     @Override
-    public int updateTs(ComplaintDTO ts) {
+    public int updateComplaint(ComplaintDTO ts) {
         Complaint item = new Complaint();
         BeanUtils.copyProperties(ts, item);
-        return extComplaintMapper.updateTs(item);
+        return extComplaintMapper.updateComplaint(item);
     }
 
     /**
@@ -104,8 +104,8 @@ public class ComplaintFacadeImpl implements ComplaintFacade {
      * @return 结果
      */
     @Override
-    public int deleteTsByIds(String ids) {
-        return extComplaintMapper.deleteTsByIds(Convert.toStrArray(ids));
+    public int deleteComplaintByIds(String ids) {
+        return extComplaintMapper.deleteComplaintByIds(Convert.toStrArray(ids));
     }
 
     @Override
@@ -120,8 +120,8 @@ public class ComplaintFacadeImpl implements ComplaintFacade {
      * @return 结果
      */
     @Override
-    public int deleteTsById(Long id) {
-        return extComplaintMapper.deleteTsById(id);
+    public int deleteComplaintById(Long id) {
+        return extComplaintMapper.deleteComplaintById(id);
     }
 
 }

@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.reward.mapper.ExtComplaintMapper">
 
-    <resultMap type="Ts" id="TsResult">
+    <resultMap type="Complaint" id="ComplaintResult">
         <result property="id" column="id"/>
         <result property="ip" column="ip"/>
         <result property="status" column="status"/>
@@ -18,12 +18,12 @@
         <result property="openId" column="open_id"/>
     </resultMap>
 
-    <sql id="selectTsVo">
+    <sql id="selectComplaintVo">
         select id, ip, status, content, duration, typeto, sid, user_id, create_time, update_time, open_id from complaint
     </sql>
 
-    <select id="selectTsList" parameterType="Ts" resultMap="TsResult">
-        <include refid="selectTsVo"/>
+    <select id="selectComplaintList" parameterType="Complaint" resultMap="ComplaintResult">
+        <include refid="selectComplaintVo"/>
         <where>
             <if test="ip != null  and ip != ''">and ip = #{ip}</if>
             <if test="status != null  and status != ''">and status = #{status}</if>
@@ -36,12 +36,12 @@
         </where>
     </select>
 
-    <select id="selectTsById" parameterType="Long" resultMap="TsResult">
-        <include refid="selectTsVo"/>
+    <select id="selectComplaintById" parameterType="Long" resultMap="ComplaintResult">
+        <include refid="selectComplaintVo"/>
         where id = #{id}
     </select>
 
-    <insert id="insertTs" parameterType="Ts" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertComplaint" parameterType="Complaint" useGeneratedKeys="true" keyProperty="id">
         insert into complaint
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="ip != null  and ip != ''">ip,</if>
@@ -69,7 +69,7 @@
         </trim>
     </insert>
 
-    <update id="updateTs" parameterType="Ts">
+    <update id="updateComplaint" parameterType="Complaint">
         update complaint
         <trim prefix="SET" suffixOverrides=",">
             <if test="ip != null  and ip != ''">ip = #{ip},</if>
@@ -86,11 +86,11 @@
         where id = #{id}
     </update>
 
-    <delete id="deleteTsById" parameterType="Long">
+    <delete id="deleteComplaintById" parameterType="Long">
         delete from complaint where id = #{id}
     </delete>
 
-    <delete id="deleteTsByIds" parameterType="String">
+    <delete id="deleteComplaintByIds" parameterType="String">
         delete from complaint where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
