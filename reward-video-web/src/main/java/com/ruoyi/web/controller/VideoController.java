@@ -23,7 +23,6 @@ import lombok.Data;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang.StringUtils;
 import org.near.servicesupport.result.TPageResult;
-import org.near.toolkit.common.DateUtils;
 import org.near.toolkit.common.EnumUtil;
 import org.near.toolkit.common.StringUtil;
 import org.near.toolkit.context.SessionContext;
@@ -83,29 +82,6 @@ public class VideoController extends BaseController {
     @Autowired
     SysConfigFacadeClient sysConfigFacadeClient;
 
-    void xxx(@RequestParam(value = "userId", required = false) String userId,
-             @RequestParam(value = "categoryId", required = false) String categoryId,
-             @RequestParam(value = "videoId", required = false) String videoId,
-             ModelMap modelmap) {
-        log.info("userId:{}", userId);
-        VideoDTO videoDTO = new VideoDTO();
-        String orderByClause = " create_time desc ";
-        TPageResult<VideoDTO> result = videoFacadeClient.queryPage(1, 12, videoDTO, orderByClause);
-        List<VideoDTO> list = result.getValues();
-        convert(list);
-        list.sort((o1, o2) -> o2.getCreateTime().compareTo(o1.getCreateTime()));
-        modelmap.addAttribute("list", list);
-        getCategory(modelmap);
-        modelmap.addAttribute("categoryId", categoryId);
-        if (StringUtil.isNotBlank(videoId)) {
-            try {
-                VideoDTO dto = videoFacadeClient.selectVideoDTOById(Long.parseLong(videoId));
-                modelmap.addAttribute("video", dto);
-            } catch (Exception e) {
-                log.error(e.getMessage(), e);
-            }
-        }
-    }
 
     @GetMapping("/redirect")
     public String redirect(@RequestParam(value = "userId", required = false) String userId,
@@ -428,33 +404,6 @@ public class VideoController extends BaseController {
         }
     }
 
-    void convert(List<VideoDTO> list) {
-        if (!CollectionUtils.isEmpty(list)) {
-            Date now = new Date();
-            for (VideoDTO dto : list) {
-                SysConfigDTO configDTO = sysConfigFacadeClient.queryConfigByKey("admin");
-                if (configDTO != null && StringUtils.isNotBlank(configDTO.getConfigValue())) {
-                    String main;
-                    Map valueMap = JSONObject.parseObject(configDTO.getConfigValue(), Map.class);
-                    if (valueMap.containsKey("main")) {
-                        main = valueMap.get("main").toString();
-                        Money m = new Money(main);
-                        dto.setMoney("￥" + m.toString() + "元");
-                    }
-                }
-                convert(now, dto);
-                dto.setMockNum(mock() + "人付款");
-            }
-        }
-    }
-
-    public String mock() {
-        String s = RandomUtil.randomNumbers(3);
-        if (s.contains("0")) {
-            s = s.replaceAll("0", "");
-        }
-        return s;
-    }
 
     @Data
     public static class PriceParam extends ToString {
@@ -479,20 +428,7 @@ public class VideoController extends BaseController {
         }
     }
 
-    private void convert(Date now, VideoDTO dto) {
-        Date createTime = dto.getCreateTime();
-        if (createTime != null) {
-            long diffDays = DateUtils.getDiffDays(now, createTime);
-            if (diffDays < 1) {
-                dto.setDiffDays("刚刚");
-            } else {
-                dto.setDiffDays(diffDays + "天前");
-            }
-        }
-        if (StringUtil.isNotBlank(dto.getDuration())) {
-            dto.setDurationStr(DateUtils.getTimeString(Integer.parseInt(dto.getDuration())));
-        }
-    }
+
 
     List<PriceParam> convert(JSONArray array) {
         ArrayList<PriceParam> objects = Lists.newArrayList();
