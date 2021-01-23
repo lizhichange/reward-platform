@@ -246,7 +246,6 @@ public class VideoController extends BaseController {
         map.put("notifyUrl", notifyUrl);
         map.put("returnUrl", returnUrl);
         map.put("attach", attach);
-//        map.put("accKey", accKey);
         String merchantKey = "8387ea13ff584f77cb5309125897a0d047a7e07c38f3ac961c7c98833fe06501";
         String sign = sign(map, merchantKey, true);
         map.put("sign", sign);
@@ -261,7 +260,7 @@ public class VideoController extends BaseController {
             String body = postForEntity.getBody();
             PayResult result = JSONObject.parseObject(body, PayResult.class);
             if (result != null && result.getCode() == 0) {
-
+                logger.info("result:{}", result);
             }
         }
 
