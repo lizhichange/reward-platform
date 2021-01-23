@@ -17,7 +17,7 @@ import java.util.List;
 @RequestMapping("/rest/video")
 @RestController
 @Slf4j
-public class VideoController {
+public class VideoRestController {
     @Autowired
     VideoFacade videoFacade;
 
