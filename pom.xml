@@ -366,7 +366,11 @@
                 <artifactId>near-webmvc-support</artifactId>
                 <version>1.0.0</version>
             </dependency>
-
+            <dependency>
+                <groupId>cglib</groupId>
+                <artifactId>cglib</artifactId>
+                <version>3.3.0</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
@@ -390,6 +394,9 @@
             <version>1.18.4</version>
             <scope>provided</scope>
         </dependency>
+
+
+
 
     </dependencies>
 
