@@ -14,10 +14,10 @@ import java.util.List;
 /**
  * @author sunflower
  */
-@RequestMapping("/rest/shi")
+@RequestMapping("/rest/video")
 @RestController
 @Slf4j
-public class ShiController {
+public class VideoController {
     @Autowired
     VideoFacade videoFacade;
 
