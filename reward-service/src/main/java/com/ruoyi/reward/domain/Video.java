@@ -1,8 +1,8 @@
 package com.ruoyi.reward.domain;
 
 import lombok.Data;
+import org.near.toolkit.model.ToString;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -10,7 +10,7 @@ import java.util.List;
  * @author sunflower
  */
 @Data
-public class Video implements Serializable {
+public class Video extends ToString {
 
 
     private static final long serialVersionUID = -495973710593943252L;
@@ -51,7 +51,7 @@ public class Video implements Serializable {
      *
      * @mbg.generated 2020-07-07 11:14:12
      */
-    private String url;
+    private String imgUrl;
 
     /**
      * video.user_id
@@ -160,36 +160,6 @@ public class Video implements Serializable {
     private String privateMoney;
 
     private List<String> userIdList;
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", money=").append(money);
-        sb.append(", sj=").append(sj);
-        sb.append(", cs=").append(cs);
-        sb.append(", url=").append(url);
-        sb.append(", userId=").append(userId);
-        sb.append(", name=").append(name);
-        sb.append(", videoUrl=").append(videoUrl);
-        sb.append(", duration=").append(duration);
-        sb.append(", lx=").append(lx);
-        sb.append(", status=").append(status);
-        sb.append(", logo=").append(logo);
-        sb.append(", isLei=").append(isLei);
-        sb.append(", isAllow=").append(isAllow);
-        sb.append(", click=").append(click);
-        sb.append(", isPreview=").append(isPreview);
-        sb.append(", shortUrl=").append(shortUrl);
-        sb.append(", categoryId=").append(categoryId);
-        sb.append(", createTime=").append(createTime);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
-    }
 
 
 }

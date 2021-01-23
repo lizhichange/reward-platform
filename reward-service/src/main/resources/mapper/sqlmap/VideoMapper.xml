@@ -6,7 +6,7 @@
         <result column="money" jdbcType="VARCHAR" property="money"/>
         <result column="sj" jdbcType="VARCHAR" property="sj"/>
         <result column="cs" jdbcType="VARCHAR" property="cs"/>
-        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="img_url" jdbcType="VARCHAR" property="imgUrl"/>
         <result column="user_id" jdbcType="VARCHAR" property="userId"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="video_url" jdbcType="VARCHAR" property="videoUrl"/>
@@ -83,7 +83,7 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-        id, money, sj, cs, url, user_id, name, video_url, duration, lx, status, logo, is_lei, is_allow,
+        id, money, sj, cs, img_url, user_id, name, video_url, duration, lx, status, logo, is_lei, is_allow,
         click, is_preview, short_url, category_id, create_time
     </sql>
     <select id="selectByExample" parameterType="com.ruoyi.reward.domain.VideoExample" resultMap="BaseResultMap">
@@ -127,13 +127,13 @@
     <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.ruoyi.reward.domain.Video"
             useGeneratedKeys="true">
         insert into video (money, sj, cs,
-        url, user_id, name,
+        img_url, user_id, name,
         video_url, duration, lx,
         status, logo, is_lei, is_allow,
         click, is_preview, short_url,
         category_id, create_time)
         values (#{money,jdbcType=VARCHAR}, #{sj,jdbcType=VARCHAR}, #{cs,jdbcType=VARCHAR},
-        #{url,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+        #{imgUrl,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
         #{videoUrl,jdbcType=VARCHAR}, #{duration,jdbcType=VARCHAR}, #{lx,jdbcType=VARCHAR},
         #{status,jdbcType=VARCHAR}, #{logo,jdbcType=VARCHAR}, #{isLei,jdbcType=BIT}, #{isAllow,jdbcType=BIT},
         #{click,jdbcType=INTEGER}, #{isPreview,jdbcType=BIT}, #{shortUrl,jdbcType=VARCHAR},
@@ -152,8 +152,8 @@
             <if test="cs != null">
                 cs,
             </if>
-            <if test="url != null">
-                url,
+            <if test="imgUrl != null">
+                img_url,
             </if>
             <if test="userId != null">
                 user_id,
@@ -208,8 +208,8 @@
             <if test="cs != null">
                 #{cs,jdbcType=VARCHAR},
             </if>
-            <if test="url != null">
-                #{url,jdbcType=VARCHAR},
+            <if test="imgUrl != null">
+                #{imgUrl,jdbcType=VARCHAR},
             </if>
             <if test="userId != null">
                 #{userId,jdbcType=VARCHAR},
@@ -276,8 +276,8 @@
             <if test="record.cs != null">
                 cs = #{record.cs,jdbcType=VARCHAR},
             </if>
-            <if test="record.url != null">
-                url = #{record.url,jdbcType=VARCHAR},
+            <if test="record.imgUrl != null">
+                img_url = #{record.imgUrl,jdbcType=VARCHAR},
             </if>
             <if test="record.userId != null">
                 user_id = #{record.userId,jdbcType=VARCHAR},
@@ -332,7 +332,7 @@
         money = #{record.money,jdbcType=VARCHAR},
         sj = #{record.sj,jdbcType=VARCHAR},
         cs = #{record.cs,jdbcType=VARCHAR},
-        url = #{record.url,jdbcType=VARCHAR},
+        img_url = #{record.imgUrl,jdbcType=VARCHAR},
         user_id = #{record.userId,jdbcType=VARCHAR},
         name = #{record.name,jdbcType=VARCHAR},
         video_url = #{record.videoUrl,jdbcType=VARCHAR},
@@ -363,8 +363,8 @@
             <if test="cs != null">
                 cs = #{cs,jdbcType=VARCHAR},
             </if>
-            <if test="url != null">
-                url = #{url,jdbcType=VARCHAR},
+            <if test="img_url != null">
+                img_url = #{imgUrl,jdbcType=VARCHAR},
             </if>
             <if test="userId != null">
                 user_id = #{userId,jdbcType=VARCHAR},
@@ -416,7 +416,7 @@
         set money = #{money,jdbcType=VARCHAR},
         sj = #{sj,jdbcType=VARCHAR},
         cs = #{cs,jdbcType=VARCHAR},
-        url = #{url,jdbcType=VARCHAR},
+        img_url = #{imgUrl,jdbcType=VARCHAR},
         user_id = #{userId,jdbcType=VARCHAR},
         name = #{name,jdbcType=VARCHAR},
         video_url = #{videoUrl,jdbcType=VARCHAR},
