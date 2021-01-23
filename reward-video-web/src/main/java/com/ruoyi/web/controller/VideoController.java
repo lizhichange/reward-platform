@@ -15,6 +15,7 @@ import com.ruoyi.web.client.*;
 import com.ruoyi.web.config.AppConfig;
 import com.ruoyi.web.interceptor.WxPnUserAuth;
 import com.ruoyi.web.model.PageForm;
+import com.ruoyi.web.result.PayResult;
 import com.ruoyi.web.result.TableDataInfo;
 import lombok.Data;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -48,7 +49,7 @@ import java.util.stream.Collectors;
 
 import static com.ruoyi.reward.facade.enums.OrderPayType.WE_CHAT_PAY;
 
-/**
+/**¬
  * @author sunflower
  */
 @Controller
