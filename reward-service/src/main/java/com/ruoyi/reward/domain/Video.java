@@ -29,13 +29,6 @@ public class Video extends ToString {
      */
     private String money;
 
-    /**
-     * video.sj
-     * 选择模式 1为 开启随机金额分配
-     *
-     * @mbg.generated 2020-07-07 11:14:12
-     */
-    private String sj;
 
     /**
      * video.cs
