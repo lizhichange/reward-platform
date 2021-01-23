@@ -152,10 +152,10 @@ public class SysIndexController extends BaseController {
     @com.ruoyi.common.annotation.Log(title = "生成推广链接", businessType = BusinessType.OTHER)
     public AjaxResult build(HttpServletRequest request) {
         String loginName = ShiroUtils.getLoginName();
-        String wxAuthUrl = sysConfigService.selectConfigByKey("wxAuthUrl");
-        String doMain = DoMainUtil.getDoMain(wxAuthUrl);
+        String wxPayUrl = sysConfigService.selectConfigByKey("wxPayUrl");
+        String doMain = DoMainUtil.getDoMain(wxPayUrl);
         log.info("doMain:{}", doMain);
-        String longUrl = wxAuthUrl + "/?userId=" + loginName;
+        String longUrl = wxPayUrl + "/?userId=" + loginName;
         List<SysShort> sysShorts = getShortList(loginName);
         SysShort sysShort = new SysShort();
         if (CollectionUtils.isEmpty(sysShorts)) {
