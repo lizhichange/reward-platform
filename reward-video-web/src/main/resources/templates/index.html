@@ -59,7 +59,8 @@
 					</div>
 					<div class="search">
 						<form>
-							<input type="text" id="keyword" class="textbox" placeholder="" value="">
+							<input type="text" id="keyword" class="textbox" value="" placeholder=""
+								onfocus="this.value = '';" onblur="if (this.value == '') {this.placeholder = '';}">
 							<input type="button" id="search" value=" " />
 						</form>
 					</div>
@@ -301,10 +302,10 @@ wxPayUrl
 		//搜索按钮
 		$("#search").click(function () {
 			var word = $("#keyword").val();
-			if (word) {
-				curWord = word; //更新关键词
-				mescroll.resetUpScroll(); //重新搜索,重置列表数据
-			}
+
+			curWord = word; //更新关键词
+			mescroll.resetUpScroll(); //重新搜索,重置列表数据
+
 		});
 
 		/*初始化菜单*/
@@ -372,7 +373,7 @@ wxPayUrl
 					var src = $a.attr("data-src");
 					//poster 图片地址
 					var poster = $a.attr("data-poster");
-					
+
 					var author = $a.attr("data-author");
 
 					$.ajax({
