@@ -27,19 +27,19 @@ import java.util.List;
 @Controller
 @RequestMapping("/system/ts")
 public class ComplaintController extends BaseController {
-    private String prefix = "system/ts";
+    private String prefix = "system/complaint";
 
     @Autowired
     ComplaintFacade complaintFacade;
     @Autowired
     ComplaintService complaintService;
 
-    @RequiresPermissions("system:ts:view")
+    @RequiresPermissions("system:complaint:view")
     @GetMapping()
-    public String ts(ModelMap modelMap) {
+    public String complaint(ModelMap modelMap) {
         int count = complaintFacade.count();
         modelMap.addAttribute("count", count);
-        return prefix + "/ts";
+        return prefix + "/complaint";
     }
 
     /**
@@ -109,7 +109,7 @@ public class ComplaintController extends BaseController {
     /**
      * 删除投诉列表
      */
-    @RequiresPermissions("system:ts:remove")
+    @RequiresPermissions("system:complaint:remove")
     @Log(title = "投诉列表", businessType = BusinessType.DELETE)
     @PostMapping("/remove")
     @ResponseBody
