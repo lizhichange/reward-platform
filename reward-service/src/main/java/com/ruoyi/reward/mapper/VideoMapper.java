@@ -2,9 +2,8 @@ package com.ruoyi.reward.mapper;
 
 import com.ruoyi.reward.domain.Video;
 import com.ruoyi.reward.domain.VideoExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface VideoMapper {
     long countByExample(VideoExample example);

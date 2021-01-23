@@ -255,76 +255,6 @@ public class VideoExample {
             return (Criteria) this;
         }
 
-        public Criteria andSjIsNull() {
-            addCriterion("sj is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSjIsNotNull() {
-            addCriterion("sj is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSjEqualTo(String value) {
-            addCriterion("sj =", value, "sj");
-            return (Criteria) this;
-        }
-
-        public Criteria andSjNotEqualTo(String value) {
-            addCriterion("sj <>", value, "sj");
-            return (Criteria) this;
-        }
-
-        public Criteria andSjGreaterThan(String value) {
-            addCriterion("sj >", value, "sj");
-            return (Criteria) this;
-        }
-
-        public Criteria andSjGreaterThanOrEqualTo(String value) {
-            addCriterion("sj >=", value, "sj");
-            return (Criteria) this;
-        }
-
-        public Criteria andSjLessThan(String value) {
-            addCriterion("sj <", value, "sj");
-            return (Criteria) this;
-        }
-
-        public Criteria andSjLessThanOrEqualTo(String value) {
-            addCriterion("sj <=", value, "sj");
-            return (Criteria) this;
-        }
-
-        public Criteria andSjLike(String value) {
-            addCriterion("sj like", value, "sj");
-            return (Criteria) this;
-        }
-
-        public Criteria andSjNotLike(String value) {
-            addCriterion("sj not like", value, "sj");
-            return (Criteria) this;
-        }
-
-        public Criteria andSjIn(List<String> values) {
-            addCriterion("sj in", values, "sj");
-            return (Criteria) this;
-        }
-
-        public Criteria andSjNotIn(List<String> values) {
-            addCriterion("sj not in", values, "sj");
-            return (Criteria) this;
-        }
-
-        public Criteria andSjBetween(String value1, String value2) {
-            addCriterion("sj between", value1, value2, "sj");
-            return (Criteria) this;
-        }
-
-        public Criteria andSjNotBetween(String value1, String value2) {
-            addCriterion("sj not between", value1, value2, "sj");
-            return (Criteria) this;
-        }
-
         public Criteria andCsIsNull() {
             addCriterion("cs is null");
             return (Criteria) this;
@@ -395,73 +325,73 @@ public class VideoExample {
             return (Criteria) this;
         }
 
-        public Criteria andUrlIsNull() {
+        public Criteria andImgUrlIsNull() {
             addCriterion("img_url is null");
             return (Criteria) this;
         }
 
-        public Criteria andUrlIsNotNull() {
+        public Criteria andImgUrlIsNotNull() {
             addCriterion("img_url is not null");
             return (Criteria) this;
         }
 
-        public Criteria andUrlEqualTo(String value) {
-            addCriterion("img_url =", value, "url");
+        public Criteria andImgUrlEqualTo(String value) {
+            addCriterion("img_url =", value, "imgUrl");
             return (Criteria) this;
         }
 
-        public Criteria andUrlNotEqualTo(String value) {
-            addCriterion("url <>", value, "url");
+        public Criteria andImgUrlNotEqualTo(String value) {
+            addCriterion("img_url <>", value, "imgUrl");
             return (Criteria) this;
         }
 
-        public Criteria andUrlGreaterThan(String value) {
-            addCriterion("url >", value, "url");
+        public Criteria andImgUrlGreaterThan(String value) {
+            addCriterion("img_url >", value, "imgUrl");
             return (Criteria) this;
         }
 
-        public Criteria andUrlGreaterThanOrEqualTo(String value) {
-            addCriterion("url >=", value, "url");
+        public Criteria andImgUrlGreaterThanOrEqualTo(String value) {
+            addCriterion("img_url >=", value, "imgUrl");
             return (Criteria) this;
         }
 
-        public Criteria andUrlLessThan(String value) {
-            addCriterion("url <", value, "url");
+        public Criteria andImgUrlLessThan(String value) {
+            addCriterion("img_url <", value, "imgUrl");
             return (Criteria) this;
         }
 
-        public Criteria andUrlLessThanOrEqualTo(String value) {
-            addCriterion("url <=", value, "url");
+        public Criteria andImgUrlLessThanOrEqualTo(String value) {
+            addCriterion("img_url <=", value, "imgUrl");
             return (Criteria) this;
         }
 
-        public Criteria andUrlLike(String value) {
-            addCriterion("url like", value, "url");
+        public Criteria andImgUrlLike(String value) {
+            addCriterion("img_url like", value, "imgUrl");
             return (Criteria) this;
         }
 
-        public Criteria andUrlNotLike(String value) {
-            addCriterion("url not like", value, "url");
+        public Criteria andImgUrlNotLike(String value) {
+            addCriterion("img_url not like", value, "imgUrl");
             return (Criteria) this;
         }
 
-        public Criteria andUrlIn(List<String> values) {
-            addCriterion("url in", values, "url");
+        public Criteria andImgUrlIn(List<String> values) {
+            addCriterion("img_url in", values, "imgUrl");
             return (Criteria) this;
         }
 
-        public Criteria andUrlNotIn(List<String> values) {
-            addCriterion("url not in", values, "url");
+        public Criteria andImgUrlNotIn(List<String> values) {
+            addCriterion("img_url not in", values, "imgUrl");
             return (Criteria) this;
         }
 
-        public Criteria andUrlBetween(String value1, String value2) {
-            addCriterion("url between", value1, value2, "url");
+        public Criteria andImgUrlBetween(String value1, String value2) {
+            addCriterion("img_url between", value1, value2, "imgUrl");
             return (Criteria) this;
         }
 
-        public Criteria andUrlNotBetween(String value1, String value2) {
-            addCriterion("url not between", value1, value2, "url");
+        public Criteria andImgUrlNotBetween(String value1, String value2) {
+            addCriterion("img_url not between", value1, value2, "imgUrl");
             return (Criteria) this;
         }
 
@@ -745,73 +675,73 @@ public class VideoExample {
             return (Criteria) this;
         }
 
-        public Criteria andLxIsNull() {
-            addCriterion("lx is null");
+        public Criteria andVideoTypeIsNull() {
+            addCriterion("video_type is null");
             return (Criteria) this;
         }
 
-        public Criteria andLxIsNotNull() {
-            addCriterion("lx is not null");
+        public Criteria andVideoTypeIsNotNull() {
+            addCriterion("video_type is not null");
             return (Criteria) this;
         }
 
-        public Criteria andLxEqualTo(String value) {
-            addCriterion("lx =", value, "lx");
+        public Criteria andVideoTypeEqualTo(String value) {
+            addCriterion("video_type =", value, "videoType");
             return (Criteria) this;
         }
 
-        public Criteria andLxNotEqualTo(String value) {
-            addCriterion("lx <>", value, "lx");
+        public Criteria andVideoTypeNotEqualTo(String value) {
+            addCriterion("video_type <>", value, "videoType");
             return (Criteria) this;
         }
 
-        public Criteria andLxGreaterThan(String value) {
-            addCriterion("lx >", value, "lx");
+        public Criteria andVideoTypeGreaterThan(String value) {
+            addCriterion("video_type >", value, "videoType");
             return (Criteria) this;
         }
 
-        public Criteria andLxGreaterThanOrEqualTo(String value) {
-            addCriterion("lx >=", value, "lx");
+        public Criteria andVideoTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("video_type >=", value, "videoType");
             return (Criteria) this;
         }
 
-        public Criteria andLxLessThan(String value) {
-            addCriterion("lx <", value, "lx");
+        public Criteria andVideoTypeLessThan(String value) {
+            addCriterion("video_type <", value, "videoType");
             return (Criteria) this;
         }
 
-        public Criteria andLxLessThanOrEqualTo(String value) {
-            addCriterion("lx <=", value, "lx");
+        public Criteria andVideoTypeLessThanOrEqualTo(String value) {
+            addCriterion("video_type <=", value, "videoType");
             return (Criteria) this;
         }
 
-        public Criteria andLxLike(String value) {
-            addCriterion("lx like", value, "lx");
+        public Criteria andVideoTypeLike(String value) {
+            addCriterion("video_type like", value, "videoType");
             return (Criteria) this;
         }
 
-        public Criteria andLxNotLike(String value) {
-            addCriterion("lx not like", value, "lx");
+        public Criteria andVideoTypeNotLike(String value) {
+            addCriterion("video_type not like", value, "videoType");
             return (Criteria) this;
         }
 
-        public Criteria andLxIn(List<String> values) {
-            addCriterion("lx in", values, "lx");
+        public Criteria andVideoTypeIn(List<String> values) {
+            addCriterion("video_type in", values, "videoType");
             return (Criteria) this;
         }
 
-        public Criteria andLxNotIn(List<String> values) {
-            addCriterion("lx not in", values, "lx");
+        public Criteria andVideoTypeNotIn(List<String> values) {
+            addCriterion("video_type not in", values, "videoType");
             return (Criteria) this;
         }
 
-        public Criteria andLxBetween(String value1, String value2) {
-            addCriterion("lx between", value1, value2, "lx");
+        public Criteria andVideoTypeBetween(String value1, String value2) {
+            addCriterion("video_type between", value1, value2, "videoType");
             return (Criteria) this;
         }
 
-        public Criteria andLxNotBetween(String value1, String value2) {
-            addCriterion("lx not between", value1, value2, "lx");
+        public Criteria andVideoTypeNotBetween(String value1, String value2) {
+            addCriterion("video_type not between", value1, value2, "videoType");
             return (Criteria) this;
         }
 
