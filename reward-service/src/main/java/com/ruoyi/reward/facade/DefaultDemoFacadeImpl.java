@@ -66,14 +66,13 @@ public class DefaultDemoFacadeImpl implements DemoFacade {
             for (int i = 0; i < 100; i++) {
                 Video newShi = new Video();
                 newShi.setMoney(video.getMoney());
-                newShi.setSj(video.getSj());
                 newShi.setCs(video.getCs());
                 newShi.setImgUrl(video.getImgUrl());
                 newShi.setUserId(video.getUserId());
                 newShi.setName(video.getName());
                 newShi.setVideoUrl(video.getVideoUrl());
                 newShi.setDuration(video.getDuration());
-                newShi.setLx(video.getLx());
+                newShi.setVideoType(video.getVideoType());
                 newShi.setStatus(video.getStatus());
                 newShi.setLogo(video.getLogo());
                 newShi.setIsLei(video.getIsLei());

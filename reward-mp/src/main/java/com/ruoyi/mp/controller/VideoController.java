@@ -76,7 +76,7 @@ public class VideoController {
             }
         }
         if (StringUtil.isNotBlank(dto.getDuration())) {
-            dto.setShijianStr(DateUtils.getTimeString(Integer.parseInt(dto.getDuration())));
+            dto.setDurationStr(DateUtils.getTimeString(Integer.parseInt(dto.getDuration())));
         }
     }
 

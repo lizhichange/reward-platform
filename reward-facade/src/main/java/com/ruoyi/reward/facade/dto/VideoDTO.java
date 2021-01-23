@@ -88,7 +88,7 @@ public class VideoDTO extends ToString {
      */
     private String duration;
 
-    private String shijianStr;
+    private String durationStr;
     /**
      * video.lx
      *
@@ -161,9 +161,6 @@ public class VideoDTO extends ToString {
     private SysCategoryDTO category;
 
     private Date createTime;
-
-    private String shiUrl;
-
     private String diffDays;
     private String mockNum;
 
