@@ -26,7 +26,8 @@
     </resultMap>
 
     <sql id="selectVideoVo">
-        select id, money, cs, img_url, user_id, name, video_url, duration, video_type, status, logo, is_lei, is_allow, click, is_preview,
+        select id, money, cs, img_url, user_id, name, video_url, duration, video_type, status, logo, is_lei, is_allow,
+        click, is_preview,
         short_url, category_id, create_time from video
     </sql>
 
