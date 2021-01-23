@@ -232,7 +232,7 @@ public class VideoController extends BaseController {
         }
         SysOrderDTO order = new SysOrderDTO();
         order.setGoodsId(videoDTO.getId());
-        order.setOpenId("openId");
+        order.setOpenId(SessionContext.getOpenId());
         List<SysOrderDTO> sysOrders = sysOrderFacadeClient.selectSysOrder(order);
         log.info("sysOrders:{}", sysOrders);
         if (CollectionUtils.isEmpty(sysOrders)) {
@@ -347,7 +347,7 @@ public class VideoController extends BaseController {
                 order.setPayTag(m.toString());
             }
 
-            order.setOpenId("openId");
+            order.setOpenId(SessionContext.getOpenId());
             //支付类型
             order.setType(Integer.valueOf(WE_CHAT_PAY.getCode()));
             order.setTypeStr(WE_CHAT_PAY.getDesc());
@@ -358,7 +358,7 @@ public class VideoController extends BaseController {
 
             SysOrderDTO newOrder = new SysOrderDTO();
             newOrder.setGoodsId(videoDTO.getId());
-            newOrder.setOpenId("openId");
+            newOrder.setOpenId(SessionContext.getOpenId());
 
             List<SysOrderDTO> newOrderDTO = sysOrderFacadeClient.selectSysOrder(newOrder);
             if (!CollectionUtils.isEmpty(newOrderDTO)) {

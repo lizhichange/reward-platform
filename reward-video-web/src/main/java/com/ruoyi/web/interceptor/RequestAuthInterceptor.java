@@ -21,6 +21,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.net.InetAddress;
 import java.util.Map;
 
 
@@ -50,7 +51,9 @@ public class RequestAuthInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-
+        InetAddress netAddress = InetAddress.getLocalHost();
+        String hostAddress = netAddress.getHostAddress();
+        log.info("hostAddress:{}", netAddress);
         request.setAttribute("authMpEnabled", appConfig.isAuthMpEnabled());
         StringBuffer requestUrl = request.getRequestURL();
         LOGGER.debug("requestURL:{}", requestUrl);
@@ -78,6 +81,18 @@ public class RequestAuthInterceptor extends HandlerInterceptorAdapter {
         userId = read(request, COOKIE_USER_KEY);
         if (StringUtil.isNotBlank(userId)) {
             SessionContext.setUserId(session, userId);
+        }
+
+        if (StringUtil.isNotBlank(hostAddress)) {
+            write(hostAddress, COOKIE_OP_KEY, doMain, response);
+            SessionContext.setOpenId(session, hostAddress);
+            return true;
+        }
+        hostAddress = read(request, COOKIE_OP_KEY);
+        LOGGER.info("openId:{}", hostAddress);
+        if (StringUtil.isNotBlank(hostAddress)) {
+            SessionContext.setOpenId(session, hostAddress);
+            return true;
         }
         return super.preHandle(request, response, handler);
 

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
-import java.net.InetAddress;
+
 import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
@@ -75,7 +75,7 @@ public class QrCodePayController {
                     String tradeType,
                     String callbackUrl) throws Exception {
         SysOrderDTO sysOrderDTO = getSysOrderDTO(orderId);
-        InetAddress netAddress = InetAddress.getLocalHost();
+
         String payUrl = "http://payapi.ttyerh45.cn/game/unifiedorder"; //请求订单地址
         String checkUrl = "http://payapi.ttyerh45.cn/pay/checkTradeNo"; //主动查单地址
         modelMap.addAttribute("checkUrl", checkUrl);
