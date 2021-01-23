@@ -68,9 +68,9 @@ import java.util.stream.Collectors;
  */
 @Controller
 @Api("视频信息管理")
-@RequestMapping("/system/shipin")
+@RequestMapping("/system/video")
 public class VideoController extends BaseController {
-    private final String prefix = "system/shipin";
+    private final String prefix = "system/video";
     @Autowired
     RestTemplate restTemplate;
     @Autowired
@@ -85,10 +85,10 @@ public class VideoController extends BaseController {
     @Autowired
     ISysOrderService sysOrderService;
 
-    @RequiresPermissions("system:shipin:view")
+    @RequiresPermissions("system:video:view")
     @GetMapping()
-    public String shipin() {
-        return prefix + "/shipin";
+    public String video() {
+        return prefix + "/video";
     }
 
     /**
@@ -96,9 +96,9 @@ public class VideoController extends BaseController {
      *
      * @return
      */
-    @GetMapping("/pshipin")
-    public String pshipin() {
-        return prefix + "/pshipin";
+    @GetMapping("/pvideo")
+    public String pvideo() {
+        return prefix + "/pvideo";
     }
 
     @Log(title = "预览视频", businessType = BusinessType.UPDATE)
@@ -111,16 +111,16 @@ public class VideoController extends BaseController {
     /**
      * 查询公共片库列表
      */
-    @RequiresPermissions("system:shipin:list")
+    @RequiresPermissions("system:video:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(Video shipin) {
+    public TableDataInfo list(Video video) {
         startPage();
         boolean b = !"admin".equals(ShiroUtils.getLoginName());
         if (b) {
-            shipin.setUserIdList(Lists.newArrayList("admin", ShiroUtils.getLoginName()));
+            video.setUserIdList(Lists.newArrayList("admin", ShiroUtils.getLoginName()));
         }
-        List<Video> list = videoService.selectVideoList(shipin);
+        List<Video> list = videoService.selectVideoList(video);
         if (!CollectionUtils.isEmpty(list)) {
 
             String main = null;
@@ -183,21 +183,21 @@ public class VideoController extends BaseController {
     /**
      * 导出公共片库列表
      */
-    @RequiresPermissions("system:shipin:export")
+    @RequiresPermissions("system:video:export")
     @PostMapping("/export")
     @RequiresRoles("admin")
     @ResponseBody
-    public AjaxResult export(Video shipin) {
-        List<Video> list = videoService.selectVideoList(shipin);
+    public AjaxResult export(Video video) {
+        List<Video> list = videoService.selectVideoList(video);
         ExcelUtil<Video> util = new ExcelUtil<>(Video.class);
-        return util.exportExcel(list, "shipin");
+        return util.exportExcel(list, "video");
     }
 
     /**
      * 新增公共片库
      */
     @GetMapping("/add")
-    @RequiresPermissions("system:shipin:add")
+    @RequiresPermissions("system:video:add")
     @RequiresRoles("admin")
     public String add() {
         return prefix + "/add";
@@ -207,19 +207,19 @@ public class VideoController extends BaseController {
     /**
      * 新增保存公共片库
      */
-    @RequiresPermissions("system:shipin:add")
+    @RequiresPermissions("system:video:add")
     @RequiresRoles("admin")
     @Log(title = "公共片库", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(VideoDTO shipin) {
+    public AjaxResult addSave(VideoDTO video) {
         String loginName = ShiroUtils.getLoginName();
-        shipin.setUserId(loginName);
-        shipin.setClick(0);
-        shipin.setCreateTime(new Date());
-        shipin.setStatus("0");
-        shipin.setMoney(shipin.getStartMoney() + "-" + shipin.getEndMoney());
-        return toAjax(videoFacade.insertVideoDTO(shipin));
+        video.setUserId(loginName);
+        video.setClick(0);
+        video.setCreateTime(new Date());
+        video.setStatus("0");
+        video.setMoney(video.getStartMoney() + "-" + video.getEndMoney());
+        return toAjax(videoFacade.insertVideoDTO(video));
     }
 
     @ApiOperation("pay")
@@ -573,17 +573,17 @@ public class VideoController extends BaseController {
     @GetMapping("/edit/{id}")
     @RequiresRoles("admin")
     public String edit(@PathVariable("id") Long id, ModelMap mmap) {
-        VideoDTO shipin = videoFacade.selectVideoDTOById(id);
-        String money = shipin.getMoney();
+        VideoDTO video = videoFacade.selectVideoDTOById(id);
+        String money = video.getMoney();
         String[] split = money.split("-");
-        shipin.setStartMoney(split[0]);
-        shipin.setEndMoney(split[1]);
-        mmap.put("shipin", shipin);
-        Integer categoryId = shipin.getCategoryId();
+        video.setStartMoney(split[0]);
+        video.setEndMoney(split[1]);
+        mmap.put("video", video);
+        Integer categoryId = video.getCategoryId();
         SysCategory sysCategory = sysCategoryService.selectDeptById(categoryId.longValue());
         SysCategoryDTO categoryDTO = new SysCategoryDTO();
         BeanUtils.copyProperties(sysCategory, categoryDTO);
-        shipin.setCategory(categoryDTO);
+        video.setCategory(categoryDTO);
 
         return prefix + "/edit";
     }
@@ -591,14 +591,14 @@ public class VideoController extends BaseController {
     /**
      * 修改保存公共片库
      */
-    @RequiresPermissions("system:shipin:edit")
+    @RequiresPermissions("system:video:edit")
     @RequiresRoles("admin")
     @Log(title = "公共片库", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(VideoDTO shipin) {
-        shipin.setMoney(shipin.getStartMoney() + "-" + shipin.getEndMoney());
-        return toAjax(videoFacade.updateVideoDTO(shipin));
+    public AjaxResult editSave(VideoDTO video) {
+        video.setMoney(video.getStartMoney() + "-" + video.getEndMoney());
+        return toAjax(videoFacade.updateVideoDTO(video));
     }
 
 
@@ -606,7 +606,7 @@ public class VideoController extends BaseController {
      * 状态修改
      */
     @Log(title = "公共片库", businessType = BusinessType.UPDATE)
-    @RequiresPermissions("system:shipin:edit")
+    @RequiresPermissions("system:video:edit")
     @PostMapping("/changeStatus")
     @RequiresRoles("admin")
     @ResponseBody
@@ -617,7 +617,7 @@ public class VideoController extends BaseController {
     /**
      * 删除公共片库
      */
-    @RequiresPermissions("system:shipin:remove")
+    @RequiresPermissions("system:video:remove")
     @RequiresRoles("admin")
     @Log(title = "公共片库", businessType = BusinessType.DELETE)
     @PostMapping("/remove")
