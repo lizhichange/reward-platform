@@ -107,7 +107,7 @@
 	<!---End-wrap---->
 </body>
 
-<input type="hidden" id="url" />
+<input type="hidden" id="imgUrl" />
 <input type="hidden" id="videoUrl" />
 <input type="hidden" id="categoryId" name="categoryId" th:value="${categoryId}" />
 <input type="hidden" id="wxPayUrl" name="wxPayUrl" th:value="${wxPayUrl}" />
@@ -150,7 +150,7 @@ wxPayUrl
 			"x5-video-orientation": "portraint",
 			"playsinline": true,
 			//图片地址
-			"poster": document.getElementById("url").value ? document.getElementById("url").value : '',
+			"poster": document.getElementById("imgUrl").value ? document.getElementById("imgUrl").value : '',
 			"url": document.getElementById("videoUrl").value ? document.getElementById("videoUrl").value : "//sf1-hscdn-tos.pstatp.com/obj/media-fe/xgplayer_doc_video/mp4/xgplayer-demo-360p.mp4",
 			"whitelist": [
 				""
@@ -349,8 +349,8 @@ wxPayUrl
 				// last-grid
 				var grid = (i & 1) != 0 ? '<div class="content-grid last-grid">' : '<div class="content-grid">';
 				var str = grid
-					+ '<a href="javascript:void(0)" data-author=' + row.userId + '  data-id=' + row.id + ' data-poster=' + row.url + ' data-src=' + row.videoUrl + ' >'
-					+ '<img  src="' + row.url + '" title="allbum-name" /></a>'
+					+ '<a href="javascript:void(0)" data-author=' + row.userId + '  data-id=' + row.id + ' data-poster=' + row.imgUrl + ' data-src=' + row.videoUrl + ' >'
+					+ '<img  src="' + row.imgUrl + '" title="allbum-name" /></a>'
 					+ '<h3>' + beautySub(row.name, 10) + '</h3>'
 					+ '<ul>'
 					+ '<li><a href="javascript:void(0)">' + row.mockNum + '</a></li>'
@@ -417,7 +417,7 @@ wxPayUrl
 									flagClick = true;
 									$("#videoId").val(dataId);
 									//图片
-									$("#url").val(poster);
+									$("#imgUrl").val(poster);
 									//视频
 									$("#videoUrl").val(src);
 									//图片地址
