@@ -94,7 +94,7 @@ public class WebController extends BaseController {
     @ResponseBody
     @com.ruoyi.common.annotation.Log(title = "代理商户注册", businessType = BusinessType.OTHER)
     public AjaxResult reg(String loginName, String userName, String password,
-                          String yqm,
+                          String invitation,
                           String payee,
                           String payeeAccount, HttpServletRequest request) {
 
@@ -109,14 +109,14 @@ public class WebController extends BaseController {
 
 
         Yqm yqmDTO = new Yqm();
-        yqmDTO.setYqm(yqm);
+        yqmDTO.setYqm(invitation);
         List<Yqm> list = yqmService.selectYqmList(yqmDTO);
         if (CollectionUtils.isEmpty(list)) {
-            return error("'" + yqm + "'邀请码不存在，注册账号失败");
+            return error("'" + invitation + "'邀请码不存在，注册账号失败");
         }
         Yqm dto = list.get(0);
         if (dto.getStatus().equals(YqmStatusEnum.Y.getCode())) {
-            return error("'" + yqm + "'邀请码已使用，注册账号失败");
+            return error("'" + invitation + "'邀请码已使用，注册账号失败");
         }
 
         if (UserConstants.USER_NAME_NOT_UNIQUE.equals(userService.checkLoginNameUnique(loginName))) {

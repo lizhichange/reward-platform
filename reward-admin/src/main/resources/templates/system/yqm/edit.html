@@ -5,7 +5,7 @@
 </head>
 <body class="white-bg">
     <div class="wrapper wrapper-content animated fadeInRight ibox-content">
-        <form class="form-horizontal m" id="form-yqm-edit" th:object="${yqm}">
+        <form class="form-horizontal m" id="form-invitation-edit" th:object="${invitation}">
             <input name="id" th:field="*{id}" type="hidden">
             <div class="form-group">    
                 <label class="col-sm-3 control-label">代理id：</label>
@@ -16,7 +16,7 @@
             <div class="form-group">    
                 <label class="col-sm-3 control-label">邀请码：</label>
                 <div class="col-sm-8">
-                    <input name="yqm" th:field="*{yqm}" class="form-control" type="text">
+                    <input name="invitation" th:field="*{invitation}" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">    
@@ -41,14 +41,14 @@
     </div>
     <th:block th:include="include :: footer" />
     <script type="text/javascript">
-        var prefix = ctx + "system/yqm";
-        $("#form-yqm-edit").validate({
+        var prefix = ctx + "system/invitation";
+        $("#form-invitation-edit").validate({
             focusCleanup: true
         });
 
         function submitHandler() {
             if ($.validate.form()) {
-                $.operate.save(prefix + "/edit", $('#form-yqm-edit').serialize());
+                $.operate.save(prefix + "/edit", $('#form-invitation-edit').serialize());
             }
         }
     </script>

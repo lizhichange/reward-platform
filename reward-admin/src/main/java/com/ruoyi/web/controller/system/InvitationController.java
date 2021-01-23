@@ -35,9 +35,9 @@ import java.util.List;
  * @date 2020-03-17
  */
 @Controller
-@RequestMapping("/system/yqm")
-public class YqmController extends BaseController {
-    private String prefix = "system/yqm";
+@RequestMapping("/system/invitation")
+public class InvitationController extends BaseController {
+    private String prefix = "system/invitation";
 
     @Autowired
     private IYqmService yqmService;
@@ -46,26 +46,26 @@ public class YqmController extends BaseController {
     @Autowired
     ISysUserService iSysUserService;
 
-    @RequiresPermissions("system:yqm:view")
+    @RequiresPermissions("system:invitation:view")
     @GetMapping()
-    public String yqm() {
-        return prefix + "/yqm";
+    public String invitation() {
+        return prefix + "/invitation";
     }
 
     /**
      * 查询邀请码管理列表
      */
-    @RequiresPermissions("system:yqm:list")
+    @RequiresPermissions("system:invitation:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(Yqm yqm) {
+    public TableDataInfo list(Yqm invitation) {
         startPage();
         startOrderBy();
         //如果是不管理员
         if (!"admin".equals(ShiroUtils.getLoginName())) {
-            yqm.setUserIdList(Lists.newArrayList(ShiroUtils.getLoginName()));
+            invitation.setUserIdList(Lists.newArrayList(ShiroUtils.getLoginName()));
         }
-        List<Yqm> list = yqmService.selectYqmList(yqm);
+        List<Yqm> list = yqmService.selectYqmList(invitation);
         for (Yqm item : list) {
             item.setZtDesc(EnumUtil.queryByCode(item.getStatus(), YqmStatusEnum.class).getDesc());
         }
@@ -75,13 +75,13 @@ public class YqmController extends BaseController {
     /**
      * 导出邀请码管理列表
      */
-    @RequiresPermissions("system:yqm:export")
+    @RequiresPermissions("system:invitation:export")
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(Yqm yqm) {
-        List<Yqm> list = yqmService.selectYqmList(yqm);
+    public AjaxResult export(Yqm invitation) {
+        List<Yqm> list = yqmService.selectYqmList(invitation);
         ExcelUtil<Yqm> util = new ExcelUtil<Yqm>(Yqm.class);
-        return util.exportExcel(list, "yqm");
+        return util.exportExcel(list, "invitation");
     }
 
     /**
@@ -95,28 +95,28 @@ public class YqmController extends BaseController {
     /**
      * 新增保存邀请码管理
      */
-    @RequiresPermissions("system:yqm:add")
+    @RequiresPermissions("system:invitation:add")
     @Log(title = "邀请码管理", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(Yqm yqm) {
+    public AjaxResult addSave(Yqm invitation) {
         //未使用默认
-        if (StringUtil.isBlank(yqm.getYqm())) {
+        if (StringUtil.isBlank(invitation.getYqm())) {
             return AjaxResult.error("邀请码不能为空");
         }
 
-        List<Yqm> list = yqmService.selectYqmList(yqm);
+        List<Yqm> list = yqmService.selectYqmList(invitation);
         if (!CollectionUtils.isEmpty(list)) {
             return AjaxResult.error("邀请码邀请码已存在");
         }
-        String username = yqm.getUserId();
+        String username = invitation.getUserId();
         SysUser user = iSysUserService.selectUserByLoginName(username);
         if (user == null) {
             return AjaxResult.error("邀请人账号信息不存在");
         }
-        yqm.setStatus(YqmStatusEnum.N.getCode());
-        yqm.setDuration(DateUtils.formatNewFormat(new Date()));
-        return toAjax(yqmService.insertYqm(yqm));
+        invitation.setStatus(YqmStatusEnum.N.getCode());
+        invitation.setDuration(DateUtils.formatNewFormat(new Date()));
+        return toAjax(yqmService.insertYqm(invitation));
     }
 
     /**
@@ -124,26 +124,26 @@ public class YqmController extends BaseController {
      */
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") Long id, ModelMap mmap) {
-        Yqm yqm = yqmService.selectYqmById(id);
-        mmap.put("yqm", yqm);
+        Yqm invitation = yqmService.selectYqmById(id);
+        mmap.put("invitation", invitation);
         return prefix + "/edit";
     }
 
     /**
      * 修改保存邀请码管理
      */
-    @RequiresPermissions("system:yqm:edit")
+    @RequiresPermissions("system:invitation:edit")
     @Log(title = "邀请码管理", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(Yqm yqm) {
-        return toAjax(yqmService.updateYqm(yqm));
+    public AjaxResult editSave(Yqm invitation) {
+        return toAjax(yqmService.updateYqm(invitation));
     }
 
     /**
      * 删除邀请码管理
      */
-    @RequiresPermissions("system:yqm:remove")
+    @RequiresPermissions("system:invitation:remove")
     @Log(title = "邀请码管理", businessType = BusinessType.DELETE)
     @PostMapping("/remove")
     @ResponseBody

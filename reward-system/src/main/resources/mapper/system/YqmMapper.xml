@@ -7,7 +7,7 @@
     <resultMap type="Yqm" id="YqmResult">
         <result property="id" column="id"/>
         <result property="userId" column="user_id"/>
-        <result property="yqm" column="yqm"/>
+        <result property="invitation" column="invitation"/>
         <result property="duration" column="duration"/>
         <result property="name" column="name"/>
         <result property="status" column="status"/>
@@ -16,14 +16,14 @@
     </resultMap>
 
     <sql id="selectYqmVo">
-        select id, user_id, yqm, duration, name, status, create_time, update_time from yqm
+        select id, user_id, invitation, duration, name, status, create_time, update_time from invitation
     </sql>
 
     <select id="selectYqmList" parameterType="Yqm" resultMap="YqmResult">
         <include refid="selectYqmVo"/>
         <where>
             <if test="userId != null  and userId != ''">and user_id = #{userId}</if>
-            <if test="yqm != null  and yqm != ''">and yqm = #{yqm}</if>
+            <if test="invitation != null  and invitation != ''">and invitation = #{invitation}</if>
             <if test="duration != null  and duration != ''">and duration = #{duration}</if>
             <if test="name != null  and name != ''">and name like concat('%', #{name}, '%')</if>
             <if test="status != null  and status != ''">and status = #{status}</if>
@@ -42,10 +42,10 @@
     </select>
 
     <insert id="insertYqm" parameterType="Yqm" useGeneratedKeys="true" keyProperty="id">
-        insert into yqm
+        insert into invitation
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="userId != null  and userId != ''">user_id,</if>
-            <if test="yqm != null  and yqm != ''">yqm,</if>
+            <if test="invitation != null  and invitation != ''">invitation,</if>
             <if test="duration != null  and duration != ''">duration,</if>
             <if test="name != null  and name != ''">name,</if>
             <if test="status != null  and status != ''">status,</if>
@@ -54,7 +54,7 @@
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="userId != null  and userId != ''">#{userId},</if>
-            <if test="yqm != null  and yqm != ''">#{yqm},</if>
+            <if test="invitation != null  and invitation != ''">#{invitation},</if>
             <if test="duration != null  and duration != ''">#{duration},</if>
             <if test="name != null  and name != ''">#{name},</if>
             <if test="status != null  and status != ''">#{status},</if>
@@ -64,10 +64,10 @@
     </insert>
 
     <update id="updateYqm" parameterType="Yqm">
-        update yqm
+        update invitation
         <trim prefix="SET" suffixOverrides=",">
             <if test="userId != null  and userId != ''">user_id = #{userId},</if>
-            <if test="yqm != null  and yqm != ''">yqm = #{yqm},</if>
+            <if test="invitation != null  and invitation != ''">yqm = #{yqm},</if>
             <if test="duration != null  and duration != ''">duration = #{duration},</if>
             <if test="name != null  and name != ''">name = #{name},</if>
             <if test="status != null  and status != ''">status = #{status},</if>

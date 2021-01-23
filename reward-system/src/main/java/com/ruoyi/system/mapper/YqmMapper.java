@@ -22,26 +22,26 @@ public interface YqmMapper {
     /**
      * 查询邀请码管理列表
      *
-     * @param yqm 邀请码管理
+     * @param invitation 邀请码管理
      * @return 邀请码管理集合
      */
-    public List<Yqm> selectYqmList(Yqm yqm);
+    public List<Yqm> selectYqmList(Yqm invitation);
 
     /**
      * 新增邀请码管理
      *
-     * @param yqm 邀请码管理
+     * @param invitation 邀请码管理
      * @return 结果
      */
-    public int insertYqm(Yqm yqm);
+    public int insertYqm(Yqm invitation);
 
     /**
      * 修改邀请码管理
      *
-     * @param yqm 邀请码管理
+     * @param invitation 邀请码管理
      * @return 结果
      */
-    public int updateYqm(Yqm yqm);
+    public int updateYqm(Yqm invitation);
 
     /**
      * 删除邀请码管理

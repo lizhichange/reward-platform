@@ -13,7 +13,7 @@ function reg() {
     var loginName = $.common.trim($("input[name='loginName']").val());
     var userName = $.common.trim($("input[name='userName']").val());
     var password = $.common.trim($("input[name='password']").val());
-    var yqm = $.common.trim($("input[name='yqm']").val());
+    var invitation = $.common.trim($("input[name='invitation']").val());
     var payee = $.common.trim($("input[name='payee']").val());
     var payeeAccount = $.common.trim($("input[name='payeeAccount']").val());
 
@@ -24,7 +24,7 @@ function reg() {
             "loginName": loginName,
             "userName": userName,
             "password": password,
-            "yqm": yqm,
+            "invitation": invitation,
             "payee": payee,
             "payeeAccount": payeeAccount
         },
@@ -67,7 +67,7 @@ function validateRule() {
                 required: icon + "请输入您的密码",
             }
             ,
-            yqm: {
+            invitation: {
                 required: icon + "请输入邀请码",
             }
             ,

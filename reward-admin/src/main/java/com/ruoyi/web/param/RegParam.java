@@ -28,7 +28,7 @@ public class RegParam extends BaseEntity {
     /**
      * 邀请码
      */
-    private String yqm;
+    private String invitation;
     /**
      * 收款人
      */

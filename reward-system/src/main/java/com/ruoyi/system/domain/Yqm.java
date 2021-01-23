@@ -7,7 +7,7 @@ import lombok.Data;
 import java.util.List;
 
 /**
- * 邀请码管理对象 yqm
+ * 邀请码管理对象 invitation
  *
  * @author ruoyi
  * @date 2020-03-26
@@ -33,7 +33,7 @@ public class Yqm extends BaseEntity {
      * 邀请码
      */
     @Excel(name = "邀请码")
-    private String yqm;
+    private String invitation;
 
     /**
      * 时间

@@ -35,36 +35,36 @@ public class YqmServiceImpl implements IYqmService {
     /**
      * 查询邀请码管理列表
      *
-     * @param yqm 邀请码管理
+     * @param invitation 邀请码管理
      * @return 邀请码管理
      */
     @Override
-    public List<Yqm> selectYqmList(Yqm yqm) {
-        return yqmMapper.selectYqmList(yqm);
+    public List<Yqm> selectYqmList(Yqm invitation) {
+        return yqmMapper.selectYqmList(invitation);
     }
 
     /**
      * 新增邀请码管理
      *
-     * @param yqm 邀请码管理
+     * @param invitation 邀请码管理
      * @return 结果
      */
     @Override
-    public int insertYqm(Yqm yqm) {
-        yqm.setCreateTime(DateUtils.getNowDate());
-        return yqmMapper.insertYqm(yqm);
+    public int insertYqm(Yqm invitation) {
+        invitation.setCreateTime(DateUtils.getNowDate());
+        return yqmMapper.insertYqm(invitation);
     }
 
     /**
      * 修改邀请码管理
      *
-     * @param yqm 邀请码管理
+     * @param invitation 邀请码管理
      * @return 结果
      */
     @Override
-    public int updateYqm(Yqm yqm) {
-        yqm.setUpdateTime(DateUtils.getNowDate());
-        return yqmMapper.updateYqm(yqm);
+    public int updateYqm(Yqm invitation) {
+        invitation.setUpdateTime(DateUtils.getNowDate());
+        return yqmMapper.updateYqm(invitation);
     }
 
     /**

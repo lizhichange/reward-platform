@@ -16,7 +16,7 @@
                         </li>
                         <li>
                             <label>邀请码：</label>
-                            <input type="text" name="yqm"/>
+                            <input type="text" name="invitation"/>
                         </li>
                         <li>
                             <label>使用者：</label>
@@ -44,15 +44,15 @@
         </div>
 
         <div class="btn-group-sm" id="toolbar" role="group">
-            <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:yqm:add">
+            <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:invitation:add">
                 <i class="fa fa-plus"></i> 添加
             </a>
 
             <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()"
-               shiro:hasPermission="system:yqm:remove">
+               shiro:hasPermission="system:invitation:remove">
                 <i class="fa fa-remove"></i> 删除
             </a>
-            <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:yqm:export">
+            <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:invitation:export">
                 <i class="fa fa-download"></i> 导出
             </a>
         </div>
@@ -65,9 +65,9 @@
 </div>
 <th:block th:include="include :: footer"/>
 <script th:inline="javascript">
-    var editFlag = [[${@permission.hasPermi('system:yqm:edit')}]];
-    var removeFlag = [[${@permission.hasPermi('system:yqm:remove')}]];
-    var prefix = ctx + "system/yqm";
+    var editFlag = [[${@permission.hasPermi('system:invitation:edit')}]];
+    var removeFlag = [[${@permission.hasPermi('system:invitation:remove')}]];
+    var prefix = ctx + "system/invitation";
 
     $(function () {
         var options = {
@@ -92,7 +92,7 @@
                     title: '代理id'
                 },
                 {
-                    field: 'yqm',
+                    field: 'invitation',
                     title: '邀请码'
                 },
                 {
