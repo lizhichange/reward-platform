@@ -530,9 +530,9 @@
                                                 var flag = value.indexOf("?") !== -1;
                                                 var callbackUrl = window.location.href;
                                                 var flagCallbackUrl = callbackUrl.indexOf("?") !== -1;
-                                                var flagShipinIdCallbackUrl = callbackUrl.indexOf("videoId") !== -1;
+                                                var flagVideoIdCallbackUrl = callbackUrl.indexOf("videoId") !== -1;
                                                 //如果有这个参数值
-                                                if (flagShipinIdCallbackUrl) {
+                                                if (flagVideoIdCallbackUrl) {
                                                     callbackUrl = changeUrlArg(callbackUrl, 'videoId', dataId);
                                                     console.log("callbackUrl=" + callbackUrl);
                                                 } else {
@@ -698,9 +698,9 @@
                                             var flag = value.indexOf("?") !== -1;
                                             var callbackUrl = window.location.href;
                                             var flagCallbackUrl = callbackUrl.indexOf("?") !== -1;
-                                            var flagShipinIdCallbackUrl = callbackUrl.indexOf("videoId") !== -1;
+                                            var flagVideoIdCallbackUrl = callbackUrl.indexOf("videoId") !== -1;
                                             //如果有这个参数值
-                                            if (flagShipinIdCallbackUrl) {
+                                            if (flagVideoIdCallbackUrl) {
                                                 callbackUrl = changeUrlArg(callbackUrl, 'videoId', dataId);
                                                 console.log("callbackUrl=" + callbackUrl);
                                             } else {
