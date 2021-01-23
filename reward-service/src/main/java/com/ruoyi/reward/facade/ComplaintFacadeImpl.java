@@ -7,7 +7,7 @@ import com.ruoyi.reward.domain.Complaint;
 import com.ruoyi.reward.domain.ComplaintExample;
 import com.ruoyi.reward.facade.api.ComplaintFacade;
 import com.ruoyi.reward.facade.dto.ComplaintDTO;
-import com.ruoyi.reward.mapper.ExtTsMapper;
+import com.ruoyi.reward.mapper.ExtComplaintMapper;
 import com.ruoyi.reward.mapper.ComplaintMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 )
 public class ComplaintFacadeImpl implements ComplaintFacade {
     @Autowired
-    private ExtTsMapper extTsMapper;
+    private ExtComplaintMapper extComplaintMapper;
 
 
     @Autowired
@@ -44,7 +44,7 @@ public class ComplaintFacadeImpl implements ComplaintFacade {
     public ComplaintDTO selectTsById(Long id) {
 
 
-        return convert(extTsMapper.selectTsById(id));
+        return convert(extComplaintMapper.selectTsById(id));
     }
 
     private ComplaintDTO convert(Complaint item) {
@@ -67,7 +67,7 @@ public class ComplaintFacadeImpl implements ComplaintFacade {
     public List<ComplaintDTO> selectTsList(ComplaintDTO ts) {
         Complaint item = new Complaint();
         BeanUtils.copyProperties(ts, item);
-        List<Complaint> list = extTsMapper.selectTsList(item);
+        List<Complaint> list = extComplaintMapper.selectTsList(item);
         return list.stream().map(this::convert).collect(Collectors.toList());
     }
 
@@ -81,7 +81,7 @@ public class ComplaintFacadeImpl implements ComplaintFacade {
     public int insertTs(ComplaintDTO ts) {
         Complaint item = new Complaint();
         BeanUtils.copyProperties(ts, item);
-        return extTsMapper.insertTs(item);
+        return extComplaintMapper.insertTs(item);
     }
 
     /**
@@ -94,7 +94,7 @@ public class ComplaintFacadeImpl implements ComplaintFacade {
     public int updateTs(ComplaintDTO ts) {
         Complaint item = new Complaint();
         BeanUtils.copyProperties(ts, item);
-        return extTsMapper.updateTs(item);
+        return extComplaintMapper.updateTs(item);
     }
 
     /**
@@ -105,7 +105,7 @@ public class ComplaintFacadeImpl implements ComplaintFacade {
      */
     @Override
     public int deleteTsByIds(String ids) {
-        return extTsMapper.deleteTsByIds(Convert.toStrArray(ids));
+        return extComplaintMapper.deleteTsByIds(Convert.toStrArray(ids));
     }
 
     @Override
@@ -121,7 +121,7 @@ public class ComplaintFacadeImpl implements ComplaintFacade {
      */
     @Override
     public int deleteTsById(Long id) {
-        return extTsMapper.deleteTsById(id);
+        return extComplaintMapper.deleteTsById(id);
     }
 
 }

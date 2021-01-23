@@ -3,17 +3,17 @@ package com.ruoyi.reward.service.impl;
 import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.reward.domain.Complaint;
-import com.ruoyi.reward.mapper.ExtTsMapper;
-import com.ruoyi.reward.service.TsService;
+import com.ruoyi.reward.mapper.ExtComplaintMapper;
+import com.ruoyi.reward.service.ComplaintService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class TsServiceImpl implements TsService {
+public class ComplaintServiceImpl implements ComplaintService {
     @Autowired
-    private ExtTsMapper extTsMapper;
+    private ExtComplaintMapper extComplaintMapper;
 
     /**
      * 查询投诉列表
@@ -23,7 +23,7 @@ public class TsServiceImpl implements TsService {
      */
     @Override
     public Complaint selectTsById(Long id) {
-        return extTsMapper.selectTsById(id);
+        return extComplaintMapper.selectTsById(id);
     }
 
     /**
@@ -34,7 +34,7 @@ public class TsServiceImpl implements TsService {
      */
     @Override
     public List<Complaint> selectTsList(Complaint complaint) {
-        return extTsMapper.selectTsList(complaint);
+        return extComplaintMapper.selectTsList(complaint);
     }
 
     /**
@@ -46,7 +46,7 @@ public class TsServiceImpl implements TsService {
     @Override
     public int insertTs(Complaint complaint) {
         complaint.setCreateTime(DateUtils.getNowDate());
-        return extTsMapper.insertTs(complaint);
+        return extComplaintMapper.insertTs(complaint);
     }
 
     /**
@@ -58,7 +58,7 @@ public class TsServiceImpl implements TsService {
     @Override
     public int updateTs(Complaint complaint) {
         complaint.setUpdateTime(DateUtils.getNowDate());
-        return extTsMapper.updateTs(complaint);
+        return extComplaintMapper.updateTs(complaint);
     }
 
     /**
@@ -69,7 +69,7 @@ public class TsServiceImpl implements TsService {
      */
     @Override
     public int deleteTsByIds(String ids) {
-        return extTsMapper.deleteTsByIds(Convert.toStrArray(ids));
+        return extComplaintMapper.deleteTsByIds(Convert.toStrArray(ids));
     }
 
     /**
@@ -80,6 +80,6 @@ public class TsServiceImpl implements TsService {
      */
     @Override
     public int deleteTsById(Long id) {
-        return extTsMapper.deleteTsById(id);
+        return extComplaintMapper.deleteTsById(id);
     }
 }

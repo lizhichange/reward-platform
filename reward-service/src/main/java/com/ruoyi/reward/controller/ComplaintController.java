@@ -9,7 +9,7 @@ import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.reward.domain.Complaint;
 import com.ruoyi.reward.facade.api.ComplaintFacade;
-import com.ruoyi.reward.service.TsService;
+import com.ruoyi.reward.service.ComplaintService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,13 +26,13 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/system/ts")
-public class TsController extends BaseController {
+public class ComplaintController extends BaseController {
     private String prefix = "system/ts";
 
     @Autowired
     ComplaintFacade complaintFacade;
     @Autowired
-    TsService tsService;
+    ComplaintService complaintService;
 
     @RequiresPermissions("system:ts:view")
     @GetMapping()
@@ -50,7 +50,7 @@ public class TsController extends BaseController {
     @ResponseBody
     public TableDataInfo list(Complaint complaint) {
         startPage();
-        List<Complaint> list = tsService.selectTsList(complaint);
+        List<Complaint> list = complaintService.selectTsList(complaint);
         return getDataTable(list);
     }
 
@@ -61,7 +61,7 @@ public class TsController extends BaseController {
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(Complaint complaint) {
-        List<Complaint> list = tsService.selectTsList(complaint);
+        List<Complaint> list = complaintService.selectTsList(complaint);
         ExcelUtil<Complaint> util = new ExcelUtil<>(Complaint.class);
         return util.exportExcel(list, "complaint");
     }
@@ -82,7 +82,7 @@ public class TsController extends BaseController {
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult addSave(Complaint complaint) {
-        return toAjax(tsService.insertTs(complaint));
+        return toAjax(complaintService.insertTs(complaint));
     }
 
     /**
@@ -90,7 +90,7 @@ public class TsController extends BaseController {
      */
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") Long id, ModelMap mmap) {
-        Complaint complaint = tsService.selectTsById(id);
+        Complaint complaint = complaintService.selectTsById(id);
         mmap.put("complaint", complaint);
         return prefix + "/edit";
     }
@@ -103,7 +103,7 @@ public class TsController extends BaseController {
     @PostMapping("/edit")
     @ResponseBody
     public AjaxResult editSave(Complaint complaint) {
-        return toAjax(tsService.updateTs(complaint));
+        return toAjax(complaintService.updateTs(complaint));
     }
 
     /**
@@ -114,6 +114,6 @@ public class TsController extends BaseController {
     @PostMapping("/remove")
     @ResponseBody
     public AjaxResult remove(String ids) {
-        return toAjax(tsService.deleteTsByIds(ids));
+        return toAjax(complaintService.deleteTsByIds(ids));
     }
 }

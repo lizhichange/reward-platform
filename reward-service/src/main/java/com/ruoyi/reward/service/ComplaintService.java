@@ -1,23 +1,17 @@
-package com.ruoyi.reward.mapper;
+package com.ruoyi.reward.service;
 
 import com.ruoyi.reward.domain.Complaint;
 
 import java.util.List;
 
-/**
- * 投诉列表Mapper接口
- *
- * @author ruoyi
- * @date 2020-03-16
- */
-public interface ExtTsMapper {
+public interface ComplaintService {
     /**
      * 查询投诉列表
      *
      * @param id 投诉列表ID
      * @return 投诉列表
      */
-    Complaint selectTsById(Long id);
+    public Complaint selectTsById(Long id);
 
     /**
      * 查询投诉列表列表
@@ -44,18 +38,18 @@ public interface ExtTsMapper {
     public int updateTs(Complaint complaint);
 
     /**
-     * 删除投诉列表
-     *
-     * @param id 投诉列表ID
-     * @return 结果
-     */
-    public int deleteTsById(Long id);
-
-    /**
      * 批量删除投诉列表
      *
      * @param ids 需要删除的数据ID
      * @return 结果
      */
-    public int deleteTsByIds(String[] ids);
+    public int deleteTsByIds(String ids);
+
+    /**
+     * 删除投诉列表信息
+     *
+     * @param id 投诉列表ID
+     * @return 结果
+     */
+    public int deleteTsById(Long id);
 }
