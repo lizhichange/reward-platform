@@ -15,14 +15,14 @@ public class Video implements Serializable {
 
     private static final long serialVersionUID = -495973710593943252L;
     /**
-     * shipin.id
+     * video.id
      *
      * @mbg.generated 2020-07-07 11:14:12
      */
     private Integer id;
 
     /**
-     * shipin.money
+     * video.money
      * 资源设置的打赏金额
      *
      * @mbg.generated 2020-07-07 11:14:12
@@ -30,7 +30,7 @@ public class Video implements Serializable {
     private String money;
 
     /**
-     * shipin.sj
+     * video.sj
      * 选择模式 1为 开启随机金额分配
      *
      * @mbg.generated 2020-07-07 11:14:12
@@ -38,7 +38,7 @@ public class Video implements Serializable {
     private String sj;
 
     /**
-     * shipin.cs
+     * video.cs
      * 打赏人数
      *
      * @mbg.generated 2020-07-07 11:14:12
@@ -46,7 +46,7 @@ public class Video implements Serializable {
     private String cs;
 
     /**
-     * shipin.url
+     * video.url
      * 打赏图片
      *
      * @mbg.generated 2020-07-07 11:14:12
@@ -54,7 +54,7 @@ public class Video implements Serializable {
     private String url;
 
     /**
-     * shipin.user_id
+     * video.user_id
      * 用户ID
      *
      * @mbg.generated 2020-07-07 11:14:12
@@ -62,7 +62,7 @@ public class Video implements Serializable {
     private String userId;
 
     /**
-     * shipin.name
+     * video.name
      * 资源名称
      *
      * @mbg.generated 2020-07-07 11:14:12
@@ -70,70 +70,70 @@ public class Video implements Serializable {
     private String name;
 
     /**
-     * shipin.videoUrl
+     * video.videoUrl
      *
      * @mbg.generated 2020-07-07 11:14:12
      */
     private String videoUrl;
 
     /**
-     * shipin.duration
+     * video.duration
      *
      * @mbg.generated 2020-07-07 11:14:12
      */
     private String duration;
 
     /**
-     * shipin.lx
+     * video.lx
      *
      * @mbg.generated 2020-07-07 11:14:12
      */
     private String lx;
 
     /**
-     * shipin.status
+     * video.status
      *
      * @mbg.generated 2020-07-07 11:14:12
      */
     private String status;
 
     /**
-     * shipin.logo
+     * video.logo
      *
      * @mbg.generated 2020-07-07 11:14:12
      */
     private String logo;
 
     /**
-     * shipin.is_lei
+     * video.is_lei
      *
      * @mbg.generated 2020-07-07 11:14:12
      */
     private Boolean isLei;
 
     /**
-     * shipin.is_allow
+     * video.is_allow
      *
      * @mbg.generated 2020-07-07 11:14:12
      */
     private Boolean isAllow;
 
     /**
-     * shipin.click
+     * video.click
      *
      * @mbg.generated 2020-07-07 11:14:12
      */
     private Integer click;
 
     /**
-     * shipin.is_preview
+     * video.is_preview
      *
      * @mbg.generated 2020-07-07 11:14:12
      */
     private Boolean isPreview;
 
     /**
-     * shipin.shorturl
+     * video.shorturl
      * 短链
      *
      * @mbg.generated 2020-07-07 11:14:12
@@ -141,7 +141,7 @@ public class Video implements Serializable {
     private String shortUrl;
 
     /**
-     * shipin.category_id
+     * video.category_id
      * 类目id
      *
      * @mbg.generated 2020-07-07 11:14:12
@@ -151,7 +151,7 @@ public class Video implements Serializable {
     private String categoryName;
 
     /**
-     * shipin.create_time
+     * video.create_time
      *
      * @mbg.generated 2020-07-07 11:14:12
      */

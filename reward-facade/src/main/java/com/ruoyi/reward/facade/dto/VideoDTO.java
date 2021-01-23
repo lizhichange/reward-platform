@@ -19,7 +19,7 @@ import java.util.List;
 public class VideoDTO extends ToString {
     private static final long serialVersionUID = 6410040127704981572L;
     /**
-     * shipin.id
+     * video.id
      *
      * @mbg.generated 2020-03-19 21:47:04
      */
@@ -27,7 +27,7 @@ public class VideoDTO extends ToString {
 
     private List<Integer> ids;
     /**
-     * shipin.money
+     * video.money
      * 资源设置的打赏金额
      *
      * @mbg.generated 2020-03-19 21:47:04
@@ -35,7 +35,7 @@ public class VideoDTO extends ToString {
     private String money;
 
     /**
-     * shipin.sj
+     * video.sj
      * 选择模式 1为 开启随机金额分配
      *
      * @mbg.generated 2020-03-19 21:47:04
@@ -43,7 +43,7 @@ public class VideoDTO extends ToString {
     private String sj;
 
     /**
-     * shipin.cs
+     * video.cs
      * 打赏人数
      *
      * @mbg.generated 2020-03-19 21:47:04
@@ -51,7 +51,7 @@ public class VideoDTO extends ToString {
     private String cs;
 
     /**
-     * shipin.url
+     * video.url
      * 打赏图片
      *
      * @mbg.generated 2020-03-19 21:47:04
@@ -59,7 +59,7 @@ public class VideoDTO extends ToString {
     private String url;
 
     /**
-     * shipin.userId
+     * video.userId
      * 用户ID
      *
      * @mbg.generated 2020-03-19 21:47:04
@@ -67,7 +67,7 @@ public class VideoDTO extends ToString {
     private String userId;
 
     /**
-     * shipin.name
+     * video.name
      * 资源名称
      *
      * @mbg.generated 2020-03-19 21:47:04
@@ -75,14 +75,14 @@ public class VideoDTO extends ToString {
     private String name;
 
     /**
-     * shipin.zykey
+     * video.zykey
      *
      * @mbg.generated 2020-03-19 21:47:04
      */
     private String videoUrl;
 
     /**
-     * shipin.duration
+     * video.duration
      *
      * @mbg.generated 2020-03-19 21:47:04
      */
@@ -90,56 +90,56 @@ public class VideoDTO extends ToString {
 
     private String shijianStr;
     /**
-     * shipin.lx
+     * video.lx
      *
      * @mbg.generated 2020-03-19 21:47:04
      */
     private String lx;
 
     /**
-     * shipin.status
+     * video.status
      *
      * @mbg.generated 2020-03-19 21:47:04
      */
     private String status;
 
     /**
-     * shipin.logo
+     * video.logo
      *
      * @mbg.generated 2020-03-19 21:47:04
      */
     private String logo;
 
     /**
-     * shipin.is_lei
+     * video.is_lei
      *
      * @mbg.generated 2020-03-19 21:47:04
      */
     private Boolean isLei;
 
     /**
-     * shipin.is_allow
+     * video.is_allow
      *
      * @mbg.generated 2020-03-19 21:47:04
      */
     private Boolean isAllow;
 
     /**
-     * shipin.click
+     * video.click
      *
      * @mbg.generated 2020-03-19 21:47:04
      */
     private Integer click;
 
     /**
-     * shipin.is_preview
+     * video.is_preview
      *
      * @mbg.generated 2020-03-19 21:47:04
      */
     private Boolean isPreview;
 
     /**
-     * shipin.shorturl
+     * video.shorturl
      * 短链
      *
      * @mbg.generated 2020-03-19 21:47:04
@@ -151,7 +151,7 @@ public class VideoDTO extends ToString {
 
     private String endMoney;
     /**
-     * shipin.category_id
+     * video.category_id
      * 类目id
      *
      * @mbg.generated 2020-03-19 21:47:04
