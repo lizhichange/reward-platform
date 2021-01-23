@@ -93,9 +93,9 @@ public class VideoController extends BaseController {
      *
      * @return
      */
-    @GetMapping("/pvideo")
-    public String pvideo() {
-        return prefix + "/pvideo";
+    @GetMapping("/private_video")
+    public String privateVideo() {
+        return prefix + "/private_video";
     }
 
     @Log(title = "预览视频", businessType = BusinessType.UPDATE)
