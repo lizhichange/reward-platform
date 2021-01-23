@@ -152,4 +152,6 @@ public class Video extends ToString {
 
     private List<String> userIdList;
 
+    private String categoryName;
+
 }
