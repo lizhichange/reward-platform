@@ -32,35 +32,35 @@ public class VideoServiceImpl implements VideoService {
     /**
      * 查询邀请码管理列表
      *
-     * @param shipin 邀请码管理
+     * @param video 邀请码管理
      * @return 邀请码管理
      */
     @Override
-    public List<Video> selectVideoList(Video shipin) {
-        return extVideoMapper.selectVideoList(shipin);
+    public List<Video> selectVideoList(Video video) {
+        return extVideoMapper.selectVideoList(video);
     }
 
     /**
      * 新增邀请码管理
      *
-     * @param shipin 邀请码管理
+     * @param video 邀请码管理
      * @return 结果
      */
     @Override
-    public int insertVideo(Video shipin) {
-        shipin.setCreateTime(DateUtils.getNowDate());
-        return extVideoMapper.insertVideo(shipin);
+    public int insertVideo(Video video) {
+        video.setCreateTime(DateUtils.getNowDate());
+        return extVideoMapper.insertVideo(video);
     }
 
     /**
      * 修改邀请码管理
      *
-     * @param shipin 邀请码管理
+     * @param video 邀请码管理
      * @return 结果
      */
     @Override
-    public int updateVideo(Video shipin) {
-        return extVideoMapper.updateVideo(shipin);
+    public int updateVideo(Video video) {
+        return extVideoMapper.updateVideo(video);
     }
 
     /**

@@ -9,12 +9,12 @@ import org.springframework.beans.BeanUtils;
  */
 public class VideoConvert {
 
-    public static VideoDTO convert(Video shipin) {
-        if (shipin == null) {
+    public static VideoDTO convert(Video video) {
+        if (video == null) {
             return null;
         }
         VideoDTO dto = new VideoDTO();
-        BeanUtils.copyProperties(shipin, dto);
+        BeanUtils.copyProperties(video, dto);
         return dto;
     }
 

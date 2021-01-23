@@ -24,23 +24,23 @@ public interface ExtVideoMapper {
      *
      * @return 公共片库集合
      */
-    List<Video> selectVideoList(Video shipin);
+    List<Video> selectVideoList(Video video);
 
     /**
      * 新增公共片库
      *
-     * @param shipin 公共片库
+     * @param video 公共片库
      * @return 结果
      */
-    int insertVideo(Video shipin);
+    int insertVideo(Video video);
 
     /**
      * 修改公共片库
      *
-     * @param shipin 公共片库
+     * @param video 公共片库
      * @return 结果
      */
-    int updateVideo(Video shipin);
+    int updateVideo(Video video);
 
     /**
      * 删除公共片库

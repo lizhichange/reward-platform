@@ -19,26 +19,26 @@ public interface VideoService {
     /**
      * 查询邀请码管理列表
      *
-     * @param shipin 邀请码管理
+     * @param video 邀请码管理
      * @return 邀请码管理集合
      */
-    public List<Video> selectVideoList(Video shipin);
+    public List<Video> selectVideoList(Video video);
 
     /**
      * 新增邀请码管理
      *
-     * @param shipin 邀请码管理
+     * @param video 邀请码管理
      * @return 结果
      */
-    public int insertVideo(Video shipin);
+    public int insertVideo(Video video);
 
     /**
      * 修改邀请码管理
      *
-     * @param shipin 邀请码管理
+     * @param video 邀请码管理
      * @return 结果
      */
-    public int updateVideo(Video shipin);
+    public int updateVideo(Video video);
 
     /**
      * 批量删除邀请码管理

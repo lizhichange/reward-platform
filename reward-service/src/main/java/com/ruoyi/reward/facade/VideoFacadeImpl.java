@@ -48,8 +48,8 @@ public class VideoFacadeImpl implements VideoFacade {
      */
     @Override
     public VideoDTO selectVideoDTOById(Long id) {
-        Video shipin = extVideoMapper.selectVideoById(id);
-        return VideoConvert.convert(shipin);
+        Video video = extVideoMapper.selectVideoById(id);
+        return VideoConvert.convert(video);
 
     }
 
