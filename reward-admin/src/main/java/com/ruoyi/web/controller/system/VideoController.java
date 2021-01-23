@@ -503,6 +503,7 @@ public class VideoController extends BaseController {
     @RequiresRoles("admin")
     @ResponseBody
     public AjaxResult changeStatus(Video video) {
+        logger.info("video:{}",video);
         return toAjax(videoService.updateVideo(video));
     }
 

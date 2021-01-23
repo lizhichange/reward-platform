@@ -70,7 +70,7 @@
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="money != null  and money != ''">money,</if>
             <if test="cs != null  and cs != ''">cs,</if>
-            <if test="url != null  and url != ''">url,</if>
+            <if test="imgUrl != null  and imgUrl != ''">img_url,</if>
             <if test="userId != null  and userId != ''">user_id,</if>
             <if test="name != null  and name != ''">name,</if>
             <if test="videoUrl != null  and videoUrl != ''">video_url,</if>
@@ -89,7 +89,7 @@
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="money != null  and money != ''">#{money},</if>
             <if test="cs != null  and cs != ''">#{cs},</if>
-            <if test="url != null  and url != ''">#{url},</if>
+            <if test="imgUrl != null  and imgUrl != ''">#{imgUrl},</if>
             <if test="userId != null  and userId != ''">#{userId},</if>
             <if test="name != null  and name != ''">#{name},</if>
             <if test="videoUrl != null  and videoUrl != ''">#{videoUrl},</if>
@@ -112,7 +112,7 @@
         <trim prefix="SET" suffixOverrides=",">
             <if test="money != null  and money != ''">money = #{money},</if>
             <if test="cs != null  and cs != ''">cs = #{cs},</if>
-            <if test="url != null  and url != ''">url = #{url},</if>
+            <if test="imgUrl != null  and imgUrl != ''">img_url = #{imgUrl},</if>
             <if test="userId != null  and userId != ''">user_id = #{userId},</if>
             <if test="name != null  and name != ''">name = #{name},</if>
             <if test="videoUrl != null  and videoUrl != ''">video_url = #{videoUrl},</if>
