@@ -9,9 +9,9 @@ import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.util.ShiroUtils;
-import com.ruoyi.reward.facade.enums.YqmStatusEnum;
+import com.ruoyi.reward.facade.enums.InvitationStatusEnum;
 import com.ruoyi.system.domain.SysUser;
-import com.ruoyi.system.domain.Yqm;
+import com.ruoyi.system.domain.Invitation;
 import com.ruoyi.system.service.ISysUserService;
 import com.ruoyi.system.service.InvitationService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -40,7 +40,7 @@ public class InvitationController extends BaseController {
     private String prefix = "system/invitation";
 
     @Autowired
-    private InvitationService yqmService;
+    InvitationService invitationService;
 
 
     @Autowired
@@ -58,16 +58,16 @@ public class InvitationController extends BaseController {
     @RequiresPermissions("system:invitation:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(Yqm invitation) {
+    public TableDataInfo list(Invitation invitation) {
         startPage();
         startOrderBy();
         //如果是不管理员
         if (!"admin".equals(ShiroUtils.getLoginName())) {
             invitation.setUserIdList(Lists.newArrayList(ShiroUtils.getLoginName()));
         }
-        List<Yqm> list = yqmService.selectYqmList(invitation);
-        for (Yqm item : list) {
-            item.setZtDesc(EnumUtil.queryByCode(item.getStatus(), YqmStatusEnum.class).getDesc());
+        List<Invitation> list = invitationService.selectInvitationList(invitation);
+        for (Invitation item : list) {
+            item.setZtDesc(EnumUtil.queryByCode(item.getStatus(), InvitationStatusEnum.class).getDesc());
         }
         return getDataTable(list);
     }
@@ -78,9 +78,9 @@ public class InvitationController extends BaseController {
     @RequiresPermissions("system:invitation:export")
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(Yqm invitation) {
-        List<Yqm> list = yqmService.selectYqmList(invitation);
-        ExcelUtil<Yqm> util = new ExcelUtil<Yqm>(Yqm.class);
+    public AjaxResult export(Invitation invitation) {
+        List<Invitation> list = invitationService.selectInvitationList(invitation);
+        ExcelUtil<Invitation> util = new ExcelUtil<>(Invitation.class);
         return util.exportExcel(list, "invitation");
     }
 
@@ -99,13 +99,13 @@ public class InvitationController extends BaseController {
     @Log(title = "邀请码管理", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(Yqm invitation) {
+    public AjaxResult addSave(Invitation invitation) {
         //未使用默认
-        if (StringUtil.isBlank(invitation.getYqm())) {
+        if (StringUtil.isBlank(invitation.getInvitation())) {
             return AjaxResult.error("邀请码不能为空");
         }
 
-        List<Yqm> list = yqmService.selectYqmList(invitation);
+        List<Invitation> list = invitationService.selectInvitationList(invitation);
         if (!CollectionUtils.isEmpty(list)) {
             return AjaxResult.error("邀请码邀请码已存在");
         }
@@ -114,9 +114,9 @@ public class InvitationController extends BaseController {
         if (user == null) {
             return AjaxResult.error("邀请人账号信息不存在");
         }
-        invitation.setStatus(YqmStatusEnum.N.getCode());
+        invitation.setStatus(InvitationStatusEnum.N.getCode());
         invitation.setDuration(DateUtils.formatNewFormat(new Date()));
-        return toAjax(yqmService.insertYqm(invitation));
+        return toAjax(invitationService.insertInvitation(invitation));
     }
 
     /**
@@ -124,7 +124,7 @@ public class InvitationController extends BaseController {
      */
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") Long id, ModelMap mmap) {
-        Yqm invitation = yqmService.selectYqmById(id);
+        Invitation invitation = invitationService.selectInvitationById(id);
         mmap.put("invitation", invitation);
         return prefix + "/edit";
     }
@@ -136,8 +136,8 @@ public class InvitationController extends BaseController {
     @Log(title = "邀请码管理", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(Yqm invitation) {
-        return toAjax(yqmService.updateYqm(invitation));
+    public AjaxResult editSave(Invitation invitation) {
+        return toAjax(invitationService.updateInvitation(invitation));
     }
 
     /**
@@ -153,36 +153,36 @@ public class InvitationController extends BaseController {
                     .trimResults()
                     .omitEmptyStrings().split(ids);
             for (String str : split) {
-                Yqm item = new Yqm();
+                Invitation item = new Invitation();
                 item.setId(Long.parseLong(str));
                 item.setUserId(ShiroUtils.getLoginName());
-                List<Yqm> xxx = yqmService.selectYqmList(item);
+                List<Invitation> xxx = invitationService.selectInvitationList(item);
                 if (xxx.size() == 0) {
                     return error("只能删除自己添加的邀请码");
                 } else {
-                    for (Yqm dto : xxx) {
-                        if (dto.getStatus().equals(YqmStatusEnum.Y.getCode())) {
+                    for (Invitation dto : xxx) {
+                        if (dto.getStatus().equals(InvitationStatusEnum.Y.getCode())) {
                             return error("邀请码已经被其他用户使用不能删除");
                         }
                     }
                 }
             }
         } else {
-            Yqm item = new Yqm();
+            Invitation item = new Invitation();
             item.setId(Long.parseLong(ids));
             item.setUserId(ShiroUtils.getLoginName());
-            List<Yqm> xxx = yqmService.selectYqmList(item);
+            List<Invitation> xxx = invitationService.selectInvitationList(item);
             if (xxx.size() == 0) {
                 return error("只能删除自己添加的邀请码");
             } else {
-                for (Yqm dto : xxx) {
-                    if (dto.getStatus().equals(YqmStatusEnum.Y.getCode())) {
+                for (Invitation dto : xxx) {
+                    if (dto.getStatus().equals(InvitationStatusEnum.Y.getCode())) {
                         return error("邀请码已经被其他用户使用不能删除");
                     }
                 }
             }
         }
-        return toAjax(yqmService.deleteYqmByIds(ids));
+        return toAjax(invitationService.deleteInvitationByIds(ids));
     }
 
 

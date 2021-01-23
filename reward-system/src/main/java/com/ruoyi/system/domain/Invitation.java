@@ -13,7 +13,7 @@ import java.util.List;
  * @date 2020-03-26
  */
 @Data
-public class Yqm extends BaseEntity {
+public class Invitation extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     /**

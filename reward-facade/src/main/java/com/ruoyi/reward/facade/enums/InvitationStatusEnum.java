@@ -9,7 +9,7 @@ import org.near.toolkit.model.BaseEnum;
  * @date 2018-12-06
  */
 @Getter
-public enum YqmStatusEnum implements BaseEnum {
+public enum InvitationStatusEnum implements BaseEnum {
 
     /**
      * 已使用
@@ -25,7 +25,7 @@ public enum YqmStatusEnum implements BaseEnum {
     String code;
     String desc;
 
-    YqmStatusEnum(String code, String desc) {
+    InvitationStatusEnum(String code, String desc) {
         this.code = code;
         this.desc = desc;
     }

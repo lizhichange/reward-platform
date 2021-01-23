@@ -2,8 +2,8 @@ package com.ruoyi.system.service.impl;
 
 import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.common.utils.DateUtils;
-import com.ruoyi.system.domain.Yqm;
-import com.ruoyi.system.mapper.YqmMapper;
+import com.ruoyi.system.domain.Invitation;
+import com.ruoyi.system.mapper.InvitationMapper;
 import com.ruoyi.system.service.InvitationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ import java.util.List;
 @Service
 public class InvitationServiceImpl implements InvitationService {
     @Autowired
-    private YqmMapper yqmMapper;
+    private InvitationMapper invitationMapper;
 
     /**
      * 查询邀请码管理
@@ -28,8 +28,8 @@ public class InvitationServiceImpl implements InvitationService {
      * @return 邀请码管理
      */
     @Override
-    public Yqm selectYqmById(Long id) {
-        return yqmMapper.selectYqmById(id);
+    public Invitation selectInvitationById(Long id) {
+        return invitationMapper.selectInvitationById(id);
     }
 
     /**
@@ -39,8 +39,8 @@ public class InvitationServiceImpl implements InvitationService {
      * @return 邀请码管理
      */
     @Override
-    public List<Yqm> selectYqmList(Yqm invitation) {
-        return yqmMapper.selectYqmList(invitation);
+    public List<Invitation> selectInvitationList(Invitation invitation) {
+        return invitationMapper.selectInvitationList(invitation);
     }
 
     /**
@@ -50,9 +50,9 @@ public class InvitationServiceImpl implements InvitationService {
      * @return 结果
      */
     @Override
-    public int insertYqm(Yqm invitation) {
+    public int insertInvitation(Invitation invitation) {
         invitation.setCreateTime(DateUtils.getNowDate());
-        return yqmMapper.insertYqm(invitation);
+        return invitationMapper.insertInvitation(invitation);
     }
 
     /**
@@ -62,9 +62,9 @@ public class InvitationServiceImpl implements InvitationService {
      * @return 结果
      */
     @Override
-    public int updateYqm(Yqm invitation) {
+    public int updateInvitation(Invitation invitation) {
         invitation.setUpdateTime(DateUtils.getNowDate());
-        return yqmMapper.updateYqm(invitation);
+        return invitationMapper.updateInvitation(invitation);
     }
 
     /**
@@ -74,8 +74,8 @@ public class InvitationServiceImpl implements InvitationService {
      * @return 结果
      */
     @Override
-    public int deleteYqmByIds(String ids) {
-        return yqmMapper.deleteYqmByIds(Convert.toStrArray(ids));
+    public int deleteInvitationByIds(String ids) {
+        return invitationMapper.deleteInvitationByIds(Convert.toStrArray(ids));
     }
 
     /**
@@ -85,7 +85,7 @@ public class InvitationServiceImpl implements InvitationService {
      * @return 结果
      */
     @Override
-    public int deleteYqmById(Long id) {
-        return yqmMapper.deleteYqmById(id);
+    public int deleteInvitationById(Long id) {
+        return invitationMapper.deleteInvitationById(id);
     }
 }

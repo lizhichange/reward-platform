@@ -8,12 +8,12 @@ import com.ruoyi.common.enums.ShortStatus;
 import com.ruoyi.framework.shiro.service.SysPasswordService;
 import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.reward.domain.SysShort;
-import com.ruoyi.reward.facade.enums.YqmStatusEnum;
+import com.ruoyi.reward.facade.enums.InvitationStatusEnum;
 import com.ruoyi.reward.service.SysShortService;
 import com.ruoyi.system.domain.SysPost;
 import com.ruoyi.system.domain.SysRole;
 import com.ruoyi.system.domain.SysUser;
-import com.ruoyi.system.domain.Yqm;
+import com.ruoyi.system.domain.Invitation;
 import com.ruoyi.system.service.*;
 import com.ruoyi.web.GetShortFactory;
 import lombok.extern.java.Log;
@@ -61,7 +61,7 @@ public class WebController extends BaseController {
     ISysRoleService roleService;
 
     @Autowired
-    InvitationService yqmService;
+    InvitationService invitationService;
 
     @Autowired
     SysShortService sysShortService;
@@ -108,14 +108,14 @@ public class WebController extends BaseController {
         final String string = requestURL.delete(requestURL.length() - request.getRequestURI().length(), requestURL.length()).append(contextPath).toString();
 
 
-        Yqm yqmDTO = new Yqm();
-        yqmDTO.setYqm(invitation);
-        List<Yqm> list = yqmService.selectYqmList(yqmDTO);
+        Invitation invitationDTO = new Invitation();
+        invitationDTO.setInvitation(invitation);
+        List<Invitation> list = invitationService.selectInvitationList(invitationDTO);
         if (CollectionUtils.isEmpty(list)) {
             return error("'" + invitation + "'邀请码不存在，注册账号失败");
         }
-        Yqm dto = list.get(0);
-        if (dto.getStatus().equals(YqmStatusEnum.Y.getCode())) {
+        Invitation dto = list.get(0);
+        if (dto.getStatus().equals(InvitationStatusEnum.Y.getCode())) {
             return error("'" + invitation + "'邀请码已使用，注册账号失败");
         }
 
@@ -155,9 +155,9 @@ public class WebController extends BaseController {
         user.setCreateBy("admin");
         int i = userService.insertUser(user);
         if (i > 0) {
-            dto.setStatus(YqmStatusEnum.Y.getCode());
+            dto.setStatus(InvitationStatusEnum.Y.getCode());
             dto.setName(loginName);
-            yqmService.updateYqm(dto);
+            invitationService.updateInvitation(dto);
             threadPoolTaskExecutor.execute(() -> {
                 SysShort sysShort = new SysShort();
                 sysShort.setShortKey(loginName);
