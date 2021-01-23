@@ -1,6 +1,5 @@
 package com.ruoyi.mp.controller;
 
-import cn.hutool.core.util.RandomUtil;
 import com.ruoyi.reward.facade.dto.SysWebMainDTO;
 import com.ruoyi.reward.facade.enums.WebMainStatus;
 import lombok.Getter;
@@ -59,15 +58,8 @@ public class IndexController extends BaseController {
         webMain.setMainStatus(WebMainStatus.OK.getCode());
         List<SysWebMainDTO> list = sysWebMainFacadeClient.selectSysWebMainList(webMain);
         if (!CollectionUtils.isEmpty(list)) {
-            SysWebMainDTO item;
-            int size = list.size();
-            if (size == 1) {
-                item = list.get(0);
-            } else {
-                int i = RandomUtil.randomInt(0, size - 1);
-                item = list.get(i);
-            }
-            String url = item.getMainUrl() + "/video/redirect?userId=" + user;
+            SysWebMainDTO item = list.get(0);
+            String url = item.getMainUrl() + "/redirect?userId=" + user;
             LOGGER.info("redirect.url:{}", url);
             return "redirect:" + url;
         }
