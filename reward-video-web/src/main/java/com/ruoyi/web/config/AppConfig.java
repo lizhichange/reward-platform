@@ -1,6 +1,7 @@
 package com.ruoyi.web.config;
 
 
+import lombok.Data;
 import org.near.toolkit.model.ToString;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -9,12 +10,8 @@ import org.springframework.stereotype.Component;
  * @author sunflower
  */
 @Component
+@Data
 public class AppConfig extends ToString {
-    /**
-     *
-     */
-
-
     /**
      * / 验证码开关
      */
@@ -27,19 +24,4 @@ public class AppConfig extends ToString {
     private boolean authMpEnabled;
 
 
-    public boolean isCaptchaEnabled() {
-        return captchaEnabled;
-    }
-
-    public void setCaptchaEnabled(boolean captchaEnabled) {
-        this.captchaEnabled = captchaEnabled;
-    }
-
-    public boolean isAuthMpEnabled() {
-        return authMpEnabled;
-    }
-
-    public void setAuthMpEnabled(boolean authMpEnabled) {
-        this.authMpEnabled = authMpEnabled;
-    }
 }
