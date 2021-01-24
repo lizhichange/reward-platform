@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
@@ -79,7 +80,7 @@ public class QrCodePayController {
                     String orderId,
                     String tradeType,
                     String callbackUrl) throws Exception {
-        modelMap.addAttribute("returnUrl", callbackUrl);
+        modelMap.addAttribute("returnUrl", URLEncoder.encode(callbackUrl));
 
         String notifyUrl = sysConfigFacadeClient.selectConfigByKey("wxPayUrl");
         notifyUrl = notifyUrl + "/qrCode/notify/order";
