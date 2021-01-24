@@ -120,11 +120,11 @@ public class QrCodePayController {
             if (result != null && result.getCode() == 0) {
                 result.getResult().setLinkUrl(URIUtil.encodeURIComponent(result.getResult().getLinkUrl()));
                 modelMap.addAttribute("result", result.getResult());
-                String billNo = result.getResult().getBillNo();
-                if (StringUtil.isNotBlank(billNo)) {
+                String tradeNo = result.getResult().getTradeNo();
+                if (StringUtil.isNotBlank(tradeNo)) {
                     SysOrderDTO newOrder = new SysOrderDTO();
                     newOrder.setId(sysOrderDTO.getId());
-                    newOrder.setPayNo(billNo);
+                    newOrder.setPayNo(tradeNo);
                     sysOrderFacadeClient.updateSysOrder(newOrder);
                 }
             }
