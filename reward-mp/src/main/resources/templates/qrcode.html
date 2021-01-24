@@ -183,6 +183,7 @@
             var tradeNo = $("#tradeNo").val();
             var billNo = $("#billNo").val();
             var returnUrl = $("#returnUrl").val();
+            console.log(decodeURIComponent(returnUrl));
             $.ajax({
                 type: "post",
                 url: '/qrCode/notify/checkUrl',
@@ -193,7 +194,6 @@
                     billNo: billNo,
                 },
                 success: function (obj) {
-                    console.log(obj);
                     if (obj.code === 0) {
                         jumpUrl = decodeURIComponent(returnUrl);
                         window.location.href = jumpUrl;
