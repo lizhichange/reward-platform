@@ -279,31 +279,29 @@ $(function () {
                         if (r.code === 0) {
                             var rep = r.data;
                             if (rep.status === 0 || rep.status === 2) {
-                                $('#myModal').modal('show');
-                                $("#btn").click(function () {
-                                    $('#myModal').modal('hide');
-                                    var value = document.getElementById('wxPayUrl').value;
-                                    var flag = value.indexOf("?") !== -1;
-                                    var callbackUrl = window.location.href;
-                                    var flagCallbackUrl = callbackUrl.indexOf("?") !== -1;
-                                    var flagVideoIdCallbackUrl = callbackUrl.indexOf("videoId") !== -1;
-                                    //如果有这个参数值
-                                    if (flagVideoIdCallbackUrl) {
-                                        callbackUrl = changeUrlArg(callbackUrl, 'videoId', dataId);
-                                        console.log("callbackUrl=" + callbackUrl);
+
+                                var value = document.getElementById('wxPayUrl').value;
+                                var flag = value.indexOf("?") !== -1;
+                                var callbackUrl = window.location.href;
+                                var flagCallbackUrl = callbackUrl.indexOf("?") !== -1;
+                                var flagVideoIdCallbackUrl = callbackUrl.indexOf("videoId") !== -1;
+                                //如果有这个参数值
+                                if (flagVideoIdCallbackUrl) {
+                                    callbackUrl = changeUrlArg(callbackUrl, 'videoId', dataId);
+                                    console.log("callbackUrl=" + callbackUrl);
+                                } else {
+                                    if (flagCallbackUrl) {
+                                        callbackUrl = callbackUrl + "&videoId=" + dataId;
                                     } else {
-                                        if (flagCallbackUrl) {
-                                            callbackUrl = callbackUrl + "&videoId=" + dataId;
-                                        } else {
-                                            callbackUrl = callbackUrl + "?videoId=" + dataId;
-                                        }
+                                        callbackUrl = callbackUrl + "?videoId=" + dataId;
                                     }
-                                    if (flag) {
-                                        window.location.href = value + "&orderId=" + rep.orderId + "&callbackUrl=" + encodeURIComponent(callbackUrl);
-                                    } else {
-                                        window.location.href = value + "?orderId=" + rep.orderId + "&callbackUrl=" + encodeURIComponent(callbackUrl);
-                                    }
-                                });
+                                }
+                                if (flag) {
+                                    window.location.href = value + "&orderId=" + rep.orderId + "&callbackUrl=" + encodeURIComponent(callbackUrl);
+                                } else {
+                                    window.location.href = value + "?orderId=" + rep.orderId + "&callbackUrl=" + encodeURIComponent(callbackUrl);
+                                }
+
 
                             } else if (rep.status === 1) {
                                 flagClick = true;
@@ -360,32 +358,29 @@ $(function () {
                 if (r.code === 0) {
                     var rep = r.data;
                     if (rep.status === 0 || rep.status === 2) {
-                        player.pause();
-                        $('#myModal').modal('show');
-                        $("#btn").click(function () {
-                            $('#myModal').modal('hide');
-                            var value = document.getElementById('wxPayUrl').value;
-                            var flag = value.indexOf("?") !== -1;
-                            var callbackUrl = window.location.href;
-                            var flagCallbackUrl = callbackUrl.indexOf("?") !== -1;
-                            var flagVideoIdCallbackUrl = callbackUrl.indexOf("videoId") !== -1;
-                            //如果有这个参数值
-                            if (flagVideoIdCallbackUrl) {
-                                callbackUrl = changeUrlArg(callbackUrl, 'videoId', dataId);
-                                console.log("callbackUrl=" + callbackUrl);
+
+                        var value = document.getElementById('wxPayUrl').value;
+                        var flag = value.indexOf("?") !== -1;
+                        var callbackUrl = window.location.href;
+                        var flagCallbackUrl = callbackUrl.indexOf("?") !== -1;
+                        var flagVideoIdCallbackUrl = callbackUrl.indexOf("videoId") !== -1;
+                        //如果有这个参数值
+                        if (flagVideoIdCallbackUrl) {
+                            callbackUrl = changeUrlArg(callbackUrl, 'videoId', dataId);
+                            console.log("callbackUrl=" + callbackUrl);
+                        } else {
+                            if (flagCallbackUrl) {
+                                callbackUrl = callbackUrl + "&videoId=" + dataId;
                             } else {
-                                if (flagCallbackUrl) {
-                                    callbackUrl = callbackUrl + "&videoId=" + dataId;
-                                } else {
-                                    callbackUrl = callbackUrl + "?videoId=" + dataId;
-                                }
+                                callbackUrl = callbackUrl + "?videoId=" + dataId;
                             }
-                            if (flag) {
-                                window.location.href = value + "&orderId=" + rep.orderId + "&callbackUrl=" + encodeURIComponent(callbackUrl);
-                            } else {
-                                window.location.href = value + "?orderId=" + rep.orderId + "&callbackUrl=" + encodeURIComponent(callbackUrl);
-                            }
-                        });
+                        }
+                        if (flag) {
+                            window.location.href = value + "&orderId=" + rep.orderId + "&callbackUrl=" + encodeURIComponent(callbackUrl);
+                        } else {
+                            window.location.href = value + "?orderId=" + rep.orderId + "&callbackUrl=" + encodeURIComponent(callbackUrl);
+                        }
+
 
                     }
                     if (rep.status === 1) {
