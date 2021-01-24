@@ -9,6 +9,7 @@ import com.ruoyi.mp.model.PayResult;
 import com.ruoyi.reward.facade.dto.SysOrderDTO;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import me.chanjar.weixin.common.util.http.URIUtil;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -20,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
-import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
@@ -80,7 +80,7 @@ public class QrCodePayController {
                     String orderId,
                     String tradeType,
                     String callbackUrl) throws Exception {
-        modelMap.addAttribute("returnUrl", URLEncoder.encode(callbackUrl));
+        modelMap.addAttribute("returnUrl", URIUtil.encodeURIComponent(callbackUrl));
 
         String notifyUrl = sysConfigFacadeClient.selectConfigByKey("wxPayUrl");
         notifyUrl = notifyUrl + "/qrCode/notify/order";
