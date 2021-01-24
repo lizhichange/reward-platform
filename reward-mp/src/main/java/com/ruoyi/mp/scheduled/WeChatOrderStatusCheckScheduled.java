@@ -22,7 +22,6 @@ import org.near.toolkit.common.StringUtil;
 import org.near.toolkit.model.BaseEnum;
 import org.near.toolkit.model.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
@@ -56,7 +55,7 @@ public class WeChatOrderStatusCheckScheduled {
         this.sysOrderFacadeClient = sysOrderFacadeClient;
     }
 
-    @Scheduled(cron = "0 0/3 * * * ?")
+//    @Scheduled(cron = "0 0/3 * * * ?")
     public void execute() {
         if (!mpAuthConfig.isMockWeChatOrderQuery()) {
             SysOrderDTO item = new SysOrderDTO();
