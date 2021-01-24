@@ -117,8 +117,8 @@
 <input type="hidden" id="imgUrl" th:value="${video?.imgUrl}" />
 <input type="hidden" id="videoUrl" th:value="${video?.videoUrl}" />
 <input type="hidden" th:value="${video?.userId}" id="author" />
-<script src="/js/index.js"></script>
 
-
- 
+<script type="text/javascript">
+   document.write("<script src='/js/index.js?" + Math.random() + "></script>")
+ </script>
 </html>
