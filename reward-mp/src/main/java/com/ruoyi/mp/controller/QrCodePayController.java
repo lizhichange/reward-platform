@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * @author sunflower
@@ -49,6 +50,8 @@ public class QrCodePayController {
     SysConfigFacadeClient sysConfigFacadeClient;
     @Autowired
     AccountFacadeClient accountFacadeClient;
+    @Autowired
+    ThreadPoolExecutor threadPoolExecutor;
 
     private static String checkUrl = "http://payapi.ttyerh45.cn/pay/checkTradeNo"; // 主动查单地址
 
@@ -83,8 +86,18 @@ public class QrCodePayController {
     @PostMapping("/notify/checkUrl")
     @ResponseBody
     @ApiOperation("checkUrl")
-    public AjaxResult checkUrl(OrderParam param) throws Exception {
+    public AjaxResult checkUrl(OrderParam param) {
         log.info("param:{}", param);
+        SysOrderDTO item = sysOrderFacadeClient.selectSysOrderByOrderId(param.getOrderId());
+        if (item == null) {
+            throw new RuntimeException("系统异常");
+        }
+        boolean equals = item.getStatus().toString().equals(OrderStatusType.Y_PAY.getCode());
+        if (equals) {
+            // 支付成功
+            return AjaxResult.success();
+        }
+
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         Map<String, String> map = Maps.newHashMap();
@@ -97,18 +110,19 @@ public class QrCodePayController {
         if (postForEntity.getStatusCode() == HttpStatus.OK) {
             String body = postForEntity.getBody();
             CheckResult checkResult = JSONObject.parseObject(body, CheckResult.class, new Feature[0]);
+            // 支付成功
             if (checkResult != null && checkResult.getCode() == 0) {
-                String billNo = checkResult.getBillNo();
-                SysOrderDTO item = sysOrderFacadeClient.selectSysOrderByOrderId(param.getOrderId());
-                if (item != null) {
-                    SysOrderDTO newOrder = new SysOrderDTO();
-                    newOrder.setId(item.getId());
-                    newOrder.setOrderId(item.getOrderId());
-                    newOrder.setStatus(Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
+                SysOrderDTO newOrder = new SysOrderDTO();
+                newOrder.setId(item.getId());
+                newOrder.setOrderId(item.getOrderId());
+                newOrder.setStatus(Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
+                try {
                     accountFacadeClient.take(newOrder);
-                    return AjaxResult.success();
+                } catch (Exception e) {
+                    log.error(e.getMessage(), e);
                 }
             }
+            return AjaxResult.success();
         }
         return AjaxResult.error("订单未支付");
     }
