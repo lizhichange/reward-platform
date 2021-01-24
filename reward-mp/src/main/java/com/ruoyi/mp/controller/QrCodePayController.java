@@ -22,6 +22,8 @@ import org.near.toolkit.model.AjaxResult;
 import org.near.toolkit.model.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
+import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -98,34 +100,27 @@ public class QrCodePayController {
             return AjaxResult.success();
         }
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-        headers.setContentType(MediaType.APPLICATION_JSON);
-//封装参数，千万不要替换为Map与HashMap，否则参数无法传递
-        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-//添加请求的参数
-        params.add("tradeNo", param.getTradeNo());
-
-        HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(params, headers);
-        ResponseEntity<String> postForEntity = restTemplate.postForEntity(checkUrl, requestEntity, String.class);
-        log.info("postForEntity:{}", postForEntity);
-        if (postForEntity.getStatusCode() == HttpStatus.OK) {
-            String body = postForEntity.getBody();
-            CheckResult checkResult = JSONObject.parseObject(body, CheckResult.class, new Feature[0]);
-            // 支付成功
-            if (checkResult != null && checkResult.getCode() == 0) {
-                SysOrderDTO newOrder = new SysOrderDTO();
-                newOrder.setId(item.getId());
-                newOrder.setOrderId(item.getOrderId());
-                newOrder.setStatus(Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
-                try {
-                    accountFacadeClient.take(newOrder);
-                } catch (Exception e) {
-                    log.error(e.getMessage(), e);
-                }
-                return AjaxResult.success();
+        MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
+        headers.add("Content-Type", "application/json");
+        HashMap<String, Object> map = Maps.newHashMap();
+        map.put("tradeNo", param.getTradeNo());
+        String body = post(checkUrl, JSONObject.toJSONString(map), headers, String.class);
+        log.info("body:{}", body);
+        CheckResult checkResult = JSONObject.parseObject(body, CheckResult.class, new Feature[0]);
+        // 支付成功
+        if (checkResult != null && checkResult.getCode() == 0) {
+            SysOrderDTO newOrder = new SysOrderDTO();
+            newOrder.setId(item.getId());
+            newOrder.setOrderId(item.getOrderId());
+            newOrder.setStatus(Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
+            try {
+                accountFacadeClient.take(newOrder);
+            } catch (Exception e) {
+                log.error(e.getMessage(), e);
             }
+            return AjaxResult.success();
         }
+
         return AjaxResult.error("订单未支付");
     }
 
@@ -201,6 +196,16 @@ public class QrCodePayController {
         }
     }
 
+    public <T> T post(String url, Object requestObject, MultiValueMap<String, String> headers, Class<T> responseType) {
+
+        restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+        restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+
+        HttpEntity request = new HttpEntity(requestObject, headers);
+        T responseObject = restTemplate.postForObject(url, request, responseType);
+
+        return responseObject;
+    }
 
     String sign(Map<String, String> params, String signKey, Boolean is) {
         SortedMap<String, String> sortedMap = new TreeMap<>(params);
