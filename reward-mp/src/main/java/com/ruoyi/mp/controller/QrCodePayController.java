@@ -27,6 +27,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -101,12 +103,10 @@ public class QrCodePayController {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
-        Map<String, Long> map = Maps.newHashMap();
-        Long tradeNo = param.getTradeNo();
-        map.put("tradeNo:", tradeNo);
-        String content = JSONObject.toJSONString(map);
-        log.info("content:{}", content);
-        HttpEntity<String> request = new HttpEntity<>(content, headers);
+
+        MultiValueMap<String, Long> map = new LinkedMultiValueMap<>();
+        map.add("tradeNo:", param.getTradeNo());
+        HttpEntity<MultiValueMap<String, Long>> request = new HttpEntity<>(map, headers);
         ResponseEntity<String> postForEntity = restTemplate.postForEntity(checkUrl, request, String.class);
         log.info("postForEntity:{}", postForEntity);
         if (postForEntity.getStatusCode() == HttpStatus.OK) {
