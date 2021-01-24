@@ -182,7 +182,7 @@
         function check() {
             var tradeNo = $("#tradeNo").val();
             var returnUrl = $("#returnUrl").val();
-            console.log(URL.decodeURI(returnUrl));
+            console.log(encodeURIComponent(returnUrl));
             $.ajax({
                 type: "post",
                 url: $("#checkUrl").val(),
@@ -191,7 +191,7 @@
                 data: { tradeNo: tradeNo },
                 success: function (obj) {
                     if (obj.code == 0) {
-                        jumpUrl = URL.decodeURI(returnUrl);
+                        jumpUrl = encodeURIComponent(returnUrl);
                         window.location.href = jumpUrl;
                     } else {
                         //alert(obj.message);
