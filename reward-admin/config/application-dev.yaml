@@ -6,14 +6,14 @@ spring:
     druid:
       # 主库数据源
       master:
-        url: jdbc:mysql://localhost:3306/ruoyi?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+        url: jdbc:mysql://119.8.122.87:3306/ruoyi?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
         username: root
         password: root
       # 从库数据源
       slave:
         # 从数据源开关/默认关闭
         enabled: true
-        url: jdbc:mysql://localhost:3306/sms_info?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+        url: jdbc:mysql://119.8.122.87:3306/ruoyi?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
         username: root
         password: root
       # 初始连接数
@@ -67,10 +67,10 @@ ruoyi:
   # 实例演示开关
   demoEnabled: true
   # 文件路径 示例（ Windows配置D:/ruoyi/uploadPath，Linux配置 /home/ruoyi/uploadPath）
-  profile: /Users/sunflower/Downloads/uploadPath
+  profile: /home/fulihui/uploadPath
   # 获取ip地址开关
-  addressEnabled: false
 
+  addressEnabled: false
 
 
 dubbo:
@@ -81,10 +81,10 @@ dubbo:
   protocol:
     port: 12345
     name: dubbo
+    lazy: true
     status: server
     serialization: hessian2
     threads: 2000
-    lazy: true
   application:
     name: dubbo-sms-zk-service
     id: dubbo-sms-zk-service
@@ -99,11 +99,8 @@ dubbo:
 # 日志配置
 logging:
   level:
-    com.ruoyi: debug
+    com.ruoyi: info
     org.springframework: warn
-
-
-
 
 
 reward-service:

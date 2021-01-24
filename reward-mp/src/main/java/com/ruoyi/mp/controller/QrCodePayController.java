@@ -13,7 +13,8 @@ import com.ruoyi.reward.facade.dto.SysOrderDTO;
 import com.ruoyi.reward.facade.enums.OrderStatusType;
 import io.swagger.annotations.ApiOperation;
 import jodd.util.StringUtil;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.util.http.URIUtil;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -128,8 +129,9 @@ public class QrCodePayController {
     }
 
 
-    @Data
-    class CheckResult extends ToString {
+    @Setter
+    @Getter
+    private static class CheckResult extends ToString {
         private int code;
         private String message;
         private int tradeStatus;
