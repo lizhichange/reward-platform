@@ -70,7 +70,7 @@ public class QrCodePayController {
     @PostMapping("/notify/order")
     @ResponseBody
     @ApiOperation("支付回调通知处理")
-    public String parseOrderNotifyResult(@RequestBody String xmlData) throws Exception {
+    public String parseOrderNotifyResult(String xmlData) throws Exception {
         return "";
     }
 
