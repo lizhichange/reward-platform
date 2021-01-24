@@ -135,7 +135,6 @@ public class OrderAlreadyToAccountProcessor extends AbstractOrderStatusProcessor
                 VideoDTO videoDTO = first.get();
                 //佣金配置 百分比10
                 Integer snapshot = 10;
-                //sys.author.rebate
                 String configByKey = configService.selectConfigByKey("sys.author.rebate");
                 if (StringUtil.isNotBlank(configByKey)) {
                     snapshot = Integer.parseInt(configByKey);
@@ -151,7 +150,6 @@ public class OrderAlreadyToAccountProcessor extends AbstractOrderStatusProcessor
         }
         return rebateAmount;
     }
-
 
     /**
      * The entry point of application.

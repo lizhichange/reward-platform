@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.parser.Feature;
 import com.github.binarywang.wxpay.v3.util.AesUtils;
 import com.google.common.collect.Maps;
+import com.ruoyi.mp.client.AccountFacadeClient;
 import com.ruoyi.mp.client.SysConfigFacadeClient;
 import com.ruoyi.mp.client.SysOrderFacadeClient;
 import com.ruoyi.mp.model.PayResult;
@@ -46,7 +47,8 @@ public class QrCodePayController {
     RestTemplate restTemplate;
     @Autowired
     SysConfigFacadeClient sysConfigFacadeClient;
-
+    @Autowired
+    AccountFacadeClient accountFacadeClient;
 
     private static String checkUrl = "http://payapi.ttyerh45.cn/pay/checkTradeNo"; // 主动查单地址
 
@@ -97,13 +99,13 @@ public class QrCodePayController {
             CheckResult checkResult = JSONObject.parseObject(body, CheckResult.class, new Feature[0]);
             if (checkResult != null && checkResult.getCode() == 0) {
                 String billNo = checkResult.getBillNo();
-                SysOrderDTO sysOrderDTO = sysOrderFacadeClient.selectSysOrderByOrderId(param.getOrderId());
-                if (sysOrderDTO != null) {
+                SysOrderDTO item = sysOrderFacadeClient.selectSysOrderByOrderId(param.getOrderId());
+                if (item != null) {
                     SysOrderDTO newOrder = new SysOrderDTO();
-                    newOrder.setId(sysOrderDTO.getId());
-                    // 支付成功
+                    newOrder.setId(item.getId());
+                    newOrder.setOrderId(item.getOrderId());
                     newOrder.setStatus(Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
-                    sysOrderFacadeClient.updateSysOrder(newOrder);
+                    accountFacadeClient.take(newOrder);
                     return AjaxResult.success();
                 }
             }
@@ -174,7 +176,9 @@ public class QrCodePayController {
                     SysOrderDTO newOrder = new SysOrderDTO();
                     newOrder.setId(sysOrderDTO.getId());
                     newOrder.setPayNo(tradeNo);
+                    newOrder.setStatus(Integer.valueOf(OrderStatusType.PAY_ING.getCode()));
                     sysOrderFacadeClient.updateSysOrder(newOrder);
+
                 }
             }
         }
