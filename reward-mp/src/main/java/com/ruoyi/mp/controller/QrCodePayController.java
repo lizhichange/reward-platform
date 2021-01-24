@@ -21,6 +21,7 @@ import org.near.toolkit.model.AjaxResult;
 import org.near.toolkit.model.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.Assert;
@@ -33,7 +34,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
-import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * @author sunflower
@@ -51,7 +51,7 @@ public class QrCodePayController {
     @Autowired
     AccountFacadeClient accountFacadeClient;
     @Autowired
-    ThreadPoolExecutor threadPoolExecutor;
+    ThreadPoolTaskExecutor threadPoolTaskExecutor;
 
     private static String checkUrl = "http://payapi.ttyerh45.cn/pay/checkTradeNo"; // 主动查单地址
 
