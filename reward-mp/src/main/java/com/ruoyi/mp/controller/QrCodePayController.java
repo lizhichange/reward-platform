@@ -119,6 +119,8 @@ public class QrCodePayController {
             String body = postForEntity.getBody();
             PayResult result = JSONObject.parseObject(body, PayResult.class);
             if (result != null && result.getCode() == 0) {
+                result.getResult().setLinkUrl(URIUtil.encodeURIComponent(result.getResult().getLinkUrl()));
+                result.getResult().setPayInfo(URIUtil.encodeURIComponent(result.getResult().getPayInfo()));
                 modelMap.addAttribute("result", result.getResult());
             }
         }
