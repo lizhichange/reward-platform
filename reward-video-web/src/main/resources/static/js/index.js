@@ -274,7 +274,6 @@ $(function () {
                         console.log(errorThrown);
                     },
                     success: function (r) {
-
                         console.log(r);
                         if (r.code === 0) {
                             var rep = r.data;
@@ -357,7 +356,6 @@ $(function () {
                 if (r.code === 0) {
                     var rep = r.data;
                     if (rep.status === 0 || rep.status === 2) {
-
                         var value = document.getElementById('wxPayUrl').value;
                         var flag = value.indexOf("?") !== -1;
                         var callbackUrl = window.location.href;
@@ -379,8 +377,6 @@ $(function () {
                         } else {
                             window.location.href = value + "?orderId=" + rep.orderId + "&callbackUrl=" + encodeURIComponent(callbackUrl);
                         }
-
-
                     }
                     if (rep.status === 1) {
                         player.play();
