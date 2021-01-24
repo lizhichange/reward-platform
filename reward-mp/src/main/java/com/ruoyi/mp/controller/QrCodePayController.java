@@ -78,8 +78,7 @@ public class QrCodePayController {
                     String orderId,
                     String tradeType,
                     String callbackUrl) throws Exception {
-        modelMap.addAttribute("callbackUrl", callbackUrl);
-
+        modelMap.addAttribute("returnUrl", callbackUrl);
 
         String notifyUrl = sysConfigFacadeClient.selectConfigByKey("wxPayUrl");
         notifyUrl = notifyUrl + "/qrCode/notify/order";
@@ -93,7 +92,6 @@ public class QrCodePayController {
         String totalAmount = sysOrderDTO.getMoney().toString(); //金额
         String billDesc = "在线充值"; //商品名称
         String payment = "wechat"; //微信支付
-        String returnUrl = callbackUrl; //同步跳转
         String attach = "123";
         //收款账号
         Map<String, String> map = Maps.newHashMap();
@@ -104,9 +102,8 @@ public class QrCodePayController {
         map.put("way", way);
         map.put("payment", payment);
         map.put("notifyUrl", notifyUrl);
-        map.put("returnUrl", returnUrl);
+        map.put("returnUrl", callbackUrl);
         map.put("attach", attach);
-
         String merchantKey = "8387ea13ff584f77cb5309125897a0d047a7e07c38f3ac961c7c98833fe06501";
         String sign = sign(map, merchantKey, true);
         map.put("sign", sign);

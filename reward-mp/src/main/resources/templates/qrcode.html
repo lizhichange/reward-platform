@@ -79,6 +79,7 @@
 <input th:value="${result.linkUrl}" type="hidden" name="linkUrl"  id="linkUrl"/>
 <input th:value="${result.h5pay}" type="hidden" name="h5pay"  id="h5pay"/>
 <input th:value="${checkUrl}" type="hidden" name="checkUrl"  id="checkUrl"/>
+<input th:value="${returnUrl}" type="hidden" name="returnUrl"  id="returnUrl"/>
 
 <div class="copyRight"></div>
 <script src="/js/toastr.min.js"></script>
@@ -180,8 +181,8 @@
             data: {tradeNo:tradeNo},
 			success: function(obj){
 				if(obj.code==0){
-					jumpUrl = '';
-					window.location.href = '';
+					jumpUrl = $("#returnUrl").val();
+					window.location.href = jumpUrl;
 				}else{
 				    //alert(obj.message);
 				}
