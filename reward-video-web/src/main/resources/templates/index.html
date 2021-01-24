@@ -55,6 +55,10 @@
 							<li class="category" th:each="item,stat:${categoryList}" th:data="${item.categoryId}"><a
 									th:data="${item.categoryId}" href="javascript:void(0);">[[${item.categoryName}]]</a>
 							</li>
+						</li>
+							<a class="highlight category" href="javascript:void(0);" data="buy"
+							style="font-weight: bold; color: #bfd128;">已购</a>
+						</li> 
 						</ul>
 					</div>
 					<div class="search">
