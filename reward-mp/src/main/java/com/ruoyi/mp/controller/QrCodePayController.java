@@ -33,10 +33,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
-import java.util.Map;
-import java.util.SortedMap;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * @author sunflower
@@ -102,12 +99,16 @@ public class QrCodePayController {
         }
 
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
+//封装参数，千万不要替换为Map与HashMap，否则参数无法传递
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+//添加请求的参数
+        params.add("tradeNo", param.getTradeNo());
 
-        MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-        map.add("tradeNo:", JSONObject.toJSONString(param.getTradeNo()));
-        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map, headers);
-        ResponseEntity<String> postForEntity = restTemplate.postForEntity(checkUrl, request, String.class);
+        HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(params, headers);
+        ResponseEntity<String> postForEntity = restTemplate.postForEntity(checkUrl, requestEntity, String.class);
         log.info("postForEntity:{}", postForEntity);
         if (postForEntity.getStatusCode() == HttpStatus.OK) {
             String body = postForEntity.getBody();
