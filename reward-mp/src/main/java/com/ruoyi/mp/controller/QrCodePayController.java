@@ -1,6 +1,7 @@
 package com.ruoyi.mp.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.binarywang.wxpay.v3.util.AesUtils;
 import com.google.common.collect.Maps;
 import com.ruoyi.mp.client.SysConfigFacadeClient;
 import com.ruoyi.mp.client.SysOrderFacadeClient;
@@ -83,6 +84,7 @@ public class QrCodePayController {
         String notifyUrl = sysConfigFacadeClient.selectConfigByKey("wxPayUrl");
         notifyUrl = notifyUrl + "/qrCode/notify/order";
         SysOrderDTO sysOrderDTO = getSysOrderDTO(orderId);
+        String merchantKey = "8387ea13ff584f77cb5309125897a0d047a7e07c38f3ac961c7c98833fe06501";
 
 
         String payUrl = "http://payapi.ttyerh45.cn/game/unifiedorder"; //请求订单地址
@@ -101,10 +103,9 @@ public class QrCodePayController {
         map.put("billDesc", billDesc);
         map.put("way", way);
         map.put("payment", payment);
-        map.put("notifyUrl", notifyUrl);
-        map.put("returnUrl", callbackUrl);
+        map.put("returnUrl", AesUtils.HMACSHA256(callbackUrl, merchantKey));
+        map.put("notifyUrl", AesUtils.HMACSHA256(notifyUrl, merchantKey));
         map.put("attach", attach);
-        String merchantKey = "8387ea13ff584f77cb5309125897a0d047a7e07c38f3ac961c7c98833fe06501";
         String sign = sign(map, merchantKey, true);
         map.put("sign", sign);
         HttpHeaders headers = new HttpHeaders();
