@@ -193,6 +193,7 @@
                     billNo: billNo,
                 },
                 success: function (obj) {
+                    console.log(obj);
                     if (obj.code === 0) {
                         jumpUrl = decodeURIComponent(returnUrl);
                         window.location.href = jumpUrl;
