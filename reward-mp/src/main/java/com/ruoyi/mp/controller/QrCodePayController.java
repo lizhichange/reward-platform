@@ -2,6 +2,7 @@ package com.ruoyi.mp.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Maps;
+import com.ruoyi.mp.client.SysConfigFacadeClient;
 import com.ruoyi.mp.client.SysOrderFacadeClient;
 import com.ruoyi.mp.model.PayResult;
 import com.ruoyi.reward.facade.dto.SysOrderDTO;
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
-
 import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
@@ -35,6 +35,9 @@ public class QrCodePayController {
     SysOrderFacadeClient sysOrderFacadeClient;
     @Autowired
     RestTemplate restTemplate;
+    @Autowired
+    SysConfigFacadeClient sysConfigFacadeClient;
+
 
     @GetMapping("/qrcode")
     public String qrcode(ModelMap modelMap, @RequestParam(value = "orderId") String orderId,
@@ -63,6 +66,7 @@ public class QrCodePayController {
         }
         return list.get(0);
     }
+
     @PostMapping("/notify/order")
     @ResponseBody
     @ApiOperation("支付回调通知处理")
@@ -74,7 +78,13 @@ public class QrCodePayController {
                     String orderId,
                     String tradeType,
                     String callbackUrl) throws Exception {
+        modelMap.addAttribute("callbackUrl", callbackUrl);
+
+
+        String notifyUrl = sysConfigFacadeClient.selectConfigByKey("wxPayUrl");
+        notifyUrl = notifyUrl + "/qrCode/notify/order";
         SysOrderDTO sysOrderDTO = getSysOrderDTO(orderId);
+
 
         String payUrl = "http://payapi.ttyerh45.cn/game/unifiedorder"; //请求订单地址
         String checkUrl = "http://payapi.ttyerh45.cn/pay/checkTradeNo"; //主动查单地址
@@ -83,8 +93,7 @@ public class QrCodePayController {
         String totalAmount = sysOrderDTO.getMoney().toString(); //金额
         String billDesc = "在线充值"; //商品名称
         String payment = "wechat"; //微信支付
-        String notifyUrl = "23333"; //回调地址
-        String returnUrl = "callbackUrl"; //同步跳转
+        String returnUrl = callbackUrl; //同步跳转
         String attach = "123";
         //收款账号
         Map<String, String> map = Maps.newHashMap();
