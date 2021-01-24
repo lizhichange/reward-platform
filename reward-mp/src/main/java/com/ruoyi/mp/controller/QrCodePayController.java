@@ -101,7 +101,6 @@ public class QrCodePayController {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
         headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
 //封装参数，千万不要替换为Map与HashMap，否则参数无法传递
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
 //添加请求的参数
