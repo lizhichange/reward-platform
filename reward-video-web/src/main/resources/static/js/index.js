@@ -279,7 +279,6 @@ $(function () {
                         if (r.code === 0) {
                             var rep = r.data;
                             if (rep.status === 0 || rep.status === 2) {
-
                                 var value = document.getElementById('wxPayUrl').value;
                                 var flag = value.indexOf("?") !== -1;
                                 var callbackUrl = window.location.href;
