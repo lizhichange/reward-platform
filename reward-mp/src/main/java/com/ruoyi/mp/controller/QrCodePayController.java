@@ -88,7 +88,7 @@ public class QrCodePayController {
     @ApiOperation("checkUrl")
     public AjaxResult checkUrl(OrderParam param) {
         log.info("param:{}", param);
-        SysOrderDTO item = sysOrderFacadeClient.selectSysOrderByOrderId(param.getOrderId());
+        SysOrderDTO item = sysOrderFacadeClient.selectSysOrderByOrderId(param.getBillNo());
         if (item == null) {
             throw new RuntimeException("系统异常");
         }
