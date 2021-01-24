@@ -101,8 +101,8 @@ public class QrCodePayController {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        Map<String, String> map = Maps.newHashMap();
-        String tradeNo = param.getTradeNo();
+        Map<String, Long> map = Maps.newHashMap();
+        Long tradeNo = param.getTradeNo();
         map.put("tradeNo:", tradeNo);
         String content = JSONObject.toJSONString(map);
         HttpEntity<String> request = new HttpEntity<>(content, headers);
