@@ -122,8 +122,8 @@ public class QrCodePayController {
                 } catch (Exception e) {
                     log.error(e.getMessage(), e);
                 }
+                return AjaxResult.success();
             }
-            return AjaxResult.success();
         }
         return AjaxResult.error("订单未支付");
     }
