@@ -104,9 +104,9 @@ public class QrCodePayController {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
 
-        MultiValueMap<String, Long> map = new LinkedMultiValueMap<>();
-        map.add("tradeNo:", param.getTradeNo());
-        HttpEntity<MultiValueMap<String, Long>> request = new HttpEntity<>(map, headers);
+        MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
+        map.add("tradeNo:", JSONObject.toJSONString(param.getTradeNo()));
+        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map, headers);
         ResponseEntity<String> postForEntity = restTemplate.postForEntity(checkUrl, request, String.class);
         log.info("postForEntity:{}", postForEntity);
         if (postForEntity.getStatusCode() == HttpStatus.OK) {

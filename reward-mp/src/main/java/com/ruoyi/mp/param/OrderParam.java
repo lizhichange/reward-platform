@@ -14,7 +14,7 @@ public class OrderParam extends ToString {
     private String orderId;
     private String tradeType;
     private String billNo;
-    private Long tradeNo;
+    private String tradeNo;
 
 
 }
