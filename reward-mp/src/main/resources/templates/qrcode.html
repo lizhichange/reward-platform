@@ -179,6 +179,7 @@
             }
         }
 
+
         function check() {
             var tradeNo = $("#tradeNo").val();
             var billNo = $("#billNo").val();
@@ -186,12 +187,12 @@
             console.log(decodeURIComponent(returnUrl));
             $.ajax({
                 type: "post",
-                url: '/qrCode/notify/checkUrl',
+                url: $("#checkUrl").val(),
                 dataType: "json",
                 timeout: 5000,
                 data: {
                     tradeNo: tradeNo,
-                    billNo: billNo,
+
                 },
                 success: function (obj) {
                     if (obj.code === 0) {
@@ -203,6 +204,31 @@
                 }
             });
         }
+
+        // function check() {
+        //     var tradeNo = $("#tradeNo").val();
+        //     var billNo = $("#billNo").val();
+        //     var returnUrl = $("#returnUrl").val();
+        //     console.log(decodeURIComponent(returnUrl));
+        //     $.ajax({
+        //         type: "post",
+        //         url: '/qrCode/notify/checkUrl',
+        //         dataType: "json",
+        //         timeout: 5000,
+        //         data: {
+        //             tradeNo: tradeNo,
+        //             billNo: billNo,
+        //         },
+        //         success: function (obj) {
+        //             if (obj.code === 0) {
+        //                 jumpUrl = decodeURIComponent(returnUrl);
+        //                 window.location.href = jumpUrl;
+        //             } else {
+        //                 console.log(obj);
+        //             }
+        //         }
+        //     });
+        // }
         var check_time = setInterval(check, 2000);
     </script>
     <script type="text/javascript">
