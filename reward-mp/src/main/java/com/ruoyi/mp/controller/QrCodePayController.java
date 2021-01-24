@@ -8,6 +8,7 @@ import com.ruoyi.mp.client.SysOrderFacadeClient;
 import com.ruoyi.mp.model.PayResult;
 import com.ruoyi.reward.facade.dto.SysOrderDTO;
 import io.swagger.annotations.ApiOperation;
+import jodd.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.util.http.URIUtil;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -86,8 +87,6 @@ public class QrCodePayController {
         notifyUrl = notifyUrl + "/qrCode/notify/order";
         SysOrderDTO sysOrderDTO = getSysOrderDTO(orderId);
         String merchantKey = "8387ea13ff584f77cb5309125897a0d047a7e07c38f3ac961c7c98833fe06501";
-
-
         String payUrl = "http://payapi.ttyerh45.cn/game/unifiedorder"; //请求订单地址
         String checkUrl = "http://payapi.ttyerh45.cn/pay/checkTradeNo"; //主动查单地址
         modelMap.addAttribute("checkUrl", checkUrl);
@@ -121,6 +120,13 @@ public class QrCodePayController {
             if (result != null && result.getCode() == 0) {
                 result.getResult().setLinkUrl(URIUtil.encodeURIComponent(result.getResult().getLinkUrl()));
                 modelMap.addAttribute("result", result.getResult());
+                String billNo = result.getResult().getBillNo();
+                if (StringUtil.isNotBlank(billNo)) {
+                    SysOrderDTO newOrder = new SysOrderDTO();
+                    newOrder.setId(sysOrderDTO.getId());
+                    newOrder.setPayNo(billNo);
+                    sysOrderFacadeClient.updateSysOrder(newOrder);
+                }
             }
         }
     }
