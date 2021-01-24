@@ -100,7 +100,7 @@ public class QrCodePayController {
         }
 
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
         Map<String, Long> map = Maps.newHashMap();
         Long tradeNo = param.getTradeNo();
         map.put("tradeNo:", tradeNo);
