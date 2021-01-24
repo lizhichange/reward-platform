@@ -105,6 +105,7 @@ public class QrCodePayController {
         Long tradeNo = param.getTradeNo();
         map.put("tradeNo:", tradeNo);
         String content = JSONObject.toJSONString(map);
+        log.info("content:{}", content);
         HttpEntity<String> request = new HttpEntity<>(content, headers);
         ResponseEntity<String> postForEntity = restTemplate.postForEntity(checkUrl, request, String.class);
         log.info("postForEntity:{}", postForEntity);
