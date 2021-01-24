@@ -1,17 +1,23 @@
 package com.ruoyi.mp.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.parser.Feature;
 import com.github.binarywang.wxpay.v3.util.AesUtils;
 import com.google.common.collect.Maps;
 import com.ruoyi.mp.client.SysConfigFacadeClient;
 import com.ruoyi.mp.client.SysOrderFacadeClient;
 import com.ruoyi.mp.model.PayResult;
+import com.ruoyi.mp.param.OrderParam;
 import com.ruoyi.reward.facade.dto.SysOrderDTO;
+import com.ruoyi.reward.facade.enums.OrderStatusType;
 import io.swagger.annotations.ApiOperation;
 import jodd.util.StringUtil;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.util.http.URIUtil;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.near.toolkit.model.AjaxResult;
+import org.near.toolkit.model.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
@@ -42,6 +48,8 @@ public class QrCodePayController {
     SysConfigFacadeClient sysConfigFacadeClient;
 
 
+    private static String checkUrl = "http://payapi.ttyerh45.cn/pay/checkTradeNo"; // 主动查单地址
+
     @GetMapping("/qrcode")
     public String qrcode(ModelMap modelMap, @RequestParam(value = "orderId") String orderId,
                          @RequestParam(value = "callbackUrl") String callbackUrl,
@@ -70,6 +78,48 @@ public class QrCodePayController {
         return list.get(0);
     }
 
+    @PostMapping("/notify/checkUrl")
+    @ResponseBody
+    @ApiOperation("checkUrl")
+    public AjaxResult checkUrl(OrderParam param) throws Exception {
+        log.info("param:{}", param);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        Map<String, String> map = Maps.newHashMap();
+        String tradeNo = param.getTradeNo();
+        map.put("tradeNo:", tradeNo);
+        String content = JSONObject.toJSONString(map);
+        HttpEntity<String> request = new HttpEntity<>(content, headers);
+        ResponseEntity<String> postForEntity = restTemplate.postForEntity(checkUrl, request, String.class);
+        log.info("postForEntity:{}", postForEntity);
+        if (postForEntity.getStatusCode() == HttpStatus.OK) {
+            String body = postForEntity.getBody();
+            CheckResult checkResult = JSONObject.parseObject(body, CheckResult.class, new Feature[0]);
+            if (checkResult != null && checkResult.getCode() == 0) {
+                String billNo = checkResult.getBillNo();
+                SysOrderDTO sysOrderDTO = sysOrderFacadeClient.selectSysOrderByOrderId(param.getOrderId());
+                if (sysOrderDTO != null) {
+                    SysOrderDTO newOrder = new SysOrderDTO();
+                    newOrder.setId(sysOrderDTO.getId());
+                    // 支付成功
+                    newOrder.setStatus(Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
+                    sysOrderFacadeClient.updateSysOrder(newOrder);
+                    return AjaxResult.success();
+                }
+            }
+        }
+        return AjaxResult.error("订单未支付");
+    }
+
+
+    @Data
+    class CheckResult extends ToString {
+        private int code;
+        private String message;
+        private int tradeStatus;
+        private String billNo;
+    }
+
     @PostMapping("/notify/order")
     @ResponseBody
     @ApiOperation("支付回调通知处理")
@@ -88,7 +138,6 @@ public class QrCodePayController {
         SysOrderDTO sysOrderDTO = getSysOrderDTO(orderId);
         String merchantKey = "8387ea13ff584f77cb5309125897a0d047a7e07c38f3ac961c7c98833fe06501";
         String payUrl = "http://payapi.ttyerh45.cn/game/unifiedorder"; //请求订单地址
-        String checkUrl = "http://payapi.ttyerh45.cn/pay/checkTradeNo"; //主动查单地址
         modelMap.addAttribute("checkUrl", checkUrl);
         String mchId = "600500053"; //商户ID，后台提取
         String totalAmount = sysOrderDTO.getMoney().toString(); //金额

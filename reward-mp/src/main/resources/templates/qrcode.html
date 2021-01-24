@@ -183,19 +183,21 @@
             var tradeNo = $("#tradeNo").val();
             var billNo = $("#billNo").val();
             var returnUrl = $("#returnUrl").val();
-            console.log(decodeURIComponent(returnUrl));
             $.ajax({
                 type: "post",
-                url: $("#checkUrl").val(),
+                url: '/qrCode/notify/checkUrl',
                 dataType: "json",
                 timeout: 5000,
-                data: { tradeNo: tradeNo },
+                data: {
+                    tradeNo: tradeNo,
+                    billNo: billNo,
+                },
                 success: function (obj) {
-                    if (obj.code == 0) {
+                    if (obj.code === 0) {
                         jumpUrl = decodeURIComponent(returnUrl);
                         window.location.href = jumpUrl;
                     } else {
-                        //alert(obj.message);
+                        console.log(obj.message);
                     }
                 }
             });
