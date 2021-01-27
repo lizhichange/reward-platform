@@ -11,7 +11,8 @@
 	<script src="/js/mescroll.min.js" charset="utf-8"></script>
 	<script src="/js/jquery.min.js"></script>
 	<script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
-
+    <script src="/js/highlight.min.js"></script>
+    <script src="/js/fastclick.js"></script>
 	<style>
 		* {
 			margin: 0;
@@ -117,6 +118,7 @@
 <input type="hidden" id="imgUrl" th:value="${video?.imgUrl}" />
 <input type="hidden" id="videoUrl" th:value="${video?.videoUrl}" />
 <input type="hidden" th:value="${video?.userId}" id="author" />
+<script type="text/javascript" src="/js/message.js"></script>
 
 <script type="text/javascript">
 	$(function () {
