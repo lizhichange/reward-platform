@@ -8,8 +8,9 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link href="/css/style.css" rel="stylesheet" type="text/css" media="all" />
     <link href="/css/mescroll.min.css" rel="stylesheet" type="text/css" media="all" />
-    <script src="/js/mescroll.min.js" charset="utf-8"></script>
     <script src="/js/jquery.min.js"></script>
+    <script src="/js/mescroll.min.js" charset="utf-8"></script>
+
     <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
     <script src="/js/highlight.min.js"></script>
     <script src="/js/fastclick.js"></script>
@@ -258,7 +259,7 @@
                 toTop: {
                     //回到顶部按钮,需配置src才显示
                     warpId: null, //父布局的id; 默认添加在body中
-                    src: "http://www.mescroll.com/img/mescroll-totop.png?v=1", // 图片路径 (建议放入static目录, 如 /static/img/mescroll-totop.png )
+                    src: "/img/mescroll-totop.png?v=1", // 图片路径 (建议放入static目录, 如 /static/img/mescroll-totop.png )
                     offset: 1000, // 列表滚动多少距离才显示回到顶部按钮,默认1000px
                     warpClass: "mescroll-totop", //按钮样式,参见mescroll.css
                     showClass: "mescroll-fade-in", //显示样式,参见mescroll.css
@@ -361,7 +362,7 @@
                 // last-grid
                 var grid = (i & 1) != 0 ? '<div class="content-grid last-grid">' : '<div class="content-grid">';
                 var str = grid
-                    + '<a href="javascript:void(0)" data-author=' + row.userId + '  data-id=' + row.id + ' data-poster=' + row.imgUrl + ' data-src=' + row.videoUrl + ' >'
+                    + '<a href="javascript:void(0)" data-name='+row.name+'  data-author=' + row.userId + '  data-id=' + row.id + ' data-poster=' + row.imgUrl + ' data-src=' + row.videoUrl + ' >'
                     + '<img  src="' + row.imgUrl + '" title="allbum-name" /></a>'
                     + '<h3>' + beautySub(row.name, 10) + '</h3>'
                     + '<ul>'
@@ -386,7 +387,9 @@
                     var poster = $a.attr("data-poster");
 
                     var author = $a.attr("data-author");
+                    var name = $a.attr("data-name");
 
+                   
                     $.ajax({
                         type: "post",
                         url: "/video/queryOrder",
@@ -405,7 +408,7 @@
                                 if (rep.status === 0 || rep.status === 2) {
                                     var html = "<img src='" + poster + "' style='max-width: 220px; min-width: 220px;' />";
                                     confirm({
-                                        title: '我是标题',
+                                        title:  beautySub(name, 10),
                                         content: html,
                                         doneText: '打赏观看',
                                         cancelText: '取消'
