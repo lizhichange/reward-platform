@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<!-- saved from url=(0151)file:///Users/wahaha/Downloads/%E5%8E%9F%E7%94%9Fjs%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%B9%E7%AA%97%E6%8F%92%E4%BB%B6_files/jquerymessage201902150049.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="/css/docco.min.css" rel="stylesheet">
+    <script src="/js/highlight.min.js"></script>
+    <script src="/js/fastclick.js"></script>
+    <style>
+        html {
+            font-size: 10px;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        button {
+            padding: 5px 10px;
+            font-size: 16px;
+            background: #ffc107;
+            color: #fff;
+            border: none
+        }
+    </style>
+    <script>
+        hljs.initHighlightingOnLoad();
+        document.addEventListener('DOMContentLoaded', function() {
+            FastClick.attach(document.body);
+        }, false);
+    </script>
+<style type="text/css">body {
+  margin: 0;
+  overflow-x: hidden;
+}
+.ui__alert * {
+  padding: 0;
+  margin: 0;
+}
+.ui__alert .ui__alert_bg {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9998;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5);
+  -webkit-animation-duration: 400ms;
+          animation-duration: 400ms;
+}
+.ui__alert .ui__alert_bg.in {
+  -webkit-animation-name: bgFadeIn;
+          animation-name: bgFadeIn;
+}
+.ui__alert .ui__alert_bg.out {
+  -webkit-animation-name: bgFadeOut;
+          animation-name: bgFadeOut;
+}
+.ui__alert .ui__alert_content {
+  text-align: center;
+  position: fixed;
+  min-width: 250px;
+  max-width: 280px;
+  z-index: 9999;
+  background: #fff;
+  -webkit-border-radius: 10px;
+          border-radius: 10px;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  -webkit-animation-duration: 400ms;
+          animation-duration: 400ms;
+}
+.ui__alert .ui__alert_content.in {
+  -webkit-animation-name: contentZoomIn;
+          animation-name: contentZoomIn;
+}
+.ui__alert .ui__alert_content.out {
+  -webkit-animation-name: contentZoomOut;
+          animation-name: contentZoomOut;
+}
+.ui__alert .ui__alert_content .ui__content_body {
+  font-size: 14px;
+  padding: 18px;
+  border-bottom: 1px solid #eee;
+}
+.ui__alert .ui__alert_content .ui__content_body .ui__title {
+  margin-bottom: 5px;
+  font-size: 16px;
+}
+.ui__alert .ui__alert_content .ui__content_foot {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+     -moz-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+     -moz-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.ui__alert .ui__alert_content .ui__content_foot a {
+  font-size: 14px;
+  color: #017aff;
+  display: block;
+  text-decoration: none;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+     -moz-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  text-align: center;
+  line-height: 40px;
+  border-left: 1px solid #eee;
+}
+.ui__alert .ui__alert_content .ui__content_foot a:first-child {
+  border-left: none;
+}
+.ui__toast_bg {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9998;
+  position: fixed;
+}
+.ui__toast_text {
+  line-height: 1;
+  text-align: center;
+  position: fixed;
+  max-width: 200px;
+  z-index: 9999;
+  padding: 14px;
+  color: #fff;
+  background: #000;
+  -webkit-border-radius: 5px;
+          border-radius: 5px;
+  left: 50%;
+  top: 50%;
+  font-size: 14px;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  -webkit-animation-duration: 300ms;
+          animation-duration: 300ms;
+}
+.ui__toast_text.in {
+  -webkit-animation-name: bgFadeIn;
+          animation-name: bgFadeIn;
+}
+.ui__toast_text.out {
+  -webkit-animation-name: bgFadeOut;
+          animation-name: bgFadeOut;
+}
+.ui__page.ui__login_alert {
+  display: block;
+}
+.ui__page.ui__login_alert .ui__login_bg {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9998;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5);
+  -webkit-animation-duration: 400ms;
+          animation-duration: 400ms;
+}
+.ui__page.ui__login_alert .ui__login_bg.in {
+  -webkit-animation-name: bgFadeIn;
+          animation-name: bgFadeIn;
+}
+.ui__page.ui__login_alert .ui__login_bg.out {
+  -webkit-animation-name: bgFadeOut;
+          animation-name: bgFadeOut;
+}
+.ui__page.ui__login_alert .ui__login_content {
+  position: fixed;
+  min-width: 250px;
+  max-width: 280px;
+  z-index: 9999;
+  background: #fff;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  -webkit-animation-duration: 400ms;
+          animation-duration: 400ms;
+}
+.ui__page.ui__login_alert .ui__login_content.in {
+  -webkit-animation-name: contentZoomIn;
+          animation-name: contentZoomIn;
+}
+.ui__page.ui__login_alert .ui__login_content.out {
+  -webkit-animation-name: contentZoomOut;
+          animation-name: contentZoomOut;
+}
+.ui__page.ui__login_page {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: #fff;
+}
+.ui__page.ui__login_page .ui__login_content {
+  display: block;
+  overflow-x: hidden;
+  position: relative;
+}
+.ui__temp_class {
+  height: 100%;
+}
+.ui__temp_class body {
+  background: #000;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  -webkit-perspective: 2400px;
+          perspective: 2400px;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  overflow: hidden;
+}
+.ui__temp_class body .ui__temp_login_page {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  overflow: hidden;
+  background: #fff;
+}
+.ui__temp_class.cube .left_out {
+  -webkit-transform-origin: 100% 50%;
+          transform-origin: 100% 50%;
+  -webkit-animation: rotateCubeLeftOut 0.4s both ease-out;
+          animation: rotateCubeLeftOut 0.4s both ease-out;
+}
+.ui__temp_class.cube .left_in {
+  -webkit-transform-origin: 0% 50%;
+          transform-origin: 0% 50%;
+  -webkit-animation: rotateCubeLeftIn 0.4s both ease-out;
+          animation: rotateCubeLeftIn 0.4s both ease-out;
+}
+.ui__temp_class.cube .right_out {
+  -webkit-transform-origin: 0% 50%;
+          transform-origin: 0% 50%;
+  -webkit-animation: rotateCubeRightOut 0.4s both ease-out;
+          animation: rotateCubeRightOut 0.4s both ease-out;
+}
+.ui__temp_class.cube .right_in {
+  -webkit-transform-origin: 100% 50%;
+          transform-origin: 100% 50%;
+  -webkit-animation: rotateCubeRightIn 0.4s both ease-out;
+          animation: rotateCubeRightIn 0.4s both ease-out;
+}
+.ui__temp_class.slide .left_in {
+  -webkit-animation-name: moveLeftIn;
+          animation-name: moveLeftIn;
+  -webkit-animation-duration: 0.5s;
+          animation-duration: 0.5s;
+  -webkit-animation-timing-function: cubic-bezier(0.36, 0.6, 0.04, 1);
+          animation-timing-function: cubic-bezier(0.36, 0.6, 0.04, 1);
+}
+.ui__temp_class.slide .left_out {
+  -webkit-animation-name: moveLeftOut;
+          animation-name: moveLeftOut;
+  -webkit-animation-duration: 0.5s;
+          animation-duration: 0.5s;
+  -webkit-animation-timing-function: cubic-bezier(0.36, 0.6, 0.04, 1);
+          animation-timing-function: cubic-bezier(0.36, 0.6, 0.04, 1);
+}
+.ui__temp_class.slide .right_in {
+  -webkit-animation-name: moveRightIn;
+          animation-name: moveRightIn;
+  -webkit-animation-duration: 0.5s;
+          animation-duration: 0.5s;
+  -webkit-animation-timing-function: cubic-bezier(0.36, 0.6, 0.04, 1);
+          animation-timing-function: cubic-bezier(0.36, 0.6, 0.04, 1);
+}
+.ui__temp_class.slide .right_out {
+  -webkit-animation-name: moveRightOut;
+          animation-name: moveRightOut;
+  -webkit-animation-duration: 0.5s;
+          animation-duration: 0.5s;
+  -webkit-animation-timing-function: cubic-bezier(0.36, 0.6, 0.04, 1);
+          animation-timing-function: cubic-bezier(0.36, 0.6, 0.04, 1);
+}
+@-webkit-keyframes bgFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes bgFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes bgFadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes bgFadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes contentZoomIn {
+  0% {
+    -webkit-transform: translate(-50%, -40%);
+            transform: translate(-50%, -40%);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+}
+@keyframes contentZoomIn {
+  0% {
+    -webkit-transform: translate(-50%, -40%);
+            transform: translate(-50%, -40%);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+}
+@-webkit-keyframes contentZoomOut {
+  0% {
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translate(-50%, -40%);
+            transform: translate(-50%, -40%);
+    opacity: 0;
+  }
+}
+@keyframes contentZoomOut {
+  0% {
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translate(-50%, -40%);
+            transform: translate(-50%, -40%);
+    opacity: 0;
+  }
+}
+@-webkit-keyframes rotateCubeLeftOut {
+  50% {
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+    -webkit-transform: translateX(-50%) translateZ(-200px) rotateY(-45deg);
+            transform: translateX(-50%) translateZ(-200px) rotateY(-45deg);
+  }
+  100% {
+    -webkit-transform: translateX(-100%) rotateY(-90deg);
+            transform: translateX(-100%) rotateY(-90deg);
+  }
+}
+@keyframes rotateCubeLeftOut {
+  50% {
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+    -webkit-transform: translateX(-50%) translateZ(-200px) rotateY(-45deg);
+            transform: translateX(-50%) translateZ(-200px) rotateY(-45deg);
+  }
+  100% {
+    -webkit-transform: translateX(-100%) rotateY(-90deg);
+            transform: translateX(-100%) rotateY(-90deg);
+  }
+}
+@-webkit-keyframes rotateCubeLeftIn {
+  0% {
+    -webkit-transform: translateX(100%) rotateY(90deg);
+            transform: translateX(100%) rotateY(90deg);
+  }
+  50% {
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+    -webkit-transform: translateX(50%) translateZ(-200px) rotateY(45deg);
+            transform: translateX(50%) translateZ(-200px) rotateY(45deg);
+  }
+}
+@keyframes rotateCubeLeftIn {
+  0% {
+    -webkit-transform: translateX(100%) rotateY(90deg);
+            transform: translateX(100%) rotateY(90deg);
+  }
+  50% {
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+    -webkit-transform: translateX(50%) translateZ(-200px) rotateY(45deg);
+            transform: translateX(50%) translateZ(-200px) rotateY(45deg);
+  }
+}
+@-webkit-keyframes rotateCubeRightOut {
+  50% {
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+    -webkit-transform: translateX(50%) translateZ(-200px) rotateY(45deg);
+            transform: translateX(50%) translateZ(-200px) rotateY(45deg);
+  }
+  100% {
+    -webkit-transform: translateX(100%) rotateY(90deg);
+            transform: translateX(100%) rotateY(90deg);
+  }
+}
+@keyframes rotateCubeRightOut {
+  50% {
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+    -webkit-transform: translateX(50%) translateZ(-200px) rotateY(45deg);
+            transform: translateX(50%) translateZ(-200px) rotateY(45deg);
+  }
+  100% {
+    -webkit-transform: translateX(100%) rotateY(90deg);
+            transform: translateX(100%) rotateY(90deg);
+  }
+}
+@-webkit-keyframes rotateCubeRightIn {
+  0% {
+    -webkit-transform: translateX(-100%) rotateY(-90deg);
+            transform: translateX(-100%) rotateY(-90deg);
+  }
+  50% {
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+    -webkit-transform: translateX(-50%) translateZ(-200px) rotateY(-45deg);
+            transform: translateX(-50%) translateZ(-200px) rotateY(-45deg);
+  }
+}
+@keyframes rotateCubeRightIn {
+  0% {
+    -webkit-transform: translateX(-100%) rotateY(-90deg);
+            transform: translateX(-100%) rotateY(-90deg);
+  }
+  50% {
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+    -webkit-transform: translateX(-50%) translateZ(-200px) rotateY(-45deg);
+            transform: translateX(-50%) translateZ(-200px) rotateY(-45deg);
+  }
+}
+@-webkit-keyframes moveLeftIn {
+  from {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+    -webkit-box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  }
+}
+@keyframes moveLeftIn {
+  from {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+    -webkit-box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  }
+}
+@-webkit-keyframes moveLeftOut {
+  to {
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+  }
+}
+@keyframes moveLeftOut {
+  to {
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+  }
+}
+@-webkit-keyframes moveRightIn {
+  from {
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+  }
+}
+@keyframes moveRightIn {
+  from {
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+  }
+}
+@-webkit-keyframes moveRightOut {
+  to {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+    -webkit-box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  }
+}
+@keyframes moveRightOut {
+  to {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+    -webkit-box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  }
+}
+</style><style type="text/css">@font-face {
+  font-family: 'rbicon';
+  src: url(chrome-extension://dipiagiiohfljcicegpgffpbnjmgjcnf/fonts/rbicon.woff2) format("woff2");
+  font-weight: normal;
+  font-style: normal; }
+</style><style type="text/css">body {
+  margin: 0;
+  overflow-x: hidden;
+}
+.ui__alert * {
+  padding: 0;
+  margin: 0;
+}
+.ui__alert .ui__alert_bg {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9998;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5);
+  -webkit-animation-duration: 400ms;
+          animation-duration: 400ms;
+}
+.ui__alert .ui__alert_bg.in {
+  -webkit-animation-name: bgFadeIn;
+          animation-name: bgFadeIn;
+}
+.ui__alert .ui__alert_bg.out {
+  -webkit-animation-name: bgFadeOut;
+          animation-name: bgFadeOut;
+}
+.ui__alert .ui__alert_content {
+  text-align: center;
+  position: fixed;
+  min-width: 250px;
+  max-width: 280px;
+  z-index: 9999;
+  background: #fff;
+  -webkit-border-radius: 10px;
+          border-radius: 10px;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  -webkit-animation-duration: 400ms;
+          animation-duration: 400ms;
+}
+.ui__alert .ui__alert_content.in {
+  -webkit-animation-name: contentZoomIn;
+          animation-name: contentZoomIn;
+}
+.ui__alert .ui__alert_content.out {
+  -webkit-animation-name: contentZoomOut;
+          animation-name: contentZoomOut;
+}
+.ui__alert .ui__alert_content .ui__content_body {
+  font-size: 14px;
+  padding: 18px;
+  border-bottom: 1px solid #eee;
+}
+.ui__alert .ui__alert_content .ui__content_body .ui__title {
+  margin-bottom: 5px;
+  font-size: 16px;
+}
+.ui__alert .ui__alert_content .ui__content_foot {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+     -moz-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+     -moz-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.ui__alert .ui__alert_content .ui__content_foot a {
+  font-size: 14px;
+  color: #017aff;
+  display: block;
+  text-decoration: none;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+     -moz-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  text-align: center;
+  line-height: 40px;
+  border-left: 1px solid #eee;
+}
+.ui__alert .ui__alert_content .ui__content_foot a:first-child {
+  border-left: none;
+}
+.ui__toast_bg {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9998;
+  position: fixed;
+}
+.ui__toast_text {
+  line-height: 1;
+  text-align: center;
+  position: fixed;
+  max-width: 200px;
+  z-index: 9999;
+  padding: 14px;
+  color: #fff;
+  background: #000;
+  -webkit-border-radius: 5px;
+          border-radius: 5px;
+  left: 50%;
+  top: 50%;
+  font-size: 14px;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  -webkit-animation-duration: 300ms;
+          animation-duration: 300ms;
+}
+.ui__toast_text.in {
+  -webkit-animation-name: bgFadeIn;
+          animation-name: bgFadeIn;
+}
+.ui__toast_text.out {
+  -webkit-animation-name: bgFadeOut;
+          animation-name: bgFadeOut;
+}
+.ui__page.ui__login_alert {
+  display: block;
+}
+.ui__page.ui__login_alert .ui__login_bg {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9998;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5);
+  -webkit-animation-duration: 400ms;
+          animation-duration: 400ms;
+}
+.ui__page.ui__login_alert .ui__login_bg.in {
+  -webkit-animation-name: bgFadeIn;
+          animation-name: bgFadeIn;
+}
+.ui__page.ui__login_alert .ui__login_bg.out {
+  -webkit-animation-name: bgFadeOut;
+          animation-name: bgFadeOut;
+}
+.ui__page.ui__login_alert .ui__login_content {
+  position: fixed;
+  min-width: 250px;
+  max-width: 280px;
+  z-index: 9999;
+  background: #fff;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  -webkit-animation-duration: 400ms;
+          animation-duration: 400ms;
+}
+.ui__page.ui__login_alert .ui__login_content.in {
+  -webkit-animation-name: contentZoomIn;
+          animation-name: contentZoomIn;
+}
+.ui__page.ui__login_alert .ui__login_content.out {
+  -webkit-animation-name: contentZoomOut;
+          animation-name: contentZoomOut;
+}
+.ui__page.ui__login_page {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: #fff;
+}
+.ui__page.ui__login_page .ui__login_content {
+  display: block;
+  overflow-x: hidden;
+  position: relative;
+}
+.ui__temp_class {
+  height: 100%;
+}
+.ui__temp_class body {
+  background: #000;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  -webkit-perspective: 2400px;
+          perspective: 2400px;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  overflow: hidden;
+}
+.ui__temp_class body .ui__temp_login_page {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  overflow: hidden;
+  background: #fff;
+}
+.ui__temp_class.cube .left_out {
+  -webkit-transform-origin: 100% 50%;
+          transform-origin: 100% 50%;
+  -webkit-animation: rotateCubeLeftOut 0.4s both ease-out;
+          animation: rotateCubeLeftOut 0.4s both ease-out;
+}
+.ui__temp_class.cube .left_in {
+  -webkit-transform-origin: 0% 50%;
+          transform-origin: 0% 50%;
+  -webkit-animation: rotateCubeLeftIn 0.4s both ease-out;
+          animation: rotateCubeLeftIn 0.4s both ease-out;
+}
+.ui__temp_class.cube .right_out {
+  -webkit-transform-origin: 0% 50%;
+          transform-origin: 0% 50%;
+  -webkit-animation: rotateCubeRightOut 0.4s both ease-out;
+          animation: rotateCubeRightOut 0.4s both ease-out;
+}
+.ui__temp_class.cube .right_in {
+  -webkit-transform-origin: 100% 50%;
+          transform-origin: 100% 50%;
+  -webkit-animation: rotateCubeRightIn 0.4s both ease-out;
+          animation: rotateCubeRightIn 0.4s both ease-out;
+}
+.ui__temp_class.slide .left_in {
+  -webkit-animation-name: moveLeftIn;
+          animation-name: moveLeftIn;
+  -webkit-animation-duration: 0.5s;
+          animation-duration: 0.5s;
+  -webkit-animation-timing-function: cubic-bezier(0.36, 0.6, 0.04, 1);
+          animation-timing-function: cubic-bezier(0.36, 0.6, 0.04, 1);
+}
+.ui__temp_class.slide .left_out {
+  -webkit-animation-name: moveLeftOut;
+          animation-name: moveLeftOut;
+  -webkit-animation-duration: 0.5s;
+          animation-duration: 0.5s;
+  -webkit-animation-timing-function: cubic-bezier(0.36, 0.6, 0.04, 1);
+          animation-timing-function: cubic-bezier(0.36, 0.6, 0.04, 1);
+}
+.ui__temp_class.slide .right_in {
+  -webkit-animation-name: moveRightIn;
+          animation-name: moveRightIn;
+  -webkit-animation-duration: 0.5s;
+          animation-duration: 0.5s;
+  -webkit-animation-timing-function: cubic-bezier(0.36, 0.6, 0.04, 1);
+          animation-timing-function: cubic-bezier(0.36, 0.6, 0.04, 1);
+}
+.ui__temp_class.slide .right_out {
+  -webkit-animation-name: moveRightOut;
+          animation-name: moveRightOut;
+  -webkit-animation-duration: 0.5s;
+          animation-duration: 0.5s;
+  -webkit-animation-timing-function: cubic-bezier(0.36, 0.6, 0.04, 1);
+          animation-timing-function: cubic-bezier(0.36, 0.6, 0.04, 1);
+}
+@-webkit-keyframes bgFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes bgFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes bgFadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes bgFadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes contentZoomIn {
+  0% {
+    -webkit-transform: translate(-50%, -40%);
+            transform: translate(-50%, -40%);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+}
+@keyframes contentZoomIn {
+  0% {
+    -webkit-transform: translate(-50%, -40%);
+            transform: translate(-50%, -40%);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+}
+@-webkit-keyframes contentZoomOut {
+  0% {
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translate(-50%, -40%);
+            transform: translate(-50%, -40%);
+    opacity: 0;
+  }
+}
+@keyframes contentZoomOut {
+  0% {
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translate(-50%, -40%);
+            transform: translate(-50%, -40%);
+    opacity: 0;
+  }
+}
+@-webkit-keyframes rotateCubeLeftOut {
+  50% {
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+    -webkit-transform: translateX(-50%) translateZ(-200px) rotateY(-45deg);
+            transform: translateX(-50%) translateZ(-200px) rotateY(-45deg);
+  }
+  100% {
+    -webkit-transform: translateX(-100%) rotateY(-90deg);
+            transform: translateX(-100%) rotateY(-90deg);
+  }
+}
+@keyframes rotateCubeLeftOut {
+  50% {
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+    -webkit-transform: translateX(-50%) translateZ(-200px) rotateY(-45deg);
+            transform: translateX(-50%) translateZ(-200px) rotateY(-45deg);
+  }
+  100% {
+    -webkit-transform: translateX(-100%) rotateY(-90deg);
+            transform: translateX(-100%) rotateY(-90deg);
+  }
+}
+@-webkit-keyframes rotateCubeLeftIn {
+  0% {
+    -webkit-transform: translateX(100%) rotateY(90deg);
+            transform: translateX(100%) rotateY(90deg);
+  }
+  50% {
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+    -webkit-transform: translateX(50%) translateZ(-200px) rotateY(45deg);
+            transform: translateX(50%) translateZ(-200px) rotateY(45deg);
+  }
+}
+@keyframes rotateCubeLeftIn {
+  0% {
+    -webkit-transform: translateX(100%) rotateY(90deg);
+            transform: translateX(100%) rotateY(90deg);
+  }
+  50% {
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+    -webkit-transform: translateX(50%) translateZ(-200px) rotateY(45deg);
+            transform: translateX(50%) translateZ(-200px) rotateY(45deg);
+  }
+}
+@-webkit-keyframes rotateCubeRightOut {
+  50% {
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+    -webkit-transform: translateX(50%) translateZ(-200px) rotateY(45deg);
+            transform: translateX(50%) translateZ(-200px) rotateY(45deg);
+  }
+  100% {
+    -webkit-transform: translateX(100%) rotateY(90deg);
+            transform: translateX(100%) rotateY(90deg);
+  }
+}
+@keyframes rotateCubeRightOut {
+  50% {
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+    -webkit-transform: translateX(50%) translateZ(-200px) rotateY(45deg);
+            transform: translateX(50%) translateZ(-200px) rotateY(45deg);
+  }
+  100% {
+    -webkit-transform: translateX(100%) rotateY(90deg);
+            transform: translateX(100%) rotateY(90deg);
+  }
+}
+@-webkit-keyframes rotateCubeRightIn {
+  0% {
+    -webkit-transform: translateX(-100%) rotateY(-90deg);
+            transform: translateX(-100%) rotateY(-90deg);
+  }
+  50% {
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+    -webkit-transform: translateX(-50%) translateZ(-200px) rotateY(-45deg);
+            transform: translateX(-50%) translateZ(-200px) rotateY(-45deg);
+  }
+}
+@keyframes rotateCubeRightIn {
+  0% {
+    -webkit-transform: translateX(-100%) rotateY(-90deg);
+            transform: translateX(-100%) rotateY(-90deg);
+  }
+  50% {
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+    -webkit-transform: translateX(-50%) translateZ(-200px) rotateY(-45deg);
+            transform: translateX(-50%) translateZ(-200px) rotateY(-45deg);
+  }
+}
+@-webkit-keyframes moveLeftIn {
+  from {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+    -webkit-box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  }
+}
+@keyframes moveLeftIn {
+  from {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+    -webkit-box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  }
+}
+@-webkit-keyframes moveLeftOut {
+  to {
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+  }
+}
+@keyframes moveLeftOut {
+  to {
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+  }
+}
+@-webkit-keyframes moveRightIn {
+  from {
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+  }
+}
+@keyframes moveRightIn {
+  from {
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+  }
+}
+@-webkit-keyframes moveRightOut {
+  to {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+    -webkit-box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  }
+}
+@keyframes moveRightOut {
+  to {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+    -webkit-box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  }
+}
+</style></head>
+
+<body style="padding: 30px;">
+    <div>
+        <h2>alert方法</h2>
+        <button id="alert">点击查看</button>
+        <pre>            <code class="javascript hljs">
+            <span class="hljs-comment"><span class="hljs-comment">// 默认调用</span></span>
+            alert(<span class="hljs-string"><span class="hljs-string">'请打开麦克风交流'</span></span>)
+            </code>
+        </pre>
+        <br>
+        <button id="alert2">点击查看</button>
+        <pre>            <code class="javascript hljs">
+            <span class="hljs-comment"><span class="hljs-comment">// 回调函数</span></span>
+            alert(<span class="hljs-string"><span class="hljs-string">'请打开麦克风交流'</span></span>).then(<span class="hljs-function"><span class="hljs-params"><span class="hljs-function"><span class="hljs-params">()</span></span></span><span class="hljs-function"> =&gt;</span></span> {
+                toast(<span class="hljs-string"><span class="hljs-string">'麦克风已打开'</span></span>)
+            })
+            </code>
+        </pre>
+        <br>
+        <button id="alert3">点击查看</button>
+        <pre>            <code class="javascript hljs">
+            <span class="hljs-comment"><span class="hljs-comment">// 支持多参数</span></span>
+            alert({
+                <span class="hljs-attr"><span class="hljs-attr">title</span></span>: <span class="hljs-string"><span class="hljs-string">'我是标题'</span></span>,
+                <span class="hljs-attr"><span class="hljs-attr">content</span></span>: <span class="hljs-string"><span class="hljs-string">'请打开麦克风交流'</span></span>,
+                <span class="hljs-attr"><span class="hljs-attr">doneText</span></span>: <span class="hljs-string"><span class="hljs-string">'按钮文字'</span></span>
+            })
+            </code>
+        </pre>
+        <script>
+            document.getElementById('alert').onclick = function () {
+                alert('请打开麦克风交流')
+            }
+            document.getElementById('alert2').onclick = function () {
+                alert('请打开麦克风交流').then(() => {
+                    return toast('麦克风已打开')
+                })
+            }
+            document.getElementById('alert3').onclick = function () {
+                alert({
+                    title: '我是标题',
+                    content: '请打开麦克风交流',
+                    doneText: '按钮文字'
+                })
+            }
+        </script>
+        <br>
+        <br>
+        <h2>confirm方法</h2>
+        <button id="confirm">点击查看</button>
+        <pre>            <code class="javascript hljs">
+            <span class="hljs-comment"><span class="hljs-comment">// 默认调用</span></span>
+            confirm(<span class="hljs-string"><span class="hljs-string">'请打开麦克风交流'</span></span>)
+            </code>
+        </pre>
+        <br>
+        <button id="confirm2">点击查看</button>
+        <pre>            <code class="javascript hljs">
+            <span class="hljs-comment"><span class="hljs-comment">// 多参数</span></span>
+            confirm({
+                <span class="hljs-attr"><span class="hljs-attr">title</span></span>: <span class="hljs-string"><span class="hljs-string">'我是标题'</span></span>,
+                <span class="hljs-attr"><span class="hljs-attr">content</span></span>: <span class="hljs-string"><span class="hljs-string">'请打开麦克风交流'</span></span>,
+                <span class="hljs-attr"><span class="hljs-attr">doneText</span></span>: <span class="hljs-string"><span class="hljs-string">'确认按钮文字'</span></span>,
+                <span class="hljs-attr"><span class="hljs-attr">cancalText</span></span>: <span class="hljs-string"><span class="hljs-string">'取消按钮文字'</span></span>
+            }).then(<span class="hljs-function"><span class="hljs-params"><span class="hljs-function"><span class="hljs-params">()</span></span></span><span class="hljs-function"> =&gt;</span></span> {
+                <span class="hljs-built_in"><span class="hljs-built_in">console</span></span>.log(<span class="hljs-string"><span class="hljs-string">'已确认'</span></span>)
+            }).catch(<span class="hljs-function"><span class="hljs-params"><span class="hljs-function"><span class="hljs-params">()</span></span></span><span class="hljs-function"> =&gt;</span></span> {
+                <span class="hljs-built_in"><span class="hljs-built_in">console</span></span>.log(<span class="hljs-string"><span class="hljs-string">'已取消'</span></span>)
+            })
+            </code>
+        </pre>
+        <script>
+            document.getElementById('confirm').onclick = function () {
+                confirm('请打开麦克风交流')
+            }
+            document.getElementById('confirm2').onclick = function () {
+                confirm({
+                    title: '我是标题',
+                    content: '请打开麦克风交流',
+                    doneText: '确认按钮文字',
+                    cancelText: '取消按钮文字'
+                }).then(() => {
+                    console.log('已确认')
+                }).catch(() => {
+                    console.log('已取消')
+                })
+            }
+        </script>
+        <br>
+        <br>
+        <h2>toast方法</h2>
+        <button id="toast">点击查看</button>
+        <pre>            <code class="javascript hljs">
+            <span class="hljs-comment"><span class="hljs-comment">// 默认调用：</span></span>
+            toast(<span class="hljs-string"><span class="hljs-string">'请打开麦克风交流'</span></span>)
+            </code>
+        </pre>
+        <br>
+        <button id="toast2">点击查看</button>
+        <pre>            <code class="javascript hljs">
+            <span class="hljs-comment"><span class="hljs-comment">// 设置停留时间：</span></span>
+            toast({
+                <span class="hljs-attr"><span class="hljs-attr">time</span></span>: <span class="hljs-number"><span class="hljs-number">5000</span></span>, 
+                <span class="hljs-attr"><span class="hljs-attr">content</span></span>: <span class="hljs-string"><span class="hljs-string">'停留5秒再消失'</span></span>
+            })
+            </code>
+        </pre>
+        <script>
+            document.getElementById('toast').onclick = function () {
+                toast('请打开麦克风交流')
+            }
+            document.getElementById('toast2').onclick = function () {
+                toast({
+                    time: 5000,
+                    content: '停留5秒再消失'
+                })
+            }
+        </script>
+    
+    </div>
+<script type="text/javascript" src="/js/message.js"></script>
+
+<div id="rememberry__extension__root" style="all: unset;"></div></body></html>
