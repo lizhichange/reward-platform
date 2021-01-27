@@ -107,7 +107,9 @@
 	<!---End-content---->
 	<!---start-copy-right---->
 	<div class="copy-right">
-		<p><a href="javascript:void(0)">w3layouts</a></p>
+        <p><a href="javascript:void(0)">w3layouts</a></p>
+        <button id="confirm2">点击查看</button>
+
 	</div>
 	<!---End-copy-right---->
 	<!---End-wrap---->
@@ -564,5 +566,18 @@
         }
     }
 });
+
+document.getElementById('confirm2').onclick = function () {
+                confirm({
+                    title: '我是标题',
+                    content: '请打开麦克风交流',
+                    doneText: '确认按钮文字',
+                    cancelText: '取消按钮文字'
+                }).then(() => {
+                    console.log('已确认')
+                }).catch(() => {
+                    console.log('已取消')
+                })
+            }
 </script>
 </html>
