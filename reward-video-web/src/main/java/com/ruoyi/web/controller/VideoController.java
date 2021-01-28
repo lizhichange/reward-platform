@@ -264,9 +264,7 @@ public class VideoController extends BaseController {
                     itemList = convert(array);
                 }
                 if (!CollectionUtils.isEmpty(itemList)) {
-                    List<PriceParam> collect = itemList.stream().filter(param -> {
-                        return StringUtil.equals(param.getId(), videoDTO.getId().toString());
-                    }).collect(Collectors.toList());
+                    List<PriceParam> collect = itemList.stream().filter(param -> StringUtil.equals(param.getId(), videoDTO.getId().toString())).collect(Collectors.toList());
 
                     if (!CollectionUtils.isEmpty(collect)) {
                         PriceParam priceParam = collect.get(0);
@@ -291,10 +289,10 @@ public class VideoController extends BaseController {
                             int start = Integer.parseInt(split[0]);
                             int end = Integer.parseInt(split[1]);
                             //这个单位是元
-                            int i = RandomUtil.randomInt(start, end);
+                            int i = RandomUtil.randomInt(start, end+1);
                             //实际金额 转换单位分
                             Money m = new Money(i);
-                            int amount = Math.toIntExact(m.getCent()) - RandomUtil.randomInt(1, 100);
+                            int amount = Math.toIntExact(m.getCent()) ;
                             log.info("实际支付金额:{}", amount);
                             order.setMoney(amount);
                             order.setMoneyStr(String.valueOf(amount));
@@ -316,10 +314,10 @@ public class VideoController extends BaseController {
                         int start = Integer.parseInt(split[0]);
                         int end = Integer.parseInt(split[1]);
                         //这个单位是元
-                        int i = RandomUtil.randomInt(start, end);
+                        int i = RandomUtil.randomInt(start, end+1);
                         //实际金额 转换单位分
                         Money m = new Money(i);
-                        int amount = Math.toIntExact(m.getCent()) - RandomUtil.randomInt(1, 100);
+                        int amount = Math.toIntExact(m.getCent()) ;
                         log.info("实际支付金额:{}", amount);
                         order.setMoney(amount);
                         order.setMoneyStr(String.valueOf(amount));
@@ -335,10 +333,10 @@ public class VideoController extends BaseController {
                 int start = Integer.parseInt(split[0]);
                 int end = Integer.parseInt(split[1]);
                 //这个单位是元
-                int i = RandomUtil.randomInt(start, end);
+                int i = RandomUtil.randomInt(start, end+1);
                 //实际金额 转换单位分
                 Money m = new Money(i);
-                int amount = Math.toIntExact(m.getCent()) - RandomUtil.randomInt(1, 100);
+                int amount = Math.toIntExact(m.getCent()) ;
                 log.info("实际支付金额:{}", amount);
                 order.setMoney(amount);
                 order.setMoneyStr(String.valueOf(amount));
