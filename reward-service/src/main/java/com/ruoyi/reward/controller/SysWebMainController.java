@@ -1,15 +1,21 @@
 package com.ruoyi.reward.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
+import com.ruoyi.reward.client.WxMpShortUrlFacadeClient;
 import com.ruoyi.reward.domain.SysWebMain;
+import com.ruoyi.reward.facade.dto.SysWebMainDTO;
+import com.ruoyi.reward.facade.enums.WebMainStatus;
 import com.ruoyi.reward.service.SysWebMainService;
+import lombok.Data;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.near.toolkit.common.StringUtil;
+import org.near.toolkit.model.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -30,6 +36,9 @@ public class SysWebMainController extends BaseController {
 
     @Autowired
     private SysWebMainService sysWebMainService;
+
+    @Autowired
+    WxMpShortUrlFacadeClient wxMpShortUrlFacadeClient;
 
     @RequiresPermissions("system:webmain:view")
     @GetMapping()
@@ -57,6 +66,62 @@ public class SysWebMainController extends BaseController {
     @ResponseBody
     public AjaxResult changeStatus(SysWebMain sysWebMain) {
         return toAjax(sysWebMainService.updateSysWebMain(sysWebMain));
+    }
+
+    /**
+     * 域名状态检测
+     */
+    @RequiresPermissions("system:webmain:edit")
+    @PostMapping("/checkStatus")
+    @ResponseBody
+    public AjaxResult checkStatus(SysWebMain sysWebMain) {
+        Long webMainId = sysWebMain.getId();
+        SysWebMain main = sysWebMainService.selectSysWebMainById(webMainId);
+        String check = wxMpShortUrlFacadeClient.check(main.getMainUrl());
+        CheckResponse parse = JSONObject.parseObject(check, CheckResponse.class);
+        if (parse != null && "01".equals(parse.getCode())) {
+            // success
+        }
+        return toAjax(Integer.parseInt(parse.getCode()));
+    }
+
+    @Data
+    public static class CheckResponse extends ToString {
+
+        private static final long serialVersionUID = -9112489328957184263L;
+        /**
+         * msg : 已停止访问该网页
+         * code : 01
+         * desc : 据用户投诉及腾讯安全网址安全中心检测，该网页包含不安全内容。为维护绿色上网环境，已停止访问。
+         */
+
+        private String msg;
+        private String code;
+        private String desc;
+
+        public String getMsg() {
+            return msg;
+        }
+
+        public void setMsg(String msg) {
+            this.msg = msg;
+        }
+
+        public String getCode() {
+            return code;
+        }
+
+        public void setCode(String code) {
+            this.code = code;
+        }
+
+        public String getDesc() {
+            return desc;
+        }
+
+        public void setDesc(String desc) {
+            this.desc = desc;
+        }
     }
 
     /**

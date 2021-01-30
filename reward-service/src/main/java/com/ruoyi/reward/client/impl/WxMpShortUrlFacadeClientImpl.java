@@ -1,8 +1,8 @@
-package com.ruoyi.web.client.impl;
+package com.ruoyi.reward.client.impl;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 
-import com.ruoyi.web.client.WxMpShortUrlFacadeClient;
+import com.ruoyi.reward.client.WxMpShortUrlFacadeClient;
 import org.springframework.stereotype.Component;
 
 @Component

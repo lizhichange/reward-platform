@@ -1,4 +1,4 @@
-package com.ruoyi.web.client;
+package com.ruoyi.reward.client;
 
 public interface WxMpShortUrlFacadeClient {
     /**
