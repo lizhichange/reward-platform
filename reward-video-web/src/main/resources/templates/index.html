@@ -65,7 +65,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="search">
+                    <div class="search" style="display: none;">
                         <form>
                             <input type="text" id="keyword" class="textbox" value="" placeholder="">
                             <input type="button" id="search" value=" " />
@@ -412,7 +412,7 @@
                                         cancelText: '取消'
                                     }).then(() => {
                                         console.log('已确认');
-                                        $.showLoading("加载中");
+                                      
                                         var value = document.getElementById('wxPayUrl').value;
                                         var flag = value.indexOf("?") !== -1;
                                         var callbackUrl = window.location.href;
