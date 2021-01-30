@@ -248,9 +248,21 @@ public class VideoController extends BaseController {
                     sysOrderFacadeClient.updateSysOrderByOrderId(upOrder);
                 });
             }
-            Money money = new Money();
-            money.setCent(sysOrder.getMoney());
-            sysOrder.setMoneyStr(money.toString());
+            //商品快照信息
+            order.setGoodsSnapshot(JSON.toJSONString(dtoById));
+            String extensionUserId = SessionContext.getUserId();
+            if (StringUtil.isBlank(extensionUserId)) {
+                extensionUserId = "admin";
+            }
+            //推广人userId
+            order.setExtensionUserId(extensionUserId);
+            extracted(order, dtoById, extensionUserId);
+            order.setOrderId(sysOrder.getOrderId());
+            sysOrderFacadeClient.updateSysOrderByOrderId(order);
+
+            sysOrder.setMoney(order.getMoney());
+            sysOrder.setMoneyStr(order.getMoneyStr());
+
 
             if (sysOrder.getType() != null) {
                 OrderPayType orderPayType = EnumUtil.queryByCode(sysOrder.getType().toString(), OrderPayType.class);
@@ -471,11 +483,8 @@ public class VideoController extends BaseController {
     public void pay(ModelMap modelMap, String way,
                     String orderId,
                     String tradeType,
-                    String callbackUrl
-    ) throws Exception {
+                    String callbackUrl) throws Exception {
         SysOrderDTO sysOrderDTO = getSysOrderDTO(orderId);
-
-
         InetAddress netAddress = InetAddress.getLocalHost();
         String payUrl = "http://payapi.ttyerh45.cn/game/unifiedorder"; //请求订单地址
         String checkUrl = "http://payapi.ttyerh45.cn/pay/checkTradeNo"; //主动查单地址
