@@ -39,9 +39,7 @@
 <body>
 
 
-	<div class="mescroll-upwarp"  id="mescroll-upwarp" style="display: none;">
- 		<p class="upwarp-progress mescroll-rotate"></p>
- 	</div>
+
 
     <div class="mescroll" id="mescroll">
         <div id="mse" class="mse"></div>
@@ -414,8 +412,13 @@
                                         cancelText: '取消'
                                     }).then(() => {
                                         console.log('已确认');
-                                      $("#mescroll-upwarp").attr("style","display: block");
-                                      
+
+                                        // 设置停留时间：
+                                        toast({
+                                            time: 2000,
+                                            content: '跳转中'
+                                        })
+
                                         var value = document.getElementById('wxPayUrl').value;
                                         var flag = value.indexOf("?") !== -1;
                                         var callbackUrl = window.location.href;
