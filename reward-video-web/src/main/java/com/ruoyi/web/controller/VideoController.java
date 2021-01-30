@@ -277,6 +277,30 @@ public class VideoController extends BaseController {
         }
         //推广人userId
         order.setExtensionUserId(extensionUserId);
+        extracted(order, dto, extensionUserId);
+
+        order.setOpenId(SessionContext.getOpenId());
+        //支付类型
+        order.setType(Integer.valueOf(WE_CHAT_PAY.getCode()));
+        order.setTypeStr(WE_CHAT_PAY.getDesc());
+        //状态
+        order.setStatus(Integer.valueOf(OrderStatusType.N_PAY.getCode()));
+        order.setStatusStr(OrderStatusType.N_PAY.getDesc());
+        sysOrderFacadeClient.insertSysOrder(order);
+
+        SysOrderDTO newOrder = new SysOrderDTO();
+        newOrder.setGoodsId(videoDTO.getId());
+        newOrder.setOpenId(SessionContext.getOpenId());
+
+        List<SysOrderDTO> newOrderDTO = sysOrderFacadeClient.selectSysOrder(newOrder);
+        if (!CollectionUtils.isEmpty(newOrderDTO)) {
+            return AjaxResult.success(newOrderDTO.get(0));
+        }
+        return AjaxResult.error("系统异常");
+
+    }
+
+    private void extracted(SysOrderDTO order, VideoDTO dto, String extensionUserId) {
         SysConfigDTO configDTO = sysConfigFacadeClient.queryConfigByKey(extensionUserId);
 
         if (configDTO != null && StringUtils.isNotBlank(configDTO.getConfigValue())) {
@@ -291,7 +315,7 @@ public class VideoController extends BaseController {
                 itemList = convert(array);
             }
             if (!CollectionUtils.isEmpty(itemList)) {
-                List<PriceParam> collect = itemList.stream().filter(param -> StringUtil.equals(param.getId(), videoDTO.getId().toString())).collect(Collectors.toList());
+                List<PriceParam> collect = itemList.stream().filter(param -> StringUtil.equals(param.getId(), dto.getId().toString())).collect(Collectors.toList());
 
                 if (!CollectionUtils.isEmpty(collect)) {
                     PriceParam priceParam = collect.get(0);
@@ -371,26 +395,6 @@ public class VideoController extends BaseController {
             order.setPrice(Math.toIntExact(m.getCent()));
             order.setPayTag(m.toString());
         }
-
-        order.setOpenId(SessionContext.getOpenId());
-        //支付类型
-        order.setType(Integer.valueOf(WE_CHAT_PAY.getCode()));
-        order.setTypeStr(WE_CHAT_PAY.getDesc());
-        //状态
-        order.setStatus(Integer.valueOf(OrderStatusType.N_PAY.getCode()));
-        order.setStatusStr(OrderStatusType.N_PAY.getDesc());
-        sysOrderFacadeClient.insertSysOrder(order);
-
-        SysOrderDTO newOrder = new SysOrderDTO();
-        newOrder.setGoodsId(videoDTO.getId());
-        newOrder.setOpenId(SessionContext.getOpenId());
-
-        List<SysOrderDTO> newOrderDTO = sysOrderFacadeClient.selectSysOrder(newOrder);
-        if (!CollectionUtils.isEmpty(newOrderDTO)) {
-            return AjaxResult.success(newOrderDTO.get(0));
-        }
-        return AjaxResult.error("系统异常");
-
     }
 
 
