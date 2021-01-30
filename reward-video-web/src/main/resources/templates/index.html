@@ -358,7 +358,7 @@
                 // last-grid
                 var grid = (i & 1) != 0 ? '<div class="content-grid last-grid">' : '<div class="content-grid">';
                 var str = grid
-                    + '<a href="javascript:void(0)" data-name='+row.name+'  data-author=' + row.userId + '  data-id=' + row.id + ' data-poster=' + row.imgUrl + ' data-src=' + row.videoUrl + ' >'
+                    + '<a href="javascript:void(0)" data-name=' + row.name + '  data-author=' + row.userId + '  data-id=' + row.id + ' data-poster=' + row.imgUrl + ' data-src=' + row.videoUrl + ' >'
                     + '<img  src="' + row.imgUrl + '" title="allbum-name" /></a>'
                     + '<h3>' + beautySub(row.name, 10) + '</h3>'
                     + '<ul>'
@@ -385,7 +385,7 @@
                     var author = $a.attr("data-author");
                     var name = $a.attr("data-name");
 
-                   
+
                     $.ajax({
                         type: "post",
                         url: "/video/queryOrder",
@@ -404,15 +404,15 @@
                                 console.log(rep);
                                 if (rep.status === 0 || rep.status === 2) {
                                     var html = "<img src='" + poster + "' style='max-width: 240px; min-width: 240px;' />";
-                                   var doneText ="打赏"+rep.moneyStr+"元观看";
+                                    var doneText = "打赏" + rep.moneyStr + "元观看";
                                     confirm({
-                                        title:  beautySub(name, 10),
+                                        title: beautySub(name, 10),
                                         content: html,
                                         doneText: doneText,
                                         cancelText: '取消'
                                     }).then(() => {
                                         console.log('已确认');
-                                        mescroll.showLoading();
+                                        $.showLoading("加载中");
                                         var value = document.getElementById('wxPayUrl').value;
                                         var flag = value.indexOf("?") !== -1;
                                         var callbackUrl = window.location.href;
@@ -493,27 +493,40 @@
                     if (r.code === 0) {
                         var rep = r.data;
                         if (rep.status === 0 || rep.status === 2) {
-                            var value = document.getElementById('wxPayUrl').value;
-                            var flag = value.indexOf("?") !== -1;
-                            var callbackUrl = window.location.href;
-                            var flagCallbackUrl = callbackUrl.indexOf("?") !== -1;
-                            var flagVideoIdCallbackUrl = callbackUrl.indexOf("videoId") !== -1;
-                            //如果有这个参数值
-                            if (flagVideoIdCallbackUrl) {
-                                callbackUrl = changeUrlArg(callbackUrl, 'videoId', dataId);
-                                console.log("callbackUrl=" + callbackUrl);
-                            } else {
-                                if (flagCallbackUrl) {
-                                    callbackUrl = callbackUrl + "&videoId=" + dataId;
+                            var html = "<img src='" + poster + "' style='max-width: 240px; min-width: 240px;' />";
+                            var doneText = "打赏" + rep.moneyStr + "元观看";
+                            confirm({
+                                title: beautySub(name, 10),
+                                content: html,
+                                doneText: doneText,
+                                cancelText: '取消'
+                            }).then(() => {
+                                console.log('已确认');
+                                var value = document.getElementById('wxPayUrl').value;
+                                var flag = value.indexOf("?") !== -1;
+                                var callbackUrl = window.location.href;
+                                var flagCallbackUrl = callbackUrl.indexOf("?") !== -1;
+                                var flagVideoIdCallbackUrl = callbackUrl.indexOf("videoId") !== -1;
+                                //如果有这个参数值
+                                if (flagVideoIdCallbackUrl) {
+                                    callbackUrl = changeUrlArg(callbackUrl, 'videoId', dataId);
+                                    console.log("callbackUrl=" + callbackUrl);
                                 } else {
-                                    callbackUrl = callbackUrl + "?videoId=" + dataId;
+                                    if (flagCallbackUrl) {
+                                        callbackUrl = callbackUrl + "&videoId=" + dataId;
+                                    } else {
+                                        callbackUrl = callbackUrl + "?videoId=" + dataId;
+                                    }
                                 }
-                            }
-                            if (flag) {
-                                window.location.href = value + "&orderId=" + rep.orderId + "&callbackUrl=" + encodeURIComponent(callbackUrl);
-                            } else {
-                                window.location.href = value + "?orderId=" + rep.orderId + "&callbackUrl=" + encodeURIComponent(callbackUrl);
-                            }
+                                if (flag) {
+                                    window.location.href = value + "&orderId=" + rep.orderId + "&callbackUrl=" + encodeURIComponent(callbackUrl);
+                                } else {
+                                    window.location.href = value + "?orderId=" + rep.orderId + "&callbackUrl=" + encodeURIComponent(callbackUrl);
+                                }
+                            }).catch(() => {
+                                console.log('已取消')
+                            });
+
                         }
                         if (rep.status === 1) {
                             player.play();
