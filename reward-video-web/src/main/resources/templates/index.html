@@ -402,12 +402,14 @@
                             console.log(r);
                             if (r.code === 0) {
                                 var rep = r.data;
+                                console.log(rep);
                                 if (rep.status === 0 || rep.status === 2) {
                                     var html = "<img src='" + poster + "' style='max-width: 220px; min-width: 220px;' />";
+                                   var doneText ="打赏"+"观看";
                                     confirm({
                                         title:  beautySub(name, 10),
                                         content: html,
-                                        doneText: '打赏观看',
+                                        doneText: doneText,
                                         cancelText: '取消'
                                     }).then(() => {
                                         console.log('已确认');
