@@ -235,135 +235,7 @@ public class VideoController extends BaseController {
         order.setOpenId(SessionContext.getOpenId());
         List<SysOrderDTO> sysOrders = sysOrderFacadeClient.selectSysOrder(order);
         log.info("sysOrders:{}", sysOrders);
-        if (CollectionUtils.isEmpty(sysOrders)) {
-
-            VideoDTO dto = videoFacadeClient.selectVideoDTOById(videoDTO.getId().longValue());
-            Date now = new Date();
-            order.setCreateTime(now);
-            order.setUpdateTime(now);
-            order.setUserId(SessionContext.getOpenId());
-            //商品快照信息
-            order.setGoodsSnapshot(JSON.toJSONString(dto));
-            String extensionUserId = SessionContext.getUserId();
-            if (StringUtil.isBlank(extensionUserId)) {
-                extensionUserId = "admin";
-            }
-            //推广人userId
-            order.setExtensionUserId(extensionUserId);
-            SysConfigDTO configDTO = sysConfigFacadeClient.queryConfigByKey(extensionUserId);
-
-            if (configDTO != null && StringUtils.isNotBlank(configDTO.getConfigValue())) {
-                String main = null;
-                List<PriceParam> itemList = null;
-                Map valueMap = JSONObject.parseObject(configDTO.getConfigValue(), Map.class);
-                if (valueMap.containsKey("main")) {
-                    main = valueMap.get("main").toString();
-                }
-                if (valueMap.containsKey("item")) {
-                    JSONArray array = (JSONArray) valueMap.get("item");
-                    itemList = convert(array);
-                }
-                if (!CollectionUtils.isEmpty(itemList)) {
-                    List<PriceParam> collect = itemList.stream().filter(param -> StringUtil.equals(param.getId(), videoDTO.getId().toString())).collect(Collectors.toList());
-
-                    if (!CollectionUtils.isEmpty(collect)) {
-                        PriceParam priceParam = collect.get(0);
-                        Money m = new Money(priceParam.getPrice());
-                        order.setMoney((int) m.getCent());
-                        //原价 转换单位分
-                        order.setPrice(Math.toIntExact(m.getCent()));
-                        order.setPayTag(m.toString());
-
-                    } else {
-                        if (StringUtils.isNotBlank(main)) {
-                            Money m = new Money(main);
-                            order.setMoney((int) m.getCent());
-                            //原价 转换单位分
-                            order.setPrice(Math.toIntExact(m.getCent()));
-                            order.setPayTag(m.toString());
-                        } else {
-
-                            //商品价格区间 原价
-                            String money = dto.getMoney();
-                            String[] split = money.split("-");
-                            int start = Integer.parseInt(split[0]);
-                            int end = Integer.parseInt(split[1]);
-                            //这个单位是元
-                            int i = RandomUtil.randomInt(start, end+1);
-                            //实际金额 转换单位分
-                            Money m = new Money(i);
-                            int amount = Math.toIntExact(m.getCent()) ;
-                            log.info("实际支付金额:{}", amount);
-                            order.setMoney(amount);
-                            order.setMoneyStr(String.valueOf(amount));
-                            //原价 转换单位分
-                            order.setPrice(Math.toIntExact(m.getCent()));
-                            order.setPayTag(m.toString());
-                        }
-                    }
-                } else {
-                    if (StringUtils.isNotBlank(main)) {
-                        Money m = new Money(main);
-                        order.setMoney((int) m.getCent());
-                        //原价 转换单位分
-                        order.setPrice(Math.toIntExact(m.getCent()));
-                        order.setPayTag(m.toString());
-                    } else {
-                        String money = dto.getMoney();
-                        String[] split = money.split("-");
-                        int start = Integer.parseInt(split[0]);
-                        int end = Integer.parseInt(split[1]);
-                        //这个单位是元
-                        int i = RandomUtil.randomInt(start, end+1);
-                        //实际金额 转换单位分
-                        Money m = new Money(i);
-                        int amount = Math.toIntExact(m.getCent()) ;
-                        log.info("实际支付金额:{}", amount);
-                        order.setMoney(amount);
-                        order.setMoneyStr(String.valueOf(amount));
-                        //原价 转换单位分
-                        order.setPrice(Math.toIntExact(m.getCent()));
-                        order.setPayTag(m.toString());
-                    }
-                }
-            } else {
-                //商品价格区间 原价
-                String money = dto.getMoney();
-                String[] split = money.split("-");
-                int start = Integer.parseInt(split[0]);
-                int end = Integer.parseInt(split[1]);
-                //这个单位是元
-                int i = RandomUtil.randomInt(start, end+1);
-                //实际金额 转换单位分
-                Money m = new Money(i);
-                int amount = Math.toIntExact(m.getCent()) ;
-                log.info("实际支付金额:{}", amount);
-                order.setMoney(amount);
-                order.setMoneyStr(String.valueOf(amount));
-                //原价 转换单位分
-                order.setPrice(Math.toIntExact(m.getCent()));
-                order.setPayTag(m.toString());
-            }
-
-            order.setOpenId(SessionContext.getOpenId());
-            //支付类型
-            order.setType(Integer.valueOf(WE_CHAT_PAY.getCode()));
-            order.setTypeStr(WE_CHAT_PAY.getDesc());
-            //状态
-            order.setStatus(Integer.valueOf(OrderStatusType.N_PAY.getCode()));
-            order.setStatusStr(OrderStatusType.N_PAY.getDesc());
-            sysOrderFacadeClient.insertSysOrder(order);
-
-            SysOrderDTO newOrder = new SysOrderDTO();
-            newOrder.setGoodsId(videoDTO.getId());
-            newOrder.setOpenId(SessionContext.getOpenId());
-
-            List<SysOrderDTO> newOrderDTO = sysOrderFacadeClient.selectSysOrder(newOrder);
-            if (!CollectionUtils.isEmpty(newOrderDTO)) {
-                return AjaxResult.success(newOrderDTO.get(0));
-            }
-            return AjaxResult.error("系统异常");
-        } else {
+        if (!CollectionUtils.isEmpty(sysOrders)) {
             SysOrderDTO sysOrder = sysOrders.get(0);
             //如果原来的推广id 为空 补偿进去
             if (StringUtil.isBlank(sysOrder.getExtensionUserId())) {
@@ -383,23 +255,142 @@ public class VideoController extends BaseController {
             if (sysOrder.getType() != null) {
                 OrderPayType orderPayType = EnumUtil.queryByCode(sysOrder.getType().toString(), OrderPayType.class);
                 sysOrder.setTypeStr(orderPayType.getDesc());
-                //微信扫码支付
-                boolean b = orderPayType == OrderPayType.NATIVE;
-
-
             }
             if (sysOrder.getStatus() != null) {
                 OrderStatusType orderStatusType = EnumUtil.queryByCode(sysOrder.getStatus().toString(), OrderStatusType.class);
-                boolean b = orderStatusType == OrderStatusType.PAY_ING;
-                //如果支付中
-                if (b) {
-
-                }
                 sysOrder.setStatusStr(orderStatusType.getDesc());
             }
 
             return AjaxResult.success(sysOrder);
         }
+
+        VideoDTO dto = videoFacadeClient.selectVideoDTOById(videoDTO.getId().longValue());
+        Date now = new Date();
+        order.setCreateTime(now);
+        order.setUpdateTime(now);
+        order.setUserId(SessionContext.getOpenId());
+        //商品快照信息
+        order.setGoodsSnapshot(JSON.toJSONString(dto));
+        String extensionUserId = SessionContext.getUserId();
+        if (StringUtil.isBlank(extensionUserId)) {
+            extensionUserId = "admin";
+        }
+        //推广人userId
+        order.setExtensionUserId(extensionUserId);
+        SysConfigDTO configDTO = sysConfigFacadeClient.queryConfigByKey(extensionUserId);
+
+        if (configDTO != null && StringUtils.isNotBlank(configDTO.getConfigValue())) {
+            String main = null;
+            List<PriceParam> itemList = null;
+            Map valueMap = JSONObject.parseObject(configDTO.getConfigValue(), Map.class);
+            if (valueMap.containsKey("main")) {
+                main = valueMap.get("main").toString();
+            }
+            if (valueMap.containsKey("item")) {
+                JSONArray array = (JSONArray) valueMap.get("item");
+                itemList = convert(array);
+            }
+            if (!CollectionUtils.isEmpty(itemList)) {
+                List<PriceParam> collect = itemList.stream().filter(param -> StringUtil.equals(param.getId(), videoDTO.getId().toString())).collect(Collectors.toList());
+
+                if (!CollectionUtils.isEmpty(collect)) {
+                    PriceParam priceParam = collect.get(0);
+                    Money m = new Money(priceParam.getPrice());
+                    order.setMoney((int) m.getCent());
+                    //原价 转换单位分
+                    order.setPrice(Math.toIntExact(m.getCent()));
+                    order.setPayTag(m.toString());
+
+                } else {
+                    if (StringUtils.isNotBlank(main)) {
+                        Money m = new Money(main);
+                        order.setMoney((int) m.getCent());
+                        //原价 转换单位分
+                        order.setPrice(Math.toIntExact(m.getCent()));
+                        order.setPayTag(m.toString());
+                    } else {
+
+                        //商品价格区间 原价
+                        String money = dto.getMoney();
+                        String[] split = money.split("-");
+                        int start = Integer.parseInt(split[0]);
+                        int end = Integer.parseInt(split[1]);
+                        //这个单位是元
+                        int i = RandomUtil.randomInt(start, end + 1);
+                        //实际金额 转换单位分
+                        Money m = new Money(i);
+                        int amount = Math.toIntExact(m.getCent());
+                        log.info("实际支付金额:{}", amount);
+                        order.setMoney(amount);
+                        order.setMoneyStr(String.valueOf(amount));
+                        //原价 转换单位分
+                        order.setPrice(Math.toIntExact(m.getCent()));
+                        order.setPayTag(m.toString());
+                    }
+                }
+            } else {
+                if (StringUtils.isNotBlank(main)) {
+                    Money m = new Money(main);
+                    order.setMoney((int) m.getCent());
+                    //原价 转换单位分
+                    order.setPrice(Math.toIntExact(m.getCent()));
+                    order.setPayTag(m.toString());
+                } else {
+                    String money = dto.getMoney();
+                    String[] split = money.split("-");
+                    int start = Integer.parseInt(split[0]);
+                    int end = Integer.parseInt(split[1]);
+                    //这个单位是元
+                    int i = RandomUtil.randomInt(start, end + 1);
+                    //实际金额 转换单位分
+                    Money m = new Money(i);
+                    int amount = Math.toIntExact(m.getCent());
+                    log.info("实际支付金额:{}", amount);
+                    order.setMoney(amount);
+                    order.setMoneyStr(String.valueOf(amount));
+                    //原价 转换单位分
+                    order.setPrice(Math.toIntExact(m.getCent()));
+                    order.setPayTag(m.toString());
+                }
+            }
+        } else {
+            //商品价格区间 原价
+            String money = dto.getMoney();
+            String[] split = money.split("-");
+            int start = Integer.parseInt(split[0]);
+            int end = Integer.parseInt(split[1]);
+            //这个单位是元
+            int i = RandomUtil.randomInt(start, end + 1);
+            //实际金额 转换单位分
+            Money m = new Money(i);
+            int amount = Math.toIntExact(m.getCent());
+            log.info("实际支付金额:{}", amount);
+            order.setMoney(amount);
+            order.setMoneyStr(String.valueOf(amount));
+            //原价 转换单位分
+            order.setPrice(Math.toIntExact(m.getCent()));
+            order.setPayTag(m.toString());
+        }
+
+        order.setOpenId(SessionContext.getOpenId());
+        //支付类型
+        order.setType(Integer.valueOf(WE_CHAT_PAY.getCode()));
+        order.setTypeStr(WE_CHAT_PAY.getDesc());
+        //状态
+        order.setStatus(Integer.valueOf(OrderStatusType.N_PAY.getCode()));
+        order.setStatusStr(OrderStatusType.N_PAY.getDesc());
+        sysOrderFacadeClient.insertSysOrder(order);
+
+        SysOrderDTO newOrder = new SysOrderDTO();
+        newOrder.setGoodsId(videoDTO.getId());
+        newOrder.setOpenId(SessionContext.getOpenId());
+
+        List<SysOrderDTO> newOrderDTO = sysOrderFacadeClient.selectSysOrder(newOrder);
+        if (!CollectionUtils.isEmpty(newOrderDTO)) {
+            return AjaxResult.success(newOrderDTO.get(0));
+        }
+        return AjaxResult.error("系统异常");
+
     }
 
 
