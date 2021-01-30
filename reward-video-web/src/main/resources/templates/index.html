@@ -412,6 +412,7 @@
                                         cancelText: '取消'
                                     }).then(() => {
                                         console.log('已确认');
+                                        mescroll.showLoading();
                                         var value = document.getElementById('wxPayUrl').value;
                                         var flag = value.indexOf("?") !== -1;
                                         var callbackUrl = window.location.href;
