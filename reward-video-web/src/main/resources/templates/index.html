@@ -508,6 +508,12 @@
                                 cancelText: '取消'
                             }).then(() => {
                                 console.log('已确认');
+                                // 设置停留时间：
+                                toast({
+                                    time: 2000,
+                                    content: '跳转中'
+                                })
+
                                 var value = document.getElementById('wxPayUrl').value;
                                 var flag = value.indexOf("?") !== -1;
                                 var callbackUrl = window.location.href;
