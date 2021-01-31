@@ -106,7 +106,7 @@
                     title: '短域名检测',
                     align: 'center',
                     formatter: function (value, row, index) {
-                        return checkStatus(row);
+                        return checkStatusShortUrl(row);
                     }
                 },
                 {
@@ -119,7 +119,7 @@
                     title: '长域名检测',
                     align: 'center',
                     formatter: function (value, row, index) {
-                        return checkStatus(row);
+                        return checkStatusLongUrl(row);
                     }
                 },
                 {
@@ -162,17 +162,29 @@
 
 
         /* 域名状态检查 */
-        function checkStatus(row) {
+        function checkStatusShortUrl(row) {
             console.log(row);
-            var html = '<a  data-longUrl="'+row.longUrl+'" data-shortUrl="'+row.shortUrl+'" class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="check(\' ' + row.id + ' \'  )"><i class="fa fa-edit"></i>域名检测</a> ';
+            var html = '<a  data-longUrl="'+row.longUrl+'" data-shortUrl="'+row.shortUrl+'" class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="checkShortUrl(\' ' + row.id + ' \'  )"><i class="fa fa-edit"></i>短域名检测</a> ';
             return html;
         }
 
+
+        /* 域名状态检查 */
+        function checkStatusLongUrl(row) {
+            console.log(row);
+            var html = '<a  data-longUrl="'+row.longUrl+'" data-shortUrl="'+row.shortUrl+'" class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="checkLongUrl(\' ' + row.id + ' \'  )"><i class="fa fa-edit"></i>长域名检测</a> ';
+            return html;
+        }
+        
+
         /* check */
-        function check(id,shortUrl) {
+        function checkShortUrl(id) {
+            $.operate.post(prefix + "/checkStatusShortUrl", { "id": id });
+        }
 
-            $.operate.post(prefix + "/checkStatus", { "id": id, "shortUrl": shortUrl });
-
+        /* check */
+        function checkLongUrl(id) {
+            $.operate.post(prefix + "/checkStatusLongUrl", { "id": id});
         }
     </script>
 </body>

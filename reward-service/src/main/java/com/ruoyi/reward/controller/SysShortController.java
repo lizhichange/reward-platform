@@ -96,11 +96,25 @@ public class SysShortController extends BaseController {
      * 域名状态检测
      */
     @RequiresPermissions("system:short:edit")
-    @PostMapping("/checkStatus")
+    @PostMapping("/checkStatusShortUrl")
     @ResponseBody
-    public AjaxResult checkStatus(SysShort sysShort) {
+    public AjaxResult checkStatusShortUrl(SysShort sysShort) {
         SysShort main = sysShortService.selectSysShortById(sysShort.getId());
         String check = wxMpShortUrlFacadeClient.check(main.getShortUrl());
+        CheckResponse parse = JSONObject.parseObject(check, CheckResponse.class);
+        logger.info("parse:{}", parse);
+        return AjaxResult.success(parse.getMsg());
+    }
+
+    /**
+     * 域名状态检测
+     */
+    @RequiresPermissions("system:short:edit")
+    @PostMapping("/checkStatusLongUrl")
+    @ResponseBody
+    public AjaxResult checkStatusLongUrl(SysShort sysShort) {
+        SysShort main = sysShortService.selectSysShortById(sysShort.getId());
+        String check = wxMpShortUrlFacadeClient.check(main.getLongUrl());
         CheckResponse parse = JSONObject.parseObject(check, CheckResponse.class);
         logger.info("parse:{}", parse);
         return AjaxResult.success(parse.getMsg());
