@@ -136,10 +136,10 @@
         }
 
         function myOpen(id) {
-            $.modal.confirm("确认要检测？", function () {
-                var url = prefix + '/checkStatus';
-                $.operate.post(url, { "id": id, "mainStatus": 1 });
-            });
+
+            var url = prefix + '/checkStatus';
+            $.operate.post(url, { "id": id, "mainStatus": 1 });
+
         }
 
         /* 用户管理-停用 */

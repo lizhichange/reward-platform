@@ -13,13 +13,14 @@ import com.ruoyi.reward.facade.dto.VideoDTO;
 import com.ruoyi.reward.facade.enums.OrderPayType;
 import com.ruoyi.reward.facade.enums.OrderStatusType;
 import com.ruoyi.reward.facade.enums.WebMainStatus;
+import com.ruoyi.web.PriceParam;
 import com.ruoyi.web.client.*;
 import com.ruoyi.web.config.AppConfig;
 import com.ruoyi.web.interceptor.WxPnUserAuth;
 import com.ruoyi.web.model.PageForm;
 import com.ruoyi.web.result.PayResult;
 import com.ruoyi.web.result.TableDataInfo;
-import lombok.Data;
+
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang.StringUtils;
 import org.near.servicesupport.result.TPageResult;
@@ -28,7 +29,7 @@ import org.near.toolkit.common.StringUtil;
 import org.near.toolkit.context.SessionContext;
 import org.near.toolkit.model.AjaxResult;
 import org.near.toolkit.model.Money;
-import org.near.toolkit.model.ToString;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -139,7 +140,7 @@ public class VideoController extends BaseController {
         String orderByClause = " create_time desc ";
         TPageResult<VideoDTO> result = videoFacadeClient.queryPage(pageNum, pageSize, videoDTO, orderByClause);
         List<VideoDTO> list = result.getValues();
-        convert(list,SessionContext.getUserId());
+        convert(list, SessionContext.getUserId());
         if (CollectionUtils.isEmpty(list)) {
             TableDataInfo dataTable = getDataTable(list);
             dataTable.setTotal(result.getTotalRows());
@@ -175,7 +176,7 @@ public class VideoController extends BaseController {
         videoDTO.setStatus("0");
         TPageResult<VideoDTO> result = videoFacadeClient.queryPage(pageNum, pageSize, videoDTO, orderByClause);
         List<VideoDTO> list = result.getValues();
-        convert(list,SessionContext.getUserId());
+        convert(list, SessionContext.getUserId());
         TableDataInfo dataTable = getDataTable(list);
         dataTable.setTotal(result.getTotalRows());
         dataTable.setTotalPage(result.getTotalPage());
@@ -207,7 +208,7 @@ public class VideoController extends BaseController {
         log.info("videoDTO:{}", videoDTO);
         TPageResult<VideoDTO> result = videoFacadeClient.queryPage(pageNum, pageSize, videoDTO, orderByClause);
         List<VideoDTO> list = result.getValues();
-        convert(list,SessionContext.getUserId());
+        convert(list, SessionContext.getUserId());
         TableDataInfo dataTable = getDataTable(list);
         dataTable.setTotal(result.getTotalRows());
         dataTable.setTotalPage(result.getTotalPage());
@@ -407,45 +408,6 @@ public class VideoController extends BaseController {
             order.setPrice(Math.toIntExact(m.getCent()));
             order.setPayTag(m.toString());
         }
-    }
-
-
-    @Data
-    public static class PriceParam extends ToString {
-        private static final long serialVersionUID = -7646396057780726563L;
-        private String price;
-        private String id;
-
-        public String getPrice() {
-            return price;
-        }
-
-        public void setPrice(String price) {
-            this.price = price;
-        }
-
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
-    }
-
-
-    List<PriceParam> convert(JSONArray array) {
-        ArrayList<PriceParam> objects = Lists.newArrayList();
-        for (Object ite : array) {
-            JSONObject a = (JSONObject) ite;
-            String price = a.getString("price");
-            String id = a.getString("id");
-            PriceParam priceParam = new PriceParam();
-            priceParam.setId(id);
-            priceParam.setPrice(price);
-            objects.add(priceParam);
-        }
-        return objects;
     }
 
 

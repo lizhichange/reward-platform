@@ -1,10 +1,13 @@
 package com.ruoyi.web.controller;
 
 import cn.hutool.core.util.RandomUtil;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.google.common.collect.Lists;
 import com.ruoyi.reward.facade.dto.SysCategoryDTO;
 import com.ruoyi.reward.facade.dto.SysConfigDTO;
 import com.ruoyi.reward.facade.dto.VideoDTO;
+import com.ruoyi.web.PriceParam;
 import com.ruoyi.web.client.*;
 import com.ruoyi.web.feign.UserDetailFacadeFeign;
 import lombok.extern.slf4j.Slf4j;
@@ -24,9 +27,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 /**
@@ -105,6 +110,22 @@ public class BaseController {
         }
     }
 
+    public List<PriceParam> convert(JSONArray array) {
+        ArrayList<PriceParam> objects = Lists.newArrayList();
+        for (Object ite : array) {
+            JSONObject a = (JSONObject) ite;
+            String price = a.getString("price");
+            String id = a.getString("id");
+            PriceParam priceParam = new PriceParam();
+            priceParam.setId(id);
+            priceParam.setPrice(price);
+            objects.add(priceParam);
+        }
+        return objects;
+    }
+//                                dto.setMoney("￥" + m.toString() + "元");
+
+
     void convert(List<VideoDTO> list, String extensionUserId) {
         if (!CollectionUtils.isEmpty(list)) {
             Date now = new Date();
@@ -114,19 +135,82 @@ public class BaseController {
                 }
                 SysConfigDTO configDTO = sysConfigFacadeClient.queryConfigByKey(extensionUserId);
                 if (configDTO != null && StringUtils.isNotBlank(configDTO.getConfigValue())) {
-                    String main;
+                    String main = null;
+                    List<PriceParam> itemList = null;
                     Map valueMap = JSONObject.parseObject(configDTO.getConfigValue(), Map.class);
                     if (valueMap.containsKey("main")) {
                         main = valueMap.get("main").toString();
-                        Money m = new Money(main);
-                        dto.setMoney("￥" + m.toString() + "元");
                     }
+                    if (valueMap.containsKey("item")) {
+                        JSONArray array = (JSONArray) valueMap.get("item");
+                        itemList = convert(array);
+                    }
+                    if (!CollectionUtils.isEmpty(itemList)) {
+                        List<PriceParam> collect = itemList.stream().filter(param -> StringUtil.equals(param.getId(), dto.getId().toString())).collect(Collectors.toList());
+
+                        if (!CollectionUtils.isEmpty(collect)) {
+                            PriceParam priceParam = collect.get(0);
+                            Money m = new Money(priceParam.getPrice());
+                            dto.setMoney("￥" + m.toString() + "元");
+
+                        } else {
+                            if (StringUtils.isNotBlank(main)) {
+                                Money m = new Money(main);
+                                dto.setMoney("￥" + m.toString() + "元");
+                            } else {
+
+                                //商品价格区间 原价
+                                String money = dto.getMoney();
+                                String[] split = money.split("-");
+                                int start = Integer.parseInt(split[0]);
+                                int end = Integer.parseInt(split[1]);
+                                //这个单位是元
+                                int i = RandomUtil.randomInt(start, end + 1);
+                                //实际金额 转换单位分
+                                Money m = new Money(i);
+                                int amount = Math.toIntExact(m.getCent());
+                                log.info("实际支付金额:{}", amount);
+                                dto.setMoney("￥" + m.toString() + "元");
+                            }
+                        }
+                    } else {
+                        if (StringUtils.isNotBlank(main)) {
+                            Money m = new Money(main);
+                            dto.setMoney("￥" + m.toString() + "元");
+                        } else {
+                            String money = dto.getMoney();
+                            String[] split = money.split("-");
+                            int start = Integer.parseInt(split[0]);
+                            int end = Integer.parseInt(split[1]);
+                            //这个单位是元
+                            int i = RandomUtil.randomInt(start, end + 1);
+                            //实际金额 转换单位分
+                            Money m = new Money(i);
+                            int amount = Math.toIntExact(m.getCent());
+                            log.info("实际支付金额:{}", amount);
+                            dto.setMoney("￥" + m.toString() + "元");
+                        }
+                    }
+                } else {
+                    //商品价格区间 原价
+                    String money = dto.getMoney();
+                    String[] split = money.split("-");
+                    int start = Integer.parseInt(split[0]);
+                    int end = Integer.parseInt(split[1]);
+                    //这个单位是元
+                    int i = RandomUtil.randomInt(start, end + 1);
+                    //实际金额 转换单位分
+                    Money m = new Money(i);
+                    int amount = Math.toIntExact(m.getCent());
+                    log.info("实际支付金额:{}", amount);
+                    dto.setMoney("￥" + m.toString() + "元");
                 }
                 convert(now, dto);
                 dto.setMockNum(mock() + "人付款");
             }
         }
     }
+
 
     public String mock() {
         String s = RandomUtil.randomNumbers(3);
