@@ -164,7 +164,7 @@
         /* 域名状态检查 */
         function checkStatusShortUrl(row) {
             console.log(row);
-            var html = '<a  data-longUrl="'+row.longUrl+'" data-shortUrl="'+row.shortUrl+'" class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="checkShortUrl(\' ' + row.id + ' \'  )"><i class="fa fa-edit"></i>短域名检测</a> ';
+            var html = '<a  data-longUrl="' + row.longUrl + '" data-shortUrl="' + row.shortUrl + '" class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="checkShortUrl(\' ' + row.id + ' \'  )"><i class="fa fa-edit"></i>短域名检测</a> ';
             return html;
         }
 
@@ -172,10 +172,10 @@
         /* 域名状态检查 */
         function checkStatusLongUrl(row) {
             console.log(row);
-            var html = '<a  data-longUrl="'+row.longUrl+'" data-shortUrl="'+row.shortUrl+'" class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="checkLongUrl(\' ' + row.id + ' \'  )"><i class="fa fa-edit"></i>长域名检测</a> ';
+            var html = '<a  data-longUrl="' + row.longUrl + '" data-shortUrl="' + row.shortUrl + '" class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="checkLongUrl(\' ' + row.id + ' \'  )"><i class="fa fa-edit"></i>长域名检测</a> ';
             return html;
         }
-        
+
 
         /* check */
         function checkShortUrl(id) {
@@ -184,7 +184,7 @@
 
         /* check */
         function checkLongUrl(id) {
-            $.operate.post(prefix + "/checkStatusLongUrl", { "id": id});
+            $.operate.post(prefix + "/checkStatusLongUrl", { "id": id });
         }
     </script>
 </body>
