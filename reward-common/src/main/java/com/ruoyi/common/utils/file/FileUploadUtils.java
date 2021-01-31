@@ -117,8 +117,23 @@ public class FileUploadUtils {
     }
 
     @Data
-    public static
-    class UploadFileNameResult implements Serializable {
+    public static class UploadFileNameResult implements Serializable {
+        public String getPathFileName() {
+            return pathFileName;
+        }
+
+        public void setPathFileName(String pathFileName) {
+            this.pathFileName = pathFileName;
+        }
+
+        public long getDuration() {
+            return duration;
+        }
+
+        public void setDuration(long duration) {
+            this.duration = duration;
+        }
+
         private String pathFileName;
         //秒
         private long duration;

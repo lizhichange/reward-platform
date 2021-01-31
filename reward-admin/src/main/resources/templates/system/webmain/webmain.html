@@ -96,6 +96,15 @@
                 },
 
                 {
+                    visible: editFlag === 'hidden' ? false : true,
+                    title: '域名状态',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        return checkStatus(row);
+                    }
+                },
+
+                {
                     title: '操作',
                     align: 'center',
                     formatter: function (value, row, index) {
@@ -117,6 +126,12 @@
         } else {
             return '<i class=\"fa fa-toggle-on text-info fa-2x\" onclick="disable(\'' + row.id + '\')"></i> ';
         }
+    }
+      /* 用户状态显示 */
+      function checkStatus(row) {
+        console.log(row);
+        var html='<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="enable(\'' + row.id + '\')"><i class="fa fa-edit"></i>域名检测</a> ';
+        return html;
     }
 
     /* 用户管理-停用 */
