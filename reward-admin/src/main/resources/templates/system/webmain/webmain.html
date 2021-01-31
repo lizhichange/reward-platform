@@ -56,6 +56,8 @@
     </div>
     <th:block th:include="include :: footer" />
     <script th:inline="javascript">
+        var resetPwdFlag = [[${@permission.hasPermi('system:user:resetPwd') }]];
+        var datas = [[${@dict.getType('sys_normal_disable') }]];
         var editFlag = [[${@permission.hasPermi('system:webmain:edit') }]];
         var removeFlag = [[${@permission.hasPermi('system:webmain:remove') }]];
         var prefix = ctx + "system/webmain";
@@ -87,6 +89,16 @@
                     field: 'shortUrl',
                     title: '短链接'
                 },
+
+                {
+                    field: 'mainStatus',
+                    title: '状态',
+                    align: "left",
+                    formatter: function (value, item, index) {
+                        return $.table.selectDictLabel(datas, item.mainStatus);
+                    }
+                },
+
                 {
                     visible: editFlag === 'hidden' ? false : true,
                     title: '域名状态',
