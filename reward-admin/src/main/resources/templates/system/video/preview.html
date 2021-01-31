@@ -24,7 +24,7 @@
     <script src="//cdn.jsdelivr.net/npm/xgplayer@1.1.4/browser/index.js" charset="utf-8"></script>
 </div>
 <input type="hidden" th:value="${video.videoUrl}" id="videoUrl" />
-<input type="hidden" th:value="${video.url}" id="url" />
+<input type="hidden" th:value="${video.imgUrl}" id="imgUrl" />
 
 <th:block th:include="include :: footer" />
 
@@ -33,7 +33,7 @@
             let player = new Player({
                 "volume": 0.0,
                 "id": "mse",
-                "poster": document.getElementById("url").value ? document.getElementById("url").value : '',
+                "poster": document.getElementById("imgUrl").value ? document.getElementById("imgUrl").value : '',
                 "url": document.getElementById("videoUrl").value ? document.getElementById("videoUrl").value : "https://video.jializyw.com:8800/20200706/LdyE4Wil/index.m3u8",
                 "playsinline": true,
                 "whitelist": [
