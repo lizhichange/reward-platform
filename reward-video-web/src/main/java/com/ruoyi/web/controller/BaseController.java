@@ -12,6 +12,7 @@ import org.apache.commons.lang.StringUtils;
 import org.near.servicesupport.result.TPageResult;
 import org.near.toolkit.common.DateUtils;
 import org.near.toolkit.common.StringUtil;
+import org.near.toolkit.context.SessionContext;
 import org.near.toolkit.model.Money;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -74,7 +75,7 @@ public class BaseController {
         String orderByClause = " create_time desc ";
         TPageResult<VideoDTO> result = videoFacadeClient.queryPage(1, 12, videoDTO, orderByClause);
         List<VideoDTO> list = result.getValues();
-        convert(list);
+        convert(list, SessionContext.getUserId());
         list.sort((o1, o2) -> o2.getCreateTime().compareTo(o1.getCreateTime()));
         modelmap.addAttribute("list", list);
         getCategory(modelmap);
@@ -104,11 +105,14 @@ public class BaseController {
         }
     }
 
-    void convert(List<VideoDTO> list) {
+    void convert(List<VideoDTO> list, String extensionUserId) {
         if (!CollectionUtils.isEmpty(list)) {
             Date now = new Date();
             for (VideoDTO dto : list) {
-                SysConfigDTO configDTO = sysConfigFacadeClient.queryConfigByKey("admin");
+                if (StringUtil.isBlank(extensionUserId)) {
+                    extensionUserId = "admin";
+                }
+                SysConfigDTO configDTO = sysConfigFacadeClient.queryConfigByKey(extensionUserId);
                 if (configDTO != null && StringUtils.isNotBlank(configDTO.getConfigValue())) {
                     String main;
                     Map valueMap = JSONObject.parseObject(configDTO.getConfigValue(), Map.class);

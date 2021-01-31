@@ -139,7 +139,7 @@ public class VideoController extends BaseController {
         String orderByClause = " create_time desc ";
         TPageResult<VideoDTO> result = videoFacadeClient.queryPage(pageNum, pageSize, videoDTO, orderByClause);
         List<VideoDTO> list = result.getValues();
-        convert(list);
+        convert(list,SessionContext.getUserId());
         if (CollectionUtils.isEmpty(list)) {
             TableDataInfo dataTable = getDataTable(list);
             dataTable.setTotal(result.getTotalRows());
@@ -175,7 +175,7 @@ public class VideoController extends BaseController {
         videoDTO.setStatus("0");
         TPageResult<VideoDTO> result = videoFacadeClient.queryPage(pageNum, pageSize, videoDTO, orderByClause);
         List<VideoDTO> list = result.getValues();
-        convert(list);
+        convert(list,SessionContext.getUserId());
         TableDataInfo dataTable = getDataTable(list);
         dataTable.setTotal(result.getTotalRows());
         dataTable.setTotalPage(result.getTotalPage());
@@ -207,7 +207,7 @@ public class VideoController extends BaseController {
         log.info("videoDTO:{}", videoDTO);
         TPageResult<VideoDTO> result = videoFacadeClient.queryPage(pageNum, pageSize, videoDTO, orderByClause);
         List<VideoDTO> list = result.getValues();
-        convert(list);
+        convert(list,SessionContext.getUserId());
         TableDataInfo dataTable = getDataTable(list);
         dataTable.setTotal(result.getTotalRows());
         dataTable.setTotalPage(result.getTotalPage());
