@@ -80,7 +80,8 @@ public class SysWebMainController extends BaseController {
         String check = wxMpShortUrlFacadeClient.check(main.getMainUrl());
         CheckResponse parse = JSONObject.parseObject(check, CheckResponse.class);
         logger.info("parse:{}", parse);
-        return AjaxResult.success(parse.getMsg());
+
+        return toAjax(1);
     }
 
     @Data
