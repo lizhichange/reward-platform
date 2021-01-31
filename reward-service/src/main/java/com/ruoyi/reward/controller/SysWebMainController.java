@@ -71,7 +71,7 @@ public class SysWebMainController extends BaseController {
     /**
      * 域名状态检测
      */
-    @RequiresPermissions("system:webmain:edit")
+
     @PostMapping("/checkStatus")
     @ResponseBody
     public AjaxResult checkStatus(SysWebMain sysWebMain) {
