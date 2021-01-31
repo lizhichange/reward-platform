@@ -118,7 +118,7 @@
         $.table.init(options);
     });
 
-    /* 用户状态显示 */
+    /* 状态显示 */
     function statusTools(row) {
         console.log(row);
         if (row.mainStatus === "1") {
@@ -127,11 +127,18 @@
             return '<i class=\"fa fa-toggle-on text-info fa-2x\" onclick="disable(\'' + row.id + '\')"></i> ';
         }
     }
-      /* 用户状态显示 */
+      /* 域名状态检查 */
       function checkStatus(row) {
         console.log(row);
-        var html='<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="enable(\'' + row.id + '\')"><i class="fa fa-edit"></i>域名检测</a> ';
+        var html='<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="check(\'' + row.id + '\')"><i class="fa fa-edit"></i>域名检测</a> ';
         return html;
+    }
+
+      /* check */
+      function check(id) {
+        
+      $.operate.post(prefix + "/checkStatus", {"id": id, "mainStatus": 1});
+        
     }
 
     /* 用户管理-停用 */

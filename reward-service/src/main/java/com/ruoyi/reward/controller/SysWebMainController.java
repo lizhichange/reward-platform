@@ -79,10 +79,8 @@ public class SysWebMainController extends BaseController {
         SysWebMain main = sysWebMainService.selectSysWebMainById(webMainId);
         String check = wxMpShortUrlFacadeClient.check(main.getMainUrl());
         CheckResponse parse = JSONObject.parseObject(check, CheckResponse.class);
-        if (parse != null && "01".equals(parse.getCode())) {
-            // success
-        }
-        return toAjax(Integer.parseInt(parse.getCode()));
+        logger.info("parse:{}", parse);
+        return AjaxResult.success(parse.getMsg());
     }
 
     @Data
@@ -122,6 +120,7 @@ public class SysWebMainController extends BaseController {
         public void setDesc(String desc) {
             this.desc = desc;
         }
+
     }
 
     /**
