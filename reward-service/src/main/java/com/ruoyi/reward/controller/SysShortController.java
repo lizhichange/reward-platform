@@ -100,7 +100,7 @@ public class SysShortController extends BaseController {
     @ResponseBody
     public AjaxResult checkStatusShortUrl(SysShort sysShort) {
         SysShort main = sysShortService.selectSysShortById(sysShort.getId());
-        String check = wxMpShortUrlFacadeClient.check(main.getShortUrl());
+        String check = wxMpShortUrlFacadeClient.checkUrl(main.getShortUrl());
         CheckResponse parse = JSONObject.parseObject(check, CheckResponse.class);
         logger.info("parse:{}", parse);
         return AjaxResult.success(parse.getMsg());
@@ -114,7 +114,7 @@ public class SysShortController extends BaseController {
     @ResponseBody
     public AjaxResult checkStatusLongUrl(SysShort sysShort) {
         SysShort main = sysShortService.selectSysShortById(sysShort.getId());
-        String check = wxMpShortUrlFacadeClient.check(main.getLongUrl());
+        String check = wxMpShortUrlFacadeClient.checkUrl(main.getLongUrl());
         CheckResponse parse = JSONObject.parseObject(check, CheckResponse.class);
         logger.info("parse:{}", parse);
         return AjaxResult.success(parse.getMsg());

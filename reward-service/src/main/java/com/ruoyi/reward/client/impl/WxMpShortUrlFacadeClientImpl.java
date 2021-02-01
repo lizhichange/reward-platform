@@ -17,7 +17,13 @@ public class WxMpShortUrlFacadeClientImpl implements WxMpShortUrlFacadeClient {
     }
 
     @Override
-    public String check(String url) {
-        return wxMpShortUrlFacade.check(url);
+    public String checkUrl(String url) {
+        return wxMpShortUrlFacade.checkUrl(url);
+    }
+
+    @Override
+    public String checkWebMain(String url) {
+        return wxMpShortUrlFacade.checkWebMain(url);
+
     }
 }

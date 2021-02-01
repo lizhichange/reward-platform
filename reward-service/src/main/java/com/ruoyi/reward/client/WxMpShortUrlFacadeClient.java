@@ -7,5 +7,7 @@ public interface WxMpShortUrlFacadeClient {
      */
     String shortUrl(String longUrl);
 
-    String check(String url);
+    String checkUrl(String url);
+
+    String checkWebMain(String url);
 }

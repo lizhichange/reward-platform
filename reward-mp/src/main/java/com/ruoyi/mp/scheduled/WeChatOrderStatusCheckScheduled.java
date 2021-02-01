@@ -183,7 +183,7 @@ public class WeChatOrderStatusCheckScheduled {
         List<SysWebMainDTO> list = sysWebMainFacadeClient.selectSysWebMainList(sysWebMainDTO);
         if (!CollectionUtils.isEmpty(list)) {
             for (SysWebMainDTO item : list) {
-                String check = wxMpShortUrlFacade.check(item.getMainUrl());
+                String check = wxMpShortUrlFacade.checkWebMain(item.getMainUrl());
                 CheckResponse parse = JSONObject.parseObject(check, CheckResponse.class);
                 if (parse != null && "01".equals(parse.getCode())) {
                     SysWebMainDTO mainDTO = new SysWebMainDTO();

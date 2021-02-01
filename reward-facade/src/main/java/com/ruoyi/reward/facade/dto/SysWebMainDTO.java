@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.near.toolkit.model.ToString;
 
+import java.util.Date;
+
 /**
  * 域名管理对象 sys_web_main
  *
@@ -37,6 +39,7 @@ public class SysWebMainDTO extends ToString {
      */
 
     private String mainStatus;
+    private Date updateTime;
 
 
     public static long getSerialVersionUID() {

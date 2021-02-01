@@ -77,10 +77,9 @@ public class SysWebMainController extends BaseController {
     public AjaxResult checkStatus(SysWebMain sysWebMain) {
         Long webMainId = sysWebMain.getId();
         SysWebMain main = sysWebMainService.selectSysWebMainById(webMainId);
-        String check = wxMpShortUrlFacadeClient.check(main.getMainUrl());
+        String check = wxMpShortUrlFacadeClient.checkWebMain(main.getMainUrl());
         CheckResponse parse = JSONObject.parseObject(check, CheckResponse.class);
         logger.info("parse:{}", parse);
-
         return AjaxResult.success(parse.getMsg());
     }
 
