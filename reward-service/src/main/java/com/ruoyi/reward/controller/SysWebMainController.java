@@ -81,7 +81,7 @@ public class SysWebMainController extends BaseController {
         CheckResponse parse = JSONObject.parseObject(check, CheckResponse.class);
         logger.info("parse:{}", parse);
 
-        return toAjax(1);
+        return AjaxResult.success(parse.getMsg());
     }
 
     @Data

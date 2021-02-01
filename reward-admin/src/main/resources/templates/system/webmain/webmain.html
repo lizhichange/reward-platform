@@ -136,9 +136,15 @@
         }
 
         function myOpen(id) {
-
             var url = prefix + '/checkStatus';
-            $.operate.post(url, { "id": id, "mainStatus": 1 });
+            $.ajax({
+                type: "post",
+                url: url,
+                data: { "id": id, "mainStatus": 1 },
+                success: function (r) {
+                    $.modal.msg(r.msg);
+                }
+            });
 
         }
 
