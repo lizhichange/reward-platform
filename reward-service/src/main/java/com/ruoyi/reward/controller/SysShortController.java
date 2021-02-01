@@ -103,8 +103,7 @@ public class SysShortController extends BaseController {
         String check = wxMpShortUrlFacadeClient.check(main.getShortUrl());
         CheckResponse parse = JSONObject.parseObject(check, CheckResponse.class);
         logger.info("parse:{}", parse);
-        // TODO: 2021/1/31 xxx
-        return   toAjax(1);
+        return AjaxResult.success(parse.getMsg());
     }
 
     /**
