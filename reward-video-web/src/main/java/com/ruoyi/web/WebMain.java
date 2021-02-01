@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @EnableFeignClients
 @EnableEurekaClient
 @EnableCaching
-@RefreshScope
+
 public class WebMain {
 
     public static void main(String[] args) {

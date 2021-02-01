@@ -22,7 +22,7 @@ import java.util.List;
  * @author sunflower
  */
 @Controller
-@RefreshScope
+
 public class IndexController extends BaseController {
     private final static Logger LOGGER = LoggerFactory.getLogger(IndexController.class);
     @Value("${share.time:0}")

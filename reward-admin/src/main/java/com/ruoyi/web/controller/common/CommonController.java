@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author ruoyi
  */
 @Controller
-@RefreshScope
+
 
 public class CommonController {
     private static final Logger log = LoggerFactory.getLogger(CommonController.class);

@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @EnableDiscoveryClient
 @EnableFeignClients
 @EnableEurekaClient
-@RefreshScope
+
 
 public class AppMain {
 

@@ -63,7 +63,7 @@ import java.util.concurrent.TimeUnit;
 @Controller
 @RequestMapping("/pay")
 @Slf4j
-@RefreshScope
+
 @Api("支付")
 public class PayController extends BaseController {
     private final static Logger LOGGER = LoggerFactory.getLogger(PayController.class);
