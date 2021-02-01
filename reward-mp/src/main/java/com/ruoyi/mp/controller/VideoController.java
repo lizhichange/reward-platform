@@ -38,7 +38,7 @@ public class VideoController {
     @ResponseBody
     @RequestMapping("/check")
     public Object userList(String url) {
-        return wxMpShortUrlFacade.check(url);
+        return wxMpShortUrlFacade.checkUrl(url);
     }
 
     @Autowired
