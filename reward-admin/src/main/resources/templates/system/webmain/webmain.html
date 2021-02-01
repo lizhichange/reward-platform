@@ -137,12 +137,17 @@
 
         function myOpen(id) {
             var url = prefix + '/checkStatus';
+            $.modal.loading("加载中...");
             $.ajax({
                 type: "post",
                 url: url,
                 data: { "id": id, "mainStatus": 1 },
                 success: function (r) {
+                    $.modal.closeLoading();
                     $.modal.msg(r.msg);
+                },
+                error:function(r){
+                    $.modal.closeLoading();
                 }
             });
 

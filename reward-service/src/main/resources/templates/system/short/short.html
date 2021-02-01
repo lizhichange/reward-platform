@@ -179,12 +179,38 @@
 
         /* check */
         function checkShortUrl(id) {
-            $.operate.post(prefix + "/checkStatusShortUrl", { "id": id });
+            var url = prefix + "/checkStatusShortUrl";
+            $.modal.loading("加载中...");
+            $.ajax({
+                type: "post",
+                url: url,
+                data: { "id": id },
+                success: function (r) {
+                    $.modal.closeLoading();
+                    $.modal.msg(r.msg);
+                },
+                error: function (r) {
+                    $.modal.closeLoading();
+                }
+            });
         }
 
         /* check */
         function checkLongUrl(id) {
-            $.operate.post(prefix + "/checkStatusLongUrl", { "id": id });
+            var url = prefix + "/checkStatusLongUrl";
+            $.ajax({
+                type: "post",
+                url: url,
+                data: { "id": id },
+                success: function (r) {
+                    $.modal.closeLoading();
+                    $.modal.msg(r.msg);
+                },
+                error: function (r) {
+                    $.modal.closeLoading();
+                }
+            });
+
         }
     </script>
 </body>
