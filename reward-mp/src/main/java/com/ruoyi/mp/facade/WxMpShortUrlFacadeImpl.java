@@ -25,6 +25,7 @@ import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -66,14 +67,16 @@ public class WxMpShortUrlFacadeImpl implements WxMpShortUrlFacade {
             if (CollectionUtils.isEmpty(list)) {
                 return JSONUtil.toJsonStr(res);
             }
+
             SysWebMainDTO mainDTO = list.get(0);
             String shortUrl;
 
-            if (mainDTO.getShortUrl() == null || "".equals(mainDTO.getShortUrl())) {
+            if (StringUtils.isBlank(mainDTO.getShortUrl())) {
                 log.info("update---------->start");
                 shortUrl = shortUrl(url);
                 SysWebMainDTO newMain = new SysWebMainDTO();
-                newMain.setShortUrl(shortUrl);
+                // TODO: 2021/2/1 不更新短连接
+                newMain.setUpdateTime(new Date());
                 newMain.setId(mainDTO.getId());
                 sysWebMainFacadeClient.updateSysWebMain(newMain);
             } else {
