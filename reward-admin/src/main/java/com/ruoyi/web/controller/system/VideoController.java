@@ -365,8 +365,8 @@ public class VideoController extends BaseController {
                 if (!CollectionUtils.isEmpty(relPrices)) {
                     String[] collect = (String[]) relPrices.stream().map(VideoRelPrice::getId).collect(Collectors.toList()).toArray();
                     videoRelPriceMapper.deleteVideoRelPriceByIds(collect);
-                    relPrice(param, loginName, Integer.valueOf(videoId));
                 }
+                relPrice(param, loginName, Integer.valueOf(videoId));
             }
         }
         SysConfig item = sysConfigService.queryConfigByKey(loginName);
