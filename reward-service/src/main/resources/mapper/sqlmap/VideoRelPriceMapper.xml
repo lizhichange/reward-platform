@@ -19,7 +19,7 @@
         (user_id,video_id,price,create_time,update_time)
         VALUES
         <foreach collection="list" item="item" separator=",">
-            (#{item.userId},#{item.videoId},#{item.price},#{item.createTime},#{item.updateTime})
+            (#{item.userId},#{item.videoId},#{item.price},now(),now())
         </foreach>
     </insert>
     <update id="batchUpdate" parameterType="java.util.Map">
