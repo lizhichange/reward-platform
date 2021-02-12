@@ -40,6 +40,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.near.toolkit.common.StringUtil;
+import org.near.toolkit.model.Money;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -448,7 +449,8 @@ public class VideoController extends BaseController {
                 VideoRelPrice relPrice = new VideoRelPrice();
                 relPrice.setVideoId(Long.valueOf(video.getId()));
                 relPrice.setUserId(loginName);
-                relPrice.setPrice(Long.valueOf(param.getPrice()));
+                Money money = new Money(param.getPrice());
+                relPrice.setPrice(money.getCent());
                 objects.add(relPrice);
             }
             videoRelPriceMapper.batchInsert(objects);
