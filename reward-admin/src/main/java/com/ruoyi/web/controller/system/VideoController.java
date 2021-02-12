@@ -363,7 +363,10 @@ public class VideoController extends BaseController {
                 price.setVideoId(Long.valueOf(videoId));
                 List<VideoRelPrice> relPrices = videoRelPriceService.selectVideoRelPriceList(price);
                 if (!CollectionUtils.isEmpty(relPrices)) {
-                    String[] collect = (String[]) relPrices.stream().map(VideoRelPrice::getId).collect(Collectors.toList()).toArray();
+                    String[] collect = new String[relPrices.size()];
+                    for (int i = 0; i < relPrices.size(); i++) {
+                        collect[i] = String.valueOf(relPrices.get(i).getId());
+                    }
                     videoRelPriceMapper.deleteVideoRelPriceByIds(collect);
                 }
                 relPrice(param, loginName, Integer.valueOf(videoId));
