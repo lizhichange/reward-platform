@@ -30,6 +30,7 @@ import java.util.List;
  * @author ruoyi
  */
 public class BaseController {
+    protected final Logger logger = LoggerFactory.getLogger(BaseController.class);
 
     /**
      * Block 异常处理函数，参数最后多一个 BlockException，其余与原函数一致.
@@ -45,7 +46,6 @@ public class BaseController {
         return AjaxResult.error();
     }
 
-    protected final Logger logger = LoggerFactory.getLogger(BaseController.class);
 
     /**
      * 将前台传递过来的日期格式的字符串，自动转化为Date类型

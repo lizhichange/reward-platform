@@ -7,7 +7,7 @@ import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.reward.facade.enums.OrderStatusType;
 import com.ruoyi.system.domain.ExtSysOrderTimeCount;
-import com.ruoyi.system.service.ISysOrderService;
+import com.ruoyi.system.service.SysOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -31,7 +31,7 @@ public class StatisticsController extends BaseController {
     private final String prefix = "statistics/statistics";
 
     @Autowired
-    ISysOrderService orderService;
+    SysOrderService orderService;
 
     @GetMapping()
     public String statistics(ModelMap modelMap) {

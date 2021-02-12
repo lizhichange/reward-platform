@@ -7,15 +7,14 @@ import java.util.List;
 
 /**
  * 发布价格Service接口
- * 
+ *
  * @author ruoyi
  * @date 2021-02-12
  */
-public interface IVideoRelPriceService 
-{
+public interface VideoRelPriceService {
     /**
      * 查询发布价格
-     * 
+     *
      * @param id 发布价格ID
      * @return 发布价格
      */
@@ -23,7 +22,7 @@ public interface IVideoRelPriceService
 
     /**
      * 查询发布价格列表
-     * 
+     *
      * @param videoRelPrice 发布价格
      * @return 发布价格集合
      */
@@ -31,7 +30,7 @@ public interface IVideoRelPriceService
 
     /**
      * 新增发布价格
-     * 
+     *
      * @param videoRelPrice 发布价格
      * @return 结果
      */
@@ -39,7 +38,7 @@ public interface IVideoRelPriceService
 
     /**
      * 修改发布价格
-     * 
+     *
      * @param videoRelPrice 发布价格
      * @return 结果
      */
@@ -47,7 +46,7 @@ public interface IVideoRelPriceService
 
     /**
      * 批量删除发布价格
-     * 
+     *
      * @param ids 需要删除的数据ID
      * @return 结果
      */
@@ -55,7 +54,7 @@ public interface IVideoRelPriceService
 
     /**
      * 删除发布价格信息
-     * 
+     *
      * @param id 发布价格ID
      * @return 结果
      */

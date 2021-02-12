@@ -1,6 +1,6 @@
 package com.ruoyi.framework.web.service;
 
-import com.ruoyi.system.service.ISysConfigService;
+import com.ruoyi.system.service.SysConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service("config")
 public class ConfigService {
     @Autowired
-    private ISysConfigService configService;
+    private SysConfigService configService;
 
     /**
      * 根据键名查询参数配置信息

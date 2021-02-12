@@ -10,7 +10,7 @@ import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.system.domain.SysConfig;
-import com.ruoyi.system.service.ISysConfigService;
+import com.ruoyi.system.service.SysConfigService;
 import lombok.Getter;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.near.toolkit.common.StringUtil;
@@ -35,7 +35,7 @@ public class SysConfigController extends BaseController {
     private String prefix = "system/config";
 
     @Autowired
-    private ISysConfigService configService;
+    private SysConfigService configService;
 
     @RequiresPermissions("system:config:view")
     @GetMapping()

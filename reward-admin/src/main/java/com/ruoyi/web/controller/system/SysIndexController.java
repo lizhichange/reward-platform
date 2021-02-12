@@ -15,7 +15,7 @@ import com.ruoyi.system.domain.SysMenu;
 import com.ruoyi.system.domain.SysNotice;
 import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.system.service.IAccountService;
-import com.ruoyi.system.service.ISysConfigService;
+import com.ruoyi.system.service.SysConfigService;
 import com.ruoyi.system.service.ISysMenuService;
 import com.ruoyi.system.service.ISysNoticeService;
 import com.ruoyi.web.GetShortFactory;
@@ -44,13 +44,13 @@ public class SysIndexController extends BaseController {
     final
     ISysMenuService menuService;
     final
-    ISysConfigService configService;
+    SysConfigService configService;
     final
     SysShortService sysShortService;
     final
     IAccountService accountService;
 
-    public SysIndexController(ISysMenuService menuService, ISysConfigService configService, SysShortService sysShortService, IAccountService accountService) {
+    public SysIndexController(ISysMenuService menuService, SysConfigService configService, SysShortService sysShortService, IAccountService accountService) {
         this.menuService = menuService;
         this.configService = configService;
         this.sysShortService = sysShortService;
@@ -135,7 +135,7 @@ public class SysIndexController extends BaseController {
     }
 
     @Autowired
-    ISysConfigService sysConfigService;
+    SysConfigService sysConfigService;
     @Autowired
     GetShortFactory getShortFactory;
 

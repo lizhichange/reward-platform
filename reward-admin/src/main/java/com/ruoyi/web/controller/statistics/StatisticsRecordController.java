@@ -6,7 +6,7 @@ import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.reward.facade.enums.OrderStatusType;
 import com.ruoyi.system.domain.SysOrder;
-import com.ruoyi.system.service.ISysOrderService;
+import com.ruoyi.system.service.SysOrderService;
 import org.near.toolkit.model.Money;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,7 +32,7 @@ public class StatisticsRecordController extends BaseController {
 
     private final String prefix = "statistics/record";
     @Autowired
-    ISysOrderService sysOrderService;
+    SysOrderService sysOrderService;
 
     @GetMapping()
     public String record(ModelMap modelMap) {

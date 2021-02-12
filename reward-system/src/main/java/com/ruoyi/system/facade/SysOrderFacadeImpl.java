@@ -8,7 +8,7 @@ import com.ruoyi.system.domain.ExtSysOrder;
 import com.ruoyi.system.domain.ExtSysOrderExample;
 import com.ruoyi.system.domain.SysOrder;
 import com.ruoyi.system.mapper.ExtSysOrderMapper;
-import com.ruoyi.system.service.ISysOrderService;
+import com.ruoyi.system.service.SysOrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.near.toolkit.common.StringUtil;
 import org.springframework.beans.BeanUtils;
@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
 public class SysOrderFacadeImpl implements SysOrderFacade {
 
     @Autowired
-    ISysOrderService sysOrderService;
+    SysOrderService sysOrderService;
 
     @Autowired
     ExtSysOrderMapper extSysOrderMapper;

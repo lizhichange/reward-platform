@@ -15,22 +15,26 @@ import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.reward.domain.SysCategory;
 import com.ruoyi.reward.domain.Video;
+import com.ruoyi.reward.domain.VideoRelPrice;
 import com.ruoyi.reward.facade.api.VideoFacade;
 import com.ruoyi.reward.facade.dto.SysCategoryDTO;
 import com.ruoyi.reward.facade.dto.VideoDTO;
 import com.ruoyi.reward.facade.enums.OrderStatusType;
+import com.ruoyi.reward.mapper.VideoRelPriceMapper;
 import com.ruoyi.reward.service.SysCategoryService;
+import com.ruoyi.reward.service.VideoRelPriceService;
 import com.ruoyi.reward.service.VideoService;
 import com.ruoyi.system.domain.ExtSysOrder;
 import com.ruoyi.system.domain.SysConfig;
 import com.ruoyi.system.domain.SysRole;
 import com.ruoyi.system.domain.SysUser;
-import com.ruoyi.system.service.ISysConfigService;
-import com.ruoyi.system.service.ISysOrderService;
+import com.ruoyi.system.service.SysConfigService;
+import com.ruoyi.system.service.SysOrderService;
 import com.ruoyi.web.model.PayResult;
 import com.ruoyi.web.param.PriceParam;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -40,6 +44,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.CollectionUtils;
@@ -51,7 +56,6 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 import java.net.HttpURLConnection;
-import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -66,6 +70,7 @@ import java.util.stream.Collectors;
 @Controller
 @Api("视频信息管理")
 @RequestMapping("/system/video")
+@Slf4j
 public class VideoController extends BaseController {
     private final String prefix = "system/video";
     @Autowired
@@ -80,7 +85,15 @@ public class VideoController extends BaseController {
     SysCategoryService sysCategoryService;
 
     @Autowired
-    ISysOrderService sysOrderService;
+    SysOrderService sysOrderService;
+    @Autowired
+    VideoRelPriceService videoRelPriceService;
+    @Autowired
+    private VideoRelPriceMapper videoRelPriceMapper;
+
+    @Autowired
+    SysConfigService sysConfigService;
+
 
     @RequiresPermissions("system:video:view")
     @GetMapping()
@@ -304,17 +317,17 @@ public class VideoController extends BaseController {
                     //throw new RuntimeException("An instance of HttpsURLConnection is expected");
                     super.prepareConnection(connection, httpMethod);
                 }
-                if (connection instanceof HttpsURLConnection) {// https协议，修改协议版本
+                if (connection instanceof HttpsURLConnection) { // https协议，修改协议版本
                     SSLContext ctx = SSLContext.getInstance("TLSv1.2");
                     X509TrustManager tm = new X509TrustManager() {
                         @Override
                         public void checkClientTrusted(X509Certificate[] chain,
-                                                       String authType) throws CertificateException {
+                                                       String authType) {
                         }
 
                         @Override
                         public void checkServerTrusted(X509Certificate[] chain,
-                                                       String authType) throws CertificateException {
+                                                       String authType) {
                         }
 
                         @Override
@@ -330,13 +343,10 @@ public class VideoController extends BaseController {
                     super.prepareConnection(httpsConnection, httpMethod);
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                log.error(e.getMessage(), e);
             }
         }
     }
-
-    @Autowired
-    ISysConfigService sysConfigService;
 
 
     @Log(title = "批量发布价格", businessType = BusinessType.INSERT)
@@ -416,11 +426,38 @@ public class VideoController extends BaseController {
         return JSONArray.toJSONString(valueMap);
     }
 
+
+    @Autowired
+    ThreadPoolTaskExecutor threadPoolTaskExecutor;
+
+
     @Log(title = "一键发布价格", businessType = BusinessType.INSERT)
     @PostMapping("/price")
     @ResponseBody
     public AjaxResult price(PriceParam param) {
+
+
+        VideoRelPrice price = new VideoRelPrice();
         String loginName = ShiroUtils.getLoginName();
+        price.setUserId(loginName);
+        List<VideoRelPrice> relPrices = videoRelPriceService.selectVideoRelPriceList(price);
+        List<Video> videos = videoService.selectVideoList(new Video());
+        if (CollectionUtils.isEmpty(relPrices)) {
+            ArrayList<VideoRelPrice> objects = Lists.newArrayList();
+            for (Video video : videos) {
+                VideoRelPrice relPrice = new VideoRelPrice();
+                relPrice.setVideoId(Long.valueOf(video.getId()));
+                relPrice.setUserId(loginName);
+                relPrice.setPrice(price.getPrice());
+                objects.add(relPrice);
+            }
+            videoRelPriceMapper.batchInsert(objects);
+        } else {
+
+
+        }
+
+
         SysConfig item = sysConfigService.queryConfigByKey(loginName);
         if (item == null) {
             SysConfig config = new SysConfig();
@@ -433,17 +470,16 @@ public class VideoController extends BaseController {
             config.setConfigName("视频自定义私人价格");
             config.setCreateTime(new Date());
             return toAjax(sysConfigService.insertConfig(config));
-        } else {
-            Long configId = item.getConfigId();
-            SysConfig config = new SysConfig();
-            config.setConfigId(configId);
-            Map<String, Object> map = Maps.newHashMap();
-            map.put("main", param.getPrice());
-
-            config.setConfigValue(JSONArray.toJSONString(map));
-            config.setUpdateTime(new Date());
-            return toAjax(sysConfigService.updateConfig(config));
         }
+        Long configId = item.getConfigId();
+        SysConfig config = new SysConfig();
+        config.setConfigId(configId);
+        Map<String, Object> map = Maps.newHashMap();
+        map.put("main", param.getPrice());
+        config.setConfigValue(JSONArray.toJSONString(map));
+        config.setUpdateTime(new Date());
+        return toAjax(sysConfigService.updateConfig(config));
+
     }
 
     private String getString(Map<String, Object> map, String configValue) {

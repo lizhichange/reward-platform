@@ -8,7 +8,7 @@ import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.security.Md5Utils;
 import com.ruoyi.system.domain.*;
 import com.ruoyi.system.mapper.*;
-import com.ruoyi.system.service.ISysConfigService;
+import com.ruoyi.system.service.SysConfigService;
 import com.ruoyi.system.service.ISysUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,7 +44,7 @@ public class SysUserServiceImpl implements ISysUserService {
     private SysUserRoleMapper userRoleMapper;
 
     @Autowired
-    private ISysConfigService configService;
+    private SysConfigService configService;
 
     /**
      * 根据条件分页查询用户列表

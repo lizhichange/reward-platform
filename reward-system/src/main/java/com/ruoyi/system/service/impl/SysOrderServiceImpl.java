@@ -10,7 +10,7 @@ import com.ruoyi.system.domain.ExtSysOrderTimeCount;
 import com.ruoyi.system.domain.SysOrder;
 import com.ruoyi.system.mapper.ExtSysOrderMapper;
 import com.ruoyi.system.mapper.SysOrderMapper;
-import com.ruoyi.system.service.ISysOrderService;
+import com.ruoyi.system.service.SysOrderService;
 import org.near.toolkit.common.StringUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
  * @date 2020-03-26
  */
 @Service
-public class SysOrderServiceImpl implements ISysOrderService {
+public class SysOrderServiceImpl implements SysOrderService {
     private final SysOrderMapper sysOrderMapper;
 
     private final

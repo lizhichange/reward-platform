@@ -5,7 +5,7 @@
 package com.ruoyi.system.biz.processor;
 
 import com.ruoyi.reward.facade.dto.SysOrderDTO;
-import com.ruoyi.system.service.ISysConfigService;
+import com.ruoyi.system.service.SysConfigService;
 import lombok.extern.slf4j.Slf4j;
 import org.near.toolkit.common.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public abstract class AbstractOrderStatusProcessor implements UserOrderStatusPro
 
 
     @Autowired
-    ISysConfigService configService;
+    SysConfigService configService;
 
     /**
      * Get long.

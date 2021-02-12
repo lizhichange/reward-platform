@@ -10,7 +10,7 @@ import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.reward.facade.enums.OrderPayType;
 import com.ruoyi.reward.facade.enums.OrderStatusType;
 import com.ruoyi.system.domain.SysOrder;
-import com.ruoyi.system.service.ISysOrderService;
+import com.ruoyi.system.service.SysOrderService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.near.toolkit.model.SelectOptionVO;
 import org.springframework.stereotype.Controller;
@@ -30,9 +30,9 @@ import java.util.List;
 public class SysOrderController extends BaseController {
     private String prefix = "system/sysOrder";
 
-    private final ISysOrderService sysOrderService;
+    private final SysOrderService sysOrderService;
 
-    public SysOrderController(ISysOrderService sysOrderService) {
+    public SysOrderController(SysOrderService sysOrderService) {
         this.sysOrderService = sysOrderService;
     }
 

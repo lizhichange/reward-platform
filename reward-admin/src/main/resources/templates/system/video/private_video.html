@@ -116,12 +116,6 @@
                     }
                 },
 
-
-<!--                {-->
-<!--                    field: 'videoUrl',-->
-<!--                    title: '视频链接'-->
-<!--                },-->
-
                 {
                     visible: editFlag === 'hidden',
                     title: '用户状态',
@@ -189,15 +183,8 @@
 
 
 
-    // 单条强退
-    function forceLogout(id) {
-        $.modal.confirm("确定要强制选中用户下线吗？", function () {
-            var data = {"id": id};
-            $.operate.post(prefix + "/forceLogout", data);
-        })
-    }
 
-    // 批量强退
+    // 批量
     function batchForceLogout() {
         var rows = $.table.selectColumns("id");
         if (rows.length == 0) {
@@ -225,13 +212,8 @@
                             }
                         }
                     });
-
             });
     }
-
-
-
-
 
 
 </script>

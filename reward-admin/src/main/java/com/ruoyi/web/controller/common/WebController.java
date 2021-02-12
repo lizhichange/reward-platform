@@ -70,7 +70,7 @@ public class WebController extends BaseController {
     @Autowired
     ISysPostService postService;
     @Autowired
-    ISysConfigService sysConfigService;
+    SysConfigService sysConfigService;
 
     @Autowired
     GetShortFactory getShortFactory;

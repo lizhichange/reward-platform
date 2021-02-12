@@ -12,7 +12,7 @@ import com.ruoyi.system.client.VideoFacadeClient;
 import com.ruoyi.system.domain.AccountDetail;
 import com.ruoyi.system.domain.AccountDetailExample;
 import com.ruoyi.system.mapper.AccountDetailMapper;
-import com.ruoyi.system.service.ISysConfigService;
+import com.ruoyi.system.service.SysConfigService;
 import lombok.extern.slf4j.Slf4j;
 import org.near.toolkit.common.StringUtil;
 import org.near.toolkit.model.Money;
@@ -114,7 +114,7 @@ public class OrderAlreadyToAccountProcessor extends AbstractOrderStatusProcessor
     }
 
     @Autowired
-    ISysConfigService configService;
+    SysConfigService configService;
 
     @Override
     public Long execute(SysOrderDTO orderInfo) {

@@ -19,6 +19,8 @@ public class VideoRelPrice extends BaseEntity {
      */
     private Long id;
 
+    private Long videoId;
+
     /**
      * 账号
      */
@@ -64,5 +66,13 @@ public class VideoRelPrice extends BaseEntity {
                 .append("createTime", getCreateTime())
                 .append("updateTime", getUpdateTime())
                 .toString();
+    }
+
+    public Long getVideoId() {
+        return videoId;
+    }
+
+    public void setVideoId(Long videoId) {
+        this.videoId = videoId;
     }
 }

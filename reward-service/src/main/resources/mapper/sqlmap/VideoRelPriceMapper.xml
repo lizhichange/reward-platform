@@ -7,19 +7,31 @@
     <resultMap type="VideoRelPrice" id="VideoRelPriceResult">
         <result property="id" column="id"/>
         <result property="userId" column="user_id"/>
+        <result property="videoId" column="video_id"/>
         <result property="price" column="price"/>
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
     </resultMap>
 
+
+    <insert id="batchInsert" parameterType="VideoRelPrice" useGeneratedKeys="true" keyProperty="id">
+        insert into video_rel_price
+        (user_id,video_id,price,create_time,update_time)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.userId},#{item.videoId},#{item.price},#{item.createTime},#{item.updateTime})
+        </foreach>
+    </insert>
+
     <sql id="selectVideoRelPriceVo">
-        select id, user_id, price, create_time, update_time from video_rel_price
+        select id, user_id, video_id, price, create_time, update_time from video_rel_price
     </sql>
 
     <select id="selectVideoRelPriceList" parameterType="VideoRelPrice" resultMap="VideoRelPriceResult">
         <include refid="selectVideoRelPriceVo"/>
         <where>
             <if test="userId != null  and userId != ''">and user_id = #{userId}</if>
+            <if test="videoId != null  and videoId != ''">and video_id = #{videoId}</if>
             <if test="price != null ">and price = #{price}</if>
         </where>
     </select>
@@ -33,12 +45,14 @@
         insert into video_rel_price
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="userId != null  and userId != ''">user_id,</if>
+            <if test="videoId != null  and videoId != ''">video_id,</if>
             <if test="price != null ">price,</if>
             <if test="createTime != null ">create_time,</if>
             <if test="updateTime != null ">update_time,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="userId != null  and userId != ''">#{userId},</if>
+            <if test="videoId != null  and videoId != ''">#{videoId},</if>
             <if test="price != null ">#{price},</if>
             <if test="createTime != null ">#{createTime},</if>
             <if test="updateTime != null ">#{updateTime},</if>
@@ -49,6 +63,7 @@
         update video_rel_price
         <trim prefix="SET" suffixOverrides=",">
             <if test="userId != null  and userId != ''">user_id = #{userId},</if>
+            <if test="videoId != null  and videoId != ''">video_id = #{videoId},</if>
             <if test="price != null ">price = #{price},</if>
             <if test="createTime != null ">create_time = #{createTime},</if>
             <if test="updateTime != null ">update_time = #{updateTime},</if>
