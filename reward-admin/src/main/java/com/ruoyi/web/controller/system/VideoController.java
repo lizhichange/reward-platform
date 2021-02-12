@@ -448,7 +448,7 @@ public class VideoController extends BaseController {
                 VideoRelPrice relPrice = new VideoRelPrice();
                 relPrice.setVideoId(Long.valueOf(video.getId()));
                 relPrice.setUserId(loginName);
-                relPrice.setPrice(price.getPrice());
+                relPrice.setPrice(Long.valueOf(param.getPrice()));
                 objects.add(relPrice);
             }
             videoRelPriceMapper.batchInsert(objects);
