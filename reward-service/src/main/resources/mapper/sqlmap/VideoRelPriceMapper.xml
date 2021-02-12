@@ -28,7 +28,7 @@
             video_rel_price
             SET
             price = #{item.price},
-            update_time = #{item.updateTime}
+            update_time =now()
             where
             user_id = #{item.userId}
             and
