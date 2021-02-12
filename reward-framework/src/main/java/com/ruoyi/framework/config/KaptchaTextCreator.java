@@ -27,16 +27,16 @@ public class KaptchaTextCreator extends DefaultTextCreator {
             suChinese.append("*");
             suChinese.append(CNUMBERS[y]);
         } else if (randomoperands == 1) {
-            if (!(x == 0) && y % x == 0) {
-                result = y / x;
-                suChinese.append(CNUMBERS[y]);
-                suChinese.append("/");
-                suChinese.append(CNUMBERS[x]);
-            } else {
+            if (x == 0 || y % x != 0) {
                 result = x + y;
                 suChinese.append(CNUMBERS[x]);
                 suChinese.append("+");
                 suChinese.append(CNUMBERS[y]);
+            } else {
+                result = y / x;
+                suChinese.append(CNUMBERS[y]);
+                suChinese.append("/");
+                suChinese.append(CNUMBERS[x]);
             }
         } else if (randomoperands == 2) {
             if (x >= y) {

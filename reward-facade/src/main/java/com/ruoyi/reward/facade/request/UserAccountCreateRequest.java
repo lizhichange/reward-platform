@@ -29,10 +29,6 @@ public class UserAccountCreateRequest extends ToString {
      */
     private String userAccountType;
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
     public String getUserId() {
         return userId;
     }

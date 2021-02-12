@@ -11,9 +11,10 @@ public class EscapeUtil {
     public static final String RE_HTML_MARK = "(<[^<]*?>)|(<[\\s]*?/[^<]*?>)|(<[^<]*?/[\\s]*?>)";
 
     private static final char[][] TEXT = new char[64][];
+    private static final int NUM = 64;
 
     static {
-        for (int i = 0; i < 64; i++) {
+        for (int i = 0; i < NUM; i++) {
             TEXT[i] = new char[]{(char) i};
         }
 

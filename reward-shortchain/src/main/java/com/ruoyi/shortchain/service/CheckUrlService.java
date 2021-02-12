@@ -56,7 +56,7 @@ public class CheckUrlService {
 
     public String check(String url) {
 
-        Map<String, String> res = new HashMap<>();
+        Map<String, String> res = new HashMap<>(10);
         try {
             String shortUrl = long2short(url);
 
@@ -118,7 +118,7 @@ public class CheckUrlService {
             String token = token(appid, secret);
 
             String url = StrUtil.format(SHORT_URL, token);
-            Map<String, String> param = new HashMap<>();
+            Map<String, String> param = new HashMap<>(10);
             param.put("action", "long2short");
             param.put("long_url", longUrl);
             String object = restTemplate.postForObject(url, param, String.class);
