@@ -90,7 +90,7 @@ public class VideoController extends BaseController {
     @Autowired
     VideoRelPriceService videoRelPriceService;
     @Autowired
-    private VideoRelPriceMapper videoRelPriceMapper;
+    VideoRelPriceMapper videoRelPriceMapper;
 
     @Autowired
     SysConfigService sysConfigService;
@@ -442,23 +442,10 @@ public class VideoController extends BaseController {
         String loginName = ShiroUtils.getLoginName();
         price.setUserId(loginName);
         List<VideoRelPrice> relPrices = videoRelPriceService.selectVideoRelPriceList(price);
-        List<Video> videos = videoService.selectVideoList(new Video());
-        if (CollectionUtils.isEmpty(relPrices)) {
-            ArrayList<VideoRelPrice> objects = Lists.newArrayList();
-            for (Video video : videos) {
-                VideoRelPrice relPrice = new VideoRelPrice();
-                relPrice.setVideoId(Long.valueOf(video.getId()));
-                relPrice.setUserId(loginName);
-                Money money = new Money(param.getPrice());
-                relPrice.setPrice(money.getCent());
-                objects.add(relPrice);
-            }
-            videoRelPriceMapper.batchInsert(objects);
-        } else {
-
-
+        if (!CollectionUtils.isEmpty(relPrices)) {
+            videoRelPriceMapper.deleteVideoRelPriceByUserId(loginName);
         }
-
+        relPrice(param, loginName);
 
         SysConfig item = sysConfigService.queryConfigByKey(loginName);
         if (item == null) {
@@ -482,6 +469,23 @@ public class VideoController extends BaseController {
         config.setUpdateTime(new Date());
         return toAjax(sysConfigService.updateConfig(config));
 
+    }
+
+    private void relPrice(PriceParam param, String loginName) {
+        List<VideoRelPrice> objects = Lists.newArrayList();
+        List<Video> videos = videoService.selectVideoList(new Video());
+        if (CollectionUtils.isEmpty(videos)) {
+            return;
+        }
+        for (Video video : videos) {
+            VideoRelPrice relPrice = new VideoRelPrice();
+            relPrice.setVideoId(Long.valueOf(video.getId()));
+            relPrice.setUserId(loginName);
+            Money money = new Money(param.getPrice());
+            relPrice.setPrice(money.getCent());
+            objects.add(relPrice);
+        }
+        videoRelPriceMapper.batchInsert(objects);
     }
 
     private String getString(Map<String, Object> map, String configValue) {

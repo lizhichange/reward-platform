@@ -3,6 +3,7 @@ package com.ruoyi.reward.mapper;
 import com.ruoyi.reward.domain.VideoRelPrice;
 
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -52,14 +53,12 @@ public interface VideoRelPriceMapper {
      */
     int deleteVideoRelPriceById(Long id);
 
-    /**
-     * 批量删除发布价格
-     *
-     * @param ids 需要删除的数据ID
-     * @return 结果
-     */
+    int deleteVideoRelPriceByUserId(String userId);
+
     int deleteVideoRelPriceByIds(String[] ids);
 
     int batchInsert(List<VideoRelPrice> list);
+
+    int batchUpdate(Map<String, Object> map);
 
 }

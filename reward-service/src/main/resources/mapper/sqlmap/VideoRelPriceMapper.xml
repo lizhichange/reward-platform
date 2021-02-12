@@ -22,6 +22,20 @@
             (#{item.userId},#{item.videoId},#{item.price},#{item.createTime},#{item.updateTime})
         </foreach>
     </insert>
+    <update id="batchUpdate" parameterType="java.util.Map">
+        <foreach collection="list" separator=";" item="item">
+            update
+            video_rel_price
+            SET
+            price = #{item.price},
+            update_time = #{item.updateTime}
+            where
+            user_id = #{item.userId}
+            and
+            id = #{item.id}
+        </foreach>
+    </update>
+
 
     <sql id="selectVideoRelPriceVo">
         select id, user_id, video_id, price, create_time, update_time from video_rel_price
@@ -73,6 +87,9 @@
 
     <delete id="deleteVideoRelPriceById" parameterType="Long">
         delete from video_rel_price where id = #{id}
+    </delete>
+    <delete id="deleteVideoRelPriceByUserId" parameterType="String">
+        delete from video_rel_price where user_id = #{user_id}
     </delete>
 
     <delete id="deleteVideoRelPriceByIds" parameterType="String">
