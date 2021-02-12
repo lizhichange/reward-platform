@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.reward.mapper.VideoRelPriceMapper">
+
+    <resultMap type="VideoRelPrice" id="VideoRelPriceResult">
+        <result property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="price" column="price"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <sql id="selectVideoRelPriceVo">
+        select id, user_id, price, create_time, update_time from video_rel_price
+    </sql>
+
+    <select id="selectVideoRelPriceList" parameterType="VideoRelPrice" resultMap="VideoRelPriceResult">
+        <include refid="selectVideoRelPriceVo"/>
+        <where>
+            <if test="userId != null  and userId != ''">and user_id = #{userId}</if>
+            <if test="price != null ">and price = #{price}</if>
+        </where>
+    </select>
+
+    <select id="selectVideoRelPriceById" parameterType="Long" resultMap="VideoRelPriceResult">
+        <include refid="selectVideoRelPriceVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertVideoRelPrice" parameterType="VideoRelPrice" useGeneratedKeys="true" keyProperty="id">
+        insert into video_rel_price
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null  and userId != ''">user_id,</if>
+            <if test="price != null ">price,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateTime != null ">update_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null  and userId != ''">#{userId},</if>
+            <if test="price != null ">#{price},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+        </trim>
+    </insert>
+
+    <update id="updateVideoRelPrice" parameterType="VideoRelPrice">
+        update video_rel_price
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null  and userId != ''">user_id = #{userId},</if>
+            <if test="price != null ">price = #{price},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteVideoRelPriceById" parameterType="Long">
+        delete from video_rel_price where id = #{id}
+    </delete>
+
+    <delete id="deleteVideoRelPriceByIds" parameterType="String">
+        delete from video_rel_price where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>
