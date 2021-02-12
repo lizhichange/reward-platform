@@ -99,4 +99,12 @@
         </foreach>
     </delete>
 
+    <select id="selectVideoRelPriceByIds" parameterType="String">
+        select id, user_id, video_id, price, create_time, update_time from video_rel_price
+        where 1=1 and user_id=#{userId} video_id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+
 </mapper>

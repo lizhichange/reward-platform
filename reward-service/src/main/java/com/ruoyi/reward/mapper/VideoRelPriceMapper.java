@@ -1,6 +1,7 @@
 package com.ruoyi.reward.mapper;
 
 import com.ruoyi.reward.domain.VideoRelPrice;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -56,6 +57,8 @@ public interface VideoRelPriceMapper {
     int deleteVideoRelPriceByUserId(String userId);
 
     int deleteVideoRelPriceByIds(String[] ids);
+
+    List<VideoRelPrice> selectVideoRelPriceByIds(@Param("userId") String userId, String[] ids);
 
     int batchInsert(List<VideoRelPrice> list);
 

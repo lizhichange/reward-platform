@@ -356,6 +356,19 @@ public class VideoController extends BaseController {
     public AjaxResult batchForceLogout(PriceParam param, @RequestParam("ids[]") String[] ids) {
         logger.info("param:{},ids:{}", param, ids);
         String loginName = ShiroUtils.getLoginName();
+        VideoRelPrice price = new VideoRelPrice();
+        price.setUserId(loginName);
+        if (!ArrayUtils.isEmpty(ids)) {
+            for (String id : ids) {
+                price.setVideoId(Long.valueOf(id));
+                List<VideoRelPrice> relPrices = videoRelPriceService.selectVideoRelPriceList(price);
+                if (!CollectionUtils.isEmpty(relPrices)) {
+                    String[] collect = (String[]) relPrices.stream().map(VideoRelPrice::getId).collect(Collectors.toList()).toArray();
+                    videoRelPriceMapper.deleteVideoRelPriceByIds(collect);
+                    relPrice(param, loginName, Integer.valueOf(id));
+                }
+            }
+        }
         SysConfig item = sysConfigService.queryConfigByKey(loginName);
         if (item == null) {
             SysConfig config = new SysConfig();
@@ -368,19 +381,19 @@ public class VideoController extends BaseController {
             config.setConfigName("视频自定义私人价格");
             config.setCreateTime(new Date());
             return toAjax(sysConfigService.insertConfig(config));
-        } else {
-            Long configId = item.getConfigId();
-            SysConfig config = new SysConfig();
-            config.setConfigId(configId);
-            String configValue = item.getConfigValue();
-            if (StringUtils.isNotBlank(configValue)) {
-                String string = getString(param, ids, configValue);
-                config.setConfigValue(string);
-            }
-            config.setUpdateTime(new Date());
-            return toAjax(sysConfigService.updateConfig(config));
-
         }
+
+        Long configId = item.getConfigId();
+        SysConfig config = new SysConfig();
+        config.setConfigId(configId);
+        String configValue = item.getConfigValue();
+        if (StringUtils.isNotBlank(configValue)) {
+            String string = getString(param, ids, configValue);
+            config.setConfigValue(string);
+        }
+        config.setUpdateTime(new Date());
+        return toAjax(sysConfigService.updateConfig(config));
+
 
     }
 
@@ -437,7 +450,6 @@ public class VideoController extends BaseController {
     @ResponseBody
     public AjaxResult price(PriceParam param) {
 
-
         VideoRelPrice price = new VideoRelPrice();
         String loginName = ShiroUtils.getLoginName();
         price.setUserId(loginName);
@@ -445,7 +457,7 @@ public class VideoController extends BaseController {
         if (!CollectionUtils.isEmpty(relPrices)) {
             videoRelPriceMapper.deleteVideoRelPriceByUserId(loginName);
         }
-        relPrice(param, loginName);
+        relPrice(param, loginName, null);
 
         SysConfig item = sysConfigService.queryConfigByKey(loginName);
         if (item == null) {
@@ -471,9 +483,14 @@ public class VideoController extends BaseController {
 
     }
 
-    private void relPrice(PriceParam param, String loginName) {
+    private void relPrice(PriceParam param, String loginName,
+                          Integer videoId) {
         List<VideoRelPrice> objects = Lists.newArrayList();
-        List<Video> videos = videoService.selectVideoList(new Video());
+        Video record = new Video();
+        if (Objects.nonNull(videoId)) {
+            record.setId(videoId);
+        }
+        List<Video> videos = videoService.selectVideoList(record);
         if (CollectionUtils.isEmpty(videos)) {
             return;
         }
@@ -486,17 +503,6 @@ public class VideoController extends BaseController {
             objects.add(relPrice);
         }
         videoRelPriceMapper.batchInsert(objects);
-    }
-
-    private String getString(Map<String, Object> map, String configValue) {
-        if (StringUtils.isNotBlank(configValue)) {
-            Map<String, Object> valueMap = JSONObject.parseObject(configValue, Map.class);
-            if (valueMap.containsKey("item")) {
-                List<PriceParam> itemList = (List<PriceParam>) valueMap.get("item");
-                map.put("item", itemList);
-            }
-        }
-        return JSONArray.toJSONString(map);
     }
 
 
