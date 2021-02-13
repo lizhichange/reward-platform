@@ -39,7 +39,6 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
-import org.near.toolkit.common.StringUtil;
 import org.near.toolkit.model.Money;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -136,19 +135,7 @@ public class VideoController extends BaseController {
             return getDataTable(list);
         }
 
-        String main = null;
-        List<PriceParam> itemList = null;
-        SysConfig sysConfig = sysConfigService.queryConfigByKey(ShiroUtils.getLoginName());
-        if (sysConfig != null && StringUtils.isNotBlank(sysConfig.getConfigValue())) {
-            Map valueMap = JSONObject.parseObject(sysConfig.getConfigValue(), Map.class);
-            if (valueMap.containsKey("main")) {
-                main = valueMap.get("main").toString();
-            }
-            if (valueMap.containsKey("item")) {
-                JSONArray array = (JSONArray) valueMap.get("item");
-                itemList = convert(array);
-            }
-        }
+
         for (Video item : list) {
             SysCategory sysCategory = sysCategoryService.selectDeptById(item.getCategoryId().longValue());
             if (sysCategory != null) {
@@ -162,33 +149,19 @@ public class VideoController extends BaseController {
             }
             long count = sysOrderService.countByExample(extSysOrder);
             item.setSucCount((int) count);
-            if (!CollectionUtils.isEmpty(itemList)) {
-                List<PriceParam> collect = itemList.stream().filter(param -> {
-                    String id = param.getId();
-                    return StringUtil.equals(id, item.getId().toString());
-                }).collect(Collectors.toList());
-                if (!CollectionUtils.isEmpty(collect)) {
-                    PriceParam priceParam = collect.get(0);
-                    item.setPrivateMoney(priceParam.getPrice());
-                } else {
-                    if (StringUtils.isNotBlank(main)) {
-                        item.setPrivateMoney(main);
-                    } else {
-                        item.setPrivateMoney(item.getMoney());
-                    }
-                }
+            VideoRelPrice price = new VideoRelPrice();
+            price.setUserId(ShiroUtils.getLoginName());
+            price.setVideoId(Long.valueOf(item.getId()));
+            List<VideoRelPrice> relPrices = videoRelPriceMapper.selectVideoRelPriceList(price);
+            if (!CollectionUtils.isEmpty(relPrices)) {
+                VideoRelPrice relPrice = relPrices.get(0);
+                Money money = new Money();
+                money.setCent(relPrice.getPrice());
+                item.setPrivateMoney(money.toString());
             } else {
-                if (StringUtils.isNotBlank(main)) {
-                    item.setPrivateMoney(main);
-                } else {
-                    item.setPrivateMoney(item.getMoney());
-                }
+                item.setPrivateMoney(item.getMoney());
             }
-
-
-
         }
-
         return getDataTable(list);
     }
 
