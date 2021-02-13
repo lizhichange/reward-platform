@@ -23,6 +23,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
 
+import static org.near.utils.IpUtils.getIpAddr;
+
 
 /**
  * 微信预授权拦截器
@@ -33,8 +35,8 @@ import java.util.Map;
 @Slf4j
 public class RequestAuthInterceptor extends HandlerInterceptorAdapter {
     private final static Logger LOGGER = LoggerFactory.getLogger(RequestAuthInterceptor.class);
-    public final static String COOKIE_OP_KEY = "OPEN_INFO_KEY";
     public final static String COOKIE_USER_KEY = "USER_INFO_KEY";
+    public final static String COOKIE_HOST_ADD = "COOKIE_HOST_ADD";
 
     @Autowired
     AppConfig appConfig;
@@ -82,44 +84,17 @@ public class RequestAuthInterceptor extends HandlerInterceptorAdapter {
         }
 
         if (StringUtil.isNotBlank(hostAddress)) {
-            write(hostAddress, COOKIE_OP_KEY, doMain, response);
-            SessionContext.setOpenId(session, hostAddress);
+            write(hostAddress, COOKIE_HOST_ADD, doMain, response);
+            SessionContext.setHostAdd(session, hostAddress);
             return true;
         }
-        hostAddress = read(request, COOKIE_OP_KEY);
-        LOGGER.info("openId:{}", hostAddress);
+        hostAddress = read(request, COOKIE_HOST_ADD);
+        LOGGER.info("hostAddress:{}", hostAddress);
         if (StringUtil.isNotBlank(hostAddress)) {
-            SessionContext.setOpenId(session, hostAddress);
+            SessionContext.setHostAdd(session, hostAddress);
             return true;
         }
         return super.preHandle(request, response, handler);
-
-    }
-
-    /**
-     * 获取登录用户的IP地址
-     *
-     * @param request
-     * @return
-     */
-    public static String getIpAddr(HttpServletRequest request) {
-        String ip = request.getHeader("x-forwarded-for");
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-            ip = request.getHeader("Proxy-Client-IP");
-        }
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-            ip = request.getHeader("WL-Proxy-Client-IP");
-        }
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-            ip = request.getRemoteAddr();
-        }
-        if ("0:0:0:0:0:0:0:1".equals(ip)) {
-            ip = "127.0.0.1";
-        }
-        if (ip.split(",").length > 1) {
-            ip = ip.split(",")[0];
-        }
-        return ip;
     }
 
 

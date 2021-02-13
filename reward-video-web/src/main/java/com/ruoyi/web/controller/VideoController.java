@@ -6,18 +6,12 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.ruoyi.reward.facade.dto.SysConfigDTO;
-import com.ruoyi.reward.facade.dto.SysOrderDTO;
-import com.ruoyi.reward.facade.dto.SysWebMainDTO;
-import com.ruoyi.reward.facade.dto.VideoDTO;
+import com.ruoyi.reward.facade.dto.*;
 import com.ruoyi.reward.facade.enums.OrderPayType;
 import com.ruoyi.reward.facade.enums.OrderStatusType;
 import com.ruoyi.reward.facade.enums.WebMainStatus;
 import com.ruoyi.web.PriceParam;
-import com.ruoyi.web.client.SysConfigFacadeClient;
-import com.ruoyi.web.client.SysOrderFacadeClient;
-import com.ruoyi.web.client.SysWebMainFacadeClient;
-import com.ruoyi.web.client.VideoFacadeClient;
+import com.ruoyi.web.client.*;
 import com.ruoyi.web.interceptor.WxPnUserAuth;
 import com.ruoyi.web.model.PageForm;
 import com.ruoyi.web.result.PayResult;
@@ -79,6 +73,8 @@ public class VideoController extends BaseController {
     @Autowired
     SysConfigFacadeClient sysConfigFacadeClient;
 
+    @Autowired
+    VideoRelPriceFacadeClient videoRelPriceFacadeClient;
 
     @GetMapping("/redirect")
     public String redirect(@RequestParam(value = "userId", required = false) String userId,
@@ -168,7 +164,7 @@ public class VideoController extends BaseController {
         int pageSize = pageForm.getPageSize();
         String orderByClause = " create_time desc ";
         log.info("videoDTO:{}", videoDTO);
-        //启用
+        // 启用
         videoDTO.setStatus("0");
         TPageResult<VideoDTO> result = videoFacadeClient.queryPage(pageNum, pageSize, videoDTO, orderByClause);
         List<VideoDTO> list = result.getValues();
@@ -229,7 +225,7 @@ public class VideoController extends BaseController {
         }
         SysOrderDTO order = new SysOrderDTO();
         order.setGoodsId(videoDTO.getId());
-        order.setOpenId(SessionContext.getOpenId());
+        order.setOpenId(SessionContext.getHostAdd());
         List<SysOrderDTO> sysOrders = sysOrderFacadeClient.selectSysOrder(order);
         log.info("sysOrders:{}", sysOrders);
         if (!CollectionUtils.isEmpty(sysOrders)) {
@@ -253,13 +249,42 @@ public class VideoController extends BaseController {
             }
             //推广人userId
             order.setExtensionUserId(extensionUserId);
-            extracted(order, dtoById, extensionUserId);
             order.setOrderId(sysOrder.getOrderId());
+            VideoRelPriceDTO relPriceDTO = new VideoRelPriceDTO();
+            relPriceDTO.setVideoId(Long.valueOf(videoDTO.getId()));
+            relPriceDTO.setUserId(extensionUserId);
+            List<VideoRelPriceDTO> dtoList = videoRelPriceFacadeClient.selectVideoDTOList(relPriceDTO);
+            if (CollectionUtils.isEmpty(dtoList)) {
+                //商品价格区间 原价
+                String money = dtoById.getMoney();
+                String[] split = money.split("-");
+                int start = Integer.parseInt(split[0]);
+                int end = Integer.parseInt(split[1]);
+                //这个单位是元
+                int i = RandomUtil.randomInt(start, end + 1);
+                //实际金额 转换单位分
+                Money m = new Money(i);
+                int amount = Math.toIntExact(m.getCent());
+                log.info("实际支付金额:{}", amount);
+                order.setMoney(amount);
+                order.setMoneyStr(String.valueOf(amount));
+                //原价 转换单位分
+                order.setPrice(Math.toIntExact(m.getCent()));
+                order.setPayTag(m.toString());
+            } else {
+                VideoRelPriceDTO priceDTO = dtoList.get(0);
+                Money m = new Money();
+                m.setCent(priceDTO.getPrice());
+                order.setMoney(Math.toIntExact(priceDTO.getPrice()));
+                order.setMoneyStr(m.toString());
+                order.setPrice(Math.toIntExact(priceDTO.getPrice()));
+                order.setPayTag(m.toString());
+            }
+
             sysOrderFacadeClient.updateSysOrderByOrderId(order);
 
             sysOrder.setMoney(order.getMoney());
             sysOrder.setMoneyStr(order.getMoneyStr());
-
 
             if (sysOrder.getType() != null) {
                 OrderPayType orderPayType = EnumUtil.queryByCode(sysOrder.getType().toString(), OrderPayType.class);
@@ -277,7 +302,7 @@ public class VideoController extends BaseController {
         Date now = new Date();
         order.setCreateTime(now);
         order.setUpdateTime(now);
-        order.setUserId(SessionContext.getOpenId());
+        order.setUserId(SessionContext.getHostAdd());
         //商品快照信息
         order.setGoodsSnapshot(JSON.toJSONString(dto));
         String extensionUserId = SessionContext.getUserId();
@@ -286,9 +311,8 @@ public class VideoController extends BaseController {
         }
         //推广人userId
         order.setExtensionUserId(extensionUserId);
-        extracted(order, dto, extensionUserId);
 
-        order.setOpenId(SessionContext.getOpenId());
+        order.setOpenId(SessionContext.getHostAdd());
         //支付类型
         order.setType(Integer.valueOf(WE_CHAT_PAY.getCode()));
         order.setTypeStr(WE_CHAT_PAY.getDesc());
@@ -299,7 +323,7 @@ public class VideoController extends BaseController {
 
         SysOrderDTO newOrder = new SysOrderDTO();
         newOrder.setGoodsId(videoDTO.getId());
-        newOrder.setOpenId(SessionContext.getOpenId());
+        newOrder.setOpenId(SessionContext.getHostAdd());
 
         List<SysOrderDTO> newOrderDTO = sysOrderFacadeClient.selectSysOrder(newOrder);
         if (!CollectionUtils.isEmpty(newOrderDTO)) {
@@ -309,6 +333,7 @@ public class VideoController extends BaseController {
 
     }
 
+    @Deprecated
     private void extracted(SysOrderDTO order, VideoDTO dto, String extensionUserId) {
         SysConfigDTO configDTO = sysConfigFacadeClient.queryConfigByKey(extensionUserId);
 
