@@ -114,6 +114,7 @@ public class SysOrderServiceImpl implements SysOrderService {
     public int insertSysOrder(SysOrder sysOrder) {
         sysOrder.setOrderId(concurrentSequence.nextId().toString());
         sysOrder.setCreateTime(DateUtils.getNowDate());
+        sysOrder.setUpdateTime(DateUtils.getNowDate());
         return sysOrderMapper.insertSysOrder(sysOrder);
 
 

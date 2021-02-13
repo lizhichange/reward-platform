@@ -223,35 +223,39 @@ public class VideoController extends BaseController {
         if (dtoById == null) {
             return AjaxResult.warn("非法请求");
         }
+
+
         SysOrderDTO order = new SysOrderDTO();
-        order.setGoodsId(videoDTO.getId());
+
+        order.setGoodsId(dtoById.getId());
         order.setOpenId(SessionContext.getHostAdd());
+
         List<SysOrderDTO> sysOrders = sysOrderFacadeClient.selectSysOrder(order);
         log.info("sysOrders:{}", sysOrders);
+
+
         if (!CollectionUtils.isEmpty(sysOrders)) {
             SysOrderDTO sysOrder = sysOrders.get(0);
-            //如果原来的推广id 为空 补偿进去
+            // 如果原来的推广id 为空 补偿进去
             if (StringUtil.isBlank(sysOrder.getExtensionUserId())) {
-                //异步执行
+                // 异步执行
                 threadPoolTaskExecutor.execute(() -> {
                     SysOrderDTO upOrder = new SysOrderDTO();
                     upOrder.setOrderId(sysOrder.getOrderId());
-                    //推广人userId
+                    // 推广人userId
                     upOrder.setExtensionUserId(SessionContext.getUserId());
                     sysOrderFacadeClient.updateSysOrderByOrderId(upOrder);
                 });
             }
-            //商品快照信息
+            // 商品快照信息
             order.setGoodsSnapshot(JSON.toJSONString(dtoById));
-            String extensionUserId = SessionContext.getUserId();
-            if (StringUtil.isBlank(extensionUserId)) {
-                extensionUserId = "admin";
-            }
+            String extensionUserId = StringUtil.isBlank(SessionContext.getUserId()) ? "admin" : SessionContext.getUserId();
             //推广人userId
             order.setExtensionUserId(extensionUserId);
             order.setOrderId(sysOrder.getOrderId());
+
             VideoRelPriceDTO relPriceDTO = new VideoRelPriceDTO();
-            relPriceDTO.setVideoId(Long.valueOf(videoDTO.getId()));
+            relPriceDTO.setVideoId(Long.valueOf(dtoById.getId()));
             relPriceDTO.setUserId(extensionUserId);
             List<VideoRelPriceDTO> dtoList = videoRelPriceFacadeClient.selectVideoDTOList(relPriceDTO);
             if (CollectionUtils.isEmpty(dtoList)) {
@@ -298,31 +302,23 @@ public class VideoController extends BaseController {
             return AjaxResult.success(sysOrder);
         }
 
-        VideoDTO dto = videoFacadeClient.selectVideoDTOById(videoDTO.getId().longValue());
-        Date now = new Date();
-        order.setCreateTime(now);
-        order.setUpdateTime(now);
         order.setUserId(SessionContext.getHostAdd());
-        //商品快照信息
-        order.setGoodsSnapshot(JSON.toJSONString(dto));
-        String extensionUserId = SessionContext.getUserId();
-        if (StringUtil.isBlank(extensionUserId)) {
-            extensionUserId = "admin";
-        }
-        //推广人userId
+        // 商品快照信息
+        order.setGoodsSnapshot(JSON.toJSONString(dtoById));
+        String extensionUserId = StringUtil.isBlank(SessionContext.getUserId()) ? "admin" : SessionContext.getUserId();
+        // 推广人userId
         order.setExtensionUserId(extensionUserId);
-
         order.setOpenId(SessionContext.getHostAdd());
-        //支付类型
+        // 支付类型
         order.setType(Integer.valueOf(WE_CHAT_PAY.getCode()));
         order.setTypeStr(WE_CHAT_PAY.getDesc());
-        //状态
+        // 状态
         order.setStatus(Integer.valueOf(OrderStatusType.N_PAY.getCode()));
         order.setStatusStr(OrderStatusType.N_PAY.getDesc());
         sysOrderFacadeClient.insertSysOrder(order);
 
         SysOrderDTO newOrder = new SysOrderDTO();
-        newOrder.setGoodsId(videoDTO.getId());
+        newOrder.setGoodsId(dtoById.getId());
         newOrder.setOpenId(SessionContext.getHostAdd());
 
         List<SysOrderDTO> newOrderDTO = sysOrderFacadeClient.selectSysOrder(newOrder);
