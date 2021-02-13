@@ -162,9 +162,9 @@ public class WebController extends BaseController {
                 SysShort sysShort = new SysShort();
                 sysShort.setShortKey(loginName);
                 sysShort.setShortStatus(ShortStatus.OK.getCode());
-                String wxAuthUrl = sysConfigService.selectConfigByKey("wxAuthUrl");
+                String wxPayUrl = sysConfigService.selectConfigByKey("wxPayUrl");
                 //我的推广链接
-                String doMain = DoMainUtil.getDoMain(wxAuthUrl);
+                String doMain = DoMainUtil.getDoMain(wxPayUrl);
                 String longUrl = "http://" + doMain + "/?userId=" + loginName;
                 sysShort.setLongUrl(longUrl);
                 logger.info("longUrl:{}", longUrl);

@@ -132,52 +132,44 @@ public class VideoController extends BaseController {
             video.setUserIdList(Lists.newArrayList("admin", ShiroUtils.getLoginName()));
         }
         List<Video> list = videoService.selectVideoList(video);
-        if (!CollectionUtils.isEmpty(list)) {
+        if (CollectionUtils.isEmpty(list)) {
+            return getDataTable(list);
+        }
 
-            String main = null;
-            List<PriceParam> itemList = null;
-            SysConfig sysConfig = sysConfigService.queryConfigByKey(ShiroUtils.getLoginName());
-            if (sysConfig != null && StringUtils.isNotBlank(sysConfig.getConfigValue())) {
-                Map valueMap = JSONObject.parseObject(sysConfig.getConfigValue(), Map.class);
-                if (valueMap.containsKey("main")) {
-                    main = valueMap.get("main").toString();
-                }
-                if (valueMap.containsKey("item")) {
-                    JSONArray array = (JSONArray) valueMap.get("item");
-                    itemList = convert(array);
-                }
+        String main = null;
+        List<PriceParam> itemList = null;
+        SysConfig sysConfig = sysConfigService.queryConfigByKey(ShiroUtils.getLoginName());
+        if (sysConfig != null && StringUtils.isNotBlank(sysConfig.getConfigValue())) {
+            Map valueMap = JSONObject.parseObject(sysConfig.getConfigValue(), Map.class);
+            if (valueMap.containsKey("main")) {
+                main = valueMap.get("main").toString();
             }
-            for (Video item : list) {
-
-                SysCategory sysCategory = sysCategoryService.selectDeptById(item.getCategoryId().longValue());
-                if (sysCategory != null) {
-                    item.setCategoryName(sysCategory.getCategoryName());
-                }
-
-
-                ExtSysOrder extSysOrder = new ExtSysOrder();
-                extSysOrder.setGoodsId(item.getId());
-                extSysOrder.setStatus(Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
-                if (b) {
-                    extSysOrder.setExtensionUserId(ShiroUtils.getLoginName());
-                }
-                long count = sysOrderService.countByExample(extSysOrder);
-                item.setSucCount((int) count);
-                if (!CollectionUtils.isEmpty(itemList)) {
-                    List<PriceParam> collect = itemList.stream().filter(param -> {
-                        String id = param.getId();
-                        return StringUtil.equals(id, item.getId().toString());
-                    }).collect(Collectors.toList());
-                    if (!CollectionUtils.isEmpty(collect)) {
-                        PriceParam priceParam = collect.get(0);
-                        item.setPrivateMoney(priceParam.getPrice());
-                    } else {
-                        if (StringUtils.isNotBlank(main)) {
-                            item.setPrivateMoney(main);
-                        } else {
-                            item.setPrivateMoney(item.getMoney());
-                        }
-                    }
+            if (valueMap.containsKey("item")) {
+                JSONArray array = (JSONArray) valueMap.get("item");
+                itemList = convert(array);
+            }
+        }
+        for (Video item : list) {
+            SysCategory sysCategory = sysCategoryService.selectDeptById(item.getCategoryId().longValue());
+            if (sysCategory != null) {
+                item.setCategoryName(sysCategory.getCategoryName());
+            }
+            ExtSysOrder extSysOrder = new ExtSysOrder();
+            extSysOrder.setGoodsId(item.getId());
+            extSysOrder.setStatus(Integer.valueOf(OrderStatusType.Y_PAY.getCode()));
+            if (b) {
+                extSysOrder.setExtensionUserId(ShiroUtils.getLoginName());
+            }
+            long count = sysOrderService.countByExample(extSysOrder);
+            item.setSucCount((int) count);
+            if (!CollectionUtils.isEmpty(itemList)) {
+                List<PriceParam> collect = itemList.stream().filter(param -> {
+                    String id = param.getId();
+                    return StringUtil.equals(id, item.getId().toString());
+                }).collect(Collectors.toList());
+                if (!CollectionUtils.isEmpty(collect)) {
+                    PriceParam priceParam = collect.get(0);
+                    item.setPrivateMoney(priceParam.getPrice());
                 } else {
                     if (StringUtils.isNotBlank(main)) {
                         item.setPrivateMoney(main);
@@ -185,7 +177,16 @@ public class VideoController extends BaseController {
                         item.setPrivateMoney(item.getMoney());
                     }
                 }
+            } else {
+                if (StringUtils.isNotBlank(main)) {
+                    item.setPrivateMoney(main);
+                } else {
+                    item.setPrivateMoney(item.getMoney());
+                }
             }
+
+
+
         }
 
         return getDataTable(list);
