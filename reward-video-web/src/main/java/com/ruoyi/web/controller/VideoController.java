@@ -14,13 +14,14 @@ import com.ruoyi.reward.facade.enums.OrderPayType;
 import com.ruoyi.reward.facade.enums.OrderStatusType;
 import com.ruoyi.reward.facade.enums.WebMainStatus;
 import com.ruoyi.web.PriceParam;
-import com.ruoyi.web.client.*;
-import com.ruoyi.web.config.AppConfig;
+import com.ruoyi.web.client.SysConfigFacadeClient;
+import com.ruoyi.web.client.SysOrderFacadeClient;
+import com.ruoyi.web.client.SysWebMainFacadeClient;
+import com.ruoyi.web.client.VideoFacadeClient;
 import com.ruoyi.web.interceptor.WxPnUserAuth;
 import com.ruoyi.web.model.PageForm;
 import com.ruoyi.web.result.PayResult;
 import com.ruoyi.web.result.TableDataInfo;
-
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang.StringUtils;
 import org.near.servicesupport.result.TPageResult;
@@ -29,7 +30,6 @@ import org.near.toolkit.common.StringUtil;
 import org.near.toolkit.context.SessionContext;
 import org.near.toolkit.model.AjaxResult;
 import org.near.toolkit.model.Money;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,13 +65,9 @@ public class VideoController extends BaseController {
     private static final String prefix = "video";
 
     @Autowired
-    AppConfig appConfig;
-    @Autowired
     ThreadPoolTaskExecutor threadPoolTaskExecutor;
     @Autowired
     VideoFacadeClient videoFacadeClient;
-    @Autowired
-    SysCategoryFacadeClient sysCategoryFacadeClient;
     @Autowired
     SysOrderFacadeClient sysOrderFacadeClient;
     @Autowired
