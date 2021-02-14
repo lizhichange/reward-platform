@@ -78,7 +78,7 @@
 
                     <div class="form-group">
                         <label class="font-noraml">上传图片</label>
-                        <input class="form-control" name="url" type="text" id="url" value="" th:field="*{url}">
+                        <input class="form-control" name="imgUrl" type="text" id="imgUrl" value="" th:field="*{imgUrl}">
 
                     </div>
 
@@ -119,7 +119,7 @@
 <script>
         var prefix = ctx + "system/video";
         $(document).ready(function () {
-            var url = $('#url').val();
+            var imgUrl = $('#imgUrl').val();
             $("#fileinput-demo-1").fileinput({
                 'theme': 'explorer-fas',
                 'uploadUrl': ctx + "common/uploadFileName",
@@ -127,7 +127,7 @@
                 overwriteInitial: false,
                 initialPreviewAsData: true,
                 initialPreview: [
-                    url
+                    imgUrl
                 ]
             });
             $("#fileinput-demo-1").on("fileuploaded", function (event, data, previewId, index) {
@@ -137,7 +137,7 @@
                         $.modal.msg(response.msg);
                     } else if (response.code === 0) {
                         $('#logo').val(response.fileName);
-                        $('#url').val(response.url);
+                        $('#imgUrl').val(response.imgUrl);
                     }
                 }
             });
@@ -180,9 +180,9 @@
 
         function submitHandler() {
             if ($.validate.form()) {
-                let url = $('#url').val();
+                let imgUrl = $('#imgUrl').val();
                 let videoUrl = $('#videoUrl').val();
-                if (url == null || url === '') {
+                if (imgUrl == null || imgUrl === '') {
                     $.modal.msg('请先上传视频logo图片');
                     return;
                 }
@@ -199,11 +199,11 @@
         function selectDeptTree() {
             var treeId = $("#treeId").val();
             var deptId = $.common.isEmpty(treeId) ? "100" : $("#treeId").val();
-            var url = ctx + "system/category/selectDeptTree/" + deptId;
+            var imgUrl = ctx + "system/category/selectDeptTree/" + deptId;
             var options = {
                 title: '选择栏目',
                 width: "380",
-                url: url,
+                imgUrl: imgUrl,
                 callBack: doSubmit
             };
             $.modal.openOptions(options);
