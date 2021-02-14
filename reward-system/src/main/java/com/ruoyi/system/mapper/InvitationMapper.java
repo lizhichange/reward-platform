@@ -17,7 +17,7 @@ public interface InvitationMapper {
      * @param id 邀请码管理ID
      * @return 邀请码管理
      */
-    public Invitation selectInvitationById(Long id);
+     Invitation selectInvitationById(Long id);
 
     /**
      * 查询邀请码管理列表
@@ -25,7 +25,7 @@ public interface InvitationMapper {
      * @param invitation 邀请码管理
      * @return 邀请码管理集合
      */
-    public List<Invitation> selectInvitationList(Invitation invitation);
+     List<Invitation> selectInvitationList(Invitation invitation);
 
     /**
      * 新增邀请码管理
@@ -33,7 +33,7 @@ public interface InvitationMapper {
      * @param invitation 邀请码管理
      * @return 结果
      */
-    public int insertInvitation(Invitation invitation);
+     int insertInvitation(Invitation invitation);
 
     /**
      * 修改邀请码管理
@@ -41,7 +41,7 @@ public interface InvitationMapper {
      * @param invitation 邀请码管理
      * @return 结果
      */
-    public int updateInvitation(Invitation invitation);
+     int updateInvitation(Invitation invitation);
 
     /**
      * 删除邀请码管理
@@ -49,7 +49,7 @@ public interface InvitationMapper {
      * @param id 邀请码管理ID
      * @return 结果
      */
-    public int deleteInvitationById(Long id);
+     int deleteInvitationById(Long id);
 
     /**
      * 批量删除邀请码管理
@@ -57,5 +57,5 @@ public interface InvitationMapper {
      * @param ids 需要删除的数据ID
      * @return 结果
      */
-    public int deleteInvitationByIds(String[] ids);
+     int deleteInvitationByIds(String[] ids);
 }

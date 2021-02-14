@@ -17,7 +17,7 @@ public interface SysOrderMapper {
      * @param id 订单列表ID
      * @return 订单列表
      */
-    public SysOrder selectSysOrderById(Long id);
+    SysOrder selectSysOrderById(Long id);
 
     /**
      * 查询订单列表列表
@@ -25,7 +25,7 @@ public interface SysOrderMapper {
      * @param sysOrder 订单列表
      * @return 订单列表集合
      */
-    public List<SysOrder> selectSysOrderList(SysOrder sysOrder);
+    List<SysOrder> selectSysOrderList(SysOrder sysOrder);
 
     /**
      * 新增订单列表
@@ -33,7 +33,7 @@ public interface SysOrderMapper {
      * @param sysOrder 订单列表
      * @return 结果
      */
-    public int insertSysOrder(SysOrder sysOrder);
+    int insertSysOrder(SysOrder sysOrder);
 
     /**
      * 修改订单列表
@@ -41,9 +41,9 @@ public interface SysOrderMapper {
      * @param sysOrder 订单列表
      * @return 结果
      */
-    public int updateSysOrder(SysOrder sysOrder);
+    int updateSysOrder(SysOrder sysOrder);
 
-    public int updateSysOrderByOrderId(SysOrder sysOrder);
+    int updateSysOrderByOrderId(SysOrder sysOrder);
 
     /**
      * 删除订单列表
@@ -51,7 +51,7 @@ public interface SysOrderMapper {
      * @param id 订单列表ID
      * @return 结果
      */
-    public int deleteSysOrderById(Long id);
+    int deleteSysOrderById(Long id);
 
     /**
      * 批量删除订单列表
@@ -59,5 +59,5 @@ public interface SysOrderMapper {
      * @param ids 需要删除的数据ID
      * @return 结果
      */
-    public int deleteSysOrderByIds(String[] ids);
+    int deleteSysOrderByIds(String[] ids);
 }
