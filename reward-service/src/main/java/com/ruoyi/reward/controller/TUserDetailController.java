@@ -26,7 +26,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/system/wxuser")
-public class UserDetailController extends BaseController {
+public class TUserDetailController extends BaseController {
     private String prefix = "system/wxuser";
 
     @Autowired
