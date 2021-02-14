@@ -11,7 +11,7 @@ import org.near.toolkit.model.BaseEnum;
  *
  * @author Willard.Hu on 2017/10/31.
  */
-public enum PrincipalTypeEnum implements BaseEnum {
+public enum PrincipalType implements BaseEnum {
     /**
      * 普通用户
      */
@@ -28,7 +28,7 @@ public enum PrincipalTypeEnum implements BaseEnum {
     String code;
     String desc;
 
-    PrincipalTypeEnum(String code, String desc) {
+    PrincipalType(String code, String desc) {
         this.code = code;
         this.desc = desc;
     }

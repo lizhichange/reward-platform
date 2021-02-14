@@ -4,7 +4,7 @@ import lombok.Getter;
 import org.near.toolkit.model.BaseEnum;
 
 @Getter
-public enum PayeeTypeEnum implements BaseEnum {
+public enum PayeeType implements BaseEnum {
     /**
      * 银行
      */
@@ -20,7 +20,7 @@ public enum PayeeTypeEnum implements BaseEnum {
     String code;
     String desc;
 
-    PayeeTypeEnum(String code, String desc) {
+    PayeeType(String code, String desc) {
         this.code = code;
         this.desc = desc;
     }

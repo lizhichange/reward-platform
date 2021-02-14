@@ -8,7 +8,7 @@ import com.ruoyi.common.enums.ShortStatus;
 import com.ruoyi.framework.shiro.service.SysPasswordService;
 import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.reward.domain.SysShort;
-import com.ruoyi.reward.facade.enums.InvitationStatusEnum;
+import com.ruoyi.reward.facade.enums.InvitationStatus;
 import com.ruoyi.reward.service.SysShortService;
 import com.ruoyi.system.domain.SysPost;
 import com.ruoyi.system.domain.SysRole;
@@ -115,7 +115,7 @@ public class WebController extends BaseController {
             return error("'" + invitation + "'邀请码不存在，注册账号失败");
         }
         Invitation dto = list.get(0);
-        if (dto.getStatus().equals(InvitationStatusEnum.Y.getCode())) {
+        if (dto.getStatus().equals(InvitationStatus.Y.getCode())) {
             return error("'" + invitation + "'邀请码已使用，注册账号失败");
         }
 
@@ -155,7 +155,7 @@ public class WebController extends BaseController {
         user.setCreateBy("admin");
         int i = userService.insertUser(user);
         if (i > 0) {
-            dto.setStatus(InvitationStatusEnum.Y.getCode());
+            dto.setStatus(InvitationStatus.Y.getCode());
             dto.setName(loginName);
             invitationService.updateInvitation(dto);
             threadPoolTaskExecutor.execute(() -> {

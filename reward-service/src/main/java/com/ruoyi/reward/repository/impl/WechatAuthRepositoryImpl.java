@@ -3,7 +3,7 @@ package com.ruoyi.reward.repository.impl;
 import com.ruoyi.reward.domain.TWechatAuth;
 import com.ruoyi.reward.domain.TWechatAuthExample;
 import com.ruoyi.reward.facade.dto.TWechatAuthDTO;
-import com.ruoyi.reward.facade.enums.PrincipalTypeEnum;
+import com.ruoyi.reward.facade.enums.PrincipalType;
 import com.ruoyi.reward.mapper.TWechatAuthMapper;
 import com.ruoyi.reward.repository.WechatAuthRepository;
 import org.near.toolkit.common.EnumUtil;
@@ -41,7 +41,7 @@ public class WechatAuthRepositoryImpl implements WechatAuthRepository {
     }
 
     @Override
-    public boolean delete(String principalId, PrincipalTypeEnum principalType) {
+    public boolean delete(String principalId, PrincipalType principalType) {
         TWechatAuthExample example = new TWechatAuthExample();
         example.createCriteria().andUserIdEqualTo(principalId)
                 .andUserTypeEqualTo(principalType.getCode());
@@ -49,7 +49,7 @@ public class WechatAuthRepositoryImpl implements WechatAuthRepository {
     }
 
     @Override
-    public TWechatAuthDTO queryByOpenId(String openId, PrincipalTypeEnum principalType) {
+    public TWechatAuthDTO queryByOpenId(String openId, PrincipalType principalType) {
         TWechatAuthExample example = new TWechatAuthExample();
         example.createCriteria().andOpenIdEqualTo(openId)
                 .andUserTypeEqualTo(principalType.getCode());
@@ -58,7 +58,7 @@ public class WechatAuthRepositoryImpl implements WechatAuthRepository {
     }
 
     @Override
-    public TWechatAuthDTO queryByPrincipalId(String principalId, PrincipalTypeEnum principalType) {
+    public TWechatAuthDTO queryByPrincipalId(String principalId, PrincipalType principalType) {
         TWechatAuthExample example = new TWechatAuthExample();
         example.createCriteria().andUserIdEqualTo(principalId)
                 .andUserTypeEqualTo(principalType.getCode());
@@ -74,8 +74,8 @@ public class WechatAuthRepositoryImpl implements WechatAuthRepository {
         dto.setId(record.getId());
         dto.setOpenId(record.getOpenId());
         dto.setUserId(record.getUserId());
-        PrincipalTypeEnum principalType = EnumUtil.queryByCode(record.getUserType(),
-                PrincipalTypeEnum.class);
+        PrincipalType principalType = EnumUtil.queryByCode(record.getUserType(),
+                PrincipalType.class);
         assert principalType != null;
         dto.setUserType(principalType);
         dto.setAppid(record.getAppid());

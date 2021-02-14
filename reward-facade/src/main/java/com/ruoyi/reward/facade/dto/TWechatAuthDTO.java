@@ -1,6 +1,6 @@
 package com.ruoyi.reward.facade.dto;
 
-import com.ruoyi.reward.facade.enums.PrincipalTypeEnum;
+import com.ruoyi.reward.facade.enums.PrincipalType;
 import lombok.Data;
 import org.near.toolkit.model.ToString;
 
@@ -38,7 +38,7 @@ public class TWechatAuthDTO extends ToString {
      *
      * @mbg.generated 2020-04-11 13:00:34
      */
-    private PrincipalTypeEnum userType;
+    private PrincipalType userType;
 
     /**
      * t_wechat_auth.appid
@@ -141,11 +141,11 @@ public class TWechatAuthDTO extends ToString {
         this.userId = userId;
     }
 
-    public PrincipalTypeEnum getUserType() {
+    public PrincipalType getUserType() {
         return userType;
     }
 
-    public void setUserType(PrincipalTypeEnum userType) {
+    public void setUserType(PrincipalType userType) {
         this.userType = userType;
     }
 

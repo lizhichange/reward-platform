@@ -19,7 +19,7 @@ public interface TWechatAuthService {
      * @param id 小程序授权信息ID
      * @return 小程序授权信息
      */
-    public TWechatAuth selectTWechatAuthById(Long id);
+    TWechatAuth selectTWechatAuthById(Long id);
 
     /**
      * 查询小程序授权信息列表
@@ -27,7 +27,7 @@ public interface TWechatAuthService {
      * @param tWechatAuth 小程序授权信息
      * @return 小程序授权信息集合
      */
-    public List<TWechatAuth> selectTWechatAuthList(TWechatAuth tWechatAuth);
+    List<TWechatAuth> selectTWechatAuthList(TWechatAuth tWechatAuth);
 
     /**
      * 新增小程序授权信息
@@ -35,7 +35,7 @@ public interface TWechatAuthService {
      * @param tWechatAuth 小程序授权信息
      * @return 结果
      */
-    public int insertTWechatAuth(TWechatAuth tWechatAuth);
+    int insertTWechatAuth(TWechatAuth tWechatAuth);
 
     /**
      * 修改小程序授权信息
@@ -43,7 +43,7 @@ public interface TWechatAuthService {
      * @param tWechatAuth 小程序授权信息
      * @return 结果
      */
-    public int updateTWechatAuth(TWechatAuth tWechatAuth);
+    int updateTWechatAuth(TWechatAuth tWechatAuth);
 
     /**
      * 批量删除小程序授权信息
@@ -51,7 +51,7 @@ public interface TWechatAuthService {
      * @param ids 需要删除的数据ID
      * @return 结果
      */
-    public int deleteTWechatAuthByIds(String ids);
+    int deleteTWechatAuthByIds(String ids);
 
     /**
      * 删除小程序授权信息信息
@@ -59,5 +59,5 @@ public interface TWechatAuthService {
      * @param id 小程序授权信息ID
      * @return 结果
      */
-    public int deleteTWechatAuthById(Long id);
+    int deleteTWechatAuthById(Long id);
 }

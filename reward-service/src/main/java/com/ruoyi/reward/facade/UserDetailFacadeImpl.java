@@ -12,7 +12,7 @@ import com.ruoyi.reward.domain.TWechatAuth;
 import com.ruoyi.reward.facade.api.UserDetailFacade;
 import com.ruoyi.reward.facade.dto.TWechatAuthDTO;
 import com.ruoyi.reward.facade.dto.UserDTO;
-import com.ruoyi.reward.facade.enums.PrincipalTypeEnum;
+import com.ruoyi.reward.facade.enums.PrincipalType;
 import com.ruoyi.reward.facade.request.UserWechatLoginRequest;
 import com.ruoyi.reward.repository.UserDetailRepository;
 import com.ruoyi.reward.repository.WechatAuthRepository;
@@ -44,7 +44,7 @@ public class UserDetailFacadeImpl implements UserDetailFacade {
 
     @Override
     public UserDTO wechatLogin(UserWechatLoginRequest request) {
-        PrincipalTypeEnum principalType = PrincipalTypeEnum.USER;
+        PrincipalType principalType = PrincipalType.USER;
         TWechatAuthDTO wechat = wechatRepository.queryByOpenId(request.getOpenId(), principalType);
         UserDTO res;
         // 已注册
@@ -75,7 +75,7 @@ public class UserDetailFacadeImpl implements UserDetailFacade {
     }
 
 
-    private UserDTO take(UserWechatLoginRequest request, PrincipalTypeEnum principalType) {
+    private UserDTO take(UserWechatLoginRequest request, PrincipalType principalType) {
         UserDTO res;
         String userId = concurrentSequence.nextId().toString();
         TUserDetail uRecord = new TUserDetail();
@@ -105,7 +105,7 @@ public class UserDetailFacadeImpl implements UserDetailFacade {
 
     @Override
     public TWechatAuthDTO queryByOpenId(String openId) {
-        PrincipalTypeEnum principalType = PrincipalTypeEnum.USER;
+        PrincipalType principalType = PrincipalType.USER;
         return wechatRepository.queryByOpenId(openId, principalType);
     }
 
@@ -122,7 +122,7 @@ public class UserDetailFacadeImpl implements UserDetailFacade {
 
     @Override
     public TWechatAuthDTO queryWechatByUserId(String userId) {
-        PrincipalTypeEnum principalType = PrincipalTypeEnum.USER;
+        PrincipalType principalType = PrincipalType.USER;
         return wechatRepository.queryByPrincipalId(userId, principalType);
     }
 }

@@ -9,7 +9,7 @@ import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.reward.domain.Trade;
 import com.ruoyi.reward.facade.api.AccountFacade;
-import com.ruoyi.reward.facade.enums.TradeStateEnum;
+import com.ruoyi.reward.facade.enums.TradeState;
 import com.ruoyi.reward.service.ITradeService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.near.toolkit.model.Money;
@@ -43,7 +43,7 @@ public class TradeController extends BaseController {
     @GetMapping()
     public String trade(ModelMap modelMap) {
         List<SelectOptionVO> states = Lists.newArrayList();
-        for (TradeStateEnum value : TradeStateEnum.values()) {
+        for (TradeState value : TradeState.values()) {
             SelectOptionVO option = new SelectOptionVO();
             option.setCode(value.getCode());
             option.setDesc(value.getDesc());

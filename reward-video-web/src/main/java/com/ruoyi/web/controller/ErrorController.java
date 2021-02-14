@@ -1,7 +1,7 @@
 package com.ruoyi.web.controller;
 
 import com.ruoyi.reward.facade.dto.ComplaintDTO;
-import com.ruoyi.reward.facade.enums.MultiTypeEnum;
+import com.ruoyi.reward.facade.enums.MultiType;
 import lombok.extern.slf4j.Slf4j;
 import org.near.toolkit.common.EnumUtil;
 import org.near.toolkit.context.SessionContext;
@@ -59,8 +59,8 @@ public class ErrorController extends BaseController {
     public String multi(@RequestParam(value = "userId", required = false) String userId,
                         @RequestParam(value = "type") String type,
                         ModelMap modelmap) {
-        MultiTypeEnum multiTypeEnum = EnumUtil.queryByCode(type, MultiTypeEnum.class);
-        List<MultiTypeEnum.ItemContent> list = multiTypeEnum.getList();
+        MultiType multiType = EnumUtil.queryByCode(type, MultiType.class);
+        List<MultiType.ItemContent> list = multiType.getList();
         modelmap.addAttribute("list", list);
         return prefix + "/multi";
     }

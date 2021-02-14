@@ -11,7 +11,7 @@ import java.util.List;
  * @author sunflower
  */
 @Getter
-public enum MultiTypeEnum implements BaseEnum {
+public enum MultiType implements BaseEnum {
 
 
     /**
@@ -71,12 +71,12 @@ public enum MultiTypeEnum implements BaseEnum {
     private String desc;
     private List<ItemContent> list;
 
-    MultiTypeEnum(String code, String desc) {
+    MultiType(String code, String desc) {
         this.code = code;
         this.desc = desc;
     }
 
-    MultiTypeEnum(String code, String desc, List<ItemContent> list) {
+    MultiType(String code, String desc, List<ItemContent> list) {
         this.code = code;
         this.desc = desc;
         this.list = list;

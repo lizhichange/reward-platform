@@ -8,7 +8,7 @@ import org.near.toolkit.model.BaseEnum;
  */
 
 @Getter
-public enum TradeStateEnum implements BaseEnum {
+public enum TradeState implements BaseEnum {
     /**
      * 未支付 ,待确认
      */
@@ -27,7 +27,7 @@ public enum TradeStateEnum implements BaseEnum {
     String code;
     String desc;
 
-    TradeStateEnum(String code, String desc) {
+    TradeState(String code, String desc) {
         this.code = code;
         this.desc = desc;
     }

@@ -9,7 +9,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.util.ShiroUtils;
-import com.ruoyi.reward.facade.enums.InvitationStatusEnum;
+import com.ruoyi.reward.facade.enums.InvitationStatus;
 import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.system.domain.Invitation;
 import com.ruoyi.system.service.ISysUserService;
@@ -67,7 +67,7 @@ public class InvitationController extends BaseController {
         }
         List<Invitation> list = invitationService.selectInvitationList(invitation);
         for (Invitation item : list) {
-            item.setZtDesc(EnumUtil.queryByCode(item.getStatus(), InvitationStatusEnum.class).getDesc());
+            item.setZtDesc(EnumUtil.queryByCode(item.getStatus(), InvitationStatus.class).getDesc());
         }
         return getDataTable(list);
     }
@@ -114,7 +114,7 @@ public class InvitationController extends BaseController {
         if (user == null) {
             return AjaxResult.error("邀请人账号信息不存在");
         }
-        invitation.setStatus(InvitationStatusEnum.N.getCode());
+        invitation.setStatus(InvitationStatus.N.getCode());
         invitation.setDuration(DateUtils.formatNewFormat(new Date()));
         return toAjax(invitationService.insertInvitation(invitation));
     }
@@ -161,7 +161,7 @@ public class InvitationController extends BaseController {
                     return error("只能删除自己添加的邀请码");
                 } else {
                     for (Invitation dto : xxx) {
-                        if (dto.getStatus().equals(InvitationStatusEnum.Y.getCode())) {
+                        if (dto.getStatus().equals(InvitationStatus.Y.getCode())) {
                             return error("邀请码已经被其他用户使用不能删除");
                         }
                     }
@@ -176,7 +176,7 @@ public class InvitationController extends BaseController {
                 return error("只能删除自己添加的邀请码");
             } else {
                 for (Invitation dto : xxx) {
-                    if (dto.getStatus().equals(InvitationStatusEnum.Y.getCode())) {
+                    if (dto.getStatus().equals(InvitationStatus.Y.getCode())) {
                         return error("邀请码已经被其他用户使用不能删除");
                     }
                 }

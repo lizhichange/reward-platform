@@ -14,8 +14,8 @@ import com.ruoyi.reward.domain.TradeExample;
 import com.ruoyi.reward.facade.api.AccountFacade;
 import com.ruoyi.reward.facade.enums.AccountBizCode;
 import com.ruoyi.reward.facade.enums.AccountOptType;
-import com.ruoyi.reward.facade.enums.PayeeTypeEnum;
-import com.ruoyi.reward.facade.enums.TradeStateEnum;
+import com.ruoyi.reward.facade.enums.PayeeType;
+import com.ruoyi.reward.facade.enums.TradeState;
 import com.ruoyi.reward.facade.request.UserAccountOperatorRequest;
 import com.ruoyi.reward.mapper.TradeMapper;
 import com.ruoyi.reward.service.ITradeService;
@@ -68,7 +68,7 @@ public class WithdrawalRecordController extends BaseController {
         String amount = money.toString();
         modelMap.put("balance", amount);
         List<SelectOptionVO> types = Lists.newArrayList();
-        for (PayeeTypeEnum value : PayeeTypeEnum.values()) {
+        for (PayeeType value : PayeeType.values()) {
             SelectOptionVO option = new SelectOptionVO();
             option.setCode(value.getCode());
             option.setDesc(value.getDesc());
@@ -108,7 +108,7 @@ public class WithdrawalRecordController extends BaseController {
 
 
         List<SelectOptionVO> states = Lists.newArrayList();
-        for (TradeStateEnum value : TradeStateEnum.values()) {
+        for (TradeState value : TradeState.values()) {
             SelectOptionVO option = new SelectOptionVO();
             option.setCode(value.getCode());
             option.setDesc(value.getDesc());
@@ -168,7 +168,7 @@ public class WithdrawalRecordController extends BaseController {
         if (balance < money.getCent()) {
             return AjaxResult.error("余额不足");
         }
-        trade.setState(TradeStateEnum.N_PAY.getCode());
+        trade.setState(TradeState.N_PAY.getCode());
         boolean matches = passwordService.matches(ShiroUtils.getSysUser(), password);
         if (!matches) {
             return AjaxResult.error("用户密码错误");
