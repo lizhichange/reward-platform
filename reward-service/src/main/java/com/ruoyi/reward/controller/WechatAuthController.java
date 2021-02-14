@@ -24,7 +24,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/system/wxauth")
-public class TWechatAuthController extends BaseController {
+public class WechatAuthController extends BaseController {
     private String prefix = "system/wxauth";
 
     @Autowired
