@@ -12,7 +12,7 @@
     <artifactId>reward-admin</artifactId>
 
     <description>
-        web服务入口
+        admin服务入口
     </description>
 
     <dependencies>
@@ -77,8 +77,6 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
-
-
 
 
     </dependencies>
