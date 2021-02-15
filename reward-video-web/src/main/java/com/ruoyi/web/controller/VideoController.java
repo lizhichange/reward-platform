@@ -2,22 +2,22 @@ package com.ruoyi.web.controller;
 
 import cn.hutool.core.util.RandomUtil;
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.ruoyi.reward.facade.dto.*;
+import com.ruoyi.reward.facade.dto.SysOrderDTO;
+import com.ruoyi.reward.facade.dto.SysWebMainDTO;
+import com.ruoyi.reward.facade.dto.VideoDTO;
+import com.ruoyi.reward.facade.dto.VideoRelPriceDTO;
 import com.ruoyi.reward.facade.enums.OrderPayType;
 import com.ruoyi.reward.facade.enums.OrderStatusType;
 import com.ruoyi.reward.facade.enums.WebMainStatus;
-import com.ruoyi.web.PriceParam;
 import com.ruoyi.web.client.*;
 import com.ruoyi.web.interceptor.WxPnUserAuth;
 import com.ruoyi.web.model.PageForm;
 import com.ruoyi.web.result.PayResult;
 import com.ruoyi.web.result.TableDataInfo;
 import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.lang.StringUtils;
 import org.near.servicesupport.result.TPageResult;
 import org.near.toolkit.common.EnumUtil;
 import org.near.toolkit.common.StringUtil;
@@ -271,7 +271,6 @@ public class VideoController extends BaseController {
         }
 
 
-
         order.setUserId(SessionContext.getHostAdd());
         // 商品快照信息
         order.setGoodsSnapshot(JSON.toJSONString(dtoById));
@@ -334,104 +333,6 @@ public class VideoController extends BaseController {
         }
     }
 
-    @Deprecated
-    private void extracted(SysOrderDTO order, VideoDTO dto, String extensionUserId) {
-        SysConfigDTO configDTO = sysConfigFacadeClient.queryConfigByKey(extensionUserId);
-
-        if (configDTO != null && StringUtils.isNotBlank(configDTO.getConfigValue())) {
-            String main = null;
-            List<PriceParam> itemList = null;
-            Map valueMap = JSONObject.parseObject(configDTO.getConfigValue(), Map.class);
-            if (valueMap.containsKey("main")) {
-                main = valueMap.get("main").toString();
-            }
-            if (valueMap.containsKey("item")) {
-                JSONArray array = (JSONArray) valueMap.get("item");
-                itemList = convert(array);
-            }
-            if (!CollectionUtils.isEmpty(itemList)) {
-                List<PriceParam> collect = itemList.stream().filter(param -> StringUtil.equals(param.getId(), dto.getId().toString())).collect(Collectors.toList());
-
-                if (!CollectionUtils.isEmpty(collect)) {
-                    PriceParam priceParam = collect.get(0);
-                    Money m = new Money(priceParam.getPrice());
-                    order.setMoney((int) m.getCent());
-                    //原价 转换单位分
-                    order.setPrice(Math.toIntExact(m.getCent()));
-                    order.setPayTag(m.toString());
-
-                } else {
-                    if (StringUtils.isNotBlank(main)) {
-                        Money m = new Money(main);
-                        order.setMoney((int) m.getCent());
-                        //原价 转换单位分
-                        order.setPrice(Math.toIntExact(m.getCent()));
-                        order.setPayTag(m.toString());
-                    } else {
-
-                        //商品价格区间 原价
-                        String money = dto.getMoney();
-                        String[] split = money.split("-");
-                        int start = Integer.parseInt(split[0]);
-                        int end = Integer.parseInt(split[1]);
-                        //这个单位是元
-                        int i = RandomUtil.randomInt(start, end + 1);
-                        //实际金额 转换单位分
-                        Money m = new Money(i);
-                        int amount = Math.toIntExact(m.getCent());
-                        log.info("实际支付金额:{}", amount);
-                        order.setMoney(amount);
-                        order.setMoneyStr(String.valueOf(amount));
-                        //原价 转换单位分
-                        order.setPrice(Math.toIntExact(m.getCent()));
-                        order.setPayTag(m.toString());
-                    }
-                }
-            } else {
-                if (StringUtils.isNotBlank(main)) {
-                    Money m = new Money(main);
-                    order.setMoney((int) m.getCent());
-                    //原价 转换单位分
-                    order.setPrice(Math.toIntExact(m.getCent()));
-                    order.setPayTag(m.toString());
-                } else {
-                    String money = dto.getMoney();
-                    String[] split = money.split("-");
-                    int start = Integer.parseInt(split[0]);
-                    int end = Integer.parseInt(split[1]);
-                    //这个单位是元
-                    int i = RandomUtil.randomInt(start, end + 1);
-                    //实际金额 转换单位分
-                    Money m = new Money(i);
-                    int amount = Math.toIntExact(m.getCent());
-                    log.info("实际支付金额:{}", amount);
-                    order.setMoney(amount);
-                    order.setMoneyStr(String.valueOf(amount));
-                    //原价 转换单位分
-                    order.setPrice(Math.toIntExact(m.getCent()));
-                    order.setPayTag(m.toString());
-                }
-            }
-        } else {
-            //商品价格区间 原价
-            String money = dto.getMoney();
-            String[] split = money.split("-");
-            int start = Integer.parseInt(split[0]);
-            int end = Integer.parseInt(split[1]);
-            //这个单位是元
-            int i = RandomUtil.randomInt(start, end + 1);
-            //实际金额 转换单位分
-            Money m = new Money(i);
-            int amount = Math.toIntExact(m.getCent());
-            log.info("实际支付金额:{}", amount);
-            order.setMoney(amount);
-            order.setMoneyStr(String.valueOf(amount));
-            //原价 转换单位分
-            order.setPrice(Math.toIntExact(m.getCent()));
-            order.setPayTag(m.toString());
-        }
-    }
-
 
     @GetMapping("/qrcode")
     public String qrcode(ModelMap modelMap,
@@ -453,7 +354,7 @@ public class VideoController extends BaseController {
         return "h5";
     }
 
-    private SysOrderDTO getSysOrderDTO(String orderId) throws Exception {
+    private SysOrderDTO getSysOrderDTO(String orderId) {
         Assert.notNull(orderId, "orderId is not null");
         SysOrderDTO selectSysOrder = new SysOrderDTO();
         selectSysOrder.setOrderId(orderId);
@@ -510,8 +411,6 @@ public class VideoController extends BaseController {
             }
         }
     }
-
-
     String sign(Map<String, String> params, String signKey, Boolean is) {
         SortedMap<String, String> sortedMap = new TreeMap<>(params);
         StringBuilder toSign = new StringBuilder();
@@ -525,8 +424,5 @@ public class VideoController extends BaseController {
         toSign.append("key=").append(signKey);
         log.info("toSign:{}", toSign);
         return DigestUtils.md5Hex(toSign.toString()).toUpperCase();
-
     }
-
-
 }

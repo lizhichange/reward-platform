@@ -4,13 +4,11 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
-import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.reward.domain.SysCategory;
@@ -25,7 +23,6 @@ import com.ruoyi.reward.service.SysCategoryService;
 import com.ruoyi.reward.service.VideoRelPriceService;
 import com.ruoyi.reward.service.VideoService;
 import com.ruoyi.system.domain.ExtSysOrder;
-import com.ruoyi.system.domain.SysConfig;
 import com.ruoyi.system.domain.SysRole;
 import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.system.service.SysConfigService;
@@ -55,8 +52,10 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 import java.net.HttpURLConnection;
 import java.security.cert.X509Certificate;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -92,6 +91,8 @@ public class VideoController extends BaseController {
     @Autowired
     SysConfigService sysConfigService;
 
+    @Autowired
+    ThreadPoolTaskExecutor threadPoolTaskExecutor;
 
     @RequiresPermissions("system:video:view")
     @GetMapping()
@@ -218,11 +219,10 @@ public class VideoController extends BaseController {
         @Override
         protected void prepareConnection(HttpURLConnection connection, String httpMethod) {
             try {
-                if (!(connection instanceof HttpsURLConnection)) {// http协议
-                    //throw new RuntimeException("An instance of HttpsURLConnection is expected");
+                if (!(connection instanceof HttpsURLConnection)) {
                     super.prepareConnection(connection, httpMethod);
                 }
-                if (connection instanceof HttpsURLConnection) { // https协议，修改协议版本
+                if (connection instanceof HttpsURLConnection) {
                     SSLContext ctx = SSLContext.getInstance("TLSv1.2");
                     X509TrustManager tm = new X509TrustManager() {
                         @Override
@@ -276,81 +276,8 @@ public class VideoController extends BaseController {
                 relPrice(param, loginName, Integer.valueOf(videoId));
             }
         }
-        SysConfig item = sysConfigService.queryConfigByKey(loginName);
-        if (item == null) {
-            SysConfig config = new SysConfig();
-            config.setConfigKey(loginName);
-            Map<String, Object> map = Maps.newHashMap();
-            map.put("main", param.getPrice());
-            config.setConfigValue(JSONObject.toJSONString(map));
-            config.setConfigType("N");
-            config.setCreateBy(loginName);
-            config.setConfigName("视频自定义私人价格");
-            config.setCreateTime(new Date());
-            return toAjax(sysConfigService.insertConfig(config));
-        }
-
-        Long configId = item.getConfigId();
-        SysConfig config = new SysConfig();
-        config.setConfigId(configId);
-        String configValue = item.getConfigValue();
-        if (StringUtils.isNotBlank(configValue)) {
-            String string = getString(param, ids, configValue);
-            config.setConfigValue(string);
-        }
-        config.setUpdateTime(new Date());
-        return toAjax(sysConfigService.updateConfig(config));
-
-
+        return toAjax(1);
     }
-
-    @Deprecated
-    private String getString(PriceParam param, @RequestParam("ids[]") String[] ids, String configValue) {
-        Map valueMap = JSONObject.parseObject(configValue, Map.class);
-        ArrayList<PriceParam> newArrayList = Lists.newArrayList();
-        if (valueMap.containsKey("item")) {
-            JSONArray array = (JSONArray) valueMap.get("item");
-            List<PriceParam> itemList = convert(array);
-            if (!ArrayUtils.isEmpty(ids)) {
-                for (String id : ids) {
-                    List<PriceParam> collect = itemList.stream().filter(it -> it.getId().equals(id)).collect(Collectors.toList());
-                    //不为空
-                    if (!CollectionUtils.isEmpty(collect)) {
-                        PriceParam priceParam = collect.get(0);
-                        //modify
-                        priceParam.setPrice(param.getPrice());
-                        newArrayList.add(priceParam);
-                        //原集合remove
-                        itemList.remove(priceParam);
-                    } else {
-                        //add
-                        PriceParam priceParam = new PriceParam();
-                        priceParam.setPrice(param.getPrice());
-                        priceParam.setId(id);
-                        newArrayList.add(priceParam);
-                    }
-                }
-                newArrayList.addAll(itemList);
-                valueMap.put("item", newArrayList);
-            }
-        } else {
-            if (!ArrayUtils.isEmpty(ids)) {
-                for (String id : ids) {
-                    PriceParam priceParam = new PriceParam();
-                    priceParam.setPrice(param.getPrice());
-                    priceParam.setId(id);
-                    newArrayList.add(priceParam);
-                }
-            }
-            valueMap.put("item", newArrayList);
-        }
-        return JSONArray.toJSONString(valueMap);
-    }
-
-
-    @Autowired
-    ThreadPoolTaskExecutor threadPoolTaskExecutor;
-
 
     @Log(title = "一键发布价格", businessType = BusinessType.INSERT)
     @PostMapping("/price")
@@ -364,34 +291,11 @@ public class VideoController extends BaseController {
         if (!CollectionUtils.isEmpty(relPrices)) {
             videoRelPriceMapper.deleteVideoRelPriceByUserId(loginName);
         }
-        relPrice(param, loginName, null);
-
-        SysConfig item = sysConfigService.queryConfigByKey(loginName);
-        if (item == null) {
-            SysConfig config = new SysConfig();
-            config.setConfigKey(loginName);
-            Map<String, Object> map = Maps.newHashMap();
-            map.put("main", param.getPrice());
-            config.setConfigValue(JSONObject.toJSONString(map));
-            config.setConfigType("N");
-            config.setCreateBy(loginName);
-            config.setConfigName("视频自定义私人价格");
-            config.setCreateTime(new Date());
-            return toAjax(sysConfigService.insertConfig(config));
-        }
-        Long configId = item.getConfigId();
-        SysConfig config = new SysConfig();
-        config.setConfigId(configId);
-        Map<String, Object> map = Maps.newHashMap();
-        map.put("main", param.getPrice());
-        config.setConfigValue(JSONArray.toJSONString(map));
-        config.setUpdateTime(new Date());
-        return toAjax(sysConfigService.updateConfig(config));
-
+        return relPrice(param, loginName, null);
     }
 
-    private void relPrice(PriceParam param, String loginName,
-                          Integer videoId) {
+    private AjaxResult relPrice(PriceParam param, String loginName,
+                                Integer videoId) {
         List<VideoRelPrice> objects = Lists.newArrayList();
         Video record = new Video();
         if (Objects.nonNull(videoId)) {
@@ -399,7 +303,7 @@ public class VideoController extends BaseController {
         }
         List<Video> videos = videoService.selectVideoList(record);
         if (CollectionUtils.isEmpty(videos)) {
-            return;
+            return toAjax(1);
         }
         for (Video video : videos) {
             VideoRelPrice relPrice = new VideoRelPrice();
@@ -409,7 +313,8 @@ public class VideoController extends BaseController {
             relPrice.setPrice(money.getCent());
             objects.add(relPrice);
         }
-        videoRelPriceMapper.batchInsert(objects);
+        return toAjax(videoRelPriceMapper.batchInsert(objects));
+
     }
 
 
