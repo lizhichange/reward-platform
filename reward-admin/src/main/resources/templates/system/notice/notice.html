@@ -87,6 +87,16 @@
                         return $.table.selectDictLabel(types, value);
                     }
                 },
+
+                  {
+                    visible: editFlag === 'hidden' ? false : true,
+                    title: '状态',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        return statusTools(row);
+                    }
+                },
+
                 {
                     field: 'status',
                     title: '状态',
@@ -117,6 +127,28 @@
         };
         $.table.init(options);
     });
+       /* 状态显示 */
+    function statusTools(row) {
+        if (row.status == 1) {
+            return '<i class=\"fa fa-toggle-off text-info fa-2x\" onclick="enable(\'' + row.noticeId + '\')"></i> ';
+        } else {
+            return '<i class=\"fa fa-toggle-on text-info fa-2x\" onclick="disable(\'' + row.noticeId + '\')"></i> ';
+        }
+    }
+
+    /* 用户管理-停用 */
+    function disable(noticeId) {
+        $.modal.confirm("确认要停用吗？", function () {
+            $.operate.post(prefix + "/changeStatus", {"noticeId": noticeId, "status": 1});
+        })
+    }
+
+    /* 用户管理启用 */
+    function enable(noticeId) {
+        $.modal.confirm("确认要启用吗？", function () {
+            $.operate.post(prefix + "/changeStatus", {"noticeId": noticeId, "status": 0});
+        })
+    }
 </script>
 </body>
 </html>

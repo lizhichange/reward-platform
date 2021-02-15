@@ -98,4 +98,15 @@ public class SysNoticeController extends BaseController {
     public AjaxResult remove(String ids) {
         return toAjax(noticeService.deleteNoticeByIds(ids));
     }
+
+    /**
+     * 用户状态修改
+     */
+    @Log(title = "用户管理", businessType = BusinessType.UPDATE)
+    @RequiresPermissions("system:notice:edit")
+    @PostMapping("/changeStatus")
+    @ResponseBody
+    public AjaxResult changeStatus(SysNotice notice) {
+        return toAjax(noticeService.updateNotice(notice));
+    }
 }
