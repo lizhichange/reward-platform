@@ -9,6 +9,7 @@ import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.system.domain.SysNotice;
 import com.ruoyi.system.service.ISysNoticeService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -106,6 +107,7 @@ public class SysNoticeController extends BaseController {
     @RequiresPermissions("system:notice:edit")
     @PostMapping("/changeStatus")
     @ResponseBody
+    @RequiresRoles("admin")
     public AjaxResult changeStatus(SysNotice notice) {
         return toAjax(noticeService.updateNotice(notice));
     }
