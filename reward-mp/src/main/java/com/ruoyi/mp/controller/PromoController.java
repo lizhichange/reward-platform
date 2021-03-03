@@ -10,4 +10,8 @@ public class PromoController {
     String render(ModelMap modelMap) {
         return "promo";
     }
+       @GetMapping("/demo")
+    String demo(ModelMap modelMap) {
+        return "demo";
+    }
 }
